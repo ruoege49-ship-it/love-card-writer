@@ -1,0 +1,11 @@
+{
+    "display_name": "Love 写卡机",
+    "loading_order": 100,
+    "requires": [],
+    "optional": [],
+    "js": "index.js",
+    "author": "if love",
+    "version": "1.15.0",
+    "homePage": "https://github.com/ruoege49-ship-it/love-card-writer",
+    "auto_update": true
+}

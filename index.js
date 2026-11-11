@@ -1,0 +1,5071 @@
+(function(){"use strict";const Fo=[["Love 写卡机","card"],["从聊天导入卡","chatImport"],["预设工坊","preset"],["状态栏工坊","status"]],ks=new Set;globalThis.__CW_EARLY_BOUND=ks;function Ss(){let an;try{an=window.parent?.TavernHelper||window.TavernHelper}catch{an=window.TavernHelper}const mt=tt=>typeof globalThis[tt]=="function"?globalThis[tt].bind(globalThis):typeof an?.[tt]=="function"?an[tt].bind(an):null,Xn=mt("eventOn"),Cs=mt("getButtonEvent");if(typeof Xn!="function"||typeof Cs!="function")return;for(const[tt,Pn]of Fo)if(!ks.has(tt))try{const On=Cs(tt);if(!On)continue;Xn(On,()=>{const As=globalThis.__CW_SUITE__;if(As?.get(Pn))return As.switchTo(Pn);const Es=`Love 写卡机尚未启动完成：${tt} 页面未加载。`;try{(window.parent?.toastr||window.toastr)?.error?.(Es)}catch{window.toastr?.error?.(Es)}console.error(`[Love 写卡机] ${Es}`)}),ks.add(tt)}catch(On){console.warn(`[Love 写卡机] 初始化魔术棒按钮 ${tt} 失败`,On)}const Is=mt("appendInexistentScriptButtons");if(ks.size&&Is)try{Is(Fo.map(([Pn])=>({name:Pn,visible:!0})))?.catch?.(Pn=>console.warn("[Love 写卡机] 魔术棒按钮清单同步失败",Pn))}catch(tt){console.warn("[Love 写卡机] 魔术棒按钮清单同步失败",tt)}}Ss(),window.addEventListener("load",Ss,{once:!0}),setTimeout(Ss,800),setTimeout(Ss,2500);const X=(()=>{try{if(window.parent&&window.parent!==window&&window.parent.document.getElementById("extensionsMenu"))return window.parent}catch{}return window})(),it=X.document;globalThis.__CW_INLINE_CSS__=!0,(function(){for(const Xn of it.querySelectorAll("#cw-suite-style"))Xn.remove();const mt=it.createElement("style");mt.id="cw-suite-style",mt.setAttribute("data-cw-suite",""),mt.textContent=`/* style.css */
+.cw { text-align: left; display: flex; flex-direction: column; gap: 12px; font-size: 0.95em; line-height: 1.6; }
+.cw-top { display: flex; flex-direction: column; gap: 4px; position: sticky; top: 0; z-index: 2; padding: 4px 0 6px; background: var(--SmartThemeBlurTintColor); backdrop-filter: blur(var(--SmartThemeBlurStrength, 8px)); border-bottom: 1px solid color-mix(in srgb, var(--SmartThemeBorderColor) 40%, transparent); }
+.cw-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 2px 0; }
+.cw-row .menu_button, .cw-btn { margin: 0; white-space: nowrap; width: auto; flex: 0 0 auto; padding: 4px 12px; }
+.cw-grow { flex: 1 1 140px; min-width: 0; }
+.cw-end { justify-content: flex-end; }
+.cw-primary { font-weight: bold; border-color: var(--SmartThemeQuoteColor) !important; background: color-mix(in srgb, var(--SmartThemeQuoteColor) 18%, transparent); }
+.cw-btn.disabled, .cw .disabled { opacity: 0.4; pointer-events: none; }
+.cw-statusrow { min-height: 1.4em; }
+.cw-status { font-size: 0.88em; opacity: 0.8; }
+.cw-response { min-width: 0; border: 1px solid var(--SmartThemeBorderColor); border-radius: 8px; padding: 8px 12px; }
+.cw-response > summary { cursor: pointer; font-weight: 600; }
+.cw-response-text { white-space: pre-wrap; overflow-wrap: anywhere; overflow: auto; max-height: 55dvh; margin: 6px 0; padding: 10px; font: inherit; text-align: left; user-select: text; }
+.cw-ptitle { font-size: 1.05em; }
+
+/* 目录 */
+.cw-next { display: flex; flex-direction: column; gap: 6px; padding: 10px 12px; border-radius: 10px; background: color-mix(in srgb, var(--SmartThemeQuoteColor) 10%, transparent); }
+.cw-next > .cw-primary { align-self: flex-start; padding: 8px 18px; font-size: 1.05em; }
+.cw-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; }
+.cw-tile { cursor: pointer; padding: 10px 12px; border-radius: 10px; border: 1px solid color-mix(in srgb, var(--SmartThemeBorderColor) 45%, transparent); display: flex; flex-direction: column; gap: 2px; min-height: 64px; }
+.cw-tile:hover { border-color: var(--SmartThemeBorderColor); }
+.cw-tile.done { background: color-mix(in srgb, var(--SmartThemeBodyColor) 5%, transparent); }
+.cw-tile.next { border-color: var(--SmartThemeQuoteColor); border-width: 2px; }
+.cw-tile.cw-tool { grid-column: 1 / -1; border-style: dashed; min-height: 0; }
+.cw-tn { font-weight: 600; }
+.cw-ts { font-size: 0.82em; opacity: 0.65; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.cw-ok { color: var(--SmartThemeQuoteColor); }
+
+/* 二级页 */
+.cw-page { display: flex; flex-direction: column; gap: 10px; }
+.cw-foot { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding: 8px 0; border-top: 1px solid color-mix(in srgb, var(--SmartThemeBorderColor) 40%, transparent); position: sticky; bottom: 0; z-index: 2; background: var(--SmartThemeBlurTintColor); backdrop-filter: blur(var(--SmartThemeBlurStrength, 8px)); }
+.cw-tabs { display: flex; flex-wrap: wrap; gap: 4px; }
+.cw-tab { cursor: pointer; padding: 4px 12px; border-radius: 16px; font-size: 0.9em; opacity: 0.7; }
+.cw-tab.on { opacity: 1; font-weight: 600; background: color-mix(in srgb, var(--SmartThemeQuoteColor) 18%, transparent); }
+
+.cw-sub { font-weight: 600; margin-top: 4px; }
+.cw-dim { opacity: 0.65; }
+.cw-small { font-size: 0.86em; }
+.cw-err { color: #e06060; }
+.cw-ta { width: 100%; min-height: 4em; line-height: 1.6; field-sizing: content; max-height: 60vh; box-sizing: border-box; }
+.cw-in { width: 100%; margin: 0; box-sizing: border-box; }
+.cw-row .cw-in { width: auto; }
+.cw-card { border: 1px solid color-mix(in srgb, var(--SmartThemeBorderColor) 45%, transparent); border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; }
+.cw-card.picked { border-color: var(--SmartThemeQuoteColor); border-width: 2px; }
+.cw-ctitle { font-weight: 600; font-size: 1.05em; }
+.cw-box { border-left: 3px solid color-mix(in srgb, var(--SmartThemeQuoteColor) 60%, transparent); padding: 4px 10px; display: flex; flex-direction: column; gap: 8px; }
+
+/* 标签和选项 */
+.cw-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.cw-chip { cursor: pointer; font-size: 0.86em; padding: 4px 12px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--SmartThemeBorderColor) 40%, transparent); user-select: none; display: inline-flex; align-items: center; gap: 4px; }
+.cw-chip input { margin: 0; }
+.cw-chip.on { background: color-mix(in srgb, var(--SmartThemeQuoteColor) 22%, transparent); border-color: var(--SmartThemeQuoteColor); }
+.cw-chip.tag.on.src-ai { border-style: dashed; }
+.cw-chip.tag.on.src-guess { border-style: dotted; }
+.cw-opts { display: flex; flex-direction: column; gap: 4px; }
+.cw-opt { cursor: pointer; padding: 6px 10px; border-radius: 6px; font-size: 0.92em; border-left: 3px solid transparent; background: color-mix(in srgb, var(--SmartThemeBodyColor) 4%, transparent); }
+.cw-opt:hover { background: color-mix(in srgb, var(--SmartThemeBodyColor) 8%, transparent); }
+.cw-opt.on { border-left-color: var(--SmartThemeQuoteColor); background: color-mix(in srgb, var(--SmartThemeQuoteColor) 14%, transparent); font-weight: 600; }
+.cw-own { font-size: 0.92em; opacity: 0.85; }
+.cw-q { display: flex; flex-direction: column; gap: 6px; margin: 6px 0 10px; }
+.cw-qt { font-weight: 600; }
+.cw-mini > summary { cursor: pointer; font-size: 0.92em; padding: 2px 0; }
+.cw-mini[open] > summary { margin-bottom: 6px; }
+.cw-badge { font-size: 0.86em; padding: 1px 8px; border-radius: 4px; border: 1px solid color-mix(in srgb, var(--SmartThemeBorderColor) 50%, transparent); }
+.cw-badge.ok { border-color: rgba(80, 160, 110, 0.8); }
+.cw-issues { display: flex; flex-wrap: wrap; gap: 4px; }
+.cw-issue { font-size: 0.82em; padding: 1px 6px; border-radius: 4px; word-break: break-all; }
+.cw-issue.error { background: rgba(210, 70, 70, 0.3); }
+.cw-issue.warn { background: color-mix(in srgb, var(--SmartThemeBodyColor) 14%, transparent); }
+.cw-issue.info { background: rgba(120, 140, 200, 0.22); }
+.cw-ov { padding: 4px 0; border-bottom: 1px dashed color-mix(in srgb, var(--SmartThemeBorderColor) 50%, transparent); }
+.cw-ov:last-child { border-bottom: 0; }
+.cw ul { margin: 2px 0 2px 1.2em; padding: 0; }
+
+/* 扩展设置面板 */
+.cw-settings label { display: block; margin: 4px 0; }
+.cw-settings label.checkbox_label { display: flex; align-items: flex-start; gap: 6px; }
+.cw-settings label.checkbox_label input { flex: 0 0 auto; margin-top: 3px; }
+.cw-settings select, .cw-settings textarea, .cw-settings input.text_pole { width: 100%; box-sizing: border-box; }
+.cw-settings input[type="number"], .cw-settings input.cw-inline { width: 6em; display: inline-block; }
+.cw-settings .cw-open { width: 100%; white-space: nowrap; display: flex; justify-content: center; gap: 6px; margin: 6px 0; }
+.cw-settings h4 { margin: 12px 0 4px; }
+
+@media (max-width: 600px) {
+    .cw { font-size: 0.93em; }
+    .cw-card { padding: 8px 10px; }
+    .cw-tile { padding: 8px 10px; }
+}
+
+/* 生成中：转圈 + 计时 */
+.cw-spin { display: none; width: 14px; height: 14px; flex: 0 0 14px; border-radius: 50%; border: 2px solid color-mix(in srgb, var(--SmartThemeBodyColor) 25%, transparent); border-top-color: var(--SmartThemeQuoteColor); animation: cw-spin 0.8s linear infinite; }
+.cw-statusrow.busy .cw-spin { display: inline-block; }
+.cw-statusrow.busy .cw-status { opacity: 1; font-weight: 600; }
+.cw-meta { white-space: nowrap; }
+@keyframes cw-spin { to { transform: rotate(360deg); } }
+
+/* 设置页 */
+.cw-form { display: flex; flex-direction: column; gap: 6px; }
+.cw-form label { display: flex; flex-direction: column; gap: 3px; }
+.cw-form label.checkbox_label { flex-direction: row; align-items: flex-start; gap: 6px; }
+.cw-form label.checkbox_label input { flex: 0 0 auto; margin-top: 4px; }
+.cw-form .cw-sub { margin-top: 12px; font-size: 1.02em; }
+.cw-num { width: 7em !important; display: inline-block; margin: 0; }
+
+/* 修改意见 / 上一版 / 截断 */
+.cw-tools { display: flex; flex-direction: column; gap: 4px; }
+.cw-fb { font-size: 0.92em; }
+.cw-warn { font-size: 0.88em; font-weight: 600; padding: 4px 8px; border-radius: 6px; border-left: 3px solid var(--SmartThemeBorderColor); background: color-mix(in srgb, var(--SmartThemeBodyColor) 6%, transparent); }
+.cw-presetpick { display: flex; flex-direction: column; gap: 3px; }
+
+/* 开场白的梗 */
+.cw-hook { display: flex; align-items: flex-start; gap: 6px; padding: 4px 6px; border-radius: 6px; border-left: 3px solid transparent; background: color-mix(in srgb, var(--SmartThemeBodyColor) 4%, transparent); }
+.cw-hook.on { border-left-color: var(--SmartThemeQuoteColor); background: color-mix(in srgb, var(--SmartThemeQuoteColor) 12%, transparent); }
+.cw-hook.used { opacity: 0.7; }
+.cw-hook input[type="checkbox"] { margin-top: 8px; flex: 0 0 auto; }
+.cw-hooktext { flex: 1 1 auto; min-height: 2.6em; margin: 0; field-sizing: content; font-size: 0.93em; line-height: 1.5; }
+.cw-x { cursor: pointer; opacity: 0.5; padding: 4px 6px; font-size: 1.1em; }
+.cw-x:hover { opacity: 1; }
+.cw-usedtag { margin: -2px 0 2px 28px; }
+
+/* 选卡 */
+.cw-cardsel { min-height: 10em; }
+.cw-cardsel option { padding: 4px 6px; }
+
+/* AU 检查 */
+.cw-verdict { display: inline-block; font-size: 0.82em; padding: 0 6px; border-radius: 4px; margin-right: 4px; }
+.cw-verdict.v-保留 { background: rgba(80, 160, 110, 0.3); }
+.cw-verdict.v-偏离 { background: color-mix(in srgb, var(--SmartThemeBodyColor) 16%, transparent); }
+.cw-verdict.v-丢了 { background: rgba(210, 70, 70, 0.3); }
+.cw-warntext { font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+
+/* 每页底部的八股检查 */
+.cw-bagubar { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; padding: 8px 10px; border-radius: 8px; border: 1px dashed color-mix(in srgb, var(--SmartThemeBorderColor) 50%, transparent); }
+.cw-bagubar.hit { border-style: solid; border-color: color-mix(in srgb, var(--SmartThemeBorderColor) 70%, transparent); }
+
+/* token */
+.cw-tokline { display: flex; justify-content: flex-end; margin-top: -4px; }
+.cw-tok { font-size: 0.8em; opacity: 0.6; }
+.cw-tok.cw-warntext { opacity: 1; font-weight: 600; }
+.cw-tokrow { display: flex; gap: 8px; padding: 1px 0; }
+
+/* 试玩 */
+.cw-chat { display: flex; flex-direction: column; gap: 8px; }
+.cw-msg { padding: 8px 10px; border-radius: 10px; display: flex; flex-direction: column; gap: 4px; }
+.cw-msg.char { background: color-mix(in srgb, var(--SmartThemeBodyColor) 5%, transparent); border-left: 3px solid var(--SmartThemeQuoteColor); }
+.cw-msg.user { background: color-mix(in srgb, var(--SmartThemeQuoteColor) 10%, transparent); margin-left: 12%; }
+.cw-msghead { margin: 0; }
+.cw-msghead .cw-btn { font-size: 0.82em; padding: 2px 8px; }
+.cw-msgtext { white-space: normal; word-break: break-word; }
+
+/* 改了什么 */
+.cw-changes > summary { color: var(--SmartThemeQuoteColor); }
+.cw-hunk { display: flex; flex-direction: column; gap: 2px; padding: 4px 0; border-bottom: 1px dashed color-mix(in srgb, var(--SmartThemeBorderColor) 40%, transparent); font-size: 0.9em; }
+.cw-hunk:last-of-type { border-bottom: 0; }
+.cw-del { background: rgba(210, 70, 70, 0.14); text-decoration: line-through; text-decoration-color: rgba(210, 70, 70, 0.6); padding: 2px 6px; border-radius: 4px; }
+.cw-add { background: rgba(80, 160, 110, 0.16); padding: 2px 6px; border-radius: 4px; }
+
+/* 局部重写 */
+.cw-selbar { display: flex; flex-direction: column; gap: 4px; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--SmartThemeQuoteColor); background: color-mix(in srgb, var(--SmartThemeQuoteColor) 8%, transparent); }
+
+/* 草稿 */
+.cw-drafts > summary { font-size: 0.88em; opacity: 0.8; }
+.cw-draftrow { padding: 3px 0; border-bottom: 1px dashed color-mix(in srgb, var(--SmartThemeBorderColor) 35%, transparent); }
+.cw-draftrow .cw-btn { font-size: 0.85em; padding: 2px 10px; }
+
+/* 致谢 */
+.cw-credits { margin-top: 6px; padding: 8px 12px; border-radius: 10px; border: 1px dashed color-mix(in srgb, var(--SmartThemeBorderColor) 45%, transparent); display: flex; flex-direction: column; gap: 2px; }
+.cw-credits .cw-sub { margin: 0 0 2px; }
+.cw-credits a { color: var(--SmartThemeQuoteColor); }
+.cw-link { cursor: pointer; color: var(--SmartThemeQuoteColor); margin-left: 6px; white-space: nowrap; }
+.cw-credits.cw-credline { display: block; line-height: 1.7; }
+
+/* 说明小字 */
+.cw.cw-nohelp .cw-help { display: none; }
+.cw-helpbtn { cursor: pointer; font-size: 0.82em; opacity: 0.55; padding: 2px 8px; border-radius: 10px; border: 1px solid color-mix(in srgb, var(--SmartThemeBorderColor) 50%, transparent); white-space: nowrap; }
+.cw-helpbtn.on { opacity: 0.9; }
+
+/* 原卡条目：默认收起 */
+.cw-orig > summary { cursor: pointer; }
+.cw-origbox > summary { cursor: pointer; margin-bottom: 6px; }
+
+/* 目录进度 */
+.cw-progress { display: flex; align-items: center; gap: 10px; }
+.cw-bar { flex: 1 1 auto; height: 4px; border-radius: 2px; background: color-mix(in srgb, var(--SmartThemeBodyColor) 14%, transparent); overflow: hidden; }
+.cw-bar > i { display: block; height: 100%; background: var(--SmartThemeQuoteColor); }
+
+/* 改了什么：太长就在框里滚动，不把整页撑得很长 */
+.cw-hunks { max-height: 16em; overflow-y: auto; padding-right: 4px; }
+
+/* 设置页：一节一节折叠 */
+.cw-sec { border-top: 1px solid color-mix(in srgb, var(--SmartThemeBorderColor) 40%, transparent); padding: 4px 0; }
+.cw-sec > summary { cursor: pointer; font-weight: 600; padding: 6px 0; }
+.cw-sec[open] > summary { margin-bottom: 4px; }
+.cw-sec > label, .cw-sec > .cw-row, .cw-sec > .cw-help { margin-left: 2px; }
+.cw-form > .cw-sec:first-child { border-top: 0; }
+
+/* 触屏：按钮和选项好点 */
+@media (pointer: coarse) {
+    .cw-row .menu_button, .cw-btn { padding: 7px 14px; }
+    .cw-opt { padding: 9px 12px; }
+    .cw-tab { padding: 6px 14px; }
+}
+
+/* 关掉界面后还在生成：右下角的小条 */
+.cw-float { position: fixed; right: 12px; bottom: 12px; z-index: 31000; max-width: min(92vw, 420px); display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 12px; border: 1px solid var(--SmartThemeQuoteColor); background: var(--SmartThemeBlurTintColor); color: var(--SmartThemeBodyColor); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35); font-size: 0.9em; }
+.cw-float .cw-float-text { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cw-float .cw-btn { padding: 3px 10px; flex: 0 0 auto; }
+
+/* 骰子前先指定标签 */
+.cw-picks { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; margin: 8px 0; }
+.cw-pick { display: flex; flex-direction: column; gap: 3px; font-size: 12.5px; }
+.cw-pick span { opacity: .7; }
+.cw-pick select { width: 100%; min-height: 36px; }
+.cw-pick.on span { opacity: 1; font-weight: 600; }
+
+/* 流式生成：实时显示正在写的文字 */
+.cw-stream { margin-top: 6px; }
+.cw-stream pre {
+  margin: 0; max-height: 11em; overflow: auto; white-space: pre-wrap; word-break: break-word;
+  font: 12.5px/1.6 inherit; padding: 8px 10px; border-radius: 8px;
+  border: 1px dashed color-mix(in srgb, var(--SmartThemeBorderColor, #888) 80%, transparent);
+  background: color-mix(in srgb, var(--SmartThemeBodyColor, #888) 5%, transparent);
+  opacity: .85;
+}
+
+/* 人设刻板：每一处单独勾选、写改法 */
+.cw-ov { padding: 6px 0; border-top: 1px dashed color-mix(in srgb, var(--SmartThemeBorderColor, #888) 70%, transparent); }
+.cw-ov:first-of-type { border-top: 0; }
+.cw-ov label.cw-row { align-items: flex-start; gap: 8px; cursor: pointer; }
+.cw-ov input[type=checkbox] { margin-top: 4px; accent-color: var(--SmartThemeQuoteColor, #4f7c6e); }
+.cw-ov .cw-in { min-height: 34px; }
+
+/* 先聊聊 */
+.cw-msg.char { border-left: 3px solid color-mix(in srgb, var(--SmartThemeQuoteColor, #4f7c6e) 70%, transparent); }
+.cw-box > label.cw-row { align-items: flex-start; gap: 8px; margin-top: 6px; cursor: pointer; }
+.cw-box > label.cw-row input[type=checkbox] { margin-top: 4px; accent-color: var(--SmartThemeQuoteColor, #4f7c6e); }
+.cw-box > label.cw-row { flex-wrap: nowrap; }
+.cw-box > label.cw-row > span { flex: 1 1 0; min-width: 0; }
+
+/* 左中右切换 */
+.cw-seg { display: flex; gap: 2px; padding: 3px; margin: 4px 0 10px; border-radius: 10px; background: color-mix(in srgb, var(--SmartThemeBorderColor) 30%, transparent); }
+.cw-seg > span { flex: 1; text-align: center; padding: 6px 4px; border-radius: 8px; cursor: pointer; font-size: 0.95em; opacity: 0.7; user-select: none; }
+.cw-seg > span.on { background: var(--SmartThemeBlurTintColor); opacity: 1; font-weight: 600; box-shadow: 0 0 0 1px color-mix(in srgb, var(--SmartThemeBorderColor) 60%, transparent); }
+.cw-seg > span:focus-visible { outline: 2px solid var(--SmartThemeQuoteColor); }
+.cw-pane[hidden] { display: none !important; }
+.cw-pane > .cw-row:first-child, .cw-pane > .cw-dim:first-child { margin-top: 0; }
+.cw-card > .cw-seg { margin-top: 8px; }
+
+/* 自己选标签：每类一行，点开选多个 */
+.cw-pickdims { display: flex; flex-direction: column; gap: 4px; margin: 6px 0; }
+.cw-pickdim { border: 1px solid color-mix(in srgb, var(--SmartThemeBorderColor) 60%, transparent); border-radius: 8px; padding: 2px 10px; }
+.cw-pickdim.on { border-color: var(--SmartThemeQuoteColor); }
+.cw-pickdim > summary { cursor: pointer; display: flex; gap: 10px; align-items: baseline; padding: 6px 0; list-style: none; }
+.cw-pickdim > summary::-webkit-details-marker { display: none; }
+.cw-pickdim > summary::after { content: '▾'; margin-left: auto; opacity: 0.5; }
+.cw-pickdim[open] > summary::after { content: '▴'; }
+.cw-pickdim > summary > b { flex: none; font-weight: 600; }
+.cw-pickdim > summary > span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cw-pickdim .cw-chips { padding: 0 0 8px; }
+.cw-pickdim .cw-chip { cursor: pointer; }
+
+/* 人设模板卡片 */
+.cw-tpls { display: flex; flex-direction: column; gap: 8px; margin: 6px 0; }
+.cw-tplcard { border: 1px solid color-mix(in srgb, var(--SmartThemeBorderColor) 60%, transparent); border-radius: 10px; padding: 8px 12px; transition: border-color .2s, background-color .2s; }
+.cw-tplcard.on { border-color: var(--SmartThemeQuoteColor); background: color-mix(in srgb, var(--SmartThemeQuoteColor) 8%, transparent); }
+.cw-tplcard .cw-pre { white-space: pre-wrap; max-height: 320px; overflow: auto; margin: 4px 0 0; font-size: 0.85em; }
+.cw-tplnow { gap: 8px; align-items: center; }
+/* 切换和保存的反馈：闪一下 */
+@keyframes cw-flash { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--SmartThemeQuoteColor) 70%, transparent); transform: scale(1); } 30% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--SmartThemeQuoteColor) 25%, transparent); transform: scale(1.015); } 100% { box-shadow: 0 0 0 0 transparent; transform: scale(1); } }
+.cw-flash { animation: cw-flash 1.2s ease-out; }
+.cw-saved { position: relative; }
+.cw-saved::after { content: '已保存 ✓'; position: absolute; right: 4px; top: 0; font-size: 0.78em; color: var(--SmartThemeQuoteColor); animation: cw-saved 1.4s ease-out forwards; pointer-events: none; }
+@keyframes cw-saved { 0% { opacity: 0; transform: translateY(4px); } 15% { opacity: 1; transform: translateY(0); } 75% { opacity: 1; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .cw-flash, .cw-saved::after { animation-duration: 0.01s; } }
+
+/* modules/preset/style.css */
+/* 预设工坊 */
+.pw-overlay {
+  position: fixed; inset: 0; z-index: 10000;
+  background: rgba(0, 0, 0, .55);
+  display: flex; align-items: center; justify-content: center;
+}
+.pw-panel {
+  width: min(980px, 96vw); height: min(88vh, 900px);
+  display: flex; flex-direction: column;
+  background: var(--SmartThemeBlurTintColor, #1e2327);
+  color: var(--SmartThemeBodyColor, #dcdcd2);
+  border: 1px solid var(--SmartThemeBorderColor, #444);
+  border-radius: 10px; overflow: hidden;
+  font-size: 14px; line-height: 1.5;
+}
+.pw-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px; border-bottom: 1px solid var(--SmartThemeBorderColor, #444);
+}
+.pw-head h3 { margin: 0; font-size: 16px; }
+.pw-tabs { display: flex; gap: 4px; padding: 6px 10px 0; border-bottom: 1px solid var(--SmartThemeBorderColor, #444); overflow-x: auto; }
+.pw-tab {
+  background: none; color: inherit; border: 1px solid transparent; border-bottom: none;
+  padding: 7px 14px; border-radius: 6px 6px 0 0; cursor: pointer; white-space: nowrap; opacity: .7;
+}
+.pw-tab.pw-active { opacity: 1; border-color: var(--SmartThemeBorderColor, #444); background: rgba(255, 255, 255, .06); font-weight: 600; }
+.pw-body { flex: 1; overflow-y: auto; padding: 12px 14px; }
+.pw-status { min-height: 0; padding: 0 14px; font-size: 12px; opacity: .85; }
+.pw-status.pw-on { padding: 6px 14px; border-top: 1px solid var(--SmartThemeBorderColor, #444); }
+
+.pw-section { display: flex; flex-direction: column; gap: 10px; }
+.pw-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.pw-row.pw-grow > * { flex: 1 1 140px; }
+.pw-hint { margin: 0; font-size: 12px; opacity: .7; }
+.pw-dim { opacity: .6; font-size: 12px; margin-left: 6px; }
+.pw-h { margin: 6px 0 0; font-size: 14px; font-weight: 600; }
+
+.pw-btn {
+  background: rgba(255, 255, 255, .08); color: inherit;
+  border: 1px solid var(--SmartThemeBorderColor, #555);
+  border-radius: 6px; padding: 5px 11px; cursor: pointer; font-size: 13px;
+}
+.pw-btn:hover { background: rgba(255, 255, 255, .16); }
+.pw-btn:disabled { opacity: .4; cursor: not-allowed; }
+.pw-btn.pw-primary { background: var(--SmartThemeQuoteColor, #4a7bd0); border-color: transparent; color: #fff; }
+.pw-btn.pw-danger { color: #e88; }
+.pw-btn.pw-sm { padding: 2px 8px; font-size: 12px; }
+
+.pw-panel input[type=text], .pw-panel input[type=number], .pw-panel input[type=search],
+.pw-panel select, .pw-panel textarea {
+  background: rgba(0, 0, 0, .25); color: inherit;
+  border: 1px solid var(--SmartThemeBorderColor, #555);
+  border-radius: 6px; padding: 6px 8px; font: inherit; box-sizing: border-box; max-width: 100%;
+}
+.pw-panel textarea { width: 100%; min-height: 90px; resize: vertical; font-family: inherit; }
+.pw-panel textarea.pw-code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px; }
+.pw-panel textarea.pw-tall { min-height: 260px; }
+.pw-panel input[type=text].pw-wide { flex: 1 1 200px; }
+
+.pw-card {
+  display: flex; gap: 8px; align-items: flex-start; padding: 8px 10px;
+  border: 1px solid var(--SmartThemeBorderColor, #444); border-radius: 8px; background: rgba(255, 255, 255, .03);
+}
+.pw-card.pw-off { opacity: .55; }
+.pw-card.pw-marker { background: rgba(120, 160, 255, .08); }
+.pw-card-main { flex: 1; min-width: 0; }
+.pw-card-title { font-weight: 600; word-break: break-all; }
+.pw-card-btns { display: flex; flex-direction: column; gap: 4px; }
+.pw-card-btns.pw-inline { flex-direction: row; flex-wrap: wrap; justify-content: flex-end; }
+.pw-preview { font-size: 12px; opacity: .65; margin-top: 2px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; word-break: break-all; }
+.pw-badge { display: inline-block; font-size: 11px; padding: 0 6px; margin-left: 6px; border-radius: 8px; border: 1px solid var(--SmartThemeBorderColor, #555); opacity: .8; font-weight: 400; }
+.pw-badge.pw-new { color: #8d8; border-color: #8d8; }
+.pw-badge.pw-warn { color: #eb6; border-color: #eb6; }
+.pw-badge.pw-mute { opacity: .5; }
+.pw-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 3px; }
+.pw-tag { font-size: 11px; padding: 0 7px; border-radius: 9px; background: rgba(255, 255, 255, .1); cursor: pointer; }
+.pw-tag.pw-active { background: var(--SmartThemeQuoteColor, #4a7bd0); color: #fff; }
+.pw-check { display: flex; align-items: center; padding-top: 3px; }
+.pw-warnbox { border: 1px solid #eb6; color: #eb6; border-radius: 6px; padding: 6px 10px; font-size: 12px; }
+.pw-errbox { border: 1px solid #e66; color: #e88; border-radius: 6px; padding: 6px 10px; font-size: 12px; }
+.pw-box { border: 1px solid var(--SmartThemeBorderColor, #444); border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+.pw-ov { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 6px; font-size: 12px; }
+.pw-pre { white-space: pre-wrap; word-break: break-all; font-size: 12px; opacity: .85; margin: 4px 0 0; max-height: 220px; overflow: auto; }
+details > summary { cursor: pointer; font-size: 12px; opacity: .7; }
+
+.pw-undo { border: 1px solid var(--SmartThemeBorderColor, #555); border-radius: 6px; padding: 6px 10px; background: rgba(120, 160, 255, .1); }
+.pw-menu-item { cursor: pointer; }
+
+@media (max-width: 700px) {
+  /* 手机上面板是全屏的，顶部会被状态栏盖住（标题、关闭按钮看不见），留出空间 */
+  .pw-panel { width: 100vw; height: 100dvh; border-radius: 0; border: none; box-sizing: border-box;
+    padding-top: max(env(safe-area-inset-top, 0px), 34px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .pw-card { flex-wrap: wrap; }
+  .pw-card-btns { flex-direction: row; flex-wrap: wrap; width: 100%; }
+}
+
+/* 在Love 写卡机里：面板头的切换按钮 */
+.pw-suite { display: flex; gap: 4px; margin-left: auto; margin-right: 8px; flex-wrap: wrap; }
+.pw-btn.pw-cur:disabled { opacity: 1; background: var(--SmartThemeQuoteColor, #4a7bd0); color: #fff; border-color: transparent; cursor: default; }
+
+/* ===== 界面整理（v2）：颜色全部从酒馆主题变量推出来，换主题自动跟着变 ===== */
+.pw-overlay {
+  --pw-ink: var(--SmartThemeBodyColor, #dcdcd2);
+  --pw-bg: var(--SmartThemeBlurTintColor, #1e2327);
+  --pw-line: var(--SmartThemeBorderColor, #444);
+  --pw-accent: var(--SmartThemeQuoteColor, #4a7bd0);
+  --pw-soft: color-mix(in srgb, var(--pw-ink) 6%, var(--pw-bg));
+  --pw-hair: color-mix(in srgb, var(--pw-line) 75%, transparent);
+  --pw-ok: color-mix(in srgb, #2e9a5b 70%, var(--pw-ink));
+  --pw-warn: color-mix(in srgb, #d99a2b 70%, var(--pw-ink));
+  --pw-bad: color-mix(in srgb, #d04a3a 75%, var(--pw-ink));
+}
+.pw-panel { font-size: 15px; }
+
+/* 头部：标题 + 关闭 一行，三个工坊的切换另起一行做成分段控件 */
+.pw-head { flex-wrap: wrap; gap: 8px 10px; padding: 10px 14px 8px; border-bottom: none; }
+.pw-head h3 { flex: 1; font-size: 15px; font-weight: 600; letter-spacing: .01em; }
+.pw-head > .pw-btn { padding: 3px 12px; font-size: 13px; }
+.pw-suite { order: 3; flex: 1 0 100%; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2px; margin: 0; padding: 2px; border: 1px solid var(--pw-hair); border-radius: 9px; background: var(--pw-soft); }
+.pw-suite .pw-btn { border: none; background: transparent; border-radius: 7px; padding: 5px 4px; font-size: 13px; min-height: 0; }
+.pw-suite .pw-btn:hover:not(:disabled) { background: color-mix(in srgb, var(--pw-ink) 8%, transparent); }
+.pw-suite .pw-btn.pw-cur:disabled { background: var(--pw-accent); color: #fff; opacity: 1; font-weight: 600; }
+
+/* 页签：下划线式，平分宽度 */
+.pw-tabs { gap: 0; padding: 0 8px; border-bottom: 1px solid var(--pw-hair); }
+.pw-tab { flex: 1 0 auto; border: none; border-bottom: 2px solid transparent; border-radius: 0; background: none; padding: 9px 12px; opacity: .6; font-size: 14px; }
+.pw-tab.pw-active { background: none; border-color: var(--pw-accent); opacity: 1; font-weight: 600; }
+.pw-body { padding: 14px 14px 12px; scroll-padding-bottom: 80px; }
+
+/* 表单控件：不再是一大块灰 */
+.pw-panel input[type=text], .pw-panel input[type=number], .pw-panel input[type=search],
+.pw-panel select, .pw-panel textarea {
+  background: var(--pw-soft); border: 1px solid var(--pw-hair); border-radius: 8px; padding: 8px 10px; font-size: 14px; line-height: 1.5;
+}
+.pw-panel input:focus-visible, .pw-panel select:focus-visible, .pw-panel textarea:focus-visible, .pw-btn:focus-visible, .pw-tab:focus-visible, .pw-chip:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--pw-accent) 55%, transparent); outline-offset: 1px; border-color: var(--pw-accent);
+}
+.pw-panel ::placeholder { color: var(--pw-ink); opacity: .42; }
+.pw-panel textarea { min-height: 72px; }
+.pw-panel input[type=checkbox], .pw-panel input[type=radio] { accent-color: var(--pw-accent); width: 17px; height: 17px; margin: 2px 0 0; flex: none; }
+.pw-panel label { display: inline-flex; align-items: flex-start; gap: 7px; line-height: 1.45; }
+.pw-box > input[type=text], .pw-box > input[type=search], .pw-section > input[type=text] { flex: none; width: 100%; }
+
+/* 按钮 */
+.pw-btn { background: var(--pw-soft); border: 1px solid var(--pw-hair); border-radius: 8px; padding: 6px 12px; min-height: 34px; font-size: 14px; }
+.pw-btn:hover:not(:disabled) { background: color-mix(in srgb, var(--pw-ink) 11%, var(--pw-bg)); }
+.pw-btn.pw-sm { min-height: 28px; padding: 2px 10px; font-size: 13px; }
+.pw-btn.pw-primary { background: var(--pw-accent); border-color: transparent; color: #fff; font-weight: 600; }
+.pw-btn.pw-primary:hover:not(:disabled) { background: color-mix(in srgb, var(--pw-accent) 88%, #000); }
+.pw-btn.pw-danger { color: var(--pw-bad); }
+.pw-btn:disabled { opacity: .38; }
+
+/* 卡片、分组 */
+.pw-section { gap: 12px; }
+.pw-box { border: 1px solid var(--pw-hair); border-radius: 12px; padding: 12px; gap: 10px; background: color-mix(in srgb, var(--pw-ink) 2.5%, transparent); }
+.pw-h { margin: 0; font-size: 13px; font-weight: 600; opacity: .9; }
+.pw-hint { font-size: 12.5px; opacity: .62; line-height: 1.5; }
+.pw-card { border-color: var(--pw-hair); border-radius: 10px; }
+details > summary { font-size: 13px; opacity: .8; padding: 4px 0; }
+details[open] > summary { opacity: 1; }
+
+/* 提示条 */
+.pw-okbox { border: 1px solid color-mix(in srgb, var(--pw-ok) 55%, transparent); color: var(--pw-ok); background: color-mix(in srgb, var(--pw-ok) 8%, transparent); border-radius: 8px; padding: 6px 10px; font-size: 13px; }
+.pw-warnbox { border: 1px solid color-mix(in srgb, var(--pw-warn) 55%, transparent); color: var(--pw-warn); background: color-mix(in srgb, var(--pw-warn) 8%, transparent); border-radius: 8px; padding: 6px 10px; font-size: 13px; }
+.pw-errbox { border: 1px solid color-mix(in srgb, var(--pw-bad) 55%, transparent); color: var(--pw-bad); background: color-mix(in srgb, var(--pw-bad) 8%, transparent); border-radius: 8px; padding: 6px 10px; font-size: 13px; }
+.pw-undo { border-color: var(--pw-hair); background: color-mix(in srgb, var(--pw-accent) 10%, transparent); border-radius: 8px; }
+.pw-badge { border-color: var(--pw-hair); }
+.pw-badge.pw-new { color: var(--pw-ok); border-color: var(--pw-ok); }
+.pw-badge.pw-warn { color: var(--pw-warn); border-color: var(--pw-warn); }
+.pw-tag { background: color-mix(in srgb, var(--pw-ink) 9%, transparent); }
+.pw-tag.pw-active { background: var(--pw-accent); }
+
+/* 底部固定操作条：主操作永远够得着 */
+.pw-bar {
+  position: sticky; bottom: 0; z-index: 3; display: flex; gap: 8px; align-items: center;
+  margin: 6px -14px -12px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: var(--pw-bg); border-top: 1px solid var(--pw-hair);
+  box-shadow: 0 -6px 12px -8px color-mix(in srgb, var(--pw-ink) 25%, transparent);
+}
+.pw-bar .pw-primary { flex: 1; min-height: 40px; font-size: 15px; }
+.pw-bar .pw-note { flex: 1; font-size: 12.5px; opacity: .7; }
+
+@media (max-width: 700px) {
+  .pw-panel { padding-top: max(env(safe-area-inset-top, 0px), 28px); }
+  .pw-body { padding-left: 12px; padding-right: 12px; }
+  .pw-bar { margin-left: -12px; margin-right: -12px; padding-left: 12px; padding-right: 12px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .pw-btn, .pw-chip, .pw-tab { transition: background-color .12s, border-color .12s, opacity .12s; }
+}
+
+/* 流式生成：实时显示正在写的文字 */
+.pw-stream {
+  margin: 6px 0 0; max-height: 9em; overflow: auto; white-space: pre-wrap; word-break: break-word;
+  font: 12px/1.55 inherit; padding: 6px 8px; border-radius: 8px; opacity: .9;
+  border: 1px dashed color-mix(in srgb, var(--SmartThemeBorderColor, #888) 80%, transparent);
+  background: color-mix(in srgb, var(--SmartThemeBodyColor, #888) 5%, transparent);
+}
+
+/* modules/status/style.css */
+/* 状态栏工坊 */
+.sf-overlay {
+  position: fixed; inset: 0; z-index: 10000;
+  background: rgba(0, 0, 0, .55);
+  display: flex; align-items: center; justify-content: center;
+}
+.sf-panel {
+  width: min(980px, 96vw); height: min(88vh, 900px);
+  display: flex; flex-direction: column;
+  background: var(--SmartThemeBlurTintColor, #1e2327);
+  color: var(--SmartThemeBodyColor, #dcdcd2);
+  border: 1px solid var(--SmartThemeBorderColor, #444);
+  border-radius: 10px; overflow: hidden;
+  font-size: 14px; line-height: 1.5;
+}
+.sf-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px; border-bottom: 1px solid var(--SmartThemeBorderColor, #444);
+}
+.sf-head h3 { margin: 0; font-size: 16px; }
+.sf-tabs { display: flex; gap: 4px; padding: 6px 10px 0; border-bottom: 1px solid var(--SmartThemeBorderColor, #444); overflow-x: auto; }
+.sf-tab {
+  background: none; color: inherit; border: 1px solid transparent; border-bottom: none;
+  padding: 7px 14px; border-radius: 6px 6px 0 0; cursor: pointer; white-space: nowrap; opacity: .7;
+}
+.sf-tab.sf-active { opacity: 1; border-color: var(--SmartThemeBorderColor, #444); background: rgba(255, 255, 255, .06); font-weight: 600; }
+.sf-body { flex: 1; overflow-y: auto; padding: 12px 14px; }
+.sf-status { min-height: 0; padding: 0 14px; font-size: 12px; opacity: .85; }
+.sf-status.sf-on { padding: 6px 14px; border-top: 1px solid var(--SmartThemeBorderColor, #444); }
+
+.sf-section { display: flex; flex-direction: column; gap: 10px; }
+.sf-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.sf-row.sf-grow > * { flex: 1 1 140px; }
+.sf-hint { margin: 0; font-size: 12px; opacity: .7; }
+.sf-dim { opacity: .6; font-size: 12px; margin-left: 6px; }
+.sf-h { margin: 6px 0 0; font-size: 14px; font-weight: 600; }
+
+.sf-btn {
+  background: rgba(255, 255, 255, .08); color: inherit;
+  border: 1px solid var(--SmartThemeBorderColor, #555);
+  border-radius: 6px; padding: 5px 11px; cursor: pointer; font-size: 13px;
+}
+.sf-btn:hover { background: rgba(255, 255, 255, .16); }
+.sf-btn:disabled { opacity: .4; cursor: not-allowed; }
+.sf-btn.sf-primary { background: var(--SmartThemeQuoteColor, #4a7bd0); border-color: transparent; color: #fff; }
+.sf-btn.sf-danger { color: #e88; }
+.sf-btn.sf-sm { padding: 2px 8px; font-size: 12px; }
+
+.sf-panel input[type=text], .sf-panel input[type=number], .sf-panel input[type=search],
+.sf-panel select, .sf-panel textarea {
+  background: rgba(0, 0, 0, .25); color: inherit;
+  border: 1px solid var(--SmartThemeBorderColor, #555);
+  border-radius: 6px; padding: 6px 8px; font: inherit; box-sizing: border-box; max-width: 100%;
+}
+.sf-panel textarea { width: 100%; min-height: 90px; resize: vertical; font-family: inherit; }
+.sf-panel textarea.sf-code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px; }
+.sf-panel textarea.sf-tall { min-height: 260px; }
+.sf-panel input[type=text].sf-wide { flex: 1 1 200px; }
+
+.sf-card {
+  display: flex; gap: 8px; align-items: flex-start; padding: 8px 10px;
+  border: 1px solid var(--SmartThemeBorderColor, #444); border-radius: 8px; background: rgba(255, 255, 255, .03);
+}
+.sf-card.sf-off { opacity: .55; }
+.sf-card.sf-marker { background: rgba(120, 160, 255, .08); }
+.sf-card-main { flex: 1; min-width: 0; }
+.sf-card-title { font-weight: 600; word-break: break-all; }
+.sf-card-btns { display: flex; flex-direction: column; gap: 4px; }
+.sf-card-btns.sf-inline { flex-direction: row; flex-wrap: wrap; justify-content: flex-end; }
+.sf-preview { font-size: 12px; opacity: .65; margin-top: 2px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; word-break: break-all; }
+.sf-badge { display: inline-block; font-size: 11px; padding: 0 6px; margin-left: 6px; border-radius: 8px; border: 1px solid var(--SmartThemeBorderColor, #555); opacity: .8; font-weight: 400; }
+.sf-badge.sf-new { color: #8d8; border-color: #8d8; }
+.sf-badge.sf-warn { color: #eb6; border-color: #eb6; }
+.sf-badge.sf-mute { opacity: .5; }
+.sf-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 3px; }
+.sf-tag { font-size: 11px; padding: 0 7px; border-radius: 9px; background: rgba(255, 255, 255, .1); cursor: pointer; }
+.sf-tag.sf-active { background: var(--SmartThemeQuoteColor, #4a7bd0); color: #fff; }
+.sf-check { display: flex; align-items: center; padding-top: 3px; }
+.sf-warnbox { border: 1px solid #eb6; color: #eb6; border-radius: 6px; padding: 6px 10px; font-size: 12px; }
+.sf-errbox { border: 1px solid #e66; color: #e88; border-radius: 6px; padding: 6px 10px; font-size: 12px; }
+.sf-box { border: 1px solid var(--SmartThemeBorderColor, #444); border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+.sf-ov { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 6px; font-size: 12px; }
+.sf-pre { white-space: pre-wrap; word-break: break-all; font-size: 12px; opacity: .85; margin: 4px 0 0; max-height: 220px; overflow: auto; }
+details > summary { cursor: pointer; font-size: 12px; opacity: .7; }
+
+.sf-undo { border: 1px solid var(--SmartThemeBorderColor, #555); border-radius: 6px; padding: 6px 10px; background: rgba(120, 160, 255, .1); }
+.sf-menu-item { cursor: pointer; }
+
+@media (max-width: 700px) {
+  /* 手机上面板是全屏的，顶部会被状态栏盖住（标题、关闭按钮看不见），留出空间 */
+  .sf-panel { width: 100vw; height: 100dvh; border-radius: 0; border: none; box-sizing: border-box;
+    padding-top: max(env(safe-area-inset-top, 0px), 34px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .sf-card { flex-wrap: wrap; }
+  .sf-card-btns { flex-direction: row; flex-wrap: wrap; width: 100%; }
+}
+
+/* 状态栏工坊专用 */
+.sf-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.sf-chip { background: rgba(255,255,255,.08); color: inherit; border: 1px solid var(--SmartThemeBorderColor, #555); border-radius: 14px; padding: 3px 12px; cursor: pointer; font-size: 13px; }
+.sf-chip.sf-on { background: var(--SmartThemeQuoteColor, #4a7bd0); color: #fff; border-color: transparent; }
+.sf-drop { border: 2px dashed var(--SmartThemeBorderColor, #666); border-radius: 8px; padding: 14px; text-align: center; font-size: 12px; opacity: .75; }
+.sf-drop.sf-over { border-color: var(--SmartThemeQuoteColor, #4a7bd0); opacity: 1; }
+.sf-thumbs { display: flex; flex-wrap: wrap; gap: 8px; }
+.sf-thumb { position: relative; width: 96px; height: 96px; border-radius: 6px; overflow: hidden; border: 1px solid var(--SmartThemeBorderColor, #555); }
+.sf-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.sf-x { position: absolute; top: 2px; right: 2px; border: none; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; background: rgba(0,0,0,.65); color: #fff; font-size: 11px; line-height: 20px; padding: 0; }
+.sf-frame { width: 100%; height: 300px; border: 1px solid var(--SmartThemeBorderColor, #555); border-radius: 8px; background: #fff; }
+.sf-okbox { border: 1px solid #6c6; color: #8d8; border-radius: 6px; padding: 6px 10px; font-size: 12px; }
+.sf-mono { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px; }
+
+/* 在Love 写卡机里：面板头的切换按钮 */
+.sf-suite { display: flex; gap: 4px; margin-left: auto; margin-right: 8px; flex-wrap: wrap; }
+.sf-btn.sf-cur:disabled { opacity: 1; background: var(--SmartThemeQuoteColor, #4a7bd0); color: #fff; border-color: transparent; cursor: default; }
+
+.sf-seen { border: 1px solid var(--SmartThemeQuoteColor, #4a7bd0); border-radius: 6px; padding: 6px 10px; font-size: 13px; background: rgba(120,160,255,.08); }
+
+/* ===== 界面整理（v2）：颜色全部从酒馆主题变量推出来，换主题自动跟着变 ===== */
+.sf-overlay {
+  --sf-ink: var(--SmartThemeBodyColor, #dcdcd2);
+  --sf-bg: var(--SmartThemeBlurTintColor, #1e2327);
+  --sf-line: var(--SmartThemeBorderColor, #444);
+  --sf-accent: var(--SmartThemeQuoteColor, #4a7bd0);
+  --sf-soft: color-mix(in srgb, var(--sf-ink) 6%, var(--sf-bg));
+  --sf-hair: color-mix(in srgb, var(--sf-line) 75%, transparent);
+  --sf-ok: color-mix(in srgb, #2e9a5b 70%, var(--sf-ink));
+  --sf-warn: color-mix(in srgb, #d99a2b 70%, var(--sf-ink));
+  --sf-bad: color-mix(in srgb, #d04a3a 75%, var(--sf-ink));
+}
+.sf-panel { font-size: 15px; }
+
+/* 头部：标题 + 关闭 一行，三个工坊的切换另起一行做成分段控件 */
+.sf-head { flex-wrap: wrap; gap: 8px 10px; padding: 10px 14px 8px; border-bottom: none; }
+.sf-head h3 { flex: 1; font-size: 15px; font-weight: 600; letter-spacing: .01em; }
+.sf-head > .sf-btn { padding: 3px 12px; font-size: 13px; }
+.sf-suite { order: 3; flex: 1 0 100%; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2px; margin: 0; padding: 2px; border: 1px solid var(--sf-hair); border-radius: 9px; background: var(--sf-soft); }
+.sf-suite .sf-btn { border: none; background: transparent; border-radius: 7px; padding: 5px 4px; font-size: 13px; min-height: 0; }
+.sf-suite .sf-btn:hover:not(:disabled) { background: color-mix(in srgb, var(--sf-ink) 8%, transparent); }
+.sf-suite .sf-btn.sf-cur:disabled { background: var(--sf-accent); color: #fff; opacity: 1; font-weight: 600; }
+
+/* 页签：下划线式，平分宽度 */
+.sf-tabs { gap: 0; padding: 0 8px; border-bottom: 1px solid var(--sf-hair); }
+.sf-tab { flex: 1 0 auto; border: none; border-bottom: 2px solid transparent; border-radius: 0; background: none; padding: 9px 12px; opacity: .6; font-size: 14px; }
+.sf-tab.sf-active { background: none; border-color: var(--sf-accent); opacity: 1; font-weight: 600; }
+.sf-body { padding: 14px 14px 12px; scroll-padding-bottom: 80px; }
+
+/* 表单控件：不再是一大块灰 */
+.sf-panel input[type=text], .sf-panel input[type=number], .sf-panel input[type=search],
+.sf-panel select, .sf-panel textarea {
+  background: var(--sf-soft); border: 1px solid var(--sf-hair); border-radius: 8px; padding: 8px 10px; font-size: 14px; line-height: 1.5;
+}
+.sf-panel input:focus-visible, .sf-panel select:focus-visible, .sf-panel textarea:focus-visible, .sf-btn:focus-visible, .sf-tab:focus-visible, .sf-chip:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--sf-accent) 55%, transparent); outline-offset: 1px; border-color: var(--sf-accent);
+}
+.sf-panel ::placeholder { color: var(--sf-ink); opacity: .42; }
+.sf-panel textarea { min-height: 72px; }
+.sf-panel input[type=checkbox], .sf-panel input[type=radio] { accent-color: var(--sf-accent); width: 17px; height: 17px; margin: 2px 0 0; flex: none; }
+.sf-panel label { display: inline-flex; align-items: flex-start; gap: 7px; line-height: 1.45; }
+.sf-box > input[type=text], .sf-box > input[type=search], .sf-section > input[type=text] { flex: none; width: 100%; }
+
+/* 按钮 */
+.sf-btn { background: var(--sf-soft); border: 1px solid var(--sf-hair); border-radius: 8px; padding: 6px 12px; min-height: 34px; font-size: 14px; }
+.sf-btn:hover:not(:disabled) { background: color-mix(in srgb, var(--sf-ink) 11%, var(--sf-bg)); }
+.sf-btn.sf-sm { min-height: 28px; padding: 2px 10px; font-size: 13px; }
+.sf-btn.sf-primary { background: var(--sf-accent); border-color: transparent; color: #fff; font-weight: 600; }
+.sf-btn.sf-primary:hover:not(:disabled) { background: color-mix(in srgb, var(--sf-accent) 88%, #000); }
+.sf-btn.sf-danger { color: var(--sf-bad); }
+.sf-btn:disabled { opacity: .38; }
+
+/* 卡片、分组 */
+.sf-section { gap: 12px; }
+.sf-box { border: 1px solid var(--sf-hair); border-radius: 12px; padding: 12px; gap: 10px; background: color-mix(in srgb, var(--sf-ink) 2.5%, transparent); }
+.sf-h { margin: 0; font-size: 13px; font-weight: 600; opacity: .9; }
+.sf-hint { font-size: 12.5px; opacity: .62; line-height: 1.5; }
+.sf-card { border-color: var(--sf-hair); border-radius: 10px; }
+details > summary { font-size: 13px; opacity: .8; padding: 4px 0; }
+details[open] > summary { opacity: 1; }
+
+/* 提示条 */
+.sf-okbox { border: 1px solid color-mix(in srgb, var(--sf-ok) 55%, transparent); color: var(--sf-ok); background: color-mix(in srgb, var(--sf-ok) 8%, transparent); border-radius: 8px; padding: 6px 10px; font-size: 13px; }
+.sf-warnbox { border: 1px solid color-mix(in srgb, var(--sf-warn) 55%, transparent); color: var(--sf-warn); background: color-mix(in srgb, var(--sf-warn) 8%, transparent); border-radius: 8px; padding: 6px 10px; font-size: 13px; }
+.sf-errbox { border: 1px solid color-mix(in srgb, var(--sf-bad) 55%, transparent); color: var(--sf-bad); background: color-mix(in srgb, var(--sf-bad) 8%, transparent); border-radius: 8px; padding: 6px 10px; font-size: 13px; }
+.sf-undo { border-color: var(--sf-hair); background: color-mix(in srgb, var(--sf-accent) 10%, transparent); border-radius: 8px; }
+.sf-badge { border-color: var(--sf-hair); }
+.sf-badge.sf-new { color: var(--sf-ok); border-color: var(--sf-ok); }
+.sf-badge.sf-warn { color: var(--sf-warn); border-color: var(--sf-warn); }
+.sf-tag { background: color-mix(in srgb, var(--sf-ink) 9%, transparent); }
+.sf-tag.sf-active { background: var(--sf-accent); }
+
+/* 底部固定操作条：主操作永远够得着 */
+.sf-bar {
+  position: sticky; bottom: 0; z-index: 3; display: flex; gap: 8px; align-items: center;
+  margin: 6px -14px -12px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: var(--sf-bg); border-top: 1px solid var(--sf-hair);
+  box-shadow: 0 -6px 12px -8px color-mix(in srgb, var(--sf-ink) 25%, transparent);
+}
+.sf-bar .sf-primary { flex: 1; min-height: 40px; font-size: 15px; }
+.sf-bar .sf-note { flex: 1; font-size: 12.5px; opacity: .7; }
+
+@media (max-width: 700px) {
+  .sf-panel { padding-top: max(env(safe-area-inset-top, 0px), 28px); }
+  .sf-body { padding-left: 12px; padding-right: 12px; }
+  .sf-bar { margin-left: -12px; margin-right: -12px; padding-left: 12px; padding-right: 12px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sf-btn, .sf-chip, .sf-tab { transition: background-color .12s, border-color .12s, opacity .12s; }
+}
+
+/* 状态栏工坊专用（v2） */
+.sf-chip { background: var(--sf-soft); border-color: var(--sf-hair); min-height: 32px; padding: 3px 13px; }
+.sf-chip.sf-on { background: var(--sf-accent); color: #fff; border-color: transparent; font-weight: 600; }
+.sf-thumbs { gap: 8px; align-items: center; }
+.sf-thumb { width: 84px; height: 84px; border-radius: 10px; border-color: var(--sf-hair); }
+.sf-addimg { width: 84px; height: 84px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 2px; border: 1.5px dashed var(--sf-hair); border-radius: 10px; background: none; color: inherit; cursor: pointer; font-size: 12px; opacity: .75; }
+.sf-addimg b { font-size: 22px; font-weight: 400; line-height: 1; }
+.sf-addimg.sf-over, .sf-addimg:hover { border-color: var(--sf-accent); opacity: 1; }
+.sf-frame { height: 120px; border-color: var(--sf-hair); transition: height .15s; }
+.sf-seen { border-color: color-mix(in srgb, var(--sf-accent) 60%, transparent); background: color-mix(in srgb, var(--sf-accent) 9%, transparent); }
+.sf-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.sf-line .sf-grow { flex: 1; min-width: 0; }
+.sf-fold > summary { list-style: none; display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px 0; font-size: 14px; font-weight: 600; opacity: 1; }
+.sf-fold > summary::-webkit-details-marker { display: none; }
+.sf-fold > summary::before { content: '▸'; opacity: .55; transition: transform .12s; font-size: 12px; }
+.sf-fold[open] > summary::before { transform: rotate(90deg); }
+.sf-fold > summary .sf-dim { font-weight: 400; margin-left: auto; }
+.sf-fold + .sf-fold, .sf-fold { border-top: 1px solid var(--sf-hair); }
+.sf-folds { display: flex; flex-direction: column; border: 1px solid var(--sf-hair); border-radius: 12px; padding: 0 12px; }
+.sf-folds > .sf-fold:first-child { border-top: none; }
+.sf-fold > :not(summary) { margin-bottom: 12px; }
+.sf-previewhead { display: flex; align-items: center; gap: 8px; }
+.sf-previewhead .sf-h { flex: 1; }
+.sf-status-line { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+
+/* 单独成行的输入框不要被 flex-basis 撑成高框 */
+.sf-panel input[type=text].sf-wide { flex: 0 0 auto; width: 100%; box-sizing: border-box; }
+.sf-line input[type=text].sf-wide { flex: 1 1 140px; width: auto; }
+
+/* 流式生成：实时显示正在写的文字 */
+.sf-stream {
+  margin: 6px 0 0; max-height: 9em; overflow: auto; white-space: pre-wrap; word-break: break-word;
+  font: 12px/1.55 inherit; padding: 6px 8px; border-radius: 8px; opacity: .9;
+  border: 1px dashed color-mix(in srgb, var(--SmartThemeBorderColor, #888) 80%, transparent);
+  background: color-mix(in srgb, var(--SmartThemeBodyColor, #888) 5%, transparent);
+}
+
+/* 改现有正则 */
+.sf-origin { display: flex; align-items: center; gap: 8px; padding: 6px 10px; margin-bottom: 8px; border-radius: 8px; border: 1px solid var(--SmartThemeQuoteColor, #4f7c6e); background: color-mix(in srgb, var(--SmartThemeQuoteColor, #4f7c6e) 10%, transparent); font-size: 0.92em; }
+.sf-origin > span { flex: 1; min-width: 0; }
+
+/* Mobile editing: fit the visible area above the software keyboard. */
+.cw-chat-source-note { flex-basis: 100%; font-size: .85em; overflow-wrap: anywhere; }
+.cw-opening-preview { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 50dvh; overflow-y: auto; font: inherit; text-align: left; }
+dialog.popup.cw-viewport.cw-mobile[open] {
+  position: fixed !important;
+  transform: none !important;
+  translate: none !important;
+  top: calc(var(--cw-viewport-top, 0px) + 8px) !important;
+  bottom: auto !important;
+  margin-block: 0 !important;
+  height: calc(var(--cw-viewport-height, 100dvh) - 16px) !important;
+  max-height: calc(var(--cw-viewport-height, 100dvh) - 16px) !important;
+  min-height: 0 !important;
+  box-sizing: border-box;
+}
+.cw-viewport.cw-mobile .popup-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: 100% !important;
+}
+.cw-viewport.cw-mobile .popup-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  scroll-padding-block: 12px;
+}
+.cw-viewport.cw-mobile .popup-controls { flex-shrink: 0; }
+.cw-viewport.cw-mobile .cw-foot {
+  position: static;
+  bottom: auto;
+  z-index: auto;
+}
+.cw-viewport.cw-mobile .cw-foot .cw-grow { flex-basis: 0; }
+.cw-viewport.cw-mobile.cw-input-active .cw-top { position: static; top: auto; }
+.cw-viewport.cw-mobile .cw textarea {
+  min-height: min(4em, var(--cw-editor-height, 4em)) !important;
+  max-height: min(60vh, var(--cw-editor-height, 50dvh)) !important;
+  overflow-y: auto;
+}
+.cw-viewport.cw-mobile .cw :is(input, textarea, [contenteditable="true"]) {
+  scroll-margin-block: 12px;
+}
+
+/* Conversation panels shared by all workshop pages. */
+.cw-dialogue { min-width: 0; width: 100%; box-sizing: border-box; margin: 0 0 12px; padding: 10px 12px; border: 1px solid var(--SmartThemeBorderColor, #8886); border-radius: 8px; text-align: left; }
+.cw-dialogue > summary { cursor: pointer; font-weight: 600; opacity: 1; overflow-wrap: anywhere; }
+.cw-dialogue-body { display: flex; flex-direction: column; gap: 8px; min-width: 0; padding-top: 8px; }
+.cw-dialogue .cw-dialogue-hint { margin: 0; font-size: .86em; opacity: .75; }
+.cw-dialogue-log { max-height: min(340px, 34dvh); overflow: auto; overscroll-behavior: contain; min-width: 0; }
+.cw-dialogue-message { margin: 0 0 8px; padding: 8px 10px; border-radius: 6px; background: color-mix(in srgb, currentColor 5%, transparent); }
+.cw-dialogue-user { border-left: 3px solid var(--SmartThemeQuoteColor, #819786); }
+.cw-dialogue-role { display: block; font-size: .8em; margin-bottom: 3px; opacity: .7; }
+.cw-dialogue-text { white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; user-select: text; }
+.cw-dialogue .cw-dialogue-input { box-sizing: border-box; min-width: 0; width: 100%; min-height: 76px; height: auto; max-height: min(160px, var(--cw-editor-height, 24dvh)); overflow-y: auto; resize: vertical; font: inherit; line-height: 1.5; }
+.cw-dialogue-actions { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.cw-dialogue .cw-dialogue-button { min-height: 36px; padding: 5px 12px; margin: 0; font: inherit; cursor: pointer; }
+.cw-dialogue .cw-dialogue-button:disabled { opacity: .45; cursor: default; }
+.cw-dialogue-use { display: flex; align-items: center; gap: 6px; font-size: .85em; }
+.cw-dialogue-use input { width: auto; flex: 0 0 auto; margin: 0; }
+.cw-dialogue-error { margin: 0; color: var(--SmartThemeQuoteColor, #a55); overflow-wrap: anywhere; }
+@media (max-width: 700px), (pointer: coarse) {
+  .cw-dialogue { padding: 8px; }
+  .cw-dialogue .cw-dialogue-input { font-size: 16px; }
+}
+
+/* Preset prose needs room to read, including on narrow screens. */
+.pw-body { min-height: 0; }
+.pw-panel .pw-text-editor { display: flex; flex-direction: column; gap: 8px; width: 100%; min-width: 0; text-align: left; }
+.pw-editor-label { flex: 1 1 90px; font-size: 14px; }
+.pw-panel textarea.pw-code { font-family: inherit; font-size: 16px; line-height: 1.75; text-align: left; white-space: pre-wrap; overflow-wrap: anywhere; tab-size: 2; color: var(--pw-ink); opacity: 1; min-height: 180px; }
+.pw-panel textarea.pw-readable { height: clamp(280px, 48dvh, 620px); min-height: 240px; max-height: none; padding: 12px; overflow-y: auto; resize: vertical; background: var(--pw-bg); }
+.pw-panel textarea.pw-guide-text { height: clamp(280px, 42dvh, 500px); }
+.pw-editor-tools { gap: 6px; }
+.pw-panel .pw-note-details { padding: 8px 12px; }
+.pw-note-details > summary { font-size: 14px; }
+.pw-panel .pw-note-details .pw-pre { font: inherit; font-size: 14px; line-height: 1.65; opacity: 1; text-align: left; }
+.pw-panel .pw-bagu-controls { gap: 5px; text-align: left; }
+.pw-bagu-controls > label { font-size: 14px; }
+.pw-bagu-part > summary { font-size: 14px; }
+.pw-bagu-part[open] > .pw-text-editor { margin-top: 8px; }
+.pw-panel .pw-gen-actions { position: static; margin-bottom: 0; box-shadow: none; }
+dialog.pw-focus-editor {
+  --pw-ink: var(--SmartThemeBodyColor, #dcdcd2);
+  --pw-bg: var(--SmartThemeBlurTintColor, #1e2327);
+  --pw-line: var(--SmartThemeBorderColor, #444);
+  --pw-accent: var(--SmartThemeQuoteColor, #4a7bd0);
+  --pw-soft: color-mix(in srgb, var(--pw-ink) 6%, var(--pw-bg));
+  --pw-hair: color-mix(in srgb, var(--pw-line) 75%, transparent);
+  position: fixed; inset: auto; top: var(--pw-visible-top, 0px); left: 0;
+  width: 100vw; max-width: none; height: var(--pw-visible-height, 100dvh); max-height: none; min-height: 0;
+  margin: 0; padding: max(10px, env(safe-area-inset-top, 0px)) 12px max(10px, env(safe-area-inset-bottom, 0px));
+  border: none; border-radius: 0; box-sizing: border-box; background: var(--pw-bg); color: var(--pw-ink);
+  text-align: left; overflow: hidden; font: inherit;
+}
+dialog.pw-focus-editor[open] { display: flex; flex-direction: column; gap: 10px; }
+dialog.pw-focus-editor::backdrop { background: rgba(0,0,0,.55); }
+.pw-focus-head { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; flex: 0 0 auto; }
+.pw-focus-head b { flex: 1 1 150px; min-width: 0; overflow-wrap: anywhere; }
+.pw-focus-editor .pw-focus-text {
+  flex: 1 1 auto; width: 100%; height: 0; min-height: 0; max-height: none; margin: 0; padding: 12px;
+  box-sizing: border-box; overflow-y: auto; resize: none; border: 1px solid var(--pw-hair); border-radius: 8px;
+  background: var(--pw-bg); color: var(--pw-ink); font: inherit; font-size: 17px; line-height: 1.8;
+  text-align: left; white-space: pre-wrap; overflow-wrap: anywhere; tab-size: 2;
+}
+@media (max-width:700px) {
+  .pw-panel textarea.pw-readable { height: 48dvh; min-height: 280px; }
+  .pw-editor-tools .pw-btn { min-height: 34px; }
+}
+
+/* Full saved bodies, natural document editing, and a compact chat composer. */
+.pw-entry-reading { margin-top: 8px; min-width: 0; text-align: left; }
+.pw-entry-prose { margin: 0; color: var(--pw-ink); font: inherit; font-size: 16px; line-height: 1.75; opacity: 1; white-space: pre-wrap; overflow-wrap: anywhere; word-break: normal; user-select: text; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; overflow: hidden; }
+.pw-reading-expanded > .pw-entry-prose { display: block; -webkit-line-clamp: unset; max-height: none; overflow: visible; }
+.pw-panel .pw-read-toggle { border: 0; border-radius: 0; padding: 5px 0; margin-top: 4px; min-height: 34px; background: none; color: var(--pw-accent); text-align: left; }
+.pw-panel textarea.pw-readable { height: auto; min-height: 280px; max-height: none; overflow-y: hidden; resize: none; }
+.pw-panel .pw-pre { font: inherit; font-size: 16px; line-height: 1.75; text-align: left; opacity: 1; max-height: none; overflow: visible; overflow-wrap: anywhere; word-break: normal; }
+.pw-panel .cw-dialogue { padding: 8px 0 12px; border: 0; border-bottom: 1px solid var(--pw-hair); border-radius: 0; }
+.pw-panel .cw-dialogue > summary { font-size: 14px; }
+.pw-panel .cw-dialogue-body { gap: 8px; }
+.pw-panel .cw-dialogue-log:empty { display: none; }
+.pw-panel .cw-dialogue .cw-dialogue-input { font-size: 16px; min-height: 24px; }
+.pw-gen-options { display: flex; flex-direction: column; gap: 10px; }
+.pw-gen-options .pw-gen-primary { display: grid; grid-template-columns: auto minmax(100px,1fr) auto; align-items: center; gap: 8px; }
+.pw-gen-options .pw-gen-extra { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(90px,110px); align-items: center; gap: 8px; }
+.pw-gen-options label { font-size: 14px; }
+.pw-panel .pw-gen-options > input.pw-wide[type=text],
+.pw-panel .pw-section > input.pw-wide[type=text],
+.pw-panel .pw-box > input.pw-wide[type=text] { flex: none; width: 100%; height: 40px; min-height: 40px; }
+.pw-panel textarea.pw-gen-need { min-height: 150px; font-size: 16px; line-height: 1.65; text-align: left; }
+.pw-panel .pw-editor-tools { margin: 0; }
+.pw-overlay.pw-viewport-mobile { inset: auto; top: var(--pw-visible-top,0px); left: 0; right: 0; height: var(--pw-visible-height,100dvh); overflow: hidden; }
+.pw-viewport-mobile > .pw-panel { width: 100%; height: 100%; max-height: 100%; min-height: 0; box-sizing: border-box; border: 0; border-radius: 0; }
+.pw-viewport-mobile .pw-head, .pw-viewport-mobile #pw-tabs-host, .pw-viewport-mobile .pw-status { flex-shrink: 0; }
+.pw-viewport-mobile .pw-body { min-height: 0; overscroll-behavior-y: contain; scroll-behavior: auto; }
+.pw-viewport-mobile.pw-input-active .pw-body { scroll-padding: 20px; }
+.pw-panel .cw-dialogue-compose { display: flex; align-items: flex-end; gap: 8px; padding: 10px; border: 1px solid var(--pw-hair); border-radius: 20px; background: var(--pw-soft); min-width: 0; }
+.pw-panel .cw-dialogue-compose:focus-within { border-color: var(--pw-accent); }
+.pw-panel .cw-dialogue .cw-dialogue-compose textarea { flex: 1 1 0; width: 0; min-width: 0; min-height: 24px; max-height: min(156px,28dvh); padding: 6px 2px; border: 0; border-radius: 0; outline: none; box-shadow: none; background: transparent; resize: none; line-height: 1.5; overflow-y: auto; }
+.pw-panel .cw-dialogue-compose .cw-dialogue-send { flex: 0 0 36px; width: 36px; height: 36px; min-height: 36px; padding: 0; border: 0; border-radius: 50%; background: var(--pw-accent); color: #fff; font-size: 23px; line-height: 1; display: grid; place-items: center; }
+.pw-panel .cw-dialogue-compose .cw-dialogue-send:disabled { opacity: .4; }
+.pw-panel .cw-dialogue-actions:empty { display: none; }
+.pw-viewport-mobile.pw-chat-typing > .pw-panel { padding-bottom: var(--pw-composer-height,64px); }
+.pw-viewport-mobile.pw-chat-typing .cw-dialogue-compose { position: fixed; top: calc(var(--pw-visible-top,0px) + var(--pw-visible-height,100dvh) - 8px); left: 12px; right: 12px; transform: translateY(-100%); z-index: 8; background: var(--pw-bg); }
+.pw-viewport-mobile.pw-chat-typing .cw-dialogue-compose textarea { max-height: min(156px,calc(var(--pw-visible-height) * .28)); }
+.pw-viewport-mobile .pw-panel input[type=text],
+.pw-viewport-mobile .pw-panel input[type=search],
+.pw-viewport-mobile .pw-panel input[type=number],
+.pw-viewport-mobile .pw-panel textarea { font-size: 16px; }
+@media (max-width:360px) {
+  .pw-gen-options .pw-gen-extra { grid-template-columns: minmax(0,1fr) auto; }
+  .pw-gen-extra label { grid-column: 1 / -1; }
+}
+
+/* A folded entry takes no body height; the title remains available. */
+.pw-panel .pw-entry-reading { min-width: 0; margin-top: 8px; text-align: left; }
+.pw-panel .pw-reading-heading { margin-top: 0; }
+.pw-panel .pw-entry-summary { min-height: 40px; padding: 8px 0; line-height: 1.5; color: var(--pw-ink); cursor: pointer; }
+.pw-panel .pw-entry-summary:focus-visible { outline: 2px solid var(--pw-accent); outline-offset: 2px; border-radius: 4px; }
+.pw-panel .pw-entry-reading:not([open]) > .pw-entry-content { display: none !important; }
+.pw-panel .pw-entry-prose { display: block; -webkit-line-clamp: unset; max-height: none; overflow: visible; }
+.pw-panel .pw-entry-content { padding-top: 6px; }
+.pw-combo-list { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.pw-panel .pw-drag-handle { cursor: grab; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; touch-action: pan-y pinch-zoom; }
+.pw-panel .pw-sorting .pw-drag-handle { cursor: grabbing; }
+.pw-panel .pw-sorting .pw-entry-content, .pw-panel .pw-sorting .pw-ov { display: none !important; }
+.pw-panel .pw-sort-source { opacity: .35; border: 1px dashed var(--pw-accent); }
+.pw-sort-ghost { position: fixed; z-index: 20; box-sizing: border-box; pointer-events: none; padding: 14px; border: 1px solid var(--pw-accent); border-radius: 10px; background: var(--pw-bg); color: var(--pw-ink); box-shadow: 0 8px 24px rgba(0,0,0,.18); transform: translateY(-50%); font-size: 15px; line-height: 1.5; overflow-wrap: anywhere; }
+
+.pw-panel .pw-combo-row { flex-wrap: wrap; }
+.pw-panel .pw-mix-editor, .pw-panel .pw-mix-insert { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.pw-panel .pw-mix-editor { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--pw-hair); }
+.pw-panel .pw-mix-insert { flex: 0 0 100%; width: 100%; padding: 12px 0 2px; border-top: 1px solid var(--pw-hair); }
+.pw-panel .pw-mix-template { display: flex; flex-direction: column; gap: 10px; }
+.pw-panel .pw-mix-template-preview { display: flex; flex-direction: column; gap: 10px; }
+.pw-panel .pw-mix-template input[type=file][hidden] { display: none; }
+.pw-panel .pw-mix-template-preview > input.pw-wide[type=text], .pw-panel .pw-mix-editor > input.pw-wide[type=text] { flex: 0 0 auto; width: 100%; height: 40px; min-height: 40px; }
+.pw-panel .pw-combo-row.pw-row-editing, .pw-panel .pw-combo-row.pw-row-inserting { opacity: 1; }
+.pw-panel .pw-combo-row.pw-sort-source { opacity: .35; }
+.pw-panel .pw-sorting .pw-mix-editor, .pw-panel .pw-sorting .pw-mix-insert { display: none !important; }
+
+.pw-panel .pw-tag-editor { margin-top: 8px; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.pw-panel .pw-tag-editor > label { display: flex; flex-direction: column; gap: 4px; }
+.pw-panel .pw-tag-editor input[type=text] { width: 100%; min-width: 0; height: 40px; font-size: 16px; }
+
+.pw-panel .pw-variables .pw-hint { margin: 0; }
+.pw-panel .pw-variable-field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.pw-panel .pw-variable-field > span { overflow-wrap: anywhere; }
+.pw-panel .pw-variable-field > input[type=text], .pw-panel .pw-variable-raw-row > input[type=text] { width: 100%; height: 40px; min-width: 0; font-size: 16px; }
+.pw-panel .pw-variable-raw > summary { padding: 8px 0; cursor: pointer; }
+.pw-panel .pw-variable-raw-row { display: flex; flex-direction: column; gap: 6px; padding: 8px 0; border-top: 1px solid var(--pw-hair); }
+.pw-panel .pw-variable-raw-row > label { overflow-wrap: anywhere; }
+
+.pw-panel .pw-entry-filters > summary, .pw-panel .pw-mix-fold > summary { padding: 8px 0; min-height: 36px; cursor: pointer; overflow-wrap: anywhere; }
+.pw-panel .pw-mix-fold > summary { font-weight: 600; }
+.pw-panel .pw-mix-fold > .pw-combo-list { margin-top: 6px; }
+.pw-panel .pw-filter-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; margin: 4px 0 8px; }
+.pw-panel .pw-filter-fields > label { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.pw-panel .pw-filter-fields select { width: 100%; min-width: 0; min-height: 36px; }
+.pw-panel .pw-auto-fold { display: flex; align-items: flex-start; gap: 4px; font-size: 13px; line-height: 1.6; }
+.pw-panel .pw-auto-fold > input { flex: 0 0 auto; margin-top: 3px; }
+
+.pw-panel .pw-legacy-repair > summary { padding: 8px 0; cursor: pointer; }
+.pw-panel .pw-legacy-choices { display: grid; gap: 6px; max-height: 220px; overflow: auto; margin-bottom: 8px; }
+.pw-panel .pw-legacy-choices > label { display: flex; align-items: flex-start; gap: 6px; }
+.pw-panel .pw-legacy-choices input { flex: 0 0 auto; }
+.pw-panel .pw-local-reserve-list { display: flex; flex-direction: column; gap: 6px; }
+.pw-panel .pw-local-reserve .pw-card { padding: 8px; }
+
+.pw-panel .pw-entry-variable-tools { gap: 6px; margin-bottom: 6px; }
+.pw-panel .pw-entry-variable-tools button[aria-pressed="true"] { background: var(--SmartThemeQuoteColor,#52796f); color: #fff; }
+.pw-panel .pw-entry-variable-panel { padding: 8px 0; }
+.pw-panel .pw-entry-variable-panel[hidden], .pw-panel .pw-variable-notice[hidden], .pw-panel .pw-get-choices > label[hidden] { display: none !important; }
+.pw-panel .pw-variable-fields { display: grid; grid-template-columns: minmax(0,1fr) minmax(100px,.6fr); gap: 8px; margin-bottom: 8px; }
+.pw-panel .pw-variable-fields > label { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.pw-panel .pw-entry-variable-panel input:not([type="checkbox"]), .pw-panel .pw-entry-variable-panel select { width: 100%; min-width: 0; }
+.pw-panel .pw-get-choices, .pw-panel .pw-init-choices { display: grid; gap: 8px; max-height: 260px; overflow: auto; margin: 8px 0; }
+.pw-panel .pw-get-choices > label { display: flex; align-items: flex-start; gap: 8px; padding: 4px 0; overflow-wrap: anywhere; }
+.pw-panel .pw-get-choices input, .pw-panel .pw-init-choices input[type="checkbox"] { flex: 0 0 auto; }
+.pw-panel .pw-get-choices small { display: block; opacity: .75; font-size: 12px; }
+.pw-panel .pw-init-choices > label { display: grid; gap: 4px; }
+.pw-panel .pw-entry-variable-panel > button { margin-top: 8px; }
+.pw-panel .pw-variable-notice { font-size: 13px; margin: 4px 0; }
+.pw-panel .pw-heading { min-width: 0; flex: 1; }
+.pw-panel .pw-save-feedback { display: flex; align-items: center; gap: 6px; min-height: 20px; font-size: 12px; }
+.pw-panel .pw-save-feedback button { min-height: 24px; padding: 2px 6px; font-size: 12px; }
+.pw-panel .pw-save-feedback button[hidden] { display: none !important; }
+.pw-panel .pw-save-feedback[data-state="dirty"] { font-weight: 600; }
+.pw-panel .pw-save-feedback[data-state="error"] { color: #a23c36; }
+
+/* The list, entry editor, and variable initializer are separate screens. */
+.pw-panel .pw-mix-home { gap: 10px; }
+.pw-panel .pw-mix-top { display: grid; grid-template-columns: minmax(0,1fr) auto auto; align-items: center; gap: 6px; }
+.pw-panel .pw-mix-top select { min-width: 0; width: 100%; }
+.pw-panel .pw-mix-count { font-size: 12px; opacity: .8; }
+.pw-panel .pw-mix-toolbar { display: flex; gap: 6px; }
+.pw-panel .pw-mix-toolbar > button { flex: 1 1 auto; padding: 8px 6px; min-width: 0; font-size: 14px; }
+.pw-panel .pw-mix-list-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.pw-panel .pw-mix-list-tools > span { flex: 1 1 auto; font-size: 12px; }
+.pw-panel .pw-mix-list-tools button { padding: 2px 8px; min-height: 32px; }
+.pw-panel .pw-combo-list { gap: 7px; }
+.pw-panel .pw-combo-list > .pw-compact-row { --pw-row-icon-size: 27px; --pw-row-switch-size: 38px; position: relative; display: grid; grid-template-columns: 26px minmax(0,1fr) auto; align-items: start; column-gap: 4px; row-gap: 0; padding: 2px 5px; margin: 0; border: 1px solid var(--pw-hair); border-radius: 8px; background: color-mix(in srgb, var(--pw-bg) 96%, var(--pw-ink)); }
+.pw-panel .pw-compact-row.pw-off { opacity: 1; }
+.pw-panel .pw-compact-row.pw-off .pw-row-name, .pw-panel .pw-compact-row.pw-off .pw-row-kind { opacity: .5; }
+.pw-panel .pw-compact-row.pw-marker { background: var(--pw-soft); }
+.pw-panel .pw-compact-row > .pw-card-main { grid-column: 2 / -1; grid-row: 1; min-width: 0; }
+.pw-panel .pw-compact-row .pw-entry-reading { display: block; margin: 0; }
+.pw-panel .pw-compact-row .pw-entry-summary, .pw-panel .pw-compact-row .pw-card-title.pw-drag-handle { display: flex; align-items: center; gap: 6px; min-width: 0; min-height: 34px; padding: 0 calc(var(--pw-row-action-count) * var(--pw-row-icon-size) + var(--pw-row-switch-size) + 4px) 0 0; line-height: 1.4; opacity: 1; list-style: none; }
+.pw-panel .pw-compact-row .pw-entry-summary::-webkit-details-marker { display: none; }
+.pw-panel .pw-compact-row .pw-entry-summary::before, .pw-panel .pw-compact-row .pw-entry-summary::after { display: none; }
+.pw-panel .pw-row-kind { display: inline-flex; flex: 0 0 15px; color: var(--pw-accent); }
+.pw-panel .pw-row-kind svg { width: 15px; height: 15px; }
+.pw-panel .pw-row-name { display: flex; align-items: center; min-width: 0; font-size: 15px; font-weight: 500; }
+.pw-panel .pw-row-title-text { display: block; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.pw-panel .pw-row-meta { display: block; font-size: 12px; opacity: .65; font-weight: normal; margin-top: 3px; }
+.pw-panel .pw-row-detail { padding: 0 0 8px; overflow-wrap: anywhere; }
+.pw-panel .pw-row-detail > b { font-size: 14px; font-weight: 500; }
+.pw-panel .pw-compact-row .pw-entry-content { min-width: 0; margin: 2px 3px 5px -27px; padding: 10px 5px 4px; border-top: 1px solid var(--pw-hair); }
+.pw-panel .pw-draft-badge { display: inline-block; font-size: 11px; margin-left: 6px; color: var(--pw-accent); }
+.pw-panel .pw-draft-badge { flex: 0 0 auto; white-space: nowrap; }
+.pw-panel .pw-row-buttons { position: relative; grid-column: 3; grid-row: 1; display: flex; gap: 0; align-items: center; min-width: 0; }
+.pw-panel .pw-row-icon { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 27px; width: 27px; min-width: 0; height: 34px; min-height: 34px; margin: 0; padding: 0; border: 0; border-radius: 5px; background: transparent; color: var(--pw-accent); box-shadow: none; }
+.pw-panel .pw-row-icon svg { display: block; flex: none; pointer-events: none; }
+.pw-panel .pw-row-icon:focus-visible { outline: 2px solid var(--pw-accent); outline-offset: -2px; }
+.pw-panel .pw-row-grip { grid-column: 1; grid-row: 1; width: 26px; color: var(--pw-ink); opacity: .8; }
+.pw-panel .pw-row-switch { position: relative; display: inline-flex; flex: 0 0 38px; align-items: center; justify-content: center; width: 38px; height: 34px; margin: 0; padding: 0; cursor: pointer; }
+.pw-panel .pw-row-switch > input[type=checkbox] { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; z-index: 1; }
+.pw-panel .pw-switch-track { position: relative; display: block; width: 28px; height: 17px; border: 1px solid var(--pw-hair); border-radius: 12px; background: color-mix(in srgb, var(--pw-ink) 17%, var(--pw-bg)); pointer-events: none; }
+.pw-panel .pw-switch-track::after { content: ""; position: absolute; top: 3px; left: 3px; width: 9px; height: 9px; border-radius: 50%; background: var(--pw-bg); box-shadow: 0 0 0 1px color-mix(in srgb, var(--pw-ink) 12%, transparent); }
+.pw-panel .pw-row-switch > input:checked + .pw-switch-track { background: var(--pw-accent); border-color: var(--pw-accent); }
+.pw-panel .pw-row-switch > input:checked + .pw-switch-track::after { left: 14px; background: #fff; }
+.pw-panel .pw-row-switch > input:focus-visible + .pw-switch-track { outline: 2px solid var(--pw-accent); outline-offset: 3px; }
+.pw-panel .pw-row-actions { position: absolute; inset: auto 4px auto auto; top: calc(100% + 4px); z-index: 12; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); align-content: start; gap: 4px; width: 244px; max-width: calc(100vw - 32px); max-height: min(260px,60vh); overflow: auto; margin: 0; padding: 7px; border: 1px solid var(--pw-hair); border-radius: 9px; background: var(--pw-bg); color: var(--pw-ink); box-shadow: 0 8px 24px color-mix(in srgb, var(--pw-ink) 16%, transparent); }
+.pw-panel .pw-row-actions.pw-actions-above { top: auto; bottom: calc(100% + 4px); }
+.pw-panel .pw-row-actions[popover] { position: fixed; inset: auto; }
+.pw-panel .pw-row-actions[popover]:not(:popover-open) { display: none; }
+.pw-panel .pw-row-actions[popover]::backdrop { background: transparent; }
+.pw-panel .pw-row-actions button { min-height: 36px; padding: 5px 7px; border: 0; background: transparent; text-align: left; white-space: nowrap; }
+.pw-panel .pw-row-actions button:hover:not(:disabled) { background: var(--pw-soft); }
+@media (max-width:360px) {
+  .pw-panel .pw-combo-list > .pw-compact-row { --pw-row-icon-size: 25px; --pw-row-switch-size: 34px; grid-template-columns: 22px minmax(0,1fr) auto; column-gap: 2px; padding-left: 3px; padding-right: 3px; }
+  .pw-panel .pw-row-grip { width: 22px; }
+  .pw-panel .pw-row-icon { flex-basis: 25px; width: 25px; }
+  .pw-panel .pw-row-switch { flex-basis: 34px; width: 34px; }
+  .pw-panel .pw-compact-row .pw-entry-summary, .pw-panel .pw-compact-row .pw-card-title.pw-drag-handle { gap: 4px; }
+  .pw-panel .pw-compact-row .pw-entry-content { margin-left: -21px; }
+}
+.pw-panel .pw-screen-nav { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-bottom: 1px solid var(--pw-hair); }
+.pw-panel .pw-screen-nav b { font-size: 16px; }
+.pw-panel .pw-screen-nav button { min-height: 36px; padding: 4px 8px; }
+.pw-panel > .pw-screen-footer { flex: 0 0 auto; display: flex; gap: 8px; align-items: stretch; padding: 10px 12px max(10px,env(safe-area-inset-bottom)); border-top: 1px solid var(--pw-hair); background: var(--pw-bg); }
+.pw-panel > .pw-screen-footer > button { flex: 1 1 auto; min-height: 44px; margin: 0; padding: 8px; font-size: 14px; }
+.pw-panel .pw-mix-screen { gap: 12px; }
+.pw-panel .pw-mix-screen .pw-mix-editor, .pw-panel .pw-mix-screen .pw-mix-insert { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.pw-panel .pw-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; font-size: 14px; }
+.pw-panel .pw-field input, .pw-panel .pw-field select { width: 100%; min-width: 0; }
+.pw-panel .pw-screen-edit textarea.pw-readable, .pw-panel .pw-screen-insert textarea.pw-readable { min-height: 220px; }
+.pw-panel .pw-screen-init .pw-init-list { display: flex; flex-direction: column; gap: 0; overflow: visible; max-height: none; }
+.pw-panel .pw-init-list > label { display: flex; flex-direction: column; gap: 8px; padding: 12px 0; border-bottom: 1px solid var(--pw-hair); }
+.pw-panel .pw-init-name { display: flex; align-items: center; gap: 8px; overflow-wrap: anywhere; }
+.pw-panel .pw-init-name > input { flex: 0 0 auto; }
+.pw-panel .pw-init-list input[type=text] { width: 100%; min-width: 0; }
+.pw-panel .pw-init-list > label[hidden] { display: none; }
+.pw-panel .pw-manage-options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.pw-panel .pw-pick-row { display: flex; align-items: start; gap: 8px; padding: 12px 0; border-bottom: 1px solid var(--pw-hair); min-width: 0; }
+.pw-panel .pw-pick-row .pw-card-main { flex: 1; min-width: 0; }
+.pw-panel .pw-field[hidden], .pw-panel .pw-picker-row[hidden], .pw-panel .pw-picker-source input[hidden] { display: none !important; }
+.pw-panel .pw-entry-settings, .pw-panel .pw-entry-ai { border: 1px solid var(--pw-hair); border-radius: 9px; padding: 0 12px; }
+.pw-panel .pw-entry-settings > summary, .pw-panel .pw-entry-ai > summary { cursor: pointer; padding: 12px 0; font-size: 14px; font-weight: 600; }
+.pw-panel .pw-entry-settings-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 2px 0 12px; }
+.pw-panel .pw-entry-settings-grid > :last-child { grid-column: 1 / -1; }
+.pw-panel .pw-entry-ai[open] { padding-bottom: 12px; }
+.pw-panel .pw-entry-ai > input { width: 100%; margin-bottom: 10px; }
+.pw-panel .pw-add-sources { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.pw-panel .pw-source-tab { min-height: 42px; padding: 8px; }
+.pw-panel .pw-source-tab.pw-active { background: var(--pw-accent); color: var(--pw-bg); border-color: var(--pw-accent); }
+.pw-panel .pw-picker-source { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+.pw-panel .pw-picker-source > button { align-self: flex-start; }
+.pw-panel .pw-picker-list { display: flex; flex-direction: column; gap: 6px; }
+.pw-panel .pw-picker-row { display: grid; grid-template-columns: 40px minmax(0, 1fr); align-items: start; border: 1px solid var(--pw-hair); border-radius: 8px; padding: 4px 8px 4px 0; }
+.pw-panel .pw-picker-check { display: flex; align-items: center; justify-content: center; min-height: 44px; cursor: pointer; }
+.pw-panel .pw-picker-check input { width: 20px; height: 20px; margin: 0; }
+.pw-panel .pw-picker-row details { min-width: 0; }
+.pw-panel .pw-picker-row summary { cursor: pointer; padding: 8px 0; overflow-wrap: anywhere; }
+.pw-panel .pw-picker-title { font-weight: 600; }
+.pw-panel .pw-picker-row summary > .pw-dim { display: block; font-size: 12px; margin-top: 3px; }
+.pw-panel .pw-picker-row .pw-pre { max-height: 320px; overflow: auto; font-size: 14px; }
+.pw-panel .pw-draft-resume { display: flex; align-items: center; justify-content: space-between; font-size: 13px; gap: 8px; }
+.pw-panel .pw-screen-template > .pw-mix-template { border: 0; padding: 0; }
+.pw-panel .pw-screen-reserve .pw-local-reserve { margin: 0; }
+.pw-panel .pw-screen-init .pw-entry-prose { display: block; overflow: visible; -webkit-line-clamp: unset; }
+.pw-panel .pw-mix-screen input[type=search] { min-width: 0; max-width: 100%; }
+.pw-overlay.pw-input-active .pw-screen-nav { padding-top: 4px; padding-bottom: 4px; }
+.pw-overlay.pw-input-active .pw-head { padding-top: 6px; padding-bottom: 6px; }
+
+/* AI 写基础版预设 */
+.pw-panel .pw-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.pw-panel .pw-chip { background: none; color: inherit; border: 1px solid var(--SmartThemeBorderColor, #555); border-radius: 14px; padding: 4px 12px; font: inherit; font-size: 13px; cursor: pointer; }
+.pw-panel .pw-chip.pw-on { border-color: var(--SmartThemeQuoteColor, #4a7bd0); background: color-mix(in srgb, var(--SmartThemeQuoteColor, #4a7bd0) 18%, transparent); }
+.pw-panel .pw-skel-note { border: 1px solid var(--SmartThemeQuoteColor, #4a7bd0); border-radius: 8px; padding: 8px 10px; }
+.pw-panel .pw-skel-note .pw-pre { font-size: 14px; line-height: 1.6; }
+
+/* 对话里每条的“重来 / 删除” */
+.cw-dialogue-head { display: flex; align-items: center; gap: 6px; }
+.cw-dialogue-head { margin-bottom: 3px; }
+.cw-dialogue-head .cw-dialogue-role { margin: 0 auto 0 0; }
+.cw-dialogue-tool { background: none; border: 1px solid transparent; color: inherit; opacity: .6; font: inherit; font-size: 12px; padding: 1px 6px; border-radius: 6px; cursor: pointer; }
+.cw-dialogue-tool:hover, .cw-dialogue-tool:focus-visible { opacity: 1; border-color: var(--SmartThemeBorderColor, #888); }
+.cw-dialogue-tool:disabled { opacity: .3; cursor: not-allowed; }
+
+/* 键盘弹出时对话记录别占满屏幕；AI 回复里的 Markdown */
+.pw-viewport-mobile.pw-input-active .cw-dialogue-log { max-height: calc(var(--pw-visible-height, 60dvh) * .3); }
+.cw-dialogue-text code { font-family: inherit; padding: 0 3px; border-radius: 4px; background: color-mix(in srgb, currentColor 8%, transparent); }
+.cw-dialogue-text hr { border: 0; border-top: 1px solid color-mix(in srgb, currentColor 20%, transparent); margin: 6px 0; }
+.pw-mix-screen + .cw-dialogue { margin-top: 12px; }
+
+/* ===== 对话：页面里一行入口 + 全屏对话（参考 Claude 的聊天界面） ===== */
+.cw-dialogue.cw-dialogue-launch { display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto; column-gap: 8px; align-items: center; cursor: pointer; background: color-mix(in srgb, var(--SmartThemeQuoteColor, #4e6b5a) 6%, transparent); color: inherit; font: inherit; }
+.pw-panel .cw-dialogue.cw-dialogue-launch { padding: 10px 12px; margin: 0 0 12px; border: 1px solid var(--pw-hair, #8886); border-radius: 12px; }
+.cw-dialogue-launch-title { font-weight: 600; grid-column: 1; }
+.cw-dialogue-launch-sub { grid-column: 1; font-size: .85em; opacity: .65; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.cw-dialogue-launch-arrow { grid-column: 2; grid-row: 1 / span 2; font-size: 1.6em; opacity: .5; }
+.cw-chat-sheet { position: fixed; left: 0; right: 0; top: 0; height: 100dvh; z-index: 30000; display: flex; flex-direction: column; background: var(--SmartThemeBlurTintColor, #f6f4e8); color: var(--SmartThemeBodyColor, #33463e); font-size: 15px; box-sizing: border-box; }
+dialog.cw-chat-modal { margin: 0; padding: 0; border: 0; width: 100%; min-width: 0; max-width: none; min-height: 0; max-height: none; overflow: hidden; text-align: start; }
+dialog.cw-chat-modal:not([open]) { display: none; }
+dialog.cw-chat-modal::backdrop { background: transparent; }
+.cw-chat-modal .cw-chat-head { padding-top: max(10px, env(safe-area-inset-top, 0px)); }
+.cw-chat-modal .cw-chat-compose { margin-bottom: max(10px, env(safe-area-inset-bottom, 0px)); }
+.cw-chat-sheet *, .cw-chat-sheet *::before, .cw-chat-sheet *::after { box-sizing: border-box; }
+.cw-chat-head { flex: none; display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-bottom: 1px solid color-mix(in srgb, var(--SmartThemeBorderColor, #888) 50%, transparent); }
+.cw-chat-back { background: none; border: 0; color: inherit; font: inherit; font-size: 15px; padding: 6px 8px; cursor: pointer; }
+.cw-chat-title { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cw-chat-more { position: relative; }
+.cw-chat-more > summary { list-style: none; cursor: pointer; padding: 4px 10px; font-size: 20px; line-height: 1; }
+.cw-chat-more > summary::-webkit-details-marker { display: none; }
+.cw-chat-more-body { position: absolute; right: 0; top: 100%; z-index: 2; min-width: 220px; display: flex; flex-direction: column; gap: 8px; padding: 10px 12px; border-radius: 10px; border: 1px solid color-mix(in srgb, var(--SmartThemeBorderColor, #888) 60%, transparent); background: var(--SmartThemeBlurTintColor, #f6f4e8); box-shadow: 0 6px 20px rgba(0,0,0,.18); font-size: 14px; }
+.cw-chat-use { display: flex; align-items: center; gap: 6px; }
+.cw-chat-context { flex: none; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; padding: 7px 14px; border-bottom: 1px solid color-mix(in srgb, var(--SmartThemeBorderColor, #888) 35%, transparent); font-size: 13px; }
+.cw-chat-context[hidden] { display: none; }
+.cw-chat-context .cw-chat-use { margin: 0; min-width: 0; line-height: 1.5; cursor: pointer; }
+.cw-chat-context input { flex: none; width: 17px; height: 17px; margin: 0; accent-color: var(--SmartThemeQuoteColor, #4e6b5a); }
+.cw-chat-context-status { margin-left: auto; font-size: 12px; opacity: .75; white-space: nowrap; }
+.pw-panel .pw-generation-context { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
+.pw-panel .pw-generation-context .pw-check { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+.pw-panel .pw-generation-context .pw-hint { margin: 0; }
+.cw-chat-log { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 14px 14px 6px; display: flex; flex-direction: column; gap: 14px; }
+.cw-chat-empty { margin: auto 0; text-align: center; opacity: .6; font-size: 14px; line-height: 1.7; }
+.cw-chat-msg { display: flex; flex-direction: column; gap: 2px; max-width: 100%; }
+.cw-chat-user { align-items: flex-end; }
+.cw-chat-bubble { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.7; user-select: text; }
+.cw-chat-user .cw-chat-bubble { max-width: 85%; padding: 8px 12px; border-radius: 16px 16px 4px 16px; background: color-mix(in srgb, var(--SmartThemeQuoteColor, #4e6b5a) 14%, transparent); }
+.cw-chat-assistant .cw-chat-bubble { padding: 2px 2px; }
+.cw-chat-bubble code { font-family: inherit; padding: 0 3px; border-radius: 4px; background: color-mix(in srgb, currentColor 8%, transparent); }
+.cw-chat-bubble hr { border: 0; border-top: 1px solid color-mix(in srgb, currentColor 20%, transparent); margin: 6px 0; }
+.cw-chat-tools { display: flex; gap: 2px; }
+.cw-chat-typing { margin: 0; opacity: .6; font-size: 14px; }
+.cw-chat-error { font-size: 14px; color: #b0583c; }
+.cw-chat-compose { flex: none; display: flex; align-items: flex-end; gap: 8px; margin: 6px 12px 10px; padding: 8px 8px 8px 14px; border: 1px solid color-mix(in srgb, var(--SmartThemeBorderColor, #888) 70%, transparent); border-radius: 22px; background: color-mix(in srgb, var(--SmartThemeBodyColor, #333) 4%, var(--SmartThemeBlurTintColor, #f6f4e8)); }
+.cw-chat-compose:focus-within { border-color: var(--SmartThemeQuoteColor, #4e6b5a); }
+.cw-chat-sheet .cw-chat-input { flex: 1; min-width: 0; min-height: 24px; max-height: 140px; border: 0; outline: none; resize: none; background: transparent; color: inherit; font: inherit; font-size: 16px; line-height: 1.5; padding: 4px 0; overflow-y: auto; }
+.cw-chat-send { flex: none; width: 36px; height: 36px; border-radius: 50%; border: 0; background: var(--SmartThemeQuoteColor, #4e6b5a); color: #fff; font-size: 20px; line-height: 1; cursor: pointer; display: grid; place-items: center; }
+.cw-chat-send:disabled { opacity: .35; cursor: default; }
+@media (min-width: 720px) { .cw-chat-sheet { left: 50%; width: min(720px, 100vw); transform: translateX(-50%); box-shadow: 0 0 0 1px color-mix(in srgb, var(--SmartThemeBorderColor, #888) 40%, transparent); } }
+@media (min-width: 720px) { dialog.cw-chat-modal { width: min(720px, 100vw); } }
+.pw-kb-debug { position: absolute; right: 4px; top: 4px; z-index: 50; max-width: 70vw; padding: 2px 6px; border-radius: 6px; background: rgba(0,0,0,.72); color: #fff; font: 11px/1.4 monospace; pointer-events: none; }
+
+/* v0.63: compact library, deliberate import destinations, persistent batch actions. */
+.pw-panel .pw-library { gap: 8px; }
+.pw-panel .pw-library > .pw-row:first-child { display: grid; grid-template-columns: minmax(0,1fr) auto; }
+.pw-panel .pw-library input[type=search] { width: 100%; min-width: 0; }
+.pw-panel .pw-list-tools { gap: 4px; }
+.pw-panel .pw-list-tools > .pw-dim { flex: 1 1 auto; margin-left: 0; }
+.pw-panel .pw-library-card { position: relative; display: grid; grid-template-columns: 24px minmax(0,1fr); gap: 5px; padding: 5px 7px; border-radius: 8px; }
+.pw-panel .pw-library-card > .pw-check { grid-column: 1; grid-row: 1; padding-top: 8px; }
+.pw-panel .pw-library-card > .pw-card-main { grid-column: 2; grid-row: 1; }
+.pw-panel .pw-library-card .pw-entry-reading { margin: 0; }
+.pw-panel .pw-library-card .pw-entry-summary { display: block; list-style: none; padding: 5px 72px 5px 0; min-height: 34px; font-size: 15px; opacity: 1; }
+.pw-panel .pw-library-card .pw-entry-summary::before, .pw-panel .pw-library-card .pw-entry-summary::after { display: none; }
+.pw-panel .pw-library-card .pw-entry-summary::-webkit-details-marker { display: none; }
+.pw-panel .pw-library-name { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pw-panel .pw-library-card .pw-entry-reading[open] .pw-library-name { white-space: normal; overflow-wrap: anywhere; }
+.pw-panel .pw-library-meta { font-size: 12px; opacity: .65; overflow-wrap: anywhere; line-height: 1.45; }
+.pw-panel .pw-library-card .pw-library-meta { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pw-panel .pw-library-buttons { position: absolute; top: 5px; right: 7px; display: flex; }
+.pw-panel .pw-library-buttons .pw-row-icon { width: 36px; flex-basis: 36px; }
+.pw-panel .pw-library-card .pw-entry-content { margin-top: 5px; padding-top: 8px; border-top: 1px solid var(--pw-hair); }
+.pw-panel .pw-library-card .pw-row-actions { grid-template-columns: minmax(0,1fr); width: 224px; }
+.pw-panel .pw-library-card .pw-row-actions button { white-space: normal; overflow-wrap: anywhere; }
+.pw-panel .pw-batch-actions { display: flex; flex-direction: column; gap: 6px; width: 100%; min-width: 0; }
+.pw-panel .pw-batch-actions > .pw-dim { margin: 0; }
+.pw-panel .pw-batch-actions .pw-row > select { flex: 1 1 110px; width: 0; min-width: 0; }
+.pw-panel .pw-batch-actions > button { min-height: 40px; }
+.pw-panel .pw-batch-actions > label.pw-field { display: grid; grid-template-columns: auto minmax(0,1fr); align-items: center; gap: 8px; }
+.pw-panel .pw-batch-actions select { width: 100%; }
+.pw-panel .pw-import .pw-source-tabs { grid-template-columns: repeat(3,minmax(0,1fr)); }
+.pw-panel .pw-import .pw-source-tab { min-height: 40px; padding: 5px; }
+.pw-panel .pw-import input[type=file] { max-width: 100%; font: inherit; font-size: 13px; }
+.pw-panel .pw-import-row { flex-wrap: nowrap; padding: 6px 8px; }
+.pw-panel .pw-import-row .pw-entry-reading { margin: 0; }
+.pw-panel .pw-import-row .pw-entry-summary { font-size: 14px; padding: 4px 0; opacity: 1; overflow-wrap: anywhere; }
+.pw-panel .pw-import-preview > .pw-row > b { min-width: 0; overflow-wrap: anywhere; flex: 1; }
+.pw-panel .pw-import .pw-errbox { white-space: pre-wrap; }
+.pw-panel .pw-inline-feedback { margin: 0; padding: 8px; border-radius: 6px; background: var(--pw-soft); font-size: 13px; }
+.pw-panel .pw-gen-optional > .pw-section { padding-top: 10px; }
+.pw-panel .pw-gen-result { display: grid; grid-template-columns: 22px minmax(0,1fr); gap: 6px; padding: 7px 8px; }
+.pw-panel .pw-gen-result > details { min-width: 0; }
+.pw-panel .pw-gen-result > details > summary { min-height: 30px; padding: 3px 0; font-size: 15px; opacity: 1; overflow-wrap: anywhere; }
+.pw-panel .pw-gen-result > details > .pw-section { padding-top: 8px; }
+.pw-panel .pw-settings-section { border: 1px solid var(--pw-hair); border-radius: 8px; }
+.pw-panel .pw-settings-section > summary { padding: 11px 10px; font-size: 14px; font-weight: 600; opacity: 1; }
+.pw-panel .pw-settings-section > .pw-box { border: 0; border-radius: 0; padding-top: 0; }
+.pw-panel .pw-danger-zone { flex: 1 0 100%; margin-top: 5px; }
+.pw-panel .pw-danger-zone > summary { padding: 5px 0; }
+.pw-panel .pw-body > .pw-section + .cw-dialogue { margin-top: 14px; }
+.pw-panel .pw-field { min-width: 0; }
+
+.pw-panel .pw-import-inputs > summary { margin-bottom: 8px; padding: 5px 0; font-size: 14px; }
+.pw-panel .pw-import-inputs > .pw-source-tabs { margin-bottom: 8px; }
+
+/* 酒馆同步差异：窄屏纵向对照，长名称可换行 */
+.pw-panel .pw-sync-change { border: 1px solid var(--pw-line); border-radius: 8px; padding: 10px; min-width: 0; }
+.pw-panel .pw-sync-change > summary { cursor: pointer; overflow-wrap: anywhere; }
+.pw-panel .pw-sync-change[open] > b { display: block; margin: 12px 0 6px; }
+.pw-panel .pw-sync-undo { justify-content: space-between; }
+
+/* ===== Love 写卡机 · 票册（v0.90）===== */
+dialog.cwz-dlg{--z-mist:#7ea29c;--z-ink:#3a2a22;--z-soft:#6e5a4d;--z-paper:#f4efe4;--z-paper2:#ebe4d2;--z-wax:#c98a3e;--z-red:#9b4f45;--z-dash:rgba(58,42,34,.5);--z-shadow:0 4px 0 rgba(26,22,18,.22);
+ --z-font:"Noto Serif SC","Noto Serif CJK SC","Source Han Serif SC","Songti SC","STSong",serif;--z-mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+ background-color:var(--z-mist)!important;background-image:radial-gradient(rgba(28,34,38,.22) 1px,transparent 1.5px)!important;background-size:7px 7px!important;color:var(--z-ink)!important;border:0!important;font-family:var(--z-font)!important;}
+dialog.cwz-dlg *{scrollbar-width:none}
+dialog.cwz-dlg ::-webkit-scrollbar{display:none}
+dialog.cwz-dlg .popup-body,dialog.cwz-dlg .popup-content{background:transparent!important;color:var(--z-ink)!important}
+dialog.cwz-dlg .popup-controls{padding:6px 12px max(8px,env(safe-area-inset-bottom));justify-content:center;background:linear-gradient(to bottom,rgba(126,162,156,0),var(--z-mist) 40%)}
+dialog.cwz-dlg .popup-controls .menu_button{min-height:34px;padding:0 18px;border-radius:999px!important;border:1.5px dashed var(--z-dash)!important;background:rgba(244,239,228,.85)!important;color:var(--z-ink)!important;font-family:var(--z-font)!important;box-shadow:none!important;opacity:1!important}
+dialog.cwz-dlg .cw{font-family:var(--z-font);color:var(--z-ink);font-size:15px;line-height:1.65;gap:12px;max-width:640px;margin:0 auto;padding-bottom:6px}
+dialog.cwz-dlg .cw *{box-sizing:border-box}
+dialog.cwz-dlg .cw a{color:#26352f}
+
+/* 头部 */
+dialog.cwz-dlg .cw-top{position:static;background:transparent;backdrop-filter:none;border:0;padding:0;gap:10px}
+.cwz-head{position:relative;display:flex;align-items:center;gap:10px;padding:10px 46px 10px 16px;background:var(--z-paper);border:1.5px solid var(--z-ink);border-radius:18px;box-shadow:var(--z-shadow)}
+.cwz-title{font-weight:700;font-size:22px;letter-spacing:4px;line-height:1.1;white-space:nowrap}
+.cwz-title small{display:block;font:400 10px var(--z-mono);letter-spacing:.2em;color:var(--z-soft);margin-top:4px}
+.cwz-draft{margin-left:auto;min-width:0;text-align:right;font-size:13px;cursor:pointer}
+.cwz-draft em{display:block;font-style:normal;font-size:10px;letter-spacing:.12em;color:var(--z-soft)}
+.cwz-draft b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw}
+.cwz-stamp{position:absolute;right:-8px;top:-12px;transform:rotate(12deg);width:46px;height:46px;border-radius:50%;background:var(--z-wax);color:#fbf8f0;display:grid;place-items:center;font-size:12px;font-weight:700;letter-spacing:1px;box-shadow:inset 0 0 0 3px var(--z-paper);pointer-events:none}
+.cwz-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+.cwz-pill{min-height:36px;display:flex;align-items:center;justify-content:center;border-radius:999px;border:1.5px solid var(--z-ink);background:var(--z-paper);font-size:14px;cursor:pointer;user-select:none}
+.cwz-pill.on{background:var(--z-ink);color:var(--z-paper)}
+.cwz-pill:active,.cwz-step:active,.cwz-tool:active{transform:translateY(2px)}
+.cwz-sub{display:flex;align-items:center;gap:8px;margin-top:2px}
+.cwz-back{display:inline-flex;align-items:center;min-height:34px;padding:0 14px;border:1.5px dashed var(--z-dash);border-radius:999px;background:rgba(244,239,228,.9);font-size:14px;cursor:pointer}
+.cwz-ptitle{padding:0 4px}
+.cwz-ptitle small{display:block;font:10px var(--z-mono);letter-spacing:.2em;color:#20302c}
+.cwz-ptitle b{font-size:21px;letter-spacing:3px}
+dialog.cwz-dlg .cw-helpbtn{border:1.5px dashed var(--z-dash);border-radius:999px;padding:2px 12px;background:rgba(244,239,228,.85);color:var(--z-ink);font-size:13px}
+dialog.cwz-dlg .cw-helpbtn.on{border-style:solid;border-color:var(--z-ink)}
+.cwz-status:has(.busy){position:sticky;top:0;z-index:5}
+dialog.cwz-dlg .cw-statusrow{min-height:0;padding:0 4px;font-size:12px;color:#20302c}
+dialog.cwz-dlg .cw-statusrow.busy{padding:8px 12px;border-radius:14px;background:var(--z-paper);border:1.5px solid var(--z-ink);box-shadow:var(--z-shadow);color:var(--z-ink)}
+dialog.cwz-dlg .cw-status{opacity:1}
+dialog.cwz-dlg .cw-stream pre{background:var(--z-paper2);color:var(--z-ink);border-radius:12px;border:0}
+
+/* 印章、标签 */
+.cwz-seal{flex-shrink:0;min-width:30px;padding:0 3px;letter-spacing:-1px;width:auto;height:30px;border-radius:50%;display:inline-grid;place-items:center;background:var(--z-wax);color:#fbf8f0;font-weight:700;font-size:13px;line-height:1}
+.cwz-seal.ink{background:var(--z-ink)}
+.cwz-seal.ghost{background:transparent;border:1.5px dashed var(--z-dash);color:var(--z-soft)}
+.cwz-lab{display:inline-block;font:10px var(--z-mono);letter-spacing:.2em;color:var(--z-soft)}
+.cw>.cw-row>.cwz-lab,.cwz-flowrow .cwz-lab{color:#20302c}
+.cwz-badge{font:10px var(--z-mono);padding:1px 8px;border-radius:999px;background:rgba(201,138,62,.22)}
+.cwz-h2{font-weight:700;font-size:20px;letter-spacing:2px;margin:2px 0 4px;line-height:1.35}
+.cwz-sum{font-size:14px}
+.cwz-warn{color:var(--z-red)}
+
+/* 卡片 */
+.cwz-card,dialog.cwz-dlg .cw-card,dialog.cwz-dlg .cw-box,dialog.cwz-dlg .cw-next,dialog.cwz-dlg details.cw-response{position:relative;background:var(--z-paper);color:var(--z-ink);border:1.5px solid var(--z-ink)!important;border-radius:18px;box-shadow:var(--z-shadow);padding:14px 16px}
+dialog.cwz-dlg .cw-card .cw-card,dialog.cwz-dlg .cw-card .cw-box,dialog.cwz-dlg .cw-box .cw-box,dialog.cwz-dlg .cw-box .cw-card,dialog.cwz-dlg .cwz-card .cw-box{background:var(--z-paper2);border:0!important;box-shadow:none;border-radius:14px;padding:10px 12px}
+dialog.cwz-dlg .cw-box.cw-small:not(.cw-card .cw-box){background:rgba(244,239,228,.92)}
+.cwz-notch{position:relative;height:0;margin:14px -16px;border-top:1.5px dashed rgba(58,42,34,.4)}
+.cwz-notch i{position:absolute;top:-10px;width:18px;height:18px;border-radius:50%;background:var(--z-mist);border:1.5px solid var(--z-ink)}
+.cwz-notch i:first-child{left:-10px;clip-path:inset(0 0 0 50%)}
+.cwz-notch i:last-child{right:-10px;clip-path:inset(0 50% 0 0)}
+.cwz-prog{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--z-soft)}
+.cwz-prog .bar{flex:1;height:8px;border-radius:999px;background:rgba(58,42,34,.14);overflow:hidden}
+.cwz-prog .bar i{display:block;height:100%;background:var(--z-wax);border-radius:999px}
+.cwz-empty{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:18px 16px;border:1.5px dashed var(--z-dash);border-radius:16px;background:rgba(244,239,228,.75)}
+.cwz-empty span{font-size:13px;color:var(--z-soft)}
+
+/* 步骤票根 */
+.cwz-flowrow{margin:2px 2px 0}
+.cwz-link{font-size:13px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;color:#20302c}
+.cwz-steps{display:flex;flex-direction:column;gap:10px}
+.cwz-step{display:flex;align-items:stretch;min-height:68px;background:var(--z-paper);border:1.5px solid var(--z-ink);border-radius:16px;box-shadow:var(--z-shadow);cursor:pointer}
+.cwz-step.todo{border-style:dashed;border-color:var(--z-dash);box-shadow:none;background:rgba(244,239,228,.82)}
+.cwz-step.cur{box-shadow:0 0 0 3px var(--z-wax),var(--z-shadow)}
+.cwz-no{width:58px;flex-shrink:0;display:grid;place-items:center}
+.cwz-perf{position:relative;width:0;border-left:1.5px dashed rgba(58,42,34,.4)}
+.cwz-perf::before,.cwz-perf::after{content:"";position:absolute;left:-9.5px;width:16px;height:16px;border-radius:50%;background:var(--z-mist);border:1.5px solid var(--z-ink)}
+.cwz-step.todo .cwz-perf::before,.cwz-step.todo .cwz-perf::after{border-color:var(--z-dash)}
+.cwz-perf::before{top:-10px;clip-path:inset(50% 0 0 0)}
+.cwz-perf::after{bottom:-10px;clip-path:inset(0 0 50% 0)}
+.cwz-stx{flex:1;min-width:0;padding:9px 12px;display:flex;flex-direction:column;justify-content:center;gap:1px}
+.cwz-stx b{font-size:16px;letter-spacing:1px}
+.cwz-stx small{font-size:12px;color:var(--z-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cwz-go{align-self:center;padding-right:14px;font-size:12px;color:var(--z-soft);white-space:nowrap}
+.cwz-add{min-height:48px;display:grid;place-items:center;border:1.5px dashed var(--z-dash);border-radius:16px;background:rgba(244,239,228,.55);cursor:pointer;font-size:14px}
+.cwz-tools{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cwz-tool{padding:11px 14px;background:var(--z-paper);border:1.5px solid var(--z-ink);border-radius:16px;box-shadow:var(--z-shadow);cursor:pointer;min-width:0}
+.cwz-tool b{display:block;font-size:15px}
+.cwz-tool small{display:block;font-size:12px;color:var(--z-soft);line-height:1.5}
+.cwz-draftrow{display:flex;align-items:center;gap:8px;padding:10px 12px;background:rgba(244,239,228,.9);border:1.5px dashed var(--z-dash);border-radius:14px}
+.cwz-draftrow b{display:block;font-size:14px}
+.cwz-draftrow small{font-size:11px;color:var(--z-soft)}
+details.cwz-fold>summary{cursor:pointer;font-size:13px;color:#20302c;padding:2px 4px}
+
+/* 底部按钮条 */
+.cwz-bottom,dialog.cwz-dlg .cw-foot{position:sticky;bottom:0;z-index:4;display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:2px -10px -6px;padding:18px 10px 10px;background:linear-gradient(to bottom,rgba(126,162,156,0),rgba(126,162,156,.96) 40%);border:0}
+.cwz-bottom>.menu_button,dialog.cwz-dlg .cw-foot>.menu_button{flex:1 1 40%;min-height:46px;justify-content:center;box-shadow:var(--z-shadow)!important}
+dialog.cwz-dlg .cw-foot>.cw-grow{display:none}
+.cwz-compose{flex-direction:column;align-items:stretch}
+.cwz-composer{display:flex;gap:8px;align-items:flex-end}
+.cwz-composer textarea{flex:1;min-height:48px!important;background:var(--z-paper)!important;border:1.5px solid var(--z-ink)!important;border-radius:18px!important}
+.cwz-composer>.menu_button{flex:0 0 auto;min-height:48px;min-width:56px}
+
+.cwz-compose>.cwz-gobtn{min-height:46px;justify-content:center}
+
+/* 主题聊天 */
+.cwz-brief{margin:6px 0 8px;padding:10px 12px;max-height:30dvh;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.7 var(--z-font);background:var(--z-paper2);color:var(--z-ink);border-radius:12px;border:0}
+.cwz-chat{display:flex;flex-direction:column;gap:10px}
+.cwz-msg{max-width:88%;display:flex;flex-direction:column;gap:4px}
+.cwz-msg.ai{align-self:flex-start}
+.cwz-msg.me{align-self:flex-end;align-items:flex-end}
+.cwz-msgtext{padding:10px 14px;border-radius:16px;font-size:14px;line-height:1.75;overflow-wrap:anywhere}
+.cwz-msg.ai .cwz-msgtext{background:var(--z-paper);border:1.5px solid var(--z-ink);border-bottom-left-radius:4px}
+.cwz-msg.me .cwz-msgtext{background:var(--z-ink);color:var(--z-paper);border-bottom-right-radius:4px}
+.cwz-msgact{display:flex;gap:6px}
+.cwz-msgact .menu_button.cw-btn{min-height:26px!important;padding:0 10px!important;font-size:11px!important;box-shadow:none!important;border-style:dashed!important;background:rgba(244,239,228,.7)!important}
+
+/* 基础件：按钮 */
+dialog.cwz-dlg .cw .menu_button,dialog.cwz-dlg .cw .cw-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;width:auto;min-height:36px;margin:0;padding:0 14px;border:1.5px solid var(--z-ink)!important;border-radius:999px!important;background:var(--z-paper)!important;color:var(--z-ink)!important;font-family:var(--z-font)!important;font-size:13px;font-weight:400;box-shadow:0 3px 0 rgba(26,22,18,.18);opacity:1;filter:none;text-shadow:none;transition:transform .08s}
+dialog.cwz-dlg .cw .menu_button:hover{background:#fbf7ee!important}
+dialog.cwz-dlg .cw .menu_button:active{transform:translateY(2px);box-shadow:none}
+dialog.cwz-dlg .cw .cw-primary,dialog.cwz-dlg .cw .menu_button.cw-primary{background:var(--z-ink)!important;color:var(--z-paper)!important;font-weight:600}
+dialog.cwz-dlg .cw .cw-btn.disabled{opacity:.45}
+dialog.cwz-dlg .cw .cw-stop{border-color:var(--z-red)!important;color:var(--z-red)!important}
+
+/* 输入 */
+dialog.cwz-dlg .cw .text_pole,dialog.cwz-dlg .cw textarea,dialog.cwz-dlg .cw select,dialog.cwz-dlg .cw input[type=text],dialog.cwz-dlg .cw input[type=number],dialog.cwz-dlg .cw input:not([type]){background:var(--z-paper2)!important;color:var(--z-ink)!important;border:0!important;border-radius:12px!important;font-family:var(--z-font)!important;font-size:14px;line-height:1.7;padding:8px 12px;box-shadow:none!important;outline:none}
+dialog.cwz-dlg .cw .text_pole:focus,dialog.cwz-dlg .cw textarea:focus,dialog.cwz-dlg .cw select:focus{box-shadow:0 0 0 2px var(--z-ink)!important}
+dialog.cwz-dlg .cw ::placeholder{color:#7c6a5d;opacity:1}
+dialog.cwz-dlg .cw input[type=checkbox],dialog.cwz-dlg .cw input[type=radio]{accent-color:var(--z-ink);filter:none}
+dialog.cwz-dlg .cw label{color:var(--z-ink)}
+
+/* 旧的零件换皮 */
+dialog.cwz-dlg .cw-dim,dialog.cwz-dlg .cw small.cw-dim{color:var(--z-soft)!important;opacity:1}
+dialog.cwz-dlg .cw>.cw-dim,dialog.cwz-dlg .cw-page>.cw-dim,dialog.cwz-dlg .cw-page>.cw-help{color:#1f2d2a!important}
+dialog.cwz-dlg .cw-sub{font-weight:700;letter-spacing:1px;color:var(--z-ink);border:0}
+dialog.cwz-dlg .cw-ctitle{font-weight:700;font-size:18px;letter-spacing:2px}
+dialog.cwz-dlg .cw-badge{border:1px dashed var(--z-dash);border-radius:999px;padding:0 8px;background:transparent;color:var(--z-ink);font-size:11px}
+dialog.cwz-dlg .cw-badge.ok{border-style:solid;background:rgba(201,138,62,.2)}
+dialog.cwz-dlg .cw-ok{color:#4f6b3f}
+dialog.cwz-dlg .cw-err,dialog.cwz-dlg .cw-warntext{color:var(--z-red)}
+dialog.cwz-dlg .cw-chip{border:1.5px dashed var(--z-dash);border-radius:999px;background:transparent;color:var(--z-ink)}
+dialog.cwz-dlg .cw-chip.on{border-style:solid;border-color:var(--z-ink);background:var(--z-paper2)}
+dialog.cwz-dlg .cw-seg{display:flex;gap:4px;padding:4px;border-radius:999px;background:rgba(58,42,34,.08);border:0}
+dialog.cwz-dlg .cw-seg span{flex:1;text-align:center;border-radius:999px;border:1.5px solid transparent;padding:3px 10px;background:transparent;color:var(--z-ink)}
+dialog.cwz-dlg .cw-seg span.on{border-color:var(--z-ink);background:var(--z-paper);font-weight:700}
+dialog.cwz-dlg .cw-tile,dialog.cwz-dlg .cw-opt,dialog.cwz-dlg .cw-tplcard,dialog.cwz-dlg .cw-pick{background:var(--z-paper);color:var(--z-ink);border:1.5px dashed var(--z-dash);border-radius:14px}
+dialog.cwz-dlg .cw-tile.done,dialog.cwz-dlg .cw-tplcard.on,dialog.cwz-dlg .cw-pick.on{border-style:solid;border-color:var(--z-ink)}
+dialog.cwz-dlg details.cw-mini>summary,dialog.cwz-dlg details.cw-sec>summary,dialog.cwz-dlg details>summary{color:var(--z-ink);cursor:pointer}
+dialog.cwz-dlg details.cw-sec{background:var(--z-paper);border:1.5px solid var(--z-ink);border-radius:16px;box-shadow:var(--z-shadow);padding:10px 14px;margin:0 0 10px}
+dialog.cwz-dlg details.cw-sec>summary{font-weight:700;letter-spacing:1px}
+dialog.cwz-dlg .cw-bar,dialog.cwz-dlg .cw-progress .cw-bar{background:rgba(58,42,34,.14);border-radius:999px}
+dialog.cwz-dlg .cw-bar i{background:var(--z-wax);border-radius:999px}
+dialog.cwz-dlg .cw-bagubar{background:rgba(244,239,228,.9);border:1.5px dashed var(--z-dash);border-radius:14px;padding:8px 12px}
+dialog.cwz-dlg .cw-bagubar.hit{border-color:var(--z-red)}
+dialog.cwz-dlg .cw-ov{border:0;border-radius:10px;background:var(--z-paper2);padding:6px 10px}
+dialog.cwz-dlg .cw-msg{border:1.5px solid var(--z-ink);border-radius:14px;background:var(--z-paper);color:var(--z-ink)}
+dialog.cwz-dlg .cw-msg.user{background:var(--z-paper2)}
+dialog.cwz-dlg .cw-response-text,dialog.cwz-dlg .cw-pre,dialog.cwz-dlg .cw pre{background:var(--z-paper2);color:var(--z-ink);border:0;border-radius:12px}
+dialog.cwz-dlg .cw-tok{color:var(--z-soft)}
+dialog.cwz-dlg .cw-dialogue-launch{background:rgba(244,239,228,.9)!important;color:var(--z-ink)!important;border:1.5px dashed var(--z-dash)!important;border-radius:16px!important;box-shadow:none;padding:10px 14px;margin:0}
+dialog.cwz-dlg .cw-dialogue-launch-title{font-weight:700;letter-spacing:1px}
+dialog.cwz-dlg .cw-dialogue-launch-sub{color:var(--z-soft);opacity:1}
+dialog.cwz-dlg .cw-dialogue-launch-arrow{opacity:.6}
+dialog.cwz-dlg .cw-spin{border-color:rgba(58,42,34,.2);border-top-color:var(--z-wax)}
+dialog.cwz-dlg .cw-page{display:flex;flex-direction:column;gap:12px}
+dialog.cwz-dlg .cw-page.cwp-card{background:var(--z-paper);border:1.5px solid var(--z-ink);border-radius:18px;box-shadow:var(--z-shadow);padding:14px 16px}
+dialog.cwz-dlg .cw-page.cwp-card .cw-card,dialog.cwz-dlg .cw-page.cwp-card .cw-box,dialog.cwz-dlg .cw-page.cwp-card .cw-next,dialog.cwz-dlg .cw-page.cwp-card details.cw-sec{background:var(--z-paper2);border:0!important;box-shadow:none;border-radius:14px;padding:10px 12px}
+dialog.cwz-dlg .cw-page.cwp-card .cw-card .text_pole,dialog.cwz-dlg .cw-page.cwp-card .cw-card textarea,dialog.cwz-dlg .cw-page.cwp-card .cw-box textarea,dialog.cwz-dlg .cw-page.cwp-card .cw-box .text_pole{background:var(--z-paper)!important}
+dialog.cwz-dlg .cw-page.cwp-card>.cw-dim,dialog.cwz-dlg .cw-page.cwp-card>.cw-help{color:var(--z-soft)!important}
+dialog.cwz-dlg .cw-page>.cw-row>.menu_button{box-shadow:0 3px 0 rgba(26,22,18,.18)}
+@media (max-width:420px){.cwz-title{font-size:19px;letter-spacing:2px}.cwz-tools{grid-template-columns:1fr}}
+
+.cwz-typing{display:flex;gap:5px;align-items:center;min-height:42px}
+.cwz-typing i{width:7px;height:7px;border-radius:50%;background:var(--z-soft);animation:cwzDot 1.2s infinite ease-in-out}
+.cwz-typing i:nth-child(2){animation-delay:.15s}.cwz-typing i:nth-child(3){animation-delay:.3s}
+@keyframes cwzDot{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+.cwz-check{display:flex;align-items:center;gap:6px;margin-top:8px;color:var(--z-soft)!important}
+.cwz-empty .cw-row{flex-wrap:wrap;gap:6px}
+.cwz-composer textarea{max-height:180px;overflow-y:auto}
+
+.cwz-chips{display:flex;flex-wrap:wrap;gap:6px;padding-left:4px}
+dialog.cwz-dlg .cw .menu_button.cwz-chip{min-height:30px;padding:0 12px;font-size:12px;border-style:dashed!important;border-color:rgba(58,42,34,.55)!important;background:rgba(244,239,228,.78)!important;box-shadow:none}
+.cwz-flowrow,.cwz-flowrow *{color:#1f2d2a!important;opacity:1!important}
+
+/* 看清楚一点 */
+dialog.cwz-dlg{--z-soft:#55443a}
+dialog.cwz-dlg .cw ::placeholder{color:#6d5b4e!important}
+.cwz-lab{font-size:11px;color:#55443a}
+dialog.cwz-dlg .cw-statusrow:has(.cw-status:not(:empty)),dialog.cwz-dlg .cw-statusrow:has(.cw-meta:not(:empty)){padding:6px 12px;border-radius:12px;background:rgba(244,239,228,.92)}
+dialog.cwz-dlg .cw-statusrow,dialog.cwz-dlg .cw-statusrow .cw-status,dialog.cwz-dlg .cw-statusrow .cw-meta{color:#2b211b!important;font-size:12.5px;opacity:1!important}
+dialog.cwz-dlg .cw-page:not(.cwp-card)>.cw-dim,dialog.cwz-dlg .cw-page:not(.cwp-card)>.cw-small,dialog.cwz-dlg .cw>.cw-dim,dialog.cwz-dlg .cw>.cw-small{background:rgba(244,239,228,.88);color:#2b211b!important;border-radius:12px;padding:8px 12px}
+dialog.cwz-dlg .cw-tok,dialog.cwz-dlg .cw-dim,dialog.cwz-dlg small{opacity:1!important}
+dialog.cwz-dlg .cw-dialogue-launch-sub{color:#55443a!important}
+.cwz-stx small,.cwz-go{color:#55443a}
+.cwz-step.todo{background:rgba(244,239,228,.93)}
+.cwz-step.todo .cwz-stx b{color:#3a2a22}
+dialog.cwz-dlg details.cw-response>summary{color:#2b211b}
+.cwz-quickadd{display:flex;flex-direction:column;gap:8px;padding:12px 14px;background:var(--z-paper);border:1.5px solid var(--z-ink);border-radius:18px;box-shadow:var(--z-shadow)}
+.cwz-quickadd .cwz-chips{padding:0}
+.cwz-addrow{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.cwz-addrow input{flex:1 1 40%;min-width:0}
+.cwz-free{scroll-margin:80px}
+
+.cwz-dup{padding:8px 0;border-top:1.5px dashed rgba(58,42,34,.25)}
+.cwz-dup:first-of-type{border-top:0}
+dialog.cwz-dlg details.cwz-bagu{background:rgba(244,239,228,.7);border:1.5px dashed rgba(58,42,34,.4);border-radius:14px;padding:8px 12px}
+dialog.cwz-dlg .cw-bagubar{background:transparent!important;border:0!important;padding:4px 2px!important;font-size:12px;opacity:.85}
+
+dialog.cwz-dlg .cw input[type=checkbox]{-webkit-appearance:none!important;appearance:none!important;flex-shrink:0;width:18px!important;height:18px!important;min-width:18px;margin:0 4px 0 0;border:1.5px solid var(--z-ink)!important;border-radius:5px!important;background:var(--z-paper2)!important;background-image:none!important;box-shadow:none!important;filter:none!important;cursor:pointer;vertical-align:-3px}
+dialog.cwz-dlg .cw input[type=checkbox]::before,dialog.cwz-dlg .cw input[type=checkbox]::after{display:none!important;content:none!important}
+dialog.cwz-dlg .cw input[type=checkbox]:checked{background:var(--z-ink)!important;box-shadow:inset 0 0 0 3px var(--z-paper2)!important}
+dialog.cwz-dlg .cw input[type=radio]{-webkit-appearance:none!important;appearance:none!important;width:16px!important;height:16px!important;border:1.5px solid var(--z-ink)!important;border-radius:50%!important;background:var(--z-paper2)!important;box-shadow:none!important}
+dialog.cwz-dlg .cw input[type=radio]:checked{background:var(--z-ink)!important;box-shadow:inset 0 0 0 3px var(--z-paper2)!important}
+
+/* ===== pw 工坊 · 票册 ===== */
+.pw-overlay.cwz-skin{--z-mist:#7ea29c;--z-ink:#3a2a22;--z-soft:#55443a;--z-paper:#f4efe4;--z-paper2:#ebe4d2;--z-wax:#c98a3e;--z-red:#9b4f45;--z-dash:rgba(58,42,34,.5);--z-shadow:0 4px 0 rgba(26,22,18,.22);--z-ontop:#1f2d2a;--z-veil:rgba(244,239,228,.9);--z-font:"Noto Serif SC","Noto Serif CJK SC","Source Han Serif SC","Songti SC",serif;--z-mono:ui-monospace,Menlo,Consolas,monospace}
+.pw-overlay.cwz-skin.cwz-dark{--z-mist:#0f0f10;--z-ink:#d6d3cc;--z-soft:#97938b;--z-paper:#1c1c1e;--z-paper2:#26262a;--z-wax:#d6d3cc;--z-red:#d98a7e;--z-dash:rgba(214,211,204,.32);--z-shadow:0 4px 0 rgba(0,0,0,.7);--z-ontop:#b9b5ad;--z-veil:rgba(30,30,33,.92)}
+.pw-overlay.cwz-skin *{scrollbar-width:none}
+.pw-overlay.cwz-skin ::-webkit-scrollbar{display:none}
+.pw-overlay.cwz-skin .pw-panel{background-color:var(--z-mist)!important;background-image:radial-gradient(rgba(28,34,38,.22) 1px,transparent 1.5px)!important;background-size:7px 7px!important;color:var(--z-ink)!important;font-family:var(--z-font)!important;border:0!important}
+.pw-overlay.cwz-skin.cwz-dark .pw-panel{background-image:radial-gradient(rgba(255,255,255,.055) 1px,transparent 1.5px)!important}
+.pw-overlay.cwz-skin .pw-head{position:relative;margin:10px 10px 0;padding:10px 14px 10px 16px;background:var(--z-paper)!important;border:1.5px solid var(--z-ink)!important;border-radius:18px;box-shadow:var(--z-shadow);color:var(--z-ink)}
+.pw-overlay.cwz-skin .pw-head h2,.pw-overlay.cwz-skin .pw-heading,.pw-overlay.cwz-skin .pw-head b{font-family:var(--z-font)!important;font-weight:700;letter-spacing:3px;color:var(--z-ink)!important}
+.pw-overlay.cwz-skin .pw-tabs{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;padding:8px 10px 0;border:0!important;background:transparent!important}
+.pw-overlay.cwz-skin .pw-tab{min-height:36px;border-radius:999px!important;border:1.5px solid var(--z-ink)!important;background:var(--z-paper)!important;color:var(--z-ink)!important;font-family:var(--z-font)!important;font-size:14px;box-shadow:none!important;margin:0!important}
+.pw-overlay.cwz-skin .pw-tab.pw-active{background:var(--z-ink)!important;color:var(--z-paper)!important}
+.pw-overlay.cwz-skin .nf-tabbar{display:none!important}
+.pw-overlay.cwz-skin .pw-body{color:var(--z-ink)}
+.pw-overlay.cwz-skin .pw-box,.pw-overlay.cwz-skin .pw-gen-result,.pw-overlay.cwz-skin .pw-fold,.pw-overlay.cwz-skin details.pw-gen-optional{background:var(--z-paper)!important;color:var(--z-ink)!important;border:1.5px solid var(--z-ink)!important;border-radius:16px!important;box-shadow:var(--z-shadow);border-left-width:1.5px!important}
+.pw-overlay.cwz-skin .pw-box .pw-box{background:var(--z-paper2)!important;border:0!important;box-shadow:none}
+.pw-overlay.cwz-skin .pw-hint,.pw-overlay.cwz-skin .pw-dim{color:var(--z-soft)!important;opacity:1!important}
+.pw-overlay.cwz-skin .pw-body>.pw-section>.pw-hint,.pw-overlay.cwz-skin .pw-section>p.pw-hint:first-child{background:var(--z-veil);border-radius:12px;padding:8px 12px;color:var(--z-ink)!important}
+.pw-overlay.cwz-skin .pw-h,.pw-overlay.cwz-skin summary{color:var(--z-ink)!important;font-weight:700}
+.pw-overlay.cwz-skin .pw-btn,.pw-overlay.cwz-skin .pw-source-tab,.pw-overlay.cwz-skin .pw-chip{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:0 14px;border:1.5px solid var(--z-ink)!important;border-radius:999px!important;background:var(--z-paper)!important;color:var(--z-ink)!important;font-family:var(--z-font)!important;font-size:13px;box-shadow:0 3px 0 rgba(26,22,18,.18)!important;text-shadow:none!important;background-image:none!important;opacity:1}
+.pw-overlay.cwz-skin .pw-btn:active{transform:translateY(2px);box-shadow:none!important}
+.pw-overlay.cwz-skin .pw-btn.pw-sm,.pw-overlay.cwz-skin .pw-chip{min-height:28px;padding:0 11px;font-size:12px;box-shadow:none!important}
+.pw-overlay.cwz-skin .pw-btn.pw-primary,.pw-overlay.cwz-skin .pw-source-tab.pw-active,.pw-overlay.cwz-skin .pw-chip.pw-on{background:var(--z-ink)!important;color:var(--z-paper)!important;font-weight:600}
+.pw-overlay.cwz-skin .pw-btn.pw-danger{border-color:var(--z-red)!important;color:var(--z-red)!important}
+.pw-overlay.cwz-skin .pw-btn:disabled{opacity:.45}
+.pw-overlay.cwz-skin .pw-row-icon{border:0!important;background:transparent!important;box-shadow:none!important;color:var(--z-soft)!important;min-height:28px;padding:0 6px}
+.pw-overlay.cwz-skin input[type=text],.pw-overlay.cwz-skin input[type=number],.pw-overlay.cwz-skin input:not([type]),.pw-overlay.cwz-skin input[type=search],.pw-overlay.cwz-skin select,.pw-overlay.cwz-skin textarea{background:var(--z-paper2)!important;color:var(--z-ink)!important;border:0!important;border-radius:12px!important;font-family:var(--z-font)!important;box-shadow:none!important;outline:none}
+.pw-overlay.cwz-skin input:focus,.pw-overlay.cwz-skin select:focus,.pw-overlay.cwz-skin textarea:focus{box-shadow:0 0 0 2px var(--z-ink)!important}
+.pw-overlay.cwz-skin ::placeholder{color:var(--z-soft)!important;opacity:.85}
+.pw-overlay.cwz-skin input[type=checkbox]{-webkit-appearance:none!important;appearance:none!important;width:18px!important;height:18px!important;min-width:18px;border:1.5px solid var(--z-ink)!important;border-radius:5px!important;background:var(--z-paper2)!important;box-shadow:none!important;background-image:none!important;vertical-align:-3px;cursor:pointer;margin:0 4px 0 0}
+.pw-overlay.cwz-skin input[type=checkbox]::before,.pw-overlay.cwz-skin input[type=checkbox]::after{content:none!important;display:none!important}
+.pw-overlay.cwz-skin input[type=checkbox]:checked{background:var(--z-ink)!important;box-shadow:inset 0 0 0 3px var(--z-paper2)!important}
+.pw-overlay.cwz-skin input[type=radio]{-webkit-appearance:none!important;appearance:none!important;width:16px!important;height:16px!important;border:1.5px solid var(--z-ink)!important;border-radius:50%!important;background:var(--z-paper2)!important;box-shadow:none!important;vertical-align:-3px}
+.pw-overlay.cwz-skin input[type=radio]:checked{background:var(--z-ink)!important;box-shadow:inset 0 0 0 3px var(--z-paper2)!important}
+.pw-overlay.cwz-skin .pw-code,.pw-overlay.cwz-skin .pw-pre,.pw-overlay.cwz-skin pre{background:var(--z-paper2)!important;color:var(--z-ink)!important;border:0!important;border-radius:12px}
+.pw-overlay.cwz-skin .pw-screen-nav{margin:8px 10px 0;display:flex;align-items:center;gap:10px}
+.pw-overlay.cwz-skin .pw-screen-nav b{color:var(--z-ontop);font-size:17px;letter-spacing:2px}
+.pw-overlay.cwz-skin .pw-screen-footer,.pw-overlay.cwz-skin .pw-bar{background:linear-gradient(to bottom,transparent,var(--z-mist) 40%)!important;border:0!important;box-shadow:none!important}
+.pw-overlay.cwz-skin .pw-screen-footer .pw-btn,.pw-overlay.cwz-skin .pw-bar .pw-btn{min-height:44px}
+.pw-overlay.cwz-skin .pw-warnbox{background:var(--z-veil)!important;border:1.5px dashed var(--z-red)!important;color:var(--z-red)!important;border-radius:12px}
+.pw-overlay.cwz-skin .cw-dialogue-launch{background:var(--z-veil)!important;color:var(--z-ink)!important;border:1.5px dashed var(--z-dash)!important;border-radius:16px!important;box-shadow:none}
+.pw-overlay.cwz-skin .cw-dialogue-launch-sub{color:var(--z-soft)!important}
+.pw-overlay.cwz-skin .pw-status{color:var(--z-ontop)!important}
+
+.pw-overlay.cwz-skin .pw-card,.pw-overlay.cwz-skin .pw-mix-row,.pw-overlay.cwz-skin .pw-entry,.pw-overlay.cwz-skin .pw-lib-row,.pw-overlay.cwz-skin [class*="pw-row-card"]{background:var(--z-paper)!important;border:1.5px solid var(--z-ink)!important;border-radius:15px!important;box-shadow:var(--z-shadow);color:var(--z-ink)!important;opacity:1!important;filter:none!important}
+.pw-overlay.cwz-skin .pw-off,.pw-overlay.cwz-skin .pw-disabled,.pw-overlay.cwz-skin [class*="disabled"]:not(button){opacity:1!important;filter:none!important}
+.pw-overlay.cwz-skin .cwz-pwnow{display:flex;flex-direction:column;gap:8px}
+.pw-overlay.cwz-skin .cwz-pwnow .pw-mix-top{display:flex;gap:8px}
+.pw-overlay.cwz-skin .cwz-pwnow select{flex:1}
+.pw-overlay.cwz-skin .cwz-pwsrc{gap:6px;flex-wrap:wrap}
+.pw-overlay.cwz-skin .pw-mix-toolbar{display:flex;gap:8px;flex-wrap:wrap}
+.pw-overlay.cwz-skin .pw-mix-list-tools{color:var(--z-ontop)}
+.pw-overlay.cwz-skin details.cwz-more{display:inline-block}
+.pw-overlay.cwz-skin details.cwz-more>summary{font-size:12px;cursor:pointer}
+.pw-overlay.cwz-skin .cwz-lab,.sf-overlay.cwz-skin .cwz-lab{font:11px var(--z-mono);letter-spacing:.2em;color:var(--z-soft)}
+
+/* ===== sf 工坊 · 票册 ===== */
+.sf-overlay.cwz-skin{--z-mist:#7ea29c;--z-ink:#3a2a22;--z-soft:#55443a;--z-paper:#f4efe4;--z-paper2:#ebe4d2;--z-wax:#c98a3e;--z-red:#9b4f45;--z-dash:rgba(58,42,34,.5);--z-shadow:0 4px 0 rgba(26,22,18,.22);--z-ontop:#1f2d2a;--z-veil:rgba(244,239,228,.9);--z-font:"Noto Serif SC","Noto Serif CJK SC","Source Han Serif SC","Songti SC",serif;--z-mono:ui-monospace,Menlo,Consolas,monospace}
+.sf-overlay.cwz-skin.cwz-dark{--z-mist:#0f0f10;--z-ink:#d6d3cc;--z-soft:#97938b;--z-paper:#1c1c1e;--z-paper2:#26262a;--z-wax:#d6d3cc;--z-red:#d98a7e;--z-dash:rgba(214,211,204,.32);--z-shadow:0 4px 0 rgba(0,0,0,.7);--z-ontop:#b9b5ad;--z-veil:rgba(30,30,33,.92)}
+.sf-overlay.cwz-skin *{scrollbar-width:none}
+.sf-overlay.cwz-skin ::-webkit-scrollbar{display:none}
+.sf-overlay.cwz-skin .sf-panel{background-color:var(--z-mist)!important;background-image:radial-gradient(rgba(28,34,38,.22) 1px,transparent 1.5px)!important;background-size:7px 7px!important;color:var(--z-ink)!important;font-family:var(--z-font)!important;border:0!important}
+.sf-overlay.cwz-skin.cwz-dark .sf-panel{background-image:radial-gradient(rgba(255,255,255,.055) 1px,transparent 1.5px)!important}
+.sf-overlay.cwz-skin .sf-head{position:relative;margin:10px 10px 0;padding:10px 14px 10px 16px;background:var(--z-paper)!important;border:1.5px solid var(--z-ink)!important;border-radius:18px;box-shadow:var(--z-shadow);color:var(--z-ink)}
+.sf-overlay.cwz-skin .sf-head h2,.sf-overlay.cwz-skin .sf-heading,.sf-overlay.cwz-skin .sf-head b{font-family:var(--z-font)!important;font-weight:700;letter-spacing:3px;color:var(--z-ink)!important}
+.sf-overlay.cwz-skin .sf-tabs{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;padding:8px 10px 0;border:0!important;background:transparent!important}
+.sf-overlay.cwz-skin .sf-tab{min-height:36px;border-radius:999px!important;border:1.5px solid var(--z-ink)!important;background:var(--z-paper)!important;color:var(--z-ink)!important;font-family:var(--z-font)!important;font-size:14px;box-shadow:none!important;margin:0!important}
+.sf-overlay.cwz-skin .sf-tab.sf-active{background:var(--z-ink)!important;color:var(--z-paper)!important}
+.sf-overlay.cwz-skin .nf-tabbar{display:none!important}
+.sf-overlay.cwz-skin .sf-body{color:var(--z-ink)}
+.sf-overlay.cwz-skin .sf-box,.sf-overlay.cwz-skin .sf-gen-result,.sf-overlay.cwz-skin .sf-fold,.sf-overlay.cwz-skin details.sf-gen-optional{background:var(--z-paper)!important;color:var(--z-ink)!important;border:1.5px solid var(--z-ink)!important;border-radius:16px!important;box-shadow:var(--z-shadow);border-left-width:1.5px!important}
+.sf-overlay.cwz-skin .sf-box .sf-box{background:var(--z-paper2)!important;border:0!important;box-shadow:none}
+.sf-overlay.cwz-skin .sf-hint,.sf-overlay.cwz-skin .sf-dim{color:var(--z-soft)!important;opacity:1!important}
+.sf-overlay.cwz-skin .sf-body>.sf-section>.sf-hint,.sf-overlay.cwz-skin .sf-section>p.sf-hint:first-child{background:var(--z-veil);border-radius:12px;padding:8px 12px;color:var(--z-ink)!important}
+.sf-overlay.cwz-skin .sf-h,.sf-overlay.cwz-skin summary{color:var(--z-ink)!important;font-weight:700}
+.sf-overlay.cwz-skin .sf-btn,.sf-overlay.cwz-skin .sf-source-tab,.sf-overlay.cwz-skin .sf-chip{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:0 14px;border:1.5px solid var(--z-ink)!important;border-radius:999px!important;background:var(--z-paper)!important;color:var(--z-ink)!important;font-family:var(--z-font)!important;font-size:13px;box-shadow:0 3px 0 rgba(26,22,18,.18)!important;text-shadow:none!important;background-image:none!important;opacity:1}
+.sf-overlay.cwz-skin .sf-btn:active{transform:translateY(2px);box-shadow:none!important}
+.sf-overlay.cwz-skin .sf-btn.sf-sm,.sf-overlay.cwz-skin .sf-chip{min-height:28px;padding:0 11px;font-size:12px;box-shadow:none!important}
+.sf-overlay.cwz-skin .sf-btn.sf-primary,.sf-overlay.cwz-skin .sf-source-tab.sf-active,.sf-overlay.cwz-skin .sf-chip.sf-on{background:var(--z-ink)!important;color:var(--z-paper)!important;font-weight:600}
+.sf-overlay.cwz-skin .sf-btn.sf-danger{border-color:var(--z-red)!important;color:var(--z-red)!important}
+.sf-overlay.cwz-skin .sf-btn:disabled{opacity:.45}
+.sf-overlay.cwz-skin .sf-row-icon{border:0!important;background:transparent!important;box-shadow:none!important;color:var(--z-soft)!important;min-height:28px;padding:0 6px}
+.sf-overlay.cwz-skin input[type=text],.sf-overlay.cwz-skin input[type=number],.sf-overlay.cwz-skin input:not([type]),.sf-overlay.cwz-skin input[type=search],.sf-overlay.cwz-skin select,.sf-overlay.cwz-skin textarea{background:var(--z-paper2)!important;color:var(--z-ink)!important;border:0!important;border-radius:12px!important;font-family:var(--z-font)!important;box-shadow:none!important;outline:none}
+.sf-overlay.cwz-skin input:focus,.sf-overlay.cwz-skin select:focus,.sf-overlay.cwz-skin textarea:focus{box-shadow:0 0 0 2px var(--z-ink)!important}
+.sf-overlay.cwz-skin ::placeholder{color:var(--z-soft)!important;opacity:.85}
+.sf-overlay.cwz-skin input[type=checkbox]{-webkit-appearance:none!important;appearance:none!important;width:18px!important;height:18px!important;min-width:18px;border:1.5px solid var(--z-ink)!important;border-radius:5px!important;background:var(--z-paper2)!important;box-shadow:none!important;background-image:none!important;vertical-align:-3px;cursor:pointer;margin:0 4px 0 0}
+.sf-overlay.cwz-skin input[type=checkbox]::before,.sf-overlay.cwz-skin input[type=checkbox]::after{content:none!important;display:none!important}
+.sf-overlay.cwz-skin input[type=checkbox]:checked{background:var(--z-ink)!important;box-shadow:inset 0 0 0 3px var(--z-paper2)!important}
+.sf-overlay.cwz-skin input[type=radio]{-webkit-appearance:none!important;appearance:none!important;width:16px!important;height:16px!important;border:1.5px solid var(--z-ink)!important;border-radius:50%!important;background:var(--z-paper2)!important;box-shadow:none!important;vertical-align:-3px}
+.sf-overlay.cwz-skin input[type=radio]:checked{background:var(--z-ink)!important;box-shadow:inset 0 0 0 3px var(--z-paper2)!important}
+.sf-overlay.cwz-skin .sf-code,.sf-overlay.cwz-skin .sf-pre,.sf-overlay.cwz-skin pre{background:var(--z-paper2)!important;color:var(--z-ink)!important;border:0!important;border-radius:12px}
+.sf-overlay.cwz-skin .sf-screen-nav{margin:8px 10px 0;display:flex;align-items:center;gap:10px}
+.sf-overlay.cwz-skin .sf-screen-nav b{color:var(--z-ontop);font-size:17px;letter-spacing:2px}
+.sf-overlay.cwz-skin .sf-screen-footer,.sf-overlay.cwz-skin .sf-bar{background:linear-gradient(to bottom,transparent,var(--z-mist) 40%)!important;border:0!important;box-shadow:none!important}
+.sf-overlay.cwz-skin .sf-screen-footer .sf-btn,.sf-overlay.cwz-skin .sf-bar .sf-btn{min-height:44px}
+.sf-overlay.cwz-skin .sf-warnbox{background:var(--z-veil)!important;border:1.5px dashed var(--z-red)!important;color:var(--z-red)!important;border-radius:12px}
+.sf-overlay.cwz-skin .cw-dialogue-launch{background:var(--z-veil)!important;color:var(--z-ink)!important;border:1.5px dashed var(--z-dash)!important;border-radius:16px!important;box-shadow:none}
+.sf-overlay.cwz-skin .cw-dialogue-launch-sub{color:var(--z-soft)!important}
+.sf-overlay.cwz-skin .sf-status{color:var(--z-ontop)!important}
+
+.sf-overlay.cwz-skin .cwz-steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:4px 0 10px}
+.sf-overlay.cwz-skin .cwz-st{display:flex;flex-direction:column;align-items:center;gap:2px;font:12px var(--z-font);color:var(--z-ontop);background:transparent;border:0;cursor:pointer}
+.sf-overlay.cwz-skin .cwz-st i{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:700;font-size:12px;border:1.5px dashed var(--z-dash);color:var(--z-soft);background:var(--z-paper)}
+.sf-overlay.cwz-skin .cwz-st.on i{background:var(--z-wax);color:var(--z-paper);border:0}
+.sf-overlay.cwz-skin .cwz-st.done i{background:var(--z-ink);color:var(--z-paper);border:0}
+.sf-overlay.cwz-skin .cwz-srcs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.sf-overlay.cwz-skin .cwz-src{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:12px 14px;border:1.5px solid var(--z-ink);border-radius:16px;background:var(--z-paper);color:var(--z-ink);font-family:var(--z-font);box-shadow:var(--z-shadow);cursor:pointer}
+.sf-overlay.cwz-skin .cwz-src.on{box-shadow:0 0 0 3px var(--z-wax),var(--z-shadow)}
+.sf-overlay.cwz-skin .cwz-src b{font-size:15px}.sf-overlay.cwz-skin .cwz-src small{font-size:12px;color:var(--z-soft);line-height:1.5}
+.sf-overlay.cwz-skin .cwz-where{display:flex;flex-direction:column;gap:6px;margin:4px 0 6px 24px;font-size:13px}
+.sf-overlay.cwz-skin .cwz-where small{display:block;margin-left:22px}
+.sf-overlay.cwz-skin iframe{background:transparent}
+.pw-overlay.cwz-skin .pw-switch-track{background:var(--z-paper2)!important;border:1.5px solid var(--z-ink)!important;box-shadow:none!important;background-image:none!important}
+.pw-overlay.cwz-skin .pw-row-switch input:checked+.pw-switch-track,.pw-overlay.cwz-skin input:checked+.pw-switch-track{background:var(--z-ink)!important}
+.pw-overlay.cwz-skin .pw-switch-track::before,.pw-overlay.cwz-skin .pw-switch-track::after{box-shadow:none!important;background-image:none!important}
+.pw-overlay.cwz-skin .pw-combo-row,.pw-overlay.cwz-skin .pw-card{opacity:1!important;filter:none!important}
+.pw-overlay.cwz-skin .pw-entry-prose,.pw-overlay.cwz-skin .pw-row-meta{color:var(--z-ink)!important}
+.sf-overlay.cwz-skin .nf-ck{background:var(--z-ink)!important;color:var(--z-paper)!important;box-shadow:none!important}
+.sf-overlay.cwz-skin .nf-set{background:var(--z-paper)!important;border:1.5px solid var(--z-ink)!important;border-radius:14px!important;color:var(--z-ink)!important;box-shadow:none!important}
+.sf-overlay.cwz-skin .nf-set.nf-on{box-shadow:0 0 0 3px var(--z-wax)!important}
+.sf-overlay.cwz-skin .nf-seg,.sf-overlay.cwz-skin .nf-seg *{border-color:var(--z-ink)!important}
+.sf-overlay.cwz-skin .nf-seg .nf-on,.sf-overlay.cwz-skin .nf-seg [class*="on"]{background:var(--z-ink)!important;color:var(--z-paper)!important}
+.sf-overlay.cwz-skin .nf-stage{border-radius:12px}
+.cw-chat-tools:has(.cwz-extract){flex-wrap:wrap;gap:6px}.cw-chat-tools .cwz-extract{border:1.5px solid currentColor!important;border-radius:999px!important;padding:4px 12px!important;white-space:nowrap;font-weight:600;opacity:1!important}.cwz-gmark{display:block;width:max-content;margin:10px 0 4px;padding:1px 10px;border:1px dashed currentColor;border-radius:999px;font-size:.78em;letter-spacing:.2em;opacity:.75}#cw_float.cw-float{background:#f4efe4;color:#3a2a22;border:1.5px solid #3a2a22;border-radius:999px;box-shadow:0 4px 0 rgba(26,22,18,.22);font-family:"Noto Serif SC","Songti SC",serif}
+#cw_float .menu_button{border-radius:999px}
+/* Love 写卡机开着时，「和 AI 聊聊」全屏对话也换成票册 */
+body:has(dialog.cwz-dlg[open]) .cw-chat-sheet{--z-mist:#7ea29c;--z-ink:#3a2a22;--z-soft:#6e5a4d;--z-paper:#f4efe4;--z-paper2:#ebe4d2;--z-wax:#c98a3e;background-color:var(--z-mist)!important;background-image:radial-gradient(rgba(28,34,38,.22) 1px,transparent 1.5px)!important;background-size:7px 7px!important;color:var(--z-ink)!important;font-family:"Noto Serif SC","Noto Serif CJK SC","Source Han Serif SC","Songti SC",serif}
+body:has(dialog.cwz-dlg[open]) .cw-chat-sheet *{scrollbar-width:none}
+body:has(dialog.cwz-dlg[open]) .cw-chat-head{margin:10px 10px 0;background:var(--z-paper);border:1.5px solid var(--z-ink)!important;border-radius:18px;box-shadow:0 4px 0 rgba(26,22,18,.22)}
+body:has(dialog.cwz-dlg[open]) .cw-chat-title{font-weight:700;letter-spacing:2px}
+body:has(dialog.cwz-dlg[open]) .cw-chat-context{border:0!important;color:#1f2d2a}
+body:has(dialog.cwz-dlg[open]) .cw-chat-context input{accent-color:var(--z-ink)}
+body:has(dialog.cwz-dlg[open]) .cw-chat-empty,body:has(dialog.cwz-dlg[open]) .cw-chat-source-note{color:#1f2d2a;opacity:1}
+body:has(dialog.cwz-dlg[open]) .cw-chat-bubble{border-radius:16px;font-size:14px;line-height:1.75}
+body:has(dialog.cwz-dlg[open]) .cw-chat-assistant .cw-chat-bubble{background:var(--z-paper)!important;color:var(--z-ink)!important;border:1.5px solid var(--z-ink);border-bottom-left-radius:4px}
+body:has(dialog.cwz-dlg[open]) .cw-chat-user .cw-chat-bubble{background:var(--z-ink)!important;color:var(--z-paper)!important;border:0;border-bottom-right-radius:4px}
+body:has(dialog.cwz-dlg[open]) .cw-chat-compose{background:var(--z-paper)!important;border:1.5px solid var(--z-ink)!important;border-radius:18px;box-shadow:0 4px 0 rgba(26,22,18,.22)}
+body:has(dialog.cwz-dlg[open]) .cw-chat-input{color:var(--z-ink)!important}
+body:has(dialog.cwz-dlg[open]) .cw-chat-send{background:var(--z-ink)!important;color:var(--z-paper)!important;border:0!important;border-radius:999px!important}
+body:has(dialog.cwz-dlg[open]) .cw-chat-back,body:has(dialog.cwz-dlg[open]) .cw-chat-more{color:var(--z-ink)!important;background:transparent!important;border:0!important}
+
+
+.cwz-themesw{position:absolute;left:14px;bottom:-11px;font-size:11px;padding:0 10px;line-height:20px;border-radius:999px;border:1.5px solid var(--z-ink);background:var(--z-paper);color:var(--z-ink);cursor:pointer;user-select:none}
+.cwz-head{margin-bottom:6px}
+.cwz-types{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.cwz-type{padding:10px 12px;border:1.5px dashed var(--z-dash);border-radius:14px;cursor:pointer}
+.cwz-type b{display:block;font-size:15px}.cwz-type small{display:block;font-size:12px;color:var(--z-soft);line-height:1.5}
+.cwz-type.on{border:1.5px solid var(--z-ink);background:var(--z-paper2);box-shadow:inset 0 0 0 1.5px var(--z-ink)}
+.cwz-presets{display:flex;flex-direction:column;gap:6px;margin-top:8px}.cwz-presets label{display:flex;align-items:center;gap:8px;font-size:13px}.cwz-presets select{flex:1}
+.cwz-tags{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:6px}
+.cwz-tag{font-size:12px;padding:1px 10px;border-radius:999px;border:1.5px solid var(--z-ink);background:var(--z-paper2);cursor:pointer}
+dialog.cwz-dlg .cw .cwz-tagin{flex:1;min-width:120px;font-size:12px;padding:3px 10px!important}
+dialog.cwz-dlg.cwz-dark .cw .menu_button.cw-primary,dialog.cwz-dlg.cwz-dark .cw .cw-primary{background:#d6d3cc!important;color:#151516!important}
+dialog.cwz-dlg.cwz-dark .cwz-pill.on{background:#d6d3cc;color:#151516}
+dialog.cwz-dlg.cwz-dark .cwz-msg.me .cwz-msgtext{background:#d6d3cc;color:#151516}
+dialog.cwz-dlg.cwz-dark .cwz-stamp{box-shadow:inset 0 0 0 3px var(--z-paper);color:#151516}
+dialog.cwz-dlg.cwz-dark .popup-controls{background:linear-gradient(to bottom,rgba(15,15,16,0),#0f0f10 40%)}
+dialog.cwz-dlg.cwz-dark iframe{filter:none}
+dialog.cwz-dlg.cwz-dark{--z-mist:#0f0f10;--z-ink:#d6d3cc;--z-soft:#97938b;--z-paper:#1c1c1e;--z-paper2:#26262a;--z-wax:#d6d3cc;--z-red:#d98a7e;--z-dash:rgba(214,211,204,.32);--z-shadow:0 4px 0 rgba(0,0,0,.7);background-image:radial-gradient(rgba(255,255,255,.055) 1px,transparent 1.5px)!important}
+body:has(dialog.cwz-dlg.cwz-dark[open]) .cw-chat-sheet{--z-mist:#0f0f10;--z-ink:#d6d3cc;--z-soft:#97938b;--z-paper:#1c1c1e;--z-paper2:#26262a;background-image:radial-gradient(rgba(255,255,255,.055) 1px,transparent 1.5px)!important}
+dialog.cwz-dlg.cwz-dark{--z-ink:#d6d3cc;--z-dash:rgba(214,211,204,0.38);--z-shadow:0 4px 0 rgba(0,0,0,.7);background-image:radial-gradient(rgba(255,255,255,.055) 1px,transparent 1.5px)!important}
+dialog.cwz-dlg.cwz-dark .popup-controls{background:linear-gradient(to bottom,rgba(15,15,16,0),var(--z-mist) 40%)}
+dialog.cwz-dlg.cwz-dark .popup-controls .menu_button{background:rgba(30,30,33,.85)!important}
+dialog.cwz-dlg.cwz-dark .cw a{color:#b9b5ad}
+dialog.cwz-dlg.cwz-dark .cwz-stamp{color:#161617}
+dialog.cwz-dlg.cwz-dark .cwz-back{background:rgba(30,30,33,.9)}
+dialog.cwz-dlg.cwz-dark .cwz-ptitle small{color:#b9b5ad}
+dialog.cwz-dlg.cwz-dark .cw-helpbtn{background:rgba(30,30,33,.85)}
+dialog.cwz-dlg.cwz-dark .cw-statusrow{color:#b9b5ad}
+dialog.cwz-dlg.cwz-dark .cwz-seal{color:#161617}
+dialog.cwz-dlg.cwz-dark .cw>.cw-row>.cwz-lab,dialog.cwz-dlg.cwz-dark .cwz-flowrow .cwz-lab{color:#b9b5ad}
+dialog.cwz-dlg.cwz-dark .cwz-badge{background:rgba(214,211,204,0.18)}
+dialog.cwz-dlg.cwz-dark .cw-box.cw-small:not(.cw-card .cw-box){background:rgba(30,30,33,.92)}
+dialog.cwz-dlg.cwz-dark .cwz-notch{border-top:1.5px dashed rgba(214,211,204,0.30)}
+dialog.cwz-dlg.cwz-dark .cwz-prog .bar{background:rgba(214,211,204,0.11)}
+dialog.cwz-dlg.cwz-dark .cwz-empty{background:rgba(30,30,33,.75)}
+dialog.cwz-dlg.cwz-dark .cwz-link{color:#b9b5ad}
+dialog.cwz-dlg.cwz-dark .cwz-step.todo{background:rgba(30,30,33,.82)}
+dialog.cwz-dlg.cwz-dark .cwz-perf{border-left:1.5px dashed rgba(214,211,204,0.30)}
+dialog.cwz-dlg.cwz-dark .cwz-add{background:rgba(30,30,33,.55)}
+dialog.cwz-dlg.cwz-dark .cwz-draftrow{background:rgba(30,30,33,.9)}
+dialog.cwz-dlg.cwz-dark details.cwz-fold>summary{color:#b9b5ad}
+dialog.cwz-dlg.cwz-dark .cwz-bottom,dialog.cwz-dlg.cwz-dark .cw-foot{background:linear-gradient(to bottom,rgba(15,15,16,0),rgba(15,15,16,.96) 40%)}
+dialog.cwz-dlg.cwz-dark .cwz-msgact .menu_button.cw-btn{background:rgba(30,30,33,.7)!important}
+dialog.cwz-dlg.cwz-dark .cw .menu_button,dialog.cwz-dlg.cwz-dark .cw .cw-btn{box-shadow:0 3px 0 rgba(0,0,0,.7)}
+dialog.cwz-dlg.cwz-dark .cw .menu_button:hover{background:#232326!important}
+dialog.cwz-dlg.cwz-dark .cw ::placeholder{color:#8a867e}
+dialog.cwz-dlg.cwz-dark .cw>.cw-dim,dialog.cwz-dlg.cwz-dark .cw-page>.cw-dim,dialog.cwz-dlg.cwz-dark .cw-page>.cw-help{color:#b9b5ad!important}
+dialog.cwz-dlg.cwz-dark .cw-badge.ok{background:rgba(214,211,204,0.16)}
+dialog.cwz-dlg.cwz-dark .cw-ok{color:#9cc08a}
+dialog.cwz-dlg.cwz-dark .cw-seg{background:rgba(214,211,204,0.06)}
+dialog.cwz-dlg.cwz-dark .cw-bar,dialog.cwz-dlg.cwz-dark .cw-progress .cw-bar{background:rgba(214,211,204,0.11)}
+dialog.cwz-dlg.cwz-dark .cw-bagubar{background:rgba(30,30,33,.9)}
+dialog.cwz-dlg.cwz-dark .cw-dialogue-launch{background:rgba(30,30,33,.9)!important}
+dialog.cwz-dlg.cwz-dark .cw-spin{border-color:rgba(214,211,204,0.15)}
+dialog.cwz-dlg.cwz-dark .cw-page>.cw-row>.menu_button{box-shadow:0 3px 0 rgba(0,0,0,.7)}
+dialog.cwz-dlg.cwz-dark .cw .menu_button.cwz-chip{border-color:rgba(214,211,204,0.41)!important;background:rgba(30,30,33,.78)!important}
+dialog.cwz-dlg.cwz-dark .cwz-flowrow,dialog.cwz-dlg.cwz-dark .cwz-flowrow *{color:#b9b5ad!important}
+dialog.cwz-dlg.cwz-dark{--z-soft:#97938b}
+dialog.cwz-dlg.cwz-dark .cw ::placeholder{color:#8a867e!important}
+dialog.cwz-dlg.cwz-dark .cwz-lab{color:#97938b}
+dialog.cwz-dlg.cwz-dark .cw-statusrow:has(.cw-status:not(:empty)),dialog.cwz-dlg.cwz-dark .cw-statusrow:has(.cw-meta:not(:empty)){background:rgba(30,30,33,.92)}
+dialog.cwz-dlg.cwz-dark .cw-statusrow,dialog.cwz-dlg.cwz-dark .cw-statusrow .cw-status,dialog.cwz-dlg.cwz-dark .cw-statusrow .cw-meta{color:#cfccc5!important}
+dialog.cwz-dlg.cwz-dark .cw-page:not(.cwp-card)>.cw-dim,dialog.cwz-dlg.cwz-dark .cw-page:not(.cwp-card)>.cw-small,dialog.cwz-dlg.cwz-dark .cw>.cw-dim,dialog.cwz-dlg.cwz-dark .cw>.cw-small{background:rgba(30,30,33,.88);color:#cfccc5!important}
+dialog.cwz-dlg.cwz-dark .cw-dialogue-launch-sub{color:#97938b!important}
+dialog.cwz-dlg.cwz-dark .cwz-stx small,dialog.cwz-dlg.cwz-dark .cwz-go{color:#97938b}
+dialog.cwz-dlg.cwz-dark .cwz-step.todo{background:rgba(30,30,33,.93)}
+dialog.cwz-dlg.cwz-dark .cwz-step.todo .cwz-stx b{color:#d6d3cc}
+dialog.cwz-dlg.cwz-dark details.cw-response>summary{color:#cfccc5}
+dialog.cwz-dlg.cwz-dark .cwz-dup{border-top:1.5px dashed rgba(214,211,204,0.19)}
+dialog.cwz-dlg.cwz-dark details.cwz-bagu{background:rgba(30,30,33,.7);border:1.5px dashed rgba(214,211,204,0.30)}
+body:has(dialog.cwz-dlg.cwz-dark[open]) .cw-chat-sheet{--z-ink:#d6d3cc;background-image:radial-gradient(rgba(255,255,255,.055) 1px,transparent 1.5px)!important}
+body:has(dialog.cwz-dlg.cwz-dark[open]) .cw-chat-head{box-shadow:0 4px 0 rgba(0,0,0,.7)}
+body:has(dialog.cwz-dlg.cwz-dark[open]) .cw-chat-context{color:#b9b5ad}
+body:has(dialog.cwz-dlg.cwz-dark[open]) .cw-chat-empty,body:has(dialog.cwz-dlg.cwz-dark[open]) .cw-chat-source-note{color:#b9b5ad}
+body:has(dialog.cwz-dlg.cwz-dark[open]) .cw-chat-compose{box-shadow:0 4px 0 rgba(0,0,0,.7)}`,it.head.append(mt),window.addEventListener("pagehide",()=>mt.remove())})(),(()=>{var an=Object.create,mt=Object.defineProperty,Xn=Object.getOwnPropertyDescriptor,Cs=Object.getOwnPropertyNames,Is=Object.getPrototypeOf,tt=Object.prototype.hasOwnProperty,Pn=(e=>typeof require<"u"?require:typeof Proxy<"u"?new Proxy(e,{get:(t,n)=>(typeof require<"u"?require:t)[n]}):e)(function(e){if(typeof require<"u")return require.apply(this,arguments);throw Error('Dynamic require of "'+e+'" is not supported')}),On=(e,t)=>{for(var n in t)mt(e,n,{get:t[n],enumerable:!0})},As=(e,t,n,r)=>{if(t&&typeof t=="object"||typeof t=="function")for(let s of Cs(t))!tt.call(e,s)&&s!==n&&mt(e,s,{get:()=>t[s],enumerable:!(r=Xn(t,s))||r.enumerable});return e},Es=(e,t,n)=>(n=e!=null?an(Is(e)):{},As(t||!e||!e.__esModule?mt(n,"default",{value:e,enumerable:!0}):n,e)),Xa=(()=>{try{if(window.parent&&window.parent!==window&&window.parent.document.getElementById("extensionsMenu"))return window.parent}catch{}return window})(),Uo={card:"写卡",preset:"预设",status:"状态栏"},wd=["card","preset","status"],Zn=new Map,Go=()=>null;function hd(){const e=Go()?.closest?.("dialog"),t=e?.querySelector(".popup-button-ok, .popup-button-close, .popup-button-cancel");t?t.click():e?.close?.()}var Za={W:Xa,DOC:Xa.document,IN_SCRIPT:Xa!==window,LABELS:Uo,readyHooks:[],register(e,t){Zn.set(e,t)},get:e=>Zn.get(e)||null,list:()=>wd.filter(e=>Zn.has(e)).map(e=>({id:e,label:Uo[e]})),switchTo(e){for(const[t,n]of Zn)try{t!==e&&n.isOpen?.()&&n.close?.()}catch(r){console.warn("[Love 写卡机]",r)}setTimeout(async()=>{try{await Zn.get(e)?.open?.()}catch(r){console.error("[Love 写卡机] 打开失败",e,r);try{(Xa.toastr||window.toastr)?.error?.(`打不开：${r?.message||r}`,"Love 写卡机")}catch{}}},60)},cardReady(e,t){Go=t,Zn.set("card",{open:e,close:hd,isOpen:()=>!!t()?.isConnected});for(const n of Za.readyHooks)try{n()}catch(r){console.warn("[Love 写卡机]",r)}}};globalThis.__CW_SUITE__=Za;var Er=Za,Jo={};On(Jo,{DEFAULT_TEMPLATES:()=>Ue,GEN_KINDS:()=>qs,LIB_KIND:()=>$a,ROLES:()=>vt,SCAFFOLD:()=>Wo,STD_MARKERS:()=>ot,STD_MARKER_IDS:()=>Ts,STD_PROMPT_IDS:()=>Ns,STD_PROMPT_LABELS:()=>_a,addEntryToCombo:()=>Ds,addMarkerToCombo:()=>Bs,addScaffold:()=>ri,allTags:()=>ti,buildGenPrompt:()=>sc,buildPreset:()=>Zo,buildRevisePrompt:()=>ci,classifyEntry:()=>Dn,cleanBase:()=>ai,clone:()=>fe,comboFromOrder:()=>si,commitItems:()=>Ko,estimateTokens:()=>Vo,exportLibrary:()=>Ls,filterEntries:()=>ni,fromHelperPreset:()=>Nr,guessName:()=>on,hash:()=>bd,mergeLibrary:()=>nc,moveItem:()=>Xo,newCombo:()=>$n,newCustomKind:()=>oi,newEntry:()=>He,normTags:()=>ft,normText:()=>Ps,normalizeEntry:()=>Xe,parseGenerated:()=>Qs,parseImportText:()=>tc,parseNote:()=>js,plainChar:()=>Os,protectMacros:()=>ei,readLibrary:()=>Ms,readPresetPrompts:()=>ii,resolveKinds:()=>rc,restoreMacros:()=>Yo,splitText:()=>ec,toHelperPreset:()=>_o,uid:()=>ae,uniqueName:()=>qt,validatePreset:()=>$o});var vt=["system","user","assistant"],$a="preset-workshop-library",ot=[{identifier:"worldInfoBefore",name:"World Info (before)",label:"世界书（角色定义之前）"},{identifier:"personaDescription",name:"Persona Description",label:"用户人设"},{identifier:"charDescription",name:"Char Description",label:"角色描述"},{identifier:"charPersonality",name:"Char Personality",label:"角色性格"},{identifier:"scenario",name:"Scenario",label:"场景"},{identifier:"worldInfoAfter",name:"World Info (after)",label:"世界书（角色定义之后）"},{identifier:"dialogueExamples",name:"Chat Examples",label:"对话示例"},{identifier:"chatHistory",name:"Chat History",label:"聊天记录"}],Ts=ot.map(e=>e.identifier),Ns=["main","nsfw","jailbreak","enhanceDefinitions"],_a={main:"主提示词",nsfw:"辅助提示词",jailbreak:"后置历史指令",enhanceDefinitions:"强化定义"},Wo=["worldInfoBefore","personaDescription","charDescription","charPersonality","scenario","worldInfoAfter","dialogueExamples","chatHistory"];function ae(e="pw"){return`${e}_${Math.random().toString(36).slice(2,8)}${Date.now().toString(36).slice(-4)}`}function bd(e){let t=2166136261;const n=String(e);for(let r=0;r<n.length;r++)t^=n.charCodeAt(r),t=Math.imul(t,16777619)>>>0;return t.toString(16).padStart(8,"0")}var fe=e=>e===void 0?void 0:JSON.parse(JSON.stringify(e)),Ps=e=>String(e??"").replace(/\r\n?/g,`
+`).replace(/[ \t]+$/gm,"").trim();function ft(e){const t=Array.isArray(e)?e:String(e??"").split(/[,，、;；\n]+/),n=[];for(const r of t){const s=String(r).trim();s&&!n.includes(s)&&n.push(s)}return n}var vd=/[㐀-鿿豈-﫿　-〿＀-￯]/g;function Vo(e){const t=String(e??"");if(!t)return 0;const n=(t.match(vd)||[]).length;return Math.ceil(n*.9+(t.length-n)/3.5)}var Os=e=>String(e??"").replace(/\{\{\s*char\s*\}\}/gi,"char"),ei=e=>String(e??"").replace(/\{\{/g,"⟦⟦").replace(/\}\}/g,"⟧⟧"),Yo=e=>String(e??"").replace(/⟦⟦/g,"{{").replace(/⟧⟧/g,"}}");function Xe(e={}){const t=Date.now(),n=Number(e.injection_depth),r=Number(e.injection_order);return{id:e.id||ae("pw"),name:String(e.name??"").trim()||"未命名条目",role:vt.includes(e.role)?e.role:"system",content:String(e.content??""),tags:ft(e.tags),note:String(e.note??""),source:String(e.source??""),sourcePromptId:String(e.sourcePromptId??""),sourcePresetName:String(e.sourcePresetName??""),...typeof e.variableInitPrefix=="string"&&e.variableInitPrefix?{variableInitPrefix:e.variableInitPrefix}:{},injection_position:Number(e.injection_position)===1?1:0,injection_depth:Number.isFinite(n)?n:4,injection_order:Number.isFinite(r)?r:100,injection_trigger:Array.isArray(e.injection_trigger)?e.injection_trigger:[],forbid_overrides:!!e.forbid_overrides,stId:Ns.includes(e.stId)?e.stId:"",history:Array.isArray(e.history)?e.history.slice(0,5):[],createdAt:e.createdAt||t,updatedAt:e.updatedAt||t}}function He(e={}){return Xe({...e,id:e.id||ae("pw")})}function ti(e){const t=new Map;for(const n of e)for(const r of n.tags||[])t.set(r,(t.get(r)||0)+1);return[...t.entries()].sort((n,r)=>r[1]-n[1]).map(([n,r])=>({tag:n,count:r}))}function ni(e,{search:t="",tag:n=""}={}){const r=t.trim().toLowerCase();return e.filter(s=>n&&!(s.tags||[]).includes(n)?!1:r?[s.name,s.content,s.note,(s.tags||[]).join(" ")].some(a=>String(a).toLowerCase().includes(r)):!0)}function qt(e,t){const n=new Set(e.map(r=>r.name));if(!n.has(t))return t;for(let r=2;r<999;r++){const s=`${t} (${r})`;if(!n.has(s))return s}return`${t} (${ae("x")})`}function Dn(e,t){const n=Ps(t.content);if(!n)return{status:"empty"};const r=e.find(a=>Ps(a.content)===n);if(r)return{status:"dup",match:r};const s=e.find(a=>a.name===t.name);return s?{status:"samename",match:s}:{status:"new"}}function Ko(e,t,{dupMode:n="skip"}={}){const r=[...e],s=[],a=new Map;let i=0,o=0;for(const c of t){const{status:p,match:d}=Dn(r,c.entry);if(p==="dup"&&n!=="copy"){a.set(c.key,d.id),i++;continue}const m=Xe({...c.entry,id:ae("pw"),createdAt:Date.now(),updatedAt:Date.now()});(p==="samename"||p==="dup")&&(m.name=qt(r,m.name),o++),r.push(m),s.push(m),a.set(c.key,m.id)}return{added:s,map:a,dups:i,renamed:o}}function $n(e="新方案"){return{id:ae("cb"),name:e,presetName:e,baseId:"",items:[],entries:[]}}function Ds(e,t){return e.items.some(n=>n.type==="entry"&&n.entryId===t)?!1:(e.items.push({uid:ae("it"),type:"entry",entryId:t,enabled:!0,override:{}}),Jc(e,t),!0)}function Bs(e,t,n=""){return e.items.some(r=>r.type==="marker"&&r.identifier===t)?!1:(e.items.push({uid:ae("it"),type:"marker",identifier:t,name:n,enabled:!0}),!0)}function ri(e){let t=0;for(const n of Wo)Bs(e,n)&&t++;return t}function Xo(e,t,n){const r=t+n;if(t<0||t>=e.length||r<0||r>=e.length)return!1;const[s]=e.splice(t,1);return e.splice(r,0,s),!0}function si(e,t,n){const r=$n(e),s=new Set;for(const a of t)if(a.type==="marker")Bs(r,a.identifier,a.name),r.items[r.items.length-1].enabled=a.enabled!==!1;else{const i=n.get(a.key);if(!i||s.has(i))continue;s.add(i),r.items.push({uid:ae("it"),type:"entry",entryId:i,enabled:a.enabled!==!1,override:{}})}return r}var xd=/(password|api[_-]?key|secret|proxy|custom_url|custom_include|bearer|token)/i;function ai(e){const t={};for(const[n,r]of Object.entries(e||{}))n==="prompts"||n==="prompt_order"||xd.test(n)||(t[n]=r);return t}function Zo({combo:e,entries:t,base:n={}}){const r=new Map([...t,...e.entries||[]].map(c=>[c.id,c])),s=[],a=[],i=new Set,o=(c,p)=>{let d=c&&!i.has(c)?c:p,m=2;for(;i.has(d);)d=`${p}_${m++}`;return i.add(d),d};for(const c of e.items){if(c.type==="marker"){const g=ot.find(E=>E.identifier===c.identifier),y=g?g.name:c.name;if(!y||i.has(c.identifier))continue;i.add(c.identifier),s.push({identifier:c.identifier,name:y,system_prompt:!0,marker:!0}),a.push({identifier:c.identifier,enabled:c.enabled!==!1});continue}const p=r.get(c.entryId);if(!p)continue;const d=o(p.stId,p.id),m=c.override||{};s.push({identifier:d,name:p.name,system_prompt:!!p.stId&&d===p.stId,marker:!1,role:vt.includes(m.role)?m.role:p.role,content:p.content,injection_position:m.injection_position===0||m.injection_position===1?m.injection_position:p.injection_position,injection_depth:Number.isFinite(Number(m.injection_depth))&&m.injection_depth!==void 0?Number(m.injection_depth):p.injection_depth,injection_order:p.injection_order,injection_trigger:p.injection_trigger,forbid_overrides:p.forbid_overrides}),a.push({identifier:d,enabled:c.enabled!==!1})}return{...ai(n),prompts:s,prompt_order:[{character_id:100001,order:a.map(c=>({...c}))},{character_id:1e5,order:a.map(c=>({...c}))}]}}function $o(e){const t=[],n=[],r=new Set;for(const o of e.prompts||[])r.has(o.identifier)&&t.push(`标识重复：${o.identifier}`),r.add(o.identifier);const s=e.prompt_order?.[0]?.order||[];for(const o of s)r.has(o.identifier)||t.push(`顺序里引用了不存在的条目：${o.identifier}`);s.length||n.push("方案是空的");const a=s.find(o=>o.identifier==="chatHistory");a?a.enabled||n.push("「聊天记录」被关掉了，酒馆不会发送聊天历史"):n.push("没有放「聊天记录」固定位置，酒馆不会发送聊天历史");const i=(e.prompts||[]).filter(o=>!o.marker&&!String(o.content??"").trim());return i.length&&n.push(`有 ${i.length} 个条目内容为空：${i.map(o=>o.name).join("、")}`),{errors:t,warnings:n}}function Tr(e){return Array.isArray(e)&&(e.find(t=>t?.character_id===100001)||e.find(t=>t?.character_id===1e5)||e[0])||null}function ii(e,t="导入的预设"){const n=Array.isArray(e.prompts)?e.prompts:[],r=Tr(e.prompt_order),s=new Map,a=[];for(const m of r?.order||[])m?.identifier&&(s.set(m.identifier,m.enabled!==!1),a.push(m.identifier));const i=new Map(n.map(m=>[m.identifier,m])),o=m=>!!m.marker||Ts.includes(m.identifier),c=[],p=m=>`p:${m}`;for(const m of n)!m||!m.identifier||o(m)||c.push({key:p(m.identifier),inOrder:s.has(m.identifier),enabled:s.get(m.identifier)??!1,entry:Xe({name:m.name||_a[m.identifier]||m.identifier,role:m.role,content:m.content,injection_position:m.injection_position,injection_depth:m.injection_depth,injection_order:m.injection_order,injection_trigger:m.injection_trigger,forbid_overrides:m.forbid_overrides,stId:Ns.includes(m.identifier)?m.identifier:"",source:t,sourcePromptId:m.identifier,sourcePresetName:t,tags:[`来自:${t}`]})});const d=a.map(m=>{const g=i.get(m);return g?o(g)?{type:"marker",identifier:m,name:g.name,enabled:s.get(m)}:{type:"entry",key:p(m),enabled:s.get(m)}:null}).filter(Boolean);return{kind:"st-preset",label:t,items:c,order:d,base:ai(e)}}function Nr(e){if(!e||typeof e!="object")throw new Error("读到的预设是空的");const t=[],n=[],r=(s,a)=>{if(!s||!s.id)return;const i=String(s.id);if(Ts.includes(i))t.push({identifier:i,name:ot.find(o=>o.identifier===i).name,system_prompt:!0,marker:!0});else{const o=s.position?.type==="in_chat";t.push({identifier:i,name:s.name||_a[i]||i,system_prompt:Ns.includes(i),marker:!1,role:vt.includes(s.role)?s.role:"system",content:String(s.content??""),injection_position:o?1:0,injection_depth:o?Number(s.position.depth)||0:4,injection_order:o&&Number.isFinite(Number(s.position.order))?Number(s.position.order):100})}a&&n.push({identifier:i,enabled:s.enabled!==!1})};return(e.prompts||[]).forEach(s=>r(s,!0)),(e.prompts_unused||[]).forEach(s=>r(s,!1)),{prompts:t,prompt_order:[{character_id:100001,order:n}]}}function _o(e,t){const n=Tr(e.prompt_order),r=new Map((e.prompts||[]).map(a=>[a.identifier,a])),s=[];for(const a of n?.order||[]){const i=r.get(a.identifier);if(!i)continue;const o=a.enabled!==!1;if(i.marker||Ts.includes(i.identifier)){s.push({id:i.identifier,enabled:o,position:{type:"relative"}});continue}s.push({id:i.identifier,name:i.name,enabled:o,position:i.injection_position===1?{type:"in_chat",depth:Number(i.injection_depth)||0,order:Number(i.injection_order)||100}:{type:"relative"},role:vt.includes(i.role)?i.role:"system",content:String(i.content??"")})}return{settings:fe(t?.settings??{}),prompts:s,prompts_unused:[],extensions:fe(t?.extensions??{})}}function Ms(e,t="条目库"){const n=Array.isArray(e.entries)?e.entries:[];return{kind:"library",label:t,items:n.map(r=>({key:`l:${r.id||ae("k")}`,srcId:r.id,entry:Xe({...r,history:[]})})),combos:Array.isArray(e.combos)?e.combos:[]}}function on(e,t="导入文本"){const n=String(e).split(`
+`).find(a=>a.trim())||"",r=n.match(/^\s*<([^\s>\/]+)[^>]*>/);return r?r[1].slice(0,24):(n.replace(/^[\s#>*\-]+/,"").trim()||t).slice(0,24)}function ec(e,t="heading",n="导入文本"){const r=Ps(e);if(!r)return[];const s=()=>[{name:on(r,n),content:r}];if(t==="whole")return s();const a=r.split(`
+`);if(t==="hr"){const g=[];let y=[],E=!1;for(const P of a)/^\s*```/.test(P)&&(E=!E),!E&&/^\s*(-{3,}|={3,}|\*{3,})\s*$/.test(P)?(g.push(y),y=[]):y.push(P);return g.push(y),g.map(P=>P.join(`
+`).trim()).filter(Boolean).map(P=>({name:on(P,n),content:P}))}let i=!1;const o=[];if(a.forEach((g,y)=>{if(/^\s*```/.test(g)&&(i=!i),i)return;const E=g.match(/^(#{1,3})\s+(.+?)\s*#*\s*$/);E&&o.push({i:y,level:E[1].length,title:E[2]})}),!o.length)return s();const c=Math.min(...o.map(g=>g.level)),p=o.filter(g=>g.level===c),d=[],m=a.slice(0,p[0].i).join(`
+`).trim();return m&&d.push({name:on(m,n),content:m}),p.forEach((g,y)=>{const E=y+1<p.length?p[y+1].i:a.length,P=a.slice(g.i+1,E).join(`
+`).trim();d.push({name:g.title,content:P||g.title})}),d}function tc(e,{label:t="导入",splitMode:n="heading"}={}){const s=String(e??"").replace(/^﻿/,"").trim();if(!s)return{kind:"empty",label:t};if(/^[\[{]/.test(s)){let i;try{i=JSON.parse(s)}catch{i=void 0}if(i!==void 0)return i&&!Array.isArray(i)&&Array.isArray(i.prompts)?ii(i,t):i&&i.kind===$a||i&&!Array.isArray(i)&&Array.isArray(i.entries)?Ms(i,t):Array.isArray(i)&&i.length&&i.every(o=>o&&typeof o=="object"&&"content"in o)?Ms({entries:i},t):{kind:"unknown",label:t}}const a=ec(s,n,t);return{kind:"text",label:t,items:a.map((i,o)=>({key:`t:${o}`,entry:Xe({name:i.name,content:i.content,source:t,tags:[`来自:${t}`]})}))}}function nc(e,t){const n=new Map,r=[...e],s=[];let a=0;for(const o of t.items){const c=o.srcId||o.entry.id,{status:p,match:d}=Dn(r,o.entry);if(p==="dup"){n.set(c,d.id),a++;continue}const m=Xe({...o.entry,id:r.some(g=>g.id===c)?ae("pw"):c||ae("pw")});p==="samename"&&(m.name=qt(r,m.name)),r.push(m),s.push(m),n.set(c,m.id)}const i=(t.combos||[]).map(o=>{const c=$n(o.name||"导入的方案"),p=new Map;return c.presetName=o.presetName||c.name,c.templateSource=String(o.templateSource||""),c.entries=(Array.isArray(o.entries)?o.entries:[]).map(d=>{const m=Xe({...d,id:ae("pw")});return p.set(d.id,m.id),m}),c.items=(o.items||[]).map(d=>d.type==="marker"?{uid:ae("it"),type:"marker",identifier:d.identifier,name:d.name||"",enabled:d.enabled!==!1}:{uid:ae("it"),type:"entry",entryId:p.get(d.entryId)||n.get(d.entryId)||d.entryId,enabled:d.enabled!==!1,override:d.override||{}}).filter(d=>d.type==="marker"||r.concat(c.entries).some(m=>m.id===d.entryId)),c.removedEntryIds=(o.removedEntryIds||[]).map(d=>p.get(d)||n.get(d)||d),c});return{added:s,combos:i,dups:a}}function Ls(e,t=[]){return{kind:$a,version:1,exportedAt:new Date().toISOString(),entries:e.map(({history:n,...r})=>r),combos:t}}var qs=[{id:"module",label:"功能模块"},{id:"rules",label:"规则清单"},{id:"style",label:"文风"},{id:"author",label:"指定作家文风"},{id:"wish",label:"规则（按愿望写）"},{id:"free",label:"自由"}];function rc(e=[],t=[]){const n=new Set(t),r=[...qs.filter(s=>!n.has(s.id)).map(s=>({...s,custom:!1})),...e.map(s=>({id:s.id,label:String(s.label||"").trim()||"未命名类型",custom:!0}))];return r.length?r:[{...qs.find(s=>s.id==="free"),custom:!1}]}function oi(e="新类型",t="",n=""){const r=String(e).trim()||"新类型";return{id:ae("ck"),label:r,prompt:t||`条目类型：${r}。`,tags:n}}var Ue={common:`你是 SillyTavern 角色扮演预设的提示词编辑。根据作者的需求和本页对话，写出可以直接使用的预设条目。
+
+先弄清作者要改变哪一部分输出，已有内容有哪些需要保留。没有依据的设定不要自行补成事实；确实缺少信息时，在说明块里指出。
+
+【写提示词】
+功能模块需要明确字段、输出位置和数据规则；文风与人物描写则说明文字该怎样组织、应该注意什么。不要把所有需求都套成“触发条件 → 固定动作”。
+用普通、准确的文字说明要求。删掉反复强调同一个意思的句子，以及没有说明怎么写的口号。形容词不能一律换成数字；作者没有要求时，不给每段安排动作次数、身体反应、心理占比和固定结尾。状态栏数值、格式长度和程序条件等实际需要的数字仍须写清。
+作者给了文字样本，就从样本中判断其写法；没有样本时按已说明的偏好写，不擅自编造示例台词、小剧场或正反对照。作者明确要求示例时再提供。
+说明取材和表达方法，给实际写作留出余地。不要把某种情绪绑定成每次都会出现的眼神、笑容或动作，也不要列一串同义的程度词充当人物差异。
+只处理作者提出的问题。已有功能、变量名、标签和酒馆宏需要保留，不能为了调整文风破坏格式或改变数据含义。用户给出的禁词表按原文保留。
+
+【组织条目】
+按内容选择简明段落或必要的列表。作者指定结构时沿用；功能模块有明确格式时给出格式。文风条目不强制填写无关字段。需要拆分时，让每个条目各自说明一件事，同一句要求不要在不同部分反复出现。
+不要使用 Human:、Assistant: 这类对话前缀。提到角色时直接写 char；提到用户时写 ⟦⟦user⟧⟧。其他 ⟦⟦…⟧⟧ 是酒馆宏，原样保留。
+默认中文。作者指定英文时，用英文写条目内容，条目名、tags 和说明块仍用中文。最后严格遵守本次的 entry 输出格式。`,module:`条目类型：功能模块（例如状态栏、思维链、特殊格式输出）。
+结构：用一个标签包住整个模块，里面按「要求 → 资料 → 任务启动」组织：
+要求里写触发条件（什么时候输出）、输出格式（逐字段写清楚）、生成步骤（编号）、边界情况（缺信息时怎么办）；
+资料里放模型要参照的设定；最后一句是启动指令。
+格式示例必须是可以直接复制使用的完整示例，不要用省略号代替内容。`,rules:`条目类型：规则清单。
+围绕作者要解决的问题写清要求，同一项要求只写一次。功能条件需要分支时再写条件；人物和文风要求不强制套入触发分支。
+作者指出某种写法有问题时，说明需要调整哪部分表达，以及如何保留原意。不要给每条禁令硬凑一条固定动作或示例。用必要的分组方便阅读，不为填满模板重复内容。`,style:`条目类型：文风。
+从作者提供的样本和偏好中提炼句子组织、叙述视角、用词与对话的写法，说明这些写法适合如何使用。保留作者想要的文学风味，删去八股时也保留句子的意思和节奏。
+不预设每段的句数、感官数量、心理占比和结尾动作。没有样本时，不编造仿写或正反例。禁词表按作者原文保留，不自行删改。`,author:`条目类型：指定作家文风配置。用户给出作家名、文本样本或风格描述，你生成一份可执行的风格配置。
+方法：运用叙事学（Genette 的叙事话语理论）、文体学（Leech 偏离理论）、修辞学。
+篇幅：条目约 1000 tokens（上下浮动 100）。属性值每条 1 句，动词开头（使用/避免/优先）；markers 4-6 个词，逗号分隔；core 4-5 个关键词，斜杠分隔。
+禁止用词：独特的、善于、富有、常用、巧妙地。
+关于 example（重要）：
+- 用户贴了文本样本：example 从样本里截取，30-80 字，保持原语言，不改字。
+- 用户没贴样本：example 写成「仿写」，30-80 字，保持作者的书写语言，并在字段前标注「仿写」，不要冒充原文，也不要凭记忆写出看似引文的句子。
+- 对作家或作品了解有限时，在说明块的“假设”里写「基于有限资料」，把 example 减到 4 段，并建议用户提供文本样本。
+- 作家有多个时期、风格不同的，在 categories 里分期标注。
+结构（条目内容用下面的 XML，括号里是要填的内容）：
+<writing_style author="作家名">
+  <narrative_system>
+    <structure type="类型" progression="推进" ending="结局"/>
+    <perspective>人称 / 聚焦类型 / 叙述距离；markers: 语言标记词</perspective>
+    <temporality>时序 / 时距 / 频率</temporality>
+    <rhythm pattern="模式" pacing="速度"><example>30-80字</example></rhythm>
+  </narrative_system>
+  <expression_system>
+    <description style="风格" principle="原则"><example>30-80字</example></description>
+    <dialogue mode="模式"><example>30-80字对话</example></dialogue>
+    <characterization method="方法" psychology="策略"><example>30-80字</example></characterization>
+    <sensory hierarchy="感官优先级"><example>30-80字</example></sensory>
+  </expression_system>
+  <aesthetics_system>
+    <core>4-5个核心美学概念</core>
+    <categories types="分类维度">各类型特征</categories>
+    <palette>场所: 典型空间 / 时间: 典型时间 / 象征: 核心意象</palette>
+    <language>syntax: 句法特征 / lexicon: 词汇偏好 / rhetoric: 修辞手法</language>
+    <telos>美学目标</telos>
+  </aesthetics_system>
+</writing_style>
+质检（写完自查，问题写进说明块）：
+- 叙事学术语用对：聚焦不等于视角，时距不等于时序
+- 各个系统之间不矛盾，参数与 example 互相印证
+- 文化术语保留原语（物哀、陰翳、間之类），不生硬套用西方理论
+- 每项参数能直接指导 AI 写作，正向指令与负向约束并存，无歧义
+- 字数落在 950-1050 tokens；超 1100 压缩属性值措辞（不压 example），不足 900 补 markers 与 categories`,wish:`条目类型：按作者的写作愿望调整输出。
+先确定作者不满意的是哪一部分、希望得到什么效果，然后围绕这件事写提示词。作者说想多写或少写某种内容时，说明应该把笔墨放在哪里、哪些重复可以删去；没有明确要求，不自行设百分比、字数配额或动作次数。
+人物与场景描写从已给设定和当前情境取材，不凭职业默认衣服磨损，也不凭性格标签安排固定表情。需要补充信息时，指出缺少什么，不用无关细节填空。
+条目只保留有用的要求和必要的边界。作者没有要求示例，就不生成小剧场、台词或正反对照。不另加一组和正文重复的自检表。作者给出的实际功能条件与数值限制照常保留。`,free:"条目类型：自由。按用户的需求直接写，不额外套结构；准则仍然适用。",single:"数量：只写 1 个条目。",multi:"数量：按需求拆成 2 到 6 个条目，每个条目只管一件事，条目名要能看出各自的职责。",note:`在所有条目之前，先输出一个说明块（这是“条目之外不要写其他文字”的唯一例外），最多 6 行：
+<说明>
+要求：一句话
+目的：一句话
+假设：需求没写清、你补上的地方；没有就写「无」
+矛盾检查：条目内部、或条目和需求之间的矛盾和可疑之处；没有就写「无」
+放置：条目名 → 头部 / 中段 / 尾部，一句理由（最重要的约束放头部或尾部；放中段的，靠 XML 标签名把注意力引过去）
+</说明>`,revise:`任务：按修改意见修改当前条目。
+只改意见说到的地方，其余内容一字不动（包括标签名、缩进、编号）。输出完整的修改后条目，不要只输出改动片段。
+如果意见和已有规则冲突，以意见为准，并在冲突处就近改写，不要再新增一条互相矛盾的规则。`,format:`输出格式：每个条目用下面的格式，属性值里不要出现英文双引号：
+<entry name="条目名" role="system" tags="标签1,标签2">
+条目内容
+</entry>
+role 只能是 system、user、assistant 之一，默认 system。tags 写 1 到 2 个简短标签。
+条目之外不要写前言、解释或总结。
+必须用上面的 XML 标签输出（<entry> 和 <说明>）：不用代码块（反引号围栏）包裹，不加 <content>、<output> 之类的外层包装；预设要求先写 <planing> 之类的思考块时，写在最前面，成品仍然必须是这些 XML 标签。`,baguWhat:`【什么是八股】
+这里的八股指反复套用的措辞、句式和人物反应。换个人名、换个场景仍能原样使用，读完没有获得新的信息，这类文字尤其需要检查。
+常见问题包括：用“不是……而是……”“与其说……不如说……”反复解释；连排几个意思接近的形容词；动作之后再补一句性格或情绪总结；反复写“眼底闪过”“嘴角勾起”“笑意不达眼底”等现成反应。
+八股也会藏在内容安排里：每次紧张都做同一动作，每次亲近都套用同一套占有话语，把人物写成只剩一种身份的反应程序；为了显得具体，随意添加精确时长、衣物磨损、颜色变化和无关物件。
+提示词本身也会制造重复。给每段规定同样的动作数和心理占比、强制每轮点名某个身体部位、把示例台词当作常用台词，都会让后续文字反复走同一条路。
+检查时结合上下文。格式标签、变量、必要的数据范围，以及作者明确指定的文字有实际用途，不因重复出现就删除。`,baguHow:`【如何反八股】
+读作者的需求和已有文字，先保留要表达的意思。找出没有增加信息的修饰、同义反复和解释性收尾，能删的直接删。需要改写时重组句子，不沿着旧句式逐词换近义词。
+把要求落在写法上。人物已有的经历、关系和当下要做的事可以提供内容，描述时按作者的关注点展开；不要用一串性格评价代替人物，也不要为了证明性格补一幕固定的小故事。
+作者给出“笑面虎”等人物风味时保留这个方向，避免继续堆同义标签或指定每次出现的招牌动作。写表情与动作要看当时正在发生什么，不把某种眼神、发颤或发白当作通用的情绪答案。
+外貌和服饰按已有设定写。没有依据时，不补洗硬、褪色、发旧、污渍或破损。富裕人物的衣着也不默认磨损。具体细节应当有用，不靠材质、数字和零碎物件填充篇幅。
+写文风提示词时，说明作者希望采用的表达方法；只保留与目标有关的限制。删除无依据的次数和占比，不把它们换成另一套固定分支。功能模块实际需要的触发条件、数字、字段和输出位置照常保留。
+改已有条目时，保留其功能、角色关系、变量、酒馆宏、标签和作者提供的事实。用户的禁词表原文不变。用于说明问题的坏例不要当作可模仿的正文，也不要在成品里额外添加示例和自检评语。`},yd={common:`你是 SillyTavern 角色扮演预设的提示词工程师。你把用户的需求写成可以直接放进预设条目的提示词。
+
+【动笔前】先确认两件事：
+- 要求：用户要什么
+- 目的：希望模型做什么
+这两点没写清时，按最合理的读法补上，并在说明块里写出你补了什么。需求里互相矛盾、或和目的无关的部分，不写进条目，在说明块里指出。
+
+【写法准则】
+1. 提示词的作用是约束输出范围：没有提示词时模型能输出很多种内容，条目要把它压到只剩符合要求的少数几种。每条规则写完，要能说出它排除了哪些输出；排除不了任何输出的句子，删掉。
+2. 机械化、规则驱动：每条规则写成「触发条件 → 具体动作」，让模型照做就能执行，而不是描述一种感觉或愿景。
+3. 不写模糊的要求，不堆程度副词和空泛形容词（非常、极其、深刻、细腻、生动之类），用具体的格式、数量、位置、顺序代替。
+4. 不写对目的没有帮助的内容：多一句废话就多一份 token，还多一分和其他规则打架的机会。
+5. 可验证：每条规则，旁人要能判断模型有没有照做。判断不了的，改写或删掉。
+6. 禁止必须给替代：写「不要 X」时，同一条里给出「改为 Y」的具体写法。只有禁令、没有替代的规则不要写。
+7. 尽可能给出一个完整的示例，能直接照抄使用，不用省略号代替内容。文风类用户没给样例时，不要编造样例冒充用户的风格。
+8. 结构化：外层用 XML 标签分区，标签名简短，方便其他条目引用，也能把模型的注意力引到这一块；区内用 YAML 风格的键值和列表。结构化优先级（针对 Claude；不同模型读格式化文本的能力不一样）是 Json > Yaml > XML > Markdown > 自然语言；但需要模型自己输出的内容（尤其是推理过程）不要用 Json，用 XML 或 Yaml。
+9. 通用结构：要求 → 资料 → 任务启动。要求是规则；资料是模型要参照的设定和数据；任务启动是触发动作的最后一句指令，放在条目末尾。需要分步完成的，写成按顺序的列表。
+10. 一个条目只管一件事。需求里有多件事时拆开；同一件事只在一处写，不重复。
+11. 不要写「Human:」「Assistant:」这类角色前缀（模型会顺着补全）。需要规定输出格式时，给出格式模板，让模型顺着模板补全。
+12. 提到角色时直接写 char，不要写成双花括号的宏；提到用户时写 ⟦⟦user⟧⟧。内容里其他的 ⟦⟦…⟧⟧ 是酒馆宏（原文是双花括号），原样保留，不要改动也不要解释。
+13. 默认用中文写。【语言】里指定了英文，就用英文写条目内容（条目名、tags、说明块仍用中文）；英文通常更省 token，模型对英文提示词的遵循通常也更好。`,rules:`条目类型：规则清单（例如叙事规则、行为约束、禁用清单）。
+结构：按主题分组，每组一个小标签；组内用编号，每条一行：「当……时 → ……；不要……，改为……」。
+每组不超过 8 条。同一件事只在一处写，不要在不同组里重复。`,style:`条目类型：文风。
+结构：写法规则（句长、人称、视角、感官优先级、对话与动作的比例）→ 句式限制（每条附替代写法）→ 禁用清单。
+只有用户给了样例文字时才写「正反对照」；没给就不要编造样例冒充用户的风格。文风条目只管怎么写，不管写什么。`,wish:`条目类型：规则（按用户的写作愿望写）。用户说一句愿望，比如“服装更丰富”“心理话变多”“视角聚焦 char”，你把它写成 AI 能逐条执行、逐条自检的规则。
+方法：指令工程（可执行、可验证）、叙事学（聚焦与时距）、文体学。
+
+【需求拆解】先判断愿望的类型，再转化：
+- 增量（更丰富、更多）：设下限与占比，并指定细节的取材来源，同时设上限防止堆砌。
+- 减量（少说教、少总结）：设上限，列出要删的句型，并给替代写法防止写空。
+- 转向（视角、人称、距离）：定义聚焦类型和叙述距离，写明越界信息怎么处理，防止视角漂移。
+一句愿望里含两个以上变量，拆成多条；每条只解决一件事。愿望含糊（“写得好一点”）时，在说明块里指出缺什么，按最合理的读法写。
+
+【写法】
+- 可数：形容词换成数量、位置、频率。“多写心理”写成“每回复至少 2 处 char 的内心活动，占正文 15%-25%”。阈值写区间，不写单值。
+- 可查：每条要求能用是/否判定。
+- 有触发：写明什么时候生效、什么时候不生效（战斗高潮、对话密集段、用户要求快进）。
+- 有来源：细节取材顺序写明，例如“设定 > 场景与季节 > 身份常识推断”。
+- 有边界：同时写不要做什么，防止矫正过度。
+- 有优先级：与用户主权、角色一致冲突时让位。不替 ⟦⟦user⟧⟧ 写言行与心理；愿望要求这样做时，改写成“char 观察到的外在反应”，并在说明块里说明。
+- 禁用词：适当地、尽量、丰富的、细腻的、生动的、自然地、巧妙地、富有。出现即换成数量或判定条件。
+- 篇幅：单条 400-700 tokens，每条至少含 1 个量化阈值、1 项正向指令、1 项负向约束、1 组自检。
+
+结构（条目内容用下面的 XML）：
+<rule_module name="规则名">
+  <goal>1句，动词开头，写可观察的结果</goal>
+  <scope>
+    <applies>生效场景与对象</applies>
+    <exempt>不生效的场景</exempt>
+    <priority>与其他规则冲突时的让位关系</priority>
+  </scope>
+  <rules>
+    <do>2-5条，每条含数量、位置或判定条件</do>
+    <dont>2-5条，每条对应一种常见的过度或偏离</dont>
+    <source>细节取材顺序</source>
+  </rules>
+  <example>
+    <weak>达不到要求的写法，30-60字</weak>
+    <strong>同一场景、达到要求的写法，30-80字；与弱例的差异只在目标变量上</strong>
+  </example>
+  <check>4-5项，每项能用是/否判定；末尾写“未通过：修正动作”</check>
+  <fallback>信息不足、设定缺失或冲突时的处理</fallback>
+</rule_module>
+
+质检（写完自查，问题写进说明块）：
+- 增量规则有上限，减量规则有替代写法，转向规则写了越界处理
+- 不与用户主权冲突，priority 与 exempt 已写
+- 多条规则之间阈值不互相抵消
+- 每个 check 项能对应到 do 或 dont
+在条目后的说明块“放置”里，附一句调参提示：想更明显把哪个数字调到多少，想更克制调到多少。
+
+示例（“服装更丰富”的一条）：
+<rule_module name="服饰描写">
+  <goal>让每个出场人物的穿着成为读者记得住的画面信息。</goal>
+  <scope>
+    <applies>人物首次出场、换装、场景切换后、服饰与情境相关时</applies>
+    <exempt>战斗高潮、对话密集段、用户要求快进的概要段</exempt>
+    <priority>低于用户主权与角色一致；不挤占对话与推进的篇幅</priority>
+  </scope>
+  <rules>
+    <do>
+      - 人物首次出场写这几项：款式、材质或颜色、一个细节（磨损、配饰、穿法）
+      - 每回复至少 1 处服饰细节，占正文 10%-15%
+      - 让动作带出服饰（袖口、衣摆、纽扣），服饰与身份、季节、场合、心情之一呼应
+    </do>
+    <dont>
+      - 不写罗列清单（“白衬衫黑裤子皮鞋”），改为一个细节带一个动作
+      - 同一件衣服连续两轮不重复同一措辞
+      - 不为服饰中断对话，不写 ⟦⟦user⟧⟧ 未提及的服饰
+    </dont>
+    <source>设定中的穿着 > 场景与季节 > 身份与职业的常识推断</source>
+  </rules>
+  <example>
+    <weak>她穿着一件好看的裙子，站在门口。</weak>
+    <strong>她的墨绿裙摆沾着泥点，袖口的银扣少了一颗，站在门口时下意识把那只手背到身后。</strong>
+  </example>
+  <check>
+    - [ ] 本回复至少 1 处服饰细节
+    - [ ] 首次出场人物含款式、材质或颜色、细节这几项
+    - [ ] 服饰细节出现在动作中，而非单独成句
+    - [ ] 服饰占比未超过 15%
+    未通过：补写或删减，使服饰融入动作句。
+  </check>
+  <fallback>设定无服饰信息时按身份与场景保守推断，不新增重大道具。</fallback>
+</rule_module>`};function sc({kind:e="module",kindPrompt:t,need:n="",refs:r=[],multi:s=!1,tags:a=[],lang:i="zh",templates:o,antiBagu:c=!0}={}){const p={...Ue,...o||{}},d=typeof t=="string"?t:p[e]??p.module,m=[p.common,d,c?nr(p):"",s?p.multi:p.single,p.note,p.format].filter(y=>String(y??"").trim()).join(`
+
+`),g=[`【需求】
+${String(n).trim()}`];return r.length&&g.push(`【参考条目（只用来衔接、避免重复，不要照抄，也不要重写）】
+`+r.map(y=>`<参考条目 name="${y.name}">
+${y.content}
+</参考条目>`).join(`
+`)),a.length&&g.push(`【标签】生成的条目 tags 里包含：${a.join("、")}`),i==="en"&&g.push("【语言】用英文写条目内容；条目名、tags、说明块仍用中文。"),{system:m,prompt:g.join(`
+
+`)}}function ci({entry:e,comment:t="",templates:n,antiBagu:r=!0}={}){const s={...Ue,...n||{}},a=[s.common,s.revise,r?nr(s):"",s.single,s.format].join(`
+
+`),o=`【当前条目】
+<entry ${`name="${e.name}" role="${e.role}" tags="${(e.tags||[]).join(",")}"`}>
+${e.content}
+</entry>
+
+【修改意见】
+${String(t).trim()}`;return{system:a,prompt:o}}function li(e){const t=e.match(/^\s*```[a-zA-Z]*\n([\s\S]*?)\n```\s*$/);return t?t[1]:e}function js(e){const t=String(e??"").match(/<说明>([\s\S]*?)(?:<\/说明>|(?=<entry\b)|$)/);return t?t[1].trim():""}function Qs(e){const t=String(e??"").replace(/<说明>[\s\S]*?(?:<\/说明>|(?=<entry\b)|$)/g,""),n=[],r=/<entry\b([^>]*)>([\s\S]*?)(?:<\/entry>|$)/gi;let s;for(;s=r.exec(t);){const a={};for(const c of s[1].matchAll(/(\w+)\s*=\s*(?:"([^"]*)"|'([^']*)'|“([^”]*)”|「([^」]*)」)/g))a[c[1].toLowerCase()]=c[2]??c[3]??c[4]??c[5]??"";const i=/<\/entry>/i.test(s[0]),o=li(s[2].trim()).trim();if(o&&(n.push({name:(a.name||"").trim()||on(o,"未命名条目"),role:vt.includes((a.role||"").trim())?a.role.trim():"system",tags:ft(a.tags||""),content:o,truncated:!i}),!i))break}if(!n.length){const a=li(t.trim()).trim();a&&n.push({name:on(a,"未命名条目"),role:"system",tags:[],content:a,truncated:!1})}return n}var pi=()=>X.SillyTavern.getContext();function Rs(e){return e===!1||e==="off"?"off":e===!0||e==="on"?"on":"preset"}function kd(e){try{const t=pi();if(e){const r=t.ConnectionManagerRequestService?.getProfile?.(e)??t.extensionSettings?.connectionManager?.profiles?.find(s=>s.id===e);if(r){let s=null;try{s=t.ConnectionManagerRequestService?.validateProfile?.(r)??t.CONNECT_API_MAP?.[r.api]}catch{}const a=s?s.selected==="openai":r.mode!=="tc",i=r.preset?t.getPresetManager?.(a?"openai":"textgenerationwebui")?.getCompletionPresetByName?.(r.preset):null,o=a?i?.stream_openai:i?.streaming;if(typeof o=="boolean")return o;const c=a?t.chatCompletionSettings?.stream_openai:t.textCompletionSettings?.streaming;if(typeof c=="boolean")return c}}const n=!t.mainApi||t.mainApi==="openai"?t.chatCompletionSettings?.stream_openai:t.textCompletionSettings?.streaming;return typeof n=="boolean"?n:!0}catch{return!0}}function ac(e){try{const t=Rs(pi().extensionSettings?.loveCardWriter?.stream);return t==="on"?!0:t==="off"?!1:kd(e)}catch{return!0}}async function ic(e,t){let n="";for await(const r of e()){const c=typeof r=="string"?r:r?.text;if(!c)continue;n=String(c);try{t?.(n)}catch{}}return n}async function oc({profile:e,messages:t,maxTokens:n,temperature:r,onText:s}={}){if(!ac(e)||typeof s!="function")return;const a=pi();let i="";const o=c=>{i=c,s(c)};try{if(e&&a.ConnectionManagerRequestService){const p=await a.ConnectionManagerRequestService.sendRequest(e,t,n,{stream:!0,extractData:!0,includePreset:!1,includeInstruct:!1},{});return typeof p=="function"?await ic(p,o):typeof p=="string"?p:String(p?.content??"")}const c=a.chatCompletionSettings;if(a.ChatCompletionService&&c&&(!a.mainApi||a.mainApi==="openai")){const p=await a.ChatCompletionService.processRequest({stream:!0,messages:t,max_tokens:n,model:a.getChatCompletionModel?a.getChatCompletionModel(c):void 0,chat_completion_source:c.chat_completion_source,custom_url:c.custom_url,reverse_proxy:c.reverse_proxy,proxy_password:c.proxy_password,custom_prompt_post_processing:c.custom_prompt_post_processing,vertexai_region:c.vertexai_region,zai_endpoint:c.zai_endpoint,temperature:typeof r=="number"?r:c.temp_openai,top_p:c.top_p_openai,frequency_penalty:c.freq_pen_openai,presence_penalty:c.pres_pen_openai},{},!0);return typeof p=="function"?await ic(p,o):String(p?.content??"")}}catch(c){if(i)throw c}}var Gt="preset-workshop",cc="0.75",ze=(()=>{try{if(window.parent&&window.parent!==window&&window.parent.document.getElementById("extensionsMenu"))return window.parent}catch{}return window})(),je=ze.document,Sd=ze!==window,cn=`pw${Date.now().toString(36)}${Math.random().toString(36).slice(2,6)}`,Cd=()=>globalThis.SillyTavern??ze.SillyTavern,xt=()=>Cd().getContext(),Pr=globalThis.__CW_SUITE__||null,ct={yes:e=>{try{return ze.confirm(e)}catch{return confirm(e)}},text:(e,t)=>{try{return ze.prompt(e,t)}catch{return prompt(e,t)}}};function yt(e){try{const t=globalThis[e];if(typeof t=="function")return t;const n=ze.TavernHelper;if(typeof n?.[e]=="function")return n[e].bind(n)}catch{}return null}function lc(){return{version:1,entries:[],combos:[],bases:[],currentComboId:"",profileId:"",followCard:!0,maxTokens:3e3,templates:{},customKinds:[],hiddenKinds:[],antiBagu:!0,generationDraft:null}}function ne(){const e=xt().extensionSettings;e[Gt]||(e[Gt]=lc());const t=e[Gt];for(const[n,r]of Object.entries(lc()))t[n]===void 0&&(t[n]=r);return Rd(t)&&xt().saveSettingsDebounced?.(),t}var Or={phase:"idle",timer:null,eventSource:null,off:null,message:""},te=()=>Sc();function jt(){const e=ne();return e.combos.find(t=>t.id===e.currentComboId)||e.combos[0]||null}function di(){const e=ne();let t=jt();return t||(t=$n(`预设 ${e.combos.length+1}`),e.combos.push(t)),e.currentComboId=t.id,t}var se=e=>{const t=ne();return t.entries.find(n=>n.id===e)||t.combos.flatMap(n=>n.entries||[]).find(n=>n.id===e)},k={tab:"mix",search:"",tag:"",selected:new Set,editing:null,gen:{kind:"module",need:"",multi:!1,tags:"",lang:"zh",useSelected:!0,results:[],note:""},imp:{text:"",splitMode:"heading",dupMode:"skip",sources:[]},mix:{addSearch:"",addOpen:!1,expanded:new Set},setOpen:new Set,trash:[],quick:{open:!1,name:"",role:"system",content:""},busy:null},ye=null,ve=null,Et=null;function u(e,t,...n){const r=je.createElement(e),s=t||{};for(const[a,i]of Object.entries(s))i==null||i===!1||a==="value"||(a==="class"?r.className=i:a==="style"?r.style.cssText=i:a.startsWith("on")&&typeof i=="function"?r.addEventListener(a.slice(2).toLowerCase(),i):a in r?r[a]=i:r.setAttribute(a,i===!0?"":i));for(const a of n.flat(1/0))a==null||a===!1||r.append(a.nodeType?a:je.createTextNode(String(a)));return"value"in s&&s.value!=null&&(r.value=s.value),r}var H=(e,t,n="",r={})=>u("button",{type:"button",class:`pw-btn ${n}`,onclick:t,...r},e),we=(e,t)=>{const n=globalThis.toastr??ze.toastr;try{n?.[e]?.(t,"预设工坊")}catch{}n||console.log(`[${Gt}] ${t}`)},Jt=e=>Vo(e),Zh=(e,t=90)=>String(e).replace(/\s+/g," ").slice(0,t),pc=e=>String(e||"预设").replace(/[\\/:*?"<>|]/g,"_").slice(0,60);function Hs(e,t){const n=new ze.Blob([t],{type:"application/json;charset=utf-8"}),r=ze.URL.createObjectURL(n),s=je.createElement("a");s.href=r,s.download=e,je.body.append(s),s.click(),setTimeout(()=>{ze.URL.revokeObjectURL(r),s.remove()},1e3)}async function ui(e){try{await ze.navigator.clipboard.writeText(e)}catch{const t=u("textarea",{style:"position:fixed;opacity:0"});t.value=e,je.body.append(t),t.select(),je.execCommand("copy"),t.remove()}we("success","已复制")}var _n={loaded:!1,fingerprint:"",pending:!1};function mi(e){const t=r=>typeof r=="string"?r:"",n=r=>(Array.isArray(r)?r:[]).filter(s=>s&&typeof s=="object").map(s=>({key:t(s.key)||ae("generated"),name:t(s.name),content:t(s.content),role:vt.includes(s.role)?s.role:"system",tags:ft(s.tags),checked:s.checked!==!1,open:!!s.open,truncated:!!s.truncated,...typeof s.beforeBagu=="string"?{beforeBagu:s.beforeBagu}:{}}));return{kind:t(e.kind)||"module",need:t(e.need),multi:!!e.multi,tags:t(e.tags),lang:e.lang==="en"?"en":"zh",useSelected:e.useSelected!==!1,results:n(e.results),note:t(e.note),raw:t(e.raw),optionsOpen:!!e.optionsOpen,noteOpen:!!e.noteOpen,saveTarget:e.saveTarget==="both"?"both":"library",discarded:e.discarded&&Array.isArray(e.discarded.results)?{results:n(e.discarded.results),note:t(e.discarded.note)}:null}}function Id(){const e=_n;if(e.loaded)return;const t=ne().generationDraft;t?.version===1&&t.data&&typeof t.data=="object"&&Object.assign(k.gen,mi(t.data)),e.loaded=!0,e.fingerprint=JSON.stringify(mi(k.gen))}function De({persist:e=!0}={}){const t=_n,n=mi(k.gen),r=JSON.stringify(n);t.loaded=!0,r!==t.fingerprint&&(ne().generationDraft={version:1,updatedAt:Date.now(),data:n},t.fingerprint=r,t.pending=!0,e&&te())}function dc(){const e=ne().generationDraft,t=Or.phase;return e?_n.pending?t==="error"?"草稿保存失败，请重试；当前内容仍在页面中":t==="unconfirmed"?"草稿保存尚未确认，请重试后再刷新":"草稿自动保存中…":"草稿已保存 · 无需加入收藏即可保留":"生成结果和修改会自动保存为草稿"}function uc(e){_n.pending&&(e.preventDefault(),e.returnValue="")}function fi(){const e=ne();return Pr&&e.followCard?xt().extensionSettings?.loveCardWriter?.apiProfile||"":e.profileId}function Ad(){try{return xt().extensionSettings?.connectionManager?.profiles||[]}catch{return[]}}async function Ed(e,t){const n=xt(),r=ne(),s=ei(e),a=ei(t),i=await oc({profile:fi(),messages:[{role:"system",content:s},{role:"user",content:a}],maxTokens:r.maxTokens,onText:c=>{po(c),k.busy&&(k.busy.stream=c,tr())}});if(i!==void 0)return i;if(fi()&&n.ConnectionManagerRequestService){const c=await n.ConnectionManagerRequestService.sendRequest(fi(),[{role:"system",content:s},{role:"user",content:a}],r.maxTokens,{stream:!1,extractData:!0,includePreset:!1,includeInstruct:!1},{});return String(c?.content??"")}if(!n.generateRaw)throw new Error("这个版本的酒馆没有 generateRaw");let o;try{o=await n.generateRaw(a,null,!1,!1,s,r.maxTokens)}catch(c){if(!/prompt|argument|object/i.test(String(c?.message)))throw c;o=await n.generateRaw({prompt:a,systemPrompt:s,responseLength:r.maxTokens})}return typeof o!="string"&&(o=String(o?.content??o??"")),o}async function er(e,t,{dialogue:n=!0,dialogueKey:r=Eo()}={}){n&&(t+=Zt(ne(),r,Jp(r)));const s=[5,15,30];for(let a=0;;a++)try{k.busy&&(k.busy.calls++,k.busy.stream="");const i=Yo(await Ed(e,t));if(!i.trim())throw new Error("AI 返回了空内容");return i}catch(i){const o=String(i?.message||i);if(!/429|5\d\d|timeout|timed out|network|fetch|空内容/i.test(o)||a>=s.length)throw i;for(let p=s[a];p>0;p--)k.busy&&(k.busy.note=`出错（${o.slice(0,40)}），${p} 秒后重试`),tr(),await new Promise(d=>setTimeout(d,1e3));k.busy&&(k.busy.note="")}}async function Bn(e,t){if(k.busy){we("warning","上一个任务还没结束");return}k.busy={label:e,start:Date.now(),calls:0,note:""},tr();const n=setInterval(tr,500);try{return await t()}catch(r){console.error(`[${Gt}]`,r),we("error",`${e}失败：${r?.message||r}`);return}finally{clearInterval(n),k.busy=null,tr(),F()}}function tr(){if(!Et)return;if(!k.busy){Et.textContent="",Et.classList.remove("pw-on");return}const e=Math.floor((Date.now()-k.busy.start)/1e3);if(Et.textContent=`⏳ ${k.busy.label}… ${e}s · 调用 ${k.busy.calls} 次${k.busy.stream?` · 已收到 ${k.busy.stream.length} 字`:""}${k.busy.note?` · ${k.busy.note}`:""}`,Et.classList.add("pw-on"),k.busy.stream){const t=it.createElement("pre");t.className="pw-stream",t.textContent=k.busy.stream.length>1200?`……${k.busy.stream.slice(-1200)}`:k.busy.stream,Et.append(t),t.scrollTop=t.scrollHeight}}function zs(e,t,n=null,{draggable:r=!0}={}){k.readExpanded??=new Set;const s=k.readExpanded.has(t),a=u("div",{class:"pw-entry-prose",id:ae("read")},e.content||"（空）"),i=u("summary",{class:`pw-entry-summary${n?` pw-card-title${r?" pw-drag-handle":""}`:""}`,role:"button","aria-expanded":String(s),"aria-controls":a.id,title:n?`点击展开或收起正文${r?"；长按拖动排序":""}`:""},n||(s?"收起正文":"展开全文")),o=u("details",{class:`pw-entry-reading${n?" pw-reading-heading":""}`,open:s},i);let c=s;const p=()=>{if(!o.isConnected)return;const m=o.open;if(m?k.readExpanded.add(t):k.readExpanded.delete(t),i.setAttribute("aria-expanded",String(m)),n||(i.textContent=m?"收起正文":"展开全文"),!m&&c&&ve){const g=i.getBoundingClientRect().top,y=ve.getBoundingClientRect();(g<y.top||g>y.bottom-44)&&(ve.scrollTop+=g-y.top-12)}c=m},d=H("收起正文",()=>{o.open=!1,p(),i.focus({preventScroll:!0})},"pw-read-toggle");return o.append(u("div",{class:"pw-entry-content"},a,d)),o.addEventListener("toggle",p),o}function Td(e){const t=u("div",{class:"pw-combo-list",role:"list","aria-label":"预设条目"},e.items.map((n,r)=>du(e,n,r)));return ye._pwComboDrag=Nd(t,e),t}function Nd(e,t){const n=e.ownerDocument,r=n.defaultView,s=ve;let a=null,i=0,o=0,c=!1;const p=()=>[...e.children].filter(J=>J.matches(".pw-combo-row")),d=()=>{i&&r.cancelAnimationFrame(i),i=0},m=()=>{const J=a;if(!J?.active||!e.isConnected)return;const re=s.getBoundingClientRect(),xe=Math.max(re.top+20,Math.min(re.bottom-20,J.y));J.ghost.style.top=`${xe}px`;const Le=p().filter(ie=>ie!==J.row).find(ie=>{const he=ie.getBoundingClientRect();return J.y<he.top+he.height/2});Le?J.row.nextElementSibling!==Le&&e.insertBefore(J.row,Le):e.lastElementChild!==J.row&&e.append(J.row)},g=()=>{i=0;const J=a;if(!J?.active)return;if(!e.isConnected){P(!1);return}const re=s.getBoundingClientRect(),xe=Math.min(64,re.height/4),de=Math.max(0,Math.min(1,(re.top+xe-J.y)/xe)),Le=Math.max(0,Math.min(1,(J.y-re.bottom+xe)/xe));(de||Le)&&(s.scrollTop+=(Le-de)*12),m(),i=r.requestAnimationFrame(g)},y=()=>{const J=a;if(!J||!e.isConnected)return;J.timer=0,J.active=!0,c=!0;const re=J.handle.getBoundingClientRect();J.anchorStyle=s.style.overflowAnchor,s.style.overflowAnchor="none",e.classList.add("pw-sorting"),J.row.classList.add("pw-sort-source"),s.scrollTop+=J.handle.getBoundingClientRect().top-re.top;const xe=J.row.getBoundingClientRect();J.ghost=u("div",{class:"pw-sort-ghost","aria-hidden":"true"},J.row.querySelector(".pw-row-name")?.textContent||J.handle.textContent),Object.assign(J.ghost.style,{left:`${xe.left}px`,width:`${xe.width}px`}),ye.append(J.ghost),n.getSelection()?.removeAllRanges(),m(),i=r.requestAnimationFrame(g)},E=()=>{n.removeEventListener("touchend",_,!0),n.removeEventListener("touchcancel",L,!0),n.removeEventListener("pointermove",V,!0),n.removeEventListener("pointerup",R,!0),n.removeEventListener("pointercancel",L,!0),n.removeEventListener("keydown",W,!0),n.removeEventListener("visibilitychange",Ce),r.removeEventListener("blur",L)};function P(J,re,xe=!0){const de=a;if(!de||(de.active&&re?.cancelable&&re.preventDefault(),r.clearTimeout(de.timer),d(),E(),a=null,!de.active))return;const Le=de.handle.getBoundingClientRect().top;let ie=!1;if(J&&e.isConnected){const he=p().map(Ae=>Ae.dataset.pwComboUid),Ie=new Map(t.items.map(Ae=>[Ae.uid,Ae]));he.length===Ie.size&&new Set(he).size===Ie.size&&he.every(Ae=>Ie.has(Ae))&&(ie=he.some((Ae,_e)=>t.items[_e].uid!==Ae),ie&&(t.items.splice(0,t.items.length,...he.map(Ae=>Ie.get(Ae))),te()))}else for(const he of de.originalRows)e.append(he);de.ghost.remove(),de.row.classList.remove("pw-sort-source"),e.classList.remove("pw-sorting"),J?s.scrollTop+=de.handle.getBoundingClientRect().top-Le:s.scrollTop=de.scrollBefore,s.style.overflowAnchor=de.anchorStyle,ie&&xe&&(o=r.requestAnimationFrame(()=>{o=0,e.isConnected&&F()})),r.setTimeout(()=>{c=!1},400)}function D(J,re,xe,de,Le){if(a){P(!1);return}const ie=J.closest?.(".pw-drag-handle"),he=ie?.closest(".pw-combo-row");!he||he.parentElement!==e||t.items.length<2||(c=!1,a={handle:ie,row:he,x:re,y:xe,startX:re,startY:xe,kind:de,id:Le,active:!1,originalRows:p(),scrollBefore:s.scrollTop},a.timer=r.setTimeout(y,450),n.addEventListener("touchend",_,{capture:!0,passive:!1}),n.addEventListener("touchcancel",L,!0),n.addEventListener("pointermove",V,!0),n.addEventListener("pointerup",R,!0),n.addEventListener("pointercancel",L,!0),n.addEventListener("keydown",W,!0),n.addEventListener("visibilitychange",Ce),r.addEventListener("blur",L))}const Q=(J,re,xe)=>{const de=a;if(de){if(!de.active&&Math.hypot(J-de.startX,re-de.startY)>9){P(!1);return}de.x=J,de.y=re,de.active&&(xe.cancelable&&xe.preventDefault(),m())}};function z(J){if(J.touches.length!==1){P(!1);return}const re=J.changedTouches[0];D(J.target,re.clientX,re.clientY,"touch",re.identifier)}function M(J){if(a?.kind!=="touch")return;if(J.touches.length!==1){P(!1,J);return}const re=[...J.touches].find(xe=>xe.identifier===a.id);re&&Q(re.clientX,re.clientY,J)}function _(J){a?.kind==="touch"&&[...J.changedTouches].some(re=>re.identifier===a.id)&&P(!0,J)}function ce(J){J.pointerType==="touch"||J.button!==0||D(J.target,J.clientX,J.clientY,"pointer",J.pointerId)}function V(J){a?.kind==="pointer"&&J.pointerId===a.id&&Q(J.clientX,J.clientY,J)}function R(J){a?.kind==="pointer"&&J.pointerId===a.id&&P(!0,J)}function L(J){J?.type==="pointercancel"&&a?.kind==="touch"||P(!1,J)}function W(J){J.key==="Escape"&&(J.preventDefault(),P(!1))}function Ce(){n.hidden&&P(!1)}function pe(J){(c||a?.active)&&(J.preventDefault(),J.stopImmediatePropagation())}function me(J){J.target.closest?.(".pw-drag-handle")&&J.preventDefault()}return e.addEventListener("touchstart",z,{passive:!0}),e.addEventListener("touchmove",M,{passive:!1}),e.addEventListener("pointerdown",ce),e.addEventListener("click",pe,!0),e.addEventListener("contextmenu",me),{dispose(){P(!1,null,!1),d(),o&&r.cancelAnimationFrame(o),e.removeEventListener("touchstart",z),e.removeEventListener("touchmove",M),e.removeEventListener("pointerdown",ce),e.removeEventListener("click",pe,!0),e.removeEventListener("contextmenu",me)}}}function mc(e,t=null){const n=t?[t].filter(r=>r.matches?.("textarea.pw-readable, .cw-dialogue-input")):e.querySelectorAll("textarea.pw-readable, .cw-dialogue-input");for(const r of n){if(!r.getClientRects().length)continue;const s=r.ownerDocument.defaultView.getComputedStyle(r),a=r.cloneNode(!1);a.removeAttribute("id"),a.removeAttribute("aria-label"),a.setAttribute("aria-hidden","true"),a.tabIndex=-1,a.value=r.value,Object.assign(a.style,{position:"fixed",left:"-100000px",top:"0",visibility:"hidden",pointerEvents:"none",width:`${r.getBoundingClientRect().width}px`,margin:"0"});for(const[o,c]of[["height","0px"],["min-height","0px"],["max-height","none"]])a.style.setProperty(o,c,"important");r.parentElement.append(a);const i=`${Math.ceil(a.scrollHeight+parseFloat(s.borderTopWidth)+parseFloat(s.borderBottomWidth))}px`;a.remove(),r.style.height!==i&&(r.style.height=i)}}function fc(e){const t=e.ownerDocument,n=t.defaultView.getComputedStyle(e),r=t.createElement("div"),s=["fontFamily","fontSize","fontWeight","fontStyle","fontVariant","lineHeight","letterSpacing","wordSpacing","textTransform","textIndent","textAlign","direction","tabSize","paddingTop","paddingRight","paddingBottom","paddingLeft","wordBreak","overflowWrap"];for(const c of s)r.style[c]=n[c];Object.assign(r.style,{position:"fixed",left:"-100000px",top:"0",visibility:"hidden",pointerEvents:"none",boxSizing:"border-box",width:`${e.clientWidth}px`,height:"auto",minHeight:"0",maxHeight:"none",whiteSpace:"pre-wrap",overflow:"hidden",border:"0",margin:"0"}),r.setAttribute("aria-hidden","true");const a=e.selectionDirection==="backward"?e.selectionStart:e.selectionEnd;r.append(t.createTextNode(e.value.slice(0,a??e.value.length)));const i=t.createElement("span");i.textContent="​",r.append(i,t.createTextNode(e.value.slice(a??e.value.length))),t.body.append(r);const o=i.getBoundingClientRect().top-r.getBoundingClientRect().top+i.getBoundingClientRect().height/2;return r.remove(),o}function Pd(e,t){let n=e.querySelector(".pw-kb-debug");if(!ne().kbDebug){n?.remove();return}n||(n=e.ownerDocument.createElement("div"),n.className="pw-kb-debug",e.append(n)),n.textContent=`窗口${t.inner} 可见${Math.round(t.measured)} 最大${Math.round(t.tallest)} 用${Math.round(t.used)} 偏移${Math.round(t.top)} ${t.editing?"输入中":"未输入"} 键盘:${t.detected?"测到":t.guessed?"估算":"无"}`}function Od(e){const t=e.ownerDocument,n=t.defaultView||ze,r=n.visualViewport,s=e.querySelector(".pw-body");let a=0,i=!1,o=0,c=n.innerWidth,p=Math.max(n.innerHeight,r?.height||0),d=!1,m=!0,g=0,y=0;const E=L=>!!L&&e.contains(L)&&L.getClientRects().length&&(L.tagName==="TEXTAREA"||L.isContentEditable||L.tagName==="INPUT"&&!/^(checkbox|radio|button|submit|reset|range|color|file|hidden)$/i.test(L.type)),P=()=>{if(a=0,i||!e.isConnected)return;const L=n.matchMedia("(max-width:700px), (pointer:coarse)").matches,W=t.activeElement,Ce=!!E(W);e.classList.toggle("pw-viewport-mobile",L);const pe=r?.height||n.innerHeight,me=r?.offsetTop||0;Math.abs(n.innerWidth-c)>80?(c=n.innerWidth,p=Math.max(n.innerHeight,pe)):p=Math.max(p,n.innerHeight,pe);const J=Math.abs((r?.scale||1)-1)>=.05,re=Ca(n,pe,p),xe=L&&Ce&&!J&&(re.detected||re.guessed),de=xe&&W.matches(".cw-dialogue-input")?W.closest(".cw-dialogue-compose"):null;let Le=d;d=!1;const ie=m;if(m=!1,Le&&!ie&&Date.now()-g<120&&(Le=!1,y||(y=n.setTimeout(()=>{y=0,D(!0)},120))),Le&&(g=Date.now()),e.classList.toggle("pw-input-active",xe),e.classList.toggle("pw-chat-typing",!!de),e.style.setProperty("--pw-visible-height",`${re.height}px`),Pd(e,{inner:n.innerHeight,measured:pe,tallest:p,used:re.height,top:me,detected:re.detected,guessed:re.guessed,editing:Ce}),e.style.setProperty("--pw-visible-top",`${me}px`),ie?mc(e):Ce&&mc(e,W),e.style.setProperty("--pw-composer-height",de?`${Math.ceil(de.getBoundingClientRect().height)+16}px`:"0px"),!Ce||!Le)return;const he=W.getBoundingClientRect();let Ie=(he.top+he.bottom)/2;if(W.tagName==="TEXTAREA"){const Te=fc(W),qe=Math.min(20,W.clientHeight/4);Te-W.scrollTop<qe?W.scrollTop=Math.max(0,Te-qe):Te-W.scrollTop>W.clientHeight-qe&&(W.scrollTop=Te-W.clientHeight+qe),Ie=he.top+W.clientTop+Te-W.scrollTop}if(de)return;const Ae=s.getBoundingClientRect(),_e=Math.max(me,Ae.top)+32,Ye=Math.min(me+re.height,Ae.bottom)-32;Ye<=_e||(Ie<_e?s.scrollTop+=Ie-_e:Ie>Ye&&(s.scrollTop+=Ie-Ye))},D=(L=!1,W=!1)=>{d||=L,m||=W,!i&&!a&&(a=n.requestAnimationFrame(P))},Q=()=>D(!0),z=()=>D(!1,!0),M=()=>{D(!0,!0);for(const L of[300,650])n.setTimeout(()=>D(!0,!0),L)},_=()=>{E(t.activeElement)&&Q()},ce=["input","compositionend"];for(const L of ce)e.addEventListener(L,Q,!0);e.addEventListener("focusin",M,!0),e.addEventListener("focusout",z,!0),e.addEventListener("toggle",z,!0),t.addEventListener("selectionchange",_);const V=()=>D(!0,!0);n.addEventListener("resize",V),r?.addEventListener("resize",V),r?.addEventListener("scroll",Q),n.navigator?.virtualKeyboard?.addEventListener("geometrychange",V);const R=new n.ResizeObserver(L=>{const W=L[0].contentRect.width;Math.abs(W-o)>.5&&(o=W,z())});return R.observe(s),z(),{refresh:z,dispose:()=>{i=!0,a&&n.cancelAnimationFrame(a),R.disconnect();for(const L of ce)e.removeEventListener(L,Q,!0);e.removeEventListener("focusin",M,!0),y&&n.clearTimeout(y),e.removeEventListener("focusout",z,!0),e.removeEventListener("toggle",z,!0),t.removeEventListener("selectionchange",_),n.removeEventListener("resize",V),r?.removeEventListener("resize",V),r?.removeEventListener("scroll",Q),n.navigator?.virtualKeyboard?.removeEventListener("geometrychange",V)}}}function Dr(){if(ye)return;Id(),ye=u("div",{class:"pw-overlay",id:"pw-root","data-pw-owner":cn}),ye.addEventListener("mousedown",t=>{t.target===ye&&Fs()}),ve=u("div",{class:"pw-body"}),Et=u("div",{class:"pw-status"});const e=u("div",{class:"pw-panel"},u("div",{class:"pw-head"},u("div",{class:"pw-heading"},u("h3",null,`预设工坊 v${cc}`),ru()),H("关闭",Fs)),u("div",{id:"pw-tabs-host"}),ve,Et);ye.append(e),je.body.append(ye),ye.addEventListener("input",()=>kc()),ye.addEventListener("change",()=>queueMicrotask(ln)),ye._pwViewport=Od(ye),F(),ve.scrollTop=k.panelScroll||0}function Fs(){if(!(k.busy&&!ct.yes("还有任务在跑，关掉面板不会中断它。确定关闭？"))){for(const e of je.querySelectorAll(`.pw-focus-editor[data-pw-owner="${cn}"]`))e.close();ye?._pwComboDrag?.dispose(),ye?._pwViewport?.dispose(),k.panelScroll=ve?.scrollTop||0,ye?.remove(),ye=ve=Et=null}}function Dd(e){const t=e.firstElementChild,n=e.lastElementChild,r=t.querySelector("button"),s=t.querySelector(".pw-primary"),a=t.querySelector("b")?.textContent||"编辑条目",i=n.querySelector(".pw-danger");return t.remove(),n.remove(),i&&e.append(u("details",null,u("summary",null,"删除条目"),i)),Qt(a,e,[r,s],()=>r.click(),"full-editor")}function F(){if(!ye)return;ye._pwComboDrag?.dispose(),ye._pwComboDrag=null;const e=ve.scrollTop,t=ye.querySelector("#pw-tabs-host");let n;k.editing?n=Dd(Ud()):k.tab==="lib"?n=jd():k.tab==="gen"?n=Jd():k.tab==="mix"?n=vi():k.tab==="imp"?n=Uu():n=em();const r=n._pwScreen;t.replaceChildren(r?u("div",{class:"pw-screen-nav"},H(k.tab==="mix"?"← 预设":"← 返回",r.onback,"pw-sm",{"aria-label":"返回上一页"}),u("b",null,r.title)):k.tab==="gen"||k.tab==="imp"?u("div",{class:"pw-screen-nav"},H("← 预设",()=>Us("mix"),"pw-sm"),u("b",null,k.tab==="gen"?"让 AI 写一条":"导入")):Bd()),ye.querySelector(".pw-panel > .pw-screen-footer")?.remove();const s=r?.actions||n._pwActions;s?.some(Boolean)&&Et.before(u("div",{class:"pw-screen-footer"},s));const a=new Set(["skeleton","remake","full-editor"]),i=r?String(n.className.match(/pw-screen-([\w-]+)/)?.[1]||""):"";r?a.has(i)?ve.replaceChildren(n,Wp()):ve.replaceChildren(n):ve.replaceChildren(n,Wp()),ve.scrollTop=e,ye._pwViewport?.refresh(),ln(),tr();try{globalThis.__cwzSkin?.(ye)}catch{}}function Us(e){k.tab===e&&!k.editing||(k.tabScroll??={},k.tabScroll[k.tab]=ve?.scrollTop||0,k.tab=e,k.libMenu&&(k.libMenu.menuUid=null),k.mix.menuUid=null,F(),ve.scrollTop=k.tabScroll[e]||0)}function Bd(){return u("div",{class:"pw-tabs"},[["mix","预设"],["lib","收藏"],["set","设置"]].map(([t,n])=>u("button",{type:"button",class:`pw-tab${(k.tab===t||t==="mix"&&(k.tab==="gen"||k.tab==="imp"))&&!k.editing?" pw-active":""}`,onclick:()=>{Us(t)}},n)))}function gc(e){const t=di();let n=0;for(const r of e)Ds(t,r)&&n++;te(),we(n?"success":"info",n?`已加入「${t.name}」${n} 条`:"这些条目已经在预设里了"),F()}function wc(e){const t=ne(),n=new Set(e),r=[],s=[{entries:t.entries,comboId:null},...t.combos.map(a=>({entries:a.entries||[],comboId:a.id}))];for(const a of s)a.entries.forEach((i,o)=>{n.has(i.id)&&r.push({entry:i,index:o,ownerComboId:a.comboId,refs:[]})});if(r.length){for(const a of r)for(const i of t.combos)i.items.forEach((o,c)=>{o.type==="entry"&&o.entryId===a.entry.id&&a.refs.push({comboId:i.id,index:c,item:o})});t.entries=t.entries.filter(a=>!n.has(a.id));for(const a of t.combos)a.entries&&(a.entries=a.entries.filter(i=>!n.has(i.id))),a.items=a.items.filter(i=>i.type!=="entry"||!n.has(i.entryId));k.trash.push(r),k.trash.length>20&&k.trash.shift();for(const a of e)k.selected.delete(a);te()}}function Md(){const e=k.trash.pop();if(!e)return;const t=ne(),n=new Set;for(const s of[...e].sort((a,i)=>a.index-i.index)){const a=s.ownerComboId?t.combos.find(o=>o.id===s.ownerComboId):null;if(s.ownerComboId&&!a)continue;const i=a?wi(a):t.entries;i.some(o=>o.id===s.entry.id)||i.splice(Math.min(s.index,i.length),0,s.entry),n.add(s.entry.id)}const r=e.flatMap(s=>n.has(s.entry.id)?s.refs.map(a=>({...a,entryId:s.entry.id})):[]);for(const s of r.sort((a,i)=>a.index-i.index)){const a=t.combos.find(i=>i.id===s.comboId);!a||a.items.some(i=>i.type==="entry"&&i.entryId===s.entryId)||a.items.splice(Math.min(s.index,a.items.length),0,s.item)}te(),we("success","已恢复条目及其原来的位置")}function Ld(){if(!k.trash.length)return null;const e=k.trash[k.trash.length-1],t=e.length===1?`「${e[0].entry.name}」`:`${e.length} 个条目`;return u("div",{class:"pw-row pw-undo"},u("span",null,`已删除 ${t}`),H("撤销",()=>{Md(),F()},"pw-sm pw-primary"),k.trash.length>1&&u("span",{class:"pw-dim"},`还能再撤销 ${k.trash.length-1} 步`),H("不用了",()=>{k.trash=[],F()},"pw-sm"))}function qd(e,t=[]){k.tab==="lib"&&(k.tag&&!e.tags.includes(k.tag)&&(k.tag=e.tags.find(n=>!t.includes(n))||""),k.search&&!ni([e],{search:k.search}).length&&(k.search=""))}function gi(e=null){k.libMenu&&(k.libMenu.menuUid=null),k.editing={draft:e?fe(e):He({name:"新条目"}),isNew:!e,undo:null,comment:"",returnScroll:ve?.scrollTop||0},F(),ve.scrollTop=0}function hc(e){const t=ne().combos.filter(n=>n.items.some(r=>r.type==="entry"&&e.includes(r.entryId)));t.length&&!ct.yes(`删除这 ${e.length} 条库内条目，也会移除 ${t.length} 个预设中对它们的引用。删除后可以撤销。继续？`)||(wc(e),F())}function jd(){const e=ne(),t=jt(),n=ju();k.tag&&!ti(e.entries).some(c=>c.tag===k.tag)&&(k.tag=""),n.tag=k.tag;const r=Qu(e.entries,{...n,search:k.search},t),s=e.entries.filter(c=>k.selected.has(c.id)).map(c=>c.id),a=u("input",{type:"search",class:"pw-wide","aria-label":"搜索收藏",placeholder:"搜索名称、内容或标签",value:k.search,oninput:c=>{k.search=c.target.value,clearTimeout(a._t),a._t=setTimeout(()=>{if(!a.isConnected)return;F();const p=ve.querySelector("input[type=search]");p&&(p.focus({preventScroll:!0}),p.setSelectionRange(p.value.length,p.value.length))},300)}}),i=Ru(n,{includeTags:!0,onChange:()=>k.tag=n.tag,onClear:()=>k.tag=""}),o=u("div",{class:"pw-section pw-library"},u("div",{class:"pw-row"},a,H("新建条目",()=>gi(),"pw-primary")),i,Ld(),u("div",{class:"pw-row pw-list-tools"},u("span",{class:"pw-dim"},`显示 ${r.length} / ${e.entries.length} 条`),H("全选当前列表",()=>{r.forEach(c=>k.selected.add(c.id)),F()},"pw-sm",{disabled:!r.length}),s.length>0&&H("清空选择",()=>{k.selected.clear(),F()},"pw-sm")),!e.entries.length&&u("p",{class:"pw-hint"},"还没有库内条目。点「新建条目」可直接粘贴正文，也可以从「写提示词」或「导入」保存。"),e.entries.length>0&&!r.length&&u("div",{class:"pw-box"},"没有匹配的条目。",H("清除搜索和筛选",()=>{k.search=k.tag="",Object.assign(n,{role:"",tag:"",status:"all",content:"all"}),F()},"pw-sm")),r.map(c=>Qd(c)));if(s.length){const c=s.filter(p=>!r.some(d=>d.id===p)).length;o._pwActions=[u("div",{class:"pw-batch-actions"},u("span",{class:"pw-dim"},`已选 ${s.length} 条${c?`（含筛选外 ${c} 条）`:""}`),u("div",{class:"pw-row"},u("select",{"aria-label":"加入哪个预设",value:t?.id||"",onchange:p=>{e.currentComboId=p.target.value,te(),F()}},!e.combos.length&&u("option",{value:""},"新建预设"),e.combos.map(p=>u("option",{value:p.id},p.name))),H("加入所选预设",()=>gc(s),"pw-primary")),u("div",{class:"pw-row"},H("导出所选条目",()=>Hs(`收藏-${s.length}条.json`,JSON.stringify(Ls(e.entries.filter(p=>s.includes(p.id))),null,2)),"pw-sm"),H("删除所选条目",()=>hc(s),"pw-sm pw-danger")))]}return o}function Qd(e){const t=jt(),n=k.libMenu||(k.libMenu={}),r=!!t?.items.some(p=>p.type==="entry"&&p.entryId===e.id),s=u("span",{class:"pw-library-name",title:e.name},e.name),a=zs(e,`lib:${e.id}`,s,{draggable:!1}),i=Mn("more",`更多：${e.name}`,()=>{n.menuUid=n.menuUid===e.id?null:e.id,F()},{"aria-expanded":String(n.menuUid===e.id)}),o=n.menuUid===e.id&&u("div",{class:"pw-row-actions"},H(r?"已在当前预设":`加入「${t?.name||"新预设"}」`,()=>{n.menuUid=null,gc([e.id])},"pw-sm",{disabled:r}),H("复制为新条目",()=>{const p=He({...fe(e),id:void 0,name:qt(ne().entries,e.name),history:[]});ne().entries.unshift(p),n.menuUid=null,te(),gi(p)},"pw-sm"),H("删除库内条目",()=>{n.menuUid=null,hc([e.id])},"pw-sm pw-danger")),c=u("div",{class:"pw-card pw-library-card"},u("label",{class:"pw-check"},u("input",{type:"checkbox","aria-label":`选择库内条目：${e.name}`,checked:k.selected.has(e.id),onchange:p=>{p.target.checked?k.selected.add(e.id):k.selected.delete(e.id),F()}})),u("div",{class:"pw-card-main"},a,u("div",{class:"pw-library-meta"},`${e.role} · ${Jt(e.content)} token${e.tags.length?` · ${e.tags.join(" / ")}`:""}`)),u("div",{class:"pw-library-buttons"},Mn("edit",`编辑：${e.name}`,()=>gi(e)),i),o);return o&&Oc(o,i,e.id,n),c}function nr(e={}){const t={...Ue,...e};return[t.baguWhat,t.baguHow].filter(n=>String(n??"").trim()).join(`
+
+`)}function Rd(e){if((e.presetWritingVersion??0)>=1)return!1;e.templates??={};for(const[t,n]of Object.entries(yd))e.templates[t]===n&&delete e.templates[t];return e.presetWritingVersion=1,!0}function Hd({title:e="编辑提示词",get:t,oninput:n}){const r=u("dialog",{class:"pw-focus-editor","data-pw-owner":cn,"aria-label":e}),s=u("textarea",{class:"pw-focus-text",value:t(),spellcheck:!1,wrap:"soft","aria-label":e,oninput:c=>n(c.target.value)});r.append(u("div",{class:"pw-focus-head"},u("b",null,e),H("复制",()=>ui(s.value)),H("完成",()=>r.close(),"pw-primary")),s);const a=je.defaultView||ze,i=a.visualViewport,o=()=>{const c=i?.height||a.innerHeight;r.style.setProperty("--pw-visible-height",`${Ca(a,c,c).height}px`),r.style.setProperty("--pw-visible-top",`${i?.offsetTop||0}px`)};return a.addEventListener("resize",o),i?.addEventListener("resize",o),i?.addEventListener("scroll",o),a.navigator?.virtualKeyboard?.addEventListener("geometrychange",o),r.addEventListener("close",()=>{a.removeEventListener("resize",o),i?.removeEventListener("resize",o),i?.removeEventListener("scroll",o),a.navigator?.virtualKeyboard?.removeEventListener("geometrychange",o),r.remove(),F()},{once:!0}),je.body.append(r),o(),r.showModal(),s.focus({preventScroll:!0}),s.setSelectionRange(0,0),s.scrollTop=0,r}function Br({title:e="条目正文",get:t,oninput:n,className:r="",tools:s=[]}){const a=u("textarea",{class:`pw-code pw-readable ${r}`,value:t(),rows:14,spellcheck:!1,wrap:"soft","aria-label":e,oninput:i=>n(i.target.value)});return u("div",{class:"pw-text-editor"},u("div",{class:"pw-row pw-editor-tools"},u("b",{class:"pw-editor-label"},e),H("放大编辑",()=>Hd({title:e,get:t,oninput:n}),"pw-sm"),H("复制",()=>ui(t()),"pw-sm"),...s),a)}function zd(){const e=ne(),t=(n,r)=>{const s=e.templates[n]!==void 0&&e.templates[n]!==Ue[n],a=u("summary",null,r,s?"（已修改）":""),i=H("恢复默认",()=>{delete e.templates[n],te(),F()},"pw-sm",{disabled:!s});return u("details",{class:"pw-bagu-part"},a,Br({title:r,get:()=>e.templates[n]??Ue[n],oninput:o=>{e.templates[n]=o,i.disabled=o===Ue[n],a.textContent=r+(i.disabled?"":"（已修改）"),te()},className:"pw-guide-text"}),u("div",{class:"pw-row"},i))};return u("div",{class:"pw-box pw-bagu-controls"},u("label",null,u("input",{type:"checkbox",checked:e.antiBagu!==!1,onchange:n=>{e.antiBagu=n.target.checked,te()}})," 生成和修改时使用反八股规则"),t("baguWhat","什么是八股"),t("baguHow","如何反八股"))}async function Fd(e){return Bn("去八股",async()=>{const t=ne(),n=e.content;if(!String(n??"").trim())return;const{system:r,prompt:s}=ci({entry:{...e,content:n},comment:"检查并修改这份提示词里的八股。删改重复句型、空泛解释、固定反应，以及没有实际用途的次数或占比；保留作者要求的风味与条目的功能。不得改变变量、宏、字段、必要的数值、角色设定和禁词表。输出完整条目。",templates:t.templates,antiBagu:!0}),a=await er(r,s,{dialogueKey:"gen"});if(!/<entry\b[^>]*>[\s\S]*?<\/entry>/i.test(a))throw new Error("没有收到完整条目，原文已保留。");const i=Qs(a),o=i[0];if(i.length!==1||!o?.content?.trim()||o.truncated)throw new Error("没有收到完整的单个条目，原文已保留。");if(e.content!==n)throw new Error("你在等待时修改了正文，本次结果未覆盖你的修改。");e.beforeBagu=n,e.content=Os(o.content),e.truncated=!1,De()})}function Ud(){const e=k.editing,t=e.draft,n=ne(),r=e.comboId?n.combos.find(M=>M.id===e.comboId):k.tab==="mix"?jt():null,s=()=>r?.items.find(M=>M.type==="entry"&&(e.itemUid?M.uid===e.itemUid:M.entryId===t.id));s()&&(e.override??=fe(s().override||{}));const a=M=>e.override?.[M]??t[M],i=(M,_)=>{t[M]=_,e.override&&delete e.override[M]},o=()=>{k.editing=null,r&&(k.mix.screen=e.returnScreen||null),F(),typeof ve<"u"&&ve&&(ve.scrollTop=e.returnScroll??(r?k.mix.homeScroll:0)??0)},c=u("input",{type:"text",class:"pw-wide","aria-label":"条目名称",value:t.name,oninput:M=>{t.name=M.target.value}}),p=u("select",{"aria-label":"条目角色",onchange:M=>{i("role",M.target.value)}},vt.map(M=>u("option",{value:M,selected:a("role")===M},M))),d=u("input",{type:"text",class:"pw-wide",placeholder:"标签，用逗号分隔","aria-label":"条目标签",value:t.tags.join(", "),oninput:M=>{t.tags=ft(M.target.value)}}),m=u("select",{"aria-label":"条目注入位置",onchange:M=>{i("injection_position",Number(M.target.value)),y.hidden=a("injection_position")!==1}},u("option",{value:0,selected:a("injection_position")===0},"相对（按预设顺序）"),u("option",{value:1,selected:a("injection_position")===1},"深度（插进聊天记录里）")),g=u("input",{type:"number",min:0,"aria-label":"注入深度",style:"width:70px",value:a("injection_depth"),oninput:M=>{i("injection_depth",Math.max(0,Number(M.target.value)||0))}}),y=u("label",{class:"pw-field",hidden:a("injection_position")!==1},"聊天深度",g),E=u("span",{class:"pw-dim"},`约 ${Jt(t.content)} token`),P=Ac({entry:t,owner:e,combo:r||jt(),allowInit:!!r,oninput:M=>{E.textContent=`约 ${Jt(M)} token`},tools:[E]}),D=u("input",{type:"text",class:"pw-wide",placeholder:"备注（不会导出）",value:t.note,oninput:M=>{t.note=M.target.value}}),Q=u("input",{type:"text",class:"pw-wide",placeholder:"修改意见，例如：调整第 3 条规则的措辞，保留其他内容",value:e.comment,oninput:M=>{e.comment=M.target.value}}),z=()=>{if(e.comboId&&!r||e.itemUid&&(!s()||s().entryId!==t.id)){we("warning","原预设或条目位置已被移除，请返回后重新打开。");return}const M=se(t.id);if(!M&&!e.isNew){we("warning","这个条目已被删除");return}const _=[...M?.tags||[]],ce=r;let V=s();const R=M&&ce&&Js(ce,M.id,V?.uid),L=Xe({...t,id:R?ae("pw"):t.id,updatedAt:Date.now()});M&&M.content!==L.content&&(L.history=[{content:M.content,at:Date.now()},...M.history||[]].slice(0,5)),R?(lt(ce,L),V&&(V.entryId=L.id)):M?Object.assign(M,L):ce?lt(ce,L):n.entries.unshift(L),V&&e.override&&(V.override=fe(e.override)),e.moveToTop&&ce&&(V||(V={uid:ae("it"),type:"entry",entryId:L.id,enabled:!0,override:{}},ce.items.push(V)),Lr(e,ce,V)),qd(L,_),k.libTagEdits?.delete(t.id),ce&&e.setWritten&&Nt(L)!=="init"&&Fc(ce)&&we("info","已自动更新预设最上方的「变量初始化」"),te(),o(),we("info","已提交保存")};return u("div",{class:`pw-section${r?" pw-mix-editor":""}`,...s()?{"data-mix-edit":s().uid}:{}},u("div",{class:"pw-row"},H("取消",o),u("b",{style:"flex:1"},e.isNew?"新建条目":"编辑条目"),H("保存",z,"pw-primary")),u("p",{class:"pw-hint"},r?`保存到预设「${r.name}」`:"保存到收藏"),u("label",{class:"pw-field"},"名称",c),u("details",{class:"pw-entry-settings",open:!!e.settingsOpen,ontoggle:M=>e.settingsOpen=M.target.open},u("summary",null,"角色、标签与位置"),u("div",{class:"pw-entry-settings-grid"},u("label",{class:"pw-field"},"角色",p),u("label",{class:"pw-field"},"标签",d),u("label",{class:"pw-field"},"注入位置",m),y,u("label",{class:"pw-field"},"备注",D))),P,u("details",{class:"pw-entry-ai",open:!!e.aiOpen,ontoggle:M=>e.aiOpen=M.target.open},u("summary",null,"让 AI 按意见改"),Q,u("div",{class:"pw-row"},H("按意见改",()=>Bn("按意见改",async()=>{if(!e.comment.trim()&&!Zt(n,`entry:${t.id}`)){we("warning","先写修改意见，或在本页对话里说明");return}const{system:M,prompt:_}=ci({entry:Xe(t),comment:e.comment||"按本页对话中作者的要求修改。",templates:n.templates,antiBagu:n.antiBagu!==!1}),ce=await er(M,_,{dialogueKey:`entry:${t.id}`}),V=Qs(ce);if(V.length>1)throw e.reviseRaw=ce,new Error(`AI 返回了 ${V.length} 个条目，当前编辑页一次只能修改一个。原文未改，完整回复已保留在下方，可复制后分别添加。`);const R=V[0];if(!R)throw new Error("没解析出条目");delete e.reviseRaw,R.content=Os(R.content),R.truncated&&we("warning","回复被截断了，可以在设置里调大最大回复长度"),e.undo={content:t.content,name:t.name,tags:[...t.tags]},t.content=R.content,R.name&&(t.name=R.name),R.tags.length&&(t.tags=R.tags)})),H("换回改之前",()=>{e.undo&&(Object.assign(t,e.undo),e.undo=null,F())},"",{disabled:!e.undo}))),e.reviseRaw&&u("details",{open:!0},u("summary",null,"AI 返回了多个条目，尚未应用"),u("textarea",{class:"pw-wide",rows:10,readOnly:!0,"aria-label":"未应用的 AI 原回复",value:e.reviseRaw})),!e.isNew&&(se(t.id)?.history||[]).length>0&&u("details",null,u("summary",null,`历史版本（${se(t.id).history.length}）`),se(t.id).history.map((M,_)=>u("div",{class:"pw-box"},u("div",{class:"pw-row"},u("span",{class:"pw-dim"},new Date(M.at).toLocaleString()),H("用这一版",()=>{t.content=M.content,F()},"pw-sm")),u("pre",{class:"pw-pre"},M.content)))),u("div",{class:"pw-row"},H("保存并返回",z,"pw-primary"),!e.isNew&&!r&&!e.comboId&&H("删除",()=>{ct.yes("删除这个条目？预设里对应的位置也会一起去掉。")&&(wc([t.id]),k.editing=null,F())},"pw-danger")))}async function Gd(){const e=ne(),t=k.gen;if(!t.need.trim()&&!Zt(e,"gen")){we("warning","先写要求，或在本页对话里说说想法");return}const n=e.customKinds.find(d=>d.id===t.kind),r=ft([...ft(t.tags),...ft(n?.tags)]),{system:s,prompt:a}=sc({kind:t.kind,kindPrompt:n?.prompt,need:t.need,refs:No(),multi:t.multi,tags:r,lang:t.lang,templates:e.templates,antiBagu:e.antiBagu!==!1}),i=await er(s,a,{dialogueKey:"gen"}),o=Qs(i);if(!o.length)throw t.raw=i,De(),new Error("没解析出条目，原回复已保留在结果区。");t.raw="",t.note=js(i),o.some(d=>d.truncated)&&we("warning","回复被截断了，最后一条可能不完整；请补全后再保存");const c=ae("generated"),p=o.map((d,m)=>({...d,content:Os(d.content),tags:ft([...d.tags,...r]),key:`${c}_${m}`,checked:!0,open:o.length===1&&!t.results.length}));t.results.unshift(...p),De(),we("success",`新增 ${p.length} 条结果，共 ${t.results.length} 条待入库`)}function Jd(){const e=ne(),t=k.gen,n=No(),r=Aa(e,"gen"),s=Jn(r).length,a=rc(e.customKinds,e.hiddenKinds);a.some(p=>p.id===t.kind)||(t.kind=a[0].id);const i=H(t.results.length?"再写一批":"写",async()=>{i.disabled=!0,await Bn("生成条目",Gd)},"pw-primary",{disabled:!!k.busy}),o=t.results.filter(p=>p.checked&&p.content.trim()).length,c=u("div",{class:"pw-section"},u("p",{class:"pw-hint","data-pw-generation-draft":"",role:"status","aria-live":"polite"},dc()),u("div",{class:"pw-gen-options"},u("div",{class:"pw-gen-primary"},u("span",null,"类型"),u("select",{"aria-label":"提示词类型",value:t.kind,onchange:p=>{t.kind=p.target.value,De()}},a.map(p=>u("option",{value:p.id},p.label))),H("管理类型",()=>{k.settingsReturn={tab:"gen",scroll:ve.scrollTop},k.setOpen.add("section-kinds"),Us("set"),ve.querySelector('[data-settings-section="section-kinds"]')?.scrollIntoView({block:"start"})},"pw-sm"))),u("textarea",{class:"pw-tall pw-gen-need","aria-label":"提示词要求",placeholder:"希望这份提示词做到什么？可以写用途、写法和需要保留的内容。",value:t.need,oninput:p=>{t.need=p.target.value,De()}}),u("details",{class:"pw-gen-optional",open:!!t.optionsOpen,ontoggle:p=>{p.target.isConnected&&t.optionsOpen!==p.target.open&&(t.optionsOpen=p.target.open,De())}},u("summary",null,`生成选项 · ${t.multi?"允许多条":"单条"} · ${t.lang==="en"?"英文":"中文"}${t.useSelected&&n.length?` · 参考 ${n.length} 条`:""}`),u("div",{class:"pw-section"},u("label",null,u("input",{type:"checkbox",checked:t.multi,onchange:p=>{t.multi=p.target.checked,De(),F()}})," 允许拆成多个条目"),u("label",{class:"pw-field"},"语言",u("select",{"aria-label":"生成语言",value:t.lang,onchange:p=>{t.lang=p.target.value,De(),F()}},u("option",{value:"zh"},"中文"),u("option",{value:"en"},"English"))),u("label",{class:"pw-field"},"默认标签",u("input",{type:"text",placeholder:"可选，用逗号分隔",value:t.tags,oninput:p=>{t.tags=p.target.value,De()}})),u("label",null,u("input",{type:"checkbox",checked:t.useSelected,onchange:p=>{t.useSelected=p.target.checked,De(),F()}})," 使用收藏中勾选的内容作为参考"),t.useSelected&&u("span",{class:"pw-dim"},`当前参考 ${n.length} 条`))),u("div",{class:"pw-generation-context","data-pw-dialogue-context":""},u("label",{class:"pw-check"},u("input",{type:"checkbox","aria-label":"生成时发送本页对话",checked:r.use!==!1,onchange:p=>{r.use=p.target.checked,te(),F()}})," 生成时发送本页对话"),u("span",{class:"pw-hint"},r.use===!1?"已关闭 · 本次不发送聊天记录":s?`已开启 · 本次发送 ${s} 条对话`:"已开启 · 聊过后会自动带入")),u("div",{class:"pw-row"},i,t.results.length>0&&u("span",{class:"pw-dim"},"新结果会追加，已有结果继续保留")),t.note&&u("details",{class:"pw-note-details",open:!!t.noteOpen,ontoggle:p=>{p.target.isConnected&&t.noteOpen!==p.target.open&&(t.noteOpen=p.target.open,De())}},u("summary",null,"本次 AI 的说明"),u("pre",{class:"pw-pre"},t.note)),t.raw&&u("details",{open:!0},u("summary",null,"未解析的原回复"),u("textarea",{readOnly:!0,class:"pw-code",value:t.raw,"aria-label":"未解析的生成回复"})),t.discarded?.results.length>0&&u("div",{class:"pw-row pw-undo"},`已清空 ${t.discarded.results.length} 条草稿`,H("撤销清空",()=>{t.results.push(...t.discarded.results),t.note||(t.note=t.discarded.note),t.discarded=null,De(),F()},"pw-sm")),t.results.length>0&&u("div",{class:"pw-row pw-list-tools"},u("b",null,`草稿（${t.results.length}）`),H("全选",()=>{t.results.forEach(p=>p.checked=!0),De(),F()},"pw-sm"),H("清空选择",()=>{t.results.forEach(p=>p.checked=!1),De(),F()},"pw-sm"),H("清空结果",()=>{t.discarded={results:t.results,note:t.note},t.results=[],t.note="",De(),F()},"pw-sm")),t.results.map((p,d)=>Wd(p,d)));return t.results.length&&(c._pwActions=[u("div",{class:"pw-batch-actions"},u("label",{class:"pw-field"},"加入",u("select",{"aria-label":"生成结果加入位置",value:t.saveTarget||"both",onchange:p=>{t.saveTarget=p.target.value,De()}},u("option",{value:"both"},`放进预设「${jt()?.name||"新建预设"}」`),u("option",{value:"library"},"只存到收藏"))),H(`加入所选（${o}）`,()=>Yd((t.saveTarget||"both")==="both"),"pw-primary",{disabled:!o}))]),c}function Wd(e,t=0){const n=u("summary",null,`${t+1}. ${e.name||"未命名条目"}`),r=u("span",{class:"pw-dim"},`约 ${Jt(e.content)} token`);return u("div",{class:"pw-box pw-gen-result"},u("label",{class:"pw-check"},u("input",{type:"checkbox","aria-label":`选择生成结果：${e.name}`,checked:e.checked,onchange:s=>{e.checked=s.target.checked,De(),F()}})),u("details",{open:!!e.open,ontoggle:s=>{s.target.isConnected&&e.open!==s.target.open&&(e.open=s.target.open,De())}},n,u("div",{class:"pw-section"},u("label",{class:"pw-field"},"名称",u("input",{type:"text","aria-label":"生成条目名称",value:e.name,oninput:s=>{e.name=s.target.value,De(),n.textContent=`${t+1}. ${e.name||"未命名条目"}`}})),u("div",{class:"pw-row"},u("label",{class:"pw-field"},"角色",u("select",{"aria-label":"生成条目角色",value:e.role,onchange:s=>{e.role=s.target.value,De()}},vt.map(s=>u("option",{value:s},s)))),r),e.truncated&&u("div",{class:"pw-warnbox"},"这一条可能被截断，请补全后再保存。"),u("label",{class:"pw-field"},"标签",u("input",{type:"text",value:e.tags.join(", "),oninput:s=>{e.tags=ft(s.target.value),De()}})),Br({title:"条目正文",get:()=>e.content,oninput:s=>{e.content=s,De(),r.textContent=`约 ${Jt(s)} token`,Vd()},tools:[H("去八股",()=>Fd(e),"pw-sm",{disabled:!!k.busy}),e.beforeBagu!==void 0&&H("撤回去八股",()=>{e.content=e.beforeBagu,delete e.beforeBagu,De(),F()},"pw-sm")]}))))}function Vd(){const e=ye?.querySelector(".pw-screen-footer .pw-primary");if(!e||k.tab!=="gen")return;const t=k.gen.results.filter(n=>n.checked&&n.content.trim()).length;e.textContent=`加入所选（${t}）`,e.disabled=!t}function Yd(e){const t=ne(),n=k.gen.results.filter(a=>a.checked&&a.content.trim());if(!n.length){we("warning","没有勾选的结果");return}const r=[...t.entries],s=n.map(a=>{const i=He({name:qt(r,a.name),role:a.role,tags:a.tags,content:a.content,source:"AI 生成"});return r.push(i),i});if(t.entries.unshift(...s),k.gen.results=k.gen.results.filter(a=>!n.includes(a)),k.gen.results.length||(k.gen.note=""),e){const a=di();s.forEach(i=>Ds(a,i.id))}De({persist:!1}),te(),we("success",`已存入 ${s.length} 条${e?"，并放进当前预设":""}`),e?Us("mix"):F()}function Gs(e){return(e.presetName||e.name||"预设").trim()||"预设"}function wi(e){return Array.isArray(e.entries)?e.entries:e.entries=[]}function bc(e,t){return(e.entries||[]).some(n=>n.id===t)}function Js(e,t,n=null){const r=ne();return!bc(e,t)||r.entries.some(s=>s.id===t)||r.combos.some(s=>s.id!==e.id&&((s.entries||[]).some(a=>a.id===t)||s.items.some(a=>a.type==="entry"&&a.entryId===t)))||!!n&&e.items.some(s=>s.type==="entry"&&s.entryId===t&&s.uid!==n)}function lt(e,t){return wi(e).push(t),t}function Kd(e){const t=fe(e),n=new Map;return t.id=ae("cb"),t.name=`${e.name} 副本`,t.presetName=t.name,delete t.syncPrevious,t.entries=(e.entries||[]).map(r=>{const s=He({...fe(r),id:ae("pw")});return n.set(r.id,s.id),s}),t.items.forEach(r=>{r.uid=ae("it"),n.has(r.entryId)&&(r.entryId=n.get(r.entryId))}),t.removedEntryIds=(t.removedEntryIds||[]).map(r=>n.get(r)||r),t}function vc(e){const t=ne(),n=Dn(t.entries,e);if(n.status==="dup"){we("info",`收藏里已有「${n.match.name}」`);return}const r=He({...fe(e),id:ae("pw"),name:qt(t.entries,e.name),history:[]});t.entries.unshift(r),te(),F(),we("success",`已存入收藏「${r.name}」`)}function xc(e,t){const n=ne(),r=new Map,s=e.items.map(i=>{const o=He({...i.entry,id:ae("pw"),history:[],createdAt:Date.now(),updatedAt:Date.now()});return r.set(i.key,o.id),o}),a=si(qt(n.combos,t||e.label||"模板预设"),e.order,r);if(a.entries=s,a.templateSource=e.label||"",Object.keys(e.base||{}).length){const i={id:ae("bs"),name:a.name,settings:fe(e.base)};n.bases.push(i),a.baseId=i.id}return n.combos.push(a),n.currentComboId=a.id,a}function Xd(e){const t=new Set(e.items.filter(a=>a.type==="entry").map(a=>a.entryId)),n=(e.entries||[]).filter(a=>!t.has(a.id));if(!n.length)return null;const r=u("div",{class:"pw-local-reserve-list"},n.map(a=>u("div",{class:"pw-card","data-pw-reserve-entry":a.id},u("div",{class:"pw-card-main"},u("div",{class:"pw-card-title"},a.name),zs(a,`reserve:${e.id}:${a.id}`)),u("div",{class:"pw-card-btns"},H("加入预设",()=>{Ds(e,a.id),te(),F()},"pw-sm"),H("编辑",()=>{k.editing={draft:fe(a),isNew:!1,undo:null,comment:"",comboId:e.id,returnScroll:ve?.scrollTop||0,returnScreen:k.mix.screen?fe(k.mix.screen):null},F()},"pw-sm"),H("存入库",()=>vc(a),"pw-sm"))))),s=Gc(e,"reserveOpen",`预设内备用（${n.length}）`,r,!1);return s.classList.add("pw-local-reserve"),s}function Zd(e,t=""){const n=ne(),r=new Set([...e.items.filter(i=>i.type==="entry").map(i=>i.entryId),...e.removedEntryIds||[]]),s=[...n.entries.filter(i=>r.has(i.id)),...e.entries||[]],a=new Set(s.filter(i=>i.source&&i.tags?.includes(`来自:${i.source}`)).map(i=>i.source));return e.templateSource&&a.add(e.templateSource),t&&(a.clear(),a.add(t)),n.entries.filter(i=>a.has(i.source)&&i.tags?.includes(`来自:${i.source}`))}function $d(e,t){const n=ne(),r=new Set(t),s=[];n.entries.forEach((a,i)=>{if(!r.has(a.id))return;const o={entry:a,index:i,locals:[]};for(const c of n.combos){const p=c.items.some(g=>g.type==="entry"&&g.entryId===a.id),d=c.removedEntryIds?.includes(a.id);if(c.id!==e.id&&!p&&!d)continue;const m=lt(c,He({...fe(a),id:ae("pw")}));c.items.forEach(g=>{g.type==="entry"&&g.entryId===a.id&&(g.entryId=m.id)}),c.removedEntryIds&&(c.removedEntryIds=c.removedEntryIds.map(g=>g===a.id?m.id:g)),o.locals.push({comboId:c.id,id:m.id,snapshot:JSON.stringify(m)})}s.push(o),k.selected.delete(a.id),k.libTagEdits?.delete(a.id)}),s.length&&(n.entries=n.entries.filter(a=>!r.has(a.id)),k.mix.legacyUndo={comboId:e.id,batch:s},k.mix.legacyRepair=null,te(),F(),we("success",`已将 ${s.length} 条移回预设，未加入的内容保留在预设内备用`))}function _d(){const e=k.mix.legacyUndo;if(!e)return;const t=ne();for(const n of[...e.batch].sort((r,s)=>r.index-s.index)){t.entries.some(r=>r.id===n.entry.id)||t.entries.splice(Math.min(n.index,t.entries.length),0,n.entry);for(const r of n.locals){const s=t.combos.find(i=>i.id===r.comboId);if(!s)continue;const a=(s.entries||[]).find(i=>i.id===r.id);!a||JSON.stringify(a)!==r.snapshot||(s.items.forEach(i=>{i.type==="entry"&&i.entryId===r.id&&(i.entryId=n.entry.id)}),s.removedEntryIds&&(s.removedEntryIds=s.removedEntryIds.map(i=>i===r.id?n.entry.id:i)),s.entries=s.entries.filter(i=>i.id!==r.id))}}k.mix.legacyUndo=null,k.mix.legacyRepair=null,te(),F(),we("success","收藏已恢复，整理后编辑的预设内容已保留")}function eu(e){const t=[...new Set(ne().entries.filter(s=>s.source&&s.tags?.includes(`来自:${s.source}`)).map(s=>s.source))];if(!t.length)return null;k.mix.legacyRepair?.comboId!==e.id&&(k.mix.legacyRepair={comboId:e.id,source:"",selected:null,open:!1});const n=k.mix.legacyRepair;n.source&&!t.includes(n.source)&&(n.source="",n.selected=null);const r=Zd(e,n.source);return n.selected||(n.selected=new Set(r.map(s=>s.id))),u("details",{class:"pw-legacy-repair",open:n.open,ontoggle:s=>{s.target.isConnected&&(n.open=s.target.open)}},u("summary",{onclick:s=>{n.open=!s.currentTarget.parentElement.open}},`整理旧模板条目${r.length?`（${r.length}）`:""}`),u("select",{"aria-label":"旧模板来源",value:n.source,onchange:s=>{n.source=s.target.value,n.selected=null,n.open=!0,F()}},u("option",{value:""},"当前预设相关来源"),t.map(s=>u("option",{value:s},s))),u("p",{class:"pw-hint"},"勾选要移回预设的同源条目。其他预设的引用会各自保留，未加入的内容放入本预设备用区。"),!r.length&&u("p",{class:"pw-hint"},"请先选择旧模板来源。"),u("div",{class:"pw-legacy-choices"},r.map(s=>u("label",null,u("input",{type:"checkbox",checked:n.selected.has(s.id),onchange:a=>{a.target.checked?n.selected.add(s.id):n.selected.delete(s.id)}}),s.name))),H("转为预设专用",()=>$d(e,r.filter(s=>n.selected.has(s.id)).map(s=>s.id)),"pw-sm",{disabled:!r.length}))}function tu(e){return k.mix.legacyUndo?.comboId!==e.id?null:u("div",{class:"pw-row pw-legacy-undo"},u("span",{class:"pw-dim"},"旧模板条目已移回预设"),H("撤销整理",_d,"pw-sm"))}function Mr(e,t,n=!1){return t?(n?["name","content","tags","role","note","injection_position","injection_depth","injection_order","variableInitPrefix"]:["name","content","variableInitPrefix"]).some(s=>JSON.stringify(e[s]??(s==="variableInitPrefix"?"":null))!==JSON.stringify(t[s]??(s==="variableInitPrefix"?"":null))):!0}function nu(){let e=0;k.editing&&(k.editing.isNew||k.editing.moveToTop||Mr(k.editing.draft,se(k.editing.draft.id),!0))&&e++;for(const[n,r]of k.mix.edits||[]){const s=ne().combos.flatMap(i=>i.items.map(o=>({combo:i,item:o}))).find(({combo:i,item:o})=>pn(i,o)===n)?.item,a=s&&se(s.entryId);a&&(r.moveToTop||Mr(r.draft,a))&&e++}for(const[n,r]of k.libTagEdits||[])JSON.stringify(ft(r.value))!==JSON.stringify(se(n)?.tags||[])&&e++;k.mix.insert?.mode==="new"&&(k.mix.insert.name||k.mix.insert.content)&&e++,(k.quick?.content||k.quick?.name)&&e++,k.mix.init?.dirty&&e++;const t=k.mix.screen;if(t?.kind==="position"&&t.override){const n=jt()?.items.find(r=>r.uid===t.itemUid);n&&JSON.stringify(t.override)!==JSON.stringify(n.override||{})&&e++}return e}var yc={last:0,timer:null};function kc(){const e=yc,t=Date.now(),n=150-(t-e.last);if(n<=0&&!e.timer){e.last=t,ln();return}e.timer||(e.timer=setTimeout(()=>{e.timer=null,e.last=Date.now(),ln()},Math.max(n,30)))}function ln(){if(!ye)return;const e=nu(),t=Or;let n=e?`${e} 处未保存`:t.phase==="saving"?"保存中…":t.phase==="saved"?"已保存到工坊":t.phase==="unconfirmed"?"保存尚未确认":t.phase==="error"?"保存失败":"未修改";t.phase==="error"&&(n="保存失败"+(e?` · ${e} 处未保存`:""));const r=ye.querySelector(".pw-save-feedback");r&&(r.querySelector("span").textContent=n,r.dataset.state=t.phase==="error"?"error":e?"dirty":t.phase,r.title=t.message||"修改正文后点保存；排序和开关会自动保存。保存到工坊不会切换酒馆预设。",r.querySelector("button").hidden=!["error","unconfirmed"].includes(t.phase));for(const s of ye.querySelectorAll("[data-pw-generation-draft]"))s.textContent=dc(),s.dataset.state=_n.pending?t.phase:"saved";for(const s of ye.querySelectorAll("[data-pw-draft-status]")){const a=k.mix.edits?.get(s.dataset.pwDraftStatus);a&&(s.textContent=a.moveToTop||Mr(a.draft,se(a.draft.id))?"未保存":"未修改")}}function Sc(){const e=Or,t=xt(),n=t.eventSource,r=(t.eventTypes||t.event_types)?.SETTINGS_UPDATED;if(n?.on&&r&&e.eventSource!==n){e.off?.();const a=()=>{e.phase!=="saving"&&e.phase!=="unconfirmed"||(clearTimeout(e.timer),e.phase="saved",_n.pending=!1,e.message="酒馆已确认保存工坊设置。",ln())};n.on(r,a),e.eventSource=n,e.off=()=>{n.removeListener?n.removeListener(r,a):n.off?.(r,a)}}clearTimeout(e.timer),e.phase="saving",e.message="正在等待酒馆保存工坊设置。",ln();const s=a=>{clearTimeout(e.timer),e.phase="error",e.message=String(a?.message||a||"保存失败，可点击重试。"),ln()};try{if(typeof t.saveSettingsDebounced!="function")throw new Error("当前酒馆没有提供保存接口。");const a=t.saveSettingsDebounced();a?.catch&&a.catch(s),e.phase==="saving"&&(e.timer=setTimeout(()=>{e.phase==="saving"&&(e.phase="unconfirmed",e.message="尚未收到酒馆的保存确认，可点击重试。当前内容仍保留在页面中。",ln())},12e3))}catch(a){s(a)}}function ru(){return u("div",{class:"pw-save-feedback",role:"status","aria-live":"polite"},u("span",null,"未修改"),H("重试保存",()=>Sc(),"pw-sm",{hidden:!0}))}function Cc(e){return e.variableTools??={mode:"",scope:"local",name:"",position:"cursor",caret:null,selected:new Set,initial:new Map,initSelected:null,error:"",notice:""}}function Ic(e){const t=String(e||"");return Ln(t).find(n=>n.kind==="set"&&n.value!==null&&!t.slice(0,n.start).trim()&&!t.slice(n.end).trim())||null}function hi(e,t=null){const n=[];for(const s of e?.items||[]){if(s.type!=="entry")continue;const a=se(s.entryId),i=t?.id===s.entryId?t:a;if(!i)continue;const o=i.variableInitPrefix&&i.content.startsWith(i.variableInitPrefix)?i.variableInitPrefix.length:0;if(!o&&Nt(i)==="init")continue;const c=Ln(i.content).filter(d=>d.kind==="set"&&d.start>=o&&d.value!==null),p=[...new Map(c.map(d=>[d.key,d])).values()];p.length&&n.push({item:s,entry:i,vars:p})}const r=new Set(n.flatMap(s=>s.vars.filter(a=>a.value.trim()).map(a=>a.key)));return n.map(s=>({...s,vars:s.vars.filter(a=>a.value.trim()||!r.has(a.key))})).filter(s=>s.vars.length)}function su(e){if(!e||/[{}\r\n\\]/.test(e)||e.includes("::"))throw new Error("变量名不能为空，也不能含双冒号、花括号或换行。")}function Lr(e,t,n){!e?.moveToTop||!t||!n||(t.items=t.items.filter(r=>r.uid!==n.uid),t.items.unshift(n),n.enabled=!0,n.override={...n.override||{},injection_position:0},e.moveToTop=!1)}function Ac({entry:e,owner:t,combo:n=jt(),allowInit:r=!0,title:s="条目正文",tools:a=[],oninput:i}){const o=Cc(t),c=u("div",{class:"pw-entry-body-editor"}),p=u("div",{class:"pw-entry-variable-panel"}),d=u("div",{class:"pw-variable-notice",role:"status"}),m=Br({title:s,get:()=>e.content,oninput:M=>{e.content=M,i?.(M),kc()},tools:a}),g=m.querySelector("textarea"),y=()=>{o.caret=g.selectionStart};for(const M of["select","keyup","click","input","blur"])g.addEventListener(M,y);o.caret!==null&&g.setSelectionRange(Math.min(o.caret,g.value.length),Math.min(o.caret,g.value.length));const E=(M,_=M.length)=>{e.content=M,g.value=M,o.caret=_,g.setSelectionRange(_,_),g.dispatchEvent(new je.defaultView.Event("input",{bubbles:!0})),o.error="",o.mode="",o.notice="已写入正文，尚未保存",t.variableEdited=!0,F()},P=M=>{try{M()}catch(_){o.error=String(_.message||_),z()}},D=M=>{if(o.mode=o.mode===M?"":M,o.error="",o.notice="",M==="set"){const _=Ic(e.content);o.name=_?.name||o.name||ku(e.name),o.scope=_?.scope||o.scope}z()},Q=u("div",{class:"pw-row pw-entry-variable-tools"},H("设为 SET",()=>D("set"),"pw-sm",{title:"把本条正文存为变量"}),H("获取 GET",()=>D("get"),"pw-sm",{title:"选择来源条目，在本条正文中调用变量"}),null);function z(){if(p.replaceChildren(),p.hidden=!o.mode,d.textContent=o.notice,d.hidden=!o.notice,Q.querySelectorAll("button").forEach((M,_)=>M.setAttribute("aria-pressed",String(o.mode===["set","get","init"][_]))),!!o.mode){if(o.mode==="set")p.append(u("div",{class:"pw-variable-fields"},u("label",null,"变量名",u("input",{type:"text","aria-label":"SET 变量名",value:o.name,oninput:M=>o.name=M.target.value})),u("label",null,"作用域",u("select",{"aria-label":"SET 作用域",value:o.scope,onchange:M=>o.scope=M.target.value},u("option",{value:"local"},"当前聊天"),u("option",{value:"global"},"全局"))))),p.append(H("写入 SET",()=>P(()=>{const M=o.name.trim();su(M);const _=Ic(e.content),ce=_?_.value:e.content;if(!Lc(ce))throw new Error("正文里有未配对的双花括号，请先补齐。");if(e.variableInitPrefix)throw new Error("这条包含初始化，请另选正文条目设置 SET。");const V=Ks("set",{name:M,scope:o.scope},ce);E(_?e.content.slice(0,_.start)+V+e.content.slice(_.end):V),t.setWritten=!0}),"pw-sm pw-primary"));else if(o.mode==="get"){const M=hi(n,e),_=u("div",{class:"pw-get-choices"});if(!M.length)p.append(u("p",{class:"pw-hint"},"当前预设还没有 SET 变量。先在来源条目里点 SET 并保存。"));else{const ce=u("input",{type:"search",placeholder:"搜索变量名或来源条目","aria-label":"搜索 GET 来源",oninput:R=>{const L=R.target.value.trim().toLowerCase();for(const W of _.children)W.hidden=!W.dataset.search.includes(L)}});p.append(ce);const V=[];for(const R of M)for(const L of R.vars){const W=V.find(Ce=>Ce.v.key===L.key);W?W.from.push(R):V.push({v:L,from:[R]})}for(const{v:R,from:L}of V){const W=`${R.name}${R.scope==="global"?"（全局）":""}`,Ce=u("label",{"data-search":`${R.name} ${L.map(pe=>pe.entry.name).join(" ")}`.toLowerCase()},u("input",{type:"checkbox","aria-label":`GET 变量：${W}`,checked:o.selected.has(R.key),onchange:pe=>{pe.target.checked?o.selected.add(R.key):o.selected.delete(R.key)}}),u("span",null,W,u("small",null,`来自：${L.map(pe=>pe.entry.name+(pe.item.enabled===!1?"（已关闭）":"")).join("、")}`)));_.append(Ce)}p.append(_,u("select",{"aria-label":"GET 插入位置",value:o.position,onchange:R=>o.position=R.target.value},u("option",{value:"cursor"},"光标处"),u("option",{value:"start"},"正文开头"),u("option",{value:"end"},"正文末尾")),H("插入 GET",()=>P(()=>{const R=[...new Map(M.flatMap(Ce=>Ce.vars.filter(pe=>o.selected.has(pe.key)).map(pe=>[pe.key,pe]))).values()];if(!R.length)throw new Error("先勾选要调用的变量。");const L=R.map(Ce=>Ks("get",Ce)).join(`
+`),W=o.position==="start"?0:o.position==="end"?e.content.length:Math.max(0,Math.min(o.caret??e.content.length,e.content.length));E(e.content.slice(0,W)+L+e.content.slice(W),W+L.length)}),"pw-sm pw-primary"))}}o.error&&p.append(u("div",{class:"pw-errbox",role:"alert"},o.error))}}return c.append(Q,p,d,m),z(),c}function Qt(e,t,n,r=()=>Ze(),s=""){const a=u("div",{class:`pw-section pw-mix-screen pw-screen-${s}`},t);return a._pwScreen={title:e,onback:r,actions:n},a}function Tt(e,t={}){k.mix.screen||(k.mix.homeScroll=ve?.scrollTop||0),k.mix.screen={kind:e,...t},k.mix.menuUid=null,F(),ve.scrollTop=0}function Ze(e=null){k.mix.screen=null,k.mix.menuUid=null,F(),ve.scrollTop=k.mix.homeScroll||0,e&&Ws(e)}function Ec(e,t,n,r=!1){const s=se(t.entryId);if(!s)throw new Error("这个条目已被删除。");r=r||Js(e,s.id,t.uid);const a=n.draft,i=Xe({...s,...n.full?a:{name:a.name,content:a.content,variableInitPrefix:a.variableInitPrefix},id:r?ae("pw"):s.id,updatedAt:Date.now()});s.content!==i.content&&(i.history=[{content:s.content,at:Date.now()},...s.history||[]].slice(0,5)),r?(lt(e,i),t.entryId=i.id):Object.assign(s,i),Lr(n,e,t),k.mix.edits?.delete(pn(e,t))}function au(e,t){const n=se(t.entryId);if(!n)return;if(Nt(n)==="init"||n.variableInitPrefix&&n.content===n.variableInitPrefix){Nc(e);return}const r=k.mix.edits?.get(pn(e,t));k.editing={...r||{},draft:fe(r?.draft||n),isNew:!1,undo:null,comment:"",comboId:e.id,itemUid:t.uid,override:fe(t.override||{}),returnScroll:ve?.scrollTop||0,returnScreen:k.mix.screen?fe(k.mix.screen):null},k.mix.edits?.delete(pn(e,t)),k.mix.menuUid=null,F(),ve.scrollTop=0}function bi(e,t=null){let n=k.mix.insert;(!n||n.comboId!==e.id)&&(n={comboId:e.id,mode:"new",side:t?"after":"end",name:"",content:"",role:"system",query:"",entryId:"",markerId:""}),n.anchorUid=t,n.side=t?"after":"end",k.mix.insert=n,Tt("insert",{comboId:e.id})}function iu(e){const t=k.mix.insert;if(!t||t.comboId!==e.id)return k.mix.screen=null,vi();const n=fu(e,t.anchorUid),r=n.lastElementChild,s=()=>{const p=t.anchorUid;k.mix.insert=null,Ze(p)};r.lastElementChild.replaceWith(H("取消",s));const i=r.querySelector(".pw-primary");if(i&&t.mode==="new"&&(i.textContent="添加条目"),n.querySelector(":scope > b")?.remove(),t.anchorUid){const p=e.items.find(d=>d.uid===t.anchorUid);n.prepend(u("p",{class:"pw-hint"},`位置参照：${p?.type==="entry"?se(p.entryId)?.name:p?.name||"固定位置"}`))}return r.remove(),Qt("添加条目",n,[...r.children].reverse(),s,"insert")}function Tc(e,t,n){const r=[...new Map(hi(e,t).flatMap(i=>i.vars.map(o=>[o.key,o]))).values()],a=[t.variableInitPrefix||(Nt(t)==="init"?t.content:""),...(e?.items||[]).filter(i=>i.type==="entry"&&i.entryId!==t.id).map(i=>se(i.entryId)?.variableInitPrefix||"")];for(const i of a.flatMap(o=>Ln(o)).filter(o=>o.kind==="set"))r.some(o=>o.key===i.key)||r.push(i),n.initial.has(i.key)||n.initial.set(i.key,i.value??"");return n.initSelected===null&&(n.initSelected=new Set(r.map(i=>i.key))),r}function ou(e,t,n){const r=n.filter(i=>t.initSelected.has(i.key));if(!r.length)throw new Error("先勾选需要初始化的变量。");for(const i of r)if(!Lc(t.initial.get(i.key)??""))throw new Error(`「${i.name}」的初始值含未配对的双花括号。`);let s=e.content;if(e.variableInitPrefix){if(!s.startsWith(e.variableInitPrefix))throw new Error("初始化段已被手动修改。请直接编辑该段，或换一个条目写入初始化。");s=s.slice(e.variableInitPrefix.length)}else Nt(e)==="init"&&(s="");const a=r.map(i=>Ks("set",i,t.initial.get(i.key)??"")).join(`
+`)+(s?`
+
+`:"");return{content:a+s,variableInitPrefix:a}}function Nc(e){const t=e.items.find(s=>{if(s.type!=="entry")return!1;const a=se(s.entryId);return a?Nt(a)==="init"||a.variableInitPrefix&&a.content===a.variableInitPrefix:!1}),n=fe(t?se(t.entryId):{name:"变量初始化",content:"",role:"system"}),r={comboId:e.id,targetUid:t?.uid||"",draft:n,owner:{draft:n},dirty:!1,error:""};r.state=Cc(r.owner),Tc(e,n,r.state);for(const s of e.items){if(s.type!=="entry"||s.uid===r.targetUid)continue;const a=se(s.entryId);if(!(!a?.variableInitPrefix||!a.content.startsWith(a.variableInitPrefix)))for(const i of Ln(a.variableInitPrefix).filter(o=>o.kind==="set"))r.state.initial.has(i.key)||r.state.initial.set(i.key,i.value??"")}k.mix.init=r,Tt("init",{comboId:e.id})}function cu(e){const t=k.mix.init;if(!t||t.comboId!==e.id)return k.mix.screen=null,vi();const n=t.state,r=Tc(e,t.draft,n),s=()=>{k.mix.init=null,Ze()},a=()=>{try{const o=ou(t.draft,n,r),c={...t.draft,...o,name:"变量初始化"};let p=e.items.find(g=>g.uid===t.targetUid);if(t.targetUid&&!p)throw new Error("初始化条目已被移出，请返回后重新打开。");const d=[];for(const g of e.items){if(g.type!=="entry"||g.uid===t.targetUid)continue;const y=se(g.entryId);if(!y?.variableInitPrefix)continue;if(!y.content.startsWith(y.variableInitPrefix))throw new Error(`「${y.name}」的旧初始化段已被修改，请先检查正文。`);const E=k.mix.edits?.get(pn(e,g));if(E&&!E.draft.content.startsWith(y.variableInitPrefix))throw new Error(`「${y.name}」还有未保存的初始化修改，请先保存或取消。`);d.push({it:g,entry:y,pending:E,prefix:y.variableInitPrefix,content:y.content.slice(y.variableInitPrefix.length)})}const m={draft:c,moveToTop:!0,variableEdited:!0};if(p)Ec(e,p,m);else{const g=He({...c,source:Ys.init});lt(e,g),p={uid:ae("it"),type:"entry",entryId:g.id,enabled:!0,override:{}},e.items.push(p),Lr(m,e,p)}for(const{it:g,entry:y,pending:E,prefix:P,content:D}of d){const Q=Xe({...y,id:Js(e,y.id,g.uid)?ae("pw"):y.id,content:D,variableInitPrefix:void 0,updatedAt:Date.now(),history:[{content:y.content,at:Date.now()},...y.history||[]].slice(0,5)});Q.id===y.id?(delete y.variableInitPrefix,Object.assign(y,Q)):(lt(e,Q),g.entryId=Q.id),E&&(E.draft.content=E.draft.content.slice(P.length),delete E.draft.variableInitPrefix,E.draft.id=Q.id)}k.mix.init=null,te(),Ze(p.uid)}catch(o){t.error=String(o.message||o),F()}},i=u("div",{class:"pw-init-list"},r.map(o=>u("label",{"data-variable":o.key},u("span",{class:"pw-init-name"},u("input",{type:"checkbox","aria-label":`初始化变量：${o.name}${o.scope==="global"?"（全局）":""}`,checked:n.initSelected.has(o.key),onchange:c=>{c.target.checked?n.initSelected.add(o.key):n.initSelected.delete(o.key),t.dirty=!0}}),u("span",null,o.name,o.scope==="global"?"（全局）":"")),u("input",{type:"text","aria-label":`初始值：${o.name}${o.scope==="global"?"（全局）":""}`,placeholder:"初始值（留空为清空）",value:n.initial.get(o.key)??"",oninput:c=>{n.initial.set(o.key,c.target.value),t.dirty=!0}}))));return Qt("变量初始化",[u("p",{class:"pw-hint"},"统一保存在预设最上方的「变量初始化」条目。"),u("div",{class:"pw-row"},u("b",null,`变量（${r.length}）`),H("全选",()=>{n.initSelected=new Set(r.map(o=>o.key)),t.dirty=!0,F()},"pw-sm"),H("全不选",()=>{n.initSelected.clear(),t.dirty=!0,F()},"pw-sm")),r.length>6&&u("input",{type:"search","aria-label":"搜索初始化变量",placeholder:"搜索变量",oninput:o=>{const c=o.target.value.trim().toLowerCase();for(const p of i.children)p.hidden=!p.dataset.variable.toLowerCase().includes(c)}}),r.length?i:u("p",{class:"pw-hint"},"当前预设还没有 SET 条目。先编辑一个条目，点「设为 SET」并保存。"),t.error&&u("p",{class:"pw-errbox",role:"alert"},t.error)],[H("取消",s),H("保存初始化",a,"pw-primary",{disabled:!r.length})],s,"init")}function lu(e){const t=ne(),n=s=>{s(),te(),Ze()},r=u("div",{class:"pw-manage-options"},H("新建预设",()=>{const s=ct.text("新预设的名字",`预设 ${t.combos.length+1}`);s?.trim()&&n(()=>{const a=$n(s.trim());t.combos.push(a),t.currentComboId=a.id})}),H("复制预设",()=>n(()=>{const s=Kd(e);t.combos.push(s),t.currentComboId=s.id})),H("重命名",()=>{const s=ct.text("预设名",e.name);s?.trim()&&n(()=>{e.presetName===e.name&&(e.presetName=s.trim()),e.name=s.trim()})}),H("AI 写基础版",()=>Tt("skeleton",{comboId:e.id})),H("从预设新建预设",()=>{Vs().open=!0,Tt("template",{comboId:e.id})}),H("补齐固定位置",()=>{const s=ri(e);te(),we("info",s?`已补齐 ${s} 个固定位置`:"固定位置已经齐全"),Ze()}),H("预设内备用条目",()=>Tt("reserve",{comboId:e.id})),H("删除预设",()=>{ct.yes(`删除预设「${e.name}」？收藏里的条目不会删。`)&&n(()=>{t.combos=t.combos.filter(s=>s.id!==e.id),t.currentComboId=t.combos[0]?.id||""})},"pw-danger"));return Qt("管理预设",[u("b",null,e.name),r,eu(e),tu(e)],[],void 0,"manage")}function vi(){const e=ne(),t=di(),n=k.mix.screen;if(n&&(!n.comboId||n.comboId===t.id)){if(n.kind==="insert")return iu(t);if(n.kind==="init")return cu(t);if(n.kind==="manage")return lu(t);if(n.kind==="export")return uu(t);if(n.kind==="sync")return Xu(t);if(n.kind==="reserve")return Qt("预设内备用",Xd(t)||u("p",{class:"pw-hint"},"没有备用条目。"),[],void 0,"reserve");if(n.kind==="skeleton")return Au();if(n.kind==="remake")return qu(t);if(n.kind==="template")return Qt("导入模板",wu(),[H("返回预设",()=>Ze())],void 0,"template")}k.mix.screen=null;try{Fc(t)&&(te(),we("info","已按预设里的 SET 更新最上方的初始化条目"))}catch(a){console.warn(`[${Gt}] 自动初始化失败`,a)}const r=t.items.filter(a=>a.enabled!==!1).length,s=t.items.reduce((a,i)=>a+(i.enabled!==!1&&i.type==="entry"?Jt(se(i.entryId)?.content):0),0);return(o=>(o._pwActions=[H("保存到酒馆 / 导出",()=>Tt("export",{comboId:t.id}),"pw-primary")],o))(u("div",{class:"pw-section pw-mix-home"},u("div",{class:"pw-box cwz-pwnow"},u("span",{class:"cwz-lab"},"正在改"),u("div",{class:"pw-mix-top"},u("select",{"aria-label":"当前预设",value:t.id,onchange:a=>{e.currentComboId=a.target.value,k.mix.menuUid=null,k.mix.homeScroll=0,te(),F(),ve.scrollTop=0}},e.combos.map(a=>u("option",{value:a.id},a.name))),H("管理",()=>Tt("manage",{comboId:t.id}),"pw-sm")),u("div",{class:"pw-row cwz-pwsrc"},H("从酒馆同步",()=>Wu(t),"pw-sm",{disabled:!!k.busy}),H("导入文件",()=>Us("imp"),"pw-sm"),H("导出",()=>Tt("export",{comboId:t.id}),"pw-sm"))),u("div",{class:"pw-mix-toolbar"},H("＋ 加一条",()=>bi(t),"pw-primary"),H("让 AI 写一条",()=>Us("gen"),"pw-primary"),H("让 AI 看整份",()=>Tt("remake",{comboId:t.id}))),Ku(t),u("div",{class:"pw-mix-list-tools"},u("span",{class:"pw-dim",title:`${t.items.length} 条 · 启用 ${r} 条 · 约 ${s} token`},`启用 ${r} 条 · ${s} token`),H("收起正文",()=>{k.readExpanded??=new Set;for(const a of t.items)k.readExpanded.delete(`mix:${a.uid}`);F()},"pw-sm"),u("details",{class:"cwz-more"},u("summary",null,"更多"),H("初始化",()=>Nc(t),"pw-sm"))),k.mix.insert?.comboId===t.id&&(k.mix.insert.name||k.mix.insert.content)&&u("div",{class:"pw-draft-resume"},"有一条未保存的新条目",H("继续编辑",()=>Tt("insert",{comboId:t.id}),"pw-sm")),t.skeletonNote&&u("div",{class:"pw-skel-note"},u("div",{class:"pw-row"},u("b",null,"AI 的说明"),H("按意见改",()=>Tt("remake",{comboId:t.id}),"pw-sm pw-primary"),t.skeletonPrev&&H("换回上一版",()=>{ct.yes("换回上一次改之前的版本？")&&(Qc(t),te(),F())},"pw-sm"),H("收起",()=>{delete t.skeletonNote,te(),F()},"pw-sm")),u("pre",{class:"pw-pre"},t.skeletonNote)),t.items.length?Gc(t,"itemsOpen",`条目顺序（${t.items.length}）`,Td(t)):u("p",{class:"pw-hint"},"还没有条目。点「＋ 加一条」新建、粘贴或从酒馆的预设里挑，也可以点「让 AI 写一条」。")))}function Pc(e){const t={grip:"M5 6h14M5 12h14M5 18h14",entry:"M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9",pin:"M9 3h6M9 3v6l-3 5h12l-3-5V3M12 14v7",remove:"M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7M14 10v7",copy:"M9 3h11v13H9zM5 8H3v13h11v-2",edit:"M14 5l5 5M4 20l5-1L21 7l-5-5L4 14z",more:"M5 11v2M12 11v2M19 11v2"},n=je.createElementNS("http://www.w3.org/2000/svg","svg");for(const[s,a]of Object.entries({viewBox:"0 0 24 24",width:"18",height:"18",fill:"none",stroke:"currentColor","stroke-width":"1.8","stroke-linecap":"round","stroke-linejoin":"round","aria-hidden":"true",focusable:"false"}))n.setAttribute(s,a);const r=je.createElementNS(n.namespaceURI,"path");return r.setAttribute("d",t[e]),n.append(r),n}function Mn(e,t,n,r={}){return H(Pc(e),n,"pw-row-icon",{"aria-label":t,title:t,...r})}function pu(e,t){const n=se(t.entryId),r=e.items.indexOf(t);if(!n||r<0||Nt(n)==="init")return;const s=He({...fe(n),id:ae("pw"),name:qt([...ne().entries,...wi(e)],`${n.name} 副本`),stId:"",history:[],createdAt:Date.now(),updatedAt:Date.now()});lt(e,s);const a={...fe(t),uid:ae("it"),entryId:s.id};e.items.splice(r+1,0,a),k.mix.menuUid=null,te(),F(),Ws(a.uid),we("success","已复制到当前条目下方")}function Oc(e,t,n,r=k.mix){typeof e.showPopover=="function"&&(e.setAttribute("popover","auto"),e.addEventListener("toggle",s=>{s.newState==="closed"&&e.isConnected&&r.menuUid===n&&(r.menuUid=null,t.setAttribute("aria-expanded","false"))}),ze.requestAnimationFrame(()=>{if(!e.isConnected||r.menuUid!==n)return;e.showPopover();const s=t.getBoundingClientRect(),a=ve.getBoundingClientRect(),i=e.getBoundingClientRect(),o=Math.max(a.left+4,Math.min(s.right-i.width,a.right-i.width-4)),c=s.bottom+4,p=c+i.height<=a.bottom?c:Math.max(a.top+4,s.top-i.height-4);e.style.left=`${o}px`,e.style.top=`${p}px`}))}function du(e,t,n){const r=t.type==="marker",s=r?null:se(t.entryId),a=r?ot.find(M=>M.identifier===t.identifier):null,i=k.mix.edits?.get(pn(e,t)),o=i&&(i.moveToTop||Mr(i.draft,s)),c=r?a?.label||t.name||t.identifier:s?.name||"（条目已被删除）",p=k.mix.menuUid===t.uid,d=u("span",{class:"pw-row-name"},u("span",{class:"pw-row-title-text"},c),o&&u("small",{class:"pw-draft-badge"},"未保存")),m=u("span",{class:"pw-row-kind","aria-hidden":"true"},Pc(r?"pin":"entry")),g=u("div",{class:"pw-card-main"},!r&&s?zs(s,`mix:${t.uid}`,d):u("div",{class:"pw-card-title pw-drag-handle",title:"长按拖动排序"},d)),y=u("div",{class:"pw-row-meta"},r?"固定位置":`${t.override?.role||s?.role||"system"} · ${Jt(s?.content)} token`,t.enabled===!1?" · 已关闭":""),E=g.querySelector("summary")||g.firstElementChild;E.prepend(m),E.title=`${c}
+${y.textContent}${!r&&s?`
+点击展开正文；长按拖动排序`:`
+长按拖动排序`}`,!r&&s&&g.querySelector(".pw-entry-content").prepend(u("div",{class:"pw-row-detail"},u("b",null,c),y));const P=M=>{Xo(e.items,n,M),k.mix.menuUid=null,te(),F(),Ws(t.uid)},D=p&&u("div",{class:`pw-row-actions${n>=e.items.length-2?" pw-actions-above":""}`,id:ae("row-actions"),role:"group","aria-label":`条目操作：${c}`},H("上移",()=>P(-1),"pw-sm",{disabled:n===0}),H("下移",()=>P(1),"pw-sm",{disabled:n===e.items.length-1}),H("前面插入",()=>{bi(e,t.uid),k.mix.insert.side="before",F()},"pw-sm"),H("后面插入",()=>bi(e,t.uid),"pw-sm"),!r&&s&&bc(e,s.id)&&H("存入收藏",()=>{k.mix.menuUid=null,vc(s)},"pw-sm")),Q=Mn("more",`更多操作：${c}`,()=>{k.mix.menuUid=k.mix.menuUid===t.uid?null:t.uid,F()},{"aria-expanded":String(p),"aria-controls":D?D.id:null}),z=u("div",{role:"listitem","data-pw-combo-uid":t.uid,style:`--pw-row-action-count: ${2+(!r&&s?1:0)+(!r&&s&&Nt(s)!=="init"?1:0)}`,class:`pw-card pw-combo-row pw-compact-row${t.enabled===!1?" pw-off":""}${r?" pw-marker":""}`},Mn("grip",`排序：${c}`,()=>{k.mix.menuUid=k.mix.menuUid===t.uid?null:t.uid,F()},{class:"pw-btn pw-row-icon pw-row-grip pw-drag-handle",title:"长按拖动排序；点击打开排序操作"}),g,u("div",{class:"pw-row-buttons"},Mn("remove","移出预设",()=>{k.mix.menuUid=null,Hu(e,t)}),!r&&s&&Nt(s)!=="init"&&Mn("copy","复制条目",()=>pu(e,t)),!r&&s&&Mn("edit","编辑",()=>au(e,t)),u("label",{class:"pw-row-switch",title:`${t.enabled===!1?"启用":"停用"}：${c}`},u("input",{type:"checkbox","aria-label":`启用：${c}`,checked:t.enabled!==!1,onchange:M=>{t.enabled=M.target.checked,te(),F()}}),u("span",{class:"pw-switch-track","aria-hidden":"true"})),Q),D);return D&&Oc(D,Q,t.uid),z}function uu(e){const t=ne(),n=Zo({combo:e,entries:t.entries,base:t.bases.find(o=>o.id===e.baseId)?.settings}),r=$o(n),s=k.mix.exportMode||"download",a={download:"下载酒馆预设 JSON",tavern:"保存到酒馆预设列表",copy:"复制预设 JSON"},i=()=>{if(r.errors.length){we("error","先处理页面中的错误");return}if(s==="tavern")return Bn("保存到酒馆",()=>zu(Gs(e),n,r));if(s==="copy")return ui(JSON.stringify(n,null,2));Hs(`${pc(Gs(e))}.json`,JSON.stringify(n,null,2))};return Qt("导出预设",u("div",{class:"pw-section"},r.errors.map(o=>u("div",{class:"pw-errbox"},o)),r.warnings.map(o=>u("div",{class:"pw-warnbox"},o)),u("label",{class:"pw-field"},"预设名称",u("input",{type:"text","aria-label":"导出预设名称",value:Gs(e),oninput:o=>{e.presetName=o.target.value,te()}})),u("label",{class:"pw-field"},"导出方式",u("select",{"aria-label":"导出方式",value:s,onchange:o=>{k.mix.exportMode=o.target.value,F()}},Object.entries(a).map(([o,c])=>u("option",{value:o},c)))),u("p",{class:"pw-hint"},s==="tavern"?"保存后可在酒馆的对话补全预设列表中选择；不会自动切换当前预设。遇到同名预设时会先询问。":"用于酒馆的「对话补全预设」导入。包含提示词内容、顺序和开关。"),u("details",{open:!!k.mix.exportOptionsOpen,ontoggle:o=>{o.target.isConnected&&(k.mix.exportOptionsOpen=o.target.open)}},u("summary",null,"采样参数"),u("label",{class:"pw-field"},"基础设置",u("select",{"aria-label":"导出基础设置",value:e.baseId||"",onchange:o=>{e.baseId=o.target.value,te(),F()}},u("option",{value:""},"仅导出提示词，沿用酒馆当前参数"),t.bases.map(o=>u("option",{value:o.id},o.name))))),u("details",{open:!!k.mix.backupOpen,ontoggle:o=>{o.target.isConnected&&(k.mix.backupOpen=o.target.open)}},u("summary",null,"备份这份工坊预设"),u("p",{class:"pw-hint"},"用于以后导回工坊继续编辑，包含备用条目。请在工坊的「导入」页读取。"),H("下载工坊预设备份",()=>{const o=new Set(e.items.filter(c=>c.type==="entry").map(c=>c.entryId));Hs(`${pc(e.name)}-工坊预设备份.json`,JSON.stringify(Ls(t.entries.filter(c=>o.has(c.id)),[e]),null,2))}))),[H(a[s],i,"pw-primary",{disabled:!!r.errors.length||!!k.busy})],void 0,"export")}function pn(e,t){return`${e.id}:${t.uid}`}function mu(e,t){const n=se(t.entryId),r=k.mix.edits?.get(pn(e,t))?.draft;return r?{...n,name:r.name,content:r.content}:n}function Ws(e,t=".pw-drag-handle"){const n=ye;je.defaultView.requestAnimationFrame(()=>{if(!n?.isConnected||n!==ye)return;const r=[...n.querySelectorAll(".pw-combo-row")].find(o=>o.dataset.pwComboUid===e),s=r?.querySelector(t)||r;if(!s)return;const a=ve.getBoundingClientRect(),i=s.getBoundingClientRect();(i.top<a.top||i.bottom>a.bottom)&&(ve.scrollTop+=i.top-a.top-12)})}function Dc(e,t){Bc(e,[t])}function Bc(e,t){const n=k.mix.insert,r=yi(e,n);e.items.splice(r,0,...t);for(const s of t)n?.mode==="new"&&Lr(n,e,s),s.type==="entry"&&Jc(e,s.entryId);Uc(e).itemsOpen=!0,k.mix.insert=null,te(),Ze(t[0]?.uid)}function fu(e,t=null){const n=k.mix.insert;if(!n||n.comboId!==e.id||n.anchorUid!==t)return null;const r=ne(),s=()=>{if(!n.name.trim()&&!n.content.trim()){we("warning","先写条目名称或正文");return}try{yi(e,n)}catch(c){we("warning",c.message);return}const o=He({name:n.name.trim()||on(n.content,"新条目"),content:n.content,role:n.role,source:"预设中新建",variableInitPrefix:n.variableInitPrefix});lt(e,o),Dc(e,{uid:ae("it"),type:"entry",entryId:o.id,enabled:!0,override:{}})};let a,i;if(n.mode==="library"||n.mode==="preset")({fields:a,insert:i}=yu(e,n));else if(n.mode==="marker"){const o=ot.filter(c=>!e.items.some(p=>p.type==="marker"&&p.identifier===c.identifier));o.some(c=>c.identifier===n.markerId)||(n.markerId=o[0]?.identifier||""),a=o.length?u("select",{"aria-label":"选择固定位置",value:n.markerId,onchange:c=>{n.markerId=c.target.value}},o.map(c=>u("option",{value:c.identifier},c.label))):u("p",{class:"pw-hint"},"固定位置已经全部加入。"),i=H("插入",()=>{const c=ot.find(p=>p.identifier===n.markerId);!c||e.items.some(p=>p.type==="marker"&&p.identifier===c.identifier)||Dc(e,{uid:ae("it"),type:"marker",identifier:c.identifier,name:c.name,enabled:!0})},"pw-primary",{disabled:!n.markerId})}else a=[u("div",{class:"pw-row"},u("input",{type:"text",class:"pw-wide","aria-label":"新条目名称",placeholder:"条目名称",value:n.name,oninput:o=>{n.name=o.target.value}}),u("select",{"aria-label":"新条目角色",value:n.role,onchange:o=>{n.role=o.target.value}},vt.map(o=>u("option",{value:o},o)))),Ac({entry:n,owner:n,combo:e,title:"新条目正文"})],i=H("插入",s,"pw-primary");return u("div",{class:"pw-mix-insert"},u("div",{class:"pw-add-sources",role:"tablist","aria-label":"条目来源"},[["new","新建／粘贴"],["preset","从预设选"],["library","从收藏选"],["marker","固定位置"]].map(([o,c])=>u("button",{type:"button",role:"tab",class:`pw-btn pw-source-tab${n.mode===o?" pw-active":""}`,"aria-selected":String(n.mode===o),onclick:()=>{n.mode=o,F()}},c))),u("label",{class:"pw-field"},"添加到",u("select",{"aria-label":"插入位置",value:n.side,onchange:o=>{n.side=o.target.value}},t?[u("option",{value:"before"},"这条前面"),u("option",{value:"after"},"这条后面")]:[u("option",{value:"start"},"预设开头"),u("option",{value:"end"},"预设末尾")])),a,u("div",{class:"pw-row"},i,H("取消",()=>{k.mix.insert=null,F(),t&&Ws(t)})))}function Vs(){return k.mix.template??={open:!1,text:"",name:"",preview:null,error:"",loading:!1,request:0}}function qr(e,t){const n=JSON.parse(String(e).replace(/^\uFEFF/,""));if(!n||!Array.isArray(n.prompts)||!n.prompts.length)throw new Error("请选择含有 prompts 条目的酒馆预设 JSON。");const r=new Set;for(const i of n.prompts){if(!i||typeof i.identifier!="string"||!i.identifier)throw new Error("预设中有缺少 identifier 的条目。");if(r.has(i.identifier))throw new Error(`预设里有重复标识：${i.identifier}`);r.add(i.identifier)}const s=Tr(n.prompt_order);(!s||!Array.isArray(s.order))&&(n.prompt_order=[{character_id:100001,order:n.prompts.map(i=>({identifier:i.identifier,enabled:i.enabled!==!1}))}]);const a=Tr(n.prompt_order).order;for(const i of a){if(!i?.identifier)throw new Error("预设顺序中有缺少 identifier 的项目。");if(!r.has(i.identifier)){const o=ot.find(c=>c.identifier===i.identifier);if(!o)throw new Error(`顺序中的条目不存在：${i.identifier}`);n.prompts.push({identifier:o.identifier,name:o.name,marker:!0}),r.add(o.identifier)}}return ii(n,t)}function xi(e,t){const n=Vs();n.preview=null,n.error="";try{n.preview=qr(e,t),n.name=t||"模板预设"}catch(r){n.error=r instanceof SyntaxError?"JSON 格式有误，请检查文件或粘贴内容。":String(r.message||r)}F()}function gu(){const e=Vs(),t=e.preview;if(!t||e.loading)return;const n=xc(t,e.name.trim());e.open=!1,e.preview=null,e.text="",e.error="",k.mix.insert=null,k.mix.screen=null,te(),F(),ve.scrollTop=0,we("success",`已建立「${n.name}」，模板内容仅保存在本预设`)}function wu(){const e=Vs();if(!e.open)return null;const t=qn();t.includes(e.pick)||(e.pick=t[0]||"");const n=u("input",{type:"file",accept:".json,application/json",hidden:!0,"aria-label":"导入模板文件",onchange:async s=>{const a=s.target.files?.[0];if(!a)return;const i=++e.request;e.loading=!0,e.error="",e.preview=null,F();try{const o=await a.text();if(i!==e.request)return;e.loading=!1,xi(o,a.name.replace(/\.[^.]+$/,""))}catch(o){i===e.request&&(e.loading=!1,e.error=`读不到这个文件：${o.message||o}`,F())}}}),r=s=>{e.request++,e.loading=!1;const a=s==="current"?Si():{name:e.pick,json:jr(e.pick)};if(!a?.json){e.preview=null,e.error="读不到这个预设，请选择 JSON 文件导入。",F();return}xi(JSON.stringify(a.json),a.name)};return u("div",{class:"pw-box pw-mix-template"},u("b",null,"导入预设作模板"),u("p",{class:"pw-hint"},"建立独立的新预设，条目仅保存在预设内；保留原顺序、开关和注入位置。"),n,u("div",{class:"pw-row"},H("选择预设 JSON",()=>n.click(),"pw-primary"),H("读取当前预设",()=>r("current"))),t.length>0&&u("div",{class:"pw-row"},u("select",{"aria-label":"酒馆已有预设",value:e.pick,onchange:s=>{e.pick=s.target.value}},t.map(s=>u("option",{value:s},s))),H("读取这个预设",()=>r("named"),"pw-sm")),u("details",null,u("summary",null,"粘贴预设 JSON"),u("textarea",{class:"pw-code","aria-label":"模板 JSON",value:e.text,oninput:s=>{e.text=s.target.value,e.preview=null,e.error="",e.request++,e.loading=!1;const a=s.target.closest(".pw-mix-template");a.querySelector(".pw-mix-template-preview")?.remove(),a.querySelector('[role="alert"]')?.remove()}}),H("读取粘贴内容",()=>{e.request++,e.loading=!1,xi(e.text,"模板预设")},"pw-sm")),e.loading&&u("p",{class:"pw-hint"},"正在读取…"),e.error&&u("p",{class:"pw-errbox",role:"alert"},e.error),e.preview&&u("div",{class:"pw-mix-template-preview"},u("p",{class:"pw-hint"},`顺序中有 ${e.preview.order.length} 项，已关闭 ${e.preview.order.filter(s=>s.enabled===!1).length} 项。${e.preview.items.some(s=>!s.inOrder)?"未编入顺序的条目保留在预设内备用区。":""}`),u("input",{type:"text",class:"pw-wide","aria-label":"模板预设名称",value:e.name,oninput:s=>{e.name=s.target.value}}),H("创建模板预设",gu,"pw-primary")))}function hu(e,t){return e.pickers??={},e.pickers[t]??={source:"",rows:null,selected:new Set,query:"",error:"",request:0}}function bu(e){return[{key:"current",type:"current",label:"酒馆当前使用的预设"},...qn().map(t=>({key:`tavern:${t}`,type:"tavern",name:t,label:`酒馆 · ${t}`})),...ne().combos.filter(t=>t.id!==e.id).map(t=>({key:`combo:${t.id}`,type:"combo",id:t.id,label:`工坊 · ${t.name}`}))]}function Mc(e){const t=new Map(e.items.map(s=>[s.key,s])),n=(e.order||[]).filter(s=>s.type==="entry"&&t.has(s.key)).map(s=>s.key);return[...new Set([...n,...e.items.map(s=>s.key)])].map(s=>{const a=t.get(s);return{key:s,entry:fe(a.entry),enabled:a.enabled!==!1,inOrder:a.inOrder!==!1}})}function vu(e){if(e.type==="combo"){const r=ne().combos.find(i=>i.id===e.id);if(!r)throw new Error("这个预设已被移除，请重新选择。");const s=r.items.filter(i=>i.type==="entry"&&se(i.entryId)).map(i=>({key:i.uid,entry:Xe({...fe(se(i.entryId)),...fe(i.override||{})}),enabled:i.enabled!==!1,inOrder:!0})),a=new Set(r.items.map(i=>i.entryId));for(const i of r.entries||[])a.has(i.id)||s.push({key:`reserve:${i.id}`,entry:fe(i),enabled:!0,inOrder:!1});return s}const t=e.type==="current"?Si():null,n=t?.json||(e.type==="tavern"?jr(e.name):null);if(!n)throw new Error("暂时读不到这个预设，可以上传它的 JSON 文件。");return Mc(qr(JSON.stringify(n),t?.name||e.name))}function yi(e,t){if(t?.anchorUid){const n=e.items.findIndex(r=>r.uid===t.anchorUid);if(n<0)throw new Error("原来的插入位置已被移除，请返回后重新选择。");return n+(t.side==="before"?0:1)}return t?.side==="start"?0:e.items.length}function xu(e,t,n){const r=(n.rows||[]).filter(i=>n.selected.has(i.key));if(!r.length)throw new Error("先勾选要添加的条目。");yi(e,t);const s=r.map(i=>He({...fe(i.entry),id:ae("pw"),history:[],createdAt:Date.now(),updatedAt:Date.now()})),a=s.map((i,o)=>({uid:ae("it"),type:"entry",entryId:i.id,enabled:r[o].enabled!==!1,override:{}}));for(const i of s)lt(e,i);return Bc(e,a),s.length}function yu(e,t){const n=t.mode,r=hu(t,n);n==="library"&&!r.rows&&(r.rows=ne().entries.map(g=>({key:g.id,entry:fe(g),enabled:!0,inOrder:!0})));const s=r.rows||[],a=g=>`${g.entry.name} ${g.entry.content} ${(g.entry.tags||[]).join(" ")}`.toLowerCase().includes(r.query.trim().toLowerCase()),i=u("span",{class:"pw-dim","aria-live":"polite"}),o=H(`添加选中（${r.selected.size}）`,()=>{try{const g=xu(e,t,r);we("success",`已添加 ${g} 个独立条目`)}catch(g){r.error=String(g.message||g),F()}},"pw-primary",{disabled:!r.selected.size}),c=()=>{i.textContent=`已选 ${r.selected.size} / ${s.length} 条`,o.textContent=`添加选中（${r.selected.size}）`,o.disabled=!r.selected.size},p=u("div",{class:"pw-picker-list"},s.map((g,y)=>u("div",{class:"pw-picker-row","data-pick-key":g.key,hidden:!a(g)},u("label",{class:"pw-picker-check"},u("input",{type:"checkbox",checked:r.selected.has(g.key),"aria-label":`选择条目 ${y+1}：${g.entry.name}`,onchange:E=>{E.target.checked?r.selected.add(g.key):r.selected.delete(g.key),c()}})),u("details",null,u("summary",null,u("span",{class:"pw-picker-title"},g.entry.name),u("span",{class:"pw-dim"},`${g.entry.role}${g.inOrder===!1?" · 未编排":g.enabled===!1?" · 已关闭":""}`)),u("pre",{class:"pw-pre"},g.entry.content||"（空正文）")))));c();let d=null;if(n==="preset"){const g=bu(e),y=u("input",{type:"file",accept:".json,application/json",hidden:!0,"aria-label":"上传预设文件",onchange:async E=>{const P=E.target.files?.[0];if(!P)return;const D=++r.request;try{const Q=await P.text();if(D!==r.request||k.mix.insert!==t)return;const z=Mc(qr(Q,P.name));Object.assign(r,{source:"file",fileName:P.name,rows:z,selected:new Set,query:"",error:""})}catch(Q){if(D!==r.request||k.mix.insert!==t)return;r.error=`读取失败：${Q.message||Q}`}E.target.value="",F()}});d=u("div",{class:"pw-picker-source"},u("label",{class:"pw-field"},"选择预设",u("select",{"aria-label":"选择条目来源预设",value:r.source,onchange:E=>{r.request++;const P=g.find(D=>D.key===E.target.value);if(Object.assign(r,{source:E.target.value,rows:[],selected:new Set,query:"",error:""}),P)try{r.rows=vu(P)}catch(D){r.error=String(D.message||D)}F()}},u("option",{value:""},"请选择预设…"),g.map(E=>u("option",{value:E.key},E.label)),r.source==="file"&&u("option",{value:"file"},r.fileName))),H("上传预设 JSON",()=>y.click(),"pw-sm"),y)}const m=s.length?[u("input",{type:"search",class:"pw-wide","aria-label":"搜索待选条目",placeholder:"搜索名称、正文或标签",value:r.query,oninput:g=>{r.query=g.target.value;for(const[y,E]of[...p.children].entries())E.hidden=!a(s[y])}}),u("div",{class:"pw-row"},i,H("全选搜索结果",()=>{for(const g of s.filter(a))r.selected.add(g.key);for(const[g,y]of[...p.children].entries())y.querySelector("input").checked=r.selected.has(s[g].key);c()},"pw-sm"),H("清空选择",()=>{r.selected.clear();for(const g of p.children)g.querySelector("input").checked=!1;c()},"pw-sm")),p]:u("p",{class:"pw-hint"},n==="preset"&&!r.source?"选择一个预设，再勾选其中的条目。":"这里没有可选的条目。");return{fields:[d,m,s.length>0&&u("p",{class:"pw-hint"},"添加为当前预设的独立副本，保留原条目的顺序和开关。"),r.error&&u("p",{class:"pw-errbox",role:"alert"},r.error)],insert:o}}const Ys={init:"preset-workshop:variable-init",get:"preset-workshop:variable-get"};function Ln(e){e=String(e||"");const t=[],n=[];for(let r=0;r<e.length-1;r++)if(e.slice(r,r+2)==="{{")t.push(r),r++;else if(e.slice(r,r+2)==="}}"&&t.length){const s=t.pop(),a=e.slice(s+2,r),i=/^\s*(setglobalvar|setvar|getglobalvar|getvar)(?=\s|:|$)/i.exec(a);if(i){const o=a.slice(i[0].length).replace(/^\s*:{1,2}\s*/,"").trimStart();let c=-1,p=0;for(let y=0;y<o.length-1;y++)if(o.slice(y,y+2)==="{{")p++,y++;else if(o.slice(y,y+2)==="}}")p--,y++;else if(!p&&o.slice(y,y+2)==="::"){c=y;break}const d=(c<0?o:o.slice(0,c)).trim(),m=i[1].toLowerCase(),g=m.includes("global")?"global":"local";d&&!/[{}\r\n]/.test(d)&&!d.includes("::")&&n.push({name:d,scope:g,kind:m.startsWith("set")?"set":"get",key:`${g}:${d}`,value:c<0?null:o.slice(c+2),start:s,end:r+2})}r++}return n.sort((r,s)=>r.start-s.start)}function Nt(e){if(!e)return"";for(const a of["init","get"])if(e.source===Ys[a])return a;const t=e.name==="变量初始化"?"init":e.name==="变量调用 GET"?"get":"";if(!t)return"";const n=Ln(e.content),r=n.filter(a=>!n.some(i=>i.start<a.start&&i.end>a.end));if(!r.length||r.some(a=>a.kind!==(t==="init"?"set":"get")))return"";let s=e.content;for(const a of[...r].reverse())s=s.slice(0,a.start)+s.slice(a.end);return s.trim()?"":t}function ku(e){return String(e||"条目").replace(/[{}\r\n\\]/g,"_").replace(/::/g,"_").trim()||"条目"}function Ks(e,t,n=""){const r=`${e}${t.scope==="global"?"global":""}var`;return e==="get"?`{{${r}::${t.name}}}`:`{{${r}::${t.name}::${n}}}`}function Lc(e){let t=0;for(let n=0;n<e.length-1;n++)if(e.slice(n,n+2)==="{{")t++,n++;else if(e.slice(n,n+2)==="}}"){if(!t)return!1;t--,n++}return t===0}var Xs="preset-workshop:skeleton";function qc(){return k.mix.skel??={need:"",picks:[],files:[],name:"基础版预设",error:"",note:""}}function Zs(e,t){const n=qr(JSON.stringify(e),t),r=new Map(n.items.map(a=>[a.key,a])),s=[];for(const a of n.order||[]){if(a.type==="marker"){const p=ot.find(d=>d.identifier===a.identifier);s.push(`[固定位置] ${p?.label||a.name||a.identifier}（id=${a.identifier}）${a.enabled===!1?" · 关闭":""}`);continue}const i=r.get(a.key);if(!i)continue;const o=i.entry,c=String(o.content||"").replace(/\s+/g," ").trim().slice(0,90);s.push(`${o.name}（${o.role}，约 ${Jt(o.content)} token${a.enabled===!1?"，关闭":""}）：${c}${String(o.content||"").length>90?"……":""}`)}return`<参考预设 name="${t}">
+${s.join(`
+`)}
+</参考预设>`}function Su({need:e="",refs:t=[],templates:n,antiBagu:r=!0}={}){const s={...Ue,...n||{}},i=`任务：写一个基础版预设，作者之后会往里填自己的条目。
+先看参考预设的结构：它们分了哪些条目、按什么顺序、固定位置放在哪里。取它们共同、合理的骨架，按作者的需求和对话调整，不照抄参考预设的正文。
+每个条目只写最基础、能直接用的版本，短一点；需要作者自己补的地方写成【待填：这里写什么】。
+固定位置（角色描述、世界书、聊天记录等）用单独一行 <marker id="标识"/> 表示，放在它该在的位置。可用的标识：${ot.map(d=>`${d.identifier}：${d.label}`).join("；")}。
+从上到下按预设里的顺序输出，固定位置和条目混排。
+要用变量时，直接在条目里写 {{setvar::变量名::内容}}，在别处用 {{getvar::变量名}} 取；不要另写“初始变量/变量初始化”条目，插件会自动在最上方生成。`,c=[s.common,i,r?nr(s):"",`输出格式：
+先输出一个说明块：
+<说明>
+结构：一两句话说这个基础版分了哪几块、为什么这样排
+待填：作者接下来最该补的几处
+</说明>
+然后按顺序输出，每个条目：
+<entry name="条目名" role="system">
+条目内容
+</entry>
+每个固定位置：<marker id="标识"/>
+role 只能是 system、user、assistant。属性值里不要出现英文双引号。不用代码块包裹，标签外不写别的文字。`].filter(d=>String(d??"").trim()).join(`
+
+`),p=[`【作者想要的预设】
+${String(e).trim()||"（没有另外写，按对话和参考预设来）"}`];return t.length&&p.push(`【参考预设的结构】（只看结构，不照抄正文）
+${t.join(`
+
+`)}`),{system:c,prompt:p.join(`
+
+`)}}function jc(e){const t=String(e??"").replace(/<说明>[\s\S]*?(?:<\/说明>|(?=<entry\b|<marker\b)|$)/g,""),n=[],r=/<marker\s+id\s*=\s*["'“]?([A-Za-z]+)["'”]?\s*\/?>(?:\s*<\/marker>)?|<entry\b([^>]*)>([\s\S]*?)(?:<\/entry>|$)/gi;let s;for(;s=r.exec(t);){if(s[1]){ot.some(o=>o.identifier===s[1])&&n.push({type:"marker",identifier:s[1]});continue}const a={};for(const o of s[2].matchAll(/(\w+)\s*=\s*(?:"([^"]*)"|'([^']*)'|“([^”]*)”)/g))a[o[1].toLowerCase()]=o[2]??o[3]??o[4]??"";const i=li(s[3].trim()).trim();i&&n.push({type:"entry",name:(a.name||"").trim()||on(i,"未命名条目"),role:vt.includes((a.role||"").trim())?a.role.trim():"system",ref:(a.ref||"").trim(),after:(a.after||"").trim(),content:i})}return n}function Cu(e,t,n=""){const r=ne();if(!e.some(i=>i.type==="entry"))throw new Error("AI 的回复里没有条目，可能被截断了。到设置里把最大回复长度调大再试。");const s=$n(qt(r.combos,t||"基础版预设"));for(const i of e){if(i.type==="marker"){Bs(s,i.identifier);continue}const o=He({name:i.name,role:i.role,content:i.content,tags:["基础版"],source:Xs});lt(s,o),s.items.push({uid:ae("it"),type:"entry",entryId:o.id,enabled:!0,override:{}})}const a=ri(s);return s.skeletonNote=n,r.combos.push(s),r.currentComboId=s.id,{combo:s,added:a}}async function Iu(){const e=qc(),t=ne();e.error="";const n=[];for(const i of e.picks){const o=jr(i);if(!o){e.error=`读不到预设「${i}」`,F();return}try{n.push(Zs(o,i))}catch(c){e.error=`预设「${i}」读不出结构：${c.message||c}`,F();return}}for(const i of e.files)try{n.push(Zs(JSON.parse(i.text),i.name))}catch(o){e.error=`「${i.name}」读不出结构：${o.message||o}`,F();return}const{system:r,prompt:s}=Su({need:e.need,refs:n,templates:t.templates,antiBagu:t.antiBagu!==!1}),a=await Bn("写基础版预设",()=>er(r,s,{dialogueKey:"mix"}));if(a)try{const i=js(a),{combo:o,added:c}=Cu(jc(a),e.name.trim(),i);k.mix.skel=null,te(),Ze(),we("success",`已建好「${o.name}」：${o.items.filter(p=>p.type==="entry").length} 个条目${c?`，补了 ${c} 个固定位置`:""}。点条目进去填内容`)}catch(i){e.error=String(i.message||i),F()}}function Au(){const e=qc(),t=qn(),n=u("input",{type:"file",accept:".json,application/json",hidden:!0,"aria-label":"上传参考预设",onchange:async a=>{for(const i of a.target.files||[])e.files.push({name:i.name.replace(/\.[^.]+$/,""),text:await i.text()});a.target.value="",F()}}),r=a=>{e.picks.includes(a)?e.picks=e.picks.filter(i=>i!==a):e.picks.push(a),F()},s=e.picks.length+e.files.length;return Qt("AI 写基础版预设",[u("p",{class:"pw-hint"},"先在上面的「和 AI 聊聊 · 预设」里说想要什么样的预设，聊过的会一起带上。再选几个参考预设，AI 照它们的结构写一个基础版，建成新预设；每个条目只有基础内容，之后你点进去自己填。"),u("label",{class:"pw-field"},"想要什么样的预设（可空）",u("textarea",{rows:3,"aria-label":"想要的预设",placeholder:"比如：古风言情，第三人称，重文风和人物，不要状态栏",value:e.need,oninput:a=>e.need=a.target.value})),u("b",null,`参考预设（已选 ${s}）`),t.length?u("div",{class:"pw-chips"},t.map(a=>u("button",{type:"button",class:`pw-chip${e.picks.includes(a)?" pw-on":""}`,"aria-pressed":String(e.picks.includes(a)),onclick:()=>r(a)},a))):u("p",{class:"pw-hint"},"酒馆里没有读到对话补全预设，可以上传预设 JSON。"),e.files.length>0&&u("div",{class:"pw-chips"},e.files.map((a,i)=>u("button",{type:"button",class:"pw-chip pw-on",title:"点一下移除",onclick:()=>{e.files.splice(i,1),F()}},`${a.name} ✕`))),u("div",{class:"pw-row"},H("上传预设 JSON",()=>n.click(),"pw-sm"),n),u("label",{class:"pw-field"},"新预设的名字",u("input",{type:"text","aria-label":"新预设名",value:e.name,oninput:a=>e.name=a.target.value})),e.error&&u("p",{class:"pw-errbox",role:"alert"},e.error)],[H("取消",()=>{k.mix.skel=null,Ze()}),H("生成基础版",()=>Iu(),"pw-primary",{disabled:!!k.busy})],()=>Ze(),"skeleton")}function Eu(e){return e.items.map(t=>{if(t.type==="marker")return`<marker id="${t.identifier}"/>`;const n=se(t.entryId);return n?`<entry name="${String(n.name).replace(/"/g,"'")}" role="${n.role}" ref="${t.uid}"${t.enabled===!1?' enabled="false"':""}>
+${n.content}
+</entry>`:""}).filter(Boolean).join(`
+`)}function Tu({combo:e,request:t="",templates:n,antiBagu:r=!0}={}){const s={...Ue,...n||{}},i=`任务：按作者的修改意见改整个预设。
+只改意见（和本页对话里作者明确提出的要求）说到的地方。没提到的条目，名字和正文一字不动地原样输出。可以增加、删除、合并条目，也可以调整顺序。
+保留已有条目的 ref 属性，用它区分同名条目；每个 ref 只能出现一次。新加的条目不写 ref。ref 只用于对应位置，不写进正文。
+固定位置用单独一行 <marker id="标识"/> 表示。可用的标识：${ot.map(c=>`${c.identifier}：${c.label}`).join("；")}。
+从上到下按预设里的顺序，输出修改后的完整预设。
+要用变量时，直接在条目里写 {{setvar::变量名::内容}}，在别处用 {{getvar::变量名}} 取；不要另写“初始变量/变量初始化”条目，插件会自动在最上方生成。`;return{system:[s.common,i,r?nr(s):"",`输出格式：
+先输出一个说明块：
+<说明>
+改了什么：一两句话
+待填：还需要作者补的地方（没有就写「无」）
+</说明>
+然后按顺序输出，每个条目：
+<entry name="条目名" role="system">
+条目内容
+</entry>
+每个固定位置：<marker id="标识"/>
+role 只能是 system、user、assistant。属性值里不要出现英文双引号。不用代码块包裹，标签外不写别的文字。`].filter(c=>String(c??"").trim()).join(`
+
+`),prompt:`【当前预设】
+${Eu(e)}
+
+【修改意见】
+${String(t).trim()||"按本页对话中作者的要求修改。"}`}}function Nu(e,t,n=""){if(!t.some(c=>c.type==="entry"))throw new Error("AI 的回复里没有条目，可能被截断了。到设置里把最大回复长度调大再试。");const r=e.items.filter(c=>c.type==="entry"),s=new Set;for(const c of t.filter(p=>p.type==="entry"&&p.ref)){if(s.has(c.ref)||!r.some(p=>p.uid===c.ref))throw new Error("AI 返回了重复或无法对应的条目标识，尚未保存。请检查下面的原回复后重试。");s.add(c.ref)}e.skeletonPrev={items:fe(e.items),entries:fe(e.entries||[]),at:Date.now()};const a=new Set,i=[];for(const c of t){if(c.type==="marker"){const y=e.items.find(E=>E.type==="marker"&&E.identifier===c.identifier);i.some(E=>E.type==="marker"&&E.identifier===c.identifier)||i.push(y?fe(y):{uid:ae("it"),type:"marker",identifier:c.identifier,name:"",enabled:!0});continue}const p=r.filter(y=>!a.has(y.uid)&&(c.ref?y.uid===c.ref:!s.has(y.uid))),d=p.find(y=>se(y.entryId)?.name===c.name&&se(y.entryId)?.role===c.role&&se(y.entryId)?.content.trim()===c.content.trim());if(d){a.add(d.uid),i.push(d);continue}const m=c.ref?p[0]:p.find(y=>se(y.entryId)?.name===c.name),g=He({name:c.name,role:c.role,content:c.content,tags:["基础版"],source:Xs});lt(e,g),m&&a.add(m.uid),i.push({uid:m?.uid||ae("it"),type:"entry",entryId:g.id,enabled:m?m.enabled!==!1:!0,override:m?fe(m.override||{}):{}})}e.items=i;const o=new Set(i.filter(c=>c.type==="entry").map(c=>c.entryId));return e.entries=(e.entries||[]).filter(c=>o.has(c.id)||c.source!==Xs),e.skeletonNote=n,e}function Qc(e){const t=e.skeletonPrev;t&&(e.items=t.items,e.entries=t.entries,delete e.skeletonPrev)}function Pu(e){return e.items.map(t=>{if(t.type==="marker")return`[固定位置] ${ot.find(s=>s.identifier===t.identifier)?.label||t.identifier}`;const n=se(t.entryId);if(!n)return"";const r=String(n.content||"").replace(/\s+/g," ").trim().slice(0,60);return`${n.name}（${n.role}${t.enabled===!1?"，关闭":""}，ref=${t.uid}）：${r}${String(n.content||"").length>60?"……":""}`}).filter(Boolean).join(`
+`)}var Rc=[["add","只加新条目"],["pick","只改勾选的条目"],["all","改整个预设"]];function Ou({combo:e,mode:t,picked:n=[],request:r="",refs:s=[],templates:a,antiBagu:i=!0}={}){const o={...Ue,...a||{}},c=t==="add"?`任务：按作者的意见给这个预设加新条目。已有的条目一个都不改，也不要重新输出。
+每个新条目用 after 属性写放在哪个已有条目后面（写那个条目的名字）；放在最前面写 after="开头"，放在最后写 after="末尾"。
+要用变量时，直接在条目里写 {{setvar::变量名::内容}}，在别处用 {{getvar::变量名}} 取；不要另写“初始变量/变量初始化”条目，插件会自动在最上方生成。`:"任务：按作者的意见修改下面列出的条目。每条各输出一次，name 和 ref 保持原样不改；同名条目用 ref 区分，不合并、不遗漏。没让改的地方一字不动，输出完整的修改后正文。预设里的其他条目不要输出。ref 只用于对应位置，不写进正文。",p=`输出格式：
+先输出一个说明块：
+<说明>
+改了什么：一两句话
+待填：还需要作者补的地方（没有就写「无」）
+</说明>
+然后每个条目：
+<entry name="条目名" role="system"${t==="add"?' after="已有条目名"':' ref="原条目的 ref"'}>
+条目内容
+</entry>
+role 只能是 system、user、assistant。属性值里不要出现英文双引号。不用代码块包裹，标签外不写别的文字。`,d=[`【当前预设的目录】（顺序、条目名、开头几句）
+${Pu(e)}`];return t==="pick"&&d.push(`【要改的条目】
+${n.map(m=>`<entry name="${String(m.name).replace(/"/g,"'")}" role="${m.role}" ref="${m.ref}">
+${m.content}
+</entry>`).join(`
+`)}`),s.length&&d.push(`【参考预设的结构】（只看结构和思路，不照抄正文）
+${s.join(`
+
+`)}`),d.push(`【修改意见】
+${String(r).trim()||"按本页对话中作者的要求修改。"}`),{system:[o.common,c,i?nr(o):"",p].filter(m=>String(m??"").trim()).join(`
+
+`),prompt:d.join(`
+
+`)}}function Hc(e){e.skeletonPrev={items:fe(e.items),entries:fe(e.entries||[]),at:Date.now()}}function Du(e,t,n=""){const r=t.filter(a=>a.type==="entry");if(!r.length)throw new Error("AI 没有写出新条目，可能被截断了，或者换个说法再试。");Hc(e);let s=null;for(const a of r){const i=He({name:a.name,role:a.role,content:a.content,tags:["基础版"],source:Xs});lt(e,i);const o={uid:ae("it"),type:"entry",entryId:i.id,enabled:!0,override:{}};let c;if(a.after==="开头"){const p=e.items.findIndex(d=>d.type==="entry"&&Nt(se(d.entryId))==="init");c=p>=0?p+1:0}else if(a.after==="末尾")c=e.items.length;else if(!a.after)c=s??e.items.length;else{const p=e.items.findIndex(d=>d.type==="entry"&&se(d.entryId)?.name===a.after);c=p>=0?p+1:s??e.items.length}e.items.splice(c,0,o),s=c+1}return e.skeletonNote=n,r.length}function Bu(e,t,n,r=""){const s=e.items.filter(p=>p.type==="entry"&&n.includes(p.uid)&&se(p.entryId)),a=t.filter(p=>p.type==="entry");if(!s.length||a.length!==s.length)throw new Error(`勾选了 ${s.length} 个条目，AI 返回了 ${a.length} 个，尚未保存。请检查下面的原回复后重试。`);const i=new Set;for(const p of a.filter(d=>d.ref)){if(i.has(p.ref)||!s.some(d=>d.uid===p.ref))throw new Error("AI 返回了重复或无法对应的条目标识，尚未保存。请检查下面的原回复后重试。");i.add(p.ref)}const o=[],c=new Set;for(const p of a){const d=s.filter(g=>!c.has(g.uid)&&(p.ref?g.uid===p.ref:!i.has(g.uid))),m=p.ref?d[0]:d.find(g=>se(g.entryId)?.name===p.name)||(s.length===1?d[0]:null);if(!m)throw new Error(`AI 返回的「${p.name}」无法对应勾选条目，尚未保存。请检查下面的原回复后重试。`);c.add(m.uid),o.push({it:m,content:p.content})}if(!o.length)throw new Error("AI 的回复里没有对上勾选的条目，换个说法再试。");Hc(e);for(const{it:p,content:d}of o){const m=se(p.entryId),g=Xe({...m,id:Js(e,m.id,p.uid)?ae("pw"):m.id,content:d,updatedAt:Date.now(),history:[{content:m.content,at:Date.now()},...m.history||[]].slice(0,5)});g.id===m.id?Object.assign(m,g):(lt(e,g),p.entryId=g.id)}return e.skeletonNote=r,o.length}function zc(){return k.mix.remake??={request:"",error:"",mode:"add",picked:[],picks:[],files:[]}}function Mu(e){const t=[];for(const n of e.picks||[]){const r=jr(n);if(!r)throw new Error(`读不到预设「${n}」`);t.push(Zs(r,n))}for(const n of e.files||[])t.push(Zs(JSON.parse(n.text),n.name));return t}async function Lu(e){const t=zc(),n=ne();if(t.error="",!t.request.trim()&&!Zt(n,"mix","预设")){t.error="先写哪里要改，或者在上面的对话里说。",F();return}const r=e.items.filter(c=>t.picked.includes(c.uid)&&c.type==="entry"&&se(c.entryId)).map(c=>({...se(c.entryId),ref:c.uid}));if(t.mode==="pick"&&!r.length){t.error="先勾选要改的条目。",F();return}let s;try{s=Mu(t)}catch(c){t.error=String(c.message||c),F();return}const a=t.mode==="all"?Tu({combo:e,request:t.request,templates:n.templates,antiBagu:n.antiBagu!==!1}):Ou({combo:e,mode:t.mode,picked:r,request:t.request,refs:s,templates:n.templates,antiBagu:n.antiBagu!==!1});t.mode==="all"&&s.length&&(a.prompt+=`
+
+【参考预设的结构】（只看结构和思路，不照抄正文）
+${s.join(`
+
+`)}`);const i=Rc.find(c=>c[0]===t.mode)[1],o=await Bn(i,()=>er(a.system,a.prompt,{dialogueKey:"mix"}));if(o){t.raw=o;try{const c=jc(o),p=js(o);let d;t.mode==="add"?d=`加了 ${Du(e,c,p)} 个条目`:t.mode==="pick"?d=`改了 ${Bu(e,c,t.picked,p)} 个条目`:(Nu(e,c,p),d="改好了"),k.mix.remake=null,te(),Ze(),we("success",`${d}。不满意可以再改，或者点「换回上一版」`)}catch(c){t.error=String(c.message||c),F()}}}function qu(e){const t=zc(),n=qn(),r=u("input",{type:"file",accept:".json,application/json",hidden:!0,"aria-label":"上传参考预设",onchange:async i=>{for(const o of i.target.files||[])t.files.push({name:o.name.replace(/\.[^.]+$/,""),text:await o.text()});i.target.value="",F()}}),s={add:"已有的条目一个都不动，AI 只写新条目，并说放在哪个条目后面。发给 AI 的是预设目录（条目名和开头几句），不发全文。",pick:"只改下面勾选的条目，其他条目不动。发给 AI 的是预设目录和勾选条目的全文。",all:"AI 改整个预设：没提到的条目原样保留，可以增删、调顺序。会把整个预设的全文发给 AI。"}[t.mode],a=e.items.filter(i=>i.type==="entry"&&se(i.entryId));return Qt("AI 改预设",[u("div",{class:"pw-chips",role:"radiogroup","aria-label":"改哪些"},Rc.map(([i,o])=>u("button",{type:"button",class:`pw-chip${t.mode===i?" pw-on":""}`,role:"radio","aria-checked":String(t.mode===i),onclick:()=>{t.mode=i,F()}},o))),u("p",{class:"pw-hint"},s),t.mode==="pick"&&u("div",{class:"pw-get-choices"},a.map(i=>u("label",null,u("input",{type:"checkbox","aria-label":`要改的条目：${se(i.entryId).name}`,checked:t.picked.includes(i.uid),onchange:o=>{o.target.checked?t.picked.push(i.uid):t.picked=t.picked.filter(c=>c!==i.uid)}}),u("span",null,se(i.entryId).name)))),u("label",{class:"pw-field"},t.mode==="add"?"想加什么":"哪里要改",u("textarea",{rows:4,"aria-label":"整个预设的修改意见",placeholder:t.mode==="add"?"比如：加一条思考链，放在破限后面；再加一条状态栏":t.mode==="pick"?"比如：文风条目写具体一点，加两条禁止":"比如：平台风格只留海棠和晋江；去掉起点；破限挪到最后",value:t.request,oninput:i=>t.request=i.target.value})),u("details",{class:"pw-remake-refs"},u("summary",null,`参考预设（可选，已选 ${(t.picks||[]).length+(t.files||[]).length}）`),u("p",{class:"pw-hint"},"选了会把它的结构（条目名、顺序、每条开头几句）一起发给 AI，不发全文。"),n.length?u("div",{class:"pw-chips"},n.map(i=>u("button",{type:"button",class:`pw-chip${t.picks.includes(i)?" pw-on":""}`,"aria-pressed":String(t.picks.includes(i)),onclick:()=>{t.picks.includes(i)?t.picks=t.picks.filter(o=>o!==i):t.picks.push(i),F()}},i))):u("p",{class:"pw-hint"},"酒馆里没有读到预设，可以上传 JSON。"),t.files.length>0&&u("div",{class:"pw-chips"},t.files.map((i,o)=>u("button",{type:"button",class:"pw-chip pw-on",onclick:()=>{t.files.splice(o,1),F()}},`${i.name} ✕`))),u("div",{class:"pw-row"},H("上传预设 JSON",()=>r.click(),"pw-sm"),r)),e.skeletonPrev&&u("p",{class:"pw-hint"},"上一次改之前的版本还留着，可以换回去。"),t.error&&u("p",{class:"pw-errbox",role:"alert"},t.error),t.error&&t.raw&&u("details",null,u("summary",null,"查看并复制 AI 原回复"),u("textarea",{class:"pw-wide",rows:10,readOnly:!0,"aria-label":"未保存的 AI 原回复",value:t.raw}))],[H("取消",()=>{k.mix.remake=null,Ze()}),e.skeletonPrev&&H("换回上一版",()=>{ct.yes("换回上一次改之前的版本？")&&(Qc(e),te(),Ze())}),H(t.mode==="add"?"加条目":"按意见改",()=>Lu(e),"pw-primary",{disabled:!!k.busy})],()=>Ze(),"remake")}function Fc(e){if(!e||e.tavernSync&&e.tavernSync.fingerprint===rr(e))return!1;const t=e.items.filter(d=>d.type==="entry");if(t.some(d=>se(d.entryId)?.variableInitPrefix))return!1;const n=[...new Map(hi(e).flatMap(d=>d.vars.map(m=>[m.key,m]))).values()];if(!n.length)return!1;const r=d=>{if(!d||!/初始化?变量|变量初始|^init/i.test(d.name||""))return!1;const m=Ln(d.content);let g=String(d.content||"");for(const y of[...m].reverse())g=g.slice(0,y.start)+g.slice(y.end);return!g.trim()&&m.every(y=>y.kind==="set")},s=t.find(d=>Nt(se(d.entryId))==="init")||t.find(d=>r(se(d.entryId))),a=s?se(s.entryId):null,i=a?Ln(a.content).filter(d=>d.kind==="set"):[],o=new Map(i.map(d=>[d.key,d.value??""])),p=[...n,...i.filter(d=>!n.some(m=>m.key===d.key))].map(d=>Ks("set",d,o.get(d.key)??"")).join(`
+`);if(a&&a.content===p)return!1;if(s){Ec(e,s,{draft:{...fe(a),content:p},full:!0,moveToTop:!0,variableEdited:!0});const d=se(s.entryId);d&&(d.source=Ys.init)}else{const d=He({name:"变量初始化",content:p,role:"system",source:Ys.init});lt(e,d);const m={uid:ae("it"),type:"entry",entryId:d.id,enabled:!0,override:{}};e.items.push(m),Lr({moveToTop:!0},e,m)}return!0}function ju(){return k.libFilters||(k.libFilters={role:"",content:"all",status:"all",open:!1})}function $h(e){return k.mix.addComboId!==e.id&&(k.mix.addComboId=e.id,k.mix.addCount=0),k.mix.addFilters||(k.mix.addFilters={role:"",content:"nonempty",status:"available",tag:"",open:!1})}function Qu(e,t,n){const r=new Set((n?.items||[]).filter(a=>a.type==="entry").map(a=>a.entryId)),s=new Set(n?.removedEntryIds||[]);return ni(e,{search:t.search||"",tag:t.tag||""}).filter(a=>{if(t.role&&a.role!==t.role)return!1;const i=!String(a.content||"").trim();return!(t.content==="nonempty"&&i||t.content==="empty"&&!i||t.status==="added"&&!r.has(a.id)||t.status==="available"&&(r.has(a.id)||s.has(a.id))||t.status==="removed"&&(!s.has(a.id)||r.has(a.id)))})}function Ru(e,{includeTags:t=!1,onClear:n=()=>{},onChange:r=()=>{}}={}){const s=[["","全部角色"],...vt.map(p=>[p,p])],a=[["all","正文不限"],["nonempty","有正文"],["empty","空正文"]],i=[["all","全部条目"],["available","可添加"],["added","已在当前预设"],["removed","从当前预设移出"]],o=[e.tag,e.role,a.find(([p])=>p===e.content&&p!=="all")?.[1],i.find(([p])=>p===e.status&&p!=="all")?.[1]].filter(Boolean),c=(p,d,m)=>u("label",null,u("span",null,d),u("select",{"aria-label":`筛选${d}`,value:e[p]||"",onchange:g=>{e[p]=g.target.value,e.open=!0,r(),F()}},m.map(([g,y])=>u("option",{value:g},y))));return u("details",{class:"pw-entry-filters",open:e.open,ontoggle:p=>{p.target.isConnected&&(e.open=p.target.open)}},u("summary",{onclick:p=>{e.open=!p.currentTarget.parentElement.open}},o.length?`筛选 · ${o.join(" / ")}`:"筛选"),u("div",{class:"pw-filter-fields"},t&&c("tag","标签",[["","全部标签"],...ti(ne().entries).map(p=>[p.tag,`${p.tag}（${p.count}）`])]),c("role","角色",s),c("content","正文",a),c("status","预设状态",i)),H("清除筛选",()=>{Object.assign(e,{role:"",content:"all",status:"all",tag:"",open:!0}),n(),F()},"pw-sm"))}function Uc(e){return k.mix.folds instanceof Map||(k.mix.folds=new Map),k.mix.folds.has(e.id)||k.mix.folds.set(e.id,{}),k.mix.folds.get(e.id)}function Gc(e,t,n,r,s=!0){const a=Uc(e);return a[t]===void 0&&(a[t]=s),u("details",{class:`pw-mix-fold pw-mix-fold-${t}`,open:a[t],ontoggle:i=>{i.target.isConnected&&(a[t]=i.target.open)}},u("summary",{onclick:i=>{a[t]=!i.currentTarget.parentElement.open}},n),r)}function Jc(e,t){Array.isArray(e.removedEntryIds)&&(e.removedEntryIds=e.removedEntryIds.filter(n=>n!==t))}function Hu(e,t){const n=e.items.findIndex(r=>r.uid===t.uid);n<0||(e.items.splice(n,1),t.type==="entry"&&(e.removedEntryIds=[...new Set([...e.removedEntryIds||[],t.entryId])]),k.mix.edits?.delete(pn(e,t)),k.mix.insert?.comboId===e.id&&k.mix.insert.anchorUid===t.uid&&(k.mix.insert.anchorUid=null,k.mix.insert.side="end"),te(),F(),we("info",t.type==="entry"?"已移出当前预设，可在筛选中找回":"已移出固定位置"))}async function zu(e,t,n){if(n.errors.length)throw new Error("预设有错误，先处理");const r=xt();if(qn().includes(e)&&!ct.yes(`酒馆里已经有叫「${e}」的预设，覆盖它？`))return;const s=yt("createOrReplacePreset");if(s){const i=yt("getPreset")?.("in_use");await s(e,_o(t,i)),we("success",`已保存为「${e}」，采样参数沿用当前预设。在对话补全预设下拉里选它`);return}const a=r.getPresetManager?.("openai");if(a?.savePreset)await a.savePreset(e,t,!1);else{const i=await(0,X.fetch)("/api/presets/save",{method:"POST",headers:r.getRequestHeaders(),body:JSON.stringify({apiId:"openai",name:e,preset:t})});if(!i.ok)throw new Error(`酒馆返回 ${i.status}`)}we("success",`已保存为「${e}」。在对话补全预设下拉里选它（没出现就刷新一下页面）`)}function qn(){try{const e=yt("getPresetNames");if(e){const t=e();if(Array.isArray(t))return t}return xt().getPresetManager?.("openai")?.getAllPresets?.()||[]}catch{return[]}}function ki(e,t){const n=k.imp,r=i=>(n.error=i,n.sourceOpen=!0,null),s=String(e||"").trim();if(/^[\[{]/.test(s)&&(/\.json$/i.test(t)||/^\{\s*"/.test(s)))try{JSON.parse(s)}catch{return r(`${t}：JSON 格式有误，请检查括号和逗号。原文已保留。`)}let a;try{a=tc(e,{label:t,splitMode:n.splitMode})}catch(i){return r(`${t}：${i.message||"无法解析"}`)}return a.kind==="empty"?r("还没有内容，请先选文件或粘贴文本。"):a.kind==="unknown"?r(`${t}：暂不支持这个 JSON，请使用酒馆预设或工坊导出的文件。原文已保留。`):!a.items.length&&a.kind!=="st-preset"&&!(a.kind==="library"&&a.combos?.length)?r(`${t}：没有可导入的条目。`):(a.id=ae("src"),a.sel=new Map(a.items.map(i=>{const o=Dn(ne().entries,i.entry).status;return[i.key,o!=="empty"&&(o!=="dup"||n.dupMode==="copy")]})),a.destination="library",n.sources.push(a),n.activeId=a.id,n.sourceOpen=!1,n.error="",a)}function Fu(e){const t=ne(),n=k.imp;if(e.destination==="combo"){if(e.complete)return;const r=xc(e,e.label.replace(/\.json$/i,""));e.complete=!0,e.comboId=r.id,e.message=`已新建「${r.name}」，保留整套顺序、开关和备用条目。`}else if(e.destination==="backup"){if(e.complete)return;const r=nc(t.entries,{items:e.items,combos:e.combos});t.entries.unshift(...r.added),t.combos.push(...r.combos),e.complete=!0,e.comboId=r.combos[0]?.id,e.message=`已导入 ${r.added.length} 条库内条目、${r.combos.length} 个预设；复用 ${r.dups} 条相同内容。`}else{const r=e.items.filter(a=>e.sel.get(a.key)&&a.entry.content.trim());if(!r.length)return;const s=Ko(t.entries,r,{dupMode:n.dupMode});t.entries.unshift(...s.added),e.message=`已存入收藏 ${s.added.length} 条${s.dups?`，跳过相同内容 ${s.dups} 条`:""}${s.renamed?`，${s.renamed} 条同名已加序号`:""}。`,r.forEach(a=>e.sel.set(a.key,!1))}te(),F(),we("success",e.message)}function Uu(){const e=k.imp,t=qn();e.mode||="file",t.includes(e.pick)||(e.pick=t[0]||"");const n=i=>{const o=i?Si():{name:e.pick,json:jr(e.pick)};o?.json?ki(JSON.stringify(o.json),o.name):e.error="读不到这个预设，请使用预设 JSON 文件。",F()},r=u("input",{type:"file",multiple:!0,accept:".json,.txt,.md,application/json,text/plain,text/markdown","aria-label":"选择要导入的文件",onchange:async i=>{const o=[];for(const c of i.target.files||[])try{ki(await c.text(),c.name)||o.push(e.error)}catch{o.push(`${c.name}：读取失败，请重新选择文件。`)}e.error=o.join(`
+`),i.target.value="",F()}}),s=e.sources.find(i=>i.id===e.activeId)||e.sources.at(-1),a=u("div",{class:"pw-section pw-import"},u("p",{class:"pw-hint"},"先读取并预览，再选择保存到哪里。支持预设 JSON、工坊备份和提示词文本。"),u("details",{class:"pw-import-inputs",open:e.sourceOpen??!s,ontoggle:i=>{i.target.isConnected&&(e.sourceOpen=i.target.open)}},u("summary",null,s?"读取其他文件或预设":"读取来源"),u("div",{class:"pw-source-tabs",role:"tablist","aria-label":"导入来源"},[["file","选文件"],["tavern","酒馆预设"],["paste","粘贴文本"]].map(([i,o])=>H(o,()=>{e.mode=i,e.error="",F()},`pw-source-tab${e.mode===i?" pw-primary":""}`,{role:"tab","aria-selected":String(e.mode===i)}))),u("div",{class:"pw-box"},e.mode==="file"&&r,e.mode==="tavern"&&u("div",{class:"pw-section"},H("读取当前使用的预设",()=>n(!0)),t.length>0&&u("div",{class:"pw-row"},u("select",{"aria-label":"要读取的酒馆预设",value:e.pick,onchange:i=>e.pick=i.target.value},t.map(i=>u("option",{value:i},i))),H("读取所选预设",()=>n(!1)))),e.mode==="paste"&&u("div",{class:"pw-section"},u("textarea",{class:"pw-code","aria-label":"待导入内容",placeholder:"粘贴预设 JSON 或提示词文本",value:e.text,oninput:i=>e.text=i.target.value}),u("label",{class:"pw-field"},"纯文本拆分方式",u("select",{"aria-label":"纯文本拆分方式",value:e.splitMode,onchange:i=>e.splitMode=i.target.value},[["heading","按标题拆分"],["hr","按分隔线 --- 拆分"],["whole","整段作为一条"]].map(([i,o])=>u("option",{value:i},o)))),H("读取并预览",()=>{ki(e.text,"粘贴内容")&&(e.text=""),F()},"pw-primary")))),e.error&&u("div",{class:"pw-errbox",role:"alert"},e.error),e.sources.length>1&&u("label",{class:"pw-field"},`已读取 ${e.sources.length} 份，选择预览`,u("select",{"aria-label":"选择导入预览",value:s?.id,onchange:i=>{e.activeId=i.target.value,F()}},e.sources.map((i,o)=>u("option",{value:i.id},`${o+1}. ${i.label}`)))),s&&Gu(s));if(s){const i=s.items.filter(c=>s.sel.get(c.key)&&c.entry.content.trim()).length,o=s.destination!=="library";a._pwActions=[H(o?s.complete?"已导入":s.destination==="combo"?"新建完整预设":"导入整份备份":`存入收藏（${i}）`,()=>Fu(s),"pw-primary",{disabled:o?!!s.complete:!i}),s.comboId&&H("查看预设",()=>{ne().currentComboId=s.comboId,k.mix.screen=null,k.tabScroll??={},k.tabScroll.mix=0,te(),Us("mix")})]}return a}function jr(e){try{const t=yt("getPreset");if(t)return Nr(t(e));const n=xt().getPresetManager?.("openai");return n?.getCompletionPresetByName?.(e)??n?.getPresetSettings?.(e)}catch(t){return console.warn(`[${Gt}] 读取预设失败`,t),null}}function Si(){const e=yt("getPreset");if(e)try{return{name:yt("getLoadedPresetName")?.()||"当前预设",json:Nr(e("in_use"))}}catch(n){console.warn(`[${Gt}] 读取当前预设失败`,n)}const t=xt().chatCompletionSettings;return!t||!Array.isArray(t.prompts)?null:{name:t.preset_settings_openai||"当前预设",json:{prompts:t.prompts,prompt_order:t.prompt_order}}}function Gu(e){const t=ne(),n=k.imp,r=e.destination==="library",s=e.items.filter(a=>e.sel.get(a.key));return u("div",{class:"pw-section pw-import-preview"},u("div",{class:"pw-row"},u("b",{class:"pw-wide"},e.label),H("移除预览",()=>{n.sources=n.sources.filter(a=>a!==e),F()},"pw-sm")),u("label",{class:"pw-field"},"保存到哪里",u("select",{"aria-label":"导入保存位置",value:e.destination,onchange:a=>{e.destination=a.target.value,F()}},u("option",{value:"library"},"收藏 · 只保存勾选的条目"),e.kind==="st-preset"&&u("option",{value:"combo"},"新建预设 · 保留完整预设"),e.kind==="library"&&e.combos?.length>0&&u("option",{value:"backup"},`导入备份 · 全部条目及 ${e.combos.length} 个预设`))),e.message&&u("p",{class:"pw-inline-feedback",role:"status"},e.message),!r&&u("p",{class:"pw-hint"},"整份导入会保留完整结构，无需勾选条目；不会覆盖原有预设。"),r&&u("label",{class:"pw-field"},"遇到内容完全相同的条目",u("select",{"aria-label":"相同内容处理",value:n.dupMode,onchange:a=>{n.dupMode=a.target.value,e.items.forEach(i=>{Dn(t.entries,i.entry).status==="dup"&&e.sel.set(i.key,n.dupMode==="copy")}),F()}},u("option",{value:"skip"},"跳过已有内容"),u("option",{value:"copy"},"另存一份副本"))),u("div",{class:"pw-row pw-list-tools"},u("span",{class:"pw-dim"},r?`共 ${e.items.length} 条 · 已选 ${s.length} 条`:`预览 ${e.items.length} 条`),r&&H("全选",()=>{e.items.forEach(a=>e.sel.set(a.key,!!a.entry.content.trim())),F()},"pw-sm"),r&&H("清空选择",()=>{e.sel.clear(),F()},"pw-sm")),e.items.map(a=>{const i=Dn(t.entries,a.entry),o={new:"",dup:"内容已存在",samename:"同名 · 将分别保留",empty:"空正文"}[i.status];return u("div",{class:"pw-card pw-import-row"},r&&u("label",{class:"pw-check"},u("input",{type:"checkbox","aria-label":`选择导入：${a.entry.name}`,checked:!!e.sel.get(a.key),disabled:!a.entry.content.trim(),onchange:c=>{e.sel.set(a.key,c.target.checked),F()}})),u("div",{class:"pw-card-main"},zs(a.entry,`import:${e.id}:${a.key}`,u("span",null,a.entry.name),{draggable:!1}),u("div",{class:"pw-library-meta"},[a.entry.role,`${Jt(a.entry.content)} token`,e.kind==="st-preset"?a.inOrder?a.enabled?"原预设开启":"原预设关闭":"原预设备用":"",o].filter(Boolean).join(" · "))))}),r&&e.kind==="st-preset"&&Object.keys(e.base||{}).length>0&&u("details",null,u("summary",null,"采样参数"),H(e.baseSaved?"基础设置已保存":"存为导出时可选的基础设置",()=>{t.bases.push({id:ae("bs"),name:e.label,settings:fe(e.base)}),e.baseSaved=!0,te(),F()},"pw-sm",{disabled:!!e.baseSaved})))}function Wc(){const e=xt();return String(yt("getLoadedPresetName")?.()||e.getPresetManager?.("openai")?.getSelectedPresetName?.()||e.chatCompletionSettings?.preset_settings_openai||"")}function Ci(){return[...new Set([...qn(),Wc()].filter(e=>typeof e=="string"&&e.trim()))]}function Ju(e,t){if(e.tavernSync?.name&&t.includes(e.tavernSync.name))return e.tavernSync.name;const n=new Set([e.name,Gs(e),String(e.templateSource||"").replace(/\.json$/i,"")]),r=t.filter(s=>n.has(s));return r.length===1?r[0]:""}function Vc(e){if(!e||!Ci().includes(e))throw new Error("酒馆里找不到这个预设，请重新选择来源。");const t=xt(),n=Wc()===e;let r;if(n&&Array.isArray(t.chatCompletionSettings?.prompts))r={prompts:t.chatCompletionSettings.prompts,prompt_order:t.chatCompletionSettings.prompt_order};else if(n){const o=yt("getPreset");o&&(r=Nr(o("in_use")))}else{const o=t.getPresetManager?.("openai");if(typeof o?.getCompletionPresetByName=="function")r=o.getCompletionPresetByName(e);else{const c=yt("getPreset");c&&(r=Nr(c(e)))}}if(!r||!Array.isArray(r.prompts))throw new Error("读取失败，原预设已保留。请先在酒馆选中这个预设，再重新读取。");const s=Tr(r.prompt_order),a=new Set;for(const o of s?.order||[]){if(a.has(o?.identifier))throw new Error("酒馆预设顺序中有重复标识，请先修正后再同步。");a.add(o?.identifier)}const i=qr(JSON.stringify(r),e);return{name:e,current:n,parsed:i}}function $s(e){const t=new Map((e.entries||[]).map(a=>[a.id,a])),n=a=>t.get(a)||se(a),r=new Set,s=e.items.map(a=>{if(a.type==="marker")return{type:"marker",identifier:a.identifier,name:a.name||ot.find(o=>o.identifier===a.identifier)?.name||a.identifier,enabled:a.enabled!==!1,inOrder:!0};const i=n(a.entryId);if(!i)throw new Error("当前预设有找不到的条目，请先修复引用。");return r.add(i.id),{type:"entry",entry:Xe({...fe(i),...fe(a.override||{})}),enabled:a.enabled!==!1,inOrder:!0}});for(const a of e.entries||[])r.has(a.id)||s.push({type:"entry",entry:Xe(a),enabled:!1,inOrder:!1});return s}function _s(e){if(e.type==="marker")return{type:"marker",identifier:e.identifier,enabled:e.enabled};const t=e.entry;return{type:"entry",name:t.name,content:t.content,role:t.role,injection_position:t.injection_position,injection_depth:t.injection_depth,injection_order:t.injection_order,injection_trigger:t.injection_trigger,forbid_overrides:t.forbid_overrides,inOrder:e.inOrder,enabled:e.inOrder&&e.enabled}}function rr(e){return JSON.stringify($s(e).map(_s))}function Yc(e){const{syncPrevious:t,...n}=e;return JSON.stringify({combo:n,referenced:e.items.filter(r=>r.type==="entry").map(r=>(e.entries||[]).find(s=>s.id===r.entryId)||se(r.entryId))})}function Kc(e,t){const n=new Map,r=e.items.map(a=>{const i=He({...fe(a.entry),id:ae("pw"),history:[]});return n.set(a.key,i.id),i}),s=si(t.name,e.order,n);return Object.assign(s,{id:t.id,name:t.name,presetName:t.presetName,baseId:t.baseId,entries:r,templateSource:e.label}),s}function Xc(e,t,n){const r=$s(e),s=$s(t),a=new Map,i=new Set(r),o=g=>g.type==="marker"?`marker:${g.identifier}`:g.entry.sourcePresetName===n&&g.entry.sourcePromptId?`entry:${g.entry.sourcePromptId}`:g.entry.stId?`entry:${g.entry.stId}`:"";for(const g of[o,y=>JSON.stringify(_s(y)),y=>y.type==="entry"?`name:${y.entry.name}`:""]){const y=s.filter(E=>!a.has(E));for(const E of y){const P=g(E);if(!P||y.filter(Q=>g(Q)===P).length!==1)continue;const D=[...i].filter(Q=>g(Q)===P);D.length===1&&(a.set(E,D[0]),i.delete(D[0]))}}const c=s.flatMap(g=>{const y=a.get(g);return y?JSON.stringify(_s(y))===JSON.stringify(_s(g))?[]:[{kind:"更新",before:y,after:g}]:[{kind:"新增",after:g}]});for(const g of i)c.push({kind:"移出",before:g});for(const[g,y]of a)if(g.type==="entry"&&y.type==="entry"){const E=t.entries.find(P=>P.id===g.entry.id);E.note=y.entry.note,E.tags=ft([...g.entry.tags,...y.entry.tags.filter(P=>P!==`来自:${y.entry.source}`)])}const p=r.filter(g=>g.inOrder),d=s.filter(g=>g.inOrder).map(g=>a.get(g)),m=p.length!==d.length||p.some((g,y)=>g!==d[y]);return{changes:c,orderChanged:m,unchanged:rr(e)===rr(t)}}function Ii(e){if(k.busy)return"有 AI 任务正在运行，请完成后再同步。";if(k.editing?.comboId===e.id)return"请先保存或取消当前条目编辑，再同步。";if(k.mix.insert?.comboId===e.id&&(k.mix.insert.name||k.mix.insert.content))return"当前预设还有未保存的新条目，请先继续编辑并保存，或取消添加。";for(const[t,n]of k.mix.edits||[])if(t.startsWith(`${e.id}:`)&&(n.moveToTop||Mr(n.draft,se(n.draft.id))))return"当前预设还有未保存的条目修改，请先保存后再同步。";return""}function Zc(e){const{syncPrevious:t,...n}=e,r=fe(n),s=new Map,a=new Map((e.entries||[]).map(i=>[i.id,i]));for(const i of e.items)i.type==="entry"&&!a.has(i.entryId)&&a.set(i.entryId,se(i.entryId));for(const i of e.removedEntryIds||[])!a.has(i)&&se(i)&&a.set(i,se(i));return r.entries=[...a.values()].map(i=>{if(!i)throw new Error("找不到原条目，未执行同步。");const o=He({...fe(i),id:ae("pw")});return s.set(i.id,o.id),o}),r.items.forEach(i=>{i.type==="entry"&&(i.entryId=s.get(i.entryId))}),r.removedEntryIds=(r.removedEntryIds||[]).map(i=>s.get(i)||i),r}function Qr(e){const t=k.mix.sync;if(t.error="",t.preview=null,!!t.name)try{const n=Vc(t.name),r=Kc(n.parsed,e),s=Xc(e,r,n.name);t.preview={...n,next:r,diff:s,sourceKey:rr(r),localKey:Yc(e)}}catch(n){t.error=String(n.message||n)}}function Wu(e){try{const t=Ci();k.mix.sync={comboId:e.id,name:Ju(e,t),preview:null,error:""},Qr(e)}catch(t){k.mix.sync={comboId:e.id,name:"",preview:null,error:String(t.message||t)}}Tt("sync",{comboId:e.id})}function Vu(e){const t=k.mix.sync,n=t?.preview;if(!(!n||t.comboId!==e.id||jt()?.id!==e.id))try{const r=Ii(e);if(r)throw new Error(r);if(Yc(e)!==n.localKey)throw Qr(e),new Error("工坊内容已变化，差异已重新读取，请检查后再同步。");const s=Vc(t.name),a=Kc(s.parsed,e);if(rr(a)!==n.sourceKey)throw Qr(e),new Error("酒馆预设又有修改，已刷新差异，请检查后再同步。");if(Xc(e,a,s.name).unchanged){we("info","已与酒馆一致，无需同步");return}a.syncPrevious={label:"同步前版本",at:Date.now(),combo:Zc(e)},a.tavernSync={name:s.name,at:Date.now(),fingerprint:rr(a)},ne().combos[ne().combos.findIndex(o=>o.id===e.id)]=a,k.mix.sync=null,te(),Ze(),we("success",`已从酒馆同步「${s.name}」，可恢复同步前版本`)}catch(r){t.error=String(r.message||r),F()}}function Yu(e){const t=e.syncPrevious;if(t?.combo)try{const n=Ii(e);if(n)throw new Error(n);if(!ct.yes(`恢复「${t.label}」？当前内容也会保留为可恢复版本。`))return;const r=fe(t.combo);r.id=e.id,r.syncPrevious={label:"恢复前版本",at:Date.now(),combo:Zc(e)},ne().combos[ne().combos.findIndex(s=>s.id===e.id)]=r,te(),F(),we("success",`已恢复${t.label}`)}catch(n){we("warning",String(n.message||n))}}function Ku(e){return e.syncPrevious?.combo?u("div",{class:"pw-row pw-sync-undo"},u("span",{class:"pw-dim"},e.tavernSync?`已同步「${e.tavernSync.name}」`:"已恢复原版本"),H(e.syncPrevious.label==="恢复前版本"?"撤销上次恢复":`恢复${e.syncPrevious.label}`,()=>Yu(e),"pw-sm",{disabled:!!k.busy})):null}function $c(e){if(!e)return u("p",{class:"pw-hint"},"无此条目");if(e.type==="marker")return u("p",null,`${e.name} · ${e.enabled?"开启":"关闭"}`);const t=e.entry;return u("div",{class:"pw-section"},u("b",null,t.name),u("span",{class:"pw-dim"},`${t.role} · ${e.inOrder?e.enabled?"开启":"关闭":"备用"} · ${t.injection_position===1?`聊天深度 ${t.injection_depth}`:"相对位置"} · 顺序 ${t.injection_order}`),u("span",{class:"pw-dim"},`注入触发：${t.injection_trigger.length?t.injection_trigger.join(" / "):"默认"} · 禁止覆盖：${t.forbid_overrides?"是":"否"}`),u("pre",{class:"pw-pre"},t.content||"（空正文）"))}function _c(e){return u("ol",{class:"pw-sync-order"},$s(e).filter(t=>t.inOrder).map(t=>u("li",null,`${t.type==="entry"?t.entry.name:t.name}${t.enabled?"":"（关闭）"}`)))}function Xu(e){k.mix.sync?.comboId!==e.id&&(k.mix.sync={comboId:e.id,name:"",preview:null,error:""});const t=k.mix.sync,n=t.preview;let r=[];try{r=Ci()}catch{}const s=Ii(e),a=i=>i.type==="entry"?i.entry.name:i.name;return Qt("从酒馆同步",[u("p",{class:"pw-hint"},`更新预设「${e.name}」的条目、角色、顺序、开关和位置。采样参数沿用工坊现有设置。`),u("label",{class:"pw-field"},"酒馆来源",u("select",{"aria-label":"同步来源预设",value:t.name,onchange:i=>{t.name=i.target.value,Qr(e),F()}},u("option",{value:""},"请选择预设…"),r.map(i=>u("option",{value:i},i)))),!t.name&&u("p",{class:"pw-hint"},"未找到唯一的同名预设，请选择要同步的酒馆来源。"),H("重新读取差异",()=>{Qr(e),F()},"pw-sm",{disabled:!t.name||!!k.busy}),t.error&&u("div",{class:"pw-errbox",role:"alert"},t.error),s&&u("div",{class:"pw-warnbox"},s),n&&u("p",{class:"pw-hint"},n.current?"来源：酒馆当前编辑中的内容（包括尚未另存的修改）。":"来源：酒馆预设列表中的已保存版本。"),n&&(n.diff.unchanged?u("p",{class:"pw-inline-feedback",role:"status"},"已与酒馆一致，无需同步。"):u("div",{class:"pw-section"},u("b",null,["更新","新增","移出"].map(i=>`${i} ${n.diff.changes.filter(o=>o.kind===i).length} 条`).join(" · ")),n.diff.orderChanged&&u("details",null,u("summary",null,"条目顺序有变化 · 查看对照"),u("b",null,"工坊当前"),_c(e),u("b",null,"酒馆新版"),_c(n.next)),u("p",{class:"pw-warnbox"},"同步以酒馆版本为准。工坊中的不同内容会保留在同步前版本，之后可以恢复。"),n.diff.changes.map(i=>u("details",{class:"pw-sync-change"},u("summary",null,`${i.kind} · ${a(i.after||i.before)}`),u("b",null,"工坊当前"),$c(i.before),u("b",null,"酒馆新版"),$c(i.after)))))],[H("同步并保留原版",()=>Vu(e),"pw-primary",{disabled:!n||n.diff.unchanged||!!s||!!k.busy})],void 0,"sync")}var Zu=[["common","通用写法准则（每次生成都带）"],["single","数量：一个条目"],["multi","数量：多个条目"],["note","说明块（要求 / 目的 / 假设 / 矛盾检查 / 放置）"],["revise","按意见修改"],["format","输出格式（改了解析可能失败，慎改）"]];function $u(){const e=ne(),t=k.setOpen,n=(a,i,...o)=>u("details",{open:t.has(a),ontoggle:c=>{c.target.open?t.add(a):t.delete(a)}},u("summary",null,i),...o),r=qs.map(a=>{const i=e.templates[a.id]??Ue[a.id],o=e.templates[a.id]!==void 0&&e.templates[a.id]!==Ue[a.id],c=!e.hiddenKinds.includes(a.id);return n(`b_${a.id}`,[a.label,u("span",{class:"pw-badge pw-mute"},"内置"),o?"（已修改）":"",c?"":"（已隐藏）"],Br({title:a.label,get:()=>e.templates[a.id]??Ue[a.id],oninput:p=>{e.templates[a.id]=p,te()}}),u("div",{class:"pw-row"},u("label",null,u("input",{type:"checkbox",checked:c,onchange:p=>{e.hiddenKinds=p.target.checked?e.hiddenKinds.filter(d=>d!==a.id):[...e.hiddenKinds,a.id],te(),F()}})," 在「写提示词」页显示"),H("复制成新类型",()=>{const p=oi(`${a.label} 副本`,i);e.customKinds.push(p),t.add(`c_${p.id}`),te(),F()},"pw-sm"),H("恢复默认",()=>{delete e.templates[a.id],te(),F()},"pw-sm",{disabled:!o})))}),s=e.customKinds.map(a=>n(`c_${a.id}`,[a.label,u("span",{class:"pw-badge"},"自定义")],u("div",{class:"pw-row"},u("span",null,"名称"),u("input",{type:"text",class:"pw-wide",value:a.label,oninput:i=>{a.label=i.target.value,te()}})),u("div",{class:"pw-row"},u("span",null,"默认标签"),u("input",{type:"text",class:"pw-wide",placeholder:"用这个类型生成的条目自动带上这些标签（逗号分隔，可空）",value:a.tags||"",oninput:i=>{a.tags=i.target.value,te()}})),u("p",{class:"pw-hint"},"下面这段会接在「通用写法准则」后面，告诉 AI 这类条目长什么样：结构、必须包含什么、不要什么。"),u("textarea",{class:"pw-code pw-tall",value:a.prompt,placeholder:`例如：
+条目类型：规则模块。
+结构：按主题分组，每组一个 XML 标签……
+必须包含：每条规则的触发条件、替代写法。`,oninput:i=>{a.prompt=i.target.value,te()}}),u("div",{class:"pw-row"},H("删除这个类型",()=>{ct.yes(`删除类型「${a.label}」？已经生成的条目不受影响。`)&&(e.customKinds=e.customKinds.filter(i=>i!==a),t.delete(`c_${a.id}`),te(),F())},"pw-sm pw-danger"))));return u("div",{class:"pw-box"},u("div",{class:"pw-h"},"条目类型（「写提示词」页的“类型”下拉）"),u("p",{class:"pw-hint"},"可以新增自己的类型，比如“文风”“规则模块”“状态栏模块”，每个类型自己写一段提示词。内置的也能改、能隐藏、能复制成新类型再改。"),r,s,u("div",{class:"pw-row"},H("＋ 新增类型",()=>{const a=ct.text("新类型的名字（例如：文风 / 规则模块 / 状态栏模块）","");if(!a||!a.trim())return;const i=oi(a);e.customKinds.push(i),t.add(`c_${i.id}`),te(),F()},"pw-primary")))}function _u(e,t,n,r=!1){return k.setSeen??=new Set,k.setSeen.has(e)||(k.setSeen.add(e),r&&k.setOpen.add(e)),u("details",{class:"pw-settings-section","data-settings-section":e,open:k.setOpen.has(e),ontoggle:s=>{s.target.isConnected&&(s.target.open?k.setOpen.add(e):k.setOpen.delete(e))}},u("summary",null,t),n)}function em(){const e=ne(),t=Ad(),n=u("div",{class:"pw-section"},u("div",{class:"pw-box"},u("div",{class:"pw-h"},"AI 来源"),Pr&&u("label",null,u("input",{type:"checkbox",checked:e.followCard,onchange:i=>{e.followCard=i.target.checked,te(),F()}})," 跟Love 写卡机用同一个 API（Love 写卡机 → 设置 → 用哪个 API）"),u("div",{class:"pw-row"},u("select",{disabled:!!(Pr&&e.followCard),onchange:i=>{e.profileId=i.target.value,te()}},u("option",{value:"",selected:!e.profileId},"酒馆当前连接的 API"),t.map(i=>u("option",{value:i.id,selected:e.profileId===i.id},`连接配置：${i.name}`))),u("span",null,"最大回复长度"),u("input",{type:"number",min:256,step:256,style:"width:100px",value:e.maxTokens,oninput:i=>{e.maxTokens=Math.max(256,Number(i.target.value)||3e3),te()}})),u("p",{class:"pw-hint"},"生成条目只用「写提示词」页和这里的准则，不会带上你酒馆当前的预设和角色卡。")),u("div",{class:"pw-box"},u("div",{class:"pw-h"},"手机键盘"),u("p",{class:"pw-hint"},"界面随实际可见区域调整。键盘收起后恢复高度，光标留在输入框中也不会让页面继续缩小。"),u("label",null,u("input",{type:"checkbox",checked:!!e.kbDebug,onchange:i=>{e.kbDebug=i.target.checked,te(),ye?._pwViewport?.refresh()}})," 显示调试数字（右上角，截图发给作者排查用）")),zd(),$u(),u("div",{class:"pw-box"},u("div",{class:"pw-h"},"写提示词用的准则"),u("p",{class:"pw-hint"},"想让生成的条目换一种风格，改这里。改过的会标出来，可以单独恢复默认。"),Zu.map(([i,o])=>{const c=e.templates[i]??Ue[i],p=e.templates[i]!==void 0&&e.templates[i]!==Ue[i];return u("details",null,u("summary",null,o,p?"（已修改）":""),Br({title:o,get:()=>e.templates[i]??Ue[i],oninput:d=>{e.templates[i]=d,te()}}),u("div",{class:"pw-row"},H("恢复默认",()=>{delete e.templates[i],te(),F()},"pw-sm",{disabled:!p})))})),e.bases.length>0&&u("div",{class:"pw-box"},u("div",{class:"pw-h"},"基础设置（采样参数等）"),e.bases.map(i=>u("div",{class:"pw-row"},u("span",null,`${i.name}（${Object.keys(i.settings).length} 项）`),H("删除",()=>{e.bases=e.bases.filter(o=>o!==i);for(const o of e.combos)o.baseId===i.id&&(o.baseId="");te(),F()},"pw-sm pw-danger")))),u("div",{class:"pw-box"},u("div",{class:"pw-h"},"数据"),u("p",{class:"pw-hint"},`条目 ${e.entries.length} 个，预设 ${e.combos.length} 个，保存在酒馆的扩展设置里。`),u("div",{class:"pw-row"},H("备份收藏和全部预设",()=>Hs("预设工坊-全部.json",JSON.stringify(Ls(e.entries,e.combos),null,2))),u("details",{class:"pw-danger-zone"},u("summary",null,"清空数据"),H("清空收藏和预设",()=>{ct.yes("清空全部条目和预设？这个操作不能撤销，建议先导出备份。")&&(e.entries=[],e.combos=[],e.currentComboId="",k.selected.clear(),te(),F())},"pw-danger"))))),r=[...n.children],s=[["section-api","AI 连接",!0],["section-keyboard","手机键盘",!1],["section-bagu","反八股规则",!1],["section-kinds","条目类型",!1],["section-guides","写作准则",!1],...e.bases.length?[["section-bases","基础设置 · 采样参数",!1]]:[],["section-data","数据与备份",!0]],a=[u("p",{class:"pw-hint"},"本页设置会自动保存。"),k.settingsReturn&&H("← 返回写提示词",()=>{const i=k.settingsReturn;k.settingsReturn=null,k.tabScroll??={},k.tabScroll[i.tab]=i.scroll,Us(i.tab)},"pw-sm"),...r.map((i,o)=>(i.firstElementChild?.classList.contains("pw-h")&&i.firstElementChild.remove(),_u(s[o][0],s[o][1],i,s[o][2])))];return n.replaceChildren(...a.filter(Boolean)),n}function tm({name:e="新条目",content:t="",role:n="system",tags:r=[],source:s="外部"}={}){const a=ne(),i=He({name:qt(a.entries,String(e).trim()||"新条目"),content:t,role:n,tags:ft(r),source:s});return a.entries.unshift(i),te(),ye&&F(),i}var el={"data-pw-owner":cn};function nm(){ze.removeEventListener("beforeunload",uc),Or.off?.(),clearTimeout(Or.timer),clearTimeout(yc.timer),ye?._pwComboDrag?.dispose(),ye?._pwViewport?.dispose();for(const e of je.querySelectorAll(`.pw-focus-editor[data-pw-owner="${cn}"]`))e.close();for(const e of je.querySelectorAll(`[data-pw-owner="${cn}"]`))e.remove();ye=ve=Et=null,ze.PresetWorkshop?.owner===cn&&delete ze.PresetWorkshop}function tl(){for(const e of["pw-menu-btn","pw-drawer","pw-root"])je.getElementById(e)?.remove();if(!Pr){const e=je.getElementById("extensionsMenu");if(e&&e.append(u("div",{id:"pw-menu-btn",...el,class:"list-group-item flex-container flexGap5 pw-menu-item",onclick:()=>{Dr(),e.style.display="none"}},u("div",{class:"fa-solid fa-puzzle-piece extensionsMenuExtensionButton"}),u("span",null,"预设工坊"))),Sd){const t=yt("eventOn"),n=yt("getButtonEvent");if(t&&n)try{t(n("预设工坊"),Dr),yt("appendInexistentScriptButtons")?.([{name:"预设工坊",visible:!0}])}catch(r){console.warn(`[${Gt}] 脚本按钮注册失败，仍可从魔棒菜单打开`,r)}}else{const t=je.getElementById("extensions_settings2")||je.getElementById("extensions_settings");t&&t.append(u("div",{id:"pw-drawer",...el,class:"inline-drawer"},u("div",{class:"inline-drawer-toggle inline-drawer-header"},u("b",null,`预设工坊 v${cc}`),u("div",{class:"inline-drawer-icon fa-solid fa-circle-chevron-down down"})),u("div",{class:"inline-drawer-content"},H("打开预设工坊",Dr))))}}ze.PresetWorkshop={open:Dr,close:Fs,core:Jo,owner:cn},Pr?.register("preset",{open:Dr,close:Fs,isOpen:()=>!!ye,addEntry:tm}),window.addEventListener("pagehide",nm),ze.addEventListener("beforeunload",uc)}je.readyState==="loading"?je.addEventListener("DOMContentLoaded",tl):tl();var nl={};On(nl,{DEFAULT_TEMPLATES:()=>Wt,EXTERNAL_NOTE:()=>hl,IMAGE_MODES:()=>ll,LIB_KIND:()=>Ai,REGEX_PREFIX:()=>sr,RULE_TAG:()=>dn,STYLES:()=>ea,TEMPLATE_LABELS:()=>sl,applyDesign:()=>gl,asRegexLiteral:()=>Di,buildAnalyzePrompt:()=>pl,buildCheckPrompt:()=>ul,buildDesignPrompt:()=>al,buildFieldsPrompt:()=>ol,buildRevisePrompt:()=>cl,clone:()=>Pt,countGroups:()=>ml,designToText:()=>na,exportLibrary:()=>kl,externalDesign:()=>Mi,fieldsToText:()=>ta,guessImageType:()=>om,guessSample:()=>Bi,hasRule:()=>yl,imageModeText:()=>Hr,newDesign:()=>ir,normText:()=>Ot,parseDesign:()=>ra,parseFields:()=>Rr,parseRegexLiteral:()=>Fr,parseSpec:()=>dl,plainChar:()=>Ei,previewDoc:()=>wl,protectMacros:()=>Ti,readCard:()=>Pi,readLibrary:()=>Sl,replaceScript:()=>Ur,restoreMacros:()=>rl,ruleBlock:()=>ia,specKind:()=>zr,specScene:()=>Oi,summarizeCard:()=>rm,summarizeWorld:()=>Ni,tidyHtml:()=>un,toRegexScripts:()=>aa,uid:()=>ar,validateDesign:()=>sa,withRule:()=>vl,withoutOurRegex:()=>Li,withoutRule:()=>xl});var Ai="status-forge-library",sr="【状态栏】",dn="status_bar_rule",ar=(e="sf")=>`${e}_${Math.random().toString(36).slice(2,8)}${Date.now().toString(36).slice(-4)}`,Pt=e=>e===void 0?void 0:JSON.parse(JSON.stringify(e)),Ot=e=>String(e??"").replace(/\r\n?/g,`
+`).replace(/[ \t]+$/gm,"").trim(),Ei=e=>String(e??"").replace(/\{\{\s*char\s*\}\}/gi,"char"),Ti=e=>String(e??"").replace(/\{\{/g,"⟦⟦").replace(/\}\}/g,"⟧⟧"),rl=e=>String(e??"").replace(/⟦⟦/g,"{{").replace(/⟧⟧/g,"}}"),ea=[{id:"card",label:"圆角卡片",desc:"浅色或深色圆角卡片，柔和阴影，左侧一条强调色竖线，字段两列排布"},{id:"terminal",label:"终端/HUD",desc:"等宽字体，深色底，细边框，字段像终端输出或游戏 HUD，少量荧光色强调"},{id:"journal",label:"手帐/便签",desc:"米色纸张质感，手写感标题，胶带或折角装饰（只用 CSS），字段像贴纸"},{id:"magazine",label:"杂志排版",desc:"大标题加细线，衬线字体，留白多，字段像杂志侧栏的小标注"},{id:"minimal",label:"极简一行",desc:"一行或两行小字，低对比度，不抢正文，用分隔符和少量图标"},{id:"ancient",label:"古风卷轴",desc:"宣纸色底，朱红印章点缀，竖线分隔，字体偏楷体/宋体"},{id:"cyber",label:"赛博霓虹",desc:"深紫或深蓝底，霓虹描边，切角（clip-path），进度条用渐变"},{id:"glass",label:"玻璃拟态",desc:"半透明模糊底（backdrop-filter），细白边，渐变背景色块，圆润大字号数值"},{id:"letter",label:"复古情书",desc:"奶油纸、锈红印章、细金线、打字机标签、手写信纸的错落排版"},{id:"archive",label:"档案/案件",desc:"旧档案纸、打孔线、编号签、黑墨印章、文件夹式字段分组"},{id:"horror",label:"黑白恐怖",desc:"黑白铜版画的高对比度、克制血红点缀、细刻线和不规则边缘"},{id:"blueprint",label:"蓝图/打孔",desc:"克莱因蓝与米白纸交叠，打孔、分割线、网格和剪影装饰"},{id:"fantasy",label:"西幻手稿",desc:"羊皮纸与羊毛灰色调、纹章、旧地图网格、金属细饰边"},{id:"game",label:"游戏角色面板",desc:"分栏属性卡、数值徽章、任务追踪、道具栏和紧凑的资源条"},{id:"mono",label:"黑白刊物",desc:"高对比黑白、网点、报纸分栏与剪贴纸条，避免多余装饰"},{id:"dream",label:"梦核/朦胧",desc:"低饱和渐变、雾状留白、漂浮的小标题与半透明卡片"}],Wt={common:`你是“酒馆状态栏设计师”，同时是写提示词的老手。任务：为一张角色卡设计一个状态栏，它由四部分组成，缺一不可：
+1. 文本块：角色扮演模型每次回复末尾（或开头）输出的固定格式文本；
+2. 输出要求（instruction）：写进角色卡，约束角色扮演模型怎么写、怎么更新这个块；
+3. 正则（find / replace）：酒馆在聊天显示时把文本块替换成 HTML；
+4. 样例（sample）：一段真实的文本块，用来在预览里验证正则。
+
+<文本块>
+- 先定主题：读角色卡，判断这张卡的状态栏讲什么、玩家最该一眼看到什么。比如修仙卡看境界和伤势，校园卡看课表和社团，悬疑卡看线索和嫌疑，日常恋爱卡看身体、心事和约定。主题写进 sf_note。
+- 再按主题定字段：没有哪一项是必须的，不默认加身体、心理、计划。主题需要什么就写什么，可以是身体各部位、心事、接下来的打算，也可以是这张卡特有的量（境界、线索、课表、资源、任务进度、某段关系的阶段……），能用卡里的专有名词就用（地名、组织、物品、称谓）。
+- 不要默认套用好感度、警戒度这类通用数值，除非卡里本来就有这类玩法。
+- 字段只留对这张卡有用的，宁少勿多（一般 4-9 个）。
+- 用一个固定的外层标签包住（如 <status>…</status>）。做法 B 每行一个“键：值”，字段顺序固定，值只写一行；做法 A 每行一个“[键|值]”，同一个键可以出现多次（身体各部位、计划）。
+- 需要画进度条的字段，值只能是 0-100 的整数，不带单位和百分号。
+</文本块>
+
+<输出要求的写法>
+输出要求是给另一个模型看的提示词，它的唯一作用是约束输出范围。写法：
+- 结构按“要求 → 资料 → 任务启动”：外层用 XML 标签分区，区内用 YAML 风格的“键: 值”。
+- 要求区（硬性规则，逐条、机械化，不用“适当”“尽量”“合理”这类模糊词）：
+  · 何时输出：每一次回复都输出，放在回复的最末尾（或开头），一次只输出一个块；
+  · 格式锁定：外层标签、键名、字段顺序、冒号都不得改动，不得增删字段，值内不得换行；
+  · 块内只写值，不写解释、不加 Markdown、不用代码块包裹；块外的正文不得复述块内的数值；
+  · 继承：本轮没有变化的字段，原样沿用上一次块里的值，不得重置或随意改动；
+  · 更新：对每个会变化的字段写清“什么情况下变、每次最多变多少、依据什么”（例：好感度：char 被 {{user}} 真心帮助 +4~6，被冒犯 -5~10，单轮变化不超过 10）；
+  · 初始值：第一条回复用的初始值（从角色卡资料推出来，资料里没有就自己定一个合理值并写死）。
+- 资料区：字段表，每个字段一行，写含义、取值类型（整数范围 / 枚举可选值 / 短语且不超过 N 个字）。
+- 示例区：一段完整的文本块，必须和 sample 完全一致。
+- 启动：最后一句话，命令模型从本条回复开始按以上规则输出。
+- 提到角色一律写 char（不要写 {{char}}），用户写 {{user}}。不要出现 Human: / Assistant: 前缀。
+- 写完检查：要求之间、要求和示例之间有没有矛盾；有就改掉。
+</输出要求的写法>
+
+<正则>
+- 用 /pattern/flags 的形式。做法 B 每个字段一个捕获组，按字段顺序；做法 A 只用一个捕获组抓整个块。
+- 匹配键时同时兼容中文冒号“：”和英文冒号“:”，冒号前后允许空格；字段之间用 \\s* 跨行；值用 (.*?) 或 ([^\\n]*?) ，不依赖块尾有没有换行；外层标签前后允许空白。
+- 不要写会大量回溯的嵌套量词。
+</正则>
+
+<两种做法>
+先选一种，在 sf_note 里写明选了哪种：
+A. 完整网页（推荐，参考模板都是这种）：replace 用 \`\`\`html 开头、\`\`\` 收尾，中间是一份完整网页（<!DOCTYPE html> 到 </html>）。酒馆助手会把它渲染成独立页面，可以写 <script>、引用网络字体。find 只要一个捕获组抓整个块：/<标签>([\\s\\S]*?)<\\/标签>/ ；网页里放 <script type="text/plain" id="raw">$1<\/script>，再用脚本读出来逐行解析。
+  · 文本块可以用“[键|值]”一行一条，同一个键可以出现多次（比如身体各部位、待办）；多人用“[人物|姓名|身份]”开新一段。
+  · 这种做法字段数不必等于捕获组数，sf_fields 照常列出全部字段。
+B. 纯 HTML：replace 只用 HTML + CSS，每个字段一个捕获组，用 $1 $2 … 引用。适合不装酒馆助手的用户。
+</两种做法>
+
+<HTML 与 CSS>
+- 字面的美元符号写成 $$。
+- 做法 B：不写 <script>、不写事件属性（onclick 等）、不引用外部资源；CSS 写在开头的 <style> 里，类名带唯一前缀（如 sf-xxxx-），不写 body、html、:root、*、.mes 这类全局选择器；外层只有一个根元素；HTML 里不能有空行，不要用 4 个以上空格缩进。
+- 做法 A：网页自成一体，可以写全局样式；字体从 fonts.googleapis.com 或 cdn.jsdelivr.net 引用，并写好系统字体兜底；不要依赖酒馆主题变量。
+- 手机优先：宽度自适应，box-sizing:border-box，不用 position:fixed，字号不小于 12px，用 flex/grid 换行。
+- 进度条用内层元素的 width（对应字段必须是 0-100 整数）。可折叠用 <details><summary>。
+</HTML 与 CSS>
+
+<美化要求>
+- 状态栏就是状态栏：内容按主题定（身体、心事、计划，或者境界、线索、课表这类卡里特有的东西），不做聊天框、弹幕、小游戏这类花样。
+- 配色只用两到四种颜色，定义成 CSS 变量；做白天、夜晚两套（:root 一套，:root[data-mode="night"] 一套），做法 A 加一个“昼 / 夜”切换按钮，选择存进 localStorage 的 nf-status-mode。
+- 要有质感：用纸纹、网点、小网格、色块、硬阴影、粗描边这类手段；不要光滑渐变、玻璃拟态、发光、莫名其妙的细线，不要没有意义的 SVG 装饰。
+- 不要用只有一侧带颜色的边框做强调。
+- 标题和正文用不同字体：正文用楷体（LXGW WenKai、KaiTi 一类），标题可以用更有个性的中文字体。
+- 装饰文字全部用中文，不写英文。
+</美化要求>
+
+写完自查：做法 B 字段数 = 捕获组数；replace 里每个 $n 都存在；sample 能被 find 匹配；instruction 的示例和 sample 一致；没有自相矛盾的要求。`,image:`用户给了参考图。参考图有两种用法，先看“参考图用法”和“参考图拆解”里的“类型”：
+
+<类型：界面>（图本身就是状态栏、游戏 HUD、App 界面、网页卡片）
+目标是“放在一起看像同一个设计”：
+- 复刻优先级：布局结构 > 配色 > 形状细节（圆角、边框、阴影、分隔线）> 字体气质 > 装饰。
+- 以拆解为准逐项实现：每一个区域、颜色、组件都要在 HTML/CSS 里有对应；尺寸按比例估，以手机宽度约 360px 为基准换算。
+- 颜色用拆解里的十六进制值，不换成你喜欢的颜色，不擅自加图里没有的渐变、阴影、装饰。
+- 图里的文字只是占位，换成用户的字段；图里有、字段里没有的区域，映射到最接近的字段或去掉，在说明里写清楚。
+</类型：界面>
+
+<类型：风格图>（插画、照片、海报、壁纸、游戏 CG、配色卡、任何“我喜欢这个感觉”的图）
+不要复刻图里的内容（人物、风景、物件），而是把它的风格语言“翻译”成一个状态栏 UI，让人一看就觉得“和这张图是一套的”：
+- 色板：用拆解里从图中取的颜色，按角色分配（底色、面板、主文字、次文字、强调、边框）。文字和底色的对比度要够，看不清就在同一色相里调深或调浅，不换色相。
+- 质感：图的材质感（纸张、水彩、金属、玻璃、布料、霓虹、胶片颗粒……）用 CSS 表现：渐变、叠加的 radial-gradient、box-shadow、inset 阴影、细描边、backdrop-filter、repeating-linear-gradient 做纹理。
+- 形状语言：图里是圆润还是锐利、手绘还是几何、对称还是错落——落实到圆角大小、切角（clip-path）、边框样式、排布方式。
+- 装饰母题：从图里挑 1-2 个有代表性的元素（花瓣、星点、藤蔓、云纹、齿轮、雪花、光斑……），用 emoji / Unicode / 内联 SVG / CSS 画成小装饰，放在标题、角落、分隔线或进度条上。装饰克制，不能压过信息。
+- 情绪：拆解里的情绪关键词决定整体的密度、留白、字重和动感。
+- 组件跟着风格走：进度条、标签、分隔线都要“像这张图里会出现的东西”（例：水彩风的进度条用晕染渐变和不规则圆角，赛博风用切角和发光描边），不要用千篇一律的默认样式。
+- 在说明里写一句：你从图里取了哪些风格元素、分别用在了哪里。
+</类型：风格图>
+
+两种情况通用：CSS 做不到的（照片、复杂插画、特殊字体）用最接近的 CSS / emoji / 内联 SVG 替代并在说明里写出来；参考图只决定视觉，文本块、输出要求和正则的稳定性要求不变。`,analyze:`你是视觉分析师。用户给了一张或几张参考图，之后会有人根据它用 HTML + CSS 做一个角色扮演用的状态栏。只描述看到的东西，不要设计状态栏本身。
+
+第一步，判断类型（用户在“参考图用法”里指定了的就按用户的来）：
+- 界面：图本身就是状态栏、游戏 HUD、App/网页界面、信息卡片——要照着复刻；
+- 风格图：插画、照片、海报、壁纸、CG、配色卡等——不复刻内容，只提炼风格。
+
+第二步，按类型输出。只输出一个 <sf_spec> 标签，里面用 YAML 风格，第一行必须是“类型: 界面”或“类型: 风格图”，第二行必须是“画面: ”——如实写图里有什么（主体、构图、看得清的文字照抄），这一行是给用户核对你是不是真的看到了图。
+
+如果你没有收到任何图片、或者图片打不开看不清，只输出 <sf_spec>类型: 无图</sf_spec>，绝对不要凭空编造。
+
+类型是界面时：
+<sf_spec>
+类型: 界面
+画面: 如实写图里有什么，看得清的文字照抄
+整体: 形状、宽高比、背景（十六进制/渐变/纹理）、外框（圆角 px、边框粗细与颜色、阴影）
+配色: 背景、面板、主文字、次要文字、强调色（可多个）、边框/分隔线，全部写十六进制
+布局:
+  - 区域: 从上到下、从左到右逐个写，每个写位置、宽度占比、内容类型（标题/标签+数值/进度条/图标/胶囊标签/大号数字）、对齐、原文
+组件样式: 进度条、标签/胶囊、分隔线、图标各自的样式
+字体: 气质（无衬线/衬线/等宽/手写/楷宋）、字号层级（如 18/14/12）、粗细与字间距
+装饰: 逐个写
+复刻难点: CSS 难做到的部分和替代方案
+</sf_spec>
+
+类型是风格图时：
+<sf_spec>
+类型: 风格图
+画面: 如实写图里有什么，看得清的文字照抄
+色板: 5-8 个颜色，每个写十六进制和它在图里的位置/占比，例如 "#2b3a55 大面积夜空"
+建议配色角色: 底色、面板、主文字、次文字、强调、边框各用哪个色（文字和底色要有足够对比度）
+质感: 材质与笔触（纸张/水彩/油画/金属/玻璃/布料/霓虹/胶片颗粒…），以及可用的 CSS 表现手法
+形状语言: 圆润/锐利、手绘/几何、对称/错落、线条粗细
+装饰母题: 4-5 个能用 emoji/Unicode/内联 SVG/CSS 画出来的代表性元素
+光影: 柔光/硬光/逆光/发光/高对比/低饱和…
+情绪关键词: 4-5 个
+字体气质: 适合这张图的字体类型和字重
+转译建议: 这种风格的状态栏大概长什么样（整体形状、进度条和标签像什么、装饰放哪）
+</sf_spec>
+不要输出 <sf_spec> 之外的任何文字。`,check:`你会拿到参考图（和它的拆解）以及一份已经写好的状态栏设计。按拆解里的“类型”对照：
+- 类型是界面：逐项找 replace（HTML/CSS）和参考图不一致的地方——布局结构、各区域比例、配色值、圆角/边框/阴影、进度条和标签样式、字体气质与字号层级、装饰。
+- 类型是风格图：不要求内容一样，检查“像不像一套”——色板是否取自图里且角色分配合理、质感和形状语言是否体现、装饰母题有没有用上且不过量、组件是否跟着风格走而不是默认样式、文字是否清晰可读。
+再检查 instruction：每个字段是否有取值类型、更新规则、继承规则和初始值，示例是否和 sample 一致。
+然后输出修正后的完整设计（格式同下）。在 <sf_note> 里加一行“差异：”逐条列出你改了什么；确实没有要改的，原样输出设计并写“差异：无”。字段、捕获组和文本块格式不要改。`,card:`角色卡资料会附在后面（角色卡字段、绑定的世界书、开场白，可能还有最近几条聊天）。这是设计的主要依据，先读完再动手：
+- 提取：char 是谁、和 {{user}} 是什么关系、故事在什么时间地点、卡的核心矛盾和玩法、世界书里有哪些会随剧情变化的东西（资源、阶段、秘密、规则）。
+- 字段、措辞、初始值都从这里来；初始值优先用开场白和最近聊天里的实际状态。
+- 视觉气质也要贴合这张卡（古风卡不要赛博风），除非用户明确要求或参考图就是那样——有参考图时，视觉按参考图，内容按卡。
+- 资料里写了的设定不要改，没写的不要编成“设定”。`,fields:`你是“酒馆状态栏设计师”。根据角色卡资料和用户需求，为状态栏推荐字段。要求：
+- 4 到 9 个字段，宁少勿多，每个都必须对这张卡的玩法有用（推动剧情、记录关系或资源、提醒时间地点）；
+- 不要放与本卡无关的通用字段；
+- 每个字段给出：键（2-6 个字）、含义与取值规则（取值类型 + 范围或字数上限 + 怎么变化）、示例值；
+- 要画进度条的字段，取值写成 0-100 的整数；
+- 输出格式：每行一个字段，“键｜含义与取值规则｜示例”，用全角竖线分隔，不要任何别的文字。`,output:`输出格式（严格遵守。必须用下面这些 XML 标签输出，标签外不用代码块（反引号围栏）；只有做法 A 的 sf_replace 里面用 \`\`\`html 围栏、不加 <content> 之类的外层包装；预设要求先写 <planing> 之类的思考块时写在最前面，成品仍然是这些标签。标签名不要改，每个标签只出现一次，按这个顺序）：
+<sf_note>
+理解：用户要什么（一句话）
+主题：这张卡的状态栏讲什么（一句话）
+假设：你补充的假设（没有写“无”）
+配色：主色/辅色/背景/强调色（十六进制）
+对应：字段 → 捕获组编号
+字段依据：每个字段 → 角色卡里的哪条设定（引原话的关键词）；没有角色卡资料就写“无资料”
+矛盾检查：发现的矛盾（没有写“无”）
+</sf_note>
+<sf_name>设计名称，2-8 个字</sf_name>
+<sf_fields>
+键｜含义与取值规则｜示例
+（每行一个字段，全角竖线分隔，顺序 = 捕获组顺序）
+</sf_fields>
+<sf_instruction>
+给角色扮演模型的输出要求（会写进角色卡），按“要求 → 资料 → 示例 → 启动”的结构。
+</sf_instruction>
+<sf_find>/正则/flags</sf_find>
+<sf_replace>
+做法 A：\`\`\`html 围栏包住的完整网页，里面用 $1 放入整个块；做法 B：开头是 <style> 的 HTML 字符串，用 $1 $2 … 引用捕获组，没有空行
+</sf_replace>
+<sf_sample>
+一段完整的文本块（含外层标签），能被 sf_find 匹配，和 instruction 里的示例一致
+</sf_sample>
+除上面的标签外不要输出任何文字，不要用 Markdown 代码块包裹。`,revise:"你会拿到一份现有的状态栏设计和用户的修改意见。只改意见涉及的部分，其余保持不变（字段顺序、捕获组数量变了的话，要同步改 find、replace、instruction、sample）。输出仍然是完整的一份设计，格式同上。"},sl=[["common","通用设计准则（头部，含输出要求的写法）"],["image","参考图怎么用（界面 / 风格图）"],["analyze","参考图拆解"],["check","对照参考图自查"],["card","角色卡资料怎么用"],["fields","推荐字段"],["output","输出格式"],["revise","修改设计"]],Vt=(e,t)=>{const n=Ot(e);return n.length>t?`${n.slice(0,t)}…`:n};function Ni(e,{constantChars:t=900,otherChars:n=160,max:r=40}={}){const s=e?.entries,a=(Array.isArray(s)?s:Object.values(s||{})).filter(d=>d&&!d.disable&&d.enabled!==!1&&Ot(d.content)),i=d=>!!d.constant,o=d=>d.comment||d.name||[].concat(d.key||d.keys||[]).slice(0,3).join("/")||"未命名";return{text:[...a.filter(i),...a.filter(d=>!i(d))].slice(0,r).map(d=>i(d)?`【常驻】${o(d)}
+${Vt(d.content,t)}`:`【触发：${[].concat(d.key||d.keys||[]).slice(0,4).join("、")||"无关键词"}】${o(d)}：${Vt(d.content,n)}`).join(`
+
+`),total:a.length,constant:a.filter(i).length}}function Pi(e,{world:t=null,worldName:n="",chat:r=[],limit:s=14e3}={}){if(!e)return{text:"",stats:[]};const a=e.data||{},i=(D,Q)=>Ot(D??Q??""),o=[],c=[],p=(D,Q,z)=>{Q&&(c.push(`[${D}]
+${Q}`),z&&o.push(z))},d=i(e.description,a.description).replace(new RegExp(`<${dn}>[\\s\\S]*?</${dn}>`,"g"),"").trim();p("名字",i(e.name,a.name)),p("描述",Vt(d,4e3),d&&`描述 ${d.length} 字`),p("性格",Vt(i(e.personality,a.personality),1500),i(e.personality,a.personality)&&"性格"),p("场景",Vt(i(e.scenario,a.scenario),1500),i(e.scenario,a.scenario)&&"场景");const m=Ot(a.extensions?.depth_prompt?.prompt);p("角色备注",Vt(m,1200),m&&"角色备注"),p("后置指令",Vt(a.post_history_instructions,800));const g=[i(e.first_mes,a.first_mes),...(a.alternate_greetings||[]).map(D=>Ot(D))].filter(Boolean);if(g.length&&p("开场白",g.slice(0,3).map((D,Q)=>`（${Q+1}）${Vt(D,Q?500:1200)}`).join(`
+`),`开场白 ${g.length} 个`),t){const D=Ni(t);p(`世界书《${n||"绑定的世界书"}》`,D.text,D.total&&`世界书 ${D.total} 条（常驻 ${D.constant}）`)}const y=a.character_book;if(y?.entries?.length){const D=Ni(y);p("角色卡内嵌世界书",D.text,D.total&&`内嵌世界书 ${D.total} 条`)}const E=(r||[]).filter(D=>D&&!D.is_system&&Ot(D.mes)).slice(-8);E.length&&p("最近的聊天",E.map(D=>`${D.is_user?"{{user}}":D.name||"char"}：${Vt(D.mes,400)}`).join(`
+`),`最近聊天 ${E.length} 条`);let P=c.join(`
+
+`);return P.length>s&&(P=`${P.slice(0,s)}
+…（已截断）`),{text:P,stats:o.filter(Boolean)}}function rm(e,t=5e3){return Pi(e,{limit:t}).text}function Rr(e){const t=[];for(const n of String(e??"").split(`
+`)){const r=n.trim().replace(/^[-*\d.、)\s]+/,"");if(!r)continue;const[s,a="",i=""]=r.split(/[｜|]/).map(o=>o.trim());s&&t.push({key:s,hint:a,example:i})}return t}var ta=e=>(e||[]).map(t=>[t.key,t.hint,t.example].join("｜")).join(`
+`);function al({card:e="",need:t="",fields:n="",styles:r=[],customStyle:s="",options:a={},images:i=0,spec:o="",mode:c="auto",reference:p=null,templates:d}={}){if(p?.kind==="opening")return am({card:e,need:t,styles:r,customStyle:s,reference:p,images:i,spec:o});const m={...Wt,...d||{}},g=[m.common,e?m.card:"",p?"固定参考正则是作者选定的设计依据：深入参考它的真实 find、HTML、CSS、字段协议与交互结构，结合本卡重新生成可运行的完整正则；参考稿中标为省略的素材和代码必须自行补全，不能复制省略提示或示例人名。以作者明确的新需求为准，最终只按本任务规定的 <sf_*> 格式返回。":"",i?m.image:"",m.output].filter(z=>String(z).trim()).join(`
+
+`),y=r.map(z=>ea.find(M=>M.id===z)).filter(Boolean).map(z=>`${z.label}：${z.desc}`);s.trim()&&y.push(s.trim());const E=[];E.push(`块的位置：${a.position==="top"?"每次回复开头":"每次回复末尾"}`),a.collapsible&&E.push("做成可折叠（<details>），默认展开"),a.compact&&E.push("尽量紧凑，高度控制在手机屏幕的四分之一以内"),a.lang==="en"&&E.push("状态栏上显示的文字用英文（instruction 仍用中文）");const P={layout:{single:"字段单列排版",two:"字段双列排版，手机端必须能换行",grid:"多格仪表盘布局",asym:"杂志式错落布局",timeline:"纵向时间轴布局"},density:{tight:"超紧凑密度，尽量减少高度",normal:"常规阅读密度",airy:"留白宽松、内容易读；此项优先于紧凑开关"},surface:{paper:"使用纸张磨损的视觉质感",ink:"深墨或黑底材质",glass:"玻璃半透明材质",solid:"使用干净的纯色块背景",transparent:"根面板透明，边界保持可读"},font:{serif:"标题和文字偏宋体/衬线气质",sans:"现代无衬线字体",mono:"打字机或等宽字体",hand:"手写感但保证系统字体回退可读"},border:{none:"没有外边框",fine:"细实线边框",dash:"虚线边框",double:"双线边框",rough:"不规则的撕纸边缘"},decoration:{none:"不添加装饰",light:"仅少量装饰",rich:"装饰丰富，不能压住字段和值"},progress:{bar:"有数值时优先横向进度条",pill:"优先胶囊标签和徽章",ring:"有数值时优先圆环指标",text:"只用文字和数字，不画进度条"},mobile:{stack:"手机窄屏必须自然切为单列",wrap:"手机窄屏允许多列自动换行",keep:"手机尽量保持原本列结构，不允许横向溢出"},motion:{off:"完全静态无动画",subtle:"轻微 CSS 渐入或呼吸，尊重 prefers-reduced-motion",interactive:"仅 CSS 悬停与焦点反馈，触屏也要能用"}};for(const[z,M]of Object.entries(P)){const _=a[z];M[_]&&E.push(M[_])}a.fieldCount&&a.fieldCount!=="auto"&&E.push(`字段数控制在 ${a.fieldCount} 个；这是作者明确指定，优先于默认字段数建议`),a.showTitle===!1&&E.push("不展示额外大标题，只留字段区"),a.groupFields&&E.push("相关字段按语义分组，每组有轻量的小标题或分隔"),String(a.accentColor||"").trim()&&E.push(`强调色：${a.accentColor.trim()}（必须实际用在重点线条或组件上）`),String(a.backgroundColor||"").trim()&&E.push(`底色：${a.backgroundColor.trim()}（必须保留文字对比度）`),String(a.mustHave||"").trim()&&E.push(`作者要求必须出现：${a.mustHave.trim()}`),String(a.avoid||"").trim()&&E.push(`作者明确禁止：${a.avoid.trim()}`),E.push(p?"显式布局、配色、组件和参考模板优先；保留有辨识度的版式和交互。原稿已有的固定素材链接可以沿用，缺失素材用 CSS 或内联 SVG 补齐；保证 CSS 作用域隔离和手机自适应。":"显式选中的布局、配色、组件要求高于默认风格建议；保持 CSS 作用域隔离、手机自适应、无外部资源依赖");const D=p?`<参考模板>
+模板：${p.name}
+来源：${p.type}
+原正则 find：
+${p.find}
+
+原版输出字段指导：
+${p.instruction}
+
+参考 replace HTML/CSS/脚本：
+${p.replace}
+</参考模板>
+<参考使用要求>把这份参考状态栏当成版式、代码和交互范本；适配当前角色卡、字段与需求。保留所选模板具有辨识度的结构，完成独立、可运行的 HTML 与正则；不要照搬原稿中的固定数据、示例人物或资源省略标记。</参考使用要求>`:"",Q=[e&&`<角色卡资料>
+${e}
+</角色卡资料>`,D,n.trim()&&`<想要的字段>
+${n.trim()}
+</想要的字段>`,y.length&&`<风格>
+${y.join(`
+`)}
+</风格>`,`<选项>
+${E.join(`
+`)}
+</选项>`,i&&`<参考图>共 ${i} 张，见附图</参考图>`,i&&`<参考图用法>
+${Hr(c,o)}
+</参考图用法>`,i&&o.trim()&&`<参考图拆解>
+${o.trim()}
+</参考图拆解>`,`<需求>
+${t.trim()||"（用户没有额外需求，按资料和字段自行设计）"}
+</需求>`,"现在开始设计，严格按输出格式。"].filter(Boolean).join(`
+
+`);return{system:g,prompt:Q}}function sm(){if(I.lvDraft){const g=I.lvDraft.greets;return g.length?g.map((r,s)=>`开场白 ${s+1}（新增主页后目标 swipe_id=${s+1}）：${String(r).slice(0,700)}`).join("\n\n"):"草稿里还没有开场白，先做空目录，提醒作者写好开场白后同步调整目标索引。"}const e=St();if(!e)return"当前没有角色卡，请使用作者提供的资料并为目录预留条目。";const t=e.data||{};return[e.first_mes??t.first_mes??"",...t.alternate_greetings||e.alternate_greetings||[]].filter(r=>String(r).trim()&&String(r).trim()!=="【主页】").map((r,s)=>`开场白 ${s+1}（新增主页后目标 swipe_id=${s+1}）：${String(r).slice(0,700)}`).join(`
+
+`)||"当前角色卡没有真实开场白，先制作空目录，提醒作者新增开场白后同步调整目标索引。"}const il=`你正在制作“开场白主页正则”，不是角色回复末尾的状态栏。作者选择的固定开场白参考优先于普通状态栏模板。
+
+【美化】主页要有质感：两到四种颜色、白天和夜晚两套、纸纹网点或色块，不要发光和光滑渐变，装饰文字全用中文，正文用楷体。\n\n【严格运行契约】
+- find 使用 /【主页】/s，作用在酒馆开场白主页标记；不要匹配所有聊天消息。
+- replace 必须用 \`\`\`html 开头，完整包含 <!DOCTYPE html>、<html>、<body>、</body>、</html>，最后用 \`\`\` 收尾；酒馆助手按 fenced HTML 和完整 body 识别 iframe。
+- replace 内允许 <script> 和真实点击事件；目录按钮须通过酒馆助手 getChatMessages / setChatMessages，或与原参考等效的真实 SillyTavern 接口切换第 0 楼 swipe_id；失败时显示错误。不能生成只有装饰、点击没作用的网页。
+- 默认先新增一个独立主页开场白（原文仅【主页】）；原有开场白按顺序保留，在主页后面排列。第一个故事进入 swipe_id=1，第二个故事=2，以此类推。
+- 所有可显示的目录标题和简介根据所给角色卡真实开场白写，标题 2–6 字，简介 15–40 字，不剧透，禁止暴露模型提示词或演示角色。
+- CSS 要隔离到独立的页面根节点，手机宽度自动适配。参考稿有省略内容，须补全成完整正则，不得把省略标记复制进成品。
+- 如果没有足够的原卡开场白，做可编辑的目录示例并明确说明，禁止伪称已创建额外开场白。
+
+【输出格式】只输出以下标签，每个一次，严格按顺序，不要在外围用 Markdown 代码块包裹。注意 sf_replace 内的 HTML 围栏必须原样保留：
+<sf_note>设计说明与设置方法：需在角色卡第一个开场白放【主页】，后面放原来的故事开场白；写清楚缺少哪些信息。</sf_note>
+<sf_name>开场白主页名称</sf_name>
+<sf_fields></sf_fields>
+<sf_instruction>给作者的安装和目录维护说明（这段不能强制模型每轮输出主页）</sf_instruction>
+<sf_find>/【主页】/s</sf_find>
+<sf_replace>
+\`\`\`html
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"></head><body>...完整 CSS/HTML/JS...</body></html>
+\`\`\`
+</sf_replace>
+<sf_sample>【主页】</sf_sample>`;function am({card:e="",need:t="",styles:n=[],customStyle:r="",reference:s,images:a=0,spec:i=""}={}){const o=n.map(c=>ea.find(p=>p.id===c)).filter(Boolean).map(c=>`${c.label}：${c.desc}`).join("；");return{system:il,prompt:[`<开场白参考模板>
+名称：${s.name}
+特色：${s.description}
+原版 find：${s.find}
+原版代码（节选）：
+${s.replace}
+</开场白参考模板>`,e&&`<当前角色卡资料>
+${e}
+</当前角色卡资料>`,`<当前卡的全部开场白目录>
+${sm()}
+</当前卡的全部开场白目录>`,`<作者选定的风格>
+${o}
+${r}
+</作者选定的风格>`,a&&`<参考图>数量 ${a}；${i}</参考图>`,`<作者的具体需求>
+${t||"按选定模板的特色制作可以点击切换开场白的主页"}
+</作者的具体需求>`,"请输出完整可运行的新开场白主页正则，保留原版辨识度，生成所有 XML 标签。"].filter(Boolean).join(`
+
+`)}}function ol({card:e="",need:t="",templates:n}={}){return{system:{...Wt,...n||{}}.fields,prompt:[e&&`<角色卡资料>
+${e}
+</角色卡资料>`,`<需求>
+${t.trim()||"（没有额外需求）"}
+</需求>`].filter(Boolean).join(`
+
+`)}}function cl({design:e,request:t="",card:n="",images:r=0,spec:s="",mode:a="auto",templates:i}={}){if(e?.kind==="opening")return{system:il+`
+
+这是修改任务：保留可点击的开场白切换机制、完整 fenced HTML、真正的开场白目录索引，只改作者指定的内容，输出完整 XML 格式设计。`,prompt:`<当前设计>
+${na(e)}
+</当前设计>
+<角色卡>
+${n}
+</角色卡>
+<作者修改意见>
+${t}
+</作者修改意见>
+${r?`带 ${r} 张参考图；${s}`:""}
+请输出修正后的完整开场白主页正则。`};const o={...Wt,...i||{}},c=[o.common,o.revise,r?o.image:"",o.output].filter(d=>String(d).trim()).join(`
+
+`),p=[n&&`<角色卡资料>
+${n}
+</角色卡资料>`,`<现有设计>
+${na(e)}
+</现有设计>`,r&&`<参考图>共 ${r} 张，见附图</参考图>`,r&&`<参考图用法>
+${Hr(a,s)}
+</参考图用法>`,r&&s.trim()&&`<参考图拆解>
+${s.trim()}
+</参考图拆解>`,`<修改意见>
+${t.trim()}
+</修改意见>`,"输出修改后的完整设计，严格按输出格式。"].filter(Boolean).join(`
+
+`);return{system:c,prompt:p}}var ll=[{id:"auto",label:"自动判断"},{id:"mood",label:"风格图：喜欢它的感觉，提炼成状态栏"},{id:"ui",label:"界面截图：照着复刻"}];function Hr(e,t=""){const n=zr(t);return e==="ui"?"参考图是界面/状态栏截图：照着复刻布局和视觉（类型：界面）。":e==="mood"?"参考图只是风格参考（插画、照片、海报等）：不要复刻图里的内容，提炼它的色板、质感、形状语言、装饰母题和情绪，转译成状态栏（类型：风格图）。":n==="ui"?"按拆解判断，参考图是界面：照着复刻（类型：界面）。":n==="mood"?"按拆解判断，参考图是风格图：提炼风格转译成状态栏（类型：风格图）。":"先判断参考图是界面截图还是风格图，再按对应的方式使用。"}function Oi(e){const t=String(e??"").match(/^\s*画面\s*[:：]\s*(.+)$/m);return t?t[1].trim():""}function zr(e){const t=String(e??"").match(/类型\s*[:：]\s*(界面|风格图?|无图)/);return t?t[1]==="界面"?"ui":t[1]==="无图"?"none":"mood":""}function pl({images:e=1,need:t="",mode:n="auto",templates:r}={}){return{system:{...Wt,...r||{}}.analyze,prompt:[`<参考图>共 ${e} 张，见附图</参考图>`,`<参考图用法>
+${Hr(n)}
+</参考图用法>`,t.trim()&&`<用户的话（帮助你理解想参考图里的什么）>
+${t.trim()}
+</用户的话（帮助你理解想参考图里的什么）>`,"开始拆解，只输出 <sf_spec>。"].filter(Boolean).join(`
+
+`)}}function dl(e){const t=String(e??"").replace(/^```\w*\n?/gm,"").replace(/^```$/gm,""),n=t.match(/<sf_spec>([\s\S]*?)(<\/sf_spec>|$)/);return Ot(n?n[1]:t)}function ul({design:e,spec:t="",images:n=1,mode:r="auto",templates:s}={}){const a={...Wt,...s||{}},i=[a.common,a.image,a.check,a.output].filter(c=>String(c).trim()).join(`
+
+`),o=[`<参考图>共 ${n} 张，见附图</参考图>`,`<参考图用法>
+${Hr(r,t)}
+</参考图用法>`,t.trim()&&`<参考图拆解>
+${t.trim()}
+</参考图拆解>`,`<现有设计>
+${na(e)}
+</现有设计>`,"逐项对照后，输出修正后的完整设计，严格按输出格式。"].filter(Boolean).join(`
+
+`);return{system:i,prompt:o}}var ir=(e={})=>({kind:"status",name:"状态栏",fields:[],instruction:"",find:"",replace:"",sample:"",note:"",...e});function na(e){return`<sf_name>${e.name}</sf_name>
+<sf_fields>
+${ta(e.fields)}
+</sf_fields>
+<sf_instruction>
+${e.instruction}
+</sf_instruction>
+<sf_find>${e.find}</sf_find>
+<sf_replace>
+${e.replace}
+</sf_replace>
+<sf_sample>
+${e.sample}
+</sf_sample>`}function im(e,t){const n=e.match(new RegExp(`<${t}>([\\s\\S]*?)</${t}>`));if(n)return n[1];const r=e.match(new RegExp(`<${t}>([\\s\\S]*?)(?=<sf_\\w+>|$)`));return r?r[1]:null}function ra(e,t="status"){let n=t==="opening"?String(e??""):String(e??"").replace(/^```\w*\n?/gm,"").replace(/^```$/gm,"");const r=o=>{const c=im(n,o);return c==null?null:Ot(c)},s=r("sf_find"),a0=r("sf_replace"),a=t!=="opening"&&a0&&/<!doctype|<html[\s>]/i.test(a0)&&!/^\s*```html/i.test(a0)?"```html\n"+a0.trim()+"\n```":a0,i=ir({kind:t,name:(r("sf_name")||(t==="opening"?"开场白主页":"状态栏")).slice(0,30),fields:Rr(r("sf_fields")||""),instruction:Ei(r("sf_instruction")||""),find:s||"",replace:a||"",sample:r("sf_sample")||"",note:r("sf_note")||""});return i.truncated=!/<\/sf_sample>/.test(n),i.ok=!!(s&&a),i}function Fr(e){const n=String(e??"").trim().match(/^\/([\s\S]+)\/([a-z]*)$/);if(!n)return{error:"正则要写成 /pattern/flags 的形式"};try{return{re:new RegExp(n[1],n[2]),source:n[1],flags:n[2]}}catch(r){return{error:`正则写错了：${r.message}`}}}function ml(e){return new RegExp(`${e.source}|`).exec("").length-1}function un(e){return String(e??"").replace(/\r\n?/g,`
+`).split(`
+`).map(t=>t.trim()).filter(Boolean).join(`
+`)}function fl(e,t=!1){const r=String(e||"").trim().match(/^```html\s*\n([\s\S]*?)\n```\s*$/i);return r?t?r[1].replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,""):r[1]:""}function sa(e){if(e?.kind==="opening"){const c=[],p=[],d=Fr(e.find);d.error?c.push(d.error):d.re.test(e.sample||"")||c.push("开场白主页样例必须匹配 find 正则");const m=fl(e.replace);return m||c.push("开场白正则必须使用 ```html 围栏，且包含完整的 HTML 文档"),m&&(!/<body(?:\s[^>]*)?>/i.test(m)||!/<\/body>/i.test(m)||!/<\/html>/i.test(m))&&c.push("开场白主页必须有完整的 <body>…</body></html> 结构"),m&&!/<script\b/i.test(m)&&c.push("开场白目录缺少真实交互脚本，点击按钮不会切换开场白"),m&&!/setChatMessages|\.swipe\[/.test(m)&&p.push("尚未找到 setChatMessages / swipe 切换调用，请核对按钮能否真的跳转"),m&&!/addEventListener\s*\(|onclick\s*=/.test(m)&&p.push("尚未看到目录按钮事件绑定"),m&&!/data-opening-index|zoh-entry|opening|目录/.test(m)&&p.push("没有识别出开场白目录列表"),m.length>4e4&&p.push("开场白主页代码很长，请在手机上检查加载效果"),{errors:c,warns:p,groups:0}}const t=[],n=[],r=Fr(e.find);let s=0;if(r.error)t.push(r.error);else{s=ml(r.re);const c=new RegExp(r.source,r.flags.replace("g",""));e.sample.trim()?c.test(e.sample)||t.push("样例没有被 find 匹配上：预览是空的，酒馆里也不会替换"):n.push("没有样例，没法验证正则"),!/^\s*```html/i.test(String(e.replace))&&e.fields.length&&e.fields.length!==s&&n.push(`字段有 ${e.fields.length} 个，但正则有 ${s} 个捕获组`),/^\/\.\*\/|^\/\(\.\*\)\/$/.test(e.find)&&t.push("正则太宽，会匹配整条消息")}const fz=/^\s*```html/i.test(String(e.replace));const a=[...String(e.replace).matchAll(/\$(\d{1,2})/g)].map(c=>Number(c[1]));a.some(c=>c>s)&&t.push(`replace 里用了 $${Math.max(...a)}，但正则只有 ${s} 个捕获组`),s&&!a.length&&n.push("replace 里一个 $n 都没用，状态栏不会显示任何值");const i=String(e.replace);!fz&&/<script\b/i.test(i)&&t.push("replace 里有 <script>，但没有用 ```html 围栏包成完整网页，酒馆不会执行"),!fz&&/\son\w+\s*=/i.test(i)&&t.push("replace 里有事件属性（onclick 等）"),fz&&(!/<body[\s>]/i.test(i)||!/<\/html>/i.test(i))&&t.push("```html 围栏里要是完整网页：<html>、<body> 到 </html> 都要有"),fz&&!/```\s*$/.test(i.trim())&&t.push("```html 围栏没有用 ``` 收尾"),/javascript:/i.test(i)&&t.push("replace 里有 javascript: 链接"),/(src|href)\s*=\s*["']?https?:|url\(\s*["']?https?:|@import/i.test(i)&&n.push(fz?"用了网络字体，没网时会换成系统字体":"引用了外部资源，离线或被墙时会失效");const o=[...i.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)].map(c=>c[1]).join(`
+`);return!fz&&/(^|[}\s,;])(body|html|:root|\*|\.mes[\w_-]*)\s*[{,]/i.test(o)&&n.push("CSS 里有 body/html/* 等全局选择器，会影响整个酒馆页面"),/\n\s*\n/.test(i)&&n.push("HTML 里有空行（保存时会自动整理）"),i.length>(fz?7e4:14e3)&&n.push(`HTML 有 ${i.length} 字符，偏大`),fz&&!/data-mode/.test(i)&&n.push("没有昼夜两套（data-mode），建议加上"),!e.instruction.trim()&&!e.external&&n.push("没有给模型的输出要求，模型不会输出这个块"),{errors:t,warns:n,groups:s}}function gl(e,t=e.sample){const n=Fr(e.find);return n.error?{error:n.error,html:""}:new RegExp(n.source,n.flags.replace("g","")).test(t)?e?.kind==="opening"?{html:fl(e.replace,!1),fenced:!0}:/^\s*```html/i.test(String(e.replace))?{html:fl(t.replace(new RegExp(n.source,n.flags.replace("g","")),()=>un(e.replace).replace(/\$1/g,()=>(t.match(new RegExp(n.source,n.flags.replace("g","")))||[])[1]||"")),!1),fenced:!0}:{html:t.replace(new RegExp(n.source,n.flags.replace("g","")),un(e.replace))}:{error:"样例没有被 find 匹配上",html:""}}function wl(e,t=!0){return`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><body style="margin:0;padding:12px;background:${t?"#1c1f24":"#f4f1ea"};color:${t?"#dcdcd2":"#222"};font:15px/1.6 system-ui,'PingFang SC','Microsoft YaHei',sans-serif"><div style="max-width:560px;margin:0 auto"><p style="margin:0 0 10px;opacity:.85">（这里是 char 的回复正文……）</p>${e}</div>`}function Di(e){const t=String(e??"").trim();return/^\/[\s\S]*\/[a-z]*$/.test(t)?t:`/${t.replace(/\//g,"\\/")}/`}function Bi(e,t=[]){const n=Fr(Di(e));if(n.error)return"";const r=new RegExp(n.source,n.flags.replace("g",""));for(let s=t.length-1;s>=0;s--){const a=String(t[s]??""),i=a.match(r);if(!i)continue;if(a.length<=3e3)return a;const o=Math.max(0,i.index-200);return a.slice(o,o+Math.max(3e3,i[0].length+400))}return""}function Mi(e,t=""){return ir({name:String(e?.scriptName||"正则美化").replace(sr,"").slice(0,30),find:Di(e?.findRegex),replace:String(e?.replaceString??""),sample:t,external:!0})}var hl="这是一条现有的正则美化，不是从零设计的：保持 find 正则和捕获组不变（除非修改意见要求改），只按意见改 replace 里的 HTML 和 CSS；<sf_fields> 和 <sf_instruction> 留空也可以；<sf_sample> 原样保留。";function Ur(e,{id:t,name:n},r){const s=Array.isArray(e)?e.map(i=>({...i})):[];let a=t?s.findIndex(i=>i?.id===t):-1;return a<0&&n&&(a=s.findIndex(i=>i?.scriptName===n)),a<0?{list:s,index:-1}:(s[a]={...s[a],findRegex:r.find,replaceString:un(r.replace)},{list:s,index:a})}function aa(e,{hideHistory:t=!1,id:n}={}){if(e?.kind==="opening")return[{id:n||ar("rx-opening"),scriptName:`Love 写卡机·开场白·${e.name}`,disabled:!1,runOnEdit:!0,findRegex:e.find,replaceString:String(e.replace||"").trim(),trimStrings:[],placement:[1,2],substituteRegex:0,minDepth:null,maxDepth:null,markdownOnly:!0,promptOnly:!1}];const r={trimStrings:[],placement:[2],disabled:!1,runOnEdit:!0,substituteRegex:0,minDepth:null,maxDepth:null},s=[{...r,id:n||ar("rx"),scriptName:`${sr}${e.name}`,findRegex:e.find,replaceString:un(e.replace),markdownOnly:!0,promptOnly:!1}];return t&&s.push({...r,id:ar("rx"),scriptName:`${sr}${e.name}（历史不进上下文）`,findRegex:e.find,replaceString:"",markdownOnly:!1,promptOnly:!0,minDepth:1}),s}var Li=e=>(Array.isArray(e)?e:[]).filter(t=>!String(t?.scriptName||"").startsWith(sr)),ia=e=>`<${dn}>
+${Ot(e)}
+</${dn}>`,bl=new RegExp(`\\n*<${dn}>[\\s\\S]*?</${dn}>\\n*`,"g");function vl(e,t){return`${String(e??"").replace(bl,`
+`).trimEnd()}
+
+${ia(cwzStripSample(t))}
+`}var xl=e=>String(e??"").replace(bl,`
+`).trimEnd(),yl=e=>new RegExp(`<${dn}>`).test(String(e??""));function kl(e){return{kind:Ai,version:1,designs:Pt(e)}}function Sl(e){let t;try{t=JSON.parse(e)}catch{return{error:"不是 JSON"}}return t?.kind!==Ai||!Array.isArray(t.designs)?{error:"不是状态栏工坊导出的文件"}:{designs:t.designs.filter(n=>n&&typeof n.find=="string").map(n=>({...ir(),...n,id:ar("d")}))}}function om(e){const t=String(e).match(/^data:(image\/[\w.+-]+);base64,/);return t?t[1]:""}var jn="status-forge",Cl="0.87",or=[],cm="",_h=(async()=>{try{if(typeof atob!="function"||typeof DecompressionStream!="function")throw new Error("当前浏览器不支持解压内置模板");const e=Uint8Array.from(atob("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"),r=>r.charCodeAt(0)),t=new Blob([e]).stream().pipeThrough(new DecompressionStream("gzip")),n=JSON.parse(await new Response(t).text());if(!Array.isArray(n)||n.length!==12)throw new Error("参考模板数据不完整");or=n,typeof rt<"u"&&rt&&typeof ue=="function"&&ue()}catch(e){cm=String(e?.message||e),console.warn("[Love 写卡机] 内置参考库加载失败",e)}})(),Gr=3,Ge=(()=>{try{if(window.parent&&window.parent!==window&&window.parent.document.getElementById("extensionsMenu"))return window.parent}catch{}return window})(),nt=Ge.document,lm=Ge!==window,Jr=`sf${Date.now().toString(36)}${Math.random().toString(36).slice(2,6)}`,pm=()=>globalThis.SillyTavern??Ge.SillyTavern,Re=()=>pm().getContext(),Qn=globalThis.__CW_SUITE__||null,Rn={yes:e=>{try{return Ge.confirm(e)}catch{return confirm(e)}},text:(e,t)=>{try{return Ge.prompt(e,t)}catch{return prompt(e,t)}}};function qi(e){try{const t=globalThis[e];if(typeof t=="function")return t;const n=Ge.TavernHelper;if(typeof n?.[e]=="function")return n[e].bind(n)}catch{}return null}var Il=()=>({version:1,designs:[],draft:null,draftOrigin:null,profileId:"",followCard:!0,maxTokens:12e3,designOptions:{},referenceId:"",templates:{}});function Me(){const e=Re().extensionSettings;e[jn]||(e[jn]=Il());const t=e[jn];for(const[n,r]of Object.entries(Il()))t[n]===void 0&&(t[n]=r);return t.maxTokens===6e3&&(t.maxTokens=12e3),t}var Je=()=>Re().saveSettingsDebounced?.(),I={tab:"start",referenceId:"",referenceSearch:"",referenceCategory:"status",card:{use:!0,text:"",for:"",stats:[],chat:!0},need:"",fields:"",styles:["card"],customStyle:"",options:{position:"bottom",collapsible:!1,compact:!0,lang:"zh",density:"auto",layout:"auto",surface:"auto",font:"auto",border:"auto",decoration:"auto",progress:"auto",motion:"off",mobile:"stack",fieldCount:"auto",accentColor:"",backgroundColor:"",showTitle:!0,groupFields:!1,mustHave:"",avoid:""},images:[],imgMode:"auto",analyze:!0,selfCheck:!0,spec:"",specKey:"",cur:null,history:[],dark:!0,revise:"",write:{regex:!0,rule:!0,hideHistory:!1},resOpen:new Set(["revise"]),foldFields:!1,busy:null,origin:null,regexImported:[],regexSearch:""},rt=null,kt=null,Rt=null,cr=null;function A(e,t,...n){const r=nt.createElement(e),s=t||{};for(const[a,i]of Object.entries(s))i==null||i===!1||a==="value"||(a==="class"?r.className=i:a==="style"?r.style.cssText=i:a.startsWith("on")&&typeof i=="function"?r.addEventListener(a.slice(2).toLowerCase(),i):a in r?r[a]=i:r.setAttribute(a,i===!0?"":i));for(const a of n.flat(1/0))a==null||a===!1||r.append(a.nodeType?a:nt.createTextNode(String(a)));return"value"in s&&s.value!=null&&(r.value=s.value),r}var ge=(e,t,n="",r={})=>A("button",{type:"button",class:`sf-btn ${n}`,onclick:t,...r},e),Oe=(e,t)=>{const n=globalThis.toastr??Ge.toastr;try{n?.[e]?.(t,"状态栏工坊")}catch{}n||console.log(`[${jn}] ${t}`)},dm=e=>String(e||"状态栏").replace(/[\\/:*?"<>|]/g,"_").slice(0,60),um=(e,t)=>{let n;return(...r)=>{clearTimeout(n),n=setTimeout(()=>e(...r),t)}};function Al(e,t){const n=new Ge.Blob([t],{type:"application/json;charset=utf-8"}),r=Ge.URL.createObjectURL(n),s=nt.createElement("a");s.href=r,s.download=e,nt.body.append(s),s.click(),setTimeout(()=>{Ge.URL.revokeObjectURL(r),s.remove()},1e3)}async function oa(e){try{await Ge.navigator.clipboard.writeText(e)}catch{const t=A("textarea",{style:"position:fixed;opacity:0"});t.value=e,nt.body.append(t),t.select(),nt.execCommand("copy"),t.remove()}Oe("success","已复制")}function St(){try{const e=Re();return e.characterId==null||e.characterId===void 0?null:e.characters?.[e.characterId]??null}catch{return null}}var lr=e=>e?.name||e?.data?.name||"";function ca(e){if(!e)return null;if(typeof e=="object")return e;if(typeof e!="string")return null;try{return JSON.parse(e)}catch{return null}}function mn(e){if(!e)return[];const t=ca(e.data),n=ca(e.json_data),r=[t?.extensions?.regex_scripts,e.extensions?.regex_scripts,t?.regex_scripts,e.regex_scripts,n?.data?.extensions?.regex_scripts,n?.extensions?.regex_scripts,n?.data?.regex_scripts];let s=null;for(const a of r)if(Array.isArray(a)){if(a.length)return a.filter(i=>i&&typeof i=="object");s??=a}return s??[]}function mm(e){const t=ca(e);return Array.isArray(t)?t.filter(n=>n&&typeof n.findRegex=="string"):t?.findRegex?[t]:Array.isArray(t?.scripts)?t.scripts.filter(n=>n?.findRegex):Array.isArray(t?.regex_scripts)?t.regex_scripts.filter(n=>n?.findRegex):mn(t)}async function Wr(e=!1){if(I.lvDraft){const d=I.lvDraft,k="draft:"+d.id;if(!e&&I.card.for===k)return;try{if(N().id===d.id){const f=nfDSrc(N());d.text=f.text;d.greets=f.greets;d.name=f.name}}catch{}I.card.for=k;I.card.text=d.text;I.card.stats=[`草稿「${d.name}」`,`${d.greets.length} 条开场白`];e&&ue();return}const t=St(),n=t?.avatar||"";if(!t||!e&&I.card.for===n)return;I.card.for=n;const r=Re(),s=t.data?.extensions?.world||"";let a=null;if(s&&r.loadWorldInfo)try{a=await r.loadWorldInfo(s)}catch(c){console.warn(`[${jn}] 读世界书失败`,c)}let i=[];try{I.card.chat&&Array.isArray(r.chat)&&St()===t&&(i=r.chat)}catch{}const o=Pi(t,{world:a,worldName:s,chat:i});I.card.text=o.text,I.card.stats=o.stats,s&&!a&&I.card.stats.push(`世界书《${s}》没读到`),ue()}function ji(e){if(!e)return{rule:!1,regex:!1};const t=e.data?.description??e.description??"",n=mn(e);return{rule:yl(t),regex:n.some(r=>String(r?.scriptName||"").startsWith(sr))}}async function El(e,t){const n=Re(),r=n.getRequestHeaders?n.getRequestHeaders():{"Content-Type":"application/json"},s=await Ge.fetch("/api/characters/merge-attributes",{method:"POST",headers:r,body:JSON.stringify({avatar:e,...t})});if(!s.ok)throw new Error(`保存角色卡失败（${s.status}）`)}async function Vr(e,t,n){const r=Re();r.writeExtensionField?await r.writeExtensionField(e,"regex_scripts",n):await El(t.avatar,{data:{extensions:{regex_scripts:n}}}),t.data=ca(t.data)||{},t.data.extensions={...t.data.extensions||{},regex_scripts:n}}async function Tl(e,t){await El(e.avatar,{description:t,data:{description:t}}),e.description=t,e.data=e.data||{},e.data.description=t}function Nl(e){var t;const n=(t=Re().extensionSettings).character_allowed_regex??(t.character_allowed_regex=[]);n.includes(e.avatar)||(n.push(e.avatar),Je())}async function Yr(){try{await Re().reloadCurrentChat?.()}catch{}}async function fm(){const t=Re().characterId,n=St();if(!n)throw new Error("没有选中角色卡（群聊里也不行），先在酒馆里打开一张卡");const r=dr(),s=sa(r);if(s.errors.length)throw new Error(`设计还有错误：${s.errors[0]}`);if(r.kind==="opening"){const c=mn(n).filter(p=>!/^(\u5199\u5361\u5de5\u574a|Love 写卡机)·开场白·/.test(String(p?.scriptName||"")));await Vr(t,n,[...c,...aa(r)]),Nl(n),await Yr(),Oe("success","开场白主页正则已写入；请在角色卡的第一个开场白单独填写【主页】，原来的故事开场白依次放在后面。已有状态栏正则未改动。");return}const a=I.write;if(!a.regex&&!a.rule)throw new Error("两项都没勾，没什么可写的");const i=[];if(a.regex){const o=mn(n);await Vr(t,n,[...Li(o),...aa(r,{hideHistory:a.hideHistory})]),Nl(n),i.push("正则")}a.rule&&i.push(await cwzSfRule(n,r.instruction)),await Yr(),Oe("success",`已写入「${lr(n)}」：${i.join("、")}`)}async function gm(){const e=Re(),t=St();if(!t)throw new Error("没有选中角色卡");const n=ji(t);n.regex&&await Vr(e.characterId,t,Li(mn(t))),n.rule&&await Tl(t,xl(t.data?.description??t.description??"")),await cwzSfRuleOff(t),await Yr(),Oe("success","已把状态栏从这张角色卡里去掉")}var wm=e=>new Promise((t,n)=>{const r=new Ge.FileReader;r.onload=()=>t(String(r.result)),r.onerror=()=>n(new Error("读取图片失败")),r.readAsDataURL(e)});function hm(e,t=1024){return new Promise(n=>{let r=!1;const s=a=>{r||(r=!0,n(a))};setTimeout(()=>s(e),4e3);try{const a=new Ge.Image;a.onload=()=>{try{const i=Math.min(1,t/Math.max(a.width,a.height));if(i>=1&&e.length<15e5)return s(e);const o=nt.createElement("canvas");o.width=Math.max(1,Math.round(a.width*i)),o.height=Math.max(1,Math.round(a.height*i));const c=o.getContext("2d");c.fillStyle="#fff",c.fillRect(0,0,o.width,o.height),c.drawImage(a,0,0,o.width,o.height),s(o.toDataURL("image/jpeg",.85))}catch{s(e)}},a.onerror=()=>s(e),a.src=e}catch{s(e)}})}async function Qi(e){const t=[...e].filter(n=>/^image\//.test(n.type));if(!t.length){Oe("warning","这不是图片");return}for(const n of t){if(I.images.length>=Gr){Oe("warning",`最多 ${Gr} 张参考图`);break}if(n.size>15*1024*1024){Oe("warning",`${n.name} 太大了（超过 15MB）`);continue}try{I.images.push({name:n.name||"粘贴的图片",url:await hm(await wm(n))})}catch(r){Oe("error",String(r.message||r))}}ue()}function bm(){const e=A("input",{type:"file",accept:"image/*",multiple:!0,style:"display:none",onchange:a=>{Qi(a.target.files),a.target.value=""}}),t=A("button",{type:"button",class:"sf-addimg",title:"选择，或把图拖到这里，或在面板里直接粘贴",onclick:()=>e.click()},A("b",null,"＋"),"加图片"),n=A("div",{class:"sf-box"}),r=a=>i=>{i.preventDefault(),t.classList.toggle("sf-over",a)};n.addEventListener("dragover",r(!0)),n.addEventListener("dragleave",r(!1)),n.addEventListener("drop",a=>{r(!1)(a),Qi(a.dataTransfer?.files||[])});const s=I.images.length>0;return n.append(A("div",{class:"sf-line"},A("div",{class:"sf-h sf-grow"},"参考图（可选）"),s&&ge("清空",()=>{I.images=[],ue()},"sf-sm sf-danger")),A("p",{class:"sf-hint"},s?`最多 ${Gr} 张，生成和修改都会带上。`:`喜欢的插画、照片、壁纸、海报，或者别人的状态栏截图。选了模型要支持看图。可以拖进来或直接粘贴，最多 ${Gr} 张。`),A("div",{class:"sf-thumbs"},I.images.map((a,i)=>A("div",{class:"sf-thumb"},A("img",{src:a.url,alt:a.name}),A("button",{type:"button",class:"sf-x",title:"移除",onclick:()=>{I.images.splice(i,1),ue()}},"✕"))),I.images.length<Gr&&t,e),s&&A("div",{class:"sf-line"},A("span",null,"这些图是"),A("select",{onchange:a=>{I.imgMode=a.target.value,I.specKey=""}},ll.map(a=>A("option",{value:a.id,selected:I.imgMode===a.id},a.label))),I.spec&&Kr()&&zr(I.spec)&&A("span",{class:"sf-badge"},`拆解判断：${zr(I.spec)==="ui"?"界面":"风格图"}`)),s&&A("div",{class:"sf-line"},A("label",{title:"先让 AI 把图拆成配色、布局、组件的规格，再照着规格写 CSS。多一次调用，复刻准很多。"},A("input",{type:"checkbox",checked:I.analyze,onchange:a=>{I.analyze=a.target.checked}})," 先拆解参考图（推荐）"),A("label",{title:"设计出来后，再把图和代码一起给 AI，逐项找不一致并修正。多一次调用。"},A("input",{type:"checkbox",checked:I.selfCheck,onchange:a=>{I.selfCheck=a.target.checked}})," 生成后对照参考图自查一轮")),s&&A("div",null,ge("只拆解，先看它看懂没有",()=>Ht("拆解参考图",Hi),"sf-sm",{disabled:!!I.busy})),s&&I.spec&&A("details",{open:Kr()},A("summary",null,`参考图拆解${Kr()?"":"（图换过了，生成时会重新拆解，除非你改过这里）"}——看错了直接改，生成按这里来`),Oi(I.spec)&&A("div",{class:"sf-seen"},A("b",null,"AI 看到的画面："),Oi(I.spec),A("div",{class:"sf-hint"},"和你的图对不上？说明模型其实没看到图（不支持看图或图没传过去），别用这份拆解，换个模型。")),A("textarea",{class:"sf-code sf-tall",value:I.spec,oninput:a=>{I.spec=a.target.value,I.specKey=Ri()}}),A("div",{class:"sf-line"},ge("重新拆解",()=>Ht("拆解参考图",Hi),"sf-sm",{disabled:!!I.busy})))),n}var Ri=()=>I.images.map(e=>`${e.name}:${e.url.length}`).join("|"),Kr=()=>!!I.spec&&I.specKey===Ri();async function Hi(){if(!I.images.length)throw new Error("没有参考图");I.busy&&(I.busy.label="拆解参考图");const{system:e,prompt:t}=pl({images:I.images.length,need:I.need,mode:I.imgMode,templates:Me().templates}),n=dl(await pr(e,t,I.images));if(!n)throw new Error("AI 没有给出拆解结果");if(zr(n)==="none")throw I.spec="",new Error("模型说它没收到图片。当前模型可能不支持看图，或者这个连接不传图片——换一个支持看图的模型再试");return I.spec=n,I.specKey=Ri(),n}function la(){const e=Me();return Qn&&e.followCard?Re().extensionSettings?.loveCardWriter?.apiProfile||"":e.profileId}function vm(){try{return Re().extensionSettings?.connectionManager?.profiles||[]}catch{return[]}}async function xm(e,t,n){const r=la();if(r&&e.ConnectionManagerRequestService){const i=await e.ConnectionManagerRequestService.sendRequest(r,n,t.maxTokens,{stream:!1,extractData:!0,includePreset:!1,includeInstruct:!1},{});return String(i?.content??"")}if(e.mainApi&&e.mainApi!=="openai")throw new Error("带图需要“对话补全（Chat Completion）”类型的 API，现在连的是文本补全。换成对话补全，或在设置里选一个连接配置。");const s=e.chatCompletionSettings;if(!e.ChatCompletionService||!s)throw new Error("这个版本的酒馆没法带图发送。请在设置里选一个连接配置（酒馆的“连接配置文件”）。");const a=await e.ChatCompletionService.processRequest({stream:!1,messages:n,max_tokens:t.maxTokens,model:e.getChatCompletionModel?e.getChatCompletionModel(s):void 0,chat_completion_source:s.chat_completion_source,custom_url:s.custom_url,reverse_proxy:s.reverse_proxy,proxy_password:s.proxy_password,custom_prompt_post_processing:s.custom_prompt_post_processing,vertexai_region:s.vertexai_region,zai_endpoint:s.zai_endpoint},{},!0);return String(a?.content??"")}async function ym(e,t,n=[]){const r=Re(),s=Me(),a=Ti(e),i=Ti(t);{const c=n.length?[{role:"system",content:a},{role:"user",content:[{type:"text",text:i},...n.map(d=>({type:"image_url",image_url:{url:d.url}}))]}]:[{role:"system",content:a},{role:"user",content:i}],p=await oc({profile:la(),messages:c,maxTokens:s.maxTokens,onText:d=>{po(d),I.busy&&(I.busy.stream=d,Hn())}});if(p!==void 0)return p}if(n.length){const c=[{role:"system",content:a},{role:"user",content:[{type:"text",text:i},...n.map(p=>({type:"image_url",image_url:{url:p.url}}))]}];try{return await xm(r,s,c)}catch(p){const d=String(p?.message||p);throw/带图需要|没法带图/.test(d)?p:/image|vision|multimodal|content|400|unsupported/i.test(d)?new Error(`带图请求失败：${d.slice(0,120)}。当前模型可能不支持看图——换一个支持看图的模型，或者先清空参考图。`):p}}if(la()&&r.ConnectionManagerRequestService){const c=await r.ConnectionManagerRequestService.sendRequest(la(),[{role:"system",content:a},{role:"user",content:i}],s.maxTokens,{stream:!1,extractData:!0,includePreset:!1,includeInstruct:!1},{});return String(c?.content??"")}if(!r.generateRaw)throw new Error("这个版本的酒馆没有 generateRaw");let o;try{o=await r.generateRaw(i,null,!1,!1,a,s.maxTokens)}catch(c){if(!/prompt|argument|object/i.test(String(c?.message)))throw c;o=await r.generateRaw({prompt:i,systemPrompt:a,responseLength:s.maxTokens})}return typeof o=="string"?o:String(o?.content??o??"")}async function pr(e,t,n=[],{dialogue:r=!0,dialogueKey:s=I.busy?.dialogueKey??lvKey(I.tab)}={}){r&&(t+=Zt(Me(),s,Vp(s)));const a=[5,15,30];for(let i=0;;i++)try{I.busy&&(I.busy.calls++,I.busy.stream="");const o=rl(await ym(e,t,n));if(!o.trim())throw new Error("AI 返回了空内容");return o}catch(o){const c=String(o?.message||o);if(!(/429|5\d\d|timeout|timed out|network|fetch|空内容/i.test(c)&&!/带图请求失败/.test(c))||i>=a.length)throw o;for(let d=a[i];d>0;d--)I.busy&&(I.busy.note=`出错（${c.slice(0,40)}），${d} 秒后重试`),Hn(),await new Promise(m=>setTimeout(m,1e3));I.busy&&(I.busy.note="")}}async function Ht(e,t){if(I.busy){Oe("warning","上一个任务还没结束");return}const nfB=nfFx.btn(),nfL=nfB?.textContent||"",nfKey=nfB?.dataset?.nf||"";let nfOk=!1;I.busy={label:e,start:Date.now(),calls:0,note:"",dialogueKey:lvKey(I.tab)},Hn();try{nfB&&nfFx.busy(nfB,e,rt)}catch{}const n=setInterval(Hn,500);try{const r=await t();nfOk=!0;return r}catch(r){console.error(`[${jn}]`,r),Oe("error",`${e}失败：${r?.message||r}`);return}finally{clearInterval(n),I.busy=null,Hn(),rt?.classList.remove("nf-running"),ue(),nfOk&&nfL&&nfFx.done(kt,nfL,nfKey)}}function Hn(){if(!Rt)return;if(!I.busy){Rt.textContent="",Rt.classList.remove("sf-on");return}const e=Math.floor((Date.now()-I.busy.start)/1e3);if(Rt.textContent=`⏳ ${I.busy.label}… ${e}s · 调用 ${I.busy.calls} 次${I.busy.stream?` · 已收到 ${I.busy.stream.length} 字`:""}${I.busy.note?` · ${I.busy.note}`:""}`,Rt.classList.add("sf-on"),I.busy.stream){const t=it.createElement("pre");t.className="sf-stream",t.textContent=I.busy.stream.length>1200?`……${I.busy.stream.slice(-1200)}`:I.busy.stream,Rt.append(t),t.scrollTop=t.scrollHeight}}function Xr(){if(rt)return;const e=Me();!I.lvDraft&&!I.cur&&e.draft&&(I.cur=Pt(e.draft),I.cur.external&&e.draftOrigin&&(I.origin=Pt(e.draftOrigin))),Wr(),rt=A("div",{class:"sf-overlay",id:"sf-root","data-sf-owner":Jr}),rt.addEventListener("mousedown",t=>{t.target===rt&&pa()}),rt.addEventListener("paste",t=>{const n=[...t.clipboardData?.files||[]].filter(r=>/^image\//.test(r.type));n.length&&(t.preventDefault(),Qi(n))}),kt=A("div",{class:"sf-body"}),Rt=A("div",{class:"sf-status"}),rt.append(A("div",{class:"sf-panel"},A("div",{class:"sf-head"},A("h3",null,`状态栏工坊 v${Cl}`),ge("关闭",pa)),A("div",{id:"sf-tabs-host"}),kt,Rt)),nt.body.append(rt),ue()}function pa(){I.busy&&!Rn.yes("还有任务在跑，关掉面板不会中断它。确定关闭？")||(rt?.remove(),rt=kt=Rt=cr=null,I.lvDraft&&lvExit())}function ue(){if(!rt)return;const e=kt.scrollTop;rt.querySelector("#sf-tabs-host").replaceChildren(km());nfFx.slide(rt.querySelector("#sf-tabs-host .sf-tabs"));["start","design","refs","other","result"].includes(I.tab)&&(I.cwzLastMake=I.tab);let t;I.tab==="start"?t=cwzSfStart():I.tab==="design"?t=Am():I.tab==="refs"?t=Sm():I.tab==="result"?t=Om():I.tab==="other"?t=qm():I.tab==="mine"?t=jm():t=Qm(),kt.replaceChildren(lvBar(),Rw(),cwzSfSteps(),t),nfFx.tab!==I.tab&&(nfFx.tab&&t?.classList?.add("nf-enter"),nfFx.tab=I.tab),kt.scrollTop=e,Hn();try{globalThis.__cwzSkin?.(rt)}catch{}}function lvKey(t){const d=I.lvDraft;return d&&(t==="design"||t==="result")?`lv:${d.id}:${d.kind}:${t}`:t}
+function lvOpRef(){const d=I.lvDraft,p=nfKPair(d?.set||"");return(p.op||or.find(o=>o.kind==="opening"))?.id||""}
+function lvEnter(o){if(!I.lvDraft){const m=Me();I.lvSave={cur:I.cur,history:I.history,origin:I.origin,need:I.need,fields:I.fields,referenceId:I.referenceId,tab:I.tab,cwzSrc:I.cwzSrc,cardFor:I.card.for,cardText:I.card.text,cardStats:I.card.stats,draft:m.draft,draftOrigin:m.draftOrigin}}const k=o.kind==="opening"?"opening":"status";I.lvDraft={id:o.id,name:o.name||"新角色",text:o.text||"",greets:o.greets||[],set:o.set||"",imported:o.imported||"",kind:k,box:{status:{cur:null,history:[],need:""},opening:{cur:null,history:[],need:""}}};const b0=I.lvDraft.box[k];o.design&&(b0.cur=ir(Pt(o.design)));I.cur=b0.cur;I.history=b0.history;I.need=b0.need;I.fields="";I.origin=null;I.card.for="";I.card.use=!0;Wr();I.cwzSrc="design";I.referenceId=k==="opening"?lvOpRef():(Zr()?.kind==="opening"?"":I.referenceId);I.tab=I.cur?"result":"design"}
+function lvExit(){const v=I.lvSave;I.lvDraft=null;I.lvSave=null;if(!v)return;I.cur=v.cur;I.history=v.history;I.origin=v.origin;I.need=v.need;I.fields=v.fields;I.referenceId=v.referenceId;I.cwzSrc=v.cwzSrc;I.card.for=v.cardFor;I.card.text=v.cardText;I.card.stats=v.cardStats;const m=Me();m.draft=v.draft;m.draftOrigin=v.draftOrigin;Je();I.tab=v.tab||"start"}
+function lvSwitch(k){const d=I.lvDraft;if(!d||d.kind===k||I.busy)return;d.box[d.kind]={cur:I.cur,history:I.history,need:I.need};d.kind=k;const b1=d.box[k];I.cur=b1.cur;I.history=b1.history;I.need=b1.need;I.referenceId=k==="opening"?lvOpRef():"";I.tab=I.cur?"result":"design";ue();kt&&(kt.scrollTop=0)}
+function lvCloseChat(){for(const d of new Set([nt,document]))try{d.querySelector(".cw-chat-sheet .cw-chat-back")?.click()}catch{}}
+function lvGen(){lvCloseChat();I.tab="design";ue();Tm(I.card.use?I.card.text:"")}
+function lvRev(){lvCloseChat();I.tab="result";ue();Nm()}
+function lvExtract(t){if(!I.lvDraft)return;if(t==="design")return()=>[{label:"按这个生成",title:"关掉对话，按聊过的生成",run:lvGen}];if(t==="result")return()=>[{label:"按这个改",title:"关掉对话，按聊过的修改",run:lvRev}]}
+function lvKindName(k){return k==="opening"?"开场白主页":"状态栏"}
+function lvBack(){try{b.page="dress"}catch{}Er.switchTo("card")}
+function lvUse(){const d=I.lvDraft;if(!d||!I.cur)return;let ok=!1;try{ok=lvAttach(d.id,d.kind,dr())}catch(x){Oe("error",String(x?.message||x));return}if(!ok){Oe("error","写卡机现在打开的不是这份草稿。先到写卡机的「草稿」里打开它，再回来点");return}Oe("success",`已接到「${d.name}」的${lvKindName(d.kind)}`);lvBack()}
+function lvBar(){const d=I.lvDraft;if(!d)return"";let c={};try{N().id===d.id&&(c=nfDState(N()).custom||{})}catch{}const seg=(v,l)=>A("button",{type:"button",class:`sf-btn sf-sm${d.kind===v?" sf-primary":""}`,disabled:!!I.busy,onclick:()=>lvSwitch(v)},l),has=k=>c[k]?`「${c[k].name}」`:"还没有";return A("div",{class:"sf-box lv-bar"},A("div",{class:"sf-line"},A("div",{class:"sf-h sf-grow"},`给「${d.name}」做`),ge("回写卡机",lvBack,"sf-sm")),A("div",{class:"sf-line"},seg("status","做状态栏"),seg("opening","做开场白主页")),A("p",{class:"sf-hint"},"读的是这份草稿里的人设、世界观和开场白。点下面「和 AI 聊聊」说想要什么，聊定了在 AI 的回复下面点「按这个生成」；结果满意就点「用到这张卡」，导入时一起装进去。"),d.imported&&A("p",{class:"sf-hint"},"这张卡已经导入过了：在酒馆里打开它，结果页会多一个「直接写进已导入的卡」。"),A("p",{class:"sf-hint"},`已接上：状态栏 ${has("status")} · 开场白主页 ${has("opening")}`))}
+function lvAttach(id,kind,design){const e=N();if(e.id!==id)return!1;const K=nfDState(e);K.custom=K.custom||{};K.custom[kind]=Pt(design);K.src!=="mine"&&(K.src="chat");K.use=!0;kind==="opening"&&(K.home=!0);K.ok=!0;ee();return!0}
+function lvOpen(kind){const d=N(),K=nfDState(d),k=kind==="opening"?"opening":"status";if(!Er.get("status")){X.toastr.warning("状态栏工坊没加载出来，刷新酒馆再试","Love 写卡机");return}const f=nfDSrc(d);lvEnter({id:d.id,name:f.name,text:f.text,greets:f.greets,set:K.set,imported:d.imported?.avatar||"",kind:k,design:K.custom?.[k]});ee();Er.switchTo("status")}
+function cwzSfSteps(){const e=I.tab;if(!["start","design","refs","other","result"].includes(e))return"";const t=e==="start"?0:e==="result"?2:1,n=(r,s,a)=>A("button",{type:"button",class:`cwz-st${t===r?" on":t>r?" done":""}`,onclick:()=>{I.tab=a,ue(),kt.scrollTop=0}},A("i",null,"一二三"[r]),s);return A("div",{class:"cwz-steps3"},I.lvDraft?"":n(0,"从哪开始","start"),n(1,"调整",I.cwzSrc||"refs"),n(2,"预览写入","result"))}
+function cwzSfStart(){const e=St(),t=(n,r,s)=>A("button",{type:"button",class:`cwz-src${I.cwzSrc===n?" on":""}`,onclick:()=>{I.cwzSrc=n,I.tab=n,ue(),kt.scrollTop=0}},A("b",null,r),A("small",null,s));return A("div",{class:"sf-section"},A("div",{class:"sf-box"},A("div",{class:"sf-h"},"给哪张卡做"),A("p",{class:"sf-hint"},e?`现在打开的是「${lr(e)}」。`:"现在没有打开角色卡。可以先做，写入前在酒馆里打开一张卡。")),A("div",{class:"cwz-srcs"},t("refs","用套装","现成的样式，改颜色就能用"),t("design","让 AI 设计","说想要什么，可以加参考图"),t("other","改卡里现有的","读这张卡已有的状态栏来改"),A("button",{type:"button",class:"cwz-src",onclick:()=>{I.tab="mine",ue(),kt.scrollTop=0}},A("b",null,"我存过的"),A("small",null,"以前做好的拿来换"))))}
+async function cwzSfRule(n,ins){const c=Re(),w=n.data?.extensions?.world||"",dsc=n.data?.description??n.description??"";if(I.write.where!=="desc"&&w&&c.loadWorldInfo&&c.saveWorldInfo){const d=await c.loadWorldInfo(w);if(d){d.entries??={};let e=Object.values(d.entries).find(r=>r.comment==="状态栏输出规则");if(!e){const r=Math.max(-1,...Object.keys(d.entries).map(Number).filter(Number.isFinite))+1;e={uid:r,key:[],keysecondary:[],comment:"状态栏输出规则",content:"",constant:!0,vectorized:!1,selective:!0,selectiveLogic:0,addMemo:!0,order:900,position:4,disable:!1,excludeRecursion:!0,preventRecursion:!0,probability:100,useProbability:!0,depth:1,role:0,group:"",groupOverride:!1,groupWeight:100,scanDepth:null,caseSensitive:null,matchWholeWords:null,useGroupScoring:null,automationId:"",sticky:null,cooldown:null,delay:null,displayIndex:r},d.entries[r]=e}Object.assign(e,{content:ia(cwzStripSample(ins)),constant:!0,position:4,depth:1,role:0,excludeRecursion:!0,preventRecursion:!0,disable:!1}),await c.saveWorldInfo(w,d,!0),yl(dsc)&&await Tl(n,xl(dsc));return`输出要求（世界书「${w}」· D1）`}}await Tl(n,vl(dsc,ins));return"输出要求（角色描述末尾）"}
+async function cwzSfRuleOff(n){try{const c=Re(),w=n.data?.extensions?.world||"";if(!w||!c.loadWorldInfo)return;const d=await c.loadWorldInfo(w);const e=d&&Object.entries(d.entries??{}).find(([,r])=>r.comment==="状态栏输出规则");e&&(delete d.entries[e[0]],await c.saveWorldInfo(w,d,!0))}catch(c){console.warn("[状态栏工坊] 去掉世界书规则",c)}}
+function km(){const mk=["start","design","refs","other","result"].includes(I.tab);return A("div",{class:"sf-tabs"},[["make","做一个"],["mine","我的"],["set","设置"]].map(([t,n])=>A("button",{type:"button",class:`sf-tab${(t==="make"?mk:I.tab===t)?" sf-active":""}`,onclick:()=>{I.tab=t==="make"?I.cwzLastMake||"start":t,ue(),kt.scrollTop=0}},n)))}function Zr(){return or.find(e=>e.id===I.referenceId)||null}function zi(e){I.referenceId=e;const t=or.find(n=>n.id===e);t&&(I.referenceCategory=t.kind==="opening"?"opening":"status"),Me().referenceId=e,Je(),ue()}var nfKRef=null,nfKTimer=0,nfKSaveT=0,nfKCol=null,nfKColT=null;
+var nfFx={last:null,t:0,tab:"",cw:"",h:{},set:"",barPos:null};
+(function(){try{for(const d of new Set([nt,document])){d.getElementById("nf-fx-style")?.remove();const st=d.createElement("style");st.id="nf-fx-style";st.textContent=".sf-overlay .sf-btn,.sf-overlay .sf-chip,.sf-overlay .sf-tab,.cw .cw-btn,.cw .cw-chip,.cw .cw-tile,.cw .cw-opt{transition:transform .12s cubic-bezier(.2,.7,.2,1),background-color .15s,border-color .15s,box-shadow .15s,opacity .15s}\n.sf-overlay .sf-btn:active:not(:disabled),.sf-overlay .sf-chip:active,.cw .cw-btn:active,.cw .cw-chip:active,.cw .cw-tile:active,.cw .cw-opt:active{transform:translateY(1px) scale(.97)}\n.sf-overlay .sf-tab:active{transform:scale(.96)}\n.sf-tabs{position:relative}.nf-tabbar{position:absolute;bottom:0;left:0;height:2px;width:0;background:var(--sf-accent,#4a7bd0);pointer-events:none}\n.sf-tabs.nf-hasbar .sf-tab.sf-active{border-bottom-color:transparent}\n.nf-enter{animation:nfRise .2s cubic-bezier(.2,.7,.2,1)}\n@keyframes nfRise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}\n@keyframes nfPop{from{transform:scale(0)}to{transform:scale(1)}}\n.sf-chip.nf-set{position:relative}\n.sf-chip.nf-set.nf-on{border-color:var(--sf-accent,#4a7bd0);box-shadow:inset 0 0 0 1px var(--sf-accent,#4a7bd0);background:color-mix(in srgb,var(--sf-accent,#4a7bd0) 14%,var(--sf-soft,transparent))}\n.nf-ck{position:absolute;top:6px;right:6px;width:18px;height:18px;border-radius:50%;background:var(--sf-accent,#4a7bd0);color:#fff;font-size:11px;line-height:18px;text-align:center;display:none}\n.nf-on>.nf-ck{display:block}.nf-pop>.nf-ck{animation:nfPop .22s cubic-bezier(.2,.7,.2,1)}\n.nf-stage{position:relative;border-radius:10px;padding:6px;transition:background-color .25s}\n.nf-stage iframe{display:block;transition:opacity .25s,height .3s cubic-bezier(.2,.7,.2,1)}\n.nf-sk{position:absolute;inset:6px;border-radius:12px;background:repeating-linear-gradient(45deg,rgba(127,127,127,.16) 0 8px,rgba(127,127,127,.07) 8px 16px);display:grid;place-items:center;font-size:12.5px;opacity:0;pointer-events:none;transition:opacity .2s}\n.nf-stage.nf-loading .nf-sk{opacity:1}.nf-stage.nf-loading iframe{opacity:0}\n.nf-seg{position:relative;display:inline-flex;background:var(--sf-soft,rgba(127,127,127,.15));border:1px solid var(--sf-hair,rgba(127,127,127,.4));border-radius:999px;padding:3px}\n.nf-seg::before{content:\"\";position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);border-radius:999px;background:var(--sf-accent,#4a7bd0);transition:transform .25s cubic-bezier(.2,.7,.2,1)}\n.nf-seg[data-v=\"night\"]::before{transform:translateX(100%)}\n.nf-seg button{position:relative;z-index:1;flex:1;appearance:none;border:0;background:none;color:inherit;font:inherit;font-size:13px;padding:6px 14px;border-radius:999px;cursor:pointer;min-width:4.6em}\n.nf-seg button.nf-on{color:#fff}\n.nf-dots{display:inline-flex;gap:3px;margin-left:6px;vertical-align:middle}.nf-dots i{width:5px;height:5px;border-radius:50%;background:currentColor;animation:nfDot 1s infinite}\n.nf-dots i:nth-child(2){animation-delay:.15s}.nf-dots i:nth-child(3){animation-delay:.3s}\n@keyframes nfDot{0%,100%{opacity:.25;transform:none}40%{opacity:1;transform:translateY(-3px)}}\n.nf-running .sf-btn.sf-primary:not(.nf-busy){opacity:.45;pointer-events:none}\n.sf-btn.nf-busy,.sf-btn.nf-busy:disabled{opacity:1;cursor:progress}\n.nf-flash{animation:nfRise .3s cubic-bezier(.2,.7,.2,1)}\n.cw .cw-chip.on:not(:has(input))::before,.cw .cw-opt.on::before{content:\"✓ \";font-size:.85em}\n@media (prefers-reduced-motion:reduce){.sf-overlay *,.sf-overlay *::before,.cw *,.cw *::before{transition:none!important;animation:none!important}}";d.head.append(st)}nt.addEventListener("pointerdown",e=>{const b=e.target?.closest?.(".sf-btn");b&&(nfFx.last=b,nfFx.t=Date.now())},!0)}catch(e){console.warn("[Love 写卡机] 交互样式",e)}})();
+nfFx.slide=function(tabs){if(!tabs)return;const on=tabs.querySelector(".sf-tab.sf-active");if(!on)return;tabs.classList.add("nf-hasbar");const b=nt.createElement("span");b.className="nf-tabbar";tabs.append(b);const to=[on.offsetLeft,on.offsetWidth],fr=nfFx.barPos||to;b.style.transition="none";b.style.width=fr[1]+"px";b.style.transform=`translateX(${fr[0]}px)`;void b.offsetWidth;b.style.transition="transform .25s cubic-bezier(.2,.7,.2,1),width .25s cubic-bezier(.2,.7,.2,1)";b.style.width=to[1]+"px";b.style.transform=`translateX(${to[0]}px)`;nfFx.barPos=to};
+nfFx.btn=function(){return nfFx.last&&nfFx.last.isConnected&&Date.now()-nfFx.t<1500?nfFx.last:null};
+nfFx.busy=function(b,label,root){b.classList.add("nf-busy");b.disabled=!0;b.textContent=`正在${label}`;const d=nt.createElement("span");d.className="nf-dots";d.append(nt.createElement("i"),nt.createElement("i"),nt.createElement("i"));b.append(d);root?.classList.add("nf-running")};
+nfFx.done=function(box,label,key){if(!box)return;const bs=[...box.querySelectorAll(".sf-btn")],b=(key&&bs.find(x=>x.dataset.nf===key))||bs.find(x=>x.textContent===label);if(!b)return;const old=b.textContent;b.textContent="✓ 好了";b.classList.add("nf-flash");setTimeout(()=>{b.isConnected&&(b.textContent=old,b.classList.remove("nf-flash"))},1400)};
+function nfKState(){const s=Me();const K=s.kit||(s.kit={set:"bow",mode:"day",pal:{},title:"",intro:"",author:null,model:"",preset:"",need:"",ai:null,entries:null,for:""});const c=St(),av=c?.avatar||"";if(av!==K.for){K.for=av;K.title="";K.intro="";K.author=null;K.model="";K.preset="";K.ai=null;K.entries=null}return K}
+function nfKPair(k){return{st:or.find(o=>o.kind!=="opening"&&o.set===k),op:or.find(o=>o.kind==="opening"&&o.set===k)}}
+function nfKSets(){return[...new Set(or.filter(o=>o.set).map(o=>o.set))].filter(k=>{const p=nfKPair(k);return p.st&&p.op})}
+var nfKPeople={single:"单人",multi:"多人",user:"user"};
+function nfKBase(html,v,mode){const blocks=[...String(html).matchAll(mode==="night"?/:root\[data-mode="night"\]\{([^}]*)\}/g:/:root\{([^}]*)\}/g)].map(m=>m[1]).join(";");const m=blocks.match(new RegExp(v.replace(/[-]/g,"\\-")+":(#[0-9a-fA-F]{3,8})\\b"));if(m)return m[1].length===4?"#"+m[1].slice(1).split("").map(c=>c+c).join(""):m[1].slice(0,7);return mode==="night"?nfKBase(html,v,"day"):"#888888"}
+function nfKPal(html,k,K){const p=K.pal[k]||{},css=["day","night"].map(m=>{const o=p[m]||{},body=Object.entries(o).map(([a,b])=>`${a}:${b}`).join(";");return body?(m==="day"?`:root{${body}}`:`:root[data-mode="night"]{${body}}`):""}).join("");return css?String(html).replace(/<\/head>/i,`<style id="nf-pal">${css}</style></head>`):String(html)}
+function nfKSrc(){const c=St();if(!c)return null;const d=c.data||{};const g=[c.first_mes??d.first_mes??"",...(d.alternate_greetings||c.alternate_greetings||[])].map(x=>String(x||"")).filter(x=>x.trim()&&x.trim()!=="【主页】");return{name:lr(c),author:d.creator||c.creator||"",text:I.card.text||"",greets:g}}
+function nfKShort(t,n){t=String(t||"").replace(/<[^>]+>/g,"").replace(/[*_#>`]/g,"").replace(/\s+/g," ").trim();return t.length>n?t.slice(0,n)+"…":t}
+function nfKHome(K,src){const g=src?.greets||[],ai=K.ai?.home||{},base=K.entries||ai.entries||[];const ents=g.length?g.map((x,i)=>({title:base[i]?.title||`第 ${i+1} 个故事`,tag:base[i]?.tag||"",summary:base[i]?.summary||nfKShort(x,36)})):(base.length?base:[{title:"第一个故事",tag:"",summary:"在角色卡里加上开场白后，这里会自动列出来。"}]);return{title:K.title||ai.title||src?.name||"作品名",kicker:"作品目录",intro:K.intro||ai.intro||"",author:K.author??src?.author??"",model:K.model||"",preset:K.preset||"",entries:ents}}
+function nfKSetHome(html,home){const j=JSON.stringify(home).replace(/</g,"\\u003c");return String(html).replace(/var HOME=\{[\s\S]*?\n\]\};/,()=>`var HOME=${j};`)}
+function nfKRetag(s,a,b){return a===b?s:String(s).split(`<${a}`).join(`<${b}`).split(`</${a}`).join(`</${b}`)}
+function nfKDesigns(K,src){const r=nfKDesigns0(K,src),c=K&&K.src&&K.src!=="set"&&K.custom;if(c){c.status&&(r.S=ir({...Pt(c.status),kind:"status",ok:!0}));c.opening&&(r.O=ir({...Pt(c.opening),kind:"opening",ok:!0}))}return r}
+function nfKDesigns0(K,src){const{st,op}=nfKPair(K.set);const ai=K.ai&&K.ai.instruction&&K.ai.people===st.people?K.ai:null;const S=ir({kind:"status",name:`套装·${st.name.replace(/^.*·\s*/,"")}`,fields:[],instruction:ai?nfKRetag(ai.instruction,ai.tag,st.tag):st.instruction,find:st.find,replace:un(nfKPal(st.replace,K.set,K)),sample:ai?nfKRetag(ai.sample,ai.tag,st.tag):st.sample,ok:!0,note:ai?`套装「${st.name}」 · 主题：${ai.theme}`:`套装「${st.name}」`});const O=ir({kind:"opening",name:op.name.replace(/^.*·\s*/,""),fields:[],instruction:op.instruction,find:op.find,replace:nfKSetHome(nfKPal(String(op.replace).trim(),K.set,K),nfKHome(K,src)),sample:"【主页】",ok:!0,note:`套装「${op.name}」`});return{S,O,st,op}}
+var nfKStub=m=>"<script>window.setChatMessages=async()=>{};window.getChatMessages=async()=>[{swipes:Array(20).fill('')}];try{var nfM='"+m+"',nfG=Storage.prototype.getItem,nfS=Storage.prototype.setItem;Storage.prototype.getItem=function(k){return k==='nf-status-mode'?nfM:nfG.call(this,k)};Storage.prototype.setItem=function(k,v){if(k==='nf-status-mode'){nfM=v;return}return nfS.call(this,k,v)}}catch(e){}window.BroadcastChannel=void 0;<\/script>";
+function nfKFrame(d,mode,key){const n=gl(d),h=n.html?(/<head[^>]*>/i.test(n.html)?n.html.replace(/<head[^>]*>/i,x=>x+nfKStub(mode)):nfKStub(mode)+n.html):"<!doctype html><body>没有匹配上，预览是空的</body>";const f=A("iframe",{sandbox:"allow-scripts allow-same-origin",title:"预览",srcdoc:h,style:`width:100%;border:0;height:${nfFx.h[key]||420}px;color-scheme:light;background:transparent`}),w=A("div",{class:"nf-stage nf-loading",style:`background:${mode==="night"?"#1c1f24":"#e9e7e1"}`},A("div",{class:"nf-sk"},"正在换…"),f),t0=Date.now(),fit=()=>{try{const dd=f.contentDocument;if(!dd?.documentElement)return;const hh=Math.min(Math.max(Math.ceil(dd.documentElement.scrollHeight)+2,120),1600);f.style.height=hh+"px";nfFx.h[key]=hh}catch{}};f.addEventListener("load",()=>{setTimeout(()=>{fit();w.classList.remove("nf-loading");setTimeout(fit,700)},Math.max(0,220-(Date.now()-t0)))});return w}
+function nfKPreview(K,src){const{S,O}=nfKDesigns(K,src);const col=(t,d,key)=>A("div",{style:"min-width:0;display:grid;gap:6px;align-content:start"},A("div",{class:"sf-hint"},t),A("div",{"data-nfk":key},nfKFrame(d,K.mode,key)));return A("div",{style:"display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px;align-items:start"},col("状态栏",S,"S"),col("开场白主页（第一条开场白）",O,"O"))}
+function nfKApply(K){if(!nfKRef)return;const{st}=nfKPair(K.set),o=(K.pal[K.set]||{})[K.mode]||{};nfKRef.querySelectorAll(".nf-stage").forEach(w=>{w.style.background=K.mode==="night"?"#1c1f24":"#e9e7e1";const f=w.querySelector("iframe");try{const r=f.contentDocument?.documentElement;if(!r)return;r.setAttribute("data-mode",K.mode);(st.palette||[]).forEach(([v])=>r.style.removeProperty(v));Object.entries(o).forEach(([a,b])=>r.style.setProperty(a,b))}catch{}})}
+function nfKRefresh(which){clearTimeout(nfKTimer);nfKTimer=setTimeout(()=>{if(!nfKRef||!nfKRef.isConnected)return;const K=nfKState(),{S,O}=nfKDesigns(K,nfKSrc());for(const key of which?[which]:["S","O"]){const h=nfKRef.querySelector(`[data-nfk="${key}"]`);h&&h.replaceChildren(nfKFrame(key==="S"?S:O,K.mode,key))}Je()},300)}
+function nfKColors(K,st){const pal=K.pal[K.set]||(K.pal[K.set]={}),pm=pal[K.mode]||(pal[K.mode]={});return A("div",{style:"display:flex;flex-wrap:wrap;gap:8px;align-items:center"},(st.palette||[]).map(([v,lab])=>A("label",{style:"display:inline-flex;align-items:center;gap:6px;font-size:13px"},A("input",{type:"color",value:pm[v]||nfKBase(st.replace,v,K.mode),style:"width:30px;height:26px;padding:0;border:0;background:none",oninput:e=>{const had=Object.keys(pm).length;pm[v]=e.target.value;nfKApply(K);clearTimeout(nfKSaveT);nfKSaveT=setTimeout(Je,400);!had&&nfKCol&&setTimeout(()=>nfKCol.lastElementChild?.tagName!=="BUTTON"&&nfKCol.append(nfKReset(K,st)),0)}}),lab)),Object.keys(pm).length?nfKReset(K,st):null)}
+function nfKReset(K,st){return ge("恢复原色",()=>{K.pal[K.set][K.mode]={};Je();nfKRef?.querySelectorAll("iframe").forEach(f=>{try{f.contentDocument?.getElementById("nf-pal")?.remove()}catch{}});nfKApply(K);nfKCol&&nfKCol.replaceWith(nfKCol=nfKColors(K,st))},"sf-sm")}
+function nfKKeys(sample){const seen=[];String(sample||"").split(/\n/).forEach(l=>{const m=l.trim().match(/^\[([^\]|]+)\|/);if(m&&m[1]!=="人物"&&!seen.includes(m[1]))seen.push(m[1])});return seen}
+var nfKSys=`你在为一张角色卡配一套「状态栏 + 开场白主页」。网页模板已经做好，你不改网页，只写内容。
+<步骤>
+- 先读角色卡，定这张卡状态栏的主题：玩家最该一眼看到什么。比如修仙卡看境界和伤势，校园卡看课表和社团，悬疑卡看线索和嫌疑，日常恋爱卡看身体、心事和约定。
+- 再按主题改状态栏的输出要求：保留参考要求的结构（要求 → 资料 → 示例 → 启动）和外层标签名。项目全部按主题来定，没有哪一项是必须的：身体、情绪、心理、计划、衣着这些键，主题用得上才留，用不上就从资料和示例里删掉，不要硬塞；主题需要的东西写成数值行（[名称|0-100 整数|阶段短语]）或记事项（[项名|内容]），用卡里的专有名词。时间、地点、人物（user 版是姓名、身份）这类开头信息照参考保留。示例用这张卡的人物、地点和开局场景。
+- 最后写开场白主页：作品名；简介一到两句，不剧透；目录每条对应一条开场白，顺序不变，条数和开场白一样多；title 2-6 字，tag 2-4 字，summary 15-40 字，不剧透。
+</步骤>
+<规则>
+- 提到角色一律写 char，用户写 {{user}}。
+- 每行写成 [键|值] 或 [键|值|值]，方括号和竖线用英文半角。保留下来的键，名字和参考要求一致，模板才认得。
+- sf_sample 和输出要求里的示例完全一样，带外层标签。
+</规则>
+输出格式（只输出下面这些标签，标签外不写任何字，不用代码块）：
+<sf_theme>主题，一句话</sf_theme>
+<sf_instruction>完整的输出要求</sf_instruction>
+<sf_sample>示例块</sf_sample>
+<sf_home>{"title":"作品名","intro":"简介","entries":[{"title":"","tag":"","summary":""}]}</sf_home>`;
+function nfKPrompt(K,src,extra){const{st}=nfKPair(K.set);return[`<套装>${st.name}，${nfKPeople[st.people]||""}版，外层标签 <${st.tag}></套装>`,`<参考输出要求>\n${st.instruction}\n</参考输出要求>`,src?.text&&`<角色卡资料>\n${src.text}\n</角色卡资料>`,`<开场白（共 ${src?.greets?.length||0} 条）>\n${(src?.greets||[]).map((g,i)=>`开场白 ${i+1}：${String(g).slice(0,600)}`).join("\n\n")||"没有开场白，目录写一条占位。"}\n</开场白>`,(extra||K.need||"").trim()&&`<作者补充>\n${(extra||K.need).trim()}\n</作者补充>`,"按步骤输出全部标签。"].filter(Boolean).join("\n\n")}
+function nfKParse(r,K){const{st}=nfKPair(K.set);const g=t=>{const v=im(String(r||""),t);return v==null?"":Ot(v)};let ins=Ei(g("sf_instruction")),sm0=g("sf_sample").replace(/^```\w*\n?|```$/gm,"").trim();if(!ins)throw new Error("AI 的回复里没有输出要求，可能被截断了，到设置里把最大回复长度调大再试");if(sm0&&!new RegExp(`<${st.tag}>`).test(sm0))sm0=`<${st.tag}>\n${sm0}\n</${st.tag}>`;const fr=Fr(st.find);if(!sm0||fr.re&&!fr.re.test(sm0)){Oe("warning","AI 给的示例和模板对不上，先用模板自带的示例");sm0=st.sample}let home=null;try{home=JSON.parse(g("sf_home").replace(/^```\w*\n?|```$/gm,"").trim())}catch{Oe("warning","主页目录没解析出来，目录先按开场白自动排")}return{theme:g("sf_theme")||"（AI 没写主题）",instruction:ins,sample:sm0,home:home&&typeof home==="object"?{title:String(home.title||""),intro:String(home.intro||""),entries:Array.isArray(home.entries)?home.entries.map(e=>({title:String(e?.title||""),tag:String(e?.tag||""),summary:String(e?.summary||"")})):[]}:null,people:st.people,tag:st.tag}}
+async function nfKAdjust(K,src,extra){const t=await pr(nfKSys,nfKPrompt(K,src,extra),[]);const ai=nfKParse(t,K);K.ai=ai;K.entries=null;if(ai.home){K.title="";K.intro=""}Je();return ai}
+async function nfKWrite(withHome){const t=Re().characterId,n=St();if(!n)throw new Error("没有选中角色卡，先在酒馆里打开一张卡");const K=nfKState(),{S,O}=nfKDesigns(K,nfKSrc());const e1=sa(S);if(e1.errors.length)throw new Error(`状态栏：${e1.errors[0]}`);if(withHome){const e2=sa(O);if(e2.errors.length)throw new Error(`主页：${e2.errors[0]}`)}const d=n.data||{},fm=String(n.first_mes??d.first_mes??""),move=withHome&&fm.trim()!=="【主页】";if(move&&!Rn.yes("会在这张卡的开场白最前面插入一条【主页】，原来的开场白依次往后挪一位。继续吗？"))return;let list=Li(mn(n));withHome&&(list=list.filter(p=>!/^(\u5199\u5361\u5de5\u574a|Love 写卡机)·开场白·/.test(String(p?.scriptName||""))));await Vr(t,n,[...list,...aa(S,{hideHistory:I.write.hideHistory}),...(withHome?aa(O):[])]);Nl(n);await cwzSfRule(n,S.instruction);if(move){const alts=[fm,...(d.alternate_greetings||n.alternate_greetings||[])].filter(x=>String(x||"").trim());await El(n.avatar,{first_mes:"【主页】",data:{first_mes:"【主页】",alternate_greetings:alts}});n.first_mes="【主页】";n.data=n.data||{};n.data.first_mes="【主页】";n.data.alternate_greetings=alts}await Yr();Oe("success",`已写入「${lr(n)}」：状态栏正则和输出要求${withHome?`、主页正则${move?"，开场白最前面加了【主页】":""}`:""}。开一个新聊天就能看到。`)}
+function nfKToResult(which){const K=nfKState(),{S,O}=nfKDesigns(K,nfKSrc());fn(null);I.cur&&I.history.push(I.cur);I.cur=which==="home"?O:S;Me().draft=Pt(I.cur);Je();I.tab="result";ue()}
+function Sm(){const K=nfKState(),src=nfKSrc(),sets=nfKSets();if(!sets.includes(K.set))K.set=sets[0];if(!K.set)return A("div",{class:"sf-section"},A("p",{class:"sf-hint"},cm?`模板库没加载出来：${cm}`:"模板库还在加载，稍等一下再点进来。"));const{st,op}=nfKPair(K.set),home=nfKHome(K,src);
+const pick=A("div",{style:"display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:8px"},sets.map(k=>{const p=nfKPair(k);return A("button",{type:"button",class:`sf-chip nf-set${k===K.set?" nf-on":""}${k===K.set&&nfFx.set&&nfFx.set!==k?" nf-pop":""}`,style:"display:grid;gap:5px;text-align:left;border-radius:10px;white-space:normal;padding:8px 10px",onclick:()=>{if(k===K.set)return;const old=nfKPair(K.set).st;K.set=k;if(K.ai&&K.ai.people!==p.st.people&&K.ai.instruction){Oe("info",`「${p.st.name}」是${nfKPeople[p.st.people]}版，状态栏内容要重新按卡调整；主页文字保留`)}Je();ue()}},A("span",{class:"nf-ck"},"✓"),A("strong",null,p.st.name.replace(/^.*·\s*/,"")),A("span",{class:"sf-hint"},`${nfKPeople[p.st.people]||""}版 · 状态栏 + 主页`),A("span",{style:"display:flex;gap:3px"},(p.st.palette||[]).slice(0,4).map(([v])=>A("i",{style:`width:14px;height:14px;border-radius:4px;border:1px solid rgba(127,127,127,.5);background:${nfKBase(p.st.replace,v,"day")}`}))))}));
+nfFx.set=K.set;
+const modeSeg=A("span",{class:"nf-seg","data-v":K.mode},[["day","☀ 昼"],["night","☾ 夜"]].map(([v,t])=>A("button",{type:"button",class:K.mode===v?"nf-on":"",onclick:e=>{if(K.mode===v)return;K.mode=v;Je();const sg=e.currentTarget.parentElement;sg.dataset.v=v;sg.querySelectorAll("button").forEach(b=>b.classList.toggle("nf-on",b===e.currentTarget));nfKApply(K);nfKColT&&(nfKColT.textContent=`颜色 · ${v==="day"?"白天":"夜晚"}（切换上面的昼夜改另一套）`);nfKCol&&nfKCol.replaceWith(nfKCol=nfKColors(K,st))}},t)));
+
+nfKCol=nfKColors(K,st);nfKColT=A("div",{class:"sf-h"},`颜色 · ${K.mode==="day"?"白天":"夜晚"}（切换上面的昼夜改另一套）`);
+const k0=key=>key==="title"||key==="intro"||key==="author"||key==="model"||key==="preset"?"O":void 0,inp=(key,ph,val,area)=>A(area?"textarea":"input",{class:"sf-wide",type:area?void 0:"text",rows:area?2:void 0,placeholder:ph,value:val,oninput:e=>{K[key]=e.target.value;nfKRefresh(k0(key))}});
+const ents=A("div",{style:"display:grid;gap:6px"},home.entries.map((en,i)=>A("div",{style:"display:grid;grid-template-columns:minmax(0,1fr) 5.5em;gap:6px"},A("input",{class:"sf-wide",type:"text",value:en.title,placeholder:"标题",oninput:e=>{K.entries=K.entries||home.entries.map(x=>({...x}));K.entries[i].title=e.target.value;nfKRefresh("O")}}),A("input",{class:"sf-wide",type:"text",value:en.tag,placeholder:"分类",oninput:e=>{K.entries=K.entries||home.entries.map(x=>({...x}));K.entries[i].tag=e.target.value;nfKRefresh("O")}}),A("input",{class:"sf-wide",type:"text",value:en.summary,placeholder:"一句简介",style:"grid-column:1/-1",oninput:e=>{K.entries=K.entries||home.entries.map(x=>({...x}));K.entries[i].summary=e.target.value;nfKRefresh("O")}}))));
+nfKRef=A("div",null,nfKPreview(K,src));
+const ai=K.ai,aiOk=ai&&ai.people===st.people&&ai.instruction,keys=nfKKeys(aiOk?ai.sample:st.sample);
+return A("div",{class:"sf-section"},
+A("div",{class:"sf-box"},A("div",{class:"sf-h"},`套装（${sets.length} 套）`),A("p",{class:"sf-hint"},"每套一个状态栏加一个开场白主页，颜色和字体共用。改颜色和文字不用 AI；要按这张卡定主题和字段时点「按这张卡调整」。"),pick),
+A("div",{class:"sf-box"},A("div",{class:"sf-line",style:"justify-content:space-between;flex-wrap:wrap;gap:6px"},A("span",{class:"sf-h"},`预览 · ${st.name.replace(/^.*·\s*/,"")}（${nfKPeople[st.people]}版）`),modeSeg),nfKRef),
+A("div",{class:"sf-box"},nfKColT,nfKCol),
+A("div",{class:"sf-box"},A("div",{class:"sf-h"},"按这张卡调整"),src?A("p",{class:"sf-hint"},`当前角色卡：${src.name} · ${src.greets.length} 条开场白${I.card.text?"":" · 角色卡资料还没读到，先点“刷新”"}`):A("p",{class:"sf-hint"},"现在没有打开角色卡。可以先改颜色和文字，写入要先打开一张卡。"),
+A("textarea",{class:"sf-wide",rows:2,placeholder:"补充（可不填）：比如“主题偏悬疑，状态栏要有线索”“主页简介写得俏皮一点”",value:K.need,oninput:e=>{K.need=e.target.value;Je()}}),
+A("div",{class:"sf-line",style:"flex-wrap:wrap;gap:6px"},ge(aiOk?"重新调整":"按这张卡调整",()=>Ht("按这张卡调整套装",async()=>{await Wr(!0);await nfKAdjust(K,nfKSrc());Oe("success","调整好了，看看预览")}),"sf-primary",{disabled:!src||!!I.busy,"data-nf":"adjust"}),ge("刷新",()=>{Wr(!0);ue()},"sf-sm"),aiOk&&ge("清掉调整",()=>{K.ai=null;Je();ue()},"sf-sm")),
+aiOk&&A("p",null,A("b",null,"主题："),ai.theme),A("div",{class:"sf-hint"},`${aiOk?"现在的":"模板自带的"}状态栏项：${keys.join("、")}`)),
+A("div",{class:"sf-box"},A("div",{class:"sf-h"},"主页文字"),inp("title","作品名（默认用角色卡名字）",K.title||ai?.home?.title||src?.name||""),inp("intro","简介（留空就不显示）",K.intro||ai?.home?.intro||"",!0),A("div",{style:"display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:6px"},inp("author","作者",K.author??src?.author??""),inp("model","推荐模型",K.model),inp("preset","推荐预设",K.preset)),A("details",{class:"sf-fold"},A("summary",null,`目录（${home.entries.length} 条，对应开场白顺序）`),ents)),
+A("div",{class:"sf-bar",style:"flex-wrap:wrap"},ge("一起写进角色卡",()=>Ht("写入套装",()=>nfKWrite(!0)),"sf-primary",{disabled:!src||!!I.busy,title:src?"":"先在酒馆里打开一张角色卡"}),ge("只要状态栏",()=>Ht("写入状态栏",()=>nfKWrite(!1)),"",{disabled:!src||!!I.busy}),ge("状态栏去结果页细改",()=>nfKToResult("status"),"sf-sm"),ge("主页去结果页细改",()=>nfKToResult("home"),"sf-sm"),ge("带这款去「① 设计」",()=>{zi(st.id);I.tab="design";ue()},"sf-sm")))}function Cm(e,t,n,r){return A("button",{type:"button",class:`sf-chip${t?" sf-on":""}`,title:r||"",onclick:n},e)}function Yt(){Me().designOptions=Pt(I.options),Je()}function Im(e){const t=(s,a,i)=>A("label",{class:"sf-field"},A("span",null,s),A("select",{value:e[a],onchange:o=>{e[a]=o.target.value,Yt()}},i.map(([o,c])=>A("option",{value:o,selected:e[a]===o},c)))),n=(s,a)=>A("label",null,A("input",{type:"checkbox",checked:!!e[a],onchange:i=>{e[a]=i.target.checked,Yt()}}),` ${s}`),r=(s,a,i)=>A("label",{class:"sf-field"},A("span",null,s),A("textarea",{rows:2,class:"sf-code",value:e[a]||"",placeholder:i,oninput:o=>{e[a]=o.target.value,Yt()}}));return A("details",{class:"sf-fold"},A("summary",null,"细调状态栏",A("span",{class:"sf-dim"},"版式 · 材质 · 字体 · 组件 · 手机 · 动效")),A("p",{class:"sf-hint"},"下面选项会一同发送给 AI；写明的条件优先于风格标签。留在“自动”就由 AI 按角色卡与参考图决定。"),A("div",{class:"sf-h"},"布局与信息密度"),A("div",{class:"sf-row"},t("版式","layout",[["auto","自动"],["single","单列卡片"],["two","双列字段"],["grid","多格信息面板"],["asym","错落杂志式"],["timeline","纵向时间轴"]]),t("密度","density",[["auto","自动"],["tight","超紧凑"],["normal","常规"],["airy","宽松留白"]]),t("字段数量","fieldCount",[["auto","AI 决定"],["3-5","3–5 个"],["6-8","6–8 个"],["9-12","9–12 个"]])),A("div",{class:"sf-line"},n("显示题头","showTitle"),n("字段分组","groupFields")),A("div",{class:"sf-h"},"颜色、材料与文字"),A("div",{class:"sf-row"},t("表面质感","surface",[["auto","自动"],["paper","纸张/磨损"],["ink","深墨/黑底"],["glass","玻璃半透明"],["solid","纯色块"],["transparent","透明底"]]),t("字体感觉","font",[["auto","自动"],["serif","宋体/衬线"],["sans","现代无衬线"],["mono","打字机/等宽"],["hand","手写感（回退可读字体）"]]),t("边框","border",[["auto","自动"],["none","无边框"],["fine","细实线"],["dash","虚线"],["double","双线"],["rough","不规则纸边"]])),A("div",{class:"sf-row"},t("装饰程度","decoration",[["auto","自动"],["none","无装饰"],["light","少量"],["rich","丰富但不遮内容"]]),t("强调组件","progress",[["auto","自动"],["bar","横向进度条"],["pill","标签/徽章"],["ring","圆环数值"],["text","纯文字数值"]])),A("div",{class:"sf-row"},A("label",{class:"sf-field"},"强调色（可填 #A3262C）",A("input",{type:"text",class:"sf-wide",placeholder:"留空自动取色",value:e.accentColor||"",oninput:s=>{e.accentColor=s.target.value,Yt()}})),A("label",{class:"sf-field"},"底色（可填 #EFE5D8）",A("input",{type:"text",class:"sf-wide",placeholder:"留空自动取色",value:e.backgroundColor||"",oninput:s=>{e.backgroundColor=s.target.value,Yt()}}))),A("div",{class:"sf-h"},"手机与交互"),A("div",{class:"sf-row"},t("手机排版","mobile",[["stack","窄屏自动单列"],["wrap","窄屏自动换行"],["keep","尽量保持列结构"]]),t("动效","motion",[["off","无动效"],["subtle","轻微渐入/呼吸"],["interactive","CSS 悬停反馈（触屏兼容）"]])),A("p",{class:"sf-hint"},"动效只用 CSS，并提供减少动画偏好兼容；状态栏仍需离线可用、不要依赖外部字体或图片。"),r("一定要出现的元素","mustHave","例如：头像旁带月相、红色细绳分割线、体力用横向条"),r("明确不要的元素","avoid","例如：不要渐变、不要 Emoji、不要玻璃质感或粗边框"))}function Am(){const e=I.lvDraft?null:St(),t=Zr(),n=t?.kind==="opening";Wr();const r=I.options,s=A("textarea",{class:"sf-code",placeholder:"没有读到角色卡。可以手动贴人设、世界观、玩法进来。",value:I.card.text,oninput:m=>{I.card.text=m.target.value}}),a=A("textarea",{rows:3,placeholder:n?"例如：把开场白做成书页目录，有几条世界线可选；点击进入对应开场，手机上别太高，保留当前卡的原始开场白。":"例如：古风宫廷卡，想要一个像宫中账簿的状态栏，显示日期时辰、位份、圣宠值（0-100）和当前所在宫殿；手机上别太高。",value:I.need,oninput:m=>{I.need=m.target.value}}),i=A("textarea",{class:"sf-code",placeholder:`每行一个字段：键｜含义与取值规则｜示例
+留空，AI 会自己定字段。也可以点上面“让 AI 推荐字段”。`,value:I.fields,oninput:m=>{I.fields=m.target.value}}),o=I.card.use?I.card.text:"",c=ji(e),p=Rr(I.fields).length,d=`${r.position==="top"?"回复开头":"回复末尾"}${r.compact?" · 紧凑":""}${r.collapsible?" · 可折叠":""}`;return A("div",{class:"sf-section"},A("div",{class:"sf-box"},A("div",{class:"sf-line"},A("div",{class:"sf-h sf-grow"},e?`当前角色卡：${lr(e)}`:I.lvDraft?"草稿资料":"当前角色卡"),e&&A("span",{class:"sf-badge"},n?"开场白主页":c.rule||c.regex?`已有状态栏：${[c.rule&&"要求",c.regex&&"正则"].filter(Boolean).join("+")}`:"还没有状态栏"),e&&ge("重新读取",()=>Wr(!0),"sf-sm")),!e&&A("p",{class:"sf-hint"},I.lvDraft?`读到：${I.card.stats.join(" · ")}。导入时开场白主页会自动排在最前面，原来的开场白往后挪。`:"当前没有选中角色卡。可以手动贴资料，但“写入角色卡”要先在酒馆里打开一张卡。"),e&&A("p",{class:"sf-hint"},I.card.stats.length?`读到：${I.card.stats.join(" · ")}`:"正在读卡……（只有名字的话，说明这张卡的设定都在别处，可以手动贴进下面）"),A("div",{class:"sf-line"},A("label",null,A("input",{type:"checkbox",checked:I.card.use,onchange:m=>{I.card.use=m.target.checked}})," 把资料发给 AI"),A("label",{title:"初始值会按实际剧情定"},A("input",{type:"checkbox",checked:I.card.chat,onchange:m=>{I.card.chat=m.target.checked,Wr(!0)}})," 带上最近 8 条聊天")),A("details",null,A("summary",null,`查看 / 修改资料（${I.card.text.length} 字）`),s)),A("div",{class:"sf-box"},A("div",{class:"sf-h"},"想要什么"),a,A("div",{class:"sf-h"},"风格"),A("div",{class:"sf-line"},A("span",{class:"sf-hint"},t?`参考模板：${t.name}`:"参考模板：未选择"),ge(t?"换一款":"从套装里选",()=>{I.tab="refs",ue()},"sf-sm"),t&&ge("取消",()=>zi(""),"sf-sm")),A("div",{class:"sf-chips"},ea.map(m=>Cm(m.label,I.styles.includes(m.id),()=>{I.styles=I.styles.includes(m.id)?I.styles.filter(g=>g!==m.id):[...I.styles,m.id],ue()},m.desc))),A("input",{type:"text",class:"sf-wide",placeholder:"再补一句，例如：配色参考水墨，偏灰青",value:I.customStyle,oninput:m=>{I.customStyle=m.target.value}}),A("div",{class:"sf-folds"},A("details",{class:"sf-fold",style:n?"display:none":"",open:I.foldFields||p>0,ontoggle:m=>{I.foldFields=m.target.open}},A("summary",null,"字段",A("span",{class:"sf-dim"},p?`已填 ${p} 个`:"AI 按角色卡来定")),A("div",null,ge("让 AI 推荐字段",Em,"sf-sm",{disabled:!!I.busy})),i),A("details",{class:"sf-fold",style:n?"display:none":""},A("summary",null,"更多选项",A("span",{class:"sf-dim"},d)),A("div",{class:"sf-line"},A("span",null,"位置"),A("select",{onchange:m=>{r.position=m.target.value,Yt()}},A("option",{value:"bottom",selected:r.position==="bottom"},"回复末尾"),A("option",{value:"top",selected:r.position==="top"},"回复开头")),A("select",{onchange:m=>{r.lang=m.target.value,Yt()}},A("option",{value:"zh",selected:r.lang==="zh"},"显示中文"),A("option",{value:"en",selected:r.lang==="en"},"显示 English"))),A("div",{class:"sf-line"},A("label",null,A("input",{type:"checkbox",checked:r.compact,onchange:m=>{r.compact=m.target.checked,Yt(),ue()}})," 紧凑"),A("label",null,A("input",{type:"checkbox",checked:r.collapsible,onchange:m=>{r.collapsible=m.target.checked,Yt(),ue()}})," 可折叠"))))),n?A("p",{class:"sf-hint"},"这页生成的是开场白主页/目录正则。会用原卡的主开场白与额外开场白自动整理目录；写入正则后，还需在角色卡最前面新增一条内容为【主页】的开场白。"):Im(r),bm(),I.cur&&A("p",{class:"sf-hint"},"想改已经生成的，去“结果”页写修改意见，比重新生成更稳。"),A("div",{class:"sf-bar"},ge(I.cur?"重新生成":n?"生成开场白主页":"生成状态栏",()=>Tm(o),"sf-primary",{disabled:!!I.busy,title:I.cur?"会覆盖当前结果，旧版可以换回":""}),I.cur&&ge("看当前结果",()=>{I.tab="result",ue()})))}async function Em(){const{system:e,prompt:t}=ol({card:I.card.use?I.card.text:"",need:I.need,templates:Me().templates}),n=await Ht("推荐字段",()=>pr(e,t));if(!n)return;const r=Rr(Ei(n));if(!r.length){Oe("warning","AI 的回复里没有认出字段，换个说法再试");return}I.fields=ta(r),ue()}function Pl(e,{keepOld:t,kind:n="status"}){const r=ra(e,n);return r.ok?(r.replace=r.kind==="opening"?String(r.replace||"").trim():un(r.replace),I.origin&&I.cur?.external&&(r.external=!0,r.sample.trim()||(r.sample=I.cur.sample)),t&&I.cur&&I.history.push(I.cur),I.history.length>8&&I.history.shift(),I.cur=r,Me().draft=Pt(r),Je(),I.tab="result",r.truncated&&Oe("warning","回复可能被截断了（没有看到结尾），预览和检查结果请留意"),!0):(I.lastRaw=e,Oe("error","AI 的回复里没有找到完整的 find 和 replace，可能被截断了。到设置里把“最大回复长度”调大再试"),!1)}var Ol=e=>{I.busy&&(I.busy.label=e,Hn())};async function Tm(e){const t=Me(),n=Zr()?.kind==="opening";fn(null);const r=I.images;let s=null;const a=await Ht(n?"设计开场白主页":"设计状态栏",async()=>{r.length&&I.analyze&&!Kr()&&await Hi();const i=r.length&&I.analyze?I.spec:"";Ol(n?"设计开场白主页":"设计状态栏");const{system:o,prompt:c}=al({card:e,need:I.need,fields:I.fields,styles:I.styles,customStyle:I.customStyle,reference:Zr(),options:I.options,images:r.length,spec:i,mode:I.imgMode,templates:t.templates});let p=await pr(o,c,r);if(r.length&&I.selfCheck&&!n){const d=ra(p);if(d.ok){Ol("对照参考图自查");const m=ul({design:d,spec:i,images:r.length,mode:I.imgMode,templates:t.templates});try{const g=await pr(m.system,m.prompt,r);ra(g).ok&&(s=d,p=g)}catch(g){Oe("warning",`自查失败，先用第一版：${g?.message||g}`)}}}return p});a&&(Pl(a,{keepOld:!0,kind:n?"opening":"status"})&&s&&(s.replace=un(s.replace),I.history.push(s)),ue(),kt&&(kt.scrollTop=0))}async function Nm(){const e=I.revise.trim()||(Zt(Me(),lvKey("result"))?"按本页对话中作者的要求修改。":"");if(!e&&!I.images.length){Oe("warning","写一句修改意见，或者加一张参考图");return}const{system:t,prompt:n}=cl({design:dr(),request:`${I.cur?.external?`${hl}
+`:""}${e||"参照附图调整，让它和参考图更像一套。"}`,card:I.card.use?I.card.text:"",images:I.images.length,spec:I.images.length&&Kr()?I.spec:"",mode:I.imgMode,templates:Me().templates}),r=await Ht("按意见修改",()=>pr(t,n,I.images));r&&(Pl(r,{keepOld:!0,kind:I.cur?.kind==="opening"?"opening":"status"})&&(I.revise=""),ue())}function dr(){const e=I.cur;return{...e,replace:e.kind==="opening"?String(e.replace||"").trim():un(e.replace),instruction:Ot(e.instruction)}}function $r(){Me().draft=Pt(I.cur),Je()}function Pm(e){try{const t=e.contentDocument;if(!t?.documentElement)return;const n=Math.ceil(t.documentElement.scrollHeight);e.style.height=`${Math.min(Math.max(n+2,90),640)}px`}catch{}}function Dl(){const e=dr(),t=sa(e),n=gl(e),r=A("iframe",{class:"sf-frame",style:n.fenced?`color-scheme:light;background:${I.dark?"#1c1f24":"#e9e7e1"}`:"",sandbox:n.fenced?"allow-scripts allow-same-origin":"allow-same-origin",title:"预览",srcdoc:n.fenced?(n.html?((st,h)=>/<head[^>]*>/i.test(h)?h.replace(/<head[^>]*>/i,m=>m+st):st+h)("<script>window.setChatMessages=async()=>{};window.getChatMessages=async()=>[{swipes:Array(20).fill('')}];try{var nfM='"+(I.dark?"night":"day")+"',nfG=Storage.prototype.getItem,nfS=Storage.prototype.setItem;Storage.prototype.getItem=function(k){return k==='nf-status-mode'?nfM:nfG.call(this,k)};Storage.prototype.setItem=function(k,v){if(k==='nf-status-mode'){nfM=v;return}return nfS.call(this,k,v)}}catch(e){}window.BroadcastChannel=void 0;<\/script>",n.html):"<!doctype html><body>没有匹配上，预览是空的</body>"):wl(n.html||'<p style="opacity:.6">（没有匹配上，预览是空的）</p>',I.dark)});return r.addEventListener("load",()=>Pm(r)),[A("div",{class:"sf-previewhead"},A("span",{class:"sf-h"},"预览（手机宽度）"),ge(I.dark?"换浅色底":"换深色底",()=>{I.dark=!I.dark,Bl()},"sf-sm")),r,t.errors.length>0&&A("div",{class:"sf-errbox"},t.errors.map(s=>A("div",null,`✕ ${s}`))),t.warns.length>0&&A("div",{class:"sf-warnbox"},t.warns.map(s=>A("div",null,`! ${s}`))),t.errors.length===0&&t.warns.length===0&&A("div",{class:"sf-okbox"},e.kind==="opening"?"✓ 开场白主页：格式与静态结构检查通过；真实点击需要在酒馆助手里验证":(/^\s*```html/i.test(String(e.replace))?"✓ 检查通过：完整网页状态栏，样例能匹配；点按钮和昼夜切换要在酒馆里试一下":`✓ 检查通过：${t.groups} 个捕获组，样例能匹配，没有脚本和外部资源`))]}function Bl(){cr&&cr.replaceChildren(...Dl().filter(Boolean))}function Om(){const e=I.cur;if(!e)return A("div",{class:"sf-section"},A("p",{class:"sf-hint"},"还没有设计。到“① 设计”生成一个，或者去“我的”里载入以前存的。"),ge("去设计",()=>{I.tab="design",ue()},"sf-primary"));const t=um(Bl,250),n=(p,d={})=>({value:p==="fields"?ta(e.fields):e[p],oninput:m=>{p==="fields"?e.fields=Rr(m.target.value):e[p]=m.target.value,$r(),t()},...d});cr=A("div",{class:"sf-section"},...Dl().filter(Boolean));const r=St(),s=ji(r),a=I.write,i=(p,d,m,...g)=>A("details",{class:"sf-fold",open:I.resOpen.has(p),ontoggle:y=>{y.target.open?I.resOpen.add(p):I.resOpen.delete(p)}},A("summary",null,d,m&&A("span",{class:"sf-dim"},m)),g),o=e.kind==="opening"?"开场白主页正则（不会覆盖现有状态栏）":[a.regex&&"正则",a.rule&&"输出要求",a.hideHistory&&"历史不进上下文"].filter(Boolean).join(" + ")||"没选",c=I.origin;return A("div",{class:"sf-section"},c&&A("div",{class:"sf-origin"},A("span",null,`正在改：「${c.name}」（${c.where==="card"?`角色卡 ${c.charName||""}`:"全局正则"}）`),ge("不改了",()=>{fn(null),ue()},"sf-sm")),A("input",{type:"text",class:"sf-wide",title:"设计名称",...n("name")}),cr,A("div",{class:"sf-folds"},e.note&&i("note","AI 的说明","理解 · 假设 · 配色 · 字段依据",A("pre",{class:"sf-pre"},e.note)),i("revise","按意见修改",I.history.length?`可换回 ${I.history.length} 版`:"",A("textarea",{rows:3,placeholder:"例如：整体再紧凑一点；好感度改成进度条；换成更暗的底色，强调色用金色；把时间放到最左边。",value:I.revise,oninput:p=>{I.revise=p.target.value}}),A("p",{class:"sf-hint"},I.images.length?`会带上 ${I.images.length} 张参考图（在“① 设计”里管理）。`:"想让它参照一张图改，先在“① 设计”页加参考图。"),A("div",{class:"sf-line"},ge("按意见修改",Nm,"sf-primary",{disabled:!!I.busy}),ge(`换回上一版（${I.history.length}）`,()=>{I.cur=I.history.pop(),$r(),ue()},"",{disabled:I.history.length===0}))),!c&&i("write","写入选项",o,A("p",{class:"sf-hint"},e.kind==="opening"?"这是开场白主页正则：写入只会替换本工坊之前添加的开场白主页正则，保留角色卡现有状态栏。需要手动在角色卡最前面新增【主页】开场白，其他开场白依次放到后面。":r?`目标：${lr(r)}${s.rule||s.regex?`（已有：${[s.rule&&"要求",s.regex&&"正则"].filter(Boolean).join("+")}，写入会覆盖旧的）`:""}`:"现在没有选中角色卡。可以用“导出与复制”手动放进去。"),A("label",{style:e.kind==="opening"?"display:none":""},A("input",{type:"checkbox",checked:a.regex,onchange:p=>{a.regex=p.target.checked,ue()}})," 正则（角色卡内嵌，只改显示，自动允许这张卡的正则）"),A("label",{style:e.kind==="opening"?"display:none":""},A("input",{type:"checkbox",checked:a.rule,onchange:p=>{a.rule=p.target.checked,ue()}})," 给模型的输出要求（状态栏规则）"),a.rule&&e.kind!=="opening"&&A("div",{class:"cwz-where"},A("label",null,A("input",{type:"radio",name:"cwzwhere",checked:a.where!=="desc",onchange:()=>{a.where="world",ue()}})," 世界书 · 深度 D1，不可递归",A("small",{class:"sf-hint"},r?.data?.extensions?.world?`（这张卡绑了「${r.data.extensions.world}」，推荐）`:"（这张卡没绑世界书，会自动改写进角色描述）")),A("label",null,A("input",{type:"radio",name:"cwzwhere",checked:a.where==="desc",onchange:()=>{a.where="desc",ue()}})," 角色描述末尾")),A("label",{style:e.kind==="opening"?"display:none":""},A("input",{type:"checkbox",checked:a.hideHistory,onchange:p=>{a.hideHistory=p.target.checked,ue()}})," 历史楼层的状态栏不发给模型（省 token，但模型看不到上一次的数值）"),e.kind!=="opening"&&A("div",null,ge("从这张卡里去掉",async()=>{Rn.yes("把本工具写进这张卡的状态栏要求和正则去掉？")&&await Ht("去掉状态栏",gm)},"sf-danger sf-sm",{disabled:!r||!(s.rule||s.regex)||!!I.busy}))),i("export","导出与复制","写入失败或想放进别处时用",A("div",{class:"sf-line"},ge("下载正则 JSON",()=>{aa(dr(),{hideHistory:I.write.hideHistory}).forEach((d,m)=>Al(`${dm(d.scriptName)}${m?`-${m}`:""}.json`,JSON.stringify(d,null,2)))},"sf-sm"),ge(e.kind==="opening"?"复制安装说明":"复制输出要求",()=>oa(e.kind==="opening"?e.instruction:ia(e.instruction)),"sf-sm"),ge("复制 HTML",()=>oa(e.kind==="opening"?e.replace:un(e.replace)),"sf-sm"),ge("复制 find 正则",()=>oa(e.find),"sf-sm"),e.kind!=="opening"&&Qn?.get("preset")&&ge("输出要求存进预设工坊",()=>{const p=Qn.get("preset").addEntry({name:`状态栏·${e.name}`,content:ia(e.instruction),role:"system",tags:["状态栏"],source:"状态栏工坊"});Oe("success",`已存进预设工坊的收藏：${p.name}`)},"sf-sm"))),i("edit","手动编辑","改了上面的预览和检查会实时更新",A("div",{class:"sf-h"},e.kind==="opening"?"字段（开场白主页无需动态字段）":"字段（键｜含义与取值规则｜示例；顺序 = 捕获组顺序）"),A("textarea",{class:"sf-code",...n("fields")}),A("div",{class:"sf-h"},e.kind==="opening"?"安装与目录说明":"给模型的输出要求"),A("textarea",{class:"sf-code sf-tall",...n("instruction")}),A("div",{class:"sf-h"},"find 正则（/pattern/flags）"),A("input",{type:"text",class:"sf-wide sf-mono",...n("find")}),A("div",{class:"sf-h"},e.kind==="opening"?"replace（保留完整 fenced HTML、body 与交互脚本）":"replace（HTML，用 $1 $2 … 引用捕获组）"),A("textarea",{class:"sf-code sf-tall",...n("replace")}),A("div",{class:"sf-h"},"样例（模型会输出的那段块）"),A("textarea",{class:"sf-code",...n("sample")}))),A("div",{class:"sf-bar"},c?[ge("写回原来的正则",()=>Ht("写回正则",Mm),"sf-primary",{disabled:!!I.busy}),c.written&&ge("撤销写回",()=>Ht("撤销写回",Lm),"",{disabled:!!I.busy})]:I.lvDraft?[ge("用到这张卡",lvUse,"sf-primary",{disabled:!!I.busy}),I.lvDraft.imported&&r?.avatar===I.lvDraft.imported&&ge(e.kind==="opening"?"写入开场白主页正则":"直接写进已导入的卡",()=>Ht("写入角色卡",fm),"",{disabled:!!I.busy})]:ge(e.kind==="opening"?"写入开场白主页正则":"写入当前角色卡",()=>Ht("写入角色卡",fm),"sf-primary",{disabled:!r||!!I.busy,title:r?"":"先在酒馆里打开一张角色卡"}),ge("保存到“我的”",Dm)))}function Dm(){const e=Me(),t=dr(),n=(Rn.text("存成什么名字？",t.name)||"").trim();n&&(t.name=n,I.cur.name=n,e.designs.unshift({...Pt(t),id:ar("d"),savedAt:Date.now()}),Je(),Oe("success",`已保存「${n}」`),ue())}function fn(e){I.origin=e,Me().draftOrigin=e?Pt(e):null,Je()}var Fi=()=>Array.isArray(Re().extensionSettings?.regex)?Re().extensionSettings.regex:[],Ml=()=>(Re().chat||[]).filter(e=>!e.is_user).map(e=>e.mes||"");function Bm(e,t){const n=St(),r=Bi(t.findRegex,Ml());I.cur&&I.history.push(I.cur),I.cur=Mi(t,r),fn({where:e,id:t.id||"",name:t.scriptName||"",avatar:e==="card"?n?.avatar:"",charName:e==="card"?lr(n):"",backup:Pt(t),written:!1}),$r(),I.tab="result",I.resOpen.add("revise"),r?Oe("success",`已载入「${I.cur.name}」，写修改意见就能改`):(I.resOpen.add("edit"),Oe("info","聊天里没找到能匹配它的消息：在“手动编辑”最下面贴一段样例，才能预览")),ue(),kt&&(kt.scrollTop=0)}async function Mm(){const e=I.origin,t=dr(),n=sa(t);if(!(n.errors.length&&!Rn.yes(`检查还有问题：${n.errors[0]}
+仍然写回吗？`))){if(e.where==="card"){const r=St();if(!r||r.avatar!==e.avatar)throw new Error(`先在酒馆里打开原来那张卡「${e.charName}」`);const s=Ur(mn(r),e,t);if(s.index<0)throw new Error("角色卡里找不到原来那条正则了（可能被删了或改了名字）");await Vr(Re().characterId,r,s.list)}else{const r=Re().extensionSettings,s=Ur(Fi(),e,t);if(s.index<0)throw new Error("全局正则里找不到原来那条了（可能被删了或改了名字）");r.regex=s.list,Je()}e.written=!0,fn(e),await Yr(),Oe("success",`已写回「${e.name}」`),ue()}}async function Lm(){const e=I.origin,t=ir({find:e.backup.findRegex,replace:e.backup.replaceString});if(e.where==="card"){const n=St();if(!n||n.avatar!==e.avatar)throw new Error(`先在酒馆里打开原来那张卡「${e.charName}」`);const r=Ur(mn(n),e,t);if(r.index<0)throw new Error("找不到原来那条正则了");r.list[r.index].replaceString=e.backup.replaceString,await Vr(Re().characterId,n,r.list)}else{const n=Ur(Fi(),e,t);if(n.index<0)throw new Error("找不到原来那条正则了");n.list[n.index].replaceString=e.backup.replaceString,Re().extensionSettings.regex=n.list,Je()}e.written=!1,fn(e),await Yr(),Oe("success","已换回原来的样子"),ue()}function qm(){const e=St(),t=mn(e),n=Fi(),r=I.regexImported,s=I.regexSearch.trim().toLowerCase(),a=d=>d.filter(m=>!s||[m.scriptName,m.findRegex,m.replaceString].some(g=>String(g||"").toLowerCase().includes(s))),i=d=>{I.cur&&I.history.push(I.cur),I.cur=Mi(d,Bi(d.findRegex,Ml())),fn(null),$r(),I.tab="result",I.resOpen.add("edit"),ue()},o=A("input",{type:"file",accept:".json,application/json",style:"display:none",onchange:async d=>{const m=d.target.files?.[0];if(d.target.value="",!!m)try{const g=mm(await m.text());if(!g.length)throw new Error("文件里没有找到 regex_scripts 正则数组。请导出角色卡 JSON 或酒馆正则 JSON。");I.regexImported=g,Oe("success",`从「${m.name}」读到 ${g.length} 条正则`),ue()}catch(g){Oe("error",`读取正则失败：${g.message||g}`)}}}),c=(d,m)=>A("div",{class:"sf-card"},A("div",{class:"sf-card-main"},A("div",{class:"sf-card-title"},m.scriptName||"（没名字）",A("span",{class:"sf-dim"},[m.disabled?"已停用":"已启用",`${String(m.replaceString||"").length} 字`,Array.isArray(m.placement)?`位置 ${m.placement.join("/")}`:""].filter(Boolean).join(" · "))),A("div",{class:"sf-preview sf-mono"},String(m.findRegex||"").slice(0,140)),A("details",null,A("summary",{class:"sf-hint"},"查看替换代码"),A("pre",{class:"sf-pre"},String(m.replaceString||"").slice(0,9e3)))),A("div",{class:"sf-card-btns"},ge(d==="import"?"载入到结果":"拿来改",()=>d==="import"?i(m):Bm(d,m),"sf-sm sf-primary",{disabled:!String(m.findRegex||"").trim()}))),p=(d,m,g,y)=>A("div",{class:"sf-box"},A("div",{class:"sf-h"},`${d}（${m.length} 条）`),a(m).length?a(m).map(E=>c(g,E)):A("p",{class:"sf-hint"},m.length?"没有匹配搜索词的正则。":y));return A("div",{class:"sf-section"},A("p",{class:"sf-hint"},"这里会读取当前角色卡内嵌的正则和酒馆全局正则。选一条“拿来改”，可以保留它的运行位置、启用状态等设置，只修改匹配与替换内容。"),A("div",{class:"sf-line"},A("input",{type:"search",class:"sf-wide sf-grow",placeholder:"按名称、查找式、HTML 搜索",value:I.regexSearch,onchange:d=>{I.regexSearch=d.target.value,ue()}}),ge("刷新当前卡",()=>{Wr(!0),ue()},"sf-sm"),ge("从角色卡 / 正则 JSON 读取",()=>o.click(),"sf-sm"),o),p(e?`角色卡 · ${lr(e)}`:"当前角色卡",t,"card",e?"当前角色对象里还没找到内嵌正则。可以尝试刷新，或从导出的角色卡 JSON 读取。":"先打开一张角色卡，再来读取。"),p("酒馆全局正则",n,"global","没有全局正则。"),r.length?p("从文件读取（不会覆盖来源）",r,"import","文件里没有可用正则。"):null)}function jm(){const e=Me(),t=A("input",{type:"file",accept:".json,application/json",style:"display:none",onchange:async n=>{const r=n.target.files[0];if(n.target.value="",!r)return;const s=Sl(await r.text());if(s.error){Oe("error",s.error);return}e.designs.unshift(...s.designs),Je(),Oe("success",`导入了 ${s.designs.length} 个`),ue()}});return A("div",{class:"sf-section"},A("div",{class:"sf-row"},ge("导入",()=>t.click()),ge("导出全部",()=>Al("状态栏工坊-我的.json",JSON.stringify(kl(e.designs),null,2)),"",{disabled:!e.designs.length}),t),e.designs.length===0&&A("p",{class:"sf-hint"},"还没有保存的状态栏。在“结果”页点“保存到我的”，以后换卡可以直接载入再按意见改。"),e.designs.map(n=>A("div",{class:"sf-card"},A("div",{class:"sf-card-main"},A("div",{class:"sf-card-title"},n.name,A("span",{class:"sf-dim"},`${(n.fields||[]).length} 个字段 · ${n.savedAt?new Date(n.savedAt).toLocaleDateString():""}`)),A("div",{class:"sf-preview"},(n.instruction||"").replace(/\s+/g," ").slice(0,100))),A("div",{class:"sf-card-btns"},ge("载入",()=>{fn(null),I.cur&&I.history.push(I.cur),I.cur=ir(Pt(n)),$r(),I.tab="result",ue()},"sf-sm"),ge("删除",()=>{Rn.yes(`删除「${n.name}」？`)&&(e.designs=e.designs.filter(r=>r!==n),Je(),ue())},"sf-sm sf-danger")))))}function Qm(){const e=Me(),t=vm();return A("div",{class:"sf-section"},A("div",{class:"sf-box"},A("div",{class:"sf-h"},"AI 来源"),Qn&&A("label",null,A("input",{type:"checkbox",checked:e.followCard,onchange:n=>{e.followCard=n.target.checked,Je(),ue()}})," 跟Love 写卡机用同一个 API（Love 写卡机 → 设置 → 用哪个 API）"),A("div",{class:"sf-row"},A("select",{disabled:!!(Qn&&e.followCard),onchange:n=>{e.profileId=n.target.value,Je()}},A("option",{value:"",selected:!e.profileId},"酒馆当前连接的 API"),t.map(n=>A("option",{value:n.id,selected:e.profileId===n.id},`连接配置：${n.name}`))),A("span",null,"最大回复长度"),A("input",{type:"number",min:1024,step:1e3,style:"width:100px",value:e.maxTokens,oninput:n=>{e.maxTokens=Math.max(1024,Number(n.target.value)||12e3),Je()}})),A("p",{class:"sf-hint"},"设计一次要输出输出要求 + 正则 + 一大段 HTML，默认 12000。带参考图时要选支持看图的模型（连接配置或当前连接）；有图时一次生成最多调用 3 次：拆解 → 设计 → 自查（可以在参考图那里关掉）。")),A("div",{class:"sf-box"},A("div",{class:"sf-h"},"设计准则（头部）"),A("p",{class:"sf-hint"},"想让 AI 换一种做法，改这里。改过的会标出来，可以单独恢复默认。"),sl.map(([n,r])=>{const s=e.templates[n]??Wt[n],a=e.templates[n]!==void 0&&e.templates[n]!==Wt[n];return A("details",null,A("summary",null,r,a?"（已修改）":""),A("textarea",{class:"sf-code sf-tall",value:s,oninput:i=>{e.templates[n]=i.target.value,Je()}}),A("div",{class:"sf-row"},ge("恢复默认",()=>{delete e.templates[n],Je(),ue()},"sf-sm",{disabled:!a})))})),A("div",{class:"sf-box"},A("div",{class:"sf-h"},"数据"),A("p",{class:"sf-hint"},`已保存 ${e.designs.length} 个状态栏，存在酒馆的扩展设置里。参考图只在当前会话里用，不会保存。`),ge("清空当前设计",()=>{Rn.yes("清掉当前设计和草稿？（“我的”里保存的不受影响）")&&(I.cur=null,I.history=[],e.draft=null,fn(null),ue())},"sf-danger")))}var Ll={"data-sf-owner":Jr};function Rm(){for(const e of nt.querySelectorAll(`[data-sf-owner="${Jr}"]`))e.remove();rt=kt=Rt=cr=null,Ge.StatusForge?.owner===Jr&&delete Ge.StatusForge}function ql(){I.options={...I.options,...Me().designOptions||{}},I.referenceId=Me().referenceId||"",I.referenceCategory=Zr()?.kind==="opening"?"opening":"status";for(const e of["sf-menu-btn","sf-drawer","sf-root"])nt.getElementById(e)?.remove();if(!Qn){const e=nt.getElementById("extensionsMenu");if(e&&e.append(A("div",{id:"sf-menu-btn",...Ll,class:"list-group-item flex-container flexGap5 sf-menu-item",onclick:()=>{Xr(),e.style.display="none"}},A("div",{class:"fa-solid fa-chart-simple extensionsMenuExtensionButton"}),A("span",null,"状态栏工坊"))),lm){const t=qi("eventOn"),n=qi("getButtonEvent");if(t&&n)try{t(n("状态栏工坊"),Xr),qi("appendInexistentScriptButtons")?.([{name:"状态栏工坊",visible:!0}])}catch(r){console.warn(`[${jn}] 脚本按钮注册失败，仍可从魔棒菜单打开`,r)}}else{const t=nt.getElementById("extensions_settings2")||nt.getElementById("extensions_settings");t&&t.append(A("div",{id:"sf-drawer",...Ll,class:"inline-drawer"},A("div",{class:"inline-drawer-toggle inline-drawer-header"},A("b",null,`状态栏工坊 v${Cl}`),A("div",{class:"inline-drawer-icon fa-solid fa-circle-chevron-down down"})),A("div",{class:"inline-drawer-content"},ge("打开状态栏工坊",Xr))))}}Ge.StatusForge={open:Xr,close:pa,core:nl,owner:Jr},Qn?.register("status",{open:Xr,close:pa,isOpen:()=>!!rt}),window.addEventListener("pagehide",Rm)}nt.readyState==="loading"?nt.addEventListener("DOMContentLoaded",ql):ql();var Hm={},{W:zm,DOC:Dt,IN_SCRIPT:Fm}=Er,zn="data-cw-suite";if(!Fm&&!globalThis.__CW_INLINE_CSS__)for(const e of["preset/style.css","status/style.css"])try{const t=new URL(e,Hm.url).href;if(!Dt.querySelector(`link[href="${t}"]`)){const n=Dt.createElement("link");n.rel="stylesheet",n.href=t,n.setAttribute(zn,""),Dt.head.append(n)}}catch(t){console.warn("[Love 写卡机] 样式加载失败",t)}var Um=[{id:"preset",label:"预设工坊",icon:"fa-puzzle-piece"},{id:"status",label:"状态栏工坊",icon:"fa-chart-simple"}];var nfOwn=Math.random().toString(36).slice(2),nfDead=!1,nfObs=null;try{zm.__CW_MENU_OWNER=nfOwn}catch{}for(const e of Dt.querySelectorAll(`[${zn}-menu]`))e.remove();Dt.getElementById("cw_menu_button")?.remove();function _r(){if(nfDead)return;try{if(zm.__CW_MENU_OWNER&&zm.__CW_MENU_OWNER!==nfOwn)return}catch{}const e=Dt.getElementById("extensionsMenu");if(!e)return;for(const x of e.querySelectorAll(`[${zn}-menu]`))x.getAttribute("data-cw-own")!==nfOwn&&x.remove();let t=Dt.getElementById("cw_menu_button");t||(t=Dt.createElement("div"),t.id="cw_menu_button",t.className="list-group-item flex-container flexGap5 interactable",t.tabIndex=0,t.innerHTML='<div class="fa-solid fa-feather-pointed extensionsMenuExtensionButton"></div>Love 写卡机',t.setAttribute(`${zn}-menu`,"card"),t.setAttribute("data-cw-own",nfOwn),t.addEventListener("click",()=>{Er.switchTo("card"),e.style.display="none"}),e.append(t));for(const n of Um){let r=Dt.querySelector(`[${zn}-menu="${n.id}"]`);r||(r=Dt.createElement("div"),r.className="list-group-item flex-container flexGap5 interactable",r.setAttribute(`${zn}-menu`,n.id),r.setAttribute("data-cw-own",nfOwn),r.tabIndex=0,r.innerHTML=`<div class="fa-solid ${n.icon} extensionsMenuExtensionButton"></div>${n.label}`,r.addEventListener("click",()=>{Er.switchTo(n.id),e.style.display="none"})),t?t.after(r):e.append(r),t=r}}_r();const nfMenuBtn=()=>_r();try{const em=Dt.getElementById("extensionsMenu");em&&(nfObs=new zm.MutationObserver(()=>{nfDead||em.querySelector(`[data-cw-own="${nfOwn}"]`)||setTimeout(_r,60)}),nfObs.observe(em,{childList:!0}));Dt.getElementById("extensionsMenuButton")?.addEventListener("click",nfMenuBtn,!0)}catch(e){console.warn("[Love 写卡机] 魔棒入口守护",e)}var Ui=[{name:"Love 写卡机",id:"card"},{name:"预设工坊",id:"preset"},{name:"状态栏工坊",id:"status"}],es=new Set;function ts(){const e=zm.TavernHelper||window.TavernHelper,t=a=>typeof globalThis[a]=="function"?globalThis[a].bind(globalThis):typeof window[a]=="function"?window[a].bind(window):typeof e?.[a]=="function"?e[a].bind(e):null,n=t("eventOn"),r=t("getButtonEvent"),s=t("appendInexistentScriptButtons");if(typeof n!="function"||typeof r!="function")return!1;for(const a of Ui)if(!es.has(a.name)){if(globalThis.__CW_EARLY_BOUND?.has(a.name)){es.add(a.name);continue}try{const i=r(a.name);if(!i)continue;n(i,()=>Er.switchTo(a.id)),es.add(a.name)}catch(i){console.warn(`[Love 写卡机] 魔术棒按钮 ${a.name} 注册失败`,i)}}if(es.size&&typeof s=="function")try{s(Ui.map(({name:i})=>({name:i,visible:!0})))?.catch?.(i=>console.warn("[Love 写卡机] 魔术棒按钮补全失败",i))}catch(a){console.warn("[Love 写卡机] 魔术棒按钮补全失败",a)}return es.size===Ui.length}Er.readyHooks.push(()=>{_r(),ts()}),ts(),window.addEventListener("load",()=>{_r(),ts()},{once:!0}),setTimeout(()=>{_r(),ts()},700),setTimeout(()=>{_r(),ts()},2500),window.addEventListener("pagehide",()=>{nfDead=!0;try{nfObs?.disconnect();Dt.getElementById("extensionsMenuButton")?.removeEventListener("click",nfMenuBtn,!0)}catch{}for(const e of Dt.querySelectorAll(`[data-cw-own="${nfOwn}"],link[${zn}]`))e.remove();try{zm.__CW_MENU_OWNER===nfOwn&&(zm.__CW_MENU_OWNER="")}catch{}});var Gm=[{key:"cardType",name:"卡类型",single:!0,required:!0,tags:["单人卡|单人,一个角色","多人卡|多人卡,多角色,几个男主,几个女主","世界卡|世界卡,无固定角色,没有固定角色,无主角,世界书卡","大世界卡|大世界,开放世界,冒险,RPG,跑团","手枪卡|手枪,纯肉,h卡","模拟器/系统卡|模拟器,系统卡,经营,养成卡"]},{key:"source",name:"来源",single:!0,required:!0,tags:["原创|原创","同人|同人,原作,二创,衍生,原著"]},{key:"cp",name:"性向",required:!0,tags:["BG|BG,言情,男女主","GB|GB,女攻,女强男弱","BL|BL,耽美,男男","GL|GL,百合,女女","无CP|无CP,不谈恋爱,纯友情,事业线"]},{key:"count",name:"人数",single:!0,required:!0,tags:["1v1|1v1,1V1,一对一,双洁","NP|NP,多男主,多女主,后宫","群像|群像,多人,小队,团队","多线可选|多线,多路线,多结局"]},{key:"userRole",name:"user 身份",single:!0,tags:["主角|","旁观者|旁观,路人","自定义|"]},{key:"userGender",name:"user 性别",single:!0,tags:["女|女主,女user,女性向","男|男主视角,男user,男性向","不限|不限性别"]},{key:"cu",name:"c/u 定位",tags:["强c弱u|强c弱u,强c","弱c强u|弱c强u,强u","双强|双强","公c|公c,攻c","嬷c|嬷c,受c","公u|公u,攻u","嬷u|嬷u,受u","泥塑c|泥塑c,女化c","泥塑u|泥塑u,女化u","整塑c|整塑c,男化c","整塑u|整塑u,男化u","爹系c|爹系,爹c","疯c|疯c","乖c|乖c,听话","狗c|狗c,小狗c,大狗","宠u|宠妻,宠溺,宠u,护短","虐u|虐u","c追u|c追u","u追c|u追c,倒追","万人迷u|万人迷u,团宠"]},{key:"era",name:"时代与题材",tags:["现言|现代,都市,现言","古言|古代,古风,古言,王爷,侯爷","民国|民国,军阀,上海滩","年代|年代文,七零,八零,九十年代","仙侠|仙侠,修仙,仙尊,宗门,师尊,飞升","玄幻|玄幻,异世,魔法","武侠|武侠,江湖,门派,侠客","宫廷|宫廷,皇宫,太子,后妃","宅斗|宅斗,嫡庶,侯府,主母","豪门|豪门,世家,继承人,联姻","娱乐圈|娱乐圈,明星,影帝,影后,顶流,爱豆","电竞|电竞,战队,职业选手","校园|校园,学校,学长,学姐,同桌,高中,大学","职场|职场,上司,公司,同事,下属","刑侦|刑侦,刑警,破案,法医,凶案","悬疑|悬疑,谜团,凶手,真相","灵异|灵异,鬼魂,阴阳,驱魔,捉鬼","规则怪谈|规则怪谈,怪谈","末世|末世,丧尸,天灾,避难所","废土|废土","星际|星际,星舰,机甲,帝国元帅","赛博朋克|赛博,义体,赛博朋克","西幻|西幻,骑士,魔王,精灵,教会,主教,圣女","克苏鲁|克苏鲁,邪神,古神,不可名状","ABO|ABO,alpha,omega,信息素,发情期","兽人|兽人,兽世,兽耳","种田|种田,农家,田园","无限流|无限流,副本,逃生游戏","快穿|快穿","穿书|穿书,炮灰,原书剧情","都市异能|异能,超能力,觉醒者","军旅|军旅,军人,部队,军校","医疗|医院,医疗,外科,急诊","宗教神明|神明,信徒,神殿,神父,修女,神谕","哨向|哨兵,向导,哨向","血族|吸血鬼,血族","妖怪|妖怪,狐妖,狐狸精,妖族","人外|人外,非人","机器人/AI|仿生人,机器人,人造人,AI恋人","海洋|人鱼,海妖,深海","游戏|网游,游戏世界,NPC觉醒","贵族学院|贵族学院,贵族学校","权谋|","大逃杀|大逃杀,生存游戏","高干|高干,红三代","职校|职校,技校","魔法校园|魔法校园,魔法学院","港风|港风,港片,九龙","乱世|","末法时代|末法时代,末法","志怪|志怪","神话|神话","谍战|谍战","战争|","密室逃脱|密室逃脱","剧本杀|剧本杀","直播|直播","荒岛求生|荒岛求生,荒岛","和风|和风,阴阳寮","维多利亚|维多利亚","体育|","美食|"]},{key:"archetype",name:"角色原型",tags:["霸总|霸总,总裁,董事长,CEO","京圈太子爷|太子爷,京圈","疯批|疯批","病娇|病娇,偏执","清冷仙尊|仙尊,清冷","高岭之花|高岭之花,高冷","魔尊|魔尊,魔头","神明|神明,神祇","帝王|帝王,皇帝,陛下,暴君","将军|将军,大将军","杀手|杀手,刺客","黑道|黑道,黑帮,帮派老大","反派|反派,大反派","忠犬|忠犬,野性忠犬","狼狗|狼狗","奶狗|奶狗","腹黑|腹黑","白切黑|白切黑","美强惨|美强惨","小白花|小白花","绿茶|绿茶","落魄贵族|落魄,没落贵族","学霸|学霸","混混|混混,校霸,不良","偶像|偶像","医生|医生","律师|律师","警察|警察,刑警","老师|老师,教授,导师","神父/修女|神父,修女,牧师","竹马|竹马","继兄|继兄,继妹,继姐","质子|质子","公主|公主","魔女|魔女,女巫","骑士|骑士","扒手/盗贼|扒手,小偷,盗贼,怪盗","孤儿|孤儿","男妈妈|男妈妈,妈系,老妈子,人夫感","人夫|人夫,好男人,温柔人夫","恋爱脑|恋爱脑","毒舌|毒舌","社恐|社恐","笨蛋美人|笨蛋美人","钓系|钓系,钓系美人","斯文败类|斯文败类","禁欲系|禁欲","大狗狗|大狗狗,金毛","野狗|野狗","阴湿男鬼|阴湿,男鬼","暗卫|暗卫","少年将军|少年将军","纨绔|纨绔,二世祖","大叔|大叔","御姐|御姐","恶役|恶役,穿成恶役","恶女|恶女","大小姐|大小姐","疯美人|疯美人","万人嫌|万人嫌","兄系|兄系"]},{key:"trait",name:"性格与特质",tags:["语言障碍|语言障碍","倒贴男|倒贴男,倒贴","妒夫|妒夫","明骚|明骚","闷骚|闷骚","眼镜男|眼镜男,眼镜","自卑敏感|自卑敏感,自卑","占有欲强|占有欲强,占有欲","黏人|","焦虑型依恋|焦虑型依恋,焦虑型","回避型|回避型","非典型道德观|非典型道德观,非典型","直男（伪）|直男（伪）,伪直男","重力系|重力系","傲娇|傲娇","毒舌心软|毒舌心软","工作狂|","外柔内刚|外柔内刚","直球|","温润如玉|温润如玉","精致利己|精致利己","伪善|","傲慢|","冷血|","情感空洞|情感空洞","享乐主义|","暴躁|","嘴臭|","嘴硬|","好面子|好面子","防备心重|防备心重,防备心","沉稳可靠|沉稳可靠,沉稳","内核稳定|内核稳定","理想主义|","感情迟钝|感情迟钝,迟钝","厨艺精湛|厨艺精湛,厨艺","控制狂|控制狂,控制欲","野心家|野心家,野心","乐子人|乐子人,乐子","笑面虎|笑面虎","毁容|","双耳失聪|双耳失聪,失聪","病美人|病美人","糙汉|糙汉","骄纵少爷|骄纵少爷,骄纵","小太阳|小太阳","冰山|","病弱|","反社会|反社会","口是心非|口是心非,嘴硬心软","爱撒娇|","醋精|醋精,爱吃醋","洁癖|洁癖","强迫症|强迫症","沉默寡言|","死心眼|","缺爱|","讨好型人格|讨好型人格,讨好型","安全感缺失|安全感缺失,没安全感","反骨|","失明|","失语|","纯爱战神|纯爱战神","偏执|偏执,偏执狂"]},{key:"job",name:"职业与身份",tags:["猎人|","黑道少主|黑道少主","亡国公主|亡国公主,亡国","神女|神女","谋士|","皇子|","狼人|狼人","魅魔|魅魔","梦魇|梦魇","女仆|女仆","领主|","财阀|财阀","贫困优等生|贫困优等生,贫困生","社畜|社畜","药师|药师","留学生|留学生,留学","艺术生|艺术生,艺考","作家|","首辅|首辅","包租公|包租公,包租","法学生|法学生,法学","电竞选手|电竞选手","游戏主播|游戏主播,主播","退役选手|退役选手,退役","黑粉|","便利店店员|便利店店员,便利店","音乐人|音乐人","宗主|宗主","刀客|刀客","骗子|","刽子手|刽子手","舞者|","琴师|琴师","药人|药人","游医|游医","神医|神医","男模|男模","博主|","演员|","调酒师|调酒师,调酒","凤凰男|凤凰男","攻略者|攻略者,攻略","创业者|","刀修|刀修","转学生|转学生,转学","宅男|","画师|","UP主|UP主,up主","权臣|权臣","傀儡师|傀儡师,傀儡","国师|国师","佛子|佛子","剑灵|剑灵","剑修|剑修","官员|","赛车手|赛车手,赛车","魔法少年|魔法少年","家族弃子|家族弃子,弃子","医毒双修|医毒双修,医毒","鳏夫|鳏夫","摄影师|摄影师","记者|记者","厨师|厨师","咖啡师|咖啡师","侦探|侦探","消防员|消防员","飞行员|飞行员","拳手|拳手","经纪人|经纪人","保镖|保镖","家庭教师|家庭教师","学生会长|学生会长","戏子|戏子","捕快|捕快","仵作|仵作","太医|太医","道士|道士","阴阳师|阴阳师","炼丹师|炼丹师","器灵|器灵","妖王|妖王","恶魔|","心理医生|心理医生","体育生|体育生"]},{key:"relation",name:"关系结构",tags:["青梅竹马|青梅竹马,一起长大,从小认识","天降|天降","契约婚姻|契约,协议结婚,合约","先婚后爱|先婚后爱","联姻|联姻,商业联姻","宿敌|宿敌","死对头|死对头,冤家","师徒|师徒,徒弟","主仆|主仆,侍卫,管家,侍从","君臣|君臣","养成|养成,养成系,从小养大,捡来,收养,养父,义父,养母","年上|年上","年下|年下","强取豪夺|强取豪夺,强制爱","追妻火葬场|火葬场,追妻","破镜重圆|破镜重圆,重逢,分手","救赎|救赎","互相救赎|互相救赎","替身|替身,白月光","暗恋|暗恋","双向暗恋|双向暗恋","假戏真做|假戏真做,假扮情侣","伪骨科|伪骨科","禁忌|禁忌,不伦","敌对阵营|敌对,阵营,卧底","前任|前任,前男友,前女友","网恋奔现|网恋,奔现","相爱相杀|相爱相杀","金主|金主,包养","仇人|仇人,杀父,灭门","同居|同居,合租","邻居|邻居","姐弟恋|姐弟恋","上下级|上下级","一见钟情|一见钟情","日久生情|日久生情","室友|","恶友|恶友","入赘|入赘,上门女婿","娃娃亲|娃娃亲,指腹为婚","协议情侣|协议情侣,协议恋爱","健康恋爱|健康恋爱,健康的恋爱","先恨后爱|先恨后爱,欢喜冤家","相亲|相亲","和亲|和亲,和亲公主","地下恋|地下恋,不公开","无爱婚姻|无爱婚姻,无爱","异地恋|异地恋,异地","妻管严|妻管严,怕老婆","朋友变恋人|朋友变恋人,友达以上","阶层差距|阶层差距,门不当户不对","引导型恋人|引导型恋人,引导型","第三者|","情人|","对抗路情侣|对抗路情侣,对抗路","异国恋|异国恋,异国","房东与租客|房东与租客,房东,租客","恋爱磨合|恋爱磨合,磨合","离异|","不婚|","才能差距|才能差距,天才与凡人","师兄弟|师兄弟,师兄,师弟,同门","兄弟|","情敌|","搭档|","盟友|","共犯|","师生|","粉丝|","前辈后辈|前辈后辈,前辈,后辈","医患|医患,患者","办公室恋情|办公室恋情","暧昧|","推拉|","双向奔赴|双向奔赴","隐婚|隐婚","恋人未满|恋人未满","互相利用|互相利用"]},{key:"plot",name:"情节梗",tags:["重生|重生","穿越|穿越","系统|系统","掉马|掉马","马甲|马甲","双重身份|双重身份,隐藏身份","修罗场|修罗场","黑化|黑化","失忆|失忆,不记得,忘了我","替嫁|替嫁","退婚|退婚","逃婚|逃婚","带球跑|带球跑","打脸|打脸","复仇|复仇,报仇","真假千金|真假千金,真千金,假千金","扮猪吃虎|扮猪吃虎","囚禁|囚禁,关起来,金丝雀","循环|循环,轮回,重置,回档","死遁|死遁,假死","HE|HE,圆满","BE|BE,永别,离去","开放结局|开放结局","久别重逢|久别重逢","先虐后甜|先虐后甜","误会|误会,误会纠葛","养崽|养崽,带娃","追夫火葬场|追夫","恋综|恋综,恋爱综艺","筑巢|筑巢","破产|","冷战|","自由探索|","属性成长|","势力周旋|","家仇国恨|家仇国恨,国恨家仇","复国|复国","认错救命恩人|认错救命恩人,认错恩人","历劫|历劫","誓约束缚|誓约束缚,誓约","反霸凌|反霸凌,霸凌","毁灭式测试|毁灭式测试,毁灭测试","共同创伤|共同创伤","女扮男装|女扮男装","背叛|","共同穿越|共同穿越,一起穿越","钟情蛊|钟情蛊,情蛊","隐居|","嫉妒|","学习成长|","以身殉道|以身殉道,殉道","卜算|卜算","学院竞争|学院竞争","行侠仗义|行侠仗义","原生家庭矛盾|原生家庭矛盾,原生家庭","江湖恩怨|江湖恩怨,恩怨","玩偶变身|玩偶变身,变成玩偶","白手起家|白手起家","灵魂互换|灵魂互换,互换身体","校园活动|","职业体验|","研学旅行|研学旅行","抢婚|抢婚","宠妾灭妻|宠妾灭妻,宠妾","复活|","能力觉醒|能力觉醒,觉醒","商战|商战","古穿今|古穿今,古人穿越","转世续缘|转世续缘,转世,前世今生","无情道|无情道","血脉觉醒|血脉觉醒,血脉","因伤退役|因伤退役,伤病退役","夺嫡|夺嫡","宫变|宫变","刺杀|","下毒|","绑架|","逃亡|","追杀|","解谜|","出道|","夺冠|","告白|","求婚|","订婚|","复婚|","奉子成婚|奉子成婚","英雄救美|英雄救美","照顾病人|","记忆篡改|记忆篡改","白月光回国|白月光回国","意外同居|意外同居","联手|"]},{key:"flavor",name:"风味",tags:["甜宠|甜宠,甜文,小甜","虐恋|虐恋,虐文,很虐","极限拉扯|拉扯","酸涩|酸涩,遗憾,错过","糖里藏刀|糖里藏刀","刀子|刀子","沙雕|沙雕,搞笑,搞怪","轻松日常|日常,轻松","治愈|治愈","温情|温情,温馨","暗黑|暗黑,黑暗向","致郁|致郁","爽文|爽文,爽点","悬疑烧脑|烧脑","史诗|史诗","群像戏|群像戏","高甜|高甜","慢热|慢热","发疯文学|发疯","下饭|下饭","哥特|哥特,哥特风","全员恶人|全员恶人,全员恶","抓马|","狗血|","恋爱喜剧|恋爱喜剧,爱情喜剧","市井烟火|市井烟火,烟火气,市井","慢节奏|","快节奏|","文艺|","反转|","黑色幽默|黑色幽默","荒诞|","意难平|意难平","宿命感|宿命感","破碎感|破碎感","氛围感|氛围感","电影感|电影感","细水长流|细水长流"]},{key:"rating",name:"尺度",single:!0,tags:["清水|清水","微肉|微肉","肉|NSFW,色色,涩涩,开车"]},{key:"platform",name:"平台味",single:!0,tags:["晋江味|晋江","起点味|起点","长佩味|长佩","番茄味|番茄"]},{key:"complexity",name:"世界观复杂度",single:!0,tags:["简单|","中等|","复杂|"]}],Jm={晋江味:"情感拉扯为主线，心理细腻，关系的每一步推进都要有来由和代价",起点味:"事业线与成长为主线，目标清楚，爽点节奏明确，感情服务于成长",长佩味:"克制细腻，生活质感强，情感在日常细节里慢慢积累",番茄味:"节奏快，钩子密，冲突直给，每段都有推进"};function jl(e,t){const[n,r="",...s]=String(e).split("|"),a=r.split(/[,，]/).map(c=>c.trim()).filter(Boolean),i={name:n.trim(),dim:t,triggers:a},o=s.join("|").trim();return o&&(i.gloss=o),i}function Gi(e={},t={}){return Gm.map(n=>{const r=n.tags.map(a=>jl(a,n.key)).filter(a=>a.name);for(const a of e?.[n.key]??[]){const i=jl(a,n.key);if(!i.name)continue;const o=r.findIndex(c=>c.name===i.name);o>=0?r[o]=i:r.push(i)}const s=new Set(t?.[n.key]??[]);return{...n,tags:r.filter(a=>!s.has(a.name)).map(a=>a.gloss||!Ji[a.name]?a:{...a,gloss:Ji[a.name]})}})}function $e(e,t){return e.find(n=>n.key===t||n.name===t)}function ns(e,t,n){const r=String(t??"").trim();if(!r)return null;if(n){const a=$e(e,n)?.tags.find(i=>i.name===r);if(a)return a}for(const s of e){const a=s.tags.find(i=>i.name===r);if(a)return a}return null}var Wm=e=>/^[\x20-\x7e]+$/.test(e),Vm=e=>e.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");function Ym(e,t){return t?Wm(t)?new RegExp(`(?<![A-Za-z])${Vm(t)}(?![A-Za-z])`,"i").test(e):e.includes(t):!1}function Km(e,t){const n=String(e??""),r=[];for(const s of t){const a=[];for(const i of s.tags){const o=i.triggers.find(c=>Ym(n,c));o&&a.push({dim:s.key,name:i.name,hit:o})}s.single?a.length&&(a.sort((i,o)=>n.indexOf(i.hit)-n.indexOf(o.hit)),r.push(a[0])):r.push(...a)}return r}function Xm(e,t=["complexity"]){return e.filter(n=>!t.includes(n.key)).map(n=>`${n.name}${n.single?"（单选）":""}：${n.tags.map(r=>r.name).join("、")}`).join(`
+`)}function Kt(e,t,n,r,s=!0){const a=$e(t,n);let i=(e??[]).filter(o=>!(o.dim===n&&o.name===r));return s&&(a?.single&&(i=i.filter(o=>o.dim!==n)),i.push({dim:n,name:r})),i}function rs(e,t){const n=[];for(const r of e??[]){const s=typeof r=="string"?r:r?.name,a=ns(t,s,typeof r=="object"?r?.dim:void 0);a&&!n.some(i=>i.dim===a.dim&&i.name===a.name)&&n.push({dim:a.dim,name:a.name})}return n}var Ji={公c:"角色是左位，即攻",嬷c:"角色是右位，即受",公u:"user 是左位，即攻",嬷u:"user 是右位，即受",泥塑c:"角色被女性化处理（泥塑）",泥塑u:"user 被女性化处理（泥塑）",整塑c:"角色被男性化处理（整塑）",整塑u:"user 被男性化处理（整塑）",重力系:"爱得沉重、执念深，付出带着独占欲，让对方有压力（比病娇内敛，多是精神层面，不直接伤害）",钓系:"很会撩、像花花公子但不油腻，看着对你有意思又抓不住（捉摸不定）",养成:"从小养大的关系，年龄差通常较大（养成系）",纯爱战神:"只认一个人（1v1），爱情纯粹，不掺家庭、财富、地位等外界因素",引导型恋人:"一方耐心引导、陪另一方（常是拧巴、回避的人）慢慢打开自己",对抗路情侣:"互相怼、互相嘴硬，吵吵闹闹里是深情（来自游戏对抗路的梗）",明骚:"外表直白地撩人、不藏",闷骚:"外表闷、不主动，私下很会",乐子人:"爱看热闹、爱添乱的人",凤凰男:"出身贫寒、靠自己上位，家里是拖累",攻略者:"带着任务或系统来攻略别人的人",倒贴男:"男方单方面倒追、不断付出",妒夫:"爱吃醋的丈夫或伴侣",地下恋:"不对外公开的恋情",毁灭式测试:"用伤害关系的方式试探对方会不会留下","直男（伪）":"自称直男，其实不是",万人嫌:"谁见了都讨厌的人",醋精:"爱吃醋的人",兄系:"像哥哥一样照顾人、靠得住",恶役:"故事里的反派角色身份，常见于穿成恶役",强c弱u:"角色强势、user 弱势",弱c强u:"角色弱势、user 强势",双强:"两人都强",爹系c:"角色像爹一样管着、护着 user",疯c:"角色是疯批",乖c:"角色乖顺听话",狗c:"角色是小狗型",宠u:"角色宠 user",虐u:"user 被虐",c追u:"角色追 user",u追c:"user 追角色",万人迷u:"user 是万人迷、被所有人喜欢"};function Wi(e,t){return t.map(n=>{const r=(e??[]).filter(s=>s.dim===n.key).map(s=>{const a=n.tags.find(i=>i.name===s.name)?.gloss??Ji[s.name];return a?`${s.name}（${a}）`:s.name});return r.length?`${n.name}：${r.join("、")}`:""}).filter(Boolean).join("；")}function pt(e,t){return(e??[]).filter(n=>n.dim===t).map(n=>n.name)}function Zm(e,t=8){const n=["cp","count","era","relation","flavor","plot","archetype","rating"],r=[];for(const s of n)for(const a of e??[])a.dim===s&&!r.includes(a.name)&&r.push(a.name);return r.slice(0,t)}var da=["era","archetype","trait","job","relation","plot","flavor"],gn=["era","archetype","relation","plot","flavor"];function $m(e,t={},n=Math.random,{dims:r=gn,count:s}={}){const a=[...new Set([...r,...Object.keys(t).filter(g=>t[g])])].filter(g=>$e(e,g)?.tags.length),i=a.filter(g=>t[g]),o=a.filter(g=>!t[g]),c=s==null?a.length:Math.max(1,Math.floor(Number(s))||1),p=Math.max(0,Math.min(o.length,c-i.length)),d=new Set(o);if(p<o.length){const g=[...o];for(let y=g.length-1;y>0;y--){const E=Math.floor(n()*(y+1));[g[y],g[E]]=[g[E],g[y]]}d.clear();for(const y of g.slice(0,p))d.add(y)}const m={};for(const g of a){if(t[g]){m[g]=t[g];continue}if(!d.has(g))continue;const y=$e(e,g).tags;m[g]=y[Math.floor(n()*y.length)].name}return m}var Vi="〔user〕",Ct={通用:`保留作者明确的设定、偏好和限制。创作时，尚未规定的生活、往事和关系可以补写；作者要求保留未知、留待决定或只整理原文的地方照办。不把作者没逐项填写当作禁止创作，也不拿新编内容推翻已有事实。
+写卡要把人说明白：身份、经历和处境是客观资料；性情、感情、价值判断和自我认识也需要直接写出来。性格词可以用，接着说明它在这个人身上的含义。不能把整个人压成职业职责、恋爱态度或一串固定反应。
+经历既包括发生过的事，也包括长期的家庭生活、教养、交往和生活变化。沿着这个人的生活写，重要的事展开，无关的略过。不要给每个性格词现编一个证明它的小故事，也不要让每段往事都以一句人生心得结束。幸福、顺遂、普通的生活同样能写，不预设创伤。
+每部分补充不同的信息。经历写过去，现状写眼下，内在描述写他怎样理解自己和别人，关系写人与人之间的来往和感情，行为指导说明这些东西怎样影响选择。不要每个字段都回到同一个特点，同一件往事也不必反复讲。
+关系可以直接说明亲近、信任、爱或怨恨，不必全改成动作让模型猜。保留双方过往和各自的判断；一段感情里还可以有失望、不同意见和各自的生活。已确定的感情照写，未来的变化不替作者或〔user〕决定。
+细节按人物与事情的需要写。数字、物件和衣物痕迹不承担“证明真实”的任务；没有依据时不补磨损、染色、发硬或褪色，也不缩小人物实际拥有的财力、权力和生活范围。参考示例只帮助理解写法，不搬用其中的人物、剧情、台词和经历。
+写卡可以直接列禁止项。保留作者明确给出的限制；理由、例外或替代有依据时再写，不为凑字段推定人物动机。
+用清楚、连贯的句子。不要靠固定小动作、口头禅、修辞八股和作者点评代替内容。示例台词和行为用于理解人物，不能规定正文反复照演。`,矛盾建模:`先区分客观事实、人物自己的看法，以及作者给扮演模型的指导。人物可以误解自己、偏信别人；他说的理由未必解释了全部行为。不要把他的看法写成世界的真相。
+深层底色写这个人较稳定的性情与待人处世的底子。拿掉当前恋爱事件和职业身份后，它仍然说得通。能力、处境、手段、一时的愤怒或“爱〔user〕”不能独占这一栏。浅层表现与底色可以相近，也可以有距离，不强求外冷内热或表里相反。
+找出他同时在乎、却不能时时兼顾的东西，说明两边对他各有什么意义。他在什么处境下倾向哪边，做了选择后还放不下什么。不要列完两个反义词就算矛盾，也不要用一句“其实都是为了爱”把所有不同的想法归成一个原因。
+取舍要能用于不同事情，不写成触发条件与固定动作的对照表。无需凑矛盾轴的条数，也不把所有人写成犹豫、阴暗或口是心非。果断、温柔、忠诚都可以成立，照样可以写清他还在意哪些不同的事。
+把经历、内在想法、关系和行为放在一起看：它们之间应有联系，也应各自增加信息。不同的人、人生阶段和处境会让他的不同侧面出现；不要让整张卡的内容只证明最初的一个标签。`,零度写作:`清楚陈述这个世界的事实：这里的人怎样生活，制度怎样运行，人有哪些权利、选择和限制，眼下在发生什么。人物或组织自己的说法要标明是谁的看法，不替它担保。
+可以写已有的利益分歧、依赖和不便，也可以补足与人物生活有关的未定部分。不用宏大评语代替事实，不为每个场所和组织都安排秘密或争斗。
+写清必要的内容，通用常识不展开成百科。用词和句子以易懂为先，不因追求客观而删掉事实之间的联系。`,开场构思:`从人物的经历、彼此的关系和这个世界里的生活寻找题材，作者没给具体剧情时也主动提出。设定中还没展开的部分可以继续写，不必一直围着构想里最显眼的身份或同一个矛盾。
+同一批候选各自提出一件值得展开的事。每条用一小段说清这次发生什么、人物牵涉其中的缘由，以及〔user〕能参与的相处或事情。让作者读懂接下去可以写什么，不用“张力”“试探”“关系升温”代替剧情。
+把整批候选放在一起比较：换了地点、天气、物件或出场顺序，接下去还是同一件事、同一种来往的，换掉重复的候选。几条不能只是同一次事件的不同片段，也不能把同一种邀约、照顾或争执反复换装。
+可以写人物各自的生活，也可以用到他与其他人的关系；按题材选择，平常相处也能成立。不要给每批固定分配“日常、误会、秘密、事故”的名额，不靠连续出事或突然揭密制造区别。NPC 有适合的戏份再出场。
+沿用本路线已有的身份、时期和关系。可以补写尚未规定的事情，不擅自另立身世、能力或既定往事来凑新鲜。作者明确要同一件事的不同版本时，按作者指定的范围构思。
+分清资料的用途：本卡构想、经历和短篇提供人物与前情，想新梗时不默认重演里面已经写过的事件；文风示例只参考表达方法，不带入示例的事件、台词，也不换名复演同一段经过。当前候选和旧开场用来避重。作者明确选中某个梗，或要求改写、续写某段时，沿用作者指定的事情。`,开场白:`沿着选定的事情写出一段小说正文，让读者读到这一次相处。人物带着自己的经历和眼前的心事说话做事，不逐项演示性格标签，也不把人设介绍换成对白再说一遍。
+从适合这段故事的地方写起，需要的前情可以自然交代，不必每次从开门、到场或递交东西开始。环境、心理和对白按这段内容来安排；不靠摆弄物件、固定小动作或反复形容目光填满字数。
+保留人物值得继续相处和琢磨的地方。写到〔user〕可以接着参与时停下，结尾可以留在交谈或事情进行之中，不强制提问、发号施令、突然打断或悬念反转；不要把本来要玩的部分提前讲完。
+不替〔user〕说话、行动、做决定，不写〔user〕的心理。遵循作者的文风要求，正文不附剧情分析。`,对白:`把前后两句连起来读：这一句有没有接住对方刚说的话，有没有回应眼前的事情。对方问一件小事，先给这件事一个回应，不急着说一段有关两人关系的大道理。人物另有心事时，话可以答不全、答偏或改口，但得知道他此刻为什么这样说。
+两个人已经知道的背景，不用借对话互相介绍。人物可以有职业用语和自己的措辞，但不会每次开口都宣示身份，也不会为了让读者看懂性格而背诵人设。疏远、亲近、客气或不耐烦，放在这一次怎么对待对方上，不规定一套必用的口癖。
+允许人物说普通的话，话不必句句漂亮、完整或有深意。该直说时直说，不把日常回应改成格言、谜语或宣判；省略、停顿、反问也按这次谈话的需要用，不逐项安排。说够了就继续做事，叙述不跟在每句台词后解释它代表什么。`,措辞:`设定与小说正文用途不同。设定需要说清人物的想法、感情和行为缘由；正文可以让读者从这一次相处中体会，不必在动作和台词后逐句解释。不要用正文的省略要求删空人设的内心。
+不靠程度副词和绝对判断加重同一个特点。作者确定的性格、感情和底线保留；需要说明范围时，把他所处的情境、关系和顾虑写清，不给每种反应机械配次数与条件。
+说话方式可以概括，但要结合身份、教养、交往对象和当时的事情。示例里允许普通的话，不要求每句都独一无二，也不每句话都加语气标注。日常回应不写成格言和人格宣言。
+同一个意思说一次。形容词、心理和感情词按内容使用，不堆叠空泛大词，不用物件、小动作和颜色变化替代所有情绪。人物的区别来自整段人生和想法，不要求人人藏一件秘密或独有道具。`,行文:`这条管正文怎么写（开场白、扩写、试玩回复；写进基调与规则里，让之后的正文照着写）。
+1. 学会说人话，主谓宾完整，不靠上下文重复，不过度解释。
+2. 禁解释。写完一个人的行为就停，不替它说明意思：一个人坐在凳子上喝了很久的酒，本身就是在等，不用再写“她在等”。只有一个东西就写那一个，不替物件和人解释他们为什么这样。
+3. 不写“不是A，不是B，而是C”这类句式。要解释，就解释得有因果、有连续性，比如“这里是风，从九千年前吹到现在”。
+4. 不用破折号。
+5. 不用没有主语的短形容词当整句话：“他平，他稳”“平的，稳的”。说话正常一点：“他一直在想，什么事都要想一遍，所以会觉得难受。”
+6. 不写具体的时间、数字、长度（几点几分、几厘米），不把几样东西一一排开列举。
+7. 不写注释式和对照式的结构，不用廉价的前后呼应，不替这个世界读懂表面的一切。
+8. 比拟用通俗的，不用“像一根针一样”这类烂俗的比喻。
+9. 情绪直接写：愤怒就写他很愤怒，不绕。不用身体动作表达情绪（手指收紧、身体绷住这类），用环境、眼睛或他做的事。
+10. 多用长句，带上环境和心理。参考：“我在这繁响的拥抱中，也懒散而且舒适，从白天以至初夜的疑虑，全给祝福的空气一扫而空了，只觉得天地圣众歆享了牲醴和香烟，都醉醺醺的在空中蹒跚，豫备给鲁镇的人们以无限的幸福。”（鲁迅《祝福》）
+    再一个：“我们并非离去，只是在变小，直到小得像一只被风托举的雨燕，地上的爱恨情仇，便再也与我们无关。”`,禁用词:`病态
+偏执
+执念
+占有欲
+掌控欲
+唯一的光
+活体神明
+私有物
+所有物
+猎物
+猎人
+笼中雀
+献祭
+极致
+极端
+疯狂
+毁天灭地
+揉进骨血
+刻进骨血
+拆吃入腹
+宣示主权
+灵魂共振
+不容置疑
+不容置喙
+骨节分明
+指节泛白
+喉结滚动
+嘴角勾起
+眼底闪过
+一丝
+一抹
+一缕
+小兽
+沙哑
+低笑
+暗哑
+薄唇
+蛊惑
+绝对
+始终
+毫无
+淡淡地
+冷冷地
+平静地
+语气平淡
+语气平静
+语气冷硬
+言语冷硬
+不带情绪
+不带多余情绪`,直接删:`极其
+极为
+极度
+无比
+格外
+万分
+分外
+非常
+十分
+尤为
+甚为
+颇为
+彻底
+完全
+全然
+毫不犹豫
+统统
+悉数
+尽数`,禁令格式:"禁止项可以直接写成一句话，作者指定格式时沿用。没有依据的理由和替代不补写；作者排除某种剧情，不等于人物自己抱持某种观念。",多人卡:`这是多人卡：有 2 个以上主要角色，地位相当，不是“一个主角加几个配角”。
+1. 每个主要角色在故事里的位置不同，对〔user〕的态度、想要的东西、矛盾轴互不重复。
+2. 主要角色之间有自己的关系：彼此怎么看、在意什么、在哪些事上想法不同，不全围着〔user〕转。
+3. 写一个角色时要知道其他人在哪、在干什么；同一件事，每个人的反应和理由不一样。
+4. 开场白和剧情里至少两个主要角色有戏份，不让其中一个变成背景板，也不每段把所有人都塞进来。
+5. 不写“所有人都爱〔user〕”的平均分配：每段关系各有各的样子；有修罗场时写清什么情况会触发。
+6. 出构想时 lineup 写 2–4 个主要角色。`,世界卡:`这是没有固定角色的世界卡：没有固定的男女主，AI 扮演整个世界和其中所有的人。
+1. 世界本身是主角：写清势力、规则、地点和正在发生的事，〔user〕走到哪里都有事发生、有人想要什么。
+2. 人物写成 NPC 库：每个 NPC 轻量（身份、想要、说话特点），按名字触发；关键的几个可以写详细一点。数量宁多勿少，覆盖不同势力和阶层。
+3. 要有 NPC 生成规则：遇到没写过的人时按什么原则现编（属于哪个势力、有自己的目的、不全是好人、不都围着〔user〕转、名字风格）。
+4. 叙事用旁白视角，不绑定某一个角色；开场白从〔user〕所处的场景写起。
+5. 世界不因〔user〕而存在：不写“天选之人”，〔user〕的行动会有后果。
+6. 写基调与规则时，加“叙事:”（旁白怎么写、节奏、什么时候让 NPC 主动找上门）和“NPC生成:”两项。
+7. 出构想时 lineup 留空数组 []，npcs 写 6–12；relation 写〔user〕和这个世界的关系，tension 写这个世界最有意思的地方。`,规则卡:`这是规则卡（手枪卡）：只有世界观和规则，没有固定的主要角色，也没有 NPC 库。以本条为准：和别的要求冲突时，按这里写。
+1. 世界观写成“这个世界的设定和运行规则”：这是个什么样的世界、〔user〕在里面处在什么位置、世界里有哪些固定的设定（身份和等级制度、社会规矩、特殊体质或机制、特殊场所），以及这些设定具体怎么作用到〔user〕身上。写成能直接执行的条目，不写剧情，不写抒情。势力和地点只写和规则有关的，可以简写。
+2. 规则是核心。分块写清：
+   - 推进：节奏怎么走、分几个阶段、什么条件下进入下一阶段或转场，一次回复推进多少。
+   - 出场人物的现编原则：遇到没写过的人时怎么现编（身份从世界设定里取、有自己的欲望和边界、不全围着〔user〕转、说话方式要有区别、名字风格），而不是写一个个固定的人。
+   - 〔user〕的选择与后果：〔user〕做了什么，世界怎么回应；〔user〕没说话的时候 AI 能做什么、不能替〔user〕做什么。
+   - 尺度、用词、描写重点这类要求，按作者在规则里写的来，不替作者加限制，也不替作者删。
+3. 不写人设，不写 NPC 库。只有作者自己加了主要角色时才按人设写。
+4. 叙事用旁白视角，不绑定某个角色；开场白从〔user〕所处的场景写起，直接进入情境，不铺垫世界观。
+5. 路线可有可无。有的话，一条路线是一种开局或一种玩法分支，只写这条路线的情境和特别规则。没有就不写。
+6. 写基调与规则时，加“叙事:”“推进:”“出场人物生成:”这几项。
+7. 出构想时 lineup 留空数组 []，npcs 写 0；relation 写〔user〕和这个世界的关系，tension 写这个世界最核心的设定或规则。`},_m=`角色详情:
+  {{name}}:
+    人物: 他是谁、怎样生活；长相和惯常衣着
+    life_story:
+      - 时期: 人生阶段
+        经历: 这段生活中发生过什么，与谁来往，后来怎样；重要的事展开，不为每种性格编一则故事
+    现状: 眼下的处境和自己关心的事情
+    重要的关系: 与具体的人怎样相处，有哪些过往、感情和分歧
+    性情与底色: 较稳定的性情、待人处世的底子，和别人先看到的样子有什么关系
+    内心: 怎样看待自己和别人，同时在意哪些事情，哪些地方难以两全
+    生活与选择: 日常、工作、交往和重要选择中有哪些不同侧面；与前面的经历和想法相联系，不列固定反应
+    说话方式: 平时怎样表达，面对不同的人有什么变化；示例只供理解，不照抄
+    禁止: 保留作者明确的限制；原因有依据时再写（没有就删）`,Ki=[{id:"live",name:"活人模板",author:"Love 写卡机",rule:"用连贯的叙述说明这个人的生活、性情、内心与关系。性格词、心理和行为都可以写；各部分补充不同的信息，不把所有字段写成动作清单。",desc:"用较少的字段写生活、性情、内心、关系和选择，同样保留人物的不同侧面，不强制每栏都写行为。",text:_m}],Bt=e=>Ki.find(t=>t.id===e)??Ki[0];Ct.输出格式="1. 必须按本任务【格式】给的写法输出：外层用 XML 标签（例如 <世界观>…</世界观>、<角色名>…</角色名>）包住内容，标签里面用 YAML 键值；需要分块的，用单独一行的 <<<类型:名称|关键词>>> 标记。标签名照抄，不改、不翻译，每个开始标签都要有结束标签。\n2. 只输出成品：不用 ``` 代码块包裹，不加 <content>、<output> 之类的外层包装，不在标签外写解释、前言或总结。\n3. 如果预设或系统指令要求先写 <planing>、<think> 这类思考块：可以写，放在成品之前；成品本身仍然必须是上面的 XML 标签，程序只认这些标签。",Ct.人设模板=_m,Ct.NPC写法=`参照《宇宙冷漠》的 NPC 原文，用连贯的段落写这个人的经历和现在。简要介绍也要把事情写明白，不要为了省字略掉经历。
+作者没有填写设想时，根据这张卡已有的世界观自行创作人物，名字和性格也由你来定，直接交出人设。作者写了要求的部分照写，其余由你补足。
+经历要写到过去发生过的事：他当时处在什么境况，做过什么选择，后来怎样了。选与如今生活有关的往事展开。只写入职年龄、职业名称和每日工作，还没有写出经历。普通生活同样可以成为经历，不必给每个人安排灾难、创伤或救命之恩。
+重要的人际关系要有来历。写他信任、依恋或怨恨某个人，就交代两人之间的过往，让读者知道他为何这样看待对方。他也可以误解别人、偏信别人，叙述不必替他的判断担保。不要另编一件小事来证明性格标签，也别用一件往事解释他整个人。
+写清他如今怎样生活，在意什么，怎样看待自己和别人。对不同人的感情可以不同，对同一个人也可以有彼此牵扯的想法。性格词可以直接用，接着写出这个人的想法，不反复证明同一个特点。他有自己的生活，介绍不必全部围绕主角的秘密。剧情功能不设必填项。
+外貌直接写这个人的长相和惯常衣着，衣着要考虑已有的家境与个人喜好。职业不能直接推出身体或衣物的痕迹；不要为了增加细节，随手添上磨损、染色、软硬或颜色变化。没有已有设定或人物经历支撑的这类细节就省掉，不另编理由强留，也别把富裕人物的衣着一律写旧。外貌不必用来证明身份或性格。
+说话方式按人物需要写进介绍，不用固定小动作和口头禅凑特点，不列触发条件与固定反应。
+参照下方《宇宙冷漠》原文怎样介绍一个人，另写这张卡里的人物。保留本卡题材，不套用样例的人名、职业或人生经历。
+用完整、连贯的句子写，不堆排比，不用否定转肯句，不在段尾追加总结或哲理，不代写〔user〕的言行与心理。`,Ct.NPC参考=`<陈明礼>
+陈明礼当年考进了一所普通本科的电气工程专业。
+临开学陈明礼便逃似的离开了樟海，此人畏惧他妈许久，誓要奔向想象中“自由自在的大学生活”。
+但游子终要归乡。
+研究生毕业后陈明礼回到樟海，努努力进了国家电网工作，樟海市虽然不大，但电网系统还算有钱，工资和福利待遇都很不错。
+唯一的缺憾大概是至今还没找到个稳定对象。
+陈明礼长得不错，倒也谈过，但大学谈的女友毕业季各奔前程，分了。听说最近陈明礼和他高中时代暗恋的女孩儿又重新联络上，不知俩人发展得如何了呢？
+至于陈明礼的妈妈匡女士（p.s.大家永远最尊敬的班主任，匡睿文老师），现如今也已退下来两三年，和丈夫陈涛拿着退休金全国各地旅游，享受悠闲的养老生活，脾气倒也没有当年那么严酷无情，变得慈眉善目了许多。
+这二位闲在家时陈明礼最常听到的念叨大概是，“唉明礼，你和〔user〕他们还有联系么，这些孩子呀，也不知道现在怎样了。”
+陈明礼答不上来。
+</陈明礼>
+<姚树英&方鹤祥>
+姚树英从前（已经是许多许多年前了，久到她也记不清有多久）其实不叫这个名，叫姚淑英。和方鹤祥自由恋爱那会儿便许多次抱怨：女人为何总得是“贤”“良”“淑”？为何不可是参天大树？方鹤祥就在一旁乐呵呵听。二人登记结婚前，姚淑英抓着他陪自己去办理了改名——从此就变成了姚树英。
+小老头前两年走了，他留下了花儿，留下了鸟，留下了姚树英。
+好在她是参天大树，独自也能在这世上活。
+</姚树英&方鹤祥>`;var ua={通用:{mode:"all",steps:["idea","persona","personaExtra","backstory","world","routes","relations","tone","revise","localEdit","destale","deepAns","free"]},矛盾建模:{mode:"all",steps:["persona","personaExtra","backstory","relations","deepAns"]},零度写作:{mode:"all",steps:["world"]},对白:{mode:"all",steps:["persona","npc","npcOne","tone","story","greeting","expand","playChar"]},NPC写法:{mode:"all",steps:["npc","npcOne"]},NPC参考:{mode:"all",steps:["npc","npcOne"]},行文:{mode:"all",steps:["story","greeting","expand","tone","playChar"]},措辞:{mode:"all",steps:["story","idea","persona","personaExtra","backstory","world","routes","tone","relations","greeting","hooks","expand","revise","localEdit","destale","playChar"]},输出格式:{mode:"all",steps:["persona","personaExtra","backstory","world","routes","tone","relations","free","destale","chatBrief"]},多人卡:{mode:"multi",steps:["idea","qa","persona","backstory","world","routes","tone","greeting","hooks","expand","playChar","playReview"]},世界卡:{mode:"world",steps:["idea","world","routes","tone","greeting","hooks","expand","playChar","playReview"]},规则卡:{mode:"rules",steps:["idea","world","tone","routes","greeting","hooks","expand","playChar","playReview"]}},ss={single:"单人卡",multi:"多人卡（NP、群像）",world:"无固定角色（世界卡）",rules:"规则卡（手枪卡：只有世界观和规则）"},Xi=`你是资深的中文网文编辑，也是 SillyTavern（酒馆）角色卡作者。你写的内容是给另一个 AI 读的提示词，用来让它扮演角色、推进故事。
+写法约定：玩家一律写作〔user〕，不要换成名字，也不要写成“你”。只输出要求的内容，不解释，不寒暄，不加 Markdown 代码块。`,Ql="你在写一部中文网络小说的正文。玩家一律写作〔user〕，不要换成名字。只输出正文，不解释。",Xt={inspire:`【任务】作者现在没有想法。下面是随机抽到的几个标签，围绕它们给作者出 4 个问题，帮他找到想写的东西。
+【随机标签】{{dice}}
+【作者已选的标签】{{tags}}
+
+【要求】
+- 问题要能激发脑洞：问人物是什么样的人、两人怎么认识、现在是什么关系、故事从哪一刻开始。不问“你喜欢什么风格”这种问题。
+- 每个问题给 4 个方向明显不同的答案选项，其中一个可以出人意料。每个选项不超过 30 字。
+- 问题之间要能拼成一个故事的开头。
+
+【输出】只输出 JSON：
+{"questions":[{"q":"问题","options":["","","",""]}]}`,story:`【任务】用下面的标签和线索写一个短篇。它的用处：让主要角色先在故事里活一遍，之后从这个故事里提取角色卡，所以人物要靠行为立起来。
+
+【随机标签】{{dice}}
+【作者已选的标签】{{tags}}
+【作者的脑洞和回答】
+{{seed}}
+
+【篇幅】{{storyLength}} 字。
+
+【写法】
+- 只写一个完整的小片段：一个场景，或者一晚、一天。有起因，有一个转折，停在还没解决的地方，不写结局。
+- 主要人物两个：一个是角色，一个是〔user〕。〔user〕只通过说话和动作出现，不写他的心理。可以有一两个配角，让世界有别的人。
+- 每个人物给一个别人猜不到的具体细节：一个习惯、一件旧东西、一个怕的东西。不要靠形容词立人。
+- 关系只写人做了什么、说了什么，不写“他爱上了她”“两人关系变了”这类结论，让读的人自己看出来。
+- 世界的规则和设定通过事情露出来，不用旁白解释。
+- 标签里的圈内说法按注释理解。性向、人数、定位、风味要在故事里看得出来。
+- 从最常见的写法里避开：不写“命运的齿轮”“目光交汇”这类八股。
+
+【输出】只输出短篇正文，第一行是标题（不超过 12 字），空一行后写正文。不要解释。`,ideaQA:`【任务】作者已经有了一个脑洞。先别急着写构想，针对这个脑洞问作者 4 个问题，帮他把还没想清楚、但最影响故事走向的地方定下来。
+
+【脑洞】{{idea}}
+【作者已选的标签】{{tags}}
+
+【要求】
+- 只问脑洞里没交代、而且答案不同故事就完全不同的地方：人物是什么样的人、两人是什么关系、故事从哪一刻开始、往哪个方向走。
+- 脑洞里已经写明的不要再问。不问“你喜欢什么风格”这种问题。
+- 每个问题给 4 个方向明显不同的答案，其中一个可以出人意料。每个选项不超过 30 字。
+
+【输出】只输出 JSON：
+{"questions":[{"q":"问题","options":["","","",""]}]}`,idea:`【任务】根据一句话脑洞，给出 4 个方向不同的角色卡构想，并从标签库里挑标签。
+
+【脑洞】{{idea}}
+{{ideaAnswers}}
+【作者已选的标签】{{tags}}
+【本地识别到的标签】{{matched}}
+
+【标签库】（只能从这里选）
+{{tagLibrary}}
+
+【要求】
+1. 这些构想要真的不同：题材、关系结构或关系的核心至少有一样不同。先在心里想出最常见、最俗的那个构想，把它排除，再写剩下的这几个。
+2. 主流网文梗可以用，霸总、青梅竹马、追妻火葬场都行。梗要清楚，新意放在“这个角色为什么这样”“这段关系是什么样的”。
+3. 作者已选的标签必须保留。
+4. 每个构想包含：
+   - title：标题，约 20 字，直接给最好的梗
+   - lineup：主要角色数组，每个写 name（起一个不俗套的名字）、identity（一句话身份）、archetype（从“角色原型”里选，数组）
+   - user：〔user〕的身份候选，1–2 个
+   - relation：主要角色和〔user〕之间发生过什么、现在处于什么状态，2–4 句
+   - tension：core（这段关系的核心是什么，一句话）、expect（玩家最想看到的几个时刻）
+   - complexity：世界观复杂度，简单 / 中等 / 复杂；reason：一句话理由
+   - routes：可能的路线数组，每条写 name、user（这条线〔user〕的身份）、period（时期）
+   - npcs：建议的 NPC 数量（数字）
+   - tags：这个构想对应的标签名数组（只能从标签库选）
+5. 标签：
+   - picked：脑洞里明确提到、所有构想都适用的标签名
+   - guessed：脑洞没提到的必填维度（卡类型、来源、性向、人数）的推测，写成 {"维度名":"标签名"}
+   - novel：标签库里没有、但这个脑洞明显需要的新标签，最多 2 个，写成 {"dim":"维度名","name":"标签名"}
+   - surprise：从别的维度挑 1 个意外但能激发脑洞的标签，写成 {"dim":"维度名","name":"标签名","why":"一句话"}
+6. 如果是同人：fandom 写原作名、角色和时间点；check 列几条你对原作关键设定的理解，让作者确认你没有记错。不是同人就留空。
+
+【输出】只输出 JSON：
+{"tags":{"picked":[],"guessed":{},"novel":[],"surprise":{}},"concepts":[{"title":"","lineup":[{"name":"","identity":"","archetype":[]}],"user":[],"relation":"","tension":{"core":"","expect":[]},"complexity":"","reason":"","routes":[{"name":"","user":"","period":""}],"npcs":2,"tags":[]}],"fandom":"","check":[]}`,qa:`【任务】为下面这个构想里的每个主要角色出 4 个问题，帮作者想清楚这个角色和刻板印象不一样的地方。
+
+【构想】
+{{concept}}
+【标签】{{tags}}
+
+【要求】
+- 问这个人的天性、成长、在乎什么、怎么对待〔user〕。不问一句话就能填完、换个人答案也一样的题。
+- 问题要具体到这个组合：换一个角色就不成立的问题才算好问题。
+- 每个问题给 4 个方向明显不同的答案，其中一个可以出人意料，不给“以上都有”。每个选项不超过 30 字。
+
+【输出】只输出 JSON：
+{"chars":[{"name":"角色名","questions":[{"q":"问题","options":["","","",""]}]}]}`,persona:`【任务】为角色「{{name}}」写人设。
+{{tplRule}}
+
+【构想】
+{{concept}}
+【标签】{{tags}}
+【平台味】{{platform}}
+【作者的回答】
+{{answers}}
+{{brief}}
+【这个角色已有的资料】
+{{currentPersona}}
+【已写的世界观】
+{{world}}
+【已写的 NPC 与人物关系】
+{{npcs}}
+{{relations}}
+{{others}}
+
+【写法规则】
+{{rules.通用}}
+{{rules.矛盾建模}}
+{{rules.禁令格式}}
+{{npRule}}
+按作者要求写这个人。已有资料不是空白模板，重写时保留作者已确定的身份、往事、感情和限制；尚未规定的内容可以创作。让经历、内心和关系各自增加信息，不让整份人设只证明一个特点。
+
+【格式】先写概要，再写人设。只用下面两行分隔，不加别的标题：
+<<<概要>>>
+（简要交代他是谁、较稳定的性情、眼下的处境与重要关系，保留理解这个人不可少的取舍。不要只概括职业和对〔user〕的态度）
+<<<人设>>>
+<{{name}}>
+（YAML，按模板填；不需要的字段删掉。保留层次，不在多个字段重复同一结论）
+{{template}}
+</{{name}}>`,deepAns:`【任务】替作者先答一遍下面这些关于角色「{{name}}」的问题，作者会逐条检查、修改。你的答案是草稿，要有可改的具体内容，不要含糊。
+
+【角色】
+作者的设想：{{desc}}
+概要：{{overview}}
+标签：{{tags}}
+
+【构想】
+{{concept}}
+【世界观】
+{{world}}
+【主要角色概要】
+{{overviews}}
+
+【作者已经答了的】（这些题不要再答，答案要和它们一致）
+{{done}}
+
+【怎么答】
+- 按这个人本来的样子答。不预设伤痛和悲剧：他可以幸福地长大，可以没有遗憾，可以没有不喜欢自己的地方，那就照实写。
+- 感情按作者已定的关系和这个人的性情写。不要自动美化、道德评判或反向加重他；爱、信任、怨恨和不同意见可以并存。
+- 简短直接地答，不复述问题。允许说明性情、心理和顾虑，不把所有答案都改写成动作；不举小故事逐项证明。
+- 写这个角色独有的答案；一看就是“这类角色都这样”的答案不要。
+- 不要把角色写得比构想、世界观和人设里已有的更厉害，没有的能力不要加。
+- 〔user〕的身份、双方的关系，以构想和作者定稿为准，不自己另编。
+- 事实与时间线前后一致；内心同时存在不同想法可以保留，说明它们各自与什么有关。
+
+【写法规则】
+{{rules.通用}}
+
+【要答的问题】
+{{questions}}
+
+【格式】每题用序号标记开头，只输出这些，不加别的：
+<<<序号>>>
+答案
+（序号按上面给的，题目没列出的序号不写）`,chatQs:`【任务】你是作者的写卡搭档。动笔之前，你先审这份设定，找出逻辑问题和没定下来的地方，然后出几道选择题让作者点选。作者不用打字，点选项就行。
+
+【你手上有的】
+脑洞/构想：
+{{concept}}
+标签：{{tags}}
+已有的人设概要：{{overviews}}
+已写的世界观：{{world}}
+作者已经定下的（作者定稿）：
+{{brief}}
+已经问过、作者答过的：
+{{transcript}}
+
+【先审，再问】逐项过一遍，有问题才问，没问题的不问：
+1. boss、反派、对手：他为什么强？他每个行动的动机是什么？有没有为了推剧情让他变蠢（不查、不防、白白放人、明显漏洞不处理）？聪明人在他的位置上会怎么做？
+2. 玩家〔user〕：是谁、什么身份、为什么在这里、想要什么、能做什么、不能做什么。
+3. 因果和时间线：谁在什么时候做了什么；重生、预知这类设定，谁知道什么、不知道什么。
+4. 背景和规则：规则怎么运作，规则之间会不会互相打架，背景里有没有构想没要求、却被硬加进去的冲突。
+5. 构想、概要自己有没有前后矛盾、说不通。有就直接指出，别照着它往下问。
+
+【出题要求】
+- 一共 4 题，只问最关键、最影响后面写作的。已经答过的不再问。
+- 每题 2–4 个选项。选项是你给出的具体改法或设定，不是“是/否”，也不是空话；每个选项自己说得通，并带一句代价。选项写得具体，直接就能当设定用。
+- 每题带 why：一句话说这题为什么要问（指出哪里有逻辑问题）。
+- findings：用 1–2 句大白话总结你看出的最大问题。
+
+只输出 JSON，不加别的文字：
+{"findings":"…","questions":[{"q":"问题","why":"为什么问","options":["",""]}]}`,chat:`【任务】你是作者的写卡搭档。现在是动笔之前的讨论阶段：和作者把设定聊到逻辑通顺、不留含糊，之后才开始写。你不写成品设定，只聊。
+
+【你手上有的】
+脑洞/构想：
+{{concept}}
+标签：{{tags}}
+已有的人设概要：{{overviews}}
+已写的世界观：{{world}}
+作者已经聊定的（作者定稿）：
+{{brief}}
+
+【怎么聊】
+- 每次先回应作者刚说的：同意就说同意，有问题直接指出。然后最多问 1–2 个最关键的问题，不要一口气抛十个。
+- 主动查逻辑，发现问题就说，并给 2 个改法让作者选，每个改法说一句代价：
+  1. 反派、boss、对手：他为什么强？他的每个行动有没有动机？有没有为了推剧情让他变蠢（不查、不防、白白放人、有明显漏洞却不处理）？一个聪明的人在他的位置上会怎么做？
+  2. 玩家〔user〕：是谁、什么身份、为什么在这里、想要什么、能做什么、不能做什么。身份没说清就问。
+  3. 因果和时间线：谁在什么时候做了什么，结果是什么；重生、穿越、预知这类设定，哪些信息谁知道、谁不知道。
+  4. 背景和规则：规则怎么运作，规则之间有没有互相打架，有没有硬加进去的冲突。
+  5. 构想或概要本身有没有前后矛盾、说不通的地方。有就直接指出来，不要照着它往下聊。
+- 作者没想法的地方，你可以给建议，但说明这是你的建议，让作者点头才算定下来。
+- 不重复问已经聊定的事。
+- 口语、简短，每次回复不超过 300 字，不写标题，不列长清单。不要输出成品设定。`,chatBrief:`【任务】把下面作者和搭档的聊天整理成《作者定稿》。后面所有写作步骤都会以它为准。
+只写聊天里作者明确定下来的，或者作者认可了的建议。没聊到的写「未定」，不要自己补设定。聊天里改掉了原构想或概要的地方，写在“对原构想的修正”里。有已有定稿时合并：聊天里新定的覆盖旧的，没被推翻的保留。
+
+【已有定稿】
+{{brief}}
+
+【聊天记录】
+{{transcript}}
+
+【格式】只输出一个 <作者定稿> XML 标签，里面用 YAML 风格，没有的项写「未定」，不加别的文字：
+<作者定稿>
+玩家身份: 〔user〕是谁、在故事里的身份、想要什么、能做什么、不能做什么
+主要角色:
+  角色名: 定位；能力和边界；行动动机（为什么这样做说得通，不降智）
+核心矛盾与因果: 谁因为什么和谁冲突，事情的先后顺序
+世界规则要点:
+  - 规则 / 代价
+对原构想的修正:
+  - 原来怎么写 → 现在怎么定
+必须写进去:
+  - 
+明确不要:
+  - 
+未定:
+  - 
+</作者定稿>`,world:`【任务】为这张卡写背景（世界观）。复杂度：{{complexity}}。
+背景写人物生活在怎样的世界里。已有的人设、关系和处境要能在这里成立，尚未规定的部分可以继续创作。写清平日的生活和正在发生的事；分歧和限制按题材需要写，不给每个地点机械安排争斗。
+
+【构想】
+{{concept}}
+【标签】{{tags}}
+【已定的人设概要】
+{{overviews}}
+【已有的人设与补充】
+{{personas}}
+【已有的 NPC 和人物关系】
+{{npcs}}
+{{relations}}
+【已有背景，重写时保留未被作者修改的事实】
+{{world}}
+{{fandom}}
+
+【写什么】
+- 简单：围绕人物常活动的地方和交往范围写，必要的组织可以简述，不展开无关的地理和势力。
+- 中等：再加人物所处的圈子和组织：它是什么、在哪、做什么、有什么规矩、和主要角色有什么关系。
+- 复杂：再加地理、更多组织、力量体系或特殊设定，拆成多个条目。
+- 特殊规则（制度、禁忌、力量体系、这个世界独有的设定）写清是什么、怎么运作。只写 AI 不知道的，通用常识不写。
+- 组织有日常职能，人与组织之间可以有支持、依赖、意见分歧和限制。沿用已有设定，在创作范围内补足联系；不要求各方都争夺东西，也不因为构想没逐项写出就删掉这些联系。
+- 〔user〕的身份以构想和作者定稿为准，不另编。
+
+【篇幅】简单 200–600 字；中等 600–1500 字；复杂 1500–2500 字，拆条目。
+
+【写法】零度写作：
+{{zeroRule}}
+- 同人卡不复述原作，只写剧情进度锚点和剧情跑偏时怎么处理。
+
+【格式】用 <世界观> 标签包住，标签里用 YAML。下面的字段按需要用，用不上的整条删掉，不留空字段：
+<世界观>
+概述: 2–4 句，这是个什么样的地方
+场所:
+  地点名: 是什么，有什么
+日常: 这里的人平时怎么生活，东西从哪来
+组织:
+  组织名: 是什么，在哪，做什么，有什么规矩，和主要角色的关系
+规则:
+  - 规则：怎么运作
+现在: 故事开始时的状况
+</世界观>
+复杂度为“中等”或“复杂”时，把重要的组织、地点再拆成单独条目，每块前加一行：
+<<<条目:名称|关键词1,关键词2>>>
+后面接这一块的详细内容（同样用 XML 标签包 YAML）。`,npc:`【任务】为这张卡创作 NPC，{{count}} 个左右，可以少写。直接写人物介绍。
+
+【卡类型】{{cardMode}}
+【构想】
+{{concept}}
+【标签】{{tags}}
+【主要角色概要】
+{{overviews}}
+【主要角色人设与补充】
+{{personas}}
+【已有的人物关系】
+{{relations}}
+【世界观】
+{{world}}
+【已有 NPC 资料，保留未被作者修改的往事与关系】
+{{npcs}}
+
+【作者已有的 NPC 设想，可为空】
+{{npcIdeas}}
+有设想时按列出的顺序写，保留已有名字；没有设想时自行创作。作者的修改意见优先于旧稿。
+
+【NPC 写法】
+{{rules.NPC写法}}
+
+【参考原文：宇宙冷漠·NPC】
+{{rules.NPC参考}}
+
+【格式】每个人物前保留程序识别标记，人物介绍写在姓名标签内：
+<<<NPC:名字|关键词1,关键词2>>>
+<名字>
+用连贯的段落写出人物的往事和现状。经历要写到发生过什么，不能只列年龄、职业和日常事务。不列固定字段。
+</名字>
+只输出本次创作的人物，参考示例不属于本卡，不能作为生成结果返回。`,relations:`【任务】为已有的主要角色整理并补写彼此的关系。
+
+【构想】
+{{concept}}
+【标签】{{tags}}
+【主要角色人设与补充】
+{{personas}}
+【世界观与 NPC】
+{{world}}
+{{npcs}}
+【已有关系与路线】
+{{relations}}
+{{routes}}
+
+【要求】
+从已有的交往、经历和各自的性情出发，写双方怎样看待彼此。他们知道和在意的事情可以不同，对同一个人也可以有不止一种感情；已经亲近仍可以有分歧，不强求误会、争斗或关系破裂。
+只展开有实际来往的关系。尚未相识的保留尚未相识，不为凑全每一对而安排往事。已有过往不重复编造，不把人物之间的关系都变成围绕〔user〕的竞争。
+群戏按在场的人和各自的事情安排，留下各人的表达和判断，不平均分配台词。修罗场只在作者或构想要求时写；出场规则只写这张卡确实需要的内容。
+{{rules.通用}}
+
+【格式】用 <角色关系> 包住 YAML，没有的项删掉：
+<角色关系>
+关系:
+  甲 与 乙:
+    过往与现状:
+    甲的看法:
+    乙的看法:
+    相处与分歧:
+出场规则:
+群戏说话区别:
+</角色关系>`,classify:`【任务】下面是一张角色卡（主角：{{charName}}）世界书里的条目，是别人按自己的习惯写的。把每一条分到Love 写卡机的一页里，方便作者分开改。
+
+【可以分到】
+- persona：主要角色的人设（主角或几个地位相当的主要角色）
+- npc：配角、路人、家人、朋友、敌人等其他人物
+- world：世界观、地点、势力、组织、种族、历史、物品、规则设定
+- routes：玩家（user）的身份、开局、路线、玩家信息
+- tone：文风、写作要求、输出格式、禁止事项、给 AI 的指令
+- other：都不像，或者说不清
+
+【条目】
+{{items}}
+
+【输出】只输出 JSON：{"items":[{"id":"条目的 id","cat":"npc"}]}，每条都要有。`,npcOne:`【任务】为这张卡创作一个 NPC。作者未填写要求时，由你自行创作，直接写人物介绍。
+
+【这个 NPC】
+名字：{{name}}
+作者的设想，可为空：{{desc}}
+保留已有名字；未命名的自行起名。有设想时沿用作者要求，作者的修改意见优先于旧稿。
+
+【卡类型】{{cardMode}}
+【构想】
+{{concept}}
+【标签】{{tags}}
+【主要角色概要】
+{{overviews}}
+【主要角色人设与补充】
+{{personas}}
+【已有的人物关系】
+{{relations}}
+【世界观】
+{{world}}
+【已有 NPC 资料，保留未被作者修改的往事与关系】
+{{npcs}}
+【已有的 NPC】
+{{otherNpcs}}
+
+【NPC 写法】
+{{rules.NPC写法}}
+
+【参考原文：宇宙冷漠·NPC】
+{{rules.NPC参考}}
+
+【格式】每个人物前保留程序识别标记，人物介绍写在姓名标签内：
+<<<NPC:名字|关键词1,关键词2>>>
+<名字>
+用连贯的段落写出人物的往事和现状。经历要写到发生过什么，不能只列年龄、职业和日常事务。不列固定字段。
+</名字>
+只输出本次创作的人物，参考示例不属于本卡，不能作为生成结果返回。`,routes:`【任务】为每条路线写玩家信息和关系指导。
+
+【构想】
+{{concept}}
+【主要角色概要】
+{{overviews}}
+【作者的回答】
+{{answers}}
+【已有的人设与补充】
+{{personas}}
+【世界观与 NPC】
+{{world}}
+{{npcs}}
+【人物关系】
+{{relations}}
+【要写的路线】
+{{routes}}
+{{otherRoutes}}
+
+【要求】
+- 玩家信息：用简短叙述交代〔user〕的身份、和{{charNames}}各自的关系、过去发生过什么；可以带一句能体现关系的台词；结尾停在当前的处境。每个角色分开写，不要合成一句“和主要角色”。单人不超过 250 字，每多一个角色可以多 150 字。
+- 关系指导：按每个人的性情和双方过往，说明这段关系当前是什么样，他怎样看待〔user〕，相处中还在意什么、有何分歧。已确定的爱、信任或敌意可以直说，不能用它们概括全部人格；不要替〔user〕规定心理、反应或最终选择。不强制每段关系都有对内对外两副样子。
+- 一律用角色的名字，不写“主要角色”“男主”“他们”。
+- 同一个角色在不同路线要体现时期差异：年龄、处境、对〔user〕的态度。
+- 作者给了主题的路线，按主题写：主题里说到的身份、关系、事件都要落实，没说到的你来补。
+{{rules.通用}}
+
+【格式】每条路线一块，块前加一行 <<<路线:路线名>>>，内容为：
+<玩家信息>
+〔user〕身份：
+{{relationFields}}
+（简短叙述）
+</玩家信息>
+<关系指导>
+{{guideFields}}
+</关系指导>`,tone:`【任务】写这张卡的基调与规则。它会放在角色定义之前，让 AI 一开始就知道要写什么样的故事。
+
+【构想】
+{{concept}}
+【标签】{{tags}}
+【平台味】{{platform}}
+【卡类型】{{cardType}}
+【已写的人设与补充】
+{{personas}}
+【人物关系与路线】
+{{relations}}
+{{routes}}
+【世界观与 NPC】
+{{world}}
+{{npcs}}
+【已有基调，保留作者已经明确的要求】
+{{tone}}
+
+【要求】
+- 从作者要求和已经写成的内容确定基调。写清以后主要写哪些生活、关系和事情，哪些差异要保留，不把整张卡的感情与行为归结成同一个主题。
+- 直接说明想要的写法，不规定“A 但不 B”句式。作者给了参照时说明参考什么，没有就不凑作品名。
+- 保留作者明确写出的禁止项。根据已有设定确实需要补充时再加，不预设条数，不给每张卡套相同的清单。
+{{rules.禁令格式}}
+- NP 卡写关系规则（修罗场怎么处理、关系怎么推进）；大世界卡写玩法规则（战斗、成长、资源）。用不上的部分删掉。
+
+【格式】
+<创作文体>
+基石:
+主题风格:
+基调:
+  核心定位:
+  调性:
+  冲突来源:
+参照:
+禁止清单:
+关系规则:
+玩法规则:
+</创作文体>`,greeting:`【任务】写路线「{{route}}」的开场白，共 {{n}} 个，分别构思后写成正文，长度 {{length}} 字左右。
+
+【路线】
+{{routeInfo}}
+【构想】
+{{concept}}
+【主要角色概要】
+{{overviews}}
+【主要角色人设与补充】
+{{personas}}
+【人物关系】
+{{relations}}
+【世界观】
+{{world}}
+【NPC】
+{{npcs}}
+【基调】
+{{tone}}
+
+【每个开场白都要有】
+- 时间、地点、在场的人物：开头几句就交代清楚，读的人马上知道“现在、在哪、谁在”。
+- 设定：用一两句自然带出这张卡最要紧的设定（这是个什么世界、〔user〕和角色是什么关系），让第一次玩的人看得懂；不写成说明书，不堆背景。
+- 现在：此刻正在发生什么事。
+- 接下来：一件马上要来的事、一个悬念或一个选择，让人想往下玩。
+- 最有张力的一刻：从冲突、秘密、欲望或危险正好顶在一起的那一下开始写，不从平淡的日常或长长的铺垫写起。
+
+【先构思，再写】
+写正文之前，先用 <开场构思>…</开场构思> 为每个开场白写清楚，一个开场白一行：
+时间｜地点｜人物｜设定怎么带出｜现在在发生什么｜接下来会发生什么｜选的是哪个场景｜为什么选它（它为什么是最有张力的一刻，〔user〕接下来有什么话可说、有什么事可做）
+构思只用来理清思路，整块写在第一个 <<<开场白>>> 之前；正文里不出现构思的字段。几个开场白之间，时间、地点和事件都要明显不同。
+
+【已经写出的开场白，仅用于避重】
+{{existingGreetings}}
+本次重新构思开场，不换词复写旧稿；作者明确要求重写某一版时才沿用那一版的事情。
+
+【写法】
+{{rules.开场白}}
+不替〔user〕说话、做决定或写心理；停在〔user〕可以回应的地方。
+
+【格式】先写 <开场构思>，再写正文。每个开场白前加一行 <<<开场白>>>，正文直接写，不加标题。`,auCore:`【任务】下面是一张已经写好的角色卡。要把角色搬进一个新的 AU（换世界观、换身份），人还是那个人。先把每个主要角色拆成两层：内核（换到哪个世界都不变的东西）和外壳（属于原作世界、AU 里要换掉的东西）。
+
+【原卡】
+{{original}}
+
+【内核写什么】每个角色写这几项，写成能指导行为的话，不写标签：
+- 矛盾轴与落点：两个互相拉扯的倾向，他在哪里让步、哪里不让，为什么
+- 对〔user〕的底色：这段关系里他真正在意的是什么
+- 说话方式：他谈什么、不谈什么
+- 决策方式：遇到危机先做什么
+- 底线：什么事他不会做，为什么
+内核里不能出现原作世界的地名、组织、道具、职业。
+
+【外壳写什么】原作里属于那个世界的东西：身份、职业、时代、组织、地点、道具、关键经历、外貌里的时代细节。一行一个。
+
+【格式】每个角色一块，最后一块写外壳：
+<<<内核:角色名>>>
+（内核）
+<<<外壳>>>
+（外壳清单）`,auMap:`【任务】把原作的外壳一项项换成 AU 里的对应，让角色在 AU 里长出同样的内核。
+
+【AU 设定】
+{{idea}}
+{{ideaAnswers}}
+【标签】{{tags}}
+
+【角色内核】（必须保留）
+{{core}}
+
+【原作的外壳】
+{{shell}}
+
+【原卡摘要】（只用来理解，不要照搬原作的设定）
+{{original}}
+
+【要求】
+- 每一行：原：xxx → AU：xxx｜为什么在 AU 里还能长出同样的内核（一句话）
+- 关键经历不能平移，要反推：原作的经历让他长成了哪条内核，AU 里换一段什么经历也能长出这条。
+- 〔user〕的身份和两人的关系也要映射。
+- 名字默认保留，要改就写一行“名字：原 → AU”。
+- AU 题材的套路可以用，但角色的反应要来自他的内核，而不是这个题材的默认角色。
+
+【格式】只输出映射表，一行一条。`,auCheck:`【任务】检查 AU 版人设有没有保住原作角色的内核。逐条对照，看 AU 人设里这条内核还在不在、有没有被 AU 题材的套路冲掉。
+
+【角色】{{name}}
+【内核】
+{{core}}
+
+【AU 版人设】
+{{persona}}
+
+【AU 题材】{{tags}}
+
+【要求】
+- verdict 只能是：保留 / 偏离 / 丢了
+- 偏离或丢了的，where 写 AU 人设里对应的原句（没有就写“没写到”），fix 写一句怎么改
+- 另外检查 AU 人设里有没有原作世界的地名、组织、道具残留，有就放进 leftovers
+
+【输出】只输出 JSON：
+{"items":[{"core":"内核这一条","verdict":"保留","where":"","fix":""}],"leftovers":[]}`,newRoutes:`【任务】这是一张已经写好的卡。给它想 {{n}} 条新路线：每条路线 = 一个〔user〕身份 + 一个时期，要和已有路线明显不同，能玩出新的关系和张力。
+
+【这张卡】
+{{concept}}
+【已有路线】
+{{routes}}
+
+【要求】
+- 身份或时期至少换一样；同一对人换个处境，往往比换个新身份更好玩。
+- 每条说清这条线好玩在哪：两人在这条线上是什么关系。
+- 不写八股。
+
+【输出】只输出 JSON：
+{"routes":[{"name":"路线名","user":"〔user〕的身份","period":"时期","why":"一句话：这条线好玩在哪"}]}`,revise:`【任务】按作者的意见修改下面这段角色卡内容。只改意见说到的地方，其他内容和格式保持原样，输出修改后的完整内容。
+
+【这段是】{{label}}
+【作者的意见】
+{{fb}}
+
+【这张卡】
+{{concept}}
+
+【写法规则】
+{{rules.通用}}
+
+【原文】
+{{text}}
+
+【输出】只输出修改后的完整内容，不解释，不加标题。`,backstory:`【任务】为角色「{{name}}」补写或展开经历。
+
+【构想】
+{{concept}}
+【已有的人设】
+{{persona}}
+【作者的回答】
+{{answers}}
+【世界观与人物关系】
+{{world}}
+{{relations}}
+
+【篇幅设置】{{count}}
+按作者明确要求的篇幅写；未指定时，以交代清楚生活为准，不凑段数。
+沿着这个人的人生写：长期的家庭生活、教养、交往和发生过的事都可以成为经历。重要的事展开，普通的阶段可以概述，不逐条给性格编一个起源故事，不要求每段都带一句领悟。
+已有的事实、人物和先后顺序保留。创作任务允许补足未定部分；作者明确不许编造的过往、指定保持未知的地方照办。不强制加童年、创伤、救命之恩，也不为了关联〔user〕而让尚未相识的人提前认识。
+讲清那段生活和后来怎样，必要时说明它怎样影响如今的想法，不用一件事解释他整个人。
+{{rules.通用}}
+
+【格式】只输出 YAML，已有经历按时间顺序合并保留：
+life_story:
+  - 时期:
+    经历:`,hooks:`【任务】为路线「{{route}}」想 {{n}} 个可供挑选的开场剧情，先不写正文。
+
+【路线】
+{{routeInfo}}
+【构想】
+{{concept}}
+【主要角色概要】
+{{overviews}}
+【主要角色人设与补充】
+{{personas}}
+【人物关系】
+{{relations}}
+【世界观】
+{{world}}
+【NPC】
+{{npcs}}
+【基调】
+{{tone}}
+【当前已有的候选，仅用于避重】
+{{existing}}
+【已经写出的开场白，仅用于避重】
+{{existingGreetings}}
+这两份旧稿用于避开重复，不直接作为新结果返回，也不换名或换词复写。作者明确要求继续某个方向时，按作者要求。
+
+【构思】
+{{rules.开场构思}}
+每个候选用一小段写清剧情，不列分析字段，不提前替〔user〕安排反应或选择，不加点评。输出前比较这一批，重写同一事件的变体，再交给作者挑选。
+
+【输出】只输出 JSON：
+{"hooks":["",""]}`,localEdit:`【任务】只改下面原文里用【【 】】括起来的那一段，其他部分一个字都不要动。
+
+【这段是】{{label}}
+【作者的要求】{{instruction}}
+
+【这张卡】
+{{concept}}
+
+【写法规则】
+{{rules.通用}}
+
+【原文】（要改的部分在【【 】】里，前后是上下文）
+{{context}}
+
+【输出】只输出【【 】】里那一段改好后的文字，不带【【 】】，不带前后文，不解释。保持原来的格式：缩进、YAML 键名、列表符号、换行方式都跟原来一样。`,playChar:`【任务】下面是一张角色卡导入酒馆后会发出去的全部设定。你来扮演卡里的角色（主要是{{char}}，需要时也扮演 NPC 和世界），和〔user〕进行角色扮演。
+
+【角色卡】
+{{card}}
+
+【要求】
+- 只写角色和世界的反应。不替〔user〕说话，不替〔user〕做决定，不写〔user〕的心理。
+- 每次回复 {{length}} 字左右。
+- 按设定里的性格、说话方式和行为逻辑来演，不要把设定原句搬出来。`,playUser:`【任务】你在帮作者测试一张角色卡。扮演玩家〔user〕，给角色回一条消息。
+
+【玩家风格】{{style}}
+【〔user〕在这条路线的身份】
+{{routeInfo}}
+【到目前为止的对话】
+{{transcript}}
+
+【要求】
+- 像真实玩家在酒馆里打字：1–2 句，可以带动作（用括号或星号），也可以只说一句话。
+- 按玩家风格来。不替角色说话，不总结剧情，不解释。
+【输出】只输出这条消息。`,personaExtra:`【任务】为角色「{{name}}」写“人设补充”。结合已经写好的世界观、NPC、关系和路线，补足人设尚未说清的联系；前面已说清的内容不再复述。
+
+【人设】（已写好，不要重复，也不要改它的矛盾轴和底线）
+{{persona}}
+
+【这张卡的其他部分】
+世界观：
+{{world}}
+NPC：
+{{npcs}}
+角色关系：
+{{relations}}
+玩家与路线：
+{{routes}}
+基调与规则：
+{{tone}}
+【同卡的其他主要角色】
+{{others}}
+【标签】{{tags}}
+{{extraBrief}}
+【写什么】只写人设里没有、而这个世界让他有了的东西：
+1. 落脚点：他在这个世界里住在哪、做什么、属于哪里，平时和谁来往，守着哪些规矩。
+2. 对具体的人：根据已写的来往，补充他怎样看待相关的人，感情、意见和相处中有哪些没说清的部分。只写有实际牵连的人，不为每段关系另编证明事件。
+3. 知道的事：他知道哪些别人不知道的事，遇到事情会去找谁。用世界观里真实存在的名字和地点。
+4. 不同路线里的他：每条路线一行，写这条路线里他的位置和对〔user〕的做法有什么不同。没有路线就不写这一项。
+5. 他自己的生活：哪些愿望、关系或事务仍在继续，不等〔user〕开口才存在。不指定事项数量，不全换成职业任务。
+
+【要求】
+- 保留已有事实，补写尚未展开的想法和联系；不要为了本条另造势力或人物来替代已有关系。资料真有冲突时保留作者明确的定稿，不用新的故事强行圆回去。
+- 不复述人设，不写外貌和性格总结，不写新的童年经历。
+- 写行为和关系，不写“他很复杂”“他内心矛盾”这类判断。
+- 800 字以内，宁可少不要空。
+{{rules.通用}}
+{{rules.禁令格式}}
+
+【格式】用 YAML，字段用上面的名字，用不上的字段整条删掉：
+<{{name}}补充>
+落脚点: …
+对具体的人:
+  - 名字: …
+知道的事: …
+不同路线:
+  - 路线名: …
+主动会做的事:
+  - …
+</{{name}}补充>
+只输出这一块。`,conflict:`【任务】检查这张角色卡里，作者选的标签和写出来的内容有没有互相矛盾。只找真正矛盾的地方，不做文笔点评。
+
+【作者选的标签】
+{{tags}}
+（c = 角色，u = user；公/左位 = 攻，嬷/右位 = 受；泥塑 = 女性化处理，整塑 = 男性化处理）
+
+【卡的内容】
+主要人设：
+{{personas}}
+世界观：
+{{world}}
+NPC：
+{{npcs}}
+玩家与路线：
+{{routes}}
+基调与规则：
+{{tone}}
+开场白：
+{{greetings}}
+
+【逐项对照】
+- 性向、人数（如 1v1、多人）、user 性别、攻受/强弱定位、关系类型（如双向、单箭头、追逐方向）、时代题材、基调（如甜、虐）、玩法（如是否有数值、系统）。
+- 标签之间自己互相冲突的也要列（比如“强c弱u”和“弱c强u”同时选）。
+- 内容之间前后不一致（名字、年龄、身份、时间线）不在这次范围，除非直接违背某个标签。
+- 标签没有被内容体现（选了但完全没写）也算，但标成 level=weak。
+
+【要求】
+- 每条都要引用卡里的原话（quote，一句以内），没有原话就不要列。
+- side：这一条更可能是“标签选错了”（tag）还是“内容写偏了”（content）。拿不准写 content。
+- part：问题出在卡的哪一部分：persona、world、npc、routes、tone、greet。name 是涉及的角色名，没有就留空。
+- tag 写涉及的标签名（原样照抄，如 嬷c），没有就留空。
+- fix 写给作者的修改意见，一两句，能直接当重写意见用。
+- 没有矛盾就返回空数组，不要硬凑。
+【输出】只输出 JSON：{"issues":[{"level":"strong|weak","tag":"","part":"persona","name":"","quote":"","problem":"","side":"content","fix":""}]}`,consistency:`【任务】检查这张角色卡的内容前后有没有对不上的地方（卡的内部矛盾）。只找真正对不上的，不做文笔点评，不管标签。
+
+【卡的内容】
+主要人设：
+{{personas}}
+世界观：
+{{world}}
+NPC：
+{{npcs}}
+玩家与路线：
+{{routes}}
+基调与规则：
+{{tone}}
+开场白：
+{{greetings}}
+
+【逐项对照】
+- 名字：同一个人前后写法不同（错字、换了称呼却没交代、全名对不上）。
+- 年龄、生日、辈分、时间线：年龄和经历的年份算不通，先后顺序倒了，说是同龄却差了很多。
+- 身份、职业、住处、外貌：同一个人在不同地方说法不一样（比如一处写黑发一处写银发）。
+- 关系：谁是谁的亲人、上司、前任，两处说法冲突；A 说认识 B，B 的资料却写没见过。
+- 同一件事：人设、NPC、世界观对同一件事（谁做的、什么时候、结果如何）说法不同。
+- 世界规则：一处说有某种力量或制度，另一处否认；规则里的数值、界限前后不一样。
+- 开场白：人物状态、地点、关系和人设对不上（比如人设写已经分手，开场白却在热恋）。
+- 有意的反差（角色撒谎、假身份、前后变化）不算矛盾，除非卡里没有任何交代。
+
+【要求】
+- 每条都要引用卡里的两处原话：quote 是一处，other 是和它对不上的另一处（各一句以内），拿不出两处原话就不要列。
+- part 和 otherPart：两处各自在卡的哪一部分，取 persona、world、npc、routes、tone、greet 之一。name 是涉及的角色名，没有就留空。
+- level：确定对不上写 strong；可能是笔误或需要作者确认写 weak。
+- fix 写给作者的修改意见，一两句，要说清以哪一处为准或怎么统一。拿不准以哪个为准就让作者选。
+- 没有矛盾就返回空数组，不要硬凑。
+【输出】只输出 JSON：{"issues":[{"level":"strong|weak","part":"persona","otherPart":"world","name":"","quote":"","other":"","problem":"","fix":""}]}`,playReview:`【任务】下面是一张角色卡的试玩记录。用挑剔的老玩家和写卡作者的眼光点评：这张卡跑起来好不好玩，问题出在卡的哪一部分，怎么改。
+
+【主要角色概要】
+{{overviews}}
+【路线】
+{{routeInfo}}
+【试玩记录】
+{{transcript}}
+
+【逐项看】
+- 角色像不像设定里那个人：说话方式、做决定的方式有没有跑偏（OOC）。
+- 有没有替〔user〕说话、做决定、写〔user〕的心理（抢话）。
+- 有没有八股、八股，有没有重复的动作和句式。
+- 角色有没有自己想要的东西、会不会主动推剧情，还是只会接话。
+- 有没有让人想接着聊的钩子；哪一轮最无聊。
+- 好的地方也要说，作者要知道哪些该保留。
+
+【要求】
+- 每条问题都要指出是第几条消息、具体哪句。
+- part 是问题出在卡的哪一部分：persona（人设）、world（世界观）、npc、routes（路线/玩家信息）、tone（基调与规则）、greet（开场白）。
+- fix 写给作者的修改意见，一两句，能直接当成重写意见用；不要写“加强”“丰富”这种空话。
+- 只是模型本身的问题（和卡无关）就不要列。
+【输出】只输出 JSON：
+{"score":7,"good":[""],"issues":[{"where":"第 N 条","problem":"","part":"persona","name":"相关的角色名或路线名，可以空","fix":""}]}`,expand:`【任务】把下面每个梗扩写成一个完整的开场白，按顺序一个梗写一个，长度 {{length}} 字左右。
+
+【梗】
+{{hooks}}
+
+【路线】
+{{routeInfo}}
+【构想】
+{{concept}}
+【主要角色概要】
+{{overviews}}
+【主要角色人设与补充】
+{{personas}}
+【人物关系】
+{{relations}}
+【世界观】
+{{world}}
+【NPC】
+{{npcs}}
+【基调】
+{{tone}}
+
+【写法】
+{{rules.开场白}}
+- 保留每个选定梗的事情和相处方式，按顺序分别写；需要的经过可以补足，不把不同的梗改回同一种见面、送东西或问答开头。作者在梗里指定的开头、停顿点按要求写。
+
+【格式】每个开场白前加一行 <<<开场白>>>，正文直接写，不加标题。`,predict:`【任务】下面只给你一个角色的类型标签。凭你对这类角色的印象，写出他最典型、最常见的表现。
+
+【角色类型】{{archetype}}
+【题材与关系】{{tags}}
+
+【场景】
+1. 第一次见到〔user〕
+2. 〔user〕和别人走得很近
+3. 他的秘密被〔user〕撞破
+4. 〔user〕受了伤
+
+【输出】只输出 JSON：
+{"scenes":[{"scene":"场景","behavior":"他会怎么做，一句话","line":"他最可能说的一句话"}],"traits":["这类角色最常见的 5 种性格写法，每条一句"]}`,judge:`【任务】左边是“这类角色最常见的刻板写法”，右边是角色「{{name}}」的人设。找出人设里本质上就是刻板写法的句子：意思一样就算，不看字面。空泛的标签式描写（“病态偏执”“唯一的执念”“活体神明”这类）也算。
+
+【刻板写法】
+{{stereotypes}}
+
+【人设】
+{{persona}}
+
+【要求】先看这句话在整份人设中是否已有具体的经历、想法和关系作为依据。常见性格、题材和作者明确选定的偏好本身不算问题；不能因为与预测相似就判定必须重写。只列缺少人物依据、反复重复同一标签或只用八股代替内容的地方，说明依据。card 必须是人设里的原句，没有就返回空数组。
+
+【输出】只输出 JSON：
+{"overlaps":[{"card":"人设原句","stereotype":"对应的刻板写法","why":"一句话"}]}`,destale:`【任务】角色「{{name}}」的人设里有几处和“这类角色的刻板写法”撞了。要改的是手法，不是措辞。
+
+【怎么改】
+作者选择要改的地方按意见处理，未涉及的原文保留。先分清这句话的问题：空话补成这个人的想法，重复的合并；已有的身份、能力、往事、感情和红线不能因为“常见”就换掉。
+结合已有经历和关系写出尚未说清的部分，不规定必须换多少动作或因果，也不一律把人物的事情缩成小事。没有作者要求，不为求新鲜给他增加创伤、秘密、能力或新关系。
+保留实际的权力、财力和活动范围，同时保留已有的限制。只输出完整人设。
+
+【撞上的地方】
+{{overlaps}}
+
+【构想】
+{{concept}}
+【作者的回答】
+{{answers}}
+【世界观】
+{{world}}
+
+【写法规则】
+{{rules.通用}}
+
+【人设原文】
+{{persona}}
+
+【输出】完整人设，格式不变，从 <{{name}}> 到 </{{name}}>。`,free:`【任务】为这张卡写一个附加模块「{{name}}」。
+
+【作者的描述】{{desc}}
+【构想】
+{{concept}}
+【主要角色概要】
+{{overviews}}
+
+【写法规则】
+{{rules.通用}}
+
+【格式】用 <{{name}}> 标签包住内容，标签内用 YAML。只输出这个模块。`,intro:`【任务】为这张卡写一篇发到 Discord 的简介，并给出 4 个标题。
+
+【标签】{{introTags}}
+【构想】
+{{concept}}
+【主要角色概要】
+{{overviews}}
+【路线】
+{{routes}}
+【开场白节选】
+{{greetingSample}}
+
+【标题要求】约 20 字，直接给最好的梗、最吸引人的处境，尺度允许时可以直给。这些标题用不同写法：关系错位、规则被打破、一句台词、一个反常的物件。
+
+【正文要求】
+- 只用 Discord 支持的 Markdown：**加粗** *斜体* __下划线__ ~~删除线~~ -# 小字 ||剧透|| > 引用 # ## ### 标题 - 列表。不用表格。
+- 简介第一句直接进冲突：一个画面或一句台词，不先铺世界观；结尾留一个悬念。需要隐藏的反转用 ||剧透||。
+- “关于TA”每段先一句话身份，再写矛盾点，写行为不写性格标签。
+- 多路线时写“路线”段，每条一行：> **路线名**｜关系定位 · 调性。只有一条路线就省略这一段。
+- “内心想法”写角色真正会想、但不会说出口的话，要是这个角色独有的，只看类型就能猜到的话不要。
+- 题句用角色台词或原创句，不用名人名言。
+- 不写八股，不复述长篇剧情。正文控制在 1300 字以内。
+
+【格式】
+<<<标题>>>
+（每行一个标题，一共 4 行）
+<<<题句>>>
+题句（可以是一行英文加一行中文翻译，也可以只有中文）
+<<<简介>>>
+（第一句进冲突的简介，2–4 段）
+||剧透（没有就写“无”）||
+<<<关于TA>>>
+**角色名**｜一句话身份
+矛盾点，2–4 句。
+（每个主要角色一段）
+**〔user〕**｜一句话身份
+〔user〕在故事里的位置，以及能改变什么。
+**关系**
+目前的关系和主要矛盾，一两句。
+<<<路线>>>
+（多路线时才写）
+<<<内心想法>>>
+角色真正会想、但不会说出口的话。`},Fn={chat:{name:"先聊聊",stage:"card",temp:.85},deepAns:{name:"深挖问答（AI 先答）",stage:"card",temp:.8},chatQs:{name:"审设定出选择题",stage:"card",temp:.7},chatBrief:{name:"整理定稿",stage:"card",temp:.3},inspire:{name:"灵感问答",stage:"card",temp:1},story:{name:"试写短篇",stage:"greeting",temp:.95},ideaQA:{name:"脑洞问答",stage:"card",temp:.95},hooks:{name:"开场白想梗",stage:"greeting",temp:1},backstory:{name:"展开经历",stage:"card",temp:.85},newRoutes:{name:"想新路线",stage:"card",temp:1},revise:{name:"按意见修改",stage:"card",temp:.6},auCore:{name:"提取内核",stage:"card",temp:.4},auMap:{name:"映射表",stage:"card",temp:.8},auCheck:{name:"内核一致性检查",stage:"card",temp:.2},expand:{name:"开场白扩写",stage:"greeting",temp:.9},relations:{name:"角色关系网",stage:"card",temp:.8},classify:{name:"原卡条目分类",stage:"card",temp:.1},npcOne:{name:"单个 NPC",stage:"card",temp:.85},localEdit:{name:"局部重写",stage:"card",temp:.8},playChar:{name:"试玩·角色回复",stage:"greeting",temp:.9},playUser:{name:"试玩·AI 扮 user",stage:"card",temp:1},playReview:{name:"试玩点评",stage:"card",temp:.3},conflict:{name:"标签与内容冲突检查",stage:"card",temp:.2},consistency:{name:"内容一致性检查",stage:"card",temp:.2},personaExtra:{name:"人设补充",stage:"card",temp:.75},idea:{name:"一句话构想",stage:"card",temp:.95},qa:{name:"人设问答",stage:"card",temp:.95},persona:{name:"主要人设",stage:"card",temp:.8},world:{name:"世界观",stage:"card",temp:.7},npc:{name:"NPC",stage:"card",temp:.8},routes:{name:"玩家与路线",stage:"card",temp:.8},tone:{name:"基调与规则",stage:"card",temp:.7},greeting:{name:"开场白",stage:"greeting",temp:.9},predict:{name:"可预测性测试",stage:"card",temp:.3},judge:{name:"刻板比对",stage:"card",temp:.2},destale:{name:"重写撞车部分",stage:"card",temp:.7},free:{name:"自由模块",stage:"card",temp:.8},intro:{name:"简介",stage:"card",temp:.9}},ef={idea:"一句话脑洞",tags:"选中的标签",concept:"选中的构想",platform:"平台味说明",overviews:"主要角色概要",personas:"主要角色人设全文",answers:"问答里作者的回答",world:"世界观",npcs:"NPC",relations:"人物关系",existingGreetings:"已经写出的开场白（想梗时避开重复）",npcIdeas:"作者已有的 NPC 名字与设想","rules.NPC写法":"规则库：NPC 写法","rules.NPC参考":"规则库：宇宙冷漠 NPC 原文参考",routes:"路线信息",tone:"基调与规则",cardMode:"卡的类型（单人卡 / 多人卡 / 无固定角色 / 规则卡）","rules.通用":"规则库：通用","rules.矛盾建模":"规则库：矛盾建模","rules.零度写作":"规则库：零度写作","rules.开场白":"规则库：开场白","rules.开场构思":"规则库：开场构思","rules.禁令格式":"规则库：禁令格式","rules.禁用词":"规则库：禁用词（每行一个）"};function as(e,t){return String(e??"").replace(/\{\{\s*([^{}\s]+)\s*\}\}/g,(n,r)=>{if(Object.prototype.hasOwnProperty.call(t,r)){const s=t[r];return s==null?"":String(s)}return n}).replace(/\n{3,}/g,`
+
+`)}var Zi=["永远"],tf=e=>String(e??"").split(`
+`).filter(t=>!Zi.includes(t.trim())).join(`
+`).replace(new RegExp(`[、，,]?(?:${Zi.join("|")})(?=[、，,：:。\\s]|$)`,"g"),"");function nf(e){const t={};for(const[n,r]of Object.entries(e??{}))t[`rules.${n}`]=tf(r);return t}var $i="〔char〕";function Un(e){let t=String(e??"").replace(/<(think(?:ing)?|plann?ing|plan|analysis|reasoning)>[\s\S]*?<\/\1>/gi,"");const n=t.match(/<(content|output|answer|result|final)>([\s\S]*?)(?:<\/\1>|$)/i);n&&!t.slice(0,n.index).replace(/```[a-zA-Z]*/g,"").trim()&&(t=n[2]),t=t.replace(/```[a-zA-Z]*[ \t]*\n(\s*<[\s\S]*?>)[ \t]*\n```/g,"$1").replace(/^\s*```[a-zA-Z]*[ \t]*\n/,"").replace(/\n?```[a-zA-Z]*[ \t]*\s*$/,"").replace(/^\s*```[a-zA-Z]*[ \t]*\n/,"").replace(/\n?```[a-zA-Z]*[ \t]*\s*$/,"");for(let r=0;r<3;r++){const s=t.replace(/^\s*<([^\s>/]+)>\s*(<\1>[\s\S]*<\/\1>)\s*<\/\1>\s*$/,"$2");if(s===t)break;t=s}return t.trim()}function dt(e){const t=Un(e),n=[t],r=t.indexOf("{"),s=t.lastIndexOf("}");r>=0&&s>r&&n.push(t.slice(r,s+1));for(const i of[...n])n.push(i.replace(/,\s*([}\]])/g,"$1"));let a;for(const i of n)try{return JSON.parse(i)}catch(o){a??=o.message}throw Object.assign(new Error("AI 返回的不是有效的 JSON，点“查看 AI 返回原文”查看。"),{code:"CW_INVALID_JSON",rawResponse:String(e??""),parseError:a})}var rf=/^[ \t]*<<<\s*([^:：|>]+?)\s*(?:[:：]\s*([^|>]*?)\s*)?(?:\|\s*([^>]*?)\s*)?>>>[ \t]*$/gm;function wn(e,{clean:t=!0}={}){const n=t?Un(e):String(e??"").trim(),r=[];let s="",a=null,i=0;for(const c of n.matchAll(rf)){const p=n.slice(i,c.index);a?a.body=p.trim():s=p.trim(),a={type:c[1].trim(),name:(c[2]??"").trim(),keys:String(c[3]??"").split(/[,，、]/).map(d=>d.trim()).filter(Boolean),body:""},r.push(a),i=c.index+c[0].length}const o=n.slice(i);return a?a.body=o.trim():s=o.trim(),{lead:s,blocks:r}}function ma(e,t){return e.blocks.find(n=>n.type===t)?.body??""}function fa(e){return String(e??"").replace(/\{\{\s*user\s*\}\}/gi,Vi).replace(/<user>/gi,Vi).replace(/\{\{\s*char\s*\}\}/gi,$i).replace(/<bot>/gi,$i)}function _i(e,t="<user>"){return String(e??"").replaceAll(Vi,t).replaceAll("[user]",t).replaceAll($i,"{{char}}")}function is(e,t){const n=t.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),r=String(e??"").match(new RegExp(`<${n}>[\\s\\S]*?</${n}>`));return r?r[0]:String(e??"").trim()}function Qe(e,t=1500){const n=String(e??"").trim();return n.length>t?`${n.slice(0,t)}
+……（以下省略）`:n}function eo(e){return[...new Set(String(e??"").split(/[\n,，、]/).map(t=>t.trim()).filter(Boolean))]}function sf(e,t){let n=String(e??"");for(const r of eo(t)){const s=r.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),a=new RegExp(`(?<![零一二三四五六七八九十百千万两0-9])${s}(?!时期|钟|之|于)(?:[的地](?=[\\u4e00-\\u9fff]))?(?=[\\u4e00-\\u9fff，。！？、；：,.!?…—\\s」”』）)]|$)`,"g");n=n.replace(a,"")}return n}function to(e,t,n=[]){const r=String(e??"");return eo(t).filter(s=>!n.includes(s)&&r.includes(s))}var af=/[^。！？!?；;\n]+[。！？!?；;]?/g;function Rl(e){return(String(e??"").match(af)||[]).map(t=>t.trim()).filter(t=>t.length>1)}var of=/推了推眼镜|推眼镜|扶了扶眼镜|捏(?:着|紧)?衣角|攥(?:着|紧)?衣角|咬(?:着)?(?:笔杆|下唇|嘴唇)|挠(?:了挠)?(?:后脑勺|头)|揉(?:了揉)?(?:眉心|太阳穴)|摸(?:了摸)?鼻子|口头禅|口癖|招牌动作|标志性动作|标志性的(?:笑|动作)|习惯性地/g,cf=/\d{2,3}\s*(?:cm|CM|厘米|公分|kg|KG|公斤|斤)|三围|\d{2}\s*[-－/]\s*\d{2}\s*[-－/]\s*\d{2}|[A-H]\s*罩杯|罩杯|[0-9一二三四五六七八九十]+岁零[0-9一二三四五六七八九十]+个月/g,lf=/3(?:次|步|回|遍|日|天|年|个时辰)|三(?:次|步|回|遍|日|天|年|月|个|枚|道|处|息|分|成|下|寸|尺|丈|十|百|更|刻|时辰)|第三|三中|两三|三两|三五/g,pf=/永远|绝不|绝对不会|从不|从来不|只会|一定会|无条件/,df=/因为|由于|缘由|所以|因此|毕竟|除非|只要|如果|才会|直到|否则|前提/,uf=/^\s*-?\s*(?:排除|缘由|替代)\s*[:：]/,mf=/美丽|华丽|古老|神秘|阴森|璀璨|宏伟|幽深|静谧|繁华|斑驳|昏暗|奢华|精致|无尽|永恒|深邃|冰冷|温暖|柔和|壮丽|诡异|庄严|肃穆|浩瀚|苍凉|绚丽|迷人|梦幻/g,ff=/[的了是在和与他她它我你们这那个也都就而或被把〔〕<>]/,gf=new Set(["身份","关系","行为","表现","性格","对白","风格","示例","描述","指导","底色","深层","浅层","红线","排除","缘由","替代","矛盾","落点","倾向","日常","决策","社交","反差","外貌","经历","影响","现在","角色","情境","台词","玩家","信息","主要","标签","解释","复杂","细节","当前","状态","公开","隐藏","特殊","世界","规则"]);function zt(e,t,n,r,s){e.push({type:t,level:n,label:r,match:String(s??"").slice(0,60)})}function wf(e,{ignore:t=[],min:n=6,per:r=180}={}){const s=String(e??"").replace(/^[ \t]*[-\w一-鿿]{1,12}[:：]/gm," "),a=new Map;for(const m of[2,3])for(const g of s.matchAll(/[一-鿿]+/g)){const y=g[0];for(let E=0;E+m<=y.length;E++){const P=y.slice(E,E+m);ff.test(P)||gf.has(P)||a.set(P,(a.get(P)||0)+1)}}const i=Math.max(1,s.length),o=Math.max(n,Math.ceil(i/r)),c=t.filter(Boolean),p=[...a.entries()].filter(([m,g])=>g>=o&&!c.some(y=>y.includes(m)||m.includes(y))).sort((m,g)=>g[1]-m[1]||g[0].length-m[0].length),d=[];for(const[m,g]of p)d.some(y=>y.word.includes(m)&&y.count>=g)||d.push({word:m,count:g});return d.slice(0,6)}function hf(e,t,{names:n=[],pistol:r=!1}={}){const s=String(e??""),a=[];if(!s.trim())return a;if(t!=="intro")for(const i of s.matchAll(of))zt(a,"action","warn","小动作/口头禅",i[0]);if(["persona","npc","route","world","free"].includes(t)){for(const i of s.matchAll(cf))zt(a,"number","warn","数字堆砌",i[0]);for(const i of s.matchAll(lf))zt(a,"number","warn","凑整数字",i[0]);for(const i of Rl(s))uf.test(i)||pf.test(i)&&!df.test(i)&&zt(a,"assert","warn","无缘由断言",i)}if(t==="persona"){const i=ga(s);(!i.found||i.chars===0)&&zt(a,"story","warn","没写经历","需要时可以点“展开经历”")}if(t==="world"&&!r){const i=[...s.matchAll(mf)].map(o=>o[0]);i.length&&zt(a,"adj",i.length>4?"warn":"info",`形容词 ${i.length} 个（零度写作）`,[...new Set(i)].join("、"))}if(["persona","npc","route","greeting","world"].includes(t))for(const i of wf(s,{ignore:n}))zt(a,"freq","info",`高频词 ×${i.count}`,i.word);if(t==="intro"){(/^\s*\|?\s*:?-{3,}:?\s*\|/m.test(s)||/^\s*\|.+\|.+\|\s*$/m.test(s))&&zt(a,"table","error","Discord 简介不能用表格","表格");const i=[...s].length;i>4e3?zt(a,"length","error",`${i} 字，超过 Discord 上限（Nitro 4000）`,""):i>2e3&&zt(a,"length","warn",`${i} 字，超过 2000（非 Nitro 需拆成两条）`,"")}return a}function Hl(e){const t=String(e??"").replace(/[^一-鿿A-Za-z0-9]/g,""),n=new Set;for(let r=0;r+2<=t.length;r++)n.add(t.slice(r,r+2));return n}function zl(e,t){const n=Hl(e),r=Hl(t);if(!n.size||!r.size)return 0;let s=0;for(const a of n)r.has(a)&&s++;return 2*s/(n.size+r.size)}function no(e){return Rl(String(e??"").replace(/<\/?[^<>\n]{1,40}>/g,`
+`).replace(/^[ \t]*-?[ \t]*[^\n:：]{1,14}[:：][ \t]*/gm,"")).filter(t=>t.replace(/[^一-鿿]/g,"").length>=4)}function bf(e,t,n=.42){const r=no(t),s=[];for(const i of e?.scenes??[])i.behavior&&s.push({from:`${i.scene}·行为`,text:i.behavior}),i.line&&s.push({from:`${i.scene}·台词`,text:i.line});for(const i of e?.traits??[])s.push({from:"常见写法",text:i});const a=[];for(const i of s){let o={score:0,sentence:""};for(const c of r){const p=zl(i.text,c);p>o.score&&(o={score:p,sentence:c})}o.score>=n&&a.push({...i,card:o.sentence,score:Math.round(o.score*100)/100})}return a.sort((i,o)=>o.score-i.score)}function vf(e,t=.5){const n=Object.keys(e??{}),r=[];for(let s=0;s<n.length;s++)for(let a=s+1;a<n.length;a++){const i=no(e[n[s]]).map(p=>p.replaceAll(n[s],"")),o=no(e[n[a]]).map(p=>p.replaceAll(n[a],"")),c=[];for(const p of i)for(const d of o){const m=zl(p,d);m>=t&&c.push({a:p,b:d,score:Math.round(m*100)/100})}c.sort((p,d)=>d.score-p.score),c.length&&r.push({a:n[s],b:n[a],count:c.length,pairs:c.slice(0,5)})}return r.sort((s,a)=>a.count-s.count)}function ga(e){const t=String(e??"").split(`
+`),n=t.findIndex(o=>/^\s*(?:life_story|经历|成长经历)\s*[:：]/.test(o));if(n<0)return{count:0,chars:0,found:!1};const r=t[n].match(/^\s*/)[0].length;let s=0,a=t[n].replace(/^\s*[^:：]+[:：]\s*/,"").replace(/[#|>].*$/,"").trim().length,i=-1;for(let o=n+1;o<t.length;o++){const c=t[o];if(!c.trim())continue;const p=c.match(/^\s*/)[0].length;if(p<=r)break;/^\s*-\s/.test(c)&&(i<0&&(i=p),p===i&&s++),a+=c.replace(/^\s*-?\s*[^:：\s]{1,8}[:：]\s*/,"").replace(/[\s\-:：]/g,"").length}return{count:s,chars:a,found:!0}}function wa(e){const t=ga(e);return!t.found||t.chars===0}function xf(e,t){const n=String(e??""),s=String(t??"").replace(/^\s*```[a-z]*\s*\n?|\n?```\s*$/g,"").split(`
+`),a=s.findIndex(E=>/^\s*life_story\s*:/.test(E));if(a<0)return n;const i=s.slice(a),o=i[0].match(/^\s*/)[0].length,c=n.split(`
+`),p=c.findIndex(E=>/^\s*(?:life_story|经历|成长经历)\s*[:：]/.test(E));let d,m,g;if(p>=0){for(d=c[p].match(/^\s*/)[0].length,g=p+1;g<c.length&&(!c[g].trim()||c[g].match(/^\s*/)[0].length>d);)g++;for(;g>p+1&&!c[g-1].trim();)g--;m=p}else{const E=c.findIndex(P=>/^\s*current_state\s*:/.test(P));if(E>=0)d=c[E].match(/^\s*/)[0].length,m=E,g=E;else{const P=c.findIndex(Q=>/^\s*<\/[^>]+>\s*$/.test(Q));m=P>=0?P:c.length,g=m;const D=c.slice(0,m).find(Q=>/^\s+(?:gender|age|identity|current_state|social_connection|appearance|对白风格|矛盾轴|内部描述|角色细节|行为指导)\s*[:：]/.test(Q));if(D)d=D.match(/^\s*/)[0].length;else{const Q=new Map;for(const z of c.slice(0,m))if(/^\s+[^\s-][^:：]*[:：]/.test(z)){const M=z.match(/^\s*/)[0].length;Q.set(M,(Q.get(M)??0)+1)}d=[...Q.entries()].sort((z,M)=>M[1]-z[1]||z[0]-M[0])[0]?.[0]??0}}}const y=i.map(E=>E.trim()?" ".repeat(d)+E.slice(Math.min(o,E.match(/^\s*/)[0].length)):E).join(`
+`).replace(/\s+$/,"");return[...c.slice(0,m),y,...c.slice(g)].join(`
+`)}function hn(){return{version:1,id:`d${Date.now().toString(36)}`,name:"",updated:Date.now(),idea:"",dice:{},diceSet:{dims:[...gn],count:gn.length},story:{text:"",prev:""},inspire:[],tags:[],ai:{guessed:[],novel:[],surprise:null},concepts:[],pick:0,fandom:"",check:[],qa:{chars:[]},personas:[],world:{main:"",extra:[]},npcs:[],routes:[],tone:"",relations:"",mode:"",free:[],greetings:[],greetingContext:{notes:"",useNotes:!0,parts:{}},intro:{titles:[],pick:0,parts:{},text:""},predict:{},custom:{},ideaQA:[],hooks:{},feedback:{},history:{},truncated:{},pageDialogues:{}}}function ha(e){if(!e)return"（没有构想）";const t=[];e.title&&t.push(`标题：${e.title}`);for(const n of e.lineup??[])t.push(`主要角色：${n.name}｜${n.identity??""}${n.archetype?.length?`｜原型：${[].concat(n.archetype).join("、")}`:""}`);return e.user?.length&&t.push(`〔user〕身份：${[].concat(e.user).join(" / ")}`),e.relation&&t.push(`关系与前情：${e.relation}`),e.tension?.core&&t.push(`核心张力：${e.tension.core}`),e.tension?.expect?.length&&t.push(`期待点：${e.tension.expect.join("；")}`),e.complexity&&t.push(`世界观复杂度：${e.complexity}${e.reason?`（${e.reason}）`:""}`),t.join(`
+`)}function ba(e){const t=[];for(const n of e?.qa?.chars??[])for(const r of n.questions??[])r.answer?.trim()&&t.push(`${n.name}｜${r.q}
+→ ${r.answer.trim()}`);for(const n of e?.inspire??[])n.answer?.trim()&&t.push(`${n.q}
+→ ${n.answer.trim()}`);return t.join(`
+`)||"（作者没有回答，按构想自行决定）"}function Fl(e){const t=n=>n.overview?.trim()||n.desc?.trim()||String(n.text??"").replace(/<\/?[^>\n]{1,30}>/g,"").trim().slice(0,200);return(e?.personas??[]).filter(n=>n.name?.trim()&&t(n)).map(n=>`${n.name}：${t(n)}`).join(`
+`)||"（还没有）"}function yf(e){return(e?.routes??[]).map((t,n)=>`${n+1}. ${t.name}｜〔user〕身份：${t.user||"未定"}｜时期：${t.period||"未定"}`).join(`
+`)||"（单路线）"}var It={before:0,after:1},Ul={key:[],keysecondary:[],comment:"",content:"",constant:!1,vectorized:!1,selective:!0,selectiveLogic:0,addMemo:!0,order:100,position:1,disable:!1,ignoreBudget:!1,excludeRecursion:!1,preventRecursion:!1,matchPersonaDescription:!1,matchCharacterDescription:!1,matchCharacterPersonality:!1,matchCharacterDepthPrompt:!1,matchScenario:!1,matchCreatorNotes:!1,delayUntilRecursion:0,probability:100,useProbability:!0,depth:4,outletName:"",group:"",groupOverride:!1,groupWeight:100,scanDepth:null,caseSensitive:null,matchWholeWords:null,useGroupScoring:null,automationId:"",role:0,sticky:null,cooldown:null,delay:null,triggers:[]},os=e=>[...new Set((e??[]).map(t=>String(t).trim()).filter(Boolean))];function cs(e,{personaPlace:t="blue",activeRoute:r=0}={}){const s=[],a=o=>{o.content?.trim()&&s.push({...o,content:o.content.trim()})};a({comment:"基调与规则",content:e.tone,constant:!0,position:It.before,order:100}),a({comment:"世界观",content:e.world?.main,constant:!0,position:It.before,order:200});for(const o of e.world?.extra??[])a({comment:`世界观·${o.name}`,content:o.content,constant:!os(o.keys).length,key:os(o.keys),position:It.before,order:210});const i=t==="green"?(e.personas??[]).filter(o=>o.overview?.trim()):[];if(i.length&&a({comment:"人设概要",content:`<人设概要>
+${i.map(o=>`${o.name}：${o.overview.trim()}`).join(`
+`)}
+</人设概要>`,constant:!0,position:It.after,order:300}),t!=="description")for(const o of e.personas??[]){const c=os([o.name,...o.keys??[]]);a({comment:`人设·${o.name}`,content:o.text,constant:t!=="green",key:c,position:It.after,order:400}),a({comment:`人设补充·${o.name}`,content:o.extra,constant:t!=="green",key:c,position:It.after,order:410})}a({comment:"角色关系",content:e.relations,constant:!0,position:It.after,order:420});for(const o of e.npcs??[])a({comment:`NPC·${o.name}`,content:o.content,constant:!1,key:os([o.name,...o.keys??[]]),position:It.after,order:450});(e.routes??[]).forEach((o,c)=>{a({comment:`路线·${o.name}`,content:o.info,constant:!0,position:It.after,order:500,disable:c!==r})});for(const o of e.free??[]){const c=os(o.keys);a({comment:o.bare?o.name:`模块·${o.name}`,content:o.content,constant:o.light!=="green"||!c.length,key:c,position:It[o.position]??It.after,order:600})}{const o=cwzRuleOf(e);o&&a({comment:"状态栏输出规则",content:ia(o),constant:!0,position:4,depth:1,role:0,order:900})}return s.forEach((o,c)=>{o.bucket=o.order,o.order=c+1}),s}function ro(e){const t={entries:{}};return e.forEach((n,r)=>{t.entries[r]={...structuredClone(Ul),uid:r,displayIndex:r,key:n.key??[],comment:n.comment,content:n.content,constant:!!n.constant,order:n.order??100,position:n.position??It.after,depth:n.depth??4,role:n.role??0,excludeRecursion:!0,preventRecursion:!0,disable:!!n.disable}}),t}function Gl(e,t){const n=String(e||"新角色").replace(/[\\/:*?"<>|]/g,"").trim()||"新角色",r=new Set(t??[]);if(!r.has(n))return n;for(let s=2;s<1e3;s++)if(!r.has(`${n} (${s})`))return`${n} (${s})`;return`${n} ${Date.now()}`}function bn(e){const t=(e.routes??[]).map(s=>s.name),n=[...e.greetings??[]].filter(s=>s.text?.trim()),r=s=>{const a=t.indexOf(s.route);return a<0?t.length:a};return n.map((s,a)=>({...s,i:a})).sort((s,a)=>r(s)-r(a)||s.i-a.i)}function so(e,{worldName:t="",creator:n="",intro:r="",personaPlace:s="blue"}={}){const a=bn(e).map(c=>c.text.trim()),i=String(e.name||e.personas?.[0]?.name||e.concepts?.[e.pick]?.title||"新角色").trim(),o=e.quickCardFields??{};return{ch_name:i,description:[s==="description"?(e.personas??[]).flatMap(c=>[c.text?.trim(),c.extra?.trim()]).filter(Boolean).join(`
+
+`):"",o.description??""].filter(Boolean).join(`
+
+`),personality:o.personality??"",scenario:o.scenario??"",first_mes:a[0]??"",mes_example:o.mes_example??"",creator_notes:r,system_prompt:"",post_history_instructions:"",creator:n,character_version:"1.0",tags:(e.tags??[]).map(c=>c.name),talkativeness:"0.5",world:t,depth_prompt_prompt:"",depth_prompt_depth:"4",depth_prompt_role:"system",fav:"false",alternate_greetings:a.slice(1),extensions:"{}"}}function va(e,t){return typeof e=="string"?t(e):Array.isArray(e)?e.map(n=>va(n,t)):e&&typeof e=="object"?Object.fromEntries(Object.entries(e).map(([n,r])=>[n,va(r,t)])):e}var kf=e=>String(e??"").split(`
+`).map(t=>t.trim()?t.startsWith(">")?t:`> ${t}`:">").join(`
+`),Gn=`{{#标签}}【{{标签}}】{{/标签}}{{标题}}
+
+{{#作者}}-# 作者：**{{作者}}**{{/作者}}
+{{#授权}}-# {{授权}}{{/授权}}
+
+{{#题句}}{{题句|题句}}{{/题句}}
+
+┈┈┈┈ ୨୧ ┈┈┈┈
+
+## ✦ 简介
+
+{{简介}}
+
+{{#关于TA}}──── ⋆⋅✧⋅⋆ ────
+
+## 关于TA
+
+{{关于TA}}{{/关于TA}}
+
+{{#路线}}## 路线
+
+{{路线|引用}}{{/路线}}
+
+{{#内心想法}}⊹ ───── ⟡ ───── ⊹
+
+## 内心想法
+
+{{内心想法|引用}}
+{{#角色名}}> -# ——{{角色名}}{{/角色名}}{{/内心想法}}
+
+{{#使用说明}}┄┄┄┄ ☾ ┄┄┄┄
+
+## 使用说明
+
+{{使用说明}}{{/使用说明}}
+
+{{固定结尾}}`,Sf=["标签","标题","作者","授权","题句","简介","关于TA","路线","内心想法","角色名","使用说明","固定结尾"];function ao(e){const t=String(e??"");return!/\{\{\s*(?:简介|关于TA|题句|路线|内心想法)(?:\s*\|[^{}]+)?\s*\}\}/.test(t)}var Jl={引用:kf,小字:e=>String(e??"").split(`
+`).map(t=>t.trim()?`-# ${t}`:t).join(`
+`),题句:e=>String(e??"").split(`
+`).filter(t=>t.trim()).map((t,n)=>{const r=t.replace(/^>\s*/,"");return n===0&&/[A-Za-z]/.test(r)&&!/^\*/.test(r)?`> *${r}*`:`> ${r}`}).join(`
+`)};function Cf(e,t){let n=String(e??"");const r=s=>String(t[s]??"").trim()!=="";for(let s=0;s<10;s++){const a=n.replace(/\{\{#([^{}|]+?)\}\}([\s\S]*?)\{\{\/\1\}\}/g,(i,o,c)=>r(o.trim())?c:"");if(a===n)break;n=a}return n=n.replace(/\{\{\s*([^{}|\s]+)\s*(?:\|\s*([^{}\s]+)\s*)?\}\}/g,(s,a,i)=>{if(!(a in t))return s;const o=String(t[a]??"").trim();return i&&Jl[i]?Jl[i](o):o}),n.replace(/[ \t]+\n/g,`
+`).replace(/\n{3,}/g,`
+
+`).trim()}function Wl(e,{title:t="",tags:n=[],author:r="",license:s={},presetNote:a="",notes:i="",charName:o="",ending:c=""}={},p=Gn){const d=String(e.路线??"").trim(),m=[a?`**预设参考**：${a}`:"",i?`-# ${i}`:""].filter(Boolean).join(`
+`),g={标签:Zm(n).join("|"),标题:t,作者:r,授权:[["二传",s.repost],["二改",s.edit],["商用",s.commercial]].filter(([,D])=>D).map(([D,Q])=>`${D}：${Q}`).join("｜"),题句:String(e.题句??"").trim(),简介:String(e.简介??"").replace(/^\s*\|\|\s*无\s*\|\|\s*$/gm,"").trim(),关于TA:String(e.关于TA??"").trim(),路线:/^（?(?:无|省略|没有)/.test(d)?"":d,内心想法:String(e.内心想法??"").trim(),角色名:o,使用说明:m,固定结尾:String(c??"").trim(),致谢:String(c??"").trim()},y=p||Gn;let E=Cf(y,g);const P=String(c??"").trim();return P&&!/\{\{\s*(固定结尾|致谢)/.test(y)&&(E=`${E.trimEnd()}
+
+${P}`),E}function If(e){return String(e??"").split(`
+`).map(t=>t.replace(/^\s*(?:(?:[-*•]|\d+[.、)]|标题[一二三四五12345]?[:：])\s*)+/,"").replace(/^[《「“"]|[》」”"]$/g,"").trim()).filter(Boolean).slice(0,5)}var xa={persona:"主要人设",world:"世界观",npc:"NPC",routes:"玩家与路线",tone:"基调与规则",other:"原卡内容（其他）"},Af={persona:"persona",world:"world",npc:"npc",routes:"routes",tone:"tone",other:"existing"};function Vl(e,{charName:t=""}={}){const n=String(e.comment??""),r=String(e.content??"").slice(0,400),s=(e.key??[]).map(String),a=i=>i.test(n);return a(/文风|基调|规则|禁止|禁用|写作|输出|格式|指令|要求|思维链|COT|cot|系统|防|注意事项|叙事|风格/)?"tone":a(/路线|开局|玩家|用户|user|\{\{user\}\}|<user>|身份卡|你的身份/i)||/<玩家信息>|〔user〕身份|<user>身份|\{\{user\}\}身份/.test(r)?"routes":t&&(n.includes(t)||s.includes(t))&&!a(/npc|配角/i)||a(/人设|主角|角色详情|char\b|\{\{char\}\}/i)||/角色详情|矛盾轴|行为指导/.test(r)?"persona":a(/npc|配角|路人|人物|角色|成员|家人|父|母|兄|姐|弟|妹|师|朋友|仆|侍/i)?"npc":a(/世界|设定|地点|地图|势力|组织|国家|王国|帝国|城|镇|村|宗门|门派|学院|公司|家族|阵营|历史|背景|种族|魔法|体系|货币|科技|规矩|制度|风俗|节日|物品|道具/)?"world":!e.constant&&/^[\u4e00-\u9fa5A-Za-z·]{2,6}$/.test(n)&&s.some(i=>i===n||n.includes(i))&&/身份|性格|外貌|年龄|性别|说话/.test(r)||/身份[:：]|性格[:：]|外貌[:：]|年龄[:：]|personality|appearance|\bage\b/i.test(r)&&!e.constant?"npc":"world"}var Ef=[[/^基调与规则$/,"tone"],[/^世界观$/,"world"],[/^世界观·(.+)$/,"worldExtra"],[/^人设概要$/,"overview"],[/^人设·(.+)$/,"persona"],[/^人设补充·(.+)$/,"personaExtra"],[/^角色关系$/,"relations"],[/^NPC·(.+)$/,"npc"],[/^路线·(.+)$/,"route"],[/^模块·(.+)$/,"free"]];function Tf(e){const t={entries:{}};return(e?.entries??[]).forEach((n,r)=>{const s=Number.isInteger(n.id)?n.id:r;t.entries[s]={...structuredClone(Ul),uid:s,key:n.keys??[],keysecondary:n.secondary_keys??[],comment:n.comment??n.name??"",content:n.content??"",constant:!!n.constant,order:n.insertion_order??100,position:n.extensions?.position??(n.position==="before_char"?0:1),disable:n.enabled===!1,depth:n.extensions?.depth??4}}),t}function Nf(e,t){return{name:e,entries:Object.values(t?.entries??{}).map(n=>({id:n.uid,keys:n.key??[],secondary_keys:n.keysecondary??[],comment:n.comment??"",content:n.content??"",constant:!!n.constant,selective:n.selective??!0,insertion_order:n.order??100,enabled:!n.disable,position:n.position==0?"before_char":"after_char",use_regex:!0,extensions:{position:n.position,display_index:n.displayIndex??n.uid,depth:n.depth??4,probability:n.probability??100,useProbability:n.useProbability??!0,selectiveLogic:n.selectiveLogic??0,role:n.role??0,exclude_recursion:!!n.excludeRecursion,prevent_recursion:!!n.preventRecursion}}))}}function Yl(e,t,n=""){const r=e?.data??e??{},s=String(r.name??e?.name??"").trim()||"未命名",a=hn();a.name=s,a.nameAuto=!1;const i=t??(r.character_book?Tf(r.character_book):{entries:{}}),o={},c=[],p=[];for(const m of Object.values(i.entries??{}).sort((g,y)=>(g.displayIndex??g.uid)-(y.displayIndex??y.uid))){const g=String(m.comment??"").trim(),y=String(m.content??"");let E=null,P=null;for(const[Q,z]of Ef)if(P=g.match(Q),P){E=z;break}const D=(m.key??[]).filter(Q=>Q!==P?.[1]);if(E==="tone")a.tone=y;else if(E==="relations")a.relations=y;else if(E==="world")a.world.main=y;else if(E==="worldExtra")a.world.extra.push({name:P[1],keys:D,content:y});else if(E==="overview")for(const Q of y.replace(/<\/?人设概要>/g,"").split(`
+`)){const z=Q.match(/^\s*([^：:]{1,20})[：:]\s*(.+)$/);z&&(o[z[1].trim()]=z[2].trim())}else E==="persona"?a.personas.push({name:P[1],keys:D,overview:"",text:y}):E==="personaExtra"?p.push({name:P[1],content:y,e:m,comment:g}):E==="npc"?a.npcs.push({name:P[1],keys:D,content:y}):E==="route"?a.routes.push({name:P[1],user:"",period:"",info:y,orig:!0}):E==="free"?a.free.push({name:P[1],desc:"",content:y,light:m.constant?"blue":"green",keys:D,position:m.position===0?"before":"after"}):c.push({uid:m.uid,comment:g||`条目 ${m.uid}`,key:m.key??[],content:y,constant:!!m.constant,disable:!!m.disable,position:m.position??1,order:m.order??100,cat:Vl({...m,comment:g},{charName:s})})}for(const m of a.personas)m.overview=o[m.name]??"";for(const m of p){const g=a.personas.find(y=>y.name===m.name);g?g.extra=m.content:c.push({uid:m.e.uid,comment:m.comment,key:m.e.key??[],content:m.content,constant:!!m.e.constant,disable:!!m.e.disable,position:m.e.position??1,order:m.e.order??100,cat:"persona"})}const d=String(r.description??"");return!a.personas.length&&d.trim()&&a.personas.push({name:s,keys:[],overview:"",text:d,fromDescription:!0}),a.tags=(r.tags??[]).map(m=>({dim:"other",name:String(m)})),a.existing={avatar:e?.avatar??"",name:s,world:n,hadWorld:!!n,fields:{description:a.personas.some(m=>m.fromDescription)?"":d,personality:String(r.personality??""),scenario:String(r.scenario??""),mes_example:String(r.mes_example??"")},entries:c,greetings:[r.first_mes,...r.alternate_greetings??[]].map(m=>String(m??"")).filter(m=>m.trim()),loaded:Date.now()},a.pick=-1,a}function Pf(e){const t=e.existing;if(!t)return"";const n=(i,o)=>{const c=String(i??"").trim();return c.length>o?`${c.slice(0,o)}……`:c},r=[`卡名：${t.name}`],s=(e.personas??[]).map(i=>i.overview?`${i.name}：${i.overview}`:`${i.name}：${n(i.text,600)}`).join(`
+`);s&&r.push(`主要角色：
+${s}`),t.fields.description&&r.push(`角色描述：${n(t.fields.description,600)}`),t.fields.scenario&&r.push(`场景：${n(t.fields.scenario,300)}`),e.world?.main&&r.push(`世界观：${n(e.world.main,500)}`);const a=(t.entries??[]).filter(i=>!i.disable).slice(0,6).map(i=>`${i.comment}：${n(i.content,200)}`).join(`
+`);return a&&r.push(`其他设定：
+${a}`),t.greetings?.[0]&&r.push(`开场白节选：${n(t.greetings[0],300)}`),r.join(`
+`)}function Of(e,t,{personaPlace:n="blue"}={}){const r=structuredClone(e??{entries:{}});r.entries??(r.entries={});for(const p of t.existing?.entries??[]){const d=r.entries[p.uid];d&&(d.content=p.content,d.disable=!!p.disable)}const s={...t,personas:(t.personas??[]).filter(p=>!p.fromDescription)},a=cs(s,{personaPlace:n}),i=new Map(Object.values(r.entries).map(p=>[p.comment,p]));let o=Math.max(-1,...Object.keys(r.entries).map(Number).filter(Number.isFinite))+1;const c=Object.values(r.entries).some(p=>String(p.comment).startsWith("路线·")&&!p.disable);for(const p of a){const d=i.get(p.comment);if(d){d.content=p.content,p.key?.length&&(d.key=[...new Set([...d.key??[],...p.key])]);continue}const m=p.comment.startsWith("路线·"),g=ro([{...p,disable:m&&c||!!p.disable}]).entries[0],y=p.comment.includes("·")?p.comment.split("·")[0]+"·":p.comment,E=Object.values(r.entries),P=E.filter(D=>String(D.comment??"").startsWith(y)).map(D=>Number(D.order)||0);g.order=(P.length?Math.max(...P):Math.max(0,...E.map(D=>Number(D.order)||0)))+1,g.uid=o,g.displayIndex=o,r.entries[o]=g,o++}return r}function Kl(e){const t=e.existing,n=(e.personas??[]).find(s=>s.fromDescription),r=[...t.greetings??[],...bn(e).map(s=>s.text)].map(s=>String(s).trim()).filter(Boolean);return{description:n?n.text:t.fields.description,personality:t.fields.personality,scenario:t.fields.scenario,mes_example:t.fields.mes_example,first_mes:r[0]??"",alternate_greetings:r.slice(1)}}function io(e,{personaPlace:t="blue",activeRoute:n=0,scan:r}={}){const s=e.existing,a=s?{...e,personas:(e.personas??[]).filter(E=>!E.fromDescription)}:e,i=cs(a,{personaPlace:t,activeRoute:n}),c=[...(s?.entries??[]).map(E=>({...E,orig:!0})),...i].filter(E=>!E.disable&&String(E.content??"").trim()),p=E=>E.constant||r!=null&&(E.key??[]).some(P=>String(P).trim()&&r.includes(String(P).trim())),d=c.filter(p).sort((E,P)=>(E.order??100)-(P.order??100)),m=E=>({label:E.comment,text:String(E.content).trim(),key:E.key??[]}),g=[],y=(E,P)=>{String(P??"").trim()&&g.push({label:E,text:String(P).trim()})};if(s){const E=Kl(e);y("角色描述",E.description),y("性格",E.personality),y("场景",E.scenario)}else y("角色描述",so(e,{personaPlace:t}).description);return{before:d.filter(E=>Number(E.position)===0).map(m),card:g,after:d.filter(E=>Number(E.position)!==0).map(m),green:c.filter(E=>!E.constant).map(m)}}function Df(e){return[...e.before,...e.card,...e.after].map(t=>t.text).join(`
+
+`)}function Bf(e){const t=String(e??"");if(!t.trim())return 0;const n=(t.match(/[　-〿㐀-鿿豈-﫿＀-￯]/g)??[]).length;return Math.ceil(n*1+(t.length-n)/4)}function Mf(e,t){const n=new Map,r=new Set;let s=null;const a=()=>{clearTimeout(s),s=setTimeout(t,120)};function i(p){const d=e();typeof d!="function"||r.has(p)||(r.add(p),Promise.resolve().then(()=>d(p)).then(m=>{Number.isFinite(m)&&(n.set(p,m),n.size>400&&n.delete(n.keys().next().value))}).catch(()=>{}).finally(()=>{r.delete(p),a()}))}function o(p,{exact:d=!0}={}){const m=String(p??"");return m.trim()?n.has(m)?{n:n.get(m),exact:!0}:(d&&i(m),{n:Bf(m),exact:!1}):{n:0,exact:!0}}function c(p,d){let m=0,g=!0;for(const y of p){const E=o(y,d);m+=E.n,g&&(g=E.exact)}return{n:m,exact:g}}return{count:o,sum:c}}var Xl=({n:e,exact:t})=>`${t?"":"约 "}${e.toLocaleString("en-US")} token`,Mt=e=>String(e??"").replace(/\r\n/g,`
+`).trim(),Zl=["description","personality","scenario","mes_example"],Lf={description:"角色描述",personality:"性格",scenario:"场景",mes_example:"对话示例"};function ur(e,t){const n={};for(const r of Object.values(t?.entries??{}))n[`uid:${r.uid}`]=String(r.content??""),r.comment&&(n[`c:${r.comment}`]=String(r.content??""));return{fields:Object.fromEntries(Zl.map(r=>[r,String(e?.[r]??"")])),greetings:[e?.first_mes,...e?.alternate_greetings??[]].map(r=>String(r??"")).filter(r=>r.trim()),entries:n}}function $l(e,{personaPlace:t="blue"}={}){const n=e.existing,r=!!n?.fromImport;let s;if(r)s={description:so(e,{personaPlace:t}).description};else{const d=Kl(e);s=Object.fromEntries(Zl.map(m=>[m,d[m]??""]))}const a=r?e:{...e,personas:(e.personas??[]).filter(d=>!d.fromDescription)},i=r?t:t==="description"?"blue":t,o=cs(a,{personaPlace:i}),c=[...(n?.entries??[]).map(d=>({key:`uid:${d.uid}`,label:d.comment,content:String(d.content??""),uid:d.uid})),...o.map(d=>({key:`c:${d.comment}`,label:d.comment,content:d.content,comment:d.comment}))];let p=[...n?.greetings??[]];if(r){p=[];for(const d of e.greetings??[])Number.isInteger(d.slot)&&(p[d.slot]=String(d.text??""))}return{fields:s,origGreetings:p,newGreetings:ya(e).map(d=>d.text),entries:c,place:i,view:a}}function ya(e){const t=(e.routes??[]).map(r=>r.name),n=r=>{const s=t.indexOf(r.route);return s<0?t.length:s};return(e.greetings??[]).map((r,s)=>({g:r,i:s})).filter(r=>String(r.g.text??"").trim()&&!Number.isInteger(r.g.slot)).sort((r,s)=>n(r.g)-n(s.g)||r.i-s.i).map(r=>r.g)}function oo(e,t,n){return n===void 0?"new":Mt(e)===Mt(n)?"same":t===void 0?"unknown":Mt(e)===Mt(t)?"theirs":Mt(n)===Mt(t)?"mine":"conflict"}function _l(e,t,n){const r=[],s=a=>{a.status!=="same"&&r.push({...a,checked:a.status==="mine"||a.status==="new"})};for(const a of Object.keys(e.fields)){const i=e.fields[a];!Mt(i)&&!Mt(n.fields[a])||s({id:`f:${a}`,kind:"field",field:a,label:Lf[a]??a,mine:i,base:t?.fields?.[a],theirs:n.fields[a],status:oo(i,t?.fields?.[a],n.fields[a])})}e.origGreetings.forEach((a,i)=>{const o=n.greetings[i],c=t?.greetings?.[i];let p=o===void 0&&!Mt(a)?"same":oo(a,c,o);p==="new"&&!Mt(a)&&(p="same"),s({id:`g:${i}`,kind:"greet",index:i,label:i===0?"主开场白":`开场白 ${i+1}`,mine:a,base:c,theirs:o,status:p,deleted:!Mt(a)})}),e.newGreetings.forEach((a,i)=>s({id:`n:${i}`,kind:"newGreet",index:i,label:`新开场白 ${i+1}`,mine:a,theirs:void 0,status:"new"}));for(const a of e.entries){const i=n.entries[a.key],o=t?.entries?.[a.key];s({id:`e:${a.key}`,kind:"entry",key:a.key,label:`世界书·${a.label}`,mine:a.content,base:o,theirs:i,status:oo(a.content,o,i)})}return r}function qf(e,{theirsCard:t,theirsWorld:n,clean:r,mine:s}){const a=new Set(e.filter(P=>P.checked).map(P=>P.id)),i={};for(const P of e)P.kind==="field"&&a.has(P.id)&&(i[P.field]=P.mine);const o=[t.first_mes,...t.alternate_greetings??[]].map(P=>String(P??""));for(const P of e)P.kind==="greet"&&a.has(P.id)&&(o[P.index]=P.mine);const c=e.filter(P=>P.kind==="newGreet"&&a.has(P.id));for(const P of c)o.push(P.mine);const p=o.filter(P=>String(P??"").trim());e.some(P=>(P.kind==="greet"||P.kind==="newGreet")&&a.has(P.id))&&(i.first_mes=p[0]??"",i.alternate_greetings=p.slice(1));const m=structuredClone(n??{entries:{}});m.entries??(m.entries={});const g=Of(n??{entries:{}},s.view,{personaPlace:s.place}),y=(P,D)=>Object.values(P.entries).find(Q=>Q.comment===D);let E=!1;for(const P of e){if(P.kind!=="entry"||!a.has(P.id))continue;if(E=!0,P.key.startsWith("uid:")){const M=P.key.slice(4);m.entries[M]&&(m.entries[M].content=P.mine);continue}const D=P.key.slice(2),Q=y(g,D);if(!Q)continue;const z=y(m,D);if(z)z.content=Q.content,z.key=Q.key;else{const M=Math.max(-1,...Object.keys(m.entries).map(Number).filter(Number.isFinite))+1;m.entries[M]={...structuredClone(Q),uid:M,displayIndex:M}}}return{cardData:i,world:m,worldChanged:E,finalGreetings:p,written:c}}function jf(e,t,n){const r=structuredClone(n);for(const s of e)s.checked||s.status!=="mine"||(s.kind==="field"&&(r.fields[s.field]=t?.fields?.[s.field]??s.theirs),s.kind==="entry"&&(r.entries[s.key]=t?.entries?.[s.key]??s.theirs),s.kind==="greet"&&(r.greetings[s.index]=t?.greetings?.[s.index]??s.theirs));return r}var ep=[{name:"天性",qs:["他的天性是什么样的？","他天生擅长什么？","他天生对什么敏感？","他一个人待着的时候是什么状态？","他的脾气是怎样的？"]},{name:"成长",qs:["他是在什么样的家里长大的？","谁把他带大？他和那个人的关系怎么样？","童年的哪段经历对他影响最大？改变了他什么？","小时候他最喜欢做什么？现在还做吗？","成年以前，对他最重要的人是谁？"]},{name:"内心",qs:["他遇到过最羞耻的事是什么？","他害怕什么？","他最得意的一件事是什么？","他后悔过什么吗？","他心里最在乎的是什么？"]},{name:"日常",qs:["什么事会让他开心？","他平时怎么过一天？","他说话是什么样子？","他相信什么？","他会怎样去爱一个人？又怎样接受别人的爱？"]},{name:"他和〔user〕",qs:["他和〔user〕是怎么认识的？","他第一次见到〔user〕时是什么印象？","他现在怎么看〔user〕？","〔user〕身上的哪一点让他记住了？","他和〔user〕在一起时，和平时有什么不一样？","他在〔user〕面前会做哪些平时不做的事？","他对〔user〕有没有没说出口的话？","他和〔user〕在哪些事上想法不一样？","他希望和〔user〕变成什么关系？","〔user〕做什么会让他高兴，做什么会让他难受？"]}],co=ep.flatMap((e,t)=>e.qs.map(n=>({q:n,group:t})));function tp(e){const t=Array.isArray(e.deep)?e.deep:[];if(t.length!==co.length||t.some((n,r)=>n.q!==co[r].q)){const n=new Map(t.map(r=>[r.q,r.a]));e.deep=co.map(r=>({q:r.q,a:n.get(r.q)??""}))}return e.deep}function lo(e){return(e?.deep??[]).filter(t=>String(t.a??"").trim()).map(t=>`${t.q}
+→ ${String(t.a).trim()}`).join(`
+`)}function Qf(e,t){const n=String(e??"").split(`
+`),r=String(t??"").split(`
+`);if(n.join(`
+`)===r.join(`
+`))return[];let s=0;for(;s<n.length&&s<r.length&&n[s]===r[s];)s++;let a=n.length,i=r.length;for(;a>s&&i>s&&n[a-1]===r[i-1];)a--,i--;const o=n.slice(s,a),c=r.slice(s,i);if(o.length*c.length>25e4)return[{before:o.join(`
+`),after:c.join(`
+`)}];const p=o.length,d=c.length,m=Array.from({length:p+1},()=>new Uint16Array(d+1));for(let Q=p-1;Q>=0;Q--)for(let z=d-1;z>=0;z--)m[Q][z]=o[Q]===c[z]?m[Q+1][z+1]+1:Math.max(m[Q+1][z],m[Q][z+1]);const g=[];let y=null;const E=()=>{y&&(g.push({before:y.before.join(`
+`),after:y.after.join(`
+`)}),y=null)};let P=0,D=0;for(;P<p||D<d;){if(P<p&&D<d&&o[P]===c[D]){E(),P++,D++;continue}y??(y={before:[],after:[]}),D>=d||P<p&&m[P+1][D]>=m[P][D+1]?y.before.push(o[P++]):y.after.push(c[D++])}return E(),g.filter(Q=>Q.before.trim()!==Q.after.trim())}var Se=e=>Array.isArray(e)?e:e==null||e===""?[]:[e],T=e=>e==null?"":String(e).trim();function Rf(e){const t=Se(e?.lineup).map(r=>({name:T(r?.name)||"未命名",identity:T(r?.identity),archetype:Se(r?.archetype).map(T).filter(Boolean)}));let n=Se(e?.routes).map(r=>({name:T(r?.name)||"主线",user:T(r?.user),period:T(r?.period)}));return n.length||(n=[{name:"主线",user:T(Se(e?.user)[0]),period:""}]),{title:T(e?.title),lineup:t,user:Se(e?.user).map(T).filter(Boolean),relation:T(e?.relation),tension:{core:T(e?.tension?.core),expect:Se(e?.tension?.expect).map(T).filter(Boolean)},complexity:["简单","中等","复杂"].includes(T(e?.complexity))?T(e.complexity):"简单",reason:T(e?.reason),routes:n,npcs:Number.isFinite(Number(e?.npcs))?Math.max(0,Math.min(8,Number(e.npcs))):2,tags:Se(e?.tags).map(T).filter(Boolean)}}function ka(e){const t={enabled:e?.greetingExtract!==!1,start:String(e?.greetingExtractStart??"<content>").trim(),end:String(e?.greetingExtractEnd??"</content>").trim()};if(t.enabled&&(!t.start||!t.end))throw new Error("先在“开场白 → 正文提取范围”填好开始和结束标记，或取消正文提取。");return t}function Hf(e){const t=ka(e);return t.enabled?`
+
+【本次开场白输出格式，以此处为准】
+每个开场白各用一组下列标记包住，只有标记内部的正文会被保存。局部改写时，标记内部只写替换片段。
+<<<开场白>>>
+${t.start}
+开场白正文
+${t.end}
+标记必须完整输出。标题、说明及其他附加内容放在这组标记之外。`:""}function Sa(e,t){const n=c=>c.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),r=String(t?.greetingExtractStart??"<content>").trim(),s=String(t?.greetingExtractEnd??"</content>").trim(),a=new Set(["content"]),i=r.match(/^<([A-Za-z][\w:.-]*)>$/);i&&a.add(i[1].toLowerCase());let o=String(e??"");for(const c of a)o=o.replace(new RegExp(`<\\/?${n(c)}(?:\\s+[^<>]*?)?\\s*\\/?>`,"gi"),"");if(!i)for(const c of[r,s])c&&(o=o.split(c).join(""));return o.replace(/^[ \t]*\n/,"").replace(/\n[ \t]*$/,"").replace(/\n{3,}/g,`
+
+`).trim()}function np(e,t){return zf(String(e??"").replace(/<开场构思>[\s\S]*?<\/开场构思>/g,""),t).map(n=>Sa(String(n).replace(/<\/?开场构思>/g,""),t))}function zf(e,t){const n=ka(t),r=(z,M)=>{const _=wn(z,{clean:M}),ce=_.blocks.filter(V=>V.type==="开场白");return ce.length?ce.map(V=>V.body.trim()):[M?_.lead:z.trim()]};if(!n.enabled){const z=r(String(e??""),!0).filter(Boolean);if(!z.length)throw new Error("回复里没有开场白正文，已有开场白未改动。");return z}let s=String(e??"");const a=/^(?:think(?:ing)?|plann?ing|plan|analysis|reasoning)$/i,i=n.start.match(/^<([A-Za-z][\w:.-]*)>$/);(!i||!a.test(i[1]))&&(s=s.replace(/<(think(?:ing)?|plann?ing|plan|analysis|reasoning)(?:\s[^<>]*?)?>[\s\S]*?(?:<\/\1\s*>|$)/gi,""));const o=z=>z.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),c=i&&n.end.toLowerCase()===`</${i[1].toLowerCase()}>`,p=n.start===n.end,d=c?`<${o(i[1])}(?:\\s+[^<>]*?)?\\s*>`:o(n.start),m=c?`</${o(i[1])}\\s*>`:o(n.end),g=new RegExp(`(${d})|(${m})`,c?"gi":"g"),y=[];let E=0,P=0,D="";for(const z of s.matchAll(g))(p?E===0:!!z[1])?(E===0?D="":D+=s.slice(P,z.index),E++,P=z.index+z[0].length):E>0&&(D+=s.slice(P,z.index),E--,P=z.index+z[0].length,E===0&&y.push(D.trim()));if(E||!y.length)throw new Error(`没有找到完整的 ${n.start} … ${n.end} 正文区域，已有开场白未改动。请检查“开场白 → 正文提取范围”。`);const Q=y.flatMap(z=>r(z,!1));if(!Q.length||Q.some(z=>!z))throw new Error("提取到的正文区域为空，已有开场白未改动。");return Q}var vn=new WeakSet,xn=null;function po(e){const t=xn;if(t){t.text=String(e??"");try{fr.get(t.record)?.stream?.(t.text)}catch{}}}function Ca(e,t,n){const r=Math.max(0,e.visualViewport?.offsetTop||0);let s=Number(t)||e.innerHeight;e.innerHeight>0&&(s=Math.min(s,Math.max(0,e.innerHeight-r)));const a=e.navigator?.virtualKeyboard?.boundingRect,i=e.visualViewport?.width||e.innerWidth,o=Math.abs((e.visualViewport?.scale||1)-1)>=.05,c=a?.y??a?.top,p=!o&&a?.height>0&&a.width>=i*.6&&Number.isFinite(c)&&c>=r&&c+a.height>=r+s;p&&(s=Math.min(s,c-r));const d=!!p||n-s>Math.max(120,n*.18);return{height:s,guessed:!1,detected:d}}var rp={home:"目录",load:"改已有的卡",existing:"原卡内容",au:"AU 内核与映射",idea:"一句话构想",tags:"标签",persona:"主要人设",world:"世界观",npc:"NPC",routes:"玩家与路线",tone:"基调与规则",greet:"开场白",play:"试玩",check:"质检",import:"导入酒馆",intro:"简介",prompts:"提示词",settings:"设置",about:"关于"},Ia={concept:"构想与短篇",personas:"主要人设",relations:"人物关系",world:"世界观",npcs:"NPC",routes:"玩家与路线",tone:"基调与规则",free:"自由模块",other:"其他原卡条目",brief:"作者定稿"};function yn(e,t){return e.greetingContext?.parts?.[t]!==!1}function mr(e){return e.greetingContext?.useNotes===!1?"":String(e.greetingContext?.notes??"").trim()}function Aa(e,t){e.pageDialogues??={},Object.prototype.hasOwnProperty.call(e.pageDialogues,t)||Object.defineProperty(e.pageDialogues,t,{value:{messages:[],input:"",open:!1,use:!0},enumerable:!0,configurable:!0,writable:!0});const n=e.pageDialogues[t];return Array.isArray(n.messages)||(n.messages=[]),n.use!==!1&&(n.use=!0),n}function Jn(e){return(e?.messages??[]).filter(t=>(t.role==="user"||t.role==="assistant")&&typeof t.text=="string"&&t.text.trim())}function Ff(e){return Jn(e).map(t=>`${t.role==="user"?"作者":"AI"}：${t.text}`).join(`
+
+`)}function Zt(e,t,n=t){const r=e.pageDialogues?.[t];return r?.use===!1||!Jn(r).some(s=>s.role==="user")?"":`
+
+【${n}页的创作对话】
+以下是作者针对本页的讨论。执行作者明确提出的要求；作者后来纠正的内容以新说法为准。AI 的建议只有在作者采纳后才成为设定。问句、引用和被否定的例子不等于写作要求。按本次任务的格式输出正文，不复述对话。
+${Ff(r)}`}function Uf(e){return`你正在和作者讨论「${e}」页面的内容。结合当前页面已有的文字和完整对话，直接回答作者这一次的问题，帮助作者决定怎么写、怎么改。作者已经说明的偏好继续沿用，不重复盘问。作者让你写时就写；只问原因或讨论方向时，先回应这个问题。没有依据的设定应当作为建议提出，不擅自视为定稿。当前调用只会在对话区显示回复，不能操作页面或改正文，不要声称已经保存、替换、应用或生成到正文里。作者要写入正文时，说明用本页原有的生成或修改按钮即可。用中文自然交谈，避免机械列规则和无关的例子。`}function gt(e,t=3e4){const n=typeof e=="string"?e:JSON.stringify(e,null,2);return n.length>t?n.slice(0,t)+`
+（本页资料较长，此处省略后文。）`:n}async function uo(e,t=!1){const n=Aa(e.owner,e.key);if(e.busy()||vn.has(n))return;const r=String(n.input??"").trim();if(!t&&!r||t&&Jn(n).at(-1)?.role!=="user")return;const s=e.context();return e.task(async()=>{t||(n.messages.push({role:"user",text:r}),n.input=""),n.error="",n.open=!0,vn.add(n),e.save(),e.render();const a=Jn(n).map(i=>({role:i.role,content:i.text}));xn={record:n,text:""};try{const i=await e.request({system:Uf(e.label)+(e.systemExtra?`
+${e.systemExtra}`:"")+`
+
+【当前页面资料】
+`+s,messages:a});if(e.aborted?.())throw new Error("已停止");const o=Un(String(i??""));if(!o)throw new Error("AI 没有回复，可以重试上一条。");n.messages.push({role:"assistant",text:o})}catch(i){throw n.error=String(i?.message??i),i}finally{xn?.record===n&&(xn=null),vn.delete(n),e.save()}})}function sp(e,t){const n=e.ownerDocument,r=(s,a)=>{const i=/\*\*([^*]+)\*\*|`([^`]+)`/g;let o=0,c;for(;c=i.exec(a);){c.index>o&&s.append(n.createTextNode(a.slice(o,c.index)));const p=n.createElement(c[1]!==void 0?"b":"code");p.textContent=c[1]??c[2],s.append(p),o=c.index+c[0].length}o<a.length&&s.append(n.createTextNode(a.slice(o)))};String(t).split(`
+`).forEach((s,a,i)=>{if(/^\s*(-{3,}|\*{3,}|_{3,})\s*$/.test(s)){e.append(n.createElement("hr"));return}if(/^\s*<<<\s*开场白\s*>>>\s*$/.test(s)){const g=n.createElement("span");g.className="cwz-gmark";g.textContent="开场白";e.append(g);return}const o=s.match(/^\s*#{1,6}\s+(.*)$/);if(o){const c=n.createElement("b");r(c,o[1]),e.append(c)}else r(e,s);a<i.length-1&&e.append(n.createTextNode(`
+`))})}function Gf(e,t,n){const r=t.messages.slice(n+1).filter(a=>typeof a.text=="string"&&a.text.trim()).length;if(r&&!e.confirm(`重来这一条会删掉它后面的 ${r} 条对话，继续吗？`))return;const s=t.messages.slice(0,n);if(s.filter(a=>typeof a.text=="string"&&a.text.trim()).at(-1)?.role!=="user"){t.error="这一条前面没有你的话，没法重来。可以直接删掉。",e.render();return}return t.messages=s,t.error="",e.save(),uo(e,!0)}var fr=new Map;function mo(e){const t=e.document??it,n=Aa(e.owner,e.key),r=Jn(n),s=r.at(-1),a=(m,g,y)=>{const E=t.createElement(m);return g&&(E.className=g),y!==void 0&&(E.textContent=y),E},i=a("button","cw-dialogue cw-dialogue-launch");i.type="button",i.dataset.dialogueKey=e.key,i.setAttribute("aria-label",`打开和 AI 的对话：${e.label}`);const o=a("span","cw-dialogue-launch-title",`和 AI 聊聊 · ${e.label}${r.length?`（${r.length} 条）`:""}`),c=vn.has(n)?"正在回复……":s?`${s.role==="user"?"你":"AI"}：${s.text.replace(/\s+/g," ").slice(0,40)}`:e.applies===!1?"可以问这一页怎么用":"聊过的要求会带进本页的生成和修改",p=a("span","cw-dialogue-launch-sub",(e.applies===!1?"":n.use===!1?"未发送本页对话 · ":"已开启发送 · ")+c);i.append(o,p,a("span","cw-dialogue-launch-arrow","›")),i.addEventListener("click",()=>Jf(e));const d=fr.get(n);return d&&d.update(e),i}function Jf(e){const t=e.document??it,n=t.defaultView||window,r=Aa(e.owner,e.key);if(fr.has(r))return fr.get(r).update(e);let s=e,a=!1;const i=e.modal?[...t.querySelectorAll("dialog[open]")].at(-1):null,o=(ie,he,Ie)=>{const Ae=t.createElement(ie);return he&&(Ae.className=he),Ie!==void 0&&(Ae.textContent=Ie),Ae},c=o(e.modal?"dialog":"div",e.modal?"cw-chat-sheet cw-chat-modal":"cw-chat-sheet");c.setAttribute("role","dialog"),c.setAttribute("aria-label",`和 AI 聊聊：${s.label}`);const p=o("div","cw-chat-head"),d=o("button","cw-chat-back","‹ 返回");d.type="button",d.setAttribute("aria-label","关闭对话");const m=o("b","cw-chat-title"),g=o("details","cw-chat-more"),y=o("summary","","⋯");y.setAttribute("aria-label","更多");const E=o("div","cw-chat-more-body");g.append(y,E),p.append(d,m,g);const P=o("div","cw-chat-context"),D=o("div","cw-chat-log");D.setAttribute("role","log"),D.setAttribute("aria-live","polite");const Q=o("div","cw-chat-compose"),z=o("textarea","cw-dialogue-input cw-chat-input");z.rows=1,z.placeholder="发消息……",z.setAttribute("aria-label","对话输入");const M=o("button","cw-chat-send","↑");M.type="button",M.setAttribute("aria-label","发送"),Q.append(z,M),c.append(p,P,D,Q);const _=()=>{z.style.height="auto",z.style.height=`${Math.min(z.scrollHeight,140)}px`},ce=()=>D.scrollHeight-D.scrollTop-D.clientHeight<40,V=(ie=!1)=>{const he=vn.has(r),Ie=s.busy()||he;m.textContent=s.label;const Ae=ie||ce();D.replaceChildren();const _e=Jn(r);if(_e.length||D.append(o("p","cw-chat-empty",s.applies===!1?"可以问这一页怎么用。":"说说这一页想怎么写，或者直接指出哪里不对。聊过的要求会带进本页的生成和修改。")),r.messages.forEach((Te,qe)=>{if(!((Te.role==="user"||Te.role==="assistant")&&typeof Te.text=="string"&&Te.text.trim()))return;const nn=o("div",`cw-chat-msg cw-chat-${Te.role}`),rn=o("div","cw-chat-bubble");sp(rn,Te.text);const At=o("div","cw-chat-tools"),et=(Mo,xs,Ua)=>{const En=o("button","cw-dialogue-tool",Mo);return En.type="button",En.setAttribute("aria-label",xs),En.title=xs,En.disabled=Ie,En.addEventListener("click",()=>{!s.busy()&&!vn.has(r)&&Ua()}),En};Te.role==="assistant"&&At.append(et("重来","不满意，让 AI 重新回复这一条",()=>Gf(Ce(),r,qe))),Te.role==="assistant"&&typeof s.extract=="function"&&(s.extract(Te.text)||[]).forEach(ex=>{const bt=et(ex.label,ex.title||ex.label,()=>ex.run(Te.text));bt.classList.add("cwz-extract");At.append(bt)}),At.append(et("删除","删掉这一条",()=>{r.messages.splice(qe,1),r.error="",s.save(),s.render(),V()})),nn.append(rn,At),D.append(nn)}),he){const Te=xn?.record===r?xn.text:"";D.append(Te?R(Te):o("p","cw-chat-typing","AI 正在回复……"))}if(r.error){const Te=o("div","cw-chat-error",r.error);if(_e.at(-1)?.role==="user"&&!he){const qe=o("button","cw-dialogue-tool","重试");qe.type="button",qe.addEventListener("click",()=>uo(Ce(),!0)),Te.append(" ",qe)}D.append(Te)}if(M.disabled=Ie||!z.value.trim(),E.replaceChildren(),P.replaceChildren(),P.hidden=s.applies===!1,s.applies!==!1){const Te=o("label","cw-chat-use"),qe=o("input");qe.type="checkbox",qe.checked=r.use!==!1,qe.addEventListener("change",()=>{r.use=qe.checked,s.save(),s.render()}),qe.setAttribute("aria-label","生成和修改时发送本页对话"),Te.append(qe,t.createTextNode(" 生成和修改时发送本页对话"));const nn=o("span","cw-chat-context-status",r.use===!1?"已关闭":`已开启 · ${_e.length} 条`);P.append(Te,nn)}s.notice&&P.append(o("div","cw-chat-source-note",s.notice()));const Ye=o("button","cw-dialogue-tool cw-chat-clear","清空对话");Ye.type="button",Ye.disabled=Ie||!_e.length,Ye.addEventListener("click",()=>{s.confirm("清空这一页的对话记录？正文会保留。")&&(r.messages=[],r.input="",r.error="",g.open=!1,s.save(),s.render(),V())}),E.append(Ye),Ae&&(D.scrollTop=D.scrollHeight)};function R(ie){const he=o("div","cw-chat-msg cw-chat-assistant cw-chat-live"),Ie=o("div","cw-chat-bubble");return sp(Ie,ie),he.append(Ie),he}let L=0;const W=()=>{if(L=0,a||!vn.has(r))return;const ie=xn?.record===r?xn.text:"",he=ce(),Ie=D.querySelector(".cw-chat-live, .cw-chat-typing"),Ae=ie?R(ie):o("p","cw-chat-typing","AI 正在回复……");Ie?Ie.replaceWith(Ae):D.append(Ae),he&&(D.scrollTop=D.scrollHeight)},Ce=()=>({...s,render:()=>{s.render(),V(!0)}}),pe=()=>{if(s.busy()||!z.value.trim())return;r.input=z.value,z.value="",_();const ie=uo(Ce());V(!0),Promise.resolve(ie).finally(()=>V(!0))};z.value=r.input??"",z.addEventListener("input",()=>{r.input=z.value,s.save(),_(),M.disabled=s.busy()||vn.has(r)||!z.value.trim()}),z.addEventListener("keydown",ie=>{ie.key==="Enter"&&(ie.ctrlKey||ie.metaKey)&&!ie.isComposing&&(ie.preventDefault(),pe())}),M.addEventListener("click",pe);const me=n.visualViewport;let J=Math.max(n.innerHeight,me?.height||0);const re=()=>{if(a)return;const ie=me?.height||n.innerHeight;J=Math.max(J,ie);const he=Ca(n,ie,J).height;c.style.height=`${he}px`,c.style.top=`${me?.offsetTop||0}px`,t.activeElement===z&&(D.scrollTop=D.scrollHeight)};me?.addEventListener("resize",re),me?.addEventListener("scroll",re),n.navigator?.virtualKeyboard?.addEventListener("geometrychange",re),n.addEventListener("resize",re),z.addEventListener("focus",()=>{for(const ie of[0,300,650])n.setTimeout(re,ie)}),z.addEventListener("blur",()=>n.setTimeout(re,50));const xe=()=>{a||(a=!0,me?.removeEventListener("resize",re),me?.removeEventListener("scroll",re),n.navigator?.virtualKeyboard?.removeEventListener("geometrychange",re),n.removeEventListener("resize",re),i?.removeEventListener("close",xe),fr.delete(r),e.modal&&c.open&&c.close(),c.remove(),r.open=!1,s.save(),s.render())};d.addEventListener("click",xe),e.modal&&(c.addEventListener("cancel",ie=>{ie.preventDefault(),xe()}),c.addEventListener("close",xe),i?.addEventListener("close",xe)),c.addEventListener("keydown",ie=>{ie.key==="Escape"&&(ie.stopPropagation(),xe())});const de={update(ie){return s=ie,V(),de},stream(){L||(L=n.requestAnimationFrame?n.requestAnimationFrame(W):n.setTimeout(W,60))},close:xe,sheet:c};return fr.set(r,de),r.open=!0,(e.modal?t.body:[...t.querySelectorAll("dialog[open]")].at(-1)||t.body).append(c),e.modal&&c.showModal(),re(),_(),V(!0),de}function ap(e,t,n="",r=""){if(t==="localEdit"&&r){if(/^(?:existing\.)?greetings\./.test(r))return"greet";if(/^existing\./.test(r))return"existing";const s=r.split(".")[0];if(s==="free"){const a=e.free?.[Number(r.split(".")[1])];return a?.fromStep?`step:${a.fromStep}`:"tone"}return{personas:"persona",npcs:"npc",routes:"routes",world:"world",tone:"tone",relations:"persona",intro:"intro",play:"play",au:"au",story:"idea",idea:"idea"}[s]??""}if(t==="revise"||t==="localEdit"){if(n.startsWith("exist:greet:"))return"greet";const[s,...a]=n.split(":");if(s==="free"){const i=e.free?.find(o=>o.name===a.join(":"));return i?.fromStep?`step:${i.fromStep}`:"tone"}return{persona:"persona",personaExtra:"persona",relations:"persona",world:"world",npc:"npc",routes:"routes",route:"routes",tone:"tone",greet:"greet",exist:"existing",au:"au",intro:"intro",idea:"idea"}[s]??""}return{inspire:"idea",story:"idea",ideaQA:"idea",idea:"idea",qa:"persona",deepAns:"persona",persona:"persona",personaExtra:"persona",backstory:"persona",relations:"persona",predict:"persona",judge:"persona",destale:"persona",world:"world",npc:"npc",npcOne:"npc",routes:"routes",newRoutes:"routes",tone:"tone",free:"tone",greeting:"greet",hooks:"greet",expand:"greet",playChar:"play",playUser:"play",playReview:"play",conflict:"tags",consistency:"check",classify:"existing",auCore:"au",auMap:"au",auCheck:"au",intro:"intro"}[t]??""}function fo(e,t,n,r){const s=ap(e,t,n,r);return s?Zt(e,s,rp[s]??s):""}function Wf(e){const t=()=>e.settings(),n=()=>e.lib(),r=l=>e.progress?.(l),s=()=>e.aborted?.()??!1,a=()=>{if(s())throw new Error("已停止")};function i(l){if(l?.mode&&ss[l.mode])return l.mode;const f=pt(l?.tags??[],"cardType");if(f.includes("世界卡"))return"world";if(f.includes("手枪卡"))return"rules";const w=pt(l?.tags??[],"count");return f.includes("多人卡")||w.includes("NP")||w.includes("群像")||(l?.personas?.length??0)>1?"multi":"single"}function o(){const l=t(),f=l.customRules??{};return[...new Set([...Object.keys(Ct),...Object.keys(f)])].map(v=>{const h=v in Ct,S=v==="人设模板"?Bt(l.personaTpl).text:Ct[v],O=h?T(l.rules?.[v])?l.rules[v]:S:String(f[v]??"");return{name:v,text:O,builtin:h,edited:h&&!!T(l.rules?.[v]),on:!l.ruleOff?.[v],mode:l.ruleModes?.[v]??ua[v]?.mode??"all",steps:l.ruleSteps?.[v]??ua[v]?.steps??[]}})}const c=(l,f)=>l.on&&(l.mode==="all"||f&&l.mode===i(f));function p(l,f){const w=m(f)??"";let v="";for(const h of o())!c(h,l)||!h.steps.includes(f)||!T(h.text)||w.includes(`{{rules.${h.name}}}`)||h.name==="零度写作"&&w.includes("{{zeroRule}}")||(v+=`
+
+【规则·${h.name}】
+${h.text}`);return v}const d=l=>Object.fromEntries(o().map(f=>[f.name,c(f,l)?f.text:""])),m=l=>t().prompts?.[l]?.trim()?t().prompts[l]:Xt[l],g=l=>l.concepts?.[l.pick]??null,y=l=>pt(l.tags,"platform").map(f=>`${f}：${Jm[f]??""}`).join("；")||"主流网文，读者想一直读下去",E=l=>pt(l.tags,"cardType").includes("手枪卡"),P=(l,f)=>(l.existing?.entries??[]).filter(w=>!w.disable&&(w.cat??"other")===f&&T(w.content)).map(w=>`【${w.comment}】
+${w.content}`);function D(l){return{personas:[...(l.personas??[]).filter(f=>!f.disable).flatMap(f=>[f.text,f.extra]),...P(l,"persona")].filter(T).join(`
+
+`),world:[l.world?.main,...(l.world?.extra??[]).filter(f=>!f.disable).map(f=>f.content),...P(l,"world")].filter(T).join(`
+
+`),npcs:[...(l.npcs??[]).filter(f=>!f.disable).map(f=>f.content),...P(l,"npc")].filter(T).join(`
+
+`),relations:T(l.relations),tone:[l.tone,...P(l,"tone")].filter(T).join(`
+
+`)}}const Q=l=>!!(l.chat?.dropConcept&&T(l.chat?.brief));function z(l){const f=M(l),w=l.chat;return T(w?.brief)&&(w.dropConcept&&(f.concept="（作者选择不参考构想梗概，一切以【作者定稿】为准）",f.answers="（无）"),w.dropOverview&&(f.overviews="（作者选择不参考人设概要，以【作者定稿】和人设全文为准）")),f}function M(l){const f=D(l);return{idea:l.idea,tags:Wi(l.tags,n())||"（未选）",concept:(g(l)?ha(g(l)):l.au?Le(l):l.existing?Pf(l):[T(l.idea)&&`脑洞：${T(l.idea)}`,ad(l)].filter(Boolean).join(`
+`)||ha(null))+uh(l),platform:y(l),overviews:Fl(l),personas:f.personas,relations:f.relations,answers:ba(l),world:f.world||"（无）",npcs:f.npcs||"（无）",routes:yf(l),tone:f.tone||"（无）",...nf(d(l)),cardMode:ss[i(l)]}}const _=l=>{const f=new Set((l.tags??[]).map(v=>v.name)),w=eo(d().禁用词).filter(v=>!f.has(v));return Qa()&&!w.includes("三")?[...w,"三"]:w},ce=(l,f)=>{const w=_(f).filter(h=>!Zi.includes(h)&&h!=="三"),v=Qa()?`${l}
+${Io}`:l;return w.length?`${v}
+下面这些词一律不要出现，换成具体、平实的写法：${w.join("、")}`:v},V=l=>sf(l,d().直接删),R=(l,f)=>T(l.feedback?.[f]);function L(l,f,w){var v;if(w==null||(typeof w=="string"?!w.trim():Array.isArray(w)?!w.length:!Object.values(w).some(O=>typeof O=="string"?O.trim():Array.isArray(O)?O.length:O)))return;l.history??(l.history={}),l.changes?.[f]&&delete l.changes[f];const S=(v=l.history)[f]??(v[f]=[]);S.push(structuredClone(w)),S.length>5&&S.shift()}function W(l,f){const[w,...v]=f.split(":"),h=v.join(":"),S=()=>l.personas.find(C=>C.name===h),O=()=>l.free.find(C=>C.name===h);return{idea:{get:()=>({concepts:l.concepts,pick:l.pick}),set:C=>{l.concepts=C.concepts,l.pick=C.pick}},persona:{get:()=>({overview:S()?.overview??"",text:S()?.text??""}),set:C=>{const j=S();j&&Object.assign(j,C)}},personaExtra:{get:()=>S()?.extra??"",set:C=>{const j=S();j&&(j.extra=C)}},world:{get:()=>l.world,set:C=>{l.world=C}},npc:{get:()=>l.npcs,set:C=>{l.npcs=C}},routes:{get:()=>l.routes.map(C=>C.info),set:C=>{l.routes.forEach((j,K)=>{j.info=C[K]??j.info})}},tone:{get:()=>l.tone,set:C=>{l.tone=C}},relations:{get:()=>l.relations??"",set:C=>{l.relations=C}},greet:{get:()=>l.greetings.filter(C=>C.route===h).map(C=>C.text),set:C=>{l.greetings=[...l.greetings.filter(j=>j.route!==h),...C.map(j=>({route:h,text:j}))]}},free:{get:()=>O()?.content??"",set:C=>{const j=O();j&&(j.content=C)}},intro:{get:()=>l.intro,set:C=>{l.intro=C}},exist:Ce(l,h),au:{get:()=>h==="map"?l.au?.map:{core:l.au?.core,shell:l.au?.shell},set:C=>{h==="map"?l.au.map=C:(l.au.core=C.core,l.au.shell=C.shell)}},route:{get:()=>l.routes.find(C=>C.name===h)?.info??"",set:C=>{const j=l.routes.find(K=>K.name===h);j&&(j.info=C)}}}[w]}function Ce(l,f){const w=l.existing;if(!w)return;const[v,h]=f.split(":");if(v==="field")return{get:()=>w.fields[h]??"",set:S=>{w.fields[h]=S}};if(v==="entry"){const S=()=>w.entries.find(O=>String(O.uid)===h);return{get:()=>S()?.content??"",set:O=>{S()&&(S().content=O)}}}if(v==="greet")return{get:()=>w.greetings[Number(h)]??"",set:S=>{w.greetings[Number(h)]=S}}}function pe(l,f){const[w,...v]=f.split(":"),h=v.join(":"),S={persona:`人设·${h}`,world:"世界观",tone:"基调与规则",free:`模块·${h}`,route:`路线·${h}`,exist:h.startsWith("field:")?{description:"角色描述",personality:"性格",scenario:"场景",mes_example:"对话示例"}[h.slice(6)]??h:h.startsWith("greet:")?`开场白 ${Number(h.slice(6))+1}`:l.existing?.entries.find(C=>`entry:${C.uid}`===h)?.comment??"条目"};if(w==="persona"){const C=l.personas.find(j=>j.name===h);return C&&{label:S.persona,get:()=>C.text,set:j=>{C.text=j}}}if(w==="personaExtra"){const C=l.personas.find(j=>j.name===h);return C&&{label:`人设补充·${h}`,get:()=>C.extra??"",set:j=>{C.extra=j}}}if(w==="world")return{label:S.world,get:()=>l.world.main,set:C=>{l.world.main=C}};if(w==="tone")return{label:S.tone,get:()=>l.tone,set:C=>{l.tone=C}};if(w==="relations")return{label:"角色关系",get:()=>l.relations??"",set:C=>{l.relations=C}};const O=W(l,f);return O&&S[w]&&{label:S[w],...O}}async function me(l,f){const w=pe(l,f);if(!w)throw new Error("这一块不能按意见改");const v=R(l,f)||(fo(l,"revise",f)?"按本页对话中作者的要求修改。":"");if(!v)throw new Error("先在本页对话或“哪里不满意”里写意见");const h=w.get();if(!T(h))throw new Error("这一块是空的，没法改");const S=f.startsWith("exist:greet:"),O=await be("revise",l,{label:w.label,fb:v,text:h},{styleKey:f,greetingOutput:S}),C=S?O.join(`
+
+`):O;return L(l,(f.startsWith("persona:"),f),f.startsWith("persona:")?{overview:l.personas.find(j=>j.name===f.slice(8))?.overview??"",text:h}:h),w.set(C.trim()),et(l,f,h,C.trim(),`按意见改：${v.slice(0,40)}`),l.feedback[f]="",l}async function J(l,f=3){const w=dt(await be("newRoutes",l,{n:f},{json:!0}));return l.routeIdeas=Se(w.routes).map(v=>({name:T(v?.name),user:T(v?.user),period:T(v?.period),why:T(v?.why)})).filter(v=>v.name),l}function re(l,f){const w=l.routeIdeas?.[f];if(!w)return l;let v=w.name;for(let h=2;l.routes.some(S=>S.name===v);h++)v=`${w.name}${h}`;return l.routes.push({name:v,user:w.user,period:w.period,info:""}),l.routeIdeas.splice(f,1),l}function xe(l,f=9e3){const w=l.au?.original;if(!w)return"";const v=[`卡名：${w.name}`];for(const h of w.personas)v.push(`【人设·${h.name}】${h.overview?`
+概要：${h.overview}`:""}
+${Qe(h.text,3500)}`);w.world&&v.push(`【世界观】
+${Qe(w.world,1500)}`);for(const h of w.entries.slice(0,8))v.push(`【${h.comment}】
+${Qe(h.content,500)}`);return w.routes&&v.push(`【路线】
+${Qe(w.routes,800)}`),w.greeting&&v.push(`【开场白节选】
+${Qe(w.greeting,400)}`),Qe(v.join(`
+
+`),f)}const de=(l,f)=>(l.au?.core??[]).filter(w=>!f||w.name===f).map(w=>`${w.name}：
+${T(w.text)}`).join(`
+
+`);function Le(l){const f=l.au;return[`这是《${f.original?.name??""}》里角色的 AU：换了世界观和身份，人还是那个人。`,`【AU 设定】
+${T(l.idea)||"（还没写）"}${Ga(l)?`
+${Ga(l)}`:""}`,`【角色内核】（必须保留，行为要从这里长出来）
+${de(l)||"（还没提取）"}`,f.map?`【映射表】（原作 → AU）
+${f.map}`:"","写的时候只写 AU 世界里的样子：原作的地名、组织、道具、事件不要出现，除非映射表给了对应。AU 题材的套路可以用，但角色的反应来自内核，不要变成这个题材的默认角色。"].filter(Boolean).join(`
+
+`)}function ie(l,f,w){const v=Yl(l,f,w),h=hn();return h.name=`${v.name}（AU）`,h.nameAuto=!1,h.tags=rs(v.tags.map(S=>S.name),n()).filter(S=>["cp","count","userGender","rating","platform"].includes(S.dim)),h.personas=v.personas.map(S=>({name:S.name,keys:S.keys??[],overview:"",text:""})),h.au={original:{name:v.name,avatar:l?.avatar??"",personas:v.personas.map(S=>({name:S.name,overview:S.overview,text:S.text})),world:v.world.main,entries:[...v.world.extra.map(S=>({comment:S.name,content:S.content})),...v.npcs.map(S=>({comment:`NPC·${S.name}`,content:S.content})),...v.existing.entries.map(S=>({comment:S.comment,content:S.content}))],routes:v.routes.map(S=>`${S.name}：${S.info}`).join(`
+`),greeting:v.existing.greetings[0]??""},core:v.personas.map(S=>({name:S.name,text:""})),shell:"",map:"",checks:{}},h.pick=-1,h}async function he(l){if(!l.au)throw new Error("不是 AU 草稿");const f=await be("auCore",l,{original:xe(l)},{key:"au:core",prev:de(l)});L(l,"au:core",{core:l.au.core,shell:l.au.shell});const w=wn(f),v=new Map(w.blocks.filter(h=>h.type==="内核").map(h=>[h.name,h.body]));return l.au.core=l.au.core.map((h,S)=>({name:h.name,text:v.get(h.name)??[...v.values()][S]??h.text})),l.au.shell=ma(w,"外壳")||l.au.shell,l}async function Ie(l){if(!l.au)throw new Error("不是 AU 草稿");if(!T(l.idea))throw new Error("先写 AU 设定");if(!de(l).replace(/[^\u4e00-\u9fff]/g,""))throw new Error("先提取内核");const f=await be("auMap",l,{core:de(l),shell:l.au.shell||"（没列）",original:xe(l,4e3)},{key:"au:map",prev:l.au.map});return L(l,"au:map",l.au.map),l.au.map=f.trim(),l}async function Ae(l,f){const w=l.personas.find(O=>O.name===f);if(!w?.text)throw new Error(`${f} 还没有 AU 人设`);const v=de(l,f);if(!v)throw new Error("没有这个角色的内核");const h=dt(await be("auCheck",l,{name:f,core:v,persona:w.text},{json:!0})),S=Se(h.items).map(O=>({core:T(O.core),verdict:["保留","偏离","丢了"].includes(T(O.verdict))?T(O.verdict):"偏离",where:T(O.where),fix:T(O.fix)})).filter(O=>O.core);return l.au.checks[f]={items:S,leftovers:Se(h.leftovers).map(T).filter(Boolean),fixed:!1},l.au.checks[f]}async function _e(l,f){const w=l.au?.checks?.[f],v=(w?.items??[]).filter(S=>S.verdict!=="保留");if(!v.length&&!w?.leftovers?.length)return l;const h=[...v.map(S=>`- 内核“${S.core}”${S.verdict}${S.where&&S.where!=="没写到"?`（「${S.where}」）`:""}：${S.fix||"改回内核的样子"}`),...w.leftovers.length?[`- 删掉或换掉原作世界的残留：${w.leftovers.join("、")}`]:[]].join(`
+`);return l.feedback??(l.feedback={}),l.feedback[`persona:${f}`]=h,await me(l,`persona:${f}`),w.fixed=!0,l}function Ye(l,f,w){const v=Yl(l,f,w);return v.tags=rs(v.tags.map(h=>h.name),n()),v}function Te(l,f){const w=l.history?.[f],v=W(l,f);if(!w?.length||!v)return!1;const h=w.pop();return w.unshift(structuredClone(v.get())),v.set(h),l.truncated&&delete l.truncated[f],!0}async function qe(l,f,w,v,h,S){if(!f||l.includes(f))return{out:l,cut:!1};r("回复被截断了，自动续写…");const O=await e.llm({system:v,user:`${w}
+
+【你上一次的回答在这里断掉了。从断掉的地方直接接着写，不要重复已经写的内容，不要解释】
+……${l.slice(-1500)}`,stage:h,temperature:S});a();const C=l+O.replace(/^\s*……/,"");return{out:C,cut:!C.includes(f)}}const nn=new Set(["persona","personaExtra","backstory","destale"]),rn=new Set(["world","npc","npcOne","routes","free","greeting","expand","custom"]);function At(l,f,w=""){const v=(t().styles??[])[Number(l.style)-1];return T(v?.text)&&(nn.has(f)||String(w).startsWith("persona:")||String(w).startsWith("personaExtra:")||l.styleAll&&(rn.has(f)||["revise","localEdit"].includes(f)))?v.text:""}function et(l,f,w,v,h=""){const S=Qf(w,v);return l.changes??(l.changes={}),l.changes[f]={at:Date.now(),how:h,hunks:S.slice(0,40),more:Math.max(0,S.length-40)},S.length}const Mo=new Set(["qa","persona","personaExtra","backstory","world","npc","npcOne","routes","tone","relations","greeting","hooks","expand","free","revise","destale","intro"]);function xs(l,f){const w=l.chat;return!Mo.has(f)||!T(w?.brief)||w.use===!1&&!w.dropConcept&&!w.dropOverview?"":`
+
+【作者定稿（最高优先级）】下面是作者和搭档聊定的设定。有冲突时沿用作者最新定下的内容。创作任务可以补写尚未规定的生活、想法和关系；作者要求保持未知、留待决定或只整理原文的地方不能擅自补定。
+${w.brief}`}const Ua={world:"人物经历、人物之间的关系和前情已经写在构想和人设里，导入后和这一条一起发给 AI。这里不复述这些，只写世界本身：地方、日常、组织、规则。提到主要角色时用一句话点明身份即可；「现在」只写世界层面的状况，不写主要角色之间发生了什么。",npc:"主要角色的人设、前情和他们与〔user〕的关系已经写过，这里不复述。NPC 和主要角色的关系用一句话写清，篇幅留给 NPC 自己。",npcOne:"主要角色的人设、前情和他们与〔user〕的关系已经写过，这里不复述。NPC 和主要角色的关系用一句话写清，篇幅留给 NPC 自己。",routes:"人设、世界观和构想里已有的内容不复述，只写这条路线自己的〔user〕信息、时期和起点。",tone:"不复述剧情、人物经历、关系前情和世界观（这些在人设、世界观里都有，会一起发给 AI）。这里只写写法：写什么样的故事、侧重什么、怎么写、禁止什么。",free:"人设、世界观、基调里已有的内容不复述，只写这个模块负责的部分。"};function En(l){return Ua[l]?`
+
+【不重复】${Ua[l]}`:""}async function be(l,f,w={},{stage:v,system:h,json:S=!1,key:O,prev:C,close:j,styleKey:K,greetingOutput:Z=!1,dialoguePath:Y="",templateOverride:ke=""}={}){a();const Ke=Z?Hf(t()):"",sn=Fn[l]??{name:l,stage:"card",temp:.8};r(`${sn.name}…`);const st=ap(f,l,K??O,Y)==="greet",Lt=ke||m(l),bt=st?Lo(f):null,Tn={...z(f),...w,...bt};if(st){const Ut=yn(f,"concept")&&!(yn(f,"brief")&&Q(f)),Ya=new Set((f.personas??[]).filter(at=>!at.disable).map(at=>at.name));Ut||(Tn.idea=Tn.tags=""),Tn.answers=ba({qa:{chars:yn(f,"personas")?(f.qa?.chars??[]).filter(at=>Ya.has(at.name)):[]},inspire:Ut?f.inspire:[]})}let Fe=as(Lt,Tn);if(Fe+=p(f,l),Fe+=En(l),st||(Fe+=xs(f,l)),Fe+=fo(f,l,K??O,Y),st){const Ut=new Set([...String(Lt??"").matchAll(/\{\{\s*([^{}\s]+)\s*\}\}/g)].map(at=>at[1]));for(const[at,Ka]of Object.entries(bt))!T(Ka)||Ut.has(at)||(Fe+=at==="brief"?xs(f,"greeting"):`
+
+【${Ia[at]??"人物概要"}】
+${Ka}`);for(const[at,Ka]of Object.entries({routeInfo:"本次路线",hooks:"本次选中的剧情",existingGreetings:"已经写出的开场白，仅用于避重"}))T(w[at])&&!Ut.has(at)&&(Fe+=`
+
+【${Ka}】
+${w[at]}`);const Ya=mr(f);Ya&&(Fe+=`
+
+【作者为开场白填写的补充文字】
+${Ya}`)}const Ne=At(f,l,K??O);Ne&&(Fe+=`
+
+【文风】作者指定的文风如下。它只管用词和句子怎么写；内容、格式和上面的要求都不变，格式要求冲突时以格式为准。
+${Ne}`);const Nn=O?R(f,O):"";Nn&&(Fe+=`
+
+【作者对上一版的修改意见，必须优先满足】
+${Nn}`,T(C)&&(Fe+=`
+【上一版】（按意见改，没提到的好的部分可以保留）
+${C}`)),Ke&&(Fe+=Ke);const Va=v??(st?"greeting":sn.stage),fd=l==="intro"&&ke?h??Xi:ce(h??(Va==="greeting"?Ql:Xi),f);let Kn=await e.llm({system:fd,user:Fe,stage:Va,temperature:sn.temp,preserveOutput:Z});if(a(),O){const Ut=await qe(Kn,j,Fe,fd,Va,sn.temp);Kn=Ut.out,f.truncated??(f.truncated={}),Ut.cut?f.truncated[O]=!0:delete f.truncated[O]}l==="intro"&&ke||(Kn=await Ao(Kn,{json:S,stage:Va})),a();const gd=Z?np(Kn,t()).map(V):S?Kn:V(Kn);if(Z&&gd.some(Ut=>!Ut.trim()))throw new Error("提取后的正文为空，已有开场白未改动。");return O&&Nn&&(f.feedback[O]=""),gd}const Ar=l=>l.chat??(l.chat={messages:[],brief:"",use:!0,dropConcept:!1,dropOverview:!1,input:""});async function td(l,{opener:f=!1}={}){a();const w=Ar(l),v=Fn.chat;r(`${v.name}…`);const h=as(m("chat"),{...M(l),brief:T(w.brief)||"（还没有定稿）"}),S=f&&!w.messages.length?[{role:"user",content:"（作者让你先开口：先看构想和标签，指出最可能有逻辑漏洞、还没定下来的地方，说清楚为什么，再问第一个最关键的问题。）"}]:w.messages.map(j=>({role:j.role==="ai"?"assistant":"user",content:j.text})),O=await e.llm({system:h,messages:S,stage:v.stage,temperature:v.temp});a();const C=T(O);if(!C)throw new Error("AI 没有回复");return w.messages.push({role:"ai",text:C}),C}const nd=(l,f)=>[f,lo(l)&&`【深挖问答】
+${lo(l)}`].filter(Boolean).join(`
+`);async function sh(l,f,{only:w}={}){const v=typeof f=="number"?l.personas[f]:l.personas.find(Y=>Y.name===f);if(!v)throw new Error("没有这个角色");const h=tp(v),S=h.map((Y,ke)=>ke).filter(Y=>!T(h[Y].a)&&(!Array.isArray(w)||w.includes(Y)));if(!S.length)throw new Error("没有要答的题：都已经填了");const O=T(v.name)||"〔新角色〕",C=h.filter(Y=>T(Y.a)).map(Y=>`${Y.q}
+→ ${T(Y.a)}`).join(`
+`)||"（还没有）",j=await be("deepAns",l,{name:O,desc:T(v.desc)||"（作者没写）",overview:T(v.overview)||Qe(T(v.text),600)||"（还没写）",done:C,questions:S.map(Y=>`<<<${Y+1}>>>
+${h[Y].q}`).join(`
+`)}),K=String(j).split(/<<<\s*(\d+)\s*>>>/);let Z=0;for(let Y=1;Y<K.length;Y+=2){const ke=Number(K[Y])-1,Ke=T(K[Y+1]);S.includes(ke)&&Ke&&!T(h[ke].a)&&(h[ke].a=Ke,h[ke].ai=!0,Z++)}if(!Z)throw new Error("AI 没有按序号答题，换一次试试");return Z}async function ah(l){const f=Ar(l),w=f.messages.length?Qe(f.messages.map(S=>`${S.role==="ai"?"问":"答"}：${S.text}`).join(`
+`),6e3):"（还没问过）",v=dt(await be("chatQs",l,{...M(l),transcript:w,brief:T(f.brief)||"（还没有定稿）"},{json:!0})),h=Se(v.questions).slice(0,4).map(S=>({q:T(S.q),why:T(S.why),options:Se(S.options).map(T).filter(Boolean).slice(0,4),answer:""})).filter(S=>S.q);if(!h.length)throw new Error("AI 没有出题，换一次试试");return f.qs={findings:T(v.findings),items:h},f.qs}function ih(l){const f=Ar(l),w=(f.qs?.items??[]).filter(v=>T(v.answer));if(!w.length)throw new Error("至少答一题");return f.messages.push({role:"ai",text:(f.qs.findings?`${f.qs.findings}
+`:"")+w.map(v=>`问：${v.q}`).join(`
+`)}),f.messages.push({role:"user",text:w.map(v=>`${v.q} → ${v.answer}`).join(`
+`)}),f.qs=null,w.length}async function oh(l,f){const w=Ar(l),v=T(f);if(v)w.messages.push({role:"user",text:v}),w.input="";else if(w.messages.at(-1)?.role!=="user")throw new Error("先写一句");return td(l)}async function ch(l){const f=Ar(l);if(!f.messages.some(O=>O.role==="user"))throw new Error("先聊几句再整理");const w=Qe(f.messages.map(O=>`${O.role==="ai"?"搭档":"作者"}：${O.text}`).join(`
+
+`),12e3),v=await be("chatBrief",l,{transcript:w,brief:T(f.brief)||"（无）"},{json:!0}),h=String(v).match(/<作者定稿>[\s\S]*?<\/作者定稿>/),S=h?h[0]:T(v);if(!S)throw new Error("AI 没有整理出定稿");return f.prevBrief=f.brief,f.brief=S,f.briefN=f.messages.length,S}function rd(l){const f=l.diceSet??{};return l.dice=$m(n(),l.diceLock??{},Math.random,{dims:f.dims?.length?f.dims:void 0,count:Number(f.count)>0?Number(f.count):void 0}),l.inspire=[],l.dice}async function lh(l,{reroll:f=!0}={}){(f||!Object.keys(l.dice??{}).length)&&rd(l);const w=Object.entries(l.dice).map(([h,S])=>`${$e(n(),h)?.name??h}：${S}`).join("；"),v=dt(await be("inspire",l,{dice:w},{json:!0}));return l.inspire=Se(v.questions).slice(0,4).map(h=>({q:T(h.q),options:Se(h.options).map(T).filter(Boolean).slice(0,4),answer:""})),l}async function ph(l){if(!T(l.idea))throw new Error("先写一句话脑洞");const f=dt(await be("ideaQA",l,{},{json:!0}));return l.ideaQA=Se(f.questions).slice(0,4).map(w=>({q:T(w.q),options:Se(w.options).map(T).filter(Boolean).slice(0,4),answer:""})),l}const ys=l=>T(l.story?.text),dh=l=>ys(l)?`【短篇或素材】（构想以这段文字为准：人物、关系、张力、世界规则都从里面提取，lineup 用里面的人，名字、称呼、设定照原文不改。如果是同人，原作设定照文字里写的。稳定的特质才算设定；某一幕里发生的具体事件放进路线或经历，别把剧情当成设定。文字里没写的不要编，缺的部分留给后面的步骤。）
+${Qe(ys(l),6e3)}`:"",uh=l=>ys(l)?`
+【参考短篇】（人物先在这个故事里活过，写的时候以里面的行为和细节为依据；稳定的特质写进设定，某一幕的具体事件写进经历或路线，别把一幕当成人设。）
+${ys(l)}`:"";async function mh(l){const f=Object.entries(l.dice??{}).map(([O,C])=>`${$e(n(),O)?.name??O}：${C}`).join("；"),w=(l.inspire??[]).filter(O=>T(O.answer)).map(O=>`${O.q} → ${T(O.answer)}`),v=[T(l.idea),...w].filter(Boolean).join(`
+`);if(!f&&!(l.tags??[]).length&&!v)throw new Error("先掷骰子，或者选几个标签、写一句脑洞");const h=T(await be("story",l,{dice:f||"（无）",seed:v||"（无）",storyLength:T(t().storyLength)||"800–1200"}));if(!h)throw new Error("AI 没有写出短篇");const S=ys(l);return l.story={text:h,prev:S||T(l.story?.prev),time:Date.now()},l.story}const Ga=l=>{const f=(l.ideaQA??[]).filter(w=>T(w.answer));return f.length?`【作者补充】
+${f.map(w=>`${w.q}
+→ ${T(w.answer)}`).join(`
+`)}`:""};function fh(l){return l.dice={...l.diceLock??{}},l.inspire=[],l.dice}function gh(l){const f=Object.values(l.dice??{}).join("、"),w=(l.inspire??[]).filter(v=>v.answer?.trim()).map(v=>v.answer.trim()).join("；");return l.idea=[w,f?`（参考标签：${f}）`:""].filter(Boolean).join(" "),l.idea}function sd(l){const f=n(),w=Km(l.idea,f);l.tagSrc??(l.tagSrc={});for(const v of w)$e(f,v.dim)?.single&&pt(l.tags,v.dim).length||l.tags.some(S=>S.dim===v.dim&&S.name===v.name)||(l.tags=Kt(l.tags,f,v.dim,v.name,!0),l.tagSrc[`${v.dim}:${v.name}`]="local");return w}function ad(l){const f=[],w=(l.personas??[]).filter(h=>T(h.text)||T(h.overview)||T(h.desc));w.length&&f.push(`已写好的主要角色（lineup 必须用这些人，名字不改；可以再加人）：
+${w.map(h=>`- ${h.name||"（还没起名）"}：${Qe(T(h.overview)||T(h.desc)||T(h.text),500)}`).join(`
+`)}`),T(l.world?.main)&&f.push(`已写好的世界观：
+${Qe(l.world.main,800)}`);const v=(l.routes??[]).filter(h=>T(h.info));return v.length&&f.push(`已写好的路线（routes 必须包含这些，名字不改）：
+${v.map(h=>`- ${h.name}：${Qe(h.info,300)}`).join(`
+`)}`),T(l.tone)&&f.push(`已写好的基调：
+${Qe(l.tone,400)}`),f.length?`【作者已经写好的内容】（最高优先级。三个构想都必须建立在这些内容上，不能换人、换设定；只补还没写的部分）
+${f.join(`
+`)}`:""}async function wh(l){const f=n(),w=sd(l),v=dt(await be("idea",l,{matched:w.map(h=>h.name).join("、")||"（无）",tagLibrary:Xm(f),ideaAnswers:[l.cardType&&CWZT[l.cardType]?`【卡种】${CWZT[l.cardType].name}：${CWZT[l.cardType].desc}`:"",l.themeOk&&String(l.chat?.brief??"").trim()?`【作者定稿】（最高优先级：这是作者和搭档聊定的主题。只给 1 个构想，完全照定稿写：人物、名字、身份、关系、世界规则一个都不改；定稿写「未定」的地方再由你补。）
+${l.chat.brief}`:"",Ga(l),dh(l),ad(l)].filter(Boolean).join(`
+`)},{json:!0,key:"idea",prev:(l.concepts??[]).map(h=>h.title).join(`
+`)}));if(L(l,"idea",{concepts:l.concepts,pick:l.pick}),l.concepts=Se(v.concepts).slice(0,4).map(Rf),!l.concepts.length)throw new Error("AI 没有给出构想");l.tagSrc??(l.tagSrc={});for(const h of rs(Se(v.tags?.picked),f))$e(f,h.dim)?.single&&pt(l.tags,h.dim).length||l.tags.some(O=>O.dim===h.dim&&O.name===h.name)||(l.tags=Kt(l.tags,f,h.dim,h.name,!0),l.tagSrc[`${h.dim}:${h.name}`]="ai");for(const[h,S]of Object.entries(v.tags?.guessed??{})){const O=$e(f,h)??f.find(j=>j.name.includes(h)),C=ns(f,S,O?.key);!C||pt(l.tags,C.dim).length||(l.tags=Kt(l.tags,f,C.dim,C.name,!0),l.tagSrc[`${C.dim}:${C.name}`]="guess")}return l.ai={novel:Se(v.tags?.novel).map(h=>({dim:($e(f,h?.dim)??f.find(S=>S.name.includes(T(h?.dim))))?.key??"plot",name:T(h?.name)})).filter(h=>h.name&&!ns(f,h.name)).slice(0,2),surprise:(()=>{const h=v.tags?.surprise,S=ns(f,T(h?.name),($e(f,h?.dim)??{}).key);return S?{dim:S.dim,name:S.name,why:T(h?.why)}:null})()},l.fandom=T(v.fandom),l.check=Se(v.check).map(T).filter(Boolean),l.pick=-1,l}function hh(l,f){const w=n(),v=l.concepts[f];if(!v)return l;l.pick=f;const h=new Map((l.personas??[]).map(C=>[C.name,C])),S=C=>T(C.text)||T(C.desc)||C.added;l.personas=[...v.lineup.map(C=>h.get(C.name)??{name:C.name,keys:[],overview:"",text:""}),...(l.personas??[]).filter(C=>S(C)&&!v.lineup.some(j=>j.name===C.name))];const O=l.routes??[];l.routes=[...v.routes.map(C=>({...C,info:O.find(j=>j.name===C.name)?.info??""})),...O.filter(C=>T(C.info)&&!v.routes.some(j=>j.name===C.name))],(!l.name||l.nameAuto)&&(l.name=v.lineup.length===1?v.lineup[0].name:v.title.slice(0,20),l.nameAuto=!0),l.tagSrc??(l.tagSrc={});for(const C of rs(v.tags,w))$e(w,C.dim)?.single&&pt(l.tags,C.dim).length||l.tags.some(K=>K.dim===C.dim&&K.name===C.name)||(l.tags=Kt(l.tags,w,C.dim,C.name,!0),l.tagSrc[`${C.dim}:${C.name}`]="ai");for(const C of v.lineup)for(const j of rs(C.archetype.map(K=>({dim:"archetype",name:K})),w))l.tags.some(K=>K.dim===j.dim&&K.name===j.name)||(l.tags=Kt(l.tags,w,j.dim,j.name,!0));return l.tags=Kt(l.tags,w,"complexity",v.complexity,!0),l}async function bh(l){const f=dt(await be("qa",l,{},{json:!0})),w=(l.personas??[]).map(v=>v.name);return l.qa={chars:Se(f.chars).map((v,h)=>({name:w.includes(T(v.name))?T(v.name):w[h]??T(v.name),questions:Se(v.questions).slice(0,4).map(S=>({q:T(S.q),options:Se(S.options).map(T).filter(Boolean).slice(0,4),answer:""}))}))},l}async function vh(l,f){const w=typeof f=="number"?l.personas[f]:l.personas.find(Ne=>Ne.name===f);if(!w)throw new Error(`没有角色 ${f}`);const v="〔新角色〕",h=!T(w.name),S=h?v:T(w.name),O=l.personas.filter(Ne=>Ne!==w&&!Ne.disable&&T(Ne.name)),C=Q(l)?[]:g(l)?.lineup??[],j=[...O.map(Ne=>[Ne.name,Ne.overview||C.find(Nn=>Nn.name===Ne.name)?.identity,Ne.text,Ne.extra].filter(T).join(`
+`)),...P(l,"persona")],K=j.length?`【同卡其他人物与原卡人设资料】
+${j.join(`
+
+`)}`:"",Y=O.length||i(l)==="multi"?`- 这张卡有多个主要角色。${S} 在故事里的位置要和其他人不同，他对〔user〕的态度、他想要的东西、他的矛盾轴都不能和其他人重复。`:"",ke=(l.qa?.chars??[]).filter(Ne=>Ne.name===S).flatMap(Ne=>Ne.questions).filter(Ne=>Ne.answer?.trim()).map(Ne=>`${Ne.q}
+→ ${Ne.answer.trim()}`).join(`
+`),Ke=(Q(l)?[]:g(l)?.lineup??[]).find(Ne=>Ne.name===S)?.identity,sn=[T(w.desc)?`【作者对这个角色的设想】（必须落实）
+${T(w.desc)}`:"",Ke?`【构想里的身份】${Ke}`:"",h?`【名字】还没起。你来起一个不俗套、合这张卡的名字，在最前面单独输出一块：
+<<<名字>>>
+名字
+后面所有写着“${v}”的地方都换成这个名字。`:"",!Ke&&!T(w.desc)&&!w.text&&(l.existing||O.length)?"【这是新加进来的角色】根据这张卡已有的内容，补一个卡里缺的、能和已有角色形成张力的人。":""].filter(Boolean).join(`
+`),st=await be("persona",l,{name:S,brief:sn,currentPersona:[w.overview,w.text,w.extra].filter(T).join(`
+
+`)||"（尚未写）",others:K,npRule:Y,answers:nd(w,ke)||(Q(l)?"":ba(l)),template:as(d(l).人设模板||_m,{name:S}),tplRule:!T(t().rules?.人设模板)&&Bt(t().personaTpl).rule?`【所选模板写法】${Bt(t().personaTpl).rule}`:"",...!T(t().rules?.人设模板)&&Bt(t().personaTpl).id==="live"?{"rules.禁令格式":""}:{}},{key:`persona:${S}`,prev:w.text,close:h?void 0:`</${S}>`}),Lt=wn(st);let bt=S;if(h){bt=T(ma(Lt,"名字")).split(`
+`)[0].replace(/[<>《》「」"“”]/g,"").trim()||"新角色";for(let Ne=2;l.personas.some(Nn=>Nn!==w&&Nn.name===bt);Ne++)bt=`${bt}${Ne}`}L(l,`persona:${bt}`,{overview:w.overview,text:w.text});const Tn=ma(Lt,"人设")||Lt.lead||st,Fe=Ne=>String(Ne??"").split(v).join(bt);return w.name=bt,w.overview=Fe(ma(Lt,"概要"))||w.overview,w.text=is(Fe(Tn),bt),w.keys?.length||(w.keys=[]),l}async function xh(l,f){const w=l.personas.find(Z=>Z.name===f);if(!T(w?.text))throw new Error(`${f||"这个角色"} 还没有人设，先写人设`);const v=[...l.personas.filter(Z=>Z!==w&&!Z.disable&&T(Z.name)).map(Z=>[Z.name,Z.overview,Z.text,Z.extra].filter(T).join(`
+`)),...P(l,"persona")].join(`
+
+`)||"（没有其他主要角色）";if(!(T(l.world?.main)||(l.npcs??[]).length||(l.routes??[]).some(Z=>T(Z.info))||T(l.relations)))throw new Error("世界观、NPC、路线都还是空的，没有东西可以接。先把它们写好再补");const S=`personaExtra:${f}`,O=`</${f}补充>`,C=await be("personaExtra",l,{name:f,persona:[w.text,w.extra].filter(T).join(`
+
+`),others:v,relations:T(l.relations)||"（无）",extraBrief:""},{key:S,prev:w.extra,close:O}),j=is(C,`${f}补充`);if(!T(j))throw new Error("AI 没有给出内容，再试一次");const K=w.extra??"";return L(l,S,K),w.extra=j,T(K)&&et(l,S,K,j,"重写人设补充"),l}async function yh(l,f){const w=l.personas.find(j=>j.name===f);if(!w?.text?.trim())throw new Error(`${f} 还没有人设`);const v=`persona:${f}`,h=(l.qa?.chars??[]).filter(j=>j.name===f).flatMap(j=>j.questions).filter(j=>j.answer?.trim()).map(j=>`${j.q}
+→ ${j.answer.trim()}`).join(`
+`),S=await be("backstory",l,{name:f,persona:w.text,answers:nd(w,h)||(Q(l)?"":ba(l)),count:t().backstoryCount||"按人物需要"},{key:`backstory:${f}`,prev:w.text}),O=S.slice(Math.max(0,S.search(/life_story\s*:/)));if(!/life_story\s*:/.test(O))throw new Error("AI 没按格式写经历，再试一次");L(l,v,{overview:w.overview,text:w.text});const C=w.text;return w.text=xf(w.text,O),et(l,v,C,w.text,"展开经历"),ga(w.text)}async function kh(l){const f=pt(l.tags,"complexity")[0]??g(l)?.complexity??"简单",w=E(l),v=pt(l.tags,"source").includes("同人")&&l.fandom?`【同人】${l.fandom}`:"",h=await be("world",l,{complexity:f,fandom:v,zeroRule:w?"- 手枪卡：不用零度写作，简洁写清场景即可。":d(l).零度写作},{key:"world",prev:l.world?.main,close:"</世界观>"});L(l,"world",l.world);const S=wn(h);return l.world={main:S.lead,extra:S.blocks.filter(O=>O.body).map(O=>({name:O.name||O.type,keys:O.keys,content:O.body}))},!l.world.main&&l.world.extra.length&&(l.world.main=l.world.extra.shift().content),l}async function Sh(l){const f=(l.npcs??[]).filter(j=>T(j.name)||T(j.desc));let w=g(l)?.npcs??2;w=Math.max(Number(w)||2,f.length);const v=f.map((j,K)=>`${K+1}. 名字：${T(j.name)||"（未命名）"}；作者设想：${T(j.desc)||"（未填写，请根据本卡自行创作）"}`).join(`
+`)||"（未填写，请根据本卡自行创作人物）",h=await be("npc",l,{count:w,npcIdeas:v},{key:"npc",prev:(l.npcs??[]).map(j=>j.content).join(`
+`)});L(l,"npc",l.npcs);const S=wn(h),O=new Set,C=S.blocks.filter(j=>j.body).map((j,K)=>{let Z=f.find(Y=>!O.has(Y)&&T(Y.name)&&T(Y.name)===j.name);return!Z&&!T(f[K]?.name)&&f[K]&&!O.has(f[K])&&(Z=f[K]),Z||(Z=f.find(Y=>!O.has(Y)&&!T(Y.name))),Z&&O.add(Z),{name:j.name||"未命名",desc:Z?.desc??"",keys:j.keys,content:j.body}});return!C.length&&S.lead&&C.push({name:"NPC",keys:[],content:S.lead}),l.npcs=C,l}async function Ch(l){if((l.personas??[]).filter(v=>T(v.name)).length<2)throw new Error("至少要有两个主要角色");const f=await be("relations",l,{},{key:"relations",prev:l.relations,close:"</角色关系>"});L(l,"relations",l.relations??"");const w=l.relations??"";return l.relations=f.trim(),T(w)&&et(l,"relations",w,l.relations,"重写角色关系"),l}async function Ih(l,f){const w=l.npcs[f];if(!w)throw new Error("没有这个 NPC");const v=l.npcs.filter((j,K)=>K!==f&&!j.disable&&T(j.content)),h=await be("npcOne",l,{name:T(w.name)||"（你来起）",desc:T(w.desc)||"（未填写，请自行创作这个人物）",otherNpcs:v.map(j=>`${j.name}：${j.content}`).join(`
+
+`)||"（还没有）"},{key:"npc",prev:w.content,styleKey:"npc"}),S=wn(h),O=S.blocks.find(j=>j.body)??(S.lead?{name:"",keys:[],body:S.lead}:null);if(!O)throw new Error("AI 没按格式写，再试一次");L(l,"npc",l.npcs);const C=w.content??"";return!T(w.name)&&O.name&&(w.name=O.name),w.keys=[...new Set([...w.keys??[],...O.keys??[]].map(j=>T(j)).filter(j=>j&&j!==w.name))],w.content=O.body,T(C)&&et(l,"npc",C,w.content,`重写 ${w.name}`),w}function Ah(l){const f=(l.personas??[]).map(w=>T(w.name)).filter(Boolean);return f.length?{charNames:f.join("、"),relationFields:f.map(w=>`〔user〕和${w}的关系：
+〔user〕和${w}的过去：`).join(`
+`),guideFields:f.map(w=>`${w}：`).join(`
+`)}:{charNames:"这个世界里的关键人物",relationFields:`〔user〕在这个世界的处境：
+〔user〕和关键人物的关系：（写名字）`,guideFields:"关键人物各自对〔user〕的态度：（写名字）"}}async function Eh(l,f){l.routes?.length||(l.routes=[{name:"主线",user:"",period:"",info:""}]);const w=l.routes.filter(Z=>!T(Z.info)),v=Number.isInteger(f)?[l.routes[f]].filter(Boolean):w.length?w:l.routes;if(!v.length)throw new Error("没有这条路线");const h=v.map(Z=>Z.info??""),S=l.routes.filter(Z=>!v.includes(Z)&&T(Z.info)),O=await be("routes",l,{routes:v.map((Z,Y)=>`${Y+1}. ${Z.name}｜〔user〕身份：${Z.user||"未定"}｜时期：${Z.period||"未定"}${T(Z.desc)?`
+   作者定的主题（必须按这个写）：${T(Z.desc)}`:""}${Number.isInteger(f)&&T(Z.info)?`
+   上一版：${Qe(Z.info,600)}`:""}`).join(`
+`),otherRoutes:S.length?`【已有的路线】（不用重写，新路线要和它们区分开）
+${S.map(Z=>`${Z.name}：${Qe(Z.info,300)}`).join(`
+`)}`:"",...Ah(l)},{key:"routes",prev:v.map(Z=>Z.info).join(`
+`)});L(l,"routes",l.routes.map(Z=>Z.info));const C=wn(O),j=C.blocks.filter(Z=>Z.body);!j.length&&C.lead&&j.push({name:v[0].name,body:C.lead});const K=new Set;for(const Z of j){let Y=v.find(ke=>!K.has(ke)&&(ke.name===Z.name||Z.name&&(ke.name.includes(Z.name)||Z.name.includes(ke.name))));Y??(Y=v.find(ke=>!K.has(ke))),Y&&(K.add(Y),Y.info=Z.body)}return Number.isInteger(f)&&T(h[0])&&et(l,"routes",h[0],v[0].info,`重写路线 ${v[0].name}`),l}async function Th(l){const f=await be("tone",l,{cardType:pt(l.tags,"cardType").join("、")||"单人卡"},{key:"tone",prev:l.tone,close:"</创作文体>"});return L(l,"tone",l.tone),l.tone=is(f,"创作文体"),l}async function Nh(l,f){const w=l.free[f];if(!w?.name?.trim())throw new Error("先给模块起个名字");const v=await be("free",l,{name:w.name.trim(),desc:w.desc||"（无）"},{key:`free:${w.name.trim()}`,prev:w.content,close:`</${w.name.trim()}>`});return L(l,`free:${w.name.trim()}`,w.content),w.content=is(v,w.name.trim()),l}async function Ph(l,f){a();const w=T(f.name)||"我的步骤";r(`${w}…`);const v=`free:${w}`;let h=l.free.find(K=>K.fromStep===f.id),S=(()=>{if(String(f.template??"").includes("{{作者要求}}")&&!String(f.userAsk??"").trim())throw new Error(`先在「${w}」页写下你的要求，再生成`);return as(String(f.template??"").split("{{作者要求}}").join(String(f.userAsk??"").trim()),{...z(l),name:w})})();S+=Zt(l,`step:${f.id}`,w);const O=R(l,v);O&&(S+=`
+
+【作者对上一版的修改意见，必须优先满足】
+${O}`,T(h?.content)&&(S+=`
+【上一版】
+${Qe(h.content,3e3)}`));const C=f.stage||"card",j=V(await Ao(await e.llm({system:ce(C==="greeting"?Ql:Xi,l),user:S,stage:C,temperature:.8}),{stage:C}));return a(),O&&(l.feedback[v]=""),l.custom??(l.custom={}),l.custom[f.id]=j,f.output!=="none"&&(h||(h={name:w,desc:"",content:"",light:f.light||"blue",keys:f.keys??[],position:f.position||"after",fromStep:f.id},l.free.push(h)),L(l,v,h.content),h.name=w,h.content=j),l}async function Oh(l,f,w=t().greetingCount||2){const v=Ja(l,f),h=await be("greeting",l,{...qo(l,v),n:w},{key:`greet:${v.name}`,greetingOutput:!0,prev:(l.greetings??[]).filter(S=>S.route===v.name).map(S=>S.text).join(`
+
+`)});return L(l,`greet:${v.name}`,(l.greetings??[]).filter(S=>S.route===v.name).map(S=>S.text)),l.greetings=(l.greetings??[]).filter(S=>S.route!==v.name),l.greetings.push(...h.map(S=>({route:v.name,text:S}))),l}function Ja(l,f){const w=Number(f)>=0?l.routes[Number(f)]:null;if(w)return w;const v=(l.routes??[]).map(h=>h.name).filter(Boolean);return{name:"",label:"不分路线",info:`不分路线：这个开场白不绑定某一条路线。按人设、世界观和基调写，〔user〕的身份可以在开场白里自然交代，也可以沿用卡里已有的设定。${v.length?`（这张卡的路线有：${v.join("、")}，这个开场白不属于其中任何一条）`:""}`}}function Lo(l){const f=(C,j)=>T(j)?`【${C}】
+${j}`:"",w=D(l),v=(l.personas??[]).filter(C=>!C.disable),h=l.existing?.fields??{},S=yn(l,"brief")&&Q(l)?["（作者选择不参考构想，以作者定稿为准）"]:[f("作者构想",l.idea),g(l)?f("已选构想",ha(g(l))):"",l.au?Le(l):"",f("已选标签",Wi(l.tags,n())),f("同人设定",l.fandom),Ga(l),f("灵感问答",(l.inspire??[]).filter(C=>T(C.answer)).map(C=>`${C.q}
+→ ${C.answer}`).join(`
+`))],O={...w,concept:[...S,f("参考短篇",l.story?.text)].filter(Boolean).join(`
+
+`),personas:[...v.map(C=>f(C.name||"主要人物",[f("作者填写的设定",C.desc),C.text,C.extra,f("深挖问答",lo(C)),f("作者问答",(l.qa?.chars??[]).filter(j=>j.name===C.name).flatMap(j=>(j.questions??[]).filter(K=>T(K.answer)).map(K=>`${K.q}
+→ ${K.answer}`)).join(`
+`))].filter(T).join(`
+
+`))),...P(l,"persona"),f("原卡人物描述",h.description),f("原卡性格",h.personality),f("原卡对话示例",h.mes_example)].filter(Boolean).join(`
+
+`),overviews:Fl({...l,personas:v}),world:[l.world?.main,...(l.world?.extra??[]).filter(C=>!C.disable).map(C=>f(C.name||"世界观条目",C.content)),...P(l,"world"),f("原卡情景",h.scenario)].filter(T).join(`
+
+`),npcs:[...(l.npcs??[]).filter(C=>!C.disable).map(C=>f(C.name||"NPC",[f("作者填写的设定",C.desc),C.content].filter(T).join(`
+
+`))),...P(l,"npc")].filter(Boolean).join(`
+
+`),routes:(l.routes??[]).filter(C=>!C.disable).map(C=>f(C.name||"未命名路线",[f("玩家身份",C.user),f("时期",C.period),f("作者指定的主题",C.desc),C.info].filter(T).join(`
+
+`))).join(`
+
+`),other:(l.existing?.entries??[]).filter(C=>!C.disable&&!["persona","world","npc","tone"].includes(C.cat)).map(C=>f(C.comment||"原卡条目",C.content)).filter(Boolean).join(`
+
+`),free:[...(l.free??[]).filter(C=>!C.disable).map(C=>f(C.name||"未命名模块",C.content)),...(t().customSteps??[]).filter(C=>C.output==="none"&&!(l.free??[]).some(j=>j.fromStep===C.id)).map(C=>f(C.name||"自定义步骤",l.custom?.[C.id]))].filter(Boolean).join(`
+
+`),brief:l.chat?.use===!1&&!l.chat?.dropConcept&&!l.chat?.dropOverview?"":T(l.chat?.brief)};O.routes&&(O.routes=`以下路线分别成立，按本次选定的路线写；不要把不同路线的玩家身份和前情合并。
+`+O.routes);for(const C of Object.keys(O))yn(l,C==="overviews"?"personas":C)||(O[C]="");return yn(l,"brief")&&T(l.chat?.brief)&&l.chat?.dropOverview&&(O.overviews=""),O}const id=l=>[...(l.greetings??[]).map(f=>T(f.text)&&`【${f.route||"不分路线"}】
+${f.text}`),...(l.existing?.greetings??[]).filter(T)].filter(Boolean).join(`
+
+`)||"（无）",qo=(l,f)=>({route:f.label??f.name,routeInfo:f.info||`${f.name}｜〔user〕身份：${f.user||"未定"}｜时期：${f.period||"未定"}`,length:t().greetingLength||"600–900",existingGreetings:id(l),...Lo(l)});async function Dh(l,f,w=5){var v,h;const S=Ja(l,f);l.hooks??(l.hooks={});const O=(v=l.hooks)[h=S.name]??(v[h]=[]),C=dt(await be("hooks",l,{...qo(l,S),n:w,existing:O.filter(K=>T(K.text)).map(K=>`- ${K.text}`).join(`
+`)||"（无）",existingGreetings:id(l)},{json:!0,key:`hooks:${S.name}`,system:"你是和作者一起构思小说的编辑。本次只提供可供选择的开场剧情，按任务要求输出 JSON，不写小说正文或分析过程。玩家一律写作〔user〕。"})),j=Se(C.hooks).map(T).filter(Boolean).map(K=>V(K));return l.hooks[S.name]=[...O.filter(K=>K.on||K.mine||K.used),...j.map(K=>({text:K,on:!1}))],l}async function Bh(l,f){const w=Ja(l,f),v=(l.hooks?.[w.name]??[]).filter(S=>S.on&&T(S.text));if(!v.length)throw new Error("先勾选要扩写的梗，或者自己写一个");const h=await be("expand",l,{...qo(l,w),hooks:v.map((S,O)=>`${O+1}. ${S.text}`).join(`
+`)},{key:`greet:${w.name}`,greetingOutput:!0});L(l,`greet:${w.name}`,(l.greetings??[]).filter(S=>S.route===w.name).map(S=>S.text)),l.greetings??(l.greetings=[]),l.greetings.push(...h.map(S=>({route:w.name,text:S})));for(const S of v)S.on=!1,S.used=!0;return h.length}function Mh(l){for(const f of l.existing?.entries??[])f.cat=Vl(f,{charName:l.existing?.name||l.name});return l.existing?.entries??[]}async function Lh(l){const f=l.existing?.entries??[];if(!f.length)throw new Error("原卡里没有其他条目");const w=f.map(O=>({id:String(O.uid),名称:O.comment,关键词:(O.key??[]).join("、"),灯:O.constant?"蓝":"绿",开头:Qe(O.content,200)})),v=dt(await be("classify",l,{charName:l.existing?.name||l.name,items:JSON.stringify(w,null,1)},{json:!0})),h=new Map(Se(v.items).map(O=>[T(O.id),T(O.cat)]));let S=0;for(const O of f){const C=h.get(String(O.uid));C&&xa[C]&&(O.cat=C,S++)}return S}const qh=(l,f)=>f.split(".").reduce((w,v)=>w?.[v],l),jh=(l,f,w)=>{const v=f.split("."),h=v.pop();v.reduce((S,O)=>S[O]??(S[O]={}),l)[h]=w};async function Qh(l,{path:f,start:w,end:v,instruction:h="",key:S="",label:O=""}){const C=String(qh(l,f)??"");if(!(v>w)||v>C.length)throw new Error("先在框里选中要改的那段");const j=C.slice(w,v);if(!T(j))throw new Error("选中的是空白");const K=2500,Z=C.slice(Math.max(0,w-K),w),Y=C.slice(v,v+K),ke=`${w>K?"……":""}${Z}【【${j}】】${Y}${v+K<C.length?"……":""}`,Ke=/^(?:greetings\.\d+\.text|existing\.greetings\.\d+)$/.test(f),sn=await be("localEdit",l,{label:O||f,instruction:T(h)||"重写这一段：意思和信息保留，写得更具体、更像这个角色自己，去掉八股和空泛的形容。",context:ke},{styleKey:S,greetingOutput:Ke,dialoguePath:f});let st=(Ke?sn.join(`
+
+`):String(sn)).replace(/【【|】】/g,"").trim();const Lt=j.match(/^\s*(?:[-*]\s+)?(?:[A-Za-z_\u4e00-\u9fa5][\w\u4e00-\u9fa5]{0,20}:\s+)?/)[0],bt=j.match(/^\s*/)[0],Tn=j.match(/\s*$/)[0];if(st=(Lt.trim()&&!st.startsWith(Lt.trim())?Lt:bt)+st+Tn,S){const Fe=W(l,S);Fe&&L(l,S,structuredClone(Fe.get()))}return jh(l,f,C.slice(0,w)+st+C.slice(v)),S&&(l.changes??(l.changes={}),l.changes[S]={at:Date.now(),how:`局部重写${T(h)?`：${T(h).slice(0,40)}`:""}`,hunks:[{before:j.trim(),after:st.trim()}],more:0}),{before:j,after:st}}const Wa=l=>T(l.existing?.name)||T(l.personas?.[0]?.name)||T(l.name)||"角色";function od(l){const f=[],w=l.routes.find(h=>h.orig)?.name??l.routes[0]?.name??"";(l.existing?.greetings??[]).forEach((h,S)=>{T(h)&&f.push({label:`原卡·${S===0?"主开场白":`开场白 ${S+1}`}`,text:h,route:w})});const v={};for(const h of bn(l))v[h.route]=(v[h.route]??0)+1,f.push({label:`${h.route||"主线"} · ${v[h.route]}`,text:h.text,route:h.route});return f}function cd(l,f){const w=l.play??{};let v=String(f??"").replace(/\{\{char\}\}|〔char〕/gi,Wa(l));const h=T(w.userName);if(h){const S=T(t().userToken)||"<user>";v=v.split(S).join(h).replace(/\{\{user\}\}|〔user〕|<user>/gi,h)}return v}function ld(l,f=8e3){const v=(l.play?.messages??[]).map((h,S)=>`[第 ${S+1} 条] ${h.role==="char"?Wa(l):"〔user〕"}：${h.text}`).join(`
+
+`);return v.length>f?`……（前面省略）
+${v.slice(-f)}`:v}const jo=l=>{const f=l.routes.findIndex(w=>w.name===l.play?.route);return f<0?0:f};function pd(l){const f=(l.play?.messages??[]).slice(-5).map(w=>w.text).join(`
+`);return io(l,{personaPlace:t().personaPlace,activeRoute:jo(l),scan:f})}function Rh(l,f){const w=od(l),v=w[f]??w[0];if(!v)throw new Error("还没有开场白，先去开场白页写一个");return l.play={...l.play??{},greet:w.indexOf(v),route:v.route,messages:[{role:"char",text:v.text}],review:null,input:""},l.play}async function Qo(l){const f=l.play;if(!f?.messages?.length)throw new Error("先选一个开场白，点“开始”");if(f.messages.at(-1).role!=="user")throw new Error("先写一句 user 的话");a();const w=pd(l);f.sent=[...w.before,...w.card,...w.after].map(O=>O.label);const v=cd(l,as(m("playChar"),{...z(l),char:Wa(l),card:Df(w),length:t().playLength||300})+p(l,"playChar")+fo(l,"playChar")),h=f.messages.map(O=>({role:O.role==="char"?"assistant":"user",content:cd(l,O.text)}));r(`${Fn.playChar.name}…`);const S=await e.llm({system:v,messages:h,stage:Fn.playChar.stage,temperature:Fn.playChar.temp});return a(),f.messages.push({role:"char",text:T(S)}),f.review=null,f}const Ro={普通:"普通玩家：顺着剧情走，偶尔提问，给角色留空间。",唱反调:"爱唱反调的玩家：拒绝、怀疑、刁难，试探角色的底线，看角色会不会崩。",话少:"话很少的玩家：只给很短的回应或一个动作，看角色能不能自己把剧情推下去。",乱来:"不按套路的玩家：做出卡里没预料到的事（突然离开、提起无关的事、做奇怪的决定），看角色和世界怎么接。"};async function dd(l,{send:f=!0}={}){const w=l.play;if(!w?.messages?.length)throw new Error("先选一个开场白，点“开始”");const v=l.routes[jo(l)],h=await be("playUser",l,{style:Ro[w.style]??Ro.普通,routeInfo:v?v.info||`${v.name}｜〔user〕身份：${v.user||"未定"}`:"（没有路线信息）",transcript:ld(l,6e3)},{system:"你在帮作者测试角色卡，扮演玩家。只输出要求的内容。",json:!0}),S=T(h).replace(/^〔user〕[：:]\s*/,"");return f?(w.messages.push({role:"user",text:S}),w.input=""):w.input=S,S}async function Hh(l,f=3){const w=l.play;if(!w?.messages?.length)throw new Error("先选一个开场白，点“开始”");const v=Math.max(1,Math.min(10,Number(f)||3));for(let h=0;h<v;h++)a(),r(`试玩 第 ${h+1}/${v} 轮：AI 扮 user…`),w.messages.at(-1).role!=="user"&&await dd(l),r(`试玩 第 ${h+1}/${v} 轮：角色回复…`),await Qo(l);return v}async function zh(l){const f=l.play;if(!f||f.messages.length<2||f.messages.at(-1).role!=="char")throw new Error("最后一条不是角色的回复");return f.messages.pop(),Qo(l)}async function Fh(l){const f=l.play;if(!f||f.messages.length<3)throw new Error("至少跑一两轮再点评");const w=l.routes[jo(l)],v=dt(await be("playReview",l,{routeInfo:w?w.info||w.name:"（没有路线信息）",transcript:ld(l)},{json:!0})),h=["persona","world","npc","routes","tone","greet"];return f.review={score:Number(v.score)||null,good:Se(v.good).map(T).filter(Boolean),issues:Se(v.issues).map(S=>({where:T(S.where),problem:T(S.problem),part:h.includes(T(S.part))?T(S.part):"persona",name:T(S.name),fix:T(S.fix)})).filter(S=>S.problem||S.fix)},f.review}async function Uh(l){const f=n();if(!(l.tags??[]).length)throw new Error("还没选标签，没有可以对照的");const w=(l.greetings??[]).filter(O=>T(O.text)).slice(0,3).map(O=>`【${O.route||"无路线"}】${Qe(T(O.text),600)}`).join(`
+`)||"（还没写）",v=dt(await be("conflict",l,{greetings:w},{json:!0})),h=["persona","world","npc","routes","tone","greet"],S=Se(v.issues).map(O=>{const C=ns(f,T(O.tag));return{level:T(O.level)==="weak"?"weak":"strong",tag:C?C.name:T(O.tag),tagDim:C?C.dim:"",part:h.includes(T(O.part))?T(O.part):"persona",name:T(O.name),quote:T(O.quote),problem:T(O.problem),side:T(O.side)==="tag"?"tag":"content",fix:T(O.fix)}}).filter(O=>O.problem&&O.quote);return l.conflicts={time:Date.now(),issues:S},l.conflicts}async function Gh(l){if(!((l.personas??[]).some(C=>T(C.text))||T(l.world?.main)))throw new Error("还没有可以对照的内容");const w=(l.greetings??[]).filter(C=>T(C.text)).slice(0,3).map(C=>`【${C.route||"无路线"}】${Qe(T(C.text),600)}`).join(`
+`)||"（还没写）",v=dt(await be("consistency",l,{greetings:w},{json:!0})),h=["persona","world","npc","routes","tone","greet"],S=C=>h.includes(T(C))?T(C):"persona",O=Se(v.issues).map(C=>({level:T(C.level)==="weak"?"weak":"strong",part:S(C.part),otherPart:S(C.otherPart||C.part),name:T(C.name),quote:T(C.quote),other:T(C.other),problem:T(C.problem),fix:T(C.fix)})).filter(C=>C.problem&&C.quote&&C.other);return l.consistency={time:Date.now(),issues:O},l.consistency}function Jh(l,f){const w=l.personas.find(h=>f.name&&(h.name===f.name||f.name.includes(h.name)))??l.personas[0],v=l.play?.route??l.routes[0]?.name??"";switch(f.part){case"world":return{page:"world",key:"world"};case"npc":return{page:"npc",key:"npc"};case"routes":return{page:"routes",key:"routes"};case"tone":return{page:"tone",key:"tone"};case"greet":return{page:"greet",key:`greet:${v}`};default:return{page:"persona",key:`persona:${w?.name??""}`}}}async function Wh(l,f){const w=l.personas.find(Y=>Y.name===f);if(!w?.text)throw new Error(`${f} 还没有人设`);const v=g(l)?.lineup?.find(Y=>Y.name===f)?.archetype?.join("、")||pt(l.tags,"archetype").join("、")||"主角",h=["era","relation","flavor","cp"].map(Y=>pt(l.tags,Y).join("、")).filter(Boolean).join("；"),S=dt(await be("predict",l,{archetype:v,tags:h},{json:!0})),O={scenes:Se(S.scenes),traits:Se(S.traits).map(T)},C=[...O.scenes.flatMap(Y=>[Y.behavior&&`${Y.scene}：${Y.behavior}`,Y.line&&`${Y.scene}时说：${Y.line}`]),...O.traits].filter(Boolean).map(Y=>`- ${Y}`).join(`
+`);let j=[];try{const Y=dt(await be("judge",l,{name:f,stereotypes:C,persona:w.text},{json:!0}));j=Se(Y.overlaps).filter(ke=>T(ke?.card)).slice(0,8).map(ke=>({from:"AI 比对",text:[T(ke.stereotype),T(ke.why)].filter(Boolean).join("："),card:T(ke.card),score:1}))}catch(Y){if(s())throw Y}const K=bf(O,w.text,t().predictThreshold??.42),Z=[...j,...K.filter(Y=>!j.some(ke=>ke.card.includes(Y.card.slice(0,12))||Y.card.includes(ke.card.slice(0,12))))];return l.predict??(l.predict={}),l.predict[f]={predicted:O,overlaps:Z,rewritten:!1},l.predict[f]}async function Vh(l,f,{only:w}={}){const v=l.personas.find(Y=>Y.name===f),h=l.predict?.[f],S=h?.overlaps??[],O=Array.isArray(w)?S.filter((Y,ke)=>w.includes(ke)):S;if(!v||!O.length)return l;const C=O.map(Y=>`- 卡里：「${Y.card}」
+  刻板写法（${Y.from}）：「${Y.text}」${T(Y.hint)?`
+  作者要的改法：${T(Y.hint)}`:""}`).join(`
+`),j=v.text;let K=is(await be("destale",l,{name:f,overlaps:C,persona:j}),f);if(!T(K))throw new Error("AI 没有返回修改后的人设，原文已保留");L(l,`persona:${f}`,{overview:v.overview,text:j}),v.text=K;const Z=et(l,`persona:${f}`,j,v.text,`重写撞车的 ${O.length} 处`);return h.fixed=[...h.fixed??[],...O.map(Y=>({card:Y.card,text:Y.text}))],h.overlaps=S.filter(Y=>!O.includes(Y)),h.rewritten=!0,Z}function Yh(l){const f=(l.personas??[]).map(C=>C.name).concat((l.npcs??[]).map(C=>C.name)),w=E(l),v=[],h=_(l),S=(C,j,K)=>{const Z=hf(j,K,{names:f,pistol:w});for(const Y of to(j,h))Z.push({type:"cliche",level:"warn",label:"禁用词",match:Y});Z.length&&v.push({label:C,issues:Z})};S("基调与规则",l.tone,"tone"),S("世界观",l.world?.main,"world");for(const C of l.world?.extra??[])S(`世界观·${C.name}`,C.content,"world");for(const C of l.personas??[])S(`人设·${C.name}`,`${C.overview}
+${C.text}`,"persona"),S(`人设补充·${C.name}`,C.extra,"persona");for(const C of l.npcs??[])S(`NPC·${C.name}`,C.content,"npc");for(const C of l.routes??[])S(`路线·${C.name}`,C.info,"route");bn(l).forEach((C,j)=>S(`开场白 ${j+1}（${C.route}）`,C.text,"greeting"));for(const C of l.free??[])S(`模块·${C.name}`,C.content,"free");l.intro?.text&&S("简介",l.intro.text,"intro");const O=(l.personas??[]).length>1?vf(Object.fromEntries(l.personas.filter(C=>C.text).map(C=>[C.name,C.text]))):[];return{sections:v,cross:O}}function Kh(l,{all:f=!1}={}){const w=[],v=(h,S,O,C,j,K={})=>{T(C())&&w.push({label:h,kind:S,page:O,get:C,set:j,...K})};if(v("基调与规则","世界书条目","tone",()=>l.tone,h=>{l.tone=h},{rules:!0}),v("世界观","世界书条目","world",()=>l.world.main,h=>{l.world.main=h}),l.world.extra.forEach(h=>v(`世界观·${h.name}`,"世界书条目","world",()=>h.content,S=>{h.content=S})),l.personas.forEach(h=>{v(`人设概要·${h.name}`,"人设","persona",()=>h.overview,S=>{h.overview=S}),v(`人设·${h.name}`,"人设","persona",()=>h.text,S=>{h.text=S}),v(`人设补充·${h.name}`,"人设","persona",()=>h.extra,S=>{h.extra=S})}),v("角色关系","世界书条目","persona",()=>l.relations,h=>{l.relations=h}),l.npcs.forEach(h=>v(`NPC·${h.name}`,"世界书条目","npc",()=>h.content,S=>{h.content=S})),l.routes.forEach(h=>v(`路线·${h.name}`,"世界书条目","routes",()=>h.info,S=>{h.info=S})),l.free.forEach(h=>v(`模块·${h.name}`,"世界书条目",h.fromStep?`step:${h.fromStep}`:"tone",()=>h.content,S=>{h.content=S})),f)for(const[h,S]of Object.entries(l.hooks??{}))(S??[]).forEach((O,C)=>v(`梗·${h} ${C+1}`,"开场白的梗","greet",()=>O.text,j=>{O.text=j}));if((l.greetings??[]).forEach((h,S)=>v(`开场白 ${S+1}`,"开场白","greet",()=>h.text,O=>{h.text=O})),l.existing){for(const[h,S]of[["description","角色描述"],["personality","性格"],["scenario","场景"]])v(`原卡·${S}`,"角色卡","existing",()=>l.existing.fields[h],O=>{l.existing.fields[h]=O});l.existing.entries.forEach(h=>v(`原卡·${h.comment}`,"世界书条目",Af[h.cat??"other"]??"existing",()=>h.content,S=>{h.content=S})),l.existing.greetings.forEach((h,S)=>v(`原卡·开场白 ${S+1}`,"开场白","existing",()=>l.existing.greetings[S],O=>{l.existing.greetings[S]=O}))}if(f&&l.play?.messages&&l.play.messages.forEach((h,S)=>{S>0&&h.role==="char"&&v(`试玩·第 ${S+1} 条`,"对话","play",()=>h.text,O=>{h.text=O},{scanOnly:!0})}),f&&l.au&&(l.au.core??[]).forEach(h=>v(`AU 内核·${h.name}`,"人设","au",()=>h.text,S=>{h.text=S})),f&&l.intro){const h=l.intro.parts??{};if(Object.values(h).some(S=>T(S)))for(const S of Object.keys(h))v(`简介·${S}`,"角色卡简介","intro",()=>h[S],O=>{h[S]=O},{introPart:!0});else v("简介","角色卡简介","intro",()=>l.intro.text,S=>{l.intro.text=S})}return w}async function ud(l){const f=t(),w=bn(l)[0],v={introTags:Wi(l.tags,n()),greetingSample:w?Qe(w.text,600):"（无）"},h=Ho(f);if(ao(h)){const K=String(f.prompts?.intro??"").trim(),Z=K&&K!==Xt.intro?`【作者额外设定的简介写法】
+`+K+`
+若其输出格式与以下模板不同，以以下模板为准。`:"",Y=["【任务】根据这张角色卡的资料，严格按照作者提供的发卡模板，直接写出一篇可以复制到 Discord 发布的成品简介。","【最高优先级：作者自己的发卡模板】",h,"【填写方式】","1. 严格使用上述模板的章节顺序、标题和装饰，不要额外加入‘简介、关于TA、路线、内心想法’等默认版栏目，也不要输出两个版本。","2. ‘角色卡名称’、‘这里填写’、‘核心 XP｜’、‘推荐玩法｜’、‘制卡灵感｜’、‘预期剧情｜’是待填位置。用本卡资料认真填写，不能照抄占位说明。","3. 避雷说明只有在卡片确实有需要注明的内容时才填写；没有就删掉整行。示例词‘不洁、乱伦、女绿、NTR’不是既定设定。","4. 测试信息按已知内容填写，不知道就标‘未填写’；保留作者明确写好的二改、二传、商用要求。保留作者的话和下载信息等固定文字。","5. ‘02 关于故事’围绕已写好的角色设定、故事冲突和可玩性填写具体内容，不编造未定的经历，不泄露作者留待游玩探索的秘密。","6. 最终回答只能有一篇完整成品。不要解释、提示词、代码围栏、<<<段落标记>>> 或 <content> 标签。","【卡片构想】","{{concept}}","【主要角色概要】","{{overviews}}","【人物人设全文】","{{personas}}","【主要角色关系】","{{relations}}","【世界观】","{{world}}","【NPC】","{{npcs}}","【路线】","{{routes}}","【基调与规则】","{{tone}}","【开场白参考】","{{greetingSample}}","【卡片标签】","{{introTags}}",Z,"【输出格式优先级】只用上面的作者模板作为唯一结构，不能混入内置默认简介的格式。"].join(`
+
+`),ke=await be("intro",l,v,{key:"intro",prev:l.intro?.text,templateOverride:Y,system:"你是给 Discord 上的真实读者写角色卡发布简介的中文编辑。当前任务是按作者自己的发卡模板填内容，不写扮演用的 XML/YAML 提示词。模板的章节顺序、数字编号、装饰线与固定文字必须保留；人物设定要忠实于提供的素材。只输出一个完整的成品简介。"}),Ke=Un(ke).replace(/^\s*<content>\s*/i,"").replace(/\s*<\/content>\s*$/i,"").trim();if(!Ke||Ke.length<80||/这里填写|在这里填|角色卡名称|如果有什么需要避雷|\[待填\]/.test(Ke))throw new Error("AI 没有照你的简介模板填完内容。本次没有覆盖已有简介，可查看 AI 原文后重试。");return L(l,"intro",l.intro),l.intro={titles:[],pick:0,parts:{},text:Ke,dirty:!1,appliedStyle:Number(f.introStyle)||0,renderMode:"author-prompt",notice:""},l}const S=await be("intro",l,v,{key:"intro",prev:l.intro?.text}),O=wn(S),C=Object.fromEntries(O.blocks.map(K=>[K.type,K.body]));if(!String(C.简介??"").trim())throw new Error("AI 没有按 <<<简介>>> 等标记返回内容；本次未覆盖旧简介。请查看 AI 返回原文。");const j={titles:If(C.标题),pick:0,parts:C,text:"",dirty:!1,appliedStyle:Number(f.introStyle)||0,renderMode:"slots",notice:""};return j.text=Wl(C,{title:j.titles[0]??l.concepts?.[l.pick]?.title??"",tags:l.tags,author:f.author,license:f.license??{},presetNote:f.presetNote||f.presetGreeting||"",notes:f.introNotes,charName:l.personas?.[0]?.name??"",ending:zo(f)},h),L(l,"intro",l.intro),l.intro=j,l}const Ho=(l=t())=>{const f=Number(l.introStyle??0);return f>0&&l.introStyles?.[f-1]?.tpl||Gn};function zo(l=t()){return String(l.introEnding??l.introThanks??"").trim()}function md(l,f=t()){const w=l.intro??{},v=Ho(f);return Wl(w.parts??{},{title:w.titles?.[w.pick??0]??l.concepts?.[l.pick]?.title??"",tags:l.tags,author:f.author,license:f.license??{},presetNote:f.presetNote||f.presetGreeting||"",notes:f.introNotes,charName:l.personas?.[0]?.name??"",ending:zo(f)},ao(v)?Gn:v)}async function Xh(l,{rememberPrevious:f=!0}={}){const w=l.intro;return ao(Ho(t()))||!String(w?.parts?.简介??"").trim()?ud(l):(f&&L(l,"intro",structuredClone(w)),w.text=md(l),w.renderMode="slots",w.appliedStyle=Number(t().introStyle)||0,w.dirty=!1,w.notice="",l)}return{banned:_,strip:V,restore:Te,remember:L,slotOf:W,localEdit:Qh,classifyLocal:Mh,classifyAI:Lh,routeOf:Ja,npcOne:Ih,relations:Ch,modeOf:i,ruleList:o,introEnding:zo,noteChanges:et,styleOf:At,playGreetings:od,playStart:Rh,playChar:Qo,playUser:dd,playAuto:Hh,playRedo:zh,playReview:Fh,conflictCheck:Uh,consistencyCheck:Gh,story:mh,personaExtra:xh,reviewTarget:Jh,playContext:pd,charName:Wa,PLAY_STYLES:Ro,deepAns:sh,deepOf:tp,chatOf:Ar,chatReply:td,chatSend:oh,chatAsk:ah,chatAnswer:ih,chatBrief:ch,roll:rd,useMyTags:fh,inspire:lh,ideaFromInspire:gh,ideaQA:ph,hooks:Dh,expand:Bh,revise:me,textSlot:pe,suggestRoutes:J,addRouteIdea:re,loadCard:Ye,backstory:yh,auStart:ie,auCore:he,auMap:Ie,auCheck:Ae,auFix:_e,localTags:sd,idea:wh,pickConcept:hh,qa:bh,persona:vh,world:kh,npc:Sh,routes:Eh,tone:Th,free:Nh,custom:Ph,greetings:Oh,predict:Wh,destale:Vh,localCheck:Yh,textSlots:Kh,intro:ud,restyleIntro:Xh,composeIntroFor:md,baseVars:z,cardMaterials:D,openingMaterials:Lo}}var ip=`- temperature
+- top_p`;function op(e){const t=String(e??ip).trim();if(!t)return[];const n=t.replace(/^\[/,"").replace(/\]$/,"").split(/[\n,，]/).map(r=>r.replace(/\s+#.*$/,"").trim().replace(/^-\s+/,"").replace(/^["']|["']$/g,"")).filter(r=>r&&!r.startsWith("#"));if(n.some(r=>!/^[A-Za-z_][A-Za-z0-9_.-]*$/.test(r)))throw new Error("排除附加参数：请每行填写一个参数名，例如 temperature 或 top_p。");return[...new Set(n)]}function go(e,t){const n={...e};if(!t.length)return n;const r=op(e.custom_exclude_body??"");n.custom_exclude_body=[...new Set([...r,...t])].map(s=>`- ${s}`).join(`
+`);for(const s of t){const a=s.split(".");let i=n;for(const o of a.slice(0,-1)){if(!Object.hasOwn(i,o)||!i[o]||typeof i[o]!="object"){i=null;break}i[o]=Array.isArray(i[o])?[...i[o]]:{...i[o]},i=i[o]}i&&delete i[a.at(-1)]}return n}async function Vf(e,t,n,r,s){if(!s.length)return{override:r,includePreset:!0};const a=e.ConnectionManagerRequestService,i=a.getProfile?.(t)??e.extensionSettings?.connectionManager?.profiles?.find(m=>m.id===t),o=a.validateProfile?.(i)??e.CONNECT_API_MAP?.[i?.api];if(!i||!o)throw new Error("当前酒馆无法读取连接配置的参数。请更新酒馆，或在设置中清空“排除附加参数”后再试。");const c=o.selected==="openai"?e.ChatCompletionService:e.TextCompletionService,p=i.preset?e.getPresetManager?.(o.selected)?.getCompletionPresetByName?.(i.preset):null;let d={...r};if(p){if(typeof c?.presetToGeneratePayload!="function")throw new Error("当前酒馆不支持合并并排除连接预设参数。请更新酒馆，或清空“排除附加参数”后再试。");d=await c.presetToGeneratePayload(p,{},{model:i.model,...o.selected==="openai"?{messages:Array.isArray(n)?n:[{role:"user",content:n}],chat_completion_source:o.source}:{prompt:n,api_type:o.type},...r});for(const m of["stream","messages","prompt","model","max_tokens","max_new_tokens","chat_completion_source","api_type","api_server","secret_id","custom_url","vertexai_region","zai_endpoint","siliconflow_endpoint","minimax_endpoint","pollinations_endpoint","reverse_proxy","proxy_password","custom_prompt_post_processing"])delete d[m]}d=go(d,s);for(const m of s)m.includes(".")||(d[m]=void 0);return{override:d,includePreset:!1}}async function Yf(e,t,n){if(!n.length)return e.generateRaw(t);const r=e.eventSource,s=e.event_types?.CHAT_COMPLETION_SETTINGS_READY;if(!s||typeof r?.on!="function"||typeof r?.removeListener!="function"||e.mainApi&&e.mainApi!=="openai")throw new Error("当前酒馆的旧请求接口无法排除参数。请更新酒馆，或在设置中清空“排除附加参数”后再试。");const a=new WeakSet(t.prompt),i=o=>{if(!o?.messages?.some(p=>a.has(p)))return;const c=go(o,n);for(const p of Object.keys(o))Object.hasOwn(c,p)||delete o[p];Object.assign(o,c)};r.on(s,i);try{return await e.generateRaw(t)}finally{r.removeListener(s,i)}}var Ea=()=>X.SillyTavern.getContext();function Kf(){const e=Ea();return e.ConnectionManagerRequestService?(e.extensionSettings?.connectionManager?.profiles??[]).map(t=>({id:t.id,name:t.name})):[]}function cp(){try{return Ea().getPresetManager?.("openai")?.getAllPresets?.()??[]}catch{return[]}}function lp(e,{required:t=!1}={}){if(!e)return[];try{const r=Ea().getPresetManager?.("openai")?.getCompletionPresetByName?.(e);if(!r){if(t)throw new Error("找不到已选预设");return[]}const s=new Map((r.prompts??[]).map(o=>[o.identifier,o])),a=(r.prompt_order??[]).find(o=>String(o.character_id)==="100001")??(r.prompt_order??[])[0];return(a?.order?.length?a.order.filter(o=>o.enabled).map(o=>s.get(o.identifier)).filter(Boolean):(r.prompts??[]).filter(o=>o.enabled!==!1)).filter(o=>!o.marker&&String(o.content??"").trim()).map(o=>({role:["system","user","assistant"].includes(o.role)?o.role:"system",content:String(o.content)}))}catch(n){if(t)throw Object.assign(new Error(`无法读取已选开场白预设“${e}”，本次未发送。请在开场白页重新选择预设。`),{code:"CW_GREETING_PRESET_UNAVAILABLE"});return console.warn("[Love 写卡机] 读取预设失败",n),[]}}var pp=e=>new Promise(t=>setTimeout(t,e)),dp=0,gr=e=>[e?.message,e?.cause?.message,e?.status,e?.cause?.status,e?.cause?.cause?.message,String(e??"")].filter(Boolean).join(" ");function wo(e){return/429|too many|rate.?limit|频率|过于频繁|quota|resource.?exhausted|overloaded|529/i.test(gr(e))}function Xf(e){return wo(e)?!1:/\b50[0234]\b|bad gateway|gateway time-?out|service unavailable|internal server error|upstream|timed? ?out|timeout|failed to fetch|network ?error|networkerror|ECONNRESET|ECONNREFUSED|socket hang up|fetch failed|terminated|unknown error occurred|网关|超时|服务.{0,4}不可用/i.test(gr(e))}function up(e){if(wo(e))return"429（请求太频繁）";const t=gr(e).match(/\b(50[0234])\b/);return t?`${t[1]}（服务器暂时出错）`:/bad gateway/i.test(gr(e))?"502（服务器暂时出错）":/service unavailable/i.test(gr(e))?"503（服务器暂时出错）":/time-?out|timed? ?out|超时/i.test(gr(e))?"超时":"连接出错"}async function Zf(e){const t=Math.max(0,Number(e.settings?.minInterval??3))*1e3,n=e.settings?.retryWaits??[15,30,60],r=e.settings?.errorWaits??[5,15,30];let s=0,a=0;for(;;){const i=dp+t-Date.now();if(i>0&&await pp(i),e.aborted?.())throw new Error("已停止");dp=Date.now();try{return e.onAttempt?.(),await cwzCatchToasts(e,()=>eg(e))}catch(o){if(e.aborted?.())throw new Error("已停止");if(o?.code==="CW_GREETING_PRESET_UNAVAILABLE")throw o;let c;if(wo(o)){if(s>=n.length)throw new Error("API 一直返回 429（请求太频繁）。等一会儿再试，或者在设置里把“两次调用间隔”调大。");c=n[s++]}else if(Xf(o)){if(a>=r.length)throw new Error(`API 一直返回 ${up(o)}，重试 ${r.length} 次都没成功。多半是 API 或中转站那边的问题，等几分钟再点一次（已经写好的不会丢），或者在设置里换一个连接配置文件。原始错误：${$f(o)}`);c=r[a++]}else throw o;const p=up(o);for(let d=c;d>0;d--){if(e.aborted?.())throw new Error("已停止");e.onWait?.(d,p),await pp(1e3)}}}}var $f=e=>String(e?.message??e??"").slice(0,160);function cwzPickText(r){if(r==null)return"";if(typeof r=="string")return r;const j=v=>Array.isArray(v)?v.map(p=>typeof p=="string"?p:p?.text??"").join(""):typeof v=="string"?v:"";const c=r.choices?.[0];return j(c?.message?.content)||j(c?.text)||j(r.content)||j(r.candidates?.[0]?.content?.parts)||j(r.responseContent?.candidates?.[0]?.content?.parts)||""}
+function cwzWhyOf(r){if(!r||typeof r!="object")return"";const c=r.choices?.[0],g=r.candidates?.[0]??r.responseContent?.candidates?.[0],f=r.promptFeedback??r.responseContent?.promptFeedback;return[c?.finish_reason,c?.native_finish_reason,g?.finishReason,f?.blockReason,r.stop_reason,typeof r.error=="string"?r.error:r.error?.message,r.message].filter(Boolean).map(String).join(" / ")}
+async function cwzRetryRaw(fn,e){try{const r=await fn(),t=cwzPickText(r);if(String(t).trim())return t;const rs=r?.choices?.[0]?.message?.reasoning??r?.choices?.[0]?.message?.reasoning_content;rs&&(e.cwzThink=String(rs));e.cwzWhy=cwzWhyOf(r)||"空";e.cwzUsage=r?.usage??null;try{e.cwzDump=JSON.stringify(r).slice(0,2e3)}catch{}return""}catch(o){if(e.aborted?.()||wo(o)||Xf(o))throw o;e.cwzWhy="请求报错："+$f(o);return""}}
+async function cwzCatchToasts(e,fn){e.cwzToasts=[];e.cwzStreamErr="";e.cwzWhy="";e.cwzDump="";const T=globalThis.toastr,keep={};const strip=v=>String(v??"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();if(T)for(const k of["error","warning"]){keep[k]=T[k];if(typeof keep[k]=="function")T[k]=function(m,t,...r){const x=[strip(t),strip(m)].filter(Boolean).join("：");x&&e.cwzToasts.push(x.slice(0,300));return keep[k].call(this,m,t,...r)}}try{return await fn()}finally{if(T)for(const k in keep)T[k]=keep[k]}}
+function cwzErrText(e){const a=[...(e.cwzToasts||[])];e.cwzStreamErr&&a.push(e.cwzStreamErr);const w=String(e.cwzWhy||"");w&&w!=="空"&&a.push(w);return[...new Set(a)].join("\n")}
+function cwzEmptyMsg(e){const er=cwzErrText(e),u=e.cwzUsage;if(u&&Number(u.completion_tokens??u.output_tokens)===0&&(!er||/^(stop|STOP|end_turn)$/.test(er)))return`接口没报错，但模型一个字都没写（输出 0 token，结束原因 ${er||"stop"}，这次发过去 ${u.prompt_tokens??u.input_tokens??"?"} token）。\n这不是写卡机出错，是模型那边直接给了空回复。Gemini 碰到它不肯写的内容时常这样，中转站会把拦截包装成「正常结束」。\n可以试：再点一次；在「选择附带资料」里先关掉 NSFW 多的部分；或者这一步换个模型 / 开场白预设。`;if(er&&!/^(stop|STOP|end_turn)$/.test(er))return"API 报错了：\n"+er+(/length|max_?tokens/i.test(er)?"\n（回复长度被用完了，可以把「最大回复长度」调大）":/safety|prohibit|block|content_filter/i.test(er)?"\n（被模型的内容审核拦下了）":"");const w=String(e.cwzWhy||"");if(/length|max_?tokens/i.test(w))return"AI 的回复长度用完了，正文还没开始写（多半是模型的思考占掉了）。到设置里把「最大回复长度」调大（建议 16000 以上）再点一次，已经写好的不会丢。原因："+w;if(/safety|prohibit|block|recitation|content_filter|spii/i.test(w)||/\bOTHER\b/.test(w))return"这次被模型的内容审核拦下了（Gemini 比较常见），所以什么都没返回。可以再点一次，或者换一个开场白预设 / 模型，也可以在补充文字里让它写得含蓄些。原因："+w;return"API 返回了空内容"+(w&&w!=="空"?"（"+w+"）":"")+"。已经自动换不流式重试过一次还是空的。多半是：最大回复长度太小被思考用完、模型审核拦截，或者预设和这个模型不搭。可以先把最大回复长度调大，或换个开场白预设再试。"}
+async function mp(e,t,n){let r="",h="";for await(const s of e()){if(t.aborted?.())throw n?.abort(),new Error("已停止");const c=typeof s=="string"?s:s?.text,g=s?.state?.reasoning;g&&(h=String(g));if(!c)continue;r=String(c);try{t.onStream?.(r)}catch{}}t.cwzThink=h;return r}function _f(e,t,n,r,s,a,i){const o=e.chatCompletionSettings;return{stream:a,messages:t,max_tokens:n,model:e.getChatCompletionModel?e.getChatCompletionModel(o):void 0,chat_completion_source:o.chat_completion_source,custom_url:o.custom_url,reverse_proxy:o.reverse_proxy,proxy_password:o.proxy_password,custom_prompt_post_processing:o.custom_prompt_post_processing,custom_include_body:o.custom_include_body,custom_exclude_body:o.custom_exclude_body,custom_include_headers:o.custom_include_headers,vertexai_region:o.vertexai_region,zai_endpoint:o.zai_endpoint,temperature:s&&typeof r=="number"?r:o.temp_openai,top_p:o.top_p_openai,frequency_penalty:o.freq_pen_openai,presence_penalty:o.pres_pen_openai}}async function eg(e){const{system:t,user:n,messages:r,stage:s="card",temperature:a,settings:i,userToken:o="<user>"}=e,c=Ea(),p=cwzPreset(s,i),d=lp(p,{required:s==="greeting"}),m=[{role:"system",content:fa(t)},...d.map(M=>({role:M.role,content:fa(M.content)})),...r?.length?r.map(M=>({role:M.role==="assistant"?"assistant":"user",content:fa(M.content)})):[{role:"user",content:fa(n)}]],g=Number(i.maxTokens)||Number(c.chatCompletionSettings?.openai_max_tokens)||8192,y=i.apiProfile,E=ac(i.apiProfile)&&typeof e.onStream=="function",P=!!i.useTemperature,D=op(i.excludedParameters);let Q;if(y&&c.ConnectionManagerRequestService){const M=c.ConnectionManagerRequestService,_=typeof M.constructPrompt=="function"?M.constructPrompt(m,y):m,ce=P&&typeof a=="number"?{temperature:a}:{},{override:V,includePreset:R}=await Vf(c,y,_,ce,D),L={extractData:!0,includePreset:R};if(E){const W=typeof AbortController=="function"?new AbortController:null;let Ce="";try{const pe=await M.sendRequest(y,_,g,{...L,stream:!0,signal:W?.signal},V);typeof pe=="function"?Q=await mp(pe,Object.assign(e,{onStream:(me=>wr=>{Ce=wr,me(wr)})(e.onStream)}),W):Q=typeof pe=="string"?pe:pe?.content??""}catch(pe){if(e.aborted?.())throw pe;e.cwzStreamErr=$f(pe);if(Ce&&Ce.trim().length>20)Q=Ce;else{if(Ce)throw pe;Q=void 0}}String(Q??"").trim()||!Ce||(Q=Ce)}if(Q===void 0||!String(Q).trim()&&!e.cwzThink){Q=await cwzRetryRaw(()=>M.sendRequest(y,_,g,{...L,extractData:!1,stream:!1},V),e)}}else if((E||D.length&&c.ChatCompletionService?.presetToGeneratePayload)&&c.ChatCompletionService&&c.chatCompletionSettings&&(!c.mainApi||c.mainApi==="openai")){const M=c.ChatCompletionService;let _=_f(c,m,g,a,P,E);D.length&&typeof M.presetToGeneratePayload=="function"&&(_=await M.presetToGeneratePayload({},{},_));const ce=L=>M.processRequest(go({..._,stream:L},D),{},!0,V?.signal),V=typeof AbortController=="function"?new AbortController:null;let R="";try{const L=await ce(E);Q=typeof L=="function"?await mp(L,Object.assign(e,{onStream:(me=>W=>{R=W,me(W)})(e.onStream)}),V):typeof L=="string"?L:L?.content??""}catch(L){if(!E||e.aborted?.())throw L;e.cwzStreamErr=$f(L);if(R&&R.trim().length>20)Q=R;else{if(R)throw L;Q=void 0}}String(Q??"").trim()||!R||(Q=R);if(Q===void 0||!String(Q).trim()&&!e.cwzThink){Q=await cwzRetryRaw(()=>M.processRequest(go({..._,stream:!1},D),{},!1,V?.signal),e)}}if(Q===void 0){if(typeof c.generateRaw!="function")throw new Error("当前酒馆版本没有 generateRaw");const M=Number(i.maxTokens)||null;Q=await Yf(c,{prompt:m,systemPrompt:"",responseLength:M,trimNames:!1},D)}e.onRaw?.(String(Q??"")||[cwzErrText(e)&&"【报错】\n"+cwzErrText(e),e.cwzDump&&"【接口原样返回】\n"+e.cwzDump].filter(Boolean).join("\n\n"));const z=e.preserveOutput?String(Q??"").trim():Un(Q);if(!z)throw new Error(e.cwzThink?"AI 只写了思考，没写正文。多半是「最大回复长度」被思考用完了：到设置里把最大回复长度调大（要写长内容的步骤建议 16000 以上），或者换一个不带思考的模型。":cwzEmptyMsg(e));return _i(z,o)}var cwzTaohua=(()=>{
+const C = '\\u4e00-\\u9fff';
+const IN = '[^，,；;。！？!?\\n]'; // 一个分句内部的字符
+
+const RULE_GROUPS = {
+    punct: '标点堆叠（！！！/……………）',
+    degree: '程度副词（极其/极为/极度）',
+    measure: '量词修饰（一丝/一抹/一缕/一股）',
+    modifier: '套路修饰语（若有若无/骨节分明/微不可察…）',
+    body: '人体词汇（四肢百骸/头颅…）',
+    clause: '套路短句（整句删除）',
+    flagSyntax: '标记·套路句式（交给 AI）',
+    flagImagery: '标记·套路意象（交给 AI）',
+    must: '必改项（的弧度 + 我的八股词）',
+    custom: '自定义规则',
+};
+
+const R = (id, group, type, re, extra = {}) => ({ id, group, type, re, on: true, ...extra });
+const CL = (id, re, label) => R(id, 'clause', 'clause', re, { label });
+const FL = (id, group, re, label) => R(id, group, 'flag', re, { label });
+
+const DEFAULT_RULES = [
+    R('p_bang', 'punct', 'replace', '([！？!?])\\1+', { to: '$1', label: '叠用！？' }),
+    R('p_ellipsis', 'punct', 'replace', '…{3,}|\\.{4,}|。{3,}', { to: '……', label: '省略号堆叠' }),
+    R('p_dash', 'punct', 'replace', '—{3,}', { to: '——', label: '破折号堆叠' }),
+    R('p_comma', 'punct', 'replace', '[，,]{2,}', { to: '，', label: '逗号堆叠' }),
+    R('p_dun', 'punct', 'replace', '、{2,}', { to: '、', label: '顿号堆叠' }),
+    R('d_ji', 'degree', 'replace', `(?:极其|极为|极度)(?=[${C}])`, { to: '', label: '极其/极为/极度' }),
+    R('m_yisi', 'measure', 'replace',
+        `(?:一丝|一抹|一缕|一股)(?=(?:[${C}]{0,6}的)?(?:笑意|弧度|光亮|光线|气息|温度|热气|热意|暖意|凉意|寒意|冷意|颤抖|颤栗|战栗|酥麻|电流|血腥|腥甜|暗色|阴影|异样|迟疑|犹豫|情绪|念头|空气|涟漪|波澜|慌乱|不安|紧张|狡黠|玩味|戏谑|笑容|嘲讽|讥诮|无奈|疲惫|心疼|愧疚|失落|烦躁|怒意|杀意|冷意))`,
+        { to: '', label: '一丝/一抹/一缕/一股' }),
+    R('mod_vague', 'modifier', 'replace',
+        '(?:若有若无|似有若无|微不可察|几不可察|几不可查|不易察觉|难以察觉|几不可闻|微不可闻|细若蚊呐|细若蚊蝇|细如蚊呐|说不清道不明|意味不明|意味深长|不容置喙|不容置疑|不容抗拒)(?:的|地)',
+        { to: '', label: '若有若无/微不可察…' }),
+    R('mod_knuckle', 'modifier', 'replace', '骨节分明的(?=[手指])', { to: '', label: '骨节分明的' }),
+    R('mod_callus', 'modifier', 'replace', '(?:带着|带有|覆着|覆有)(?:长年|常年)?(?:的)?(?:一层)?(?:薄茧|茧子)的(?=[指手])', { to: '', label: '带着薄茧的' }),
+    R('mod_allofall', 'modifier', 'replace', '一切的一切', { to: '一切', label: '一切的一切' }),
+    R('mod_cry', 'modifier', 'replace', '比哭还(?:要)?难看的(笑容|笑)', { to: '勉强的$1', label: '比哭还难看的笑' }),
+    R('mod_sick', 'modifier', 'replace', '病态(?:的|地)', { to: '', label: '病态的', on: false }),
+    R('mod_damn', 'modifier', 'replace', '该死的', { to: '', label: '该死的', on: false }),
+    R('b_limbs', 'body', 'replace', '四肢百骸', { to: '全身', label: '四肢百骸' }),
+    R('b_skull', 'body', 'replace', '头颅', { to: '头', label: '头颅' }),
+    R('b_torso', 'body', 'replace', '躯体|身躯', { to: '身体', label: '躯体/身躯', on: false }),
+    R('b_back', 'body', 'replace', '脊背|背脊', { to: '后背', label: '脊背/背脊', on: false }),
+    CL('c_light', `光线(?:从${IN}{0,10})?斜切(?:进来|进屋|下来)`, '光线斜切进来'),
+    CL('c_air', '(?:空气|气氛|周遭|四周|周围)(?:里|中)?(?:仿佛|似乎|像是|好像)?(?:在这一刻|瞬间|骤然|一下子)?(?:凝固|静止|冻结)(?:了)?', '空气凝固'),
+    CL('c_time', '时间(?:仿佛|似乎|像是|好像)?(?:在这一刻|在此刻|在这一瞬)?(?:停滞|静止|凝固|停止)(?:了)?', '时间停滞'),
+    CL('c_century', '(?:仿佛|像是|好像)(?:过了|度过了|熬过了)(?:整整)?一个世纪', '仿佛过了一个世纪'),
+    CL('c_pause', '(?:像是|仿佛)被(?:人)?按(?:下)?了(?:暂停键|慢放键)', '按下暂停键'),
+    CL('c_world', `(?:仿佛)?整个世界(?:都)?(?:屏住了呼吸|安静了下来|静止了|只剩下${IN}{1,8})`, '整个世界屏住呼吸'),
+    CL('c_fate', `(?:命运|时光|宿命)的(?:齿轮|洪流|棋局|轨迹|獠牙)${IN}{0,14}`, '命运的齿轮'),
+    CL('c_smirk', `(?:嘴角|唇角)(?:微微)?(?:勾起|扬起|噙着|挂着|浮起|牵起|微勾)(?:了)?(?:一抹|一丝|一个|一道)?(?:${IN}{0,8}的)?(?:弧度|笑意|笑)?`, '嘴角勾起弧度'),
+    CL('c_eyes', '(?:眼神|眸色|眼底|眸光|眼眸)(?:微微)?(?:暗了暗|一暗|微沉|沉了沉|暗了下来|深了深)', '眼神暗了暗'),
+    CL('c_heart', '(?:心脏|心跳|心)(?:猛地)?漏(?:跳)?了(?:半|一)拍', '心跳漏了一拍'),
+    CL('c_breath', '呼吸(?:猛地)?(?:一滞|一窒|漏了一拍)', '呼吸一滞'),
+    CL('c_adam', '喉结(?:上下)?滚动了?(?:一下|两下)?', '喉结滚动'),
+    CL('c_blank', '大脑(?:一片)?空白(?:[，,](?:耳边|脑中)?嗡嗡作响)?', '大脑一片空白'),
+    CL('c_begin', `(?:真正的${IN}{0,6}|一切|这一切|游戏|好戏)(?:才)?刚刚开始`, '才刚刚开始'),
+    CL('c_changed', '有什么(?:东西)?(?:已经)?(?:彻底|悄然)?(?:改变|变了|不一样)(?:了)?', '有什么改变了'),
+    CL('c_broken', '像是(?:有)?什么(?:东西)?(?:碎了|裂开了|被击中了)|像是被什么(?:东西)?(?:击中|击碎)了', '像是什么碎了'),
+    CL('c_mixed', '(?:心中|心里|心头)?(?:五味杂陈|百感交集)', '五味杂陈'),
+    CL('c_whateyes', `那是一(?:双|种|个)(?:怎样|什么样)的${IN}{1,8}啊`, '那是一双怎样的眼睛啊'),
+    CL('c_deep', '深邃的(?:眼眸|眼睛|双眸)(?:像|如|宛如)一汪(?:深潭|幽潭)(?:[，,](?:又|也)?(?:像|如|宛如)(?:璀璨的)?(?:星辰|星空))?', '眼眸像深潭'),
+    CL('c_ending', '事情就是这样|一切就是这样开始的|这就是当时发生的事|然后就没有然后了', '空洞收尾'),
+    CL('c_mute', '张了张嘴(?:唇)?(?:[，,](?:却|但|最终)?(?:还是)?什么(?:也|都)没(?:能)?说(?:出口|出来)?)?', '张了张嘴却没说'),
+    CL('c_wantsay', '似乎想(?:要)?说(?:些)?什么(?:[，,](?:但|却)?最终(?:还是)?(?:沉默了|什么也没说|没有开口))?', '似乎想说什么'),
+    CL('c_tell', '仿佛在(?:诉说|述说|低语)着什么', '仿佛在诉说着什么'),
+    R('must_arc', 'must', 'flag', '的弧度', { label: '…的弧度', must: true }),
+    FL('f_notbut', 'flagSyntax', `不是${IN}{1,16}[，,]?而是`, '不是……而是……'),
+    FL('f_ratherthan', 'flagSyntax', `与其说${IN}{0,20}[，,]?不如说`, '与其说……不如说'),
+    FL('f_notonly', 'flagSyntax', `非但${IN}{0,20}[，,]?反而|并非${IN}{0,16}[，,]?恰恰`, '非但……反而'),
+    FL('f_close', 'flagSyntax', `近乎于${IN}{0,12}[，,]?又不(?:等同|同)于`, '近乎于……又不等同于'),
+    FL('f_explain', 'flagSyntax', '也就是说|换句话说|这意味着', '解释性复述'),
+    FL('f_because', 'flagSyntax', '(?:由于|鉴于)(?:某种|这层|方才)', '伪因果'),
+    FL('f_between', 'flagSyntax', `介于${IN}{1,10}(?:和|与)${IN}{1,10}之间`, '介于……之间'),
+    FL('f_omni', 'flagSyntax', `(?:他|她|它|他们|她们)(?:并)?不知道的是|在${IN}{0,8}看不见的(?:角落|地方)|若从(?:上方|高处)俯瞰`, '全知视角插入'),
+    FL('f_mouth', 'flagSyntax', `嘴上说着${IN}{0,10}[，,]?(?:身体|眼神|心里)`, '嘴上说着……身体却'),
+    FL('f_mind', 'flagSyntax', '理智(?:在)?(?:告诉|说)|身体比(?:意识|理智|大脑)更诚实', '理智/身体诚实'),
+    FL('f_decimal', 'flagImagery', '\\d+\\.\\d+\\s*秒|\\d+(?:\\.\\d+)?\\s*度(?:角|的(?:弧|角))|(?:偏|侧|歪|仰|抬|低|转)了?\\s*\\d+\\s*度', '伪精确数字'),
+    FL('f_anat', 'flagImagery', '肱二头肌|股骨|腓肠肌|掌指关节|胸锁乳突肌|尾椎骨|髋骨|胯骨', '解剖学词汇'),
+    FL('f_hunt', 'flagImagery', '猎人|猎物|捕食者|笼中雀|执棋者|收网|围猎|无处可逃|困兽', '猎人与猎物'),
+    FL('f_stone', 'flagImagery', '(?:石子|石头)(?:投|落|砸)(?:入|进)?(?:湖|水)|涟漪(?:层层)?(?:扩散|荡开)', '石子投湖'),
+    FL('f_scalpel', 'flagImagery', '手术刀般|如同手术刀|收藏家(?:审视|打量)|如同艺术品|像(?:一件)?艺术品|提线木偶|精美的人偶|精密仪器', '手术刀/艺术品/木偶'),
+    FL('f_spine', 'flagImagery', '(?:从|顺着)尾椎(?:骨)?|天灵盖|电流(?:般)?(?:窜|划)过|过电(?:般|一样)|头皮发麻', '尾椎窜上电流'),
+    FL('f_possess', 'flagImagery', '占有欲|刻在骨子里|近乎(?:于)?条件反射|揉(?:进|入)骨血', '占有欲/刻在骨子里'),
+    FL('f_pupil', 'flagImagery', '瞳孔(?:骤然|猛地|微微)?(?:一缩|骤缩|猛缩|缩了缩|紧缩)', '瞳孔骤缩'),
+    FL('f_white', 'flagImagery', `(?:指节|骨节)${IN}{0,4}(?:泛白|发白|泛青)`, '指节泛白'),
+    FL('f_holy', 'flagImagery', '宛若神明|虔诚的信徒|献祭|圣物|神圣的仪式', '宗教史诗比喻'),
+    FL('f_animal', 'flagImagery', '像(?:一只)?(?:受惊|炸毛|被踩(?:到|了)尾巴|被顺毛|慵懒|温顺)的(?:猫|小猫|小鹿|幼兽|兔子|野兔)', '动物比喻'),
+    FL('f_throat', 'flagImagery', '(?:喉咙|喉间)(?:里)?(?:溢出|泄出|挤出)', '喉间溢出'),
+    FL('f_ant', 'flagImagery', '看(?:待)?蝼蚁|居高临下的审视|古井无波', '蝼蚁/古井无波'),
+    FL('f_cold', 'flagImagery', '如坠冰窟|淬(?:了|着)?(?:冰|毒)', '淬了冰'),
+];
+
+const LEGACY_AI_PROMPT = `你是中文小说编辑，负责给 AI 角色扮演用的角色卡、世界书、开场白去“八股”。
+
+八股指 AI 写作的套路化表达，例如：程度副词堆叠（极其/极为/极度）、量词修饰（一丝/一抹/一缕）、若有若无的弧度、骨节分明的手指、眼神暗了暗、空气凝固、时间停滞、命运的齿轮、猎人与猎物、石子投湖、手术刀般精准、“不是……而是……”“与其说……不如说……”这类伪深刻转折、伪精确数字（0.3秒、15度）、硬塞的解剖学词汇、全知视角插入、不必要的动物比喻、空洞的升华式结尾。
+
+改写要求：
+1. 保留全部设定信息：人名、地名、关系、外貌事实、能力、规则、时间线、数值。不增不减。
+2. 原样保留 {{char}}、{{user}} 等宏，尖括号标签，代码块，Markdown 结构和换行。
+3. 用具体、平实的描写代替套路；能删就删，不要换成另一套华丽辞藻。
+4. 对白尽量保留原意和语气，只修掉明显的套路词。
+5. 篇幅与原文接近或更短。
+6. 【必须改掉】里列出的词句，结果里一个都不能再出现（包括对白里），换成具体描写或直接删去。
+7. 只输出改写后的正文，不要解释，不要加标题，不要用代码块或引号包住全文。`;
+const PREVIOUS_EDIT_CONTRACT = `【局部编辑约束】
+逐段保留原文的人物、动作、对白、场景细节、情绪变化、事件顺序和设定信息，只调整命中的词句及其必要衔接。
+可直接删除不承载信息的赘词、重复修饰；承载信息的词句改成自然表达，保留原意和语气。未命中的内容尽量原样保留。
+必改词是措辞修改目标。遇到宽泛规则或改写后仍命中时，优先保全内容，留下待人工处理的词句。
+逐段输出完整修改稿，正文长度通常保持原文的 90%～110%，至少保留 80%；靠保留细节达到篇幅，保持原有剧情。
+原样保留宏、标签、代码块、链接及 Markdown 结构。只输出修改后的全文。`;
+
+const PREVIOUS_AI_PROMPT = `你是中文小说编辑，负责调整角色卡、世界书和开场白中的套路化表达。
+
+${PREVIOUS_EDIT_CONTRACT}`;
+const V4_EDIT_CONTRACT = `【局部替换约束】
+根据上下文修改指定片段，保留片段表达的动作、情绪、人物关系、事实和语气。冗余修饰可精简，承载信息的内容换成自然表达。
+未指定的内容由程序原样保留。上下文供理解使用，输出范围仅限指定片段。
+短语可以自然缩短，例如“嘴角勾起一抹若有若无的弧度”可写成“轻轻笑了笑”。长句保留原有事件和细节。
+每个片段按本次请求指定的格式输出替换文字，宏、标签、代码块和链接由程序保护。`;
+
+const V4_AI_PROMPT = `你是中文小说编辑，负责调整角色卡、世界书和开场白中的套路化表达。\n\n${V4_EDIT_CONTRACT}`;
+const EDIT_CONTRACT = `【整句修改约束】
+程序只把含八股的句子交给你，每句给出命中的八股和前后句。其他句子由程序原样保留。
+逐句处理：能删掉的套路词直接删；删了不通顺或丢了内容的，把这句改写成自然的说法。
+保留这句原有的动作、对白内容、事实和语气，不加新情节。长短不限，按改好为准。
+整句只是空套路、删掉不影响内容的，可以输出空字符串。
+句子里的 {{char}}、{{user}} 等宏原样保留。`;
+
+const DEFAULT_AI_PROMPT = `你是中文小说编辑，负责修改角色卡、世界书和开场白里的 AI 八股句子。\n\n${EDIT_CONTRACT}`;
+
+function rewriteIssue(before, after) {
+    const count = (s) => String(s ?? '').replace(/<[^>]*>/g, '').replace(/\s/g, '').length;
+    const oldSize = count(before);
+    const newSize = count(after);
+    if (oldSize && newSize < Math.ceil(oldSize * 0.8)) {
+        return `正文从 ${oldSize} 字缩为 ${newSize} 字，低于原文的 80%`;
+    }
+    if (!String(after ?? '').trim() && String(before ?? '').trim()) return '结果为空';
+    return '';
+}
+
+function parseCustomRules(src, errors = []) {
+    const out = [];
+    let n = 0;
+    for (const raw of String(src || '').split('\n')) {
+        const line = raw.trim();
+        if (!line || line.startsWith('#')) continue;
+        const m = line.match(/^(删除|替换|整句|标记)\s*[:：]\s*(.+)$/);
+        if (!m) { errors.push(`无法识别：${line}`); continue; }
+        n++;
+        let re = m[2];
+        let to = '';
+        if (m[1] === '替换') {
+            const k = re.lastIndexOf('=>');
+            if (k < 0) { errors.push(`替换规则缺少 =>：${line}`); continue; }
+            to = re.slice(k + 2).trim();
+            re = re.slice(0, k).trim();
+        }
+        const type = { 删除: 'replace', 替换: 'replace', 整句: 'clause', 标记: 'flag' }[m[1]];
+        out.push({ id: `custom_${n}`, group: 'custom', type, re, to, label: `自定义:${re.slice(0, 10)}`, on: true });
+    }
+    return out;
+}
+
+function compile(r, errors) {
+    try {
+        return { ...r, rx: new RegExp(r.re, r.type === 'clause' ? '' : 'g') };
+    } catch (e) {
+        errors.push(`正则无效（${r.label}）：${e.message}`);
+        return null;
+    }
+}
+
+const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+/** 用户的八股词：每行一个，普通文字；以 re: 开头则按正则处理。全部视为必改。 */
+function parseUserWords(src) {
+    const out = [];
+    let n = 0;
+    for (const raw of String(src || '').split('\n')) {
+        const w = raw.trim();
+        if (!w || w.startsWith('#')) continue;
+        n++;
+        const isRe = /^re[:：]/i.test(w);
+        const body = isRe ? w.replace(/^re[:：]\s*/i, '') : w;
+        out.push({ id: `user_${n}`, group: 'must', type: 'flag', must: true, re: isRe ? body : escapeRe(body), label: body.slice(0, 16), on: true });
+    }
+    return out;
+}
+
+function buildRules({ ruleOverrides = {}, disabledGroups = [], customRules = '', userWords = '' } = {}) {
+    const errors = [];
+    const list = [];
+    for (const r of DEFAULT_RULES) {
+        const on = ruleOverrides[r.id] ?? r.on;
+        if (!on || disabledGroups.includes(r.group)) continue;
+        list.push(compile(r, errors));
+    }
+    if (!disabledGroups.includes('must')) {
+        for (const r of parseUserWords(userWords)) list.push(compile(r, errors));
+    }
+    if (!disabledGroups.includes('custom')) {
+        for (const r of parseCustomRules(customRules, errors)) list.push(compile(r, errors));
+    }
+    return { rules: list.filter(Boolean), errors };
+}
+
+const PROTECT_BASE = [
+    /```[\s\S]*?```/g,
+    /\{\{[\s\S]*?\}\}/g,
+    /<[^<>\n]{1,300}>/g,
+    /https?:\/\/[^\s]+/g,
+    /\[[^[\]\n]{0,80}\]\([^)\n]*\)/g,
+];
+const PROTECT_QUOTES = [/“[^“”]*”/g, /「[^「」]*」/g, /『[^『』]*』/g, /"[^"\n]*"/g];
+const PH = /[\uE100-\uF8FF]/g;
+
+/** 返回真实原文范围，保护区与检测、修改共用。 */
+function protectedRanges(text, quotes = false) {
+    const spans = [];
+    for (const rx of [...PROTECT_BASE, ...(quotes ? PROTECT_QUOTES : [])]) {
+        for (const m of text.matchAll(new RegExp(rx.source, 'g'))) {
+            spans.push({ start: m.index, end: m.index + m[0].length });
+        }
+    }
+    return spans;
+}
+
+const MACRO_RX = /\{\{[\s\S]*?\}\}/g;
+const HARD_BASE = PROTECT_BASE.filter((rx) => rx.source !== MACRO_RX.source);
+const SENTENCE_RX = /[^。！？!?…\n]+(?:[。！？!?…]+[”」』"’）)]*)?|[。！？!?…]+[”」』"’）)]*/g;
+
+function rangesOf(text, list) {
+    const out = [];
+    for (const rx of list) {
+        for (const m of text.matchAll(new RegExp(rx.source, 'g'))) out.push({ start: m.index, end: m.index + m[0].length });
+    }
+    return out.sort((a, b) => a.start - b.start);
+}
+const overlaps = (a, b) => a.start < b.end && a.end > b.start;
+
+/** 按句切分。标签、代码块、链接单独隔开，不并进句子；宏留在句子里。 */
+function splitSentences(text) {
+    const hard = rangesOf(text, HARD_BASE);
+    const out = [];
+    const take = (from, to) => {
+        const part = text.slice(from, to);
+        for (const m of part.matchAll(SENTENCE_RX)) {
+            const lead = m[0].match(/^\s*/)[0].length;
+            const value = m[0].slice(lead).replace(/\s+$/, '');
+            if (!value) continue;
+            const start = from + m.index + lead;
+            out.push({ start, end: start + value.length });
+        }
+    };
+    let pos = 0;
+    for (const h of hard) {
+        if (h.start > pos) take(pos, h.start);
+        pos = Math.max(pos, h.end);
+    }
+    take(pos, text.length);
+    return out;
+}
+
+/**
+ * 编辑目标：含八股的整句。all=true 时每句都是目标。
+ * 每个目标带命中的八股（hits）和前后句，供 API 理解。
+ */
+function editTargets(text, { rules = [], protectQuotes = true } = {}, all = false) {
+    const sentences = splitSentences(text);
+    const hard = rangesOf(text, PROTECT_BASE);
+    const quotes = protectQuotes ? rangesOf(text, PROTECT_QUOTES) : [];
+    const hitsBy = sentences.map(() => new Map());
+    for (const r of rules) {
+        let rx;
+        try { rx = new RegExp(r.re, 'g'); } catch { continue; }
+        for (const m of text.matchAll(rx)) {
+            if (!m[0]) continue;
+            const span = { start: m.index, end: m.index + m[0].length };
+            if (hard.some((p) => overlaps(span, p))) continue;
+            if (!r.must && quotes.some((p) => overlaps(span, p))) continue;
+            sentences.forEach((s, i) => { if (overlaps(span, s)) hitsBy[i].set(`${r.label}|${m[0]}`, { label: r.label, match: m[0] }); });
+        }
+    }
+    const targets = [];
+    sentences.forEach((s, i) => {
+        if (!all && !hitsBy[i].size) return;
+        const prev = sentences[i - 1];
+        const next = sentences[i + 1];
+        targets.push({
+            ...s,
+            id: `s${targets.length + 1}`,
+            text: text.slice(s.start, s.end),
+            hits: [...hitsBy[i].values()],
+            prev: prev ? text.slice(prev.start, prev.end) : '',
+            next: next ? text.slice(next.start, next.end) : '',
+        });
+    });
+    return targets;
+}
+
+/** 只检查格式：宏不能丢或多，不能凭空出现标签/代码。长短不限，允许删成空。 */
+function editIssue(target, replacement) {
+    if (typeof replacement !== 'string') return '缺少修改结果';
+    const macros = (s) => (s.match(MACRO_RX) || []).sort().join('');
+    if (macros(target.text) !== macros(replacement)) return '宏（{{char}} 等）要原样保留';
+    if (rangesOf(replacement, HARD_BASE).length) return '结果里多了标签、代码或链接';
+    return '';
+}
+
+function applyEdits(text, targets, replacements) {
+    let result = '';
+    let offset = 0;
+    for (const t of targets) {
+        const next = replacements.get(t.id);
+        result += text.slice(offset, t.start) + (typeof next === 'string' ? next : t.text);
+        offset = t.end;
+    }
+    return result + text.slice(offset);
+}
+
+function parseEdits(raw) {
+    const text = String(raw ?? '').trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '');
+    const data = JSON.parse(text);
+    const edits = Array.isArray(data) ? data : data?.edits;
+    if (!Array.isArray(edits)) throw new Error('需要 edits 数组');
+    const map = new Map();
+    const duplicates = new Set();
+    for (const e of edits) {
+        if (typeof e?.id !== 'string') continue;
+        if (duplicates.has(e.id)) continue;
+        if (map.has(e.id)) { map.delete(e.id); duplicates.add(e.id); continue; }
+        if (typeof e.text !== 'string') continue;
+        map.set(e.id, e.text);
+    }
+    return map;
+}
+
+function protect(text, quotes) {
+    const store = [];
+    let out = text;
+    for (const re of [...PROTECT_BASE, ...(quotes ? PROTECT_QUOTES : [])]) {
+        out = out.replace(re, (m) => {
+            if (store.length >= 6000) return m;
+            store.push(m);
+            return String.fromCharCode(0xE100 + store.length - 1);
+        });
+    }
+    const restore = (s) => {
+        for (let i = 0; i < 4 && PH.test(s); i++) {
+            PH.lastIndex = 0;
+            s = s.replace(PH, (ch) => store[ch.charCodeAt(0) - 0xE100] ?? ch);
+        }
+        PH.lastIndex = 0;
+        return s;
+    };
+    return { out, restore };
+}
+
+const SPLIT = /([，,；;。！？!?\n]+)/;
+const COMMA_ONLY = /^[，,；;]+$/;
+const PRONOUN = /^(?:他们|她们|我们|你们|它们|他|她|它|我|你|对方)/;
+const FILLER = /微微|轻轻|缓缓|随即|不禁|不由得|一时间|此刻|那一刻|在这一刻|整个人|忽然|突然|顿时|瞬间|仿佛|似乎|像是|好像|一下|再次|只是|便|就|也|又|了|的|地|却|但|而|那|这/g;
+const BLOCK = /[“”「」『』"《》()（）[\]【】\uE100-\uF8FF]/;
+
+function evalMatch(t, m) {
+    const before = t.slice(0, m.index).trim();
+    const after = t.slice(m.index + m[0].length);
+    const subj = (before.match(PRONOUN) || [''])[0];
+    const rest = before.slice(subj.length) + after;
+    if (BLOCK.test(rest)) return { ok: false };
+    const left = rest.replace(FILLER, '').replace(/\s+/g, '');
+    return { ok: left.length <= 4, subject: subj };
+}
+
+function mergeEnd(prevD, d) {
+    const nlP = prevD.replace(/[^\n]/g, '');
+    if (nlP) return prevD; // 前一句已经换行收尾，不需要补标点
+    const nlD = d.replace(/[^\n]/g, '');
+    const pP = prevD.replace(/\n/g, '');
+    const pD = d.replace(/\n/g, '');
+    let punct;
+    if (pP === '') punct = pD;
+    else if (COMMA_ONLY.test(pP)) punct = pD || '。';
+    else punct = pP;
+    return punct + (nlP.length >= nlD.length ? nlP : nlD);
+}
+
+function applyClauses(text, rules, hits) {
+    const clauseRules = rules.filter((r) => r.type === 'clause');
+    if (!clauseRules.length) return text;
+    const parts = text.split(SPLIT);
+    const toks = [];
+    for (let i = 0; i < parts.length; i += 2) toks.push({ t: parts[i], d: parts[i + 1] ?? '' });
+
+    const out = [];
+    let carry = '';
+    let indent = '';
+    for (let i = 0; i < toks.length; i++) {
+        const tok = toks[i];
+        let del = null;
+        for (const rule of clauseRules) {
+            if (i + 1 < toks.length && COMMA_ONLY.test(tok.d)) {
+                const joined = tok.t + tok.d + toks[i + 1].t;
+                const m = rule.rx.exec(joined);
+                if (m && m[0] && m.index < tok.t.length && m.index + m[0].length > tok.t.length + tok.d.length) {
+                    const r = evalMatch(joined, m);
+                    if (r.ok) { del = { span: 2, rule, match: m[0], subject: r.subject }; break; }
+                }
+            }
+            const m = rule.rx.exec(tok.t);
+            if (m && m[0]) {
+                const r = evalMatch(tok.t, m);
+                if (r.ok) { del = { span: 1, rule, match: m[0], subject: r.subject }; break; }
+            }
+        }
+
+        if (del) {
+            hits.push({ id: del.rule.id, label: del.rule.label, type: 'clause', match: del.match });
+            const lead = tok.t.match(/^[\s\u3000]*/)[0];
+            if (lead && (!out.length || out[out.length - 1].d.includes('\n'))) indent = lead;
+            const last = toks[i + del.span - 1];
+            if (COMMA_ONLY.test(last.d) && i + del.span < toks.length) {
+                carry = del.subject || carry;
+            } else {
+                carry = '';
+                if (out.length) out[out.length - 1].d = mergeEnd(out[out.length - 1].d, last.d);
+            }
+            i += del.span - 1;
+            continue;
+        }
+
+        let t = tok.t;
+        if (indent) { t = indent + t.replace(/^[\s\u3000]*/, ''); indent = ''; }
+        if (carry) {
+            const lead = t.match(/^[\s\u3000]*/)[0];
+            const body = t.slice(lead.length);
+            if (body && !PRONOUN.test(body)) t = lead + carry + body;
+            carry = '';
+        }
+        out.push({ t, d: tok.d });
+    }
+    return out.map((x) => x.t + x.d).join('');
+}
+
+function tidy(text) {
+    return text
+        .replace(/(^|\n)([ \t\u3000]*)[，,；;]+/g, '$1$2')
+        .replace(/[，,；;]+([。！？!?])/g, '$1')
+        .replace(/([。！？!?])[，,；;]+/g, '$1')
+        .replace(/^\n+/, (m) => m); // 保留原样开头
+}
+
+/** 规则清理：返回 { text, hits } */
+function cleanText(text, { rules = [], protectQuotes = true } = {}) {
+    if (!text) return { text: text ?? '', hits: [] };
+    const hits = [];
+    const p = protect(text, protectQuotes);
+    let s = applyClauses(p.out, rules, hits);
+    for (const r of rules) {
+        if (r.type !== 'replace') continue;
+        r.rx.lastIndex = 0;
+        const ms = s.match(r.rx);
+        if (!ms) continue;
+        for (const m of ms) hits.push({ id: r.id, label: r.label, type: 'replace', match: m });
+        r.rx.lastIndex = 0;
+        s = s.replace(r.rx, r.to ?? '');
+    }
+    s = tidy(s);
+    if (!s.trim()) return { text, hits };
+    return { text: p.restore(s), hits };
+}
+
+function flagHits(text, rules, protectQuotes) {
+    const p = protect(text, protectQuotes);
+    const hits = [];
+    for (const r of rules) {
+        if (r.type !== 'flag') continue;
+        const src = r.must ? text : p.out;
+        const blocked = r.must ? protectedRanges(text) : [];
+        r.rx.lastIndex = 0;
+        for (const m of src.matchAll(r.rx)) {
+            if (!m[0]) continue;
+            if (blocked.some(p => m.index < p.end && m.index + m[0].length > p.start)) continue;
+            const s = r.must ? m[0] : p.restore(m[0]);
+            const ctx = r.must ? text.slice(Math.max(0, m.index - 8), m.index + m[0].length + 2) : s;
+            hits.push({ id: r.id, label: r.label, type: r.must ? 'must' : 'flag', match: s, context: ctx });
+        }
+    }
+    return hits;
+}
+
+/** 必改项命中（结果里不允许再出现的） */
+function mustHits(text, opts = {}) {
+    return flagHits(text || '', (opts.rules || []).filter((r) => r.must), false);
+}
+
+/** 列出具体命中片段，给 AI 当提示 */
+function hitList(text, opts = {}) {
+    const { rules = [], protectQuotes = true } = opts;
+    const auto = cleanText(text, { rules, protectQuotes }).hits;
+    const flags = flagHits(text || '', rules, protectQuotes);
+    return [...auto, ...flags];
+}
+
+function flagCount(text, opts = {}) {
+    return flagHits(text || '', opts.rules || [], opts.protectQuotes ?? true).length;
+}
+
+/** 扫描：返回命中统计，不修改文本 */
+function scanText(text, opts = {}) {
+    const { rules = [], protectQuotes = true } = opts;
+    const auto = cleanText(text, { rules, protectQuotes }).hits;
+    const flags = flagHits(text || '', rules, protectQuotes);
+    const map = new Map();
+    for (const h of [...auto, ...flags]) {
+        const k = h.label;
+        const v = map.get(k) || { label: k, count: 0, type: h.type === 'flag' || h.type === 'must' ? h.type : 'auto' };
+        v.count++;
+        map.set(k, v);
+    }
+    const order = { must: 0, flag: 1, auto: 2 };
+    const top = [...map.values()].sort((a, b) => order[a.type] - order[b.type] || b.count - a.count);
+    const len = Math.max(1, (text || '').length);
+    const must = flags.filter((h) => h.type === 'must').length;
+    return { auto: auto.length, flag: flags.length - must, must, total: auto.length + flags.length, density: ((auto.length + flags.length) * 1000) / len, top };
+}
+
+/** 识别“规则/提示词”型条目（例如本身就是一张禁用词清单），默认跳过以免清单被清空 */
+function looksLikeInstructions(text) {
+    const s = text || '';
+    const quoted = (s.match(/[“"「][^“”"「」\n]{1,30}[”"」]/g) || []).length;
+    const directives = (s.match(/禁止|禁用|不要使用|避免使用|不得|严禁|强制|必须|【[^】\n]{1,12}】/g) || []).length;
+    return (quoted >= 10 && directives >= 2) || directives >= 8;
+}
+
+/** 检查宏/标签数量是否被改动 */
+function protectStats(before, after) {
+    const count = (s, re) => (s.match(re) || []).length;
+    const warns = [];
+    const pairs = [[/\{\{[^}]*\}\}/g, '{{宏}}'], [/<[^<>\n]{1,300}>/g, '<标签>'], [/```/g, '代码块']];
+    for (const [re, name] of pairs) {
+        const a = count(before, re);
+        const b = count(after, re);
+        if (a !== b) warns.push(`${name} 数量 ${a}→${b}`);
+    }
+    return warns.length ? `⚠ ${warns.join('，')}，请检查` : '';
+}
+
+/** 按段落切块，供 AI 分段改写 */
+function splitChunks(text, max = 1800) {
+    const parts = String(text).split(/(\n+)/);
+    const chunks = [];
+    let cur = '';
+    let has = false;
+    for (let i = 0; i < parts.length; i += 2) {
+        const p = parts[i];
+        const sep = parts[i + 1] ?? '';
+        if (has && cur.length + p.length > max) { chunks.push(cur); cur = ''; }
+        cur += p + sep;
+        has = true;
+    }
+    if (cur) chunks.push(cur);
+    return chunks;
+}
+
+function tokenize(s) {
+    return s.match(/[^，,；;。！？!?\n]*[，,；;。！？!?\n]+|[^，,；;。！？!?\n]+$/g) || [];
+}
+
+function diffText(a, b) {
+    const A = tokenize(a);
+    const B = tokenize(b);
+    const n = A.length;
+    const m = B.length;
+    if (n * m > 2_500_000) return [{ type: 'del', text: a }, { type: 'add', text: b }];
+    const dp = Array.from({ length: n + 1 }, () => new Uint16Array(m + 1));
+    for (let i = n - 1; i >= 0; i--) {
+        for (let j = m - 1; j >= 0; j--) {
+            dp[i][j] = A[i] === B[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+        }
+    }
+    const ops = [];
+    let i = 0;
+    let j = 0;
+    const push = (type, text) => {
+        const last = ops[ops.length - 1];
+        if (last && last.type === type) last.text += text; else ops.push({ type, text });
+    };
+    while (i < n && j < m) {
+        if (A[i] === B[j]) { push('eq', A[i]); i++; j++; } else if (dp[i + 1][j] >= dp[i][j + 1]) { push('del', A[i++]); } else { push('add', B[j++]); }
+    }
+    while (i < n) push('del', A[i++]);
+    while (j < m) push('add', B[j++]);
+    const out = [];
+    for (let k = 0; k < ops.length; k++) {
+        const o = ops[k];
+        const nx = ops[k + 1];
+        if (o.type === 'del' && nx && nx.type === 'add') {
+            const x = o.text;
+            const y = nx.text;
+            let p = 0;
+            while (p < x.length && p < y.length && x[p] === y[p]) p++;
+            let q = 0;
+            while (q < x.length - p && q < y.length - p && x[x.length - 1 - q] === y[y.length - 1 - q]) q++;
+            if (p) out.push({ type: 'eq', text: x.slice(0, p) });
+            if (x.length - p - q > 0) out.push({ type: 'del', text: x.slice(p, x.length - q) });
+            if (y.length - p - q > 0) out.push({ type: 'add', text: y.slice(p, y.length - q) });
+            if (q) out.push({ type: 'eq', text: x.slice(x.length - q) });
+            k++;
+        } else {
+            out.push(o);
+        }
+    }
+    return out;
+}
+
+return{RULE_GROUPS,DEFAULT_RULES,LEGACY_AI_PROMPT,PREVIOUS_EDIT_CONTRACT,PREVIOUS_AI_PROMPT,V4_EDIT_CONTRACT,V4_AI_PROMPT,EDIT_CONTRACT,DEFAULT_AI_PROMPT,rewriteIssue,parseCustomRules,parseUserWords,buildRules,protectedRanges,splitSentences,editTargets,editIssue,applyEdits,parseEdits,cleanText,mustHits,hitList,flagCount,scanText,looksLikeInstructions,protectStats,splitChunks,diffText}})();var tg={},Ee=cwzTaohua,fp=!0,ng=[];async function gp(e=tg.url){if(Ee||fp)return Ee;fp=!0;const t=[];try{t.push(new URL("../../",e).href)}catch{}try{t.push(new URL("/scripts/extensions/third-party/",(globalThis.__CW_SUITE__?.W??globalThis).location.href).href)}catch{}for(const n of[...new Set(t)])for(const r of ng){try{if(Ee=await import(`${n}${encodeURIComponent(r)}/engine.js`),Ee?.editTargets)return Ee}catch{}Ee=null}return null}var ut=()=>!!Ee;function $t(e,t=[]){if(!Ee)return null;const n=e?.baguCleaner??{},{rules:r,errors:s}=Ee.buildRules({ruleOverrides:n.ruleOverrides??{},disabledGroups:n.disabledGroups??[],customRules:n.customRules??"",userWords:[n.userWords??"",...t].join(`
+`)}),a=Ee.normalizeAiPrompt&&n.aiPrompt?Ee.normalizeAiPrompt(n.aiPrompt):n.aiPrompt;return{rules:r,errors:s,protectQuotes:n.protectQuotes??!0,aiPrompt:a}}function wr(e,t){if(!Ee||!t)return{total:0,must:0,top:[],words:[]};const n=Ee.scanText(e,t),r=new Map;let s=[];try{s=Ee.hitList?Ee.hitList(e,t):[]}catch{s=[]}for(const o of s){const c=String(o.match??"").trim();if(!c)continue;const p=r.get(c)??{text:c,must:!1,count:0};p.count++,p.must||(p.must=o.type==="must"),r.set(c,p)}const a=[...r.values()],i=a.filter(o=>!a.some(c=>c!==o&&c.text.length>o.text.length&&c.text.includes(o.text))).sort((o,c)=>Number(c.must)-Number(o.must)||c.count-o.count);return{...n,words:i}}function ho(e,t=8,n=[]){const r=(e??[]).filter(a=>!n.includes(a.text)),s=r.slice(0,t).map(a=>a.count>1?`${a.text}×${a.count}`:a.text).join("、");return r.length>t?`${s} 等 ${r.length} 种`:s}async function rg(e,t,n,r,s=()=>!1,a={}){const[i]=await wp([{text:e,kind:t}],n,r,s,a);return i}async function wp(e,t,n,r=()=>!1,{onlyMust:s=!1,batch:a=12,onProgress:i}={}){const o=e.map(V=>({text:V.text,changed:0,failed:[]}));if(!Ee||!t)return o;const c=V=>Ee.mustHits(V,t),p=e.map(V=>{let R=Ee.editTargets(V.text,t,!1);return s&&(R=R.filter(L=>c(L.text).length)),R}),d=p.flatMap((V,R)=>V.map(L=>({t:L,bi:R,gid:`b${R+1}${L.id}`,kind:e[R].kind})));if(!d.length)return o;const m=t.aiPrompt||Ee.DEFAULT_AI_PROMPT,g=`${m.includes(Ee.EDIT_CONTRACT)?m:`${m}
+
+${Ee.EDIT_CONTRACT}`}${Ee.BAGU_GUIDE?`
+
+${Ee.BAGU_GUIDE}`:""}`,y=[...new Set(e.map(V=>V.kind))],E=(V,R)=>{if(!Ee.introducedHits||typeof R!="string")return"";const L=Ee.introducedHits(V.text,R,t);return L.length?Ee.introducedReason(L):""},P=(V,R)=>Ee.editIssue(V,R)||(R===V.text&&V.hits.length?"这句还没改，原样交回来了":"")||(c(R).length?`还含必改词：${[...new Set(c(R).map(L=>L.match))].join("、")}`:"")||E(V,R),D=new Map,Q=new Map,z=Math.ceil(d.length/a);let M=0;async function _(V,R){for(let L=0;L<V.length;L+=a){if(r())return;const W=V.slice(L,L+a);M++,i?.({sent:M,rounds:z,retry:R,sentences:d.length});const Ce=`【任务】下面是${y.join("、")}里含八股的句子，逐句修改。能删的套路词删掉；删了不通顺或丢内容的，整句改写成自然的说法。长短不限；不要用近义说法换皮，优先删。整句只是空套路的，text 填空字符串。命中的词只是线索，整句写法是八股的就整句处理，按【什么是八股】【怎么改】来。${R?`
+这些句子上次没改好，“上次的问题”写了原因，这次一定要避开。`:""}
+【格式】只输出 JSON：{"edits":[{"id":"b1s1","text":"改好的句子"}]}，每个 id 都要有。
+【句子】
+${JSON.stringify(W.map(me=>({id:me.gid,...y.length>1?{类型:me.kind}:{},句子:me.t.text,八股:me.t.hits.map(J=>J.match),...R&&Q.get(me.gid)?{上次的问题:Q.get(me.gid)}:{},前一句:me.t.prev,后一句:me.t.next})),null,1)}`;let pe=new Map;for(let me=0;me<2&&!pe.size;me++){if(r())return;try{pe=Ee.parseEdits(await n(g,Ce))}catch{pe=new Map}}for(const me of W){const J=pe.get(me.gid),re=P(me.t,J);re?Q.set(me.gid,re):(D.set(me.gid,J),Q.delete(me.gid))}}}await _(d,!1);const ce=d.filter(V=>!D.has(V.gid));return ce.length&&!r()&&await _(ce,!0),p.forEach((V,R)=>{const L=new Map;for(const W of d)W.bi===R&&D.has(W.gid)&&L.set(W.t.id,D.get(W.gid));o[R]={text:L.size?Ee.applyEdits(e[R].text,V,L):e[R].text,changed:L.size,failed:d.filter(W=>W.bi===R&&!D.has(W.gid)).map(W=>W.t.text.slice(0,30))}}),o}function Ta(e){try{return!!Ee?.looksLikeInstructions?.(e)}catch{return!1}}var bo="loveCardWriter",Na="1.15",le=()=>X.SillyTavern.getContext(),Pa={version:1,apiProfile:"",presetCard:"",presetGreeting:"",maxTokens:0,useTemperature:!0,excludedParameters:ip,userToken:"<user>",personaPlace:"blue",personaTpl:"live",autoBackstory:!0,noNumbers:!0,backstoryCount:"按人物需要",introStyles:[],styles:[],customRules:{},ruleOff:{},ruleModes:{},ruleSteps:{},offPages:[],helpMode:"first",seenHelp:[],introStyle:0,minInterval:3,stream:"preset",greetingCount:2,greetingLength:"600–900",greetingExtract:!0,greetingExtractStart:"<content>",greetingExtractEnd:"</content>",storyLength:"800–1200",maxStepCalls:0,lean:!1,author:"",license:{repost:"不可",edit:"可",commercial:"不可"},presetNote:"",introNotes:"",introThanks:"",introEnding:void 0,predictThreshold:.42,autoPredict:!0,autoBagu:!0,greetMustClean:!0,blueBudget:4e3,playLength:300,prompts:{},rules:{},customTags:{},hiddenTags:{},customSteps:[],quickFlows:[{id:"quick-default",name:"简易角色卡",steps:[{id:"quick-persona",name:"人设",output:"description",prompt:"根据一句话梗写这张卡的人设：这个人的经历、性情、处境及与<user>的关系。写成可直接放进角色卡的正文。"},{id:"quick-opening",name:"开场白",output:"greeting",prompt:"根据一句话梗和前面写好的人设写开场白。从正在发生的事情写起，让角色说话或行动，留给<user>回应的余地。只写开场正文。"}]}],quickFlowId:"full",quickDrafts:{},draft:null,drafts:[]},b={busy:!1,abort:!1,root:null,page:"home",checks:null,bagu:null,editStep:"persona",editRule:"通用",editDim:"era",ptab:"step"},sg={npc:`【任务】为这张卡写 NPC，{{count}} 个左右。可以少，不要凑数。
+
+【构想】
+{{concept}}
+【标签】{{tags}}
+【主要角色概要】
+{{overviews}}
+【世界观】
+{{world}}
+
+【要求】
+- 每个 NPC 必须有一个剧情功能：推动剧情 / 制造阻碍 / 提供信息 / 情敌或修罗场 / 衬托主角，选一个写清楚。
+- 每个 NPC 有他自己想要的东西，不只是围着主角转。
+- 每个 NPC 必须有“只有他”这一项：换成别的卡、别的 NPC 都不能直接用的东西。想不出来就少写一个 NPC，不要凑。
+- 轻量写法，不写完整行为指导。
+{{rules.通用}}
+
+【格式】每个 NPC 一块，块前加一行：
+<<<NPC:名字|关键词1,关键词2>>>
+<名字>
+身份: 他在这个世界里靠什么活、站在哪（用世界观里真实的名字和地点）
+功能:
+想要: 一件近期能办成或办不成的具体的事：和谁有关、卡在哪
+只有他: 只有他会做的一件事，或只有他知道的一个信息，或只有他才有的一个毛病（落在这个世界的具体物件和地点上）
+和主角、〔user〕: 他对他们做过什么、常做什么（隔多久、在哪、说什么、避开什么），不写关系结论
+外貌: 一个能一眼认出他的具体特征，来自他的身份，一句
+说话: 他谈什么、不谈什么，被追问不想答的事时怎么办；加 1–2 句示例台词（严禁在正文照抄）。不写语气形容词
+</名字>`,npcOne:`【任务】为这张卡写一个 NPC。
+
+【这个 NPC】
+名字：{{name}}
+作者的设想：{{desc}}
+
+【构想】
+{{concept}}
+【标签】{{tags}}
+【主要角色概要】
+{{overviews}}
+【世界观】
+{{world}}
+【已有的 NPC】（剧情功能不要和他们重复；可以和他们有关系）
+{{otherNpcs}}
+
+【要求】
+- 按作者的设想写；设想没说到的你来补，但不要改掉设想里的东西。
+- 必须有一个剧情功能：推动剧情 / 制造阻碍 / 提供信息 / 情敌或修罗场 / 衬托主角，选一个写清楚。
+- 有他自己想要的东西，不只是围着主角转。
+- 必须有“只有他”这一项：换成别的卡、别的 NPC 都不能直接用的东西。
+- 轻量写法，不写完整行为指导。
+{{rules.通用}}
+
+【格式】只写这一个，块前加一行：
+<<<NPC:名字|关键词1,关键词2>>>
+<名字>
+身份: 他在这个世界里靠什么活、站在哪（用世界观里真实的名字和地点）
+功能:
+想要: 一件近期能办成或办不成的具体的事：和谁有关、卡在哪
+只有他: 只有他会做的一件事，或只有他知道的一个信息，或只有他才有的一个毛病（落在这个世界的具体物件和地点上）
+和主角、〔user〕: 他对他们做过什么、常做什么（隔多久、在哪、说什么、避开什么），不写关系结论
+外貌: 一个能一眼认出他的具体特征，来自他的身份，一句
+说话: 他谈什么、不谈什么，被追问不想答的事时怎么办；加 1–2 句示例台词（严禁在正文照抄）。不写语气形容词
+</名字>`},pg=`NPC 简要写经历和现在，篇幅要省。
+作者没有填写设想时，根据这张卡已有的世界观自行创作人物，名字和性格也由你来定，直接交出人设。作者写了要求的部分照写，其余由你补足。
+用连贯的短段落写他过去怎样走到今天，现在过着怎样的生活，和身边的人是什么关系。经历只保留影响他现在的性格或关系的部分，不写生平流水账。
+先想清这个人自己在意什么、为什么在意，再写他怎样待人。对不同人的感情可以不同，同一个人也有彼此牵扯的想法；把这些写明白，给后续演绎留下余地。性格词只用于定调，后面要写出这个人的想法，不能停在标签上。
+外貌和说话方式按人物需要写进介绍。每段增加有用的信息，不用物件和小动作凑篇幅，不反复证明同一个特点，也不列触发条件与固定反应。
+参照下方《宇宙冷漠》的 NPC 原文怎样介绍一个人，另写这张卡里的人物。保留本卡题材，不套用样例的人名、职业或人生经历。剧情功能不设必填项。
+用完整、连贯的句子写，不堆排比，不用否定转肯句，不在段尾追加总结或哲理，不代写〔user〕的言行与心理。`;function U(){const e=le().extensionSettings;e[bo]??(e[bo]={});const t=e[bo];for(const[i,o]of Object.entries(Pa))t[i]===void 0&&(t[i]=structuredClone(o));t.license={...Pa.license,...t.license};return t}var oe=()=>le().saveSettingsDebounced(),_t=()=>Gi(U().customTags,U().hiddenTags);function N(){const e=U();e.draft||(e.draft=hn());const t=e.draft;for(const[n,r]of Object.entries(hn()))t[n]===void 0&&(t[n]=structuredClone(r));return t}function ee(){N().updated=Date.now(),oe()}var B=Wf({settings:U,lib:_t,aborted:()=>b.abort,progress:e=>Be(e),llm:e=>hr(e)});function hr(e){const t=Number(U().maxStepCalls)||0;if(t&&b.busy&&(b.stepCalls??0)>=t)return b.capped=!0,Promise.reject(new Error(`这一步已经调用了 ${b.stepCalls} 次，到了你设的上限，先停在这里。写好的都保留；再点一次会从没写的地方接着往下。`));b.calls=(b.calls??0)+1,b.stepCalls=(b.stepCalls??0)+1,bs();const n=b.lastStatus,r=e.diagnosticOwner??N(),s=r.lastResponse={at:Date.now(),page:b.page,raw:"",processed:"",received:!1,status:"pending",error:""};b.root?.querySelector(".cw-response")?.remove();let a=!1;const i=o=>(a&&b.lastStatus!==n&&Be(n),o);return Zf({...e,settings:U(),userToken:U().userToken||"<user>",aborted:()=>b.abort,onAttempt:()=>{Object.assign(s,{raw:"",processed:"",received:!1,status:"pending",error:""}),hs("")},onRaw:o=>{Object.assign(s,{raw:o,received:!0})},onWait:(o,c)=>{a=!0,Be(`API 返回 ${c||"429（请求太频繁）"}，${o} 秒后自动重试…`)},onStream:o=>{s.raw=o,s.status="partial",hs(o)}}).then(o=>(s.processed=o,s.status="received",oe(),hs(""),i(o)),o=>{throw s.status="error",s.error=String(o?.message??o),oe(),hs(""),o})}function gg(e){if(e?.code!=="CW_INVALID_JSON")return;const t=N();(!t.lastResponse||t.lastResponse.processed!==e.rawResponse)&&(t.lastResponse={at:Date.now(),page:b.page,raw:e.rawResponse,received:!0}),Object.assign(t.lastResponse,{status:"parse-error",error:e.parseError||e.message})}var Oa=Mf(()=>le().getTokenCountAsync,()=>yp()),Wn=(e,t)=>Xl(Oa.sum((e??[]).map(n=>String(n??"")),t)),xo=new Map,wg=0;function yo(e){const t=String(++wg);return xo.set(t,e),`<span class="cw-tok" data-tok-ref="${t}">${Wn(e)}</span>`}function xp(e=N()){const t=io(e,{personaPlace:U().personaPlace,activeRoute:0});return[...t.before,...t.card,...t.after]}function Da(e=N()){const t=xp(e);if(!t.length)return"";const n=Oa.sum(t.map(a=>a.text)),r=Number(U().blueBudget)||0,s=r&&n.n>r;return`<span class="cw-tok ${s?"cw-warntext":""}" data-tok-blue>常驻设定 ${Xl(n)}${r?`（上限 ${r}${s?"，超了":""}）`:""}</span>`}function ko(e=N()){const t=xp(e);if(!t.length)return"";const n=io(e,{personaPlace:U().personaPlace}).green,r=s=>`<div class="cw-small cw-tokrow"><span class="cw-grow">${x(s.label)}</span>${yo([s.text])}</div>`;return`<div class="cw-box"><div class="cw-sub">token ${Da(e)}</div>
+<div class="cw-dim cw-small cw-help">每次聊天都会发出去的：蓝灯条目、第一条路线、角色描述。上限在设置里改，0 = 不提示。</div>
+<details class="cw-mini"><summary>每一块多少</summary>${[...t].sort((s,a)=>Oa.count(a.text).n-Oa.count(s.text).n).map(r).join("")}
+${n.length?`<div class="cw-sub cw-small">绿灯（提到关键词才发）</div>${n.map(r).join("")}`:""}</details></div>`}function yp(){if(!b.root)return;const e=(0,X.jQuery)(b.root),t=N();e.find(".cw-tok[data-tok-path]").each(function(){this.textContent=Wn([Ft(t,this.dataset.tokPath)])}),e.find(".cw-tok[data-tok-blue]").each(function(){const n=Da(t);n&&(this.outerHTML=n)}),e.find(".cw-tok[data-tok-ref]").each(function(){const n=xo.get(this.dataset.tokRef);n&&(this.textContent=Wn(n))}),e.find(".cw-tok[data-tok-page]").each(function(){this.textContent=`这一页 ${Wn(Rp(this.dataset.tokPage).map(n=>n.get()))}`})}var x=e=>String(e??"").replace(/[&<>"']/g,t=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[t]);function Ft(e,t){return t.split(".").reduce((n,r)=>n?.[r],e)}function ls(e,t,n){const r=t.split("."),s=r.pop(),a=r.reduce((i,o)=>i[o]??(i[o]={}),e);a[s]=n}var q=(e,t,n="")=>{let r="";const s=String(n).replace(/\bclass="([^"]*)"/,(a,i)=>(r=` ${i}`,""));return`<div class="menu_button cw-btn${r}" data-act="${e}" ${s}>${t}</div>`},Pe=(e,t=6,n="")=>`<textarea class="text_pole cw-ta" data-bind="${e}" rows="${t}" placeholder="${x(n)}">${x(Ft(N(),e)??"")}</textarea>${t>=5?`<div class="cw-tokline"><span class="cw-tok" data-tok-path="${e}">${Wn([Ft(N(),e)])}</span></div>`:""}`,We=(e,t="",n="")=>`<input class="text_pole cw-in ${n}" data-bind="${e}" value="${x(Ft(N(),e)??"")}" placeholder="${x(t)}">`,Ba=(e,t="关键词，逗号分隔")=>`<input class="text_pole cw-in" data-bind-list="${e}" value="${x((Ft(N(),e)??[]).join("，"))}" placeholder="${x(t)}">`;function hg(e,t){const n=t.split("."),r=s=>Ft(e,n.slice(0,s).join("."));switch(n[0]){case"personas":{const s=r(2);return s&&n[2]==="extra"?{key:`personaExtra:${s.name}`,label:`人设补充·${s.name}`}:s?{key:`persona:${s.name}`,label:`${n[2]==="overview"?"人设概要":"人设"}·${s.name}`}:null}case"world":return{key:"world",label:"世界观"};case"npcs":return{key:"npc",label:`NPC·${r(2)?.name??""}`};case"routes":return{key:"routes",label:`路线·${r(2)?.name??""}`};case"tone":return{key:"tone",label:"基调与规则"};case"relations":return{key:"relations",label:"角色关系"};case"free":return{key:`free:${String(r(2)?.name??"").trim()}`,label:`模块·${r(2)?.name??""}`};case"greetings":return{key:`greet:${r(2)?.route??""}`,label:"开场白"};case"intro":return n[1]==="text"?{key:"intro",label:"简介"}:null;case"au":return n[1]==="map"?{key:"au:map",label:"AU 映射表"}:{key:"au:core",label:"AU 内核"};case"existing":return n[1]==="fields"?{key:`exist:field:${n[2]}`,label:{description:"角色描述",personality:"性格",scenario:"场景",mes_example:"对话示例"}[n[2]]??n[2]}:n[1]==="entries"?{key:`exist:entry:${r(3)?.uid}`,label:r(3)?.comment??"条目"}:n[1]==="greetings"?{key:`exist:greet:${n[2]}`,label:`原卡开场白 ${Number(n[2])+1}`}:null;default:return null}}var bg=/^(idea|feedback|play|ideaQA|inspire|qa|greetingContext)\b/;function kp(e){const t=e.dataset.bind,n=(0,X.jQuery)(e),r=n.next(".cw-tokline").length?n.next(".cw-tokline"):n;let s=r.next(".cw-selbar");const a=e.selectionStart,i=e.selectionEnd;if(!t||bg.test(t)||!(i>a)||!e.value.slice(a,i).trim()){s.find(".cw-selin").is(":focus")||s.remove();return}b.sel={path:t,start:a,end:i};const o=[...e.value.slice(a,i)].length;s.length||(s=(0,X.jQuery)(`<div class="cw-selbar"><div class="cw-row"><span class="cw-small cw-selcount"></span><span class="cw-grow"></span>${q("localEdit","局部重写",'class="cw-primary"')}</div><input class="text_pole cw-in cw-selin" placeholder="怎么改？比如“更狠一点”“改成他嘴硬”。空着就是重写这一段"></div>`),s.find(".cw-selin").val(b.selNote??""),r.after(s)),s.find(".cw-selcount").text(`已选 ${o} 字，只改这一段`)}function Ve(e,t=!0){const n=N(),r=n.history?.[e]?.length??0,s=n.truncated?.[e];return!t&&!r?"":`<div class="cw-tools">
+${s?'<div class="cw-warn">回复可能被截断了（自动续写过一次还不完整）。在“设置”里把最大回复长度调大再重写，或者手动补完。</div>':""}
+<input class="text_pole cw-in cw-fb" data-bind="feedback.${x(e)}" value="${x(n.feedback?.[e]??"")}" placeholder="哪里不满意？写在这里，点重写时会带上（可选）">
+${t&&B.textSlot(n,e)||r?`<div class="cw-row">${t&&B.textSlot(n,e)?q("revise","按意见改",`data-key="${x(e)}"`):""}${r?q("restore",`换回上一版（存了 ${r} 版）`,`data-key="${x(e)}"`):""}</div>`:""}
+${xg(n.changes?.[e])}
+</div>`}function vg(){const e=N(),t=U().styles??[];return`<div class="cw-row"><span class="cw-small">文风</span><select class="text_pole cw-in cw-stylesel" style="width:auto"><option value="0">不指定</option>${t.map((n,r)=>`<option value="${r+1}" ${Number(e.style)===r+1?"selected":""}>${x(n.name||`文风 ${r+1}`)}</option>`).join("")}</select>
+${Number(e.style)?`<label class="checkbox_label cw-small"><input type="checkbox" class="cw-styleall" ${e.styleAll?"checked":""}>世界观、NPC、路线、模块、开场白也用</label>`:""}<span class="cw-grow"></span><span class="menu_button cw-btn" data-act="go" data-page="prompts" data-tab="style">${t.length?"编辑文风":"写一个文风"}</span></div>`}function xg(e){if(!e)return"";if(!e.hunks?.length)return`<div class="cw-small cw-dim">${x(e.how||"上次修改")}：没有改动。</div>`;const t=n=>n.length>400?`${n.slice(0,400)}……`:n;return`<details class="cw-mini cw-changes" open><summary>${x(e.how||"上次修改")}：改了 ${e.hunks.length+(e.more??0)} 处</summary>
+<div class="cw-hunks">${e.hunks.map(n=>`<div class="cw-hunk">${n.before.trim()?`<div class="cw-del">${x(t(n.before.trim())).replace(/\n/g,"<br>")}</div>`:'<div class="cw-dim cw-small cw-help">（新加）</div>'}${n.after.trim()?`<div class="cw-add">${x(t(n.after.trim())).replace(/\n/g,"<br>")}</div>`:'<div class="cw-dim cw-small cw-help">（删掉了）</div>'}</div>`).join("")}</div>
+${e.more?`<div class="cw-dim cw-small">还有 ${e.more} 处没列出来。</div>`:""}
+<div class="cw-dim cw-small cw-help">红色是原来的，绿色是现在的。不满意点“换回上一版”。</div></details>`}function yg(){const e=N(),t=e.au;if(!t)return'<div class="cw-dim">不是 AU 草稿。</div>';const n=t.core.some(r=>r.text.trim());return`<div class="cw-small">原卡：<b>${x(t.original.name)}</b>。人还是那个人，换世界观和身份。原卡不会被改动，最后存成一张新卡。</div>
+<div class="cw-card"><div class="cw-sub">① 内核 <small class="cw-dim">换到哪个世界都不变的东西，之后锁定</small></div>
+<div class="cw-row">${q("auCore",n?"重新提取":"从原卡提取内核")}</div>
+${Ve("au:core",n)}
+${t.core.map((r,s)=>`<div class="cw-sub">${x(r.name)}</div>${Pe(`au.core.${s}.text`,8,"矛盾轴与落点、对 user 的底色、说话方式、决策方式、底线")}`).join("")}
+<details class="cw-mini" ${t.shell?"":"open"}><summary>外壳 <small class="cw-dim">原作世界的东西，AU 里要换掉</small></summary>${Pe("au.shell",5,"身份、职业、时代、组织、地点、道具、关键经历……")}</details></div>
+<div class="cw-card"><div class="cw-sub">② AU 设定</div>
+${Pe("idea",3,"一句话 AU：比如“现代都市，他是外卖骑手，<user>是新来的站长”")}
+<div class="cw-row">${q("ideaQA",e.ideaQA?.length?"换几个问题":"先问我几个问题")}${q("go","去改标签",'data-page="tags"')}</div>
+${e.ideaQA?.length?e.ideaQA.map((r,s)=>`<div class="cw-q"><div class="cw-qt">${x(r.q)}</div>${ms(`ideaQA.${s}.answer`,r.options)}</div>`).join(""):""}
+<div class="cw-dim cw-small cw-help">原作的题材、原型标签没带过来，按 AU 重新选。</div></div>
+<div class="cw-card"><div class="cw-sub">③ 映射表 <small class="cw-dim">原作 → AU，每条写清为什么还能长出同样的内核</small></div>
+<div class="cw-row">${n&&e.idea.trim()?`<div class="menu_button cw-btn ${t.map?"":"cw-primary"}" data-act="auMap">${t.map?"重写映射表":"生成映射表 →"}</div>`:'<span class="cw-dim cw-small cw-help">先提取内核、写好 AU 设定</span>'}</div>
+${Ve("au:map",!!t.map)}
+${Pe("au.map",10,"原：扒手团 → AU：城中村的外卖站｜……")}</div>
+<details class="cw-mini"><summary>原卡内容（只读）</summary><textarea class="text_pole cw-ta" rows="10" readonly>${x(t.original.personas.map(r=>`【${r.name}】
+${r.text}`).join(`
+
+`))}</textarea></details>
+<div class="cw-dim cw-small cw-help">映射表写好后，去“主要人设”生成 AU 人设，生成完点“内核一致性检查”。后面的世界观、NPC、路线、开场白照常写，都会带上内核和映射表。</div>`}var So=[["description","角色描述"],["personality","性格"],["scenario","场景"],["world","世界观"],["tone","基调"],["entry","世界书条目"],["mes_example","对话示例"],["greeting","开场白"],["name","卡名"]],ps=[["chat","主题",!0],["persona","主要人设"],["world","世界观"],["npc","NPC"],["routes","玩家与路线"],["tone","基调与规则"],["greet","开场白"],["play","试玩",!0],["check","质检"],["dress","状态栏和主页",!0],["import","导入酒馆",!0],["intro","简介"]],br="full",kn=e=>`${e}${Date.now().toString(36)}${Math.random().toString(36).slice(2,7)}`,vr=e=>So.find(t=>t[0]===e)?.[1]||e,Ma=e=>ps.find(t=>t[0]===e);function La(){const e=U();if(Array.isArray(e.quickFlows)||(e.quickFlows=structuredClone(Pa.quickFlows)),!e.quickFlowV2){e.quickFlowV2=!0;const t=[...Object.values(e.quickDrafts??{}),...(e.quickCards??[]).map(n=>n.draft)].filter(n=>n&&(n.idea?.trim()||n.name?.trim()||Object.keys(n.quickState?.done??{}).length));for(const n of t)try{const r=(e.quickFlows??[]).find(s=>e.quickDrafts?.[s.id]===n)??(e.quickFlows??[]).find(s=>(e.quickCards??[]).some(a=>a.draft===n&&a.flowId===s.id));r&&Sg(n,r),n.id??=kn("d"),n.updated??=Date.now(),e.drafts=[n,...e.drafts??[]].slice(0,12)}catch{}e.quickDrafts={},e.quickCards=[],e.quickFlowId=br,oe()}return e.quickFlows}function wt(){const e=U(),t=La();if(!e.quickFlowId||e.quickFlowId===br){const d=e.draft;return d?.cardType&&CWZT[d.cardType]&&!d.au&&!(d.existing&&!d.existing.fromImport)?cwzTypeFlow(d.cardType):null}const n=t.find(r=>r.id===e.quickFlowId);return n?(n.steps??=[],n):(e.quickFlowId=br,oe(),null)}function en(e=N()){return e.au||e.existing&&!e.existing.fromImport?null:wt()}function ht(){const e=N();return e.quickState??={done:{},skipped:{}},e.quickState.done??={},e.quickState.skipped??={},e.quickState.feedback??={},e}function ds(e){return JSON.stringify([e.name,e.output,e.prompt])}function xr(e){return e.kind==="builtin"?Ma(e.page)?.[1]??e.page:e.kind==="mine"?(U().customSteps??[]).find(t=>t.id===e.stepId)?.name||"我的步骤":e.name||"新步骤"}function Sp(e,t){const n=e.quickState?.done?.[t.id];return!!String(n?.text??"").trim()&&n.signature===ds(t)}function kg(e,t){const n=[];for(const r of e.steps??[])if(r.kind==="builtin"){const s=fs.find(a=>a.id===r.page);if(!s)continue;n.push({...s,soft:!!r.optional,flowStep:r,done:a=>s.done(a)||!!a.quickState?.skipped?.[r.id],status:a=>a.quickState?.skipped?.[r.id]&&!s.done(a)?"跳过了":s.status?.(a)??""})}else if(r.kind==="mine"){const s=(U().customSteps??[]).find(i=>i.id===r.stepId);if(!s){n.push({id:`q:${r.id}`,name:"（已删除的我的步骤）",desc:"到流程编辑里删掉这一步",flowStep:r,missing:!0,status:()=>"",done:()=>!0});continue}const a=()=>t.free.find(i=>i.fromStep===s.id);n.push({id:`step:${s.id}`,name:s.name||"我的步骤",desc:"我的步骤",custom:s,soft:!!r.optional,flowStep:r,status:()=>a()?.content?"已写":"",done:()=>!!a()?.content})}else n.push({id:`q:${r.id}`,name:r.name||"新步骤",desc:`写到 ${vr(r.output)}`,soft:!!r.optional,flowStep:r,status:s=>{const a=s.quickState?.done?.[r.id];return String(a?.text??"").trim()?a.signature===ds(r)?`写到 ${vr(r.output)} · 已写`:`写到 ${vr(r.output)} · 提示词改过，待重写`:`写到 ${vr(r.output)}`},done:s=>Sp(s,r)});return n}function qa(e,t){ht();const n=e.quickState,r={},s=[],a=[];let i="";e.free=(e.free??[]).filter(c=>!String(c.fromStep??"").startsWith("quick:")),e.greetings=(e.greetings??[]).filter(c=>!c.quickStep);for(const c of t?.steps??[]){if(c.kind)continue;const p=String(n.done?.[c.id]?.text??"").trim();p&&(["description","personality","scenario","mes_example"].includes(c.output)?r[c.output]=[r[c.output],p].filter(Boolean).join(`
+
+`):c.output==="name"?i=p.split(`
+`)[0].trim():c.output==="world"?s.push([c,p]):c.output==="tone"?a.push([c,p]):c.output==="greeting"?e.greetings.push({route:"",text:p,quickStep:c.id}):cwzSplit(c,p).forEach(m=>e.free.push(m)))}Object.keys(r).length?e.quickCardFields=r:delete e.quickCardFields;const o=(c,p,d,m,g)=>{const y=m.map(P=>P[1]).join(`
+
+`),E=String(c()??"");if(!E.trim()||E===n[d])p(y),n[d]=y;else{n[d]="";for(const[P,D]of m)e.free.push({name:P.name||g,desc:"",content:D,light:"blue",keys:[],position:"after",fromStep:`quick:${P.id}`})}};(s.length||n.worldText)&&o(()=>e.world.main,c=>{e.world.main=c},"worldText",s,"世界观"),(a.length||n.toneText)&&o(()=>e.tone,c=>{e.tone=c},"toneText",a,"基调"),i&&(!e.name||e.name===n.generatedName)&&(e.name=i),n.generatedName=i}function Sg(e,t){e.quickState??={done:{}},e.world??={main:"",extra:[]},e.free??=[],e.greetings??=[];const n={};for(const r of t.steps??[]){const s=String(e.quickState.done?.[r.id]?.text??"").trim();s&&(["description","personality","scenario","mes_example"].includes(r.output)?n[r.output]=[n[r.output],s].filter(Boolean).join(`
+
+`):r.output==="world"?e.world.main=[e.world.main,s].filter(Boolean).join(`
+
+`):r.output==="tone"?e.tone=[e.tone,s].filter(Boolean).join(`
+
+`):r.output==="greeting"?e.greetings.some(a=>a.text===s)||e.greetings.push({route:"",text:s}):r.output==="name"?e.name||=s.split(`
+`)[0].trim():e.free.some(a=>a.content===s)||e.free.push({name:r.name||"补充设定",content:s,light:"blue",position:"after"}))}Object.keys(n).length&&(e.quickCardFields=n)}function Cg(e){const t=U();try{return Sa(np(e,t).join(`
+
+`),t)}catch{return Sa(Un(e),t)}}function Cp(e,t,n){const r=(()=>{try{return Ig(t)}catch{return{}}})(),s=[],a=i=>e.steps.slice(0,n).some(o=>o.kind==="builtin"&&o.page===i);!a("idea")&&t.pick>=0&&t.concepts?.[t.pick]&&s.push({name:"构想",text:ha(t.concepts[t.pick])}),!a("chat")&&t.chat?.use!==!1&&String(t.chat?.brief??"").trim()&&s.push({name:"作者定稿",text:String(t.chat.brief).trim()});for(const i of e.steps.slice(0,n)){let o="";i.kind?i.kind==="mine"?o=String(t.free.find(c=>c.fromStep===i.stepId)?.content??"").trim():o=String({idea:t.pick>=0&&t.concepts?.[t.pick]?r.concept:"",tags:r.tags,chat:t.chat?.use===!1?"":t.chat?.brief,persona:[r.personas,r.relations&&`【人物关系】
+${r.relations}`].filter(Boolean).join(`
+
+`),world:r.world,npc:r.npcs,routes:r.routes,tone:r.tone,greet:(t.greetings??[]).filter(c=>!c.quickStep).map(c=>c.text).join(`
+
+`),intro:t.intro?.text}[i.page]??"").trim():o=String(t.quickState?.done?.[i.id]?.text??"").trim(),o&&!/^（(无|未选)）$/.test(o)&&s.push({name:xr(i),text:o})}return s}function Ig(e){return{...B.baseVars(e),personas:B.cardMaterials(e).personas,relations:B.cardMaterials(e).relations}}function Ag(e,t,n){const r=n.map(d=>`【${d.name}】
+${d.text}`).join(`
+
+`),s=String(e.prompt??"").trim().replace(/\{\{\s*NSFW要求\s*\}\}/g,()=>cwzNsfwAsk()||"（作者没写，按卡的设定自己把握尺度）");if(!s)throw new Error(`先填写“${e.name||"新步骤"}”的提示词。`);const a=String(t.idea??"").trim(),i=/\{\{\s*梗\s*\}\}/.test(s),o=/\{\{\s*前文\s*\}\}/.test(s),c=n.at(-1)?.text??"";let p=s.replace(/\{\{\s*(梗|前文|上一步)\s*\}\}/g,(d,m)=>m==="梗"?a:m==="上一步"?c:r);return!i&&a&&(p+=`
+
+【一句话梗】
+${a}`),r&&!o&&(p+=`
+
+【前面已写好的内容】
+${r}`),p+=Ip(t,`q:${e.id}`,e.name||"新步骤"),{system:"按作者给本步写的提示词创作。沿用前面已经写好的事实，只返回本步需要的正文。前面写好的内容会一起放进角色卡，这一步不复述人物经历、关系前情和别的步骤已经写过的东西，只写本步负责的部分。",user:p,stage:e.output==="greeting"?"greeting":"card",preserveOutput:!0}}function Ip(e,t,n){try{return Zt(e,t,n)}catch{return""}}async function Ap(e,t,n){const r=e.steps[n];Be(`${x(r.name||`步骤 ${n+1}`)}（${n+1}/${e.steps.length}）…`);const s=Ag(r,t,Cp(e,t,n)),a=String(t.quickState.done?.[r.id]?.text??"").trim(),i=String(t.quickState.feedback?.[r.id]??"").trim(),o=!!Ip(t,`q:${r.id}`,r.name||"新步骤");a&&(i||o)&&(i&&(s.user+=`
+
+【作者对上一版的修改意见，必须优先满足】
+${i}`),s.user+=`
+
+【上一版】（按${i?"意见":"上面对话里的要求"}改，没提到的好的部分可以保留）
+${a}`),Qa()&&(s.system+=Io);const c=await Ao(await hr(s),{stage:s.stage}),p=r.output==="greeting"?Cg(c):Un(c);if(!p)throw new Error(`“${r.name||`步骤 ${n+1}`}”返回空内容，之前写好的仍在。`);t.quickState.done[r.id]={signature:ds(r),text:p},i&&(t.quickState.feedback[r.id]=""),qa(t,e)}async function Ep(e,t,{oneClick:n=!1}={}){ht();const r=U(),s=p=>r[p]&&!r.lean,a=()=>{ee(),G(),Ra(!0)},i=async()=>{if(!(t.pick>=0&&t.concepts?.[t.pick])){if(!t.concepts?.length){if(!String(t.idea??"").trim()&&!t.tags?.length)throw new Error("先在「主题」里把主题定下来。");await B.idea(t),a()}B.pickConcept(t,0),a()}},o=e.steps??[];if(!o.length)throw new Error("这套流程还没有步骤。");if((o.some(p=>!p.kind)||o.some(p=>p.kind==="builtin"&&!["idea","chat","tags","import","play","check"].includes(p.page)))&&!String(t.idea??"").trim()&&!t.concepts?.length&&!o.some(p=>p.kind==="builtin"&&p.page==="idea")&&!t.personas?.some(p=>p.text))throw new Error("先在「主题」里把主题定下来。");qa(t,e);for(let p=0;p<o.length;p++){if(b.abort)throw new Error("已停止");const d=o[p],m=xr(d);if(d.optional)continue;if(!d.kind){Sp(t,d)||(await Ap(e,t,p),a());continue}if(d.kind==="mine"){const y=(r.customSteps??[]).find(E=>E.id===d.stepId);if(!y||cwzNeedAsk(y)||t.free.find(E=>E.fromStep===y.id)?.content)continue;await i(),await B.custom(t,y),a();continue}const g=d.page==="tone"?null:fs.find(y=>y.id===d.page);if(!(!g||g.done(t)||t.quickState.skipped[d.id])){if(Ma(d.page)?.[2]){if(d.page==="idea"&&n){await i();continue}if(n)continue;return b.page=d.page,b.quickStopAt=d.id,`流程停在「${x(m)}」：在这一页选好以后，点上面的「继续流程」；不想做就点「跳过这一步」。`}if(await i(),d.page==="persona"){for(let y=0;y<t.personas.length;y++){const E=t.personas[y];E.text||(Be(`人设：${x(E.name||"新角色")}…`),await B.persona(t,y),a(),s("autoBackstory")&&wa(E.text)&&(Be(`展开经历：${x(E.name)}…`),await B.backstory(t,E.name),a()))}t.personas.filter(y=>y.text).length>1&&!t.relations&&(Be("角色关系网…"),await B.relations(t),a())}else if(d.page==="world")await B.world(t),a();else if(d.page==="npc")((t.concepts[t.pick]?.npcs??1)>0||B.modeOf(t)==="world")&&(await B.npc(t),a());else if(d.page==="routes")await B.routes(t),a();else if(d.page==="tone")await B.tone(t),a();else if(d.page==="greet"){const y=(t.greetings??[]).filter(E=>!E.quickStep);!t.routes.length&&!y.length&&(Be("开场白…"),await In(()=>B.greetings(t,-1)),a());for(let E=0;E<t.routes.length;E++)t.greetings.some(P=>!P.quickStep&&P.route===t.routes[E].name)||(Be(`开场白：${x(t.routes[E].name)}…`),await In(()=>B.greetings(t,E)),a())}else d.page==="check"?b.checks=B.localCheck(t):d.page==="intro"&&(await B.intro(t),a())}}return b.quickStopAt="",o.some(p=>p.kind==="builtin"&&p.page==="check")?(b.checks=B.localCheck(t),b.page="check"):b.page="home",n?"一键出卡完成（要你选的步骤跳过了）。检查一下，没问题就导入酒馆。":"流程跑完了。检查一下，没问题就导入酒馆。"}function Tp(e){const t=[...String(e??"").matchAll(/\{\{\s*([^{}]+?)\s*\}\}/g)].map(n=>n[1]).filter(n=>!["梗","前文","上一步","user","char"].includes(n));return[...new Set(t)]}function Eg(e){const t=wt(),n=ht(),r=t?.steps.indexOf(e)??-1;if(r<0)return'<div class="cw-dim">这一步不在当前流程里了。</div>';const s=(p,d,m)=>`<option value="${x(p)}" ${p===m?"selected":""}>${x(d)}</option>`,a=n.quickState.done[e.id],i=!!String(a?.text??"").trim(),o=i&&a.signature!==ds(e),c=Tp(e.prompt);return`<div class="cw-form cw-qstep-page">
+<div class="cw-row cw-end" style="flex-wrap:nowrap">${q("quickMove","↑",`data-i="${r}" data-dir="-1" title="前移" style="padding:2px 12px;min-height:0;font-size:.85em"`)}${q("quickMove","↓",`data-i="${r}" data-dir="1" title="后移" style="padding:2px 12px;min-height:0;font-size:.85em"`)}${q("quickDelStep","删除",`data-i="${r}" style="padding:2px 12px;min-height:0;font-size:.85em"`)}</div>
+<label>步骤名<input class="text_pole cw-in" data-qstep="${r}" data-key="name" value="${x(e.name)}" placeholder="步骤名"></label>
+<label>写到<select class="text_pole cw-in" data-qstep="${r}" data-key="output">${So.map(([p,d])=>s(p,d,e.output)).join("")}</select></label>
+<label>提示词<textarea class="text_pole cw-ta cw-qprompt" rows="8" data-qstep="${r}" data-key="prompt" placeholder="写这一步要 AI 做什么">${x(e.prompt)}</textarea></label>
+${c.length?`<div class="cw-card cw-small">提示词里的 ${c.map(p=>`{{${x(p)}}}`).join("、")} 在这里用不上，会原样发给 AI。可以改成 {{梗}}、{{前文}}、{{上一步}}，或删掉。</div>`:""}
+<div class="cw-dim cw-small cw-help">可用 {{梗}}（主页的一句话梗）、{{前文}}（流程里前面各步写好的内容）、{{上一步}}。没写变量也会自动带上一句话梗和前文。</div>
+${i?`<label>修改意见<small class="cw-dim">（重写时按这里改；空着就整段重新写。聊一聊里说过的要求也会带上）</small><textarea class="text_pole cw-ta" rows="3" data-qbind="quickState.feedback.${x(e.id)}" placeholder="例如：经历再短一点，性格写得具体些">${x(n.quickState.feedback?.[e.id]??"")}</textarea></label>`:""}
+<div class="cw-row">${q("quickRunOne",i?String(n.quickState.feedback?.[e.id]??"").trim()?"按意见重写":"重写这一步":"写这一步",`class="cw-primary" data-id="${x(e.id)}"`)}${o?'<span class="cw-dim cw-small">提示词改过了，下次跑流程会重写这一步</span>':""}</div>
+<label>结果（可直接改）<textarea class="text_pole cw-ta" rows="10" data-qbind="quickState.done.${x(e.id)}.text" placeholder="还没写。">${x(a?.text??"")}</textarea></label>
+</div>`}function Tg(e){const t=U(),n=(t.quickFlows??[]).filter(o=>o.id!==e.id).flatMap(o=>(o.steps??[]).filter(c=>!c.kind).map(c=>({f:o,st:c}))),r=t.customSteps??[],s=o=>e.steps.some(c=>c.kind==="builtin"&&c.page===o),a=(o,c,p,d="")=>`<div class="cw-opt" data-act="quickPickStep" ${o}><b>${c}</b>${p?` <span class="cw-dim cw-small">· ${p}</span>`:""}${d}</div>`,i=o=>`<div class="cw-dim cw-small" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">${x(String(o??"").replace(/\s+/g," ").slice(0,60))}</div>`;return`<div class="cw-card cw-qpick"><b>选一个步骤加进来</b>
+<div class="cw-opts">${a('data-src="blank"',"空白步骤","自己写提示词")}</div>
+<div class="cw-sub cw-small">工坊自带的步骤</div>
+<div class="cw-opts">${ps.filter(([o])=>o!=="chat"&&o!=="tone").map(([o,c,p])=>a(`data-src="builtin" data-page="${o}"`,x(c),[p?"要你自己选，流程会停下等你":"",s(o)?"流程里已经有了":""].filter(Boolean).join(" · "))).join("")}</div>
+<div class="cw-sub cw-small">别的流程里的步骤（复制一份）</div>
+<div class="cw-opts">${n.length?n.map(({f:o,st:c})=>a(`data-src="flow" data-flow="${x(o.id)}" data-step="${x(c.id)}"`,x(c.name||"新步骤"),`写到 ${x(vr(c.output))} · 来自「${x(o.name||"未命名流程")}」`,c.prompt?i(c.prompt):"")).join(""):'<div class="cw-dim cw-small">别的流程里还没有自己写的步骤。</div>'}</div>
+<div class="cw-sub cw-small">我的步骤（草稿 → 我的步骤）</div>
+<div class="cw-opts">${r.length?r.map(o=>a(`data-src="mine" data-step="${x(o.id)}"`,x(o.name||"未命名步骤"),"用工坊的变量跑，在「草稿 → 我的步骤」里改",o.template?i(o.template):"")).join(""):'<div class="cw-dim cw-small">还没有自定义步骤。</div>'}</div>
+<div class="cw-dim cw-small">会按完整工坊的顺序插到合适的位置，加好后可以上下移动。</div></div>`}function Ng(){const e=U(),t=new Set(e.offPages??[]),n=[];for(const[r]of ps){t.has(r)||n.push({id:kn("qs"),kind:"builtin",page:r});for(const s of e.customSteps??[])(s.after||"tone")===r&&n.push({id:kn("qs"),kind:"mine",stepId:s.id})}return n}function Np(e=""){const t=U(),n=La(),r=wt(),s=(a,i,o)=>`<option value="${x(a)}" ${o?"selected":""}>${x(i)}</option>`;return`<select class="text_pole cw-in cw-grow cw-qflow-sel ${e}" aria-label="选择出卡流程">${s(br,N().cardType&&CWZT[N().cardType]?`按卡种：${CWZT[N().cardType].name}`:"完整工坊（原来的步骤）",!r||!!r.builtinType)}${n.map(a=>s(a.id,a.name||"未命名流程",r?.id===a.id)).join("")}</select>`}function Pg(){const e=U(),t=wt();if(t?.builtinType)return cwzTypePg(t);const n=`<div class="cw-row">${Np()}${q("quickNewFlow","新建")}${t?q("quickDelFlow","删除"):""}${q("quickCopyFlow","复制")}</div>`;if(!t)return`<div class="cw-form cw-quick">${n}
+<div class="cw-card cw-small">现在用的是<b>完整工坊（原来的步骤）</b>，主页还是原来那套。这套不在这里改：自己的步骤在「草稿 → 我的步骤」加。<br>想按自己的顺序排，点「复制」把它复制成一套新流程，或点「新建」。</div></div>`;const r=(s,a)=>{const i=`${q("quickMove","↑",`data-i="${a}" data-dir="-1"`)}${q("quickMove","↓",`data-i="${a}" data-dir="1"`)}${q("quickDelStep","删除",`data-i="${a}"`)}`;if(s.kind){const c=s.kind==="builtin"&&Ma(s.page)?.[2];return`<div class="cw-card cw-qstep"><div class="cw-row"><b class="cw-grow">${a+1}. ${x(xr(s))}</b>${i}</div><div class="cw-dim cw-small">${s.kind==="mine"?"我的步骤 · 在「提示词 → 我的步骤」里改":`工坊自带${c?" · 跑到这里会停下等你选，一键出卡跳过":""}`}</div></div>`}const o=Tp(s.prompt);return`<div class="cw-card cw-qstep">
+<div class="cw-row"><b class="cw-grow">${a+1}. ${x(s.name||"新步骤")}</b>${i}</div>
+<input class="text_pole cw-in" data-qstep="${a}" data-key="name" value="${x(s.name)}" placeholder="步骤名">
+<label>写到<select class="text_pole cw-in" data-qstep="${a}" data-key="output">${So.map(([c,p])=>`<option value="${c}" ${c===s.output?"selected":""}>${x(p)}</option>`).join("")}</select></label>
+<label>提示词<textarea class="text_pole cw-ta cw-qprompt" rows="6" data-qstep="${a}" data-key="prompt" placeholder="写这一步要 AI 做什么">${x(s.prompt)}</textarea></label>
+${o.length?`<div class="cw-card cw-small">提示词里的 ${o.map(c=>`{{${x(c)}}}`).join("、")} 在这里用不上，会原样发给 AI。可以改成 {{梗}}、{{前文}}、{{上一步}}，或删掉。</div>`:""}
+</div>`};return`<div class="cw-form cw-quick">${n}
+<div class="cw-small cw-dim cw-qsave">自动保存。主页按这套流程排步骤，点哪一步进哪一步。</div>
+<label>流程名称<input class="text_pole cw-in" data-qflow="name" value="${x(t.name)}"></label>
+<div class="cw-small cw-dim cw-help">从上往下执行。自己写的步骤可用 {{梗}}、{{前文}}、{{上一步}}。工坊自带里要你选的步骤（构想、先聊聊、标签、试玩、导入），按「继续流程」跑到时会停下等你；「一键出卡」跳过它们。</div>
+${t.steps.map(r).join("")||'<div class="cw-dim">还没有步骤。</div>'}
+<div class="cw-row">${q("quickAddStep",b.quickPickOpen?"收起":"+ 添加步骤")}<span class="cw-grow"></span>${q("go","回主页",'data-page="home"')}</div>
+${b.quickPickOpen?Tg(t):""}
+</div>`}function Og(e){const t=en(),n=e?.flowStep;if(!t||!n||n.kind!=="builtin"||!Ma(n.page)?.[2])return"";const r=ht().quickState.skipped[n.id];return`<div class="cw-next cw-qstop"><div class="cw-small">${b.quickStopAt===n.id?"流程停在这一步，等你来选。":"这一步要你自己选。"}选好以后点「继续流程」接着往下跑。</div>
+<div class="cw-row">${q("quickContinue","继续流程",'class="cw-primary"')}${r?q("quickUnskip","不跳过这一步",`data-id="${x(n.id)}"`):q("quickSkip","跳过这一步",`data-id="${x(n.id)}"`)}</div></div>`}function Dg(e,t,n,r){const s=en(e);if(!s)return"";const a=s.steps.some(o=>o.kind==="builtin"&&o.page==="idea"),i=b.quickStopAt&&s.steps.find(o=>o.id===b.quickStopAt);return`<div class="cw-next cw-qhome">
+${a?"":`<label class="cw-small">一句话梗<textarea class="text_pole cw-ta" rows="2" data-bind="idea" placeholder="例如：重逢那天，他认不出曾经救过自己的人。">${x(e.idea??"")}</textarea></label>`}
+${r.length?`<div class="cw-dim cw-small cw-progress"><span>${t?"下一步":"全部完成了"} · 已完成 ${n}/${r.length}</span><span class="cw-bar"><i style="width:${Math.round(n/r.length*100)}%"></i></span></div>`:'<div class="cw-dim cw-small">这套流程还没有步骤，点下面的「＋ 添加步骤」。</div>'}
+${i?`<div class="cw-small">流程停在「${x(xr(i))}」，等你选好。</div>`:""}
+<div class="cw-row">${q("quickContinue",t?n?"继续流程":"开始跑流程":"再检查一遍",'class="cw-primary"')}${q("quickOneClick","一键出卡")}${t?`<div class="menu_button cw-btn" data-act="go" data-page="${t.id}">去「${x(t.name)}」</div>`:""}</div>
+<div class="cw-dim cw-small">「继续流程」一步步跑，碰到要你选的步骤会停下；「一键出卡」跳过要你选的步骤，一口气跑完。写好的步骤不会重写。</div>
+</div>`}var Pp=/^(姓名|名字|角色名|角色|人物|name)$/i,Bg=/^(关键词|关键字|触发词|keys?|keywords?)$/i;function ja(e){return String(e).replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}function Op(e){return String(e??"").replace(/[（(][^）)]*[）)]/g,"").replace(/[\s*`"“”'‘’「」『』]/g,"").trim()}function Dp(e){const t=String(e??"").replace(/\s+/g,"").slice(0,400),n=new Set;for(let r=0;r<t.length-1;r++)n.add(t.slice(r,r+2));return n}function Mg(e,t){const n=Dp(e),r=Dp(t);if(!n.size||!r.size)return!1;let s=0;for(const a of n)r.has(a)&&s++;return s/(n.size+r.size-s)>=.35}function Bp(){const e=U(),t=String(e.greetingExtractStart??"").trim()||"<content>",n=String(e.greetingExtractEnd??"").trim()||"</content>";return{start:t,end:n}}function Lg(e,{start:t,end:n}){const r=t.match(/^<([A-Za-z一-龥][\w:.\-一-龥]*)>$/),a=r&&n.toLowerCase()===`</${r[1].toLowerCase()}>`?new RegExp(`<${ja(r[1])}(?:\\s[^<>]*)?>([\\s\\S]*?)<\\/${ja(r[1])}\\s*>`,"gi"):new RegExp(`${ja(t)}([\\s\\S]*?)${ja(n)}`,"g"),i=[],o=String(e).replace(a,(c,p)=>{const d=Sa(p,U());return d.trim()&&i.push(d.trim()),`
+`});return{regions:i,rest:o}}function qg(e){return String(e??"").replace(/<(think(?:ing)?|plann?ing|plan|analysis|reasoning)(?:\s[^<>]*?)?>[\s\S]*?(?:<\/\1\s*>|$)/gi,"")}function Co(e){return String(e??"").split(/[,，、;；|\/]/).map(t=>t.trim()).filter(Boolean)}function jg(e){const t=[];let n=String(e??"").replace(/^\s*```[\w-]*\s*$/gm,"");n=n.replace(/<(entry|条目|worldbook_entry)\b([^>]*)>([\s\S]*?)<\/\1\s*>/gi,(o,c,p,d)=>{const m=D=>p.match(new RegExp(`${D}\\s*=\\s*["“]([^"”]*)["”]`,"i"))?.[1]??"",g=m("name")||m("comment")||m("名字")||m("标题"),y=Co(m("keys")||m("key")||m("关键词")),E=d.match(/^\s*(?:姓名|名字|角色名|name)\s*[:：]\s*(.+)$/im)?.[1]?.trim(),P=/人设|角色|人物|char/i.test(m("type"))||!!E;return d.trim()&&t.push({kind:P?"char":"other",name:P&&E||g||d.trim().split(`
+`)[0].slice(0,16),content:d.trim(),keys:y}),`
+`});const r=/^\s*(?:[-*•·]\s*)?\**([^\s:：*#【】<>]{1,10})\**\s*[:：]\s*(.*)$/,s=/^\s*(?:【([^】]{1,30})】|#{1,6}\s*(.{1,30}?)\s*#*|<([^\/<>\s=]{1,20})>|\*\*([^*]{1,30})\*\*)\s*[:：]?\s*$/;let a=null;const i=()=>{if(!a)return;const o=a.lines;for(;o.length&&!o.at(-1).trim();)o.pop();const c=o.map(d=>!d.trim()).lastIndexOf(!0);if(c>0){const d=o.slice(c+1).join(`
+`);d.length<100&&!r.test(d)&&/[？?]|吗|需要|要不要|如果你|还有什么|以上/.test(d)&&o.splice(c)}const p=o.join(`
+`).replace(/\n{3,}/g,`
+
+`).trim();p&&(a.kind==="char"||a.fields>0||p.length>=20)&&t.push({kind:a.kind,name:a.name,content:p,keys:a.keys}),a=null};for(const o of n.split(`
+`)){if(/^\s*(-{3,}|={3,}|\*{3,}|_{3,})\s*$/.test(o)){i();continue}if(/^\s*<\/[^<>]{1,30}>\s*$/.test(o))continue;const c=o.match(s);if(c){const d=(c[1]??c[2]??c[3]??c[4]??"").trim();if(d&&!Pp.test(d)){i(),a={kind:"other",name:d,lines:[],keys:[],fields:0,head:!0};continue}}const p=o.match(r);if(p&&Pp.test(p[1])&&p[2].trim()){a?.head&&!a.lines.some(d=>d.trim())||i(),a={kind:"char",name:p[2].trim(),lines:[o],keys:[],fields:1};continue}if(p&&Bg.test(p[1])){a&&(a.keys=Co(p[2]));continue}a&&(p&&a.fields++,a.lines.push(o))}return i(),t}function us({upto:e=null,scope:t="all"}={}){const n=le().chat??[],r=e??n.length-1,s=Bp(),a=new Map,i=[];let o=0,c=0;n.forEach((m,g)=>{if(!m||m.is_user||m.is_system||g>r||t==="one"&&g!==r)return;c++;const y=qg(m.mes),{regions:E,rest:P}=Lg(y,s);for(const D of E)i.push({text:D,floor:g,seq:o++});for(const D of jg(P)){const Q=`${D.kind}:${Op(D.name)||D.name}`,z=a.get(Q)??{key:Q,kind:D.kind,name:Op(D.name)||D.name,versions:[],first:o};z.versions.push({floor:g,content:D.content,keys:D.keys}),a.set(Q,z),o++}});const p=[...a.values()].map((m,g)=>{const y=m.versions.length-1,E=m.versions[y].keys??[];return{...m,id:`c${g}`,pick:y,on:!/开场/.test(m.name),keys:E,light:E.length?"green":"blue"}});i.forEach((m,g)=>{const y=i.slice(g+1).find(E=>Mg(E.text,m.text));m.old=!!y,m.on=!y,m.id=`g${g}`});const d=p.find(m=>m.kind==="char"&&m.on);return{upto:r,scope:t,count:c,items:p,greets:i,name:b.ci?.name||d?.name||"",open:{}}}function Sn(){return b.ci||(b.ci=us()),b.ci}function Qg(){const e=Sn(),t=(d,m)=>`<option value="${d}" ${e.scope===d?"selected":""}>${m}</option>`,n=e.items.filter(d=>d.kind==="char"),r=e.items.filter(d=>d.kind!=="char"),s=d=>d.filter(m=>m.on).length,a=(d,m,g,y)=>`<span class="cw-chip ${y?"on":""}" data-act="${d}" ${g}>${m}</span>`,i=d=>{const m=d.versions[d.pick];return`<div class="cw-card ${d.on?"picked":""}">
+<label class="checkbox_label" style="display:flex;flex-direction:row;flex-wrap:nowrap;align-items:flex-start;gap:8px;cursor:pointer;min-width:0"><input type="checkbox" data-ci-on="${d.id}" ${d.on?"checked":""} style="margin-top:5px"><span style="flex:1 1 auto;min-width:0;overflow:hidden"><b>${x(d.name)}</b>
+<span class="cw-dim cw-small" style="display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">${x(m.content.replace(/\s+/g," ").slice(0,70))}</span></span></label>
+<div class="cw-chips">${a("ciLight","蓝灯",`data-id="${d.id}" data-v="blue"`,d.light==="blue")}${a("ciLight","绿灯",`data-id="${d.id}" data-v="green"`,d.light==="green")}${d.light==="green"?`<span class="cw-small cw-dim">关键词：${x(d.keys.join("、")||d.name)}</span>`:""}</div>
+${d.versions.length>1?`<div class="cw-chips">${d.versions.map((g,y)=>a("ciPick",`第 ${g.floor} 楼${y===d.versions.length-1?" · 最新":""}`,`data-id="${d.id}" data-v="${y}"`,y===d.pick)).join("")}</div>`:`<div class="cw-small cw-dim">来自第 ${m.floor} 楼</div>`}
+<details class="cw-mini" ${e.open[d.id]?"open":""} data-ci-open="${d.id}"><summary>展开全文、修改</summary>
+<label>条目名<input class="text_pole cw-in" data-ci-name="${d.id}" value="${x(d.name)}"></label>
+${d.light==="green"?`<label>关键词（用逗号分开）<input class="text_pole cw-in" data-ci-keys="${d.id}" value="${x(d.keys.join("，"))}" placeholder="${x(d.name)}"></label>`:""}
+<textarea class="text_pole cw-ta" rows="8" data-ci-text="${d.id}">${x(m.content)}</textarea></details>
+</div>`},o=(d,m)=>`<div class="cw-card ${d.on?"picked":""}">
+<label class="checkbox_label" style="display:flex;flex-direction:row;flex-wrap:nowrap;align-items:flex-start;gap:8px;cursor:pointer;min-width:0"><input type="checkbox" data-ci-gon="${d.id}" ${d.on?"checked":""} style="margin-top:5px"><span style="flex:1 1 auto;min-width:0;overflow:hidden"><b>第 ${d.floor} 楼</b>${d.old?' <span class="cw-dim cw-small">· 后面有相似的新版本</span>':""}
+<span class="cw-dim cw-small" style="display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">${x(d.text.replace(/\s+/g," ").slice(0,70))}</span></span></label>
+<details class="cw-mini" ${e.open[d.id]?"open":""} data-ci-open="${d.id}"><summary>展开全文、修改</summary><textarea class="text_pole cw-ta" rows="8" data-ci-gtext="${d.id}">${x(d.text)}</textarea></details></div>`,c=e.greets.filter(d=>d.on).length,p=Bp();return`<div class="cw-form cw-ci">
+<label>卡名<input class="text_pole cw-in" data-ci-cardname value="${x(e.name)}" placeholder="新角色"></label>
+<div class="cw-row"><select class="text_pole cw-in cw-grow" data-ci-scope>${t("all",`第 ${e.upto} 楼及以前的全部 AI 消息`)}${t("one",`只读第 ${e.upto} 楼`)}</select>${q("ciRescan","重新读取")}</div>
+<div class="cw-small cw-dim">读了 ${e.count} 条 AI 消息。同一个人写过几次会合并成一条，默认用最新的一版。</div>
+${!e.items.length&&!e.greets.length?`<div class="cw-card"><b>没找到能导入的内容</b><div class="cw-small cw-dim">角色要有「姓名：xxx」这一行；其他条目用【标题】、# 标题或 &lt;entry&gt; 分开；开场白要包在 ${x(p.start)}…${x(p.end)} 里。</div></div>`:""}
+${n.length?`<div class="cw-row"><b class="cw-grow">角色 · 放进世界书</b><span class="cw-small cw-dim">${n.length} 个，已选 ${s(n)}</span></div>${n.map(i).join("")}`:""}
+${r.length?`<div class="cw-row"><b class="cw-grow">其他条目</b><span class="cw-small cw-dim">${r.length} 个，已选 ${s(r)}</span></div>${r.map(i).join("")}`:""}
+${e.greets.length?`<div class="cw-row"><b class="cw-grow">开场白 · 从 ${x(p.start)} 里取</b><span class="cw-small cw-dim">找到 ${e.greets.length} 段，已选 ${c}</span></div>
+<div class="cw-small cw-dim">勾选的按顺序排：第一个当开场白，其余是备选开场白。标记在「设置 → 开场白 → 正文提取范围」里改。</div>${e.greets.map(o).join("")}`:""}
+${e.items.length||e.greets.length?`<div class="cw-row">${q("ciImport","新建角色卡并导入",'class="cw-primary"')}${q("ciToDraft","先放进写卡草稿")}</div>
+<div class="cw-small cw-dim">世界书顺序按聊天里出现的先后排。放进草稿后可以在工坊里接着改（条目在「基调与规则 → 自由模块」）。</div>`:""}
+</div>`}function Rg(){const e=Sn(),t=hn(),n=e.items.filter(r=>r.on).sort((r,s)=>r.first-s.first);t.name=String(e.name||n.find(r=>r.kind==="char")?.name||"新角色").trim(),t.nameAuto=!1,t.idea=`从聊天导入：${t.name}`;for(const r of n){const s=r.versions[r.pick];t.free.push({name:r.name,desc:"",content:s.content,light:r.light,keys:r.light==="green"?r.keys.length?r.keys:[r.name]:[],position:"after",bare:!0,fromChat:!0})}for(const r of e.greets.filter(s=>s.on))t.greetings.push({route:"",text:r.text});return t}function Mp(){const e=Rg();return!e.free.length&&!e.greetings.length?(X.toastr.info("没有勾选任何内容","Love 写卡机"),null):(Ir(),U().draft=e,ee(),e)}function Hg(e=null){b.ci=null,b.ci=us({upto:e}),b.page="chatImport",b.root?G():Fa()}function zg(){const e=X.jQuery,t='<div class="mes_button cw-ci-btn fa-solid fa-file-import interactable" title="导入为角色卡（Love 写卡机）" tabindex="0"></div>',n=()=>{e("#message_template .extraMesButtons, #chat .mes .extraMesButtons").each(function(){e(this).find(".cw-ci-btn").length||e(this).prepend(t)})};n();try{const r=le();for(const s of["CHARACTER_MESSAGE_RENDERED","USER_MESSAGE_RENDERED","CHAT_CHANGED","MORE_MESSAGES_LOADED"])r.event_types?.[s]&&r.eventSource?.on(r.event_types[s],()=>setTimeout(n,0))}catch{}e(it).off("click.cwci").on("click.cwci",".cw-ci-btn",function(r){r.stopPropagation();const s=Number(e(this).closest(".mes").attr("mesid"));Hg(Number.isFinite(s)?s:null)})}var Io="不写具体数字：年龄、年数、天数、次数、金额、分数、名次、楼层、身高体重、好感值之类都不用阿拉伯数字或汉字数字写，换成模糊说法（几年、好些次、很高、一大笔钱）。绝对不出现“三”这个字：三年、三次、三楼、第三、两三、三两……一律不写。";function Qa(){try{return U().noNumbers!==!1}catch{return!1}}function Fg(e,t=!1){let n=String(e??"");t&&(n=n.replace(/"\s*:\s*-?\d+(?:\.\d+)?/g,'":')),n=n.replace(/<[^<>\n]{0,40}>/g,"").replace(/\{\{[^{}]*\}\}/g,"");const r=[];return/三/.test(n)&&r.push("三"),/[0-9０-９]/.test(n)&&r.push("数字"),r}async function Ao(e,{json:t=!1,stage:n="card"}={}){if(!Qa()||!Fg(e,t).length||b.abort)return e;Be("去掉具体数字和「三」…");const r=`下面的文字里有具体数字或“三”字。只改含有它们的句子：${Io}
+其他内容一个字都不要动，格式、标签、标记${t?"、JSON 结构和字段名":""}原样保留。直接返回改好的全文，不加说明。
+
+${e}`;try{const s=await hr({system:"你是校对，只按要求改动指定的句子。",user:r,stage:n,temperature:.3,preserveOutput:!0}),a=String(s??"").trim();return!a||a.length<String(e).length*.6?e:t?a.replace(/^```(?:json)?\s*|\s*```$/g,""):a}catch(s){if(b.abort)throw s;return e}}function Ug(){const e=le(),t=(e.characters??[]).filter(r=>r?.avatar&&r?.name),n=N().existing?.avatar??e.characters?.[e.characterId]?.avatar;return t.length?`<div class="cw-small">选一张酒馆里的角色卡读进来。人设、世界书条目、开场白都能改，也能加路线、加开场白，改完在“导入酒馆”页写回原卡（会先备份，可以撤销）。</div>
+<input class="text_pole cw-in cw-cardfilter" placeholder="筛选卡名">
+<select class="text_pole cw-in cw-cardsel" size="8">${t.map(r=>`<option value="${x(r.avatar)}" ${r.avatar===n?"selected":""}>${x(r.name)}</option>`).join("")}</select>
+<div class="cw-row"><div class="menu_button cw-btn cw-primary" data-act="loadCard">读取这张卡，改原卡 →</div><div class="menu_button cw-btn" data-act="loadAU">用这张卡做 AU（存成新卡）</div></div>
+<div class="cw-dim cw-small cw-help">现在的草稿会放进“历史草稿”，随时能读回来。Love 写卡机做的卡能认回各个步骤；别人做的卡，世界书条目会原样放在“原卡内容”里。</div>`:'<div class="cw-dim">酒馆里还没有角色卡。</div>'}function Vn(e,{open:t=!0}={}){const r=N().existing;if(!r||r.fromImport)return"";const s=r.entries.map((i,o)=>({e:i,i:o})).filter(({e:i})=>(i.cat??"other")===e);if(!s.length)return"";const a=({e:i,i:o})=>`<details class="cw-card cw-orig" ${b.openOrig?.has(i.uid)?"open":""} data-uid="${x(i.uid)}"><summary><b>${x(i.comment)}</b> <small class="cw-dim">${i.disable?"未启用 · ":""}${i.constant?"蓝灯":"绿灯"} · ${x(String(i.content??"").replace(/\s+/g," ").slice(0,30))}…</small></summary>
+<div class="cw-row cw-small"><label><input type="checkbox" class="cw-exen" data-i="${o}" ${i.disable?"":"checked"}> 启用</label><span class="cw-dim cw-grow">${i.constant?"":x((i.key??[]).join("、")||"没有关键词")}</span><span class="cw-dim">放到</span><select class="text_pole cw-excat" data-i="${o}" style="width:auto;margin:0">${Object.entries(xa).map(([c,p])=>`<option value="${c}" ${(i.cat??"other")===c?"selected":""}>${x(p)}</option>`).join("")}</select></div>
+${Pe(`existing.entries.${o}.content`,6)}${Ve(`exist:entry:${i.uid}`,!!i.content.trim())}</details>`;return e==="other"?s.map(a).join(""):`<details class="cw-mini cw-origbox" ${t?"open":""}><summary><b>原卡里的条目（${s.length}）</b> <small class="cw-dim">别人写的条目，改了按原条目写回</small></summary>${s.map(a).join("")}</details>`}function Gg(){const e=N(),t=e.existing;if(!t)return'<div class="cw-dim">还没读卡。</div>';const n=e.personas.some(s=>s.fromDescription),r=(s,a,i=!1)=>!i&&!String(t.fields[s]??"").trim()?"":`<div class="cw-card"><div class="cw-sub">${a}</div>${Pe(`existing.fields.${s}`,5)}${Ve(`exist:field:${s}`,!!String(t.fields[s]??"").trim())}</div>`;return`<div class="cw-small">原卡：<b>${x(t.name)}</b> · ${t.world?`世界书 ${x(t.world)}`:"没绑世界书（写回时会新建一本并绑定）"}</div>
+<div class="cw-dim cw-small cw-help">直接改字，或者在“哪里不满意”里写意见再点“按意见改”。Love 写卡机认得的条目（人设、世界观、NPC、路线、基调、模块）在对应的页里改。</div>
+${n?'<div class="cw-box cw-small">这张卡的角色描述就是人设，在“主要人设”页里改。</div>':r("description","角色描述",!0)}
+${r("personality","性格")}${r("scenario","场景")}${r("mes_example","对话示例")}
+${t.entries.length?`<div class="cw-box"><div class="cw-sub">原卡世界书的条目（${t.entries.length}）已经分到各页</div>
+<div class="cw-small">${Object.entries(xa).filter(([s])=>s!=="other").map(([s,a])=>{const i=t.entries.filter(o=>(o.cat??"other")===s).length;return i?`<span class="cw-badge">${x(a)} ${i}</span> `:""}).join("")}${t.entries.some(s=>(s.cat??"other")==="other")?`<span class="cw-badge">其他 ${t.entries.filter(s=>(s.cat??"other")==="other").length}（在下面）</span>`:""}</div>
+<div class="cw-dim cw-small cw-help">按条目名和内容自动猜的，分错了可以在每个条目的“放到”里换，也可以让 AI 重新分一次。不管放在哪一页，写回时都按原条目改，不会多出新条目。</div>
+<div class="cw-row">${q("classifyAI","让 AI 分类")}${q("classifyLocal","重新自动分类")}</div></div>`:""}
+${t.entries.some(s=>(s.cat??"other")==="other")?`<div class="cw-sub">其他条目</div>${Vn("other")}`:""}
+<div class="cw-sub">原来的开场白（${t.greetings.length}）</div>
+${t.greetings.map((s,a)=>String(s??"").trim()?`<div class="cw-card"><div class="cw-row"><b class="cw-grow">${a===0?"主开场白":`额外开场白 ${a}`}</b>${q("del","删",`data-path="existing.greetings" data-i="${a}"`)}</div>${Pe(`existing.greetings.${a}`,8)}${Ve(`exist:greet:${a}`,!!s.trim())}</div>`:`<div class="cw-small cw-dim">${a===0?"主开场白":`额外开场白 ${a}`}：已删掉（写回时会从原卡里去掉）</div>`).join("")}
+<div class="cw-dim cw-small cw-help">新的开场白在“开场白”页写，写回时加在原来的后面。</div>`}function Jg(e){return e?.length?`<div class="cw-issues">${e.map(t=>`<span class="cw-issue ${t.level}">${x(t.label)}${t.match?`：${x(t.match)}`:""}</span>`).join("")}</div>`:""}function ms(e,t,n="或者自己写"){const r=Ft(N(),e)??"",s=t.includes(r)?"":r;return`<div class="cw-opts">${t.map(a=>`<span class="cw-opt ${r===a?"on":""}" data-act="answer" data-path="${e}" data-val="${x(a)}">${x(a)}</span>`).join("")}</div>
+<input class="text_pole cw-in cw-own" data-bind="${e}" value="${x(s)}" placeholder="${x(n)}">`}var Wg=["免费使用。","转发请注明作者 if love。","改过再发布请注明改自 Love 写卡机。","不能拿来卖钱。","用它写出来的卡，归写卡的人自己。"],yr=(e,t)=>e.existing&&!e.existing.fromImport?e.existing.entries.filter(n=>(n.cat??"other")===t).length:0,Vg=["chat","world","npc","routes","tone","play","check","dress","intro"],fs=[{id:"chat",name:"主题",desc:"先聊，聊定了再写",status:e=>e.themeOk?(e.concepts?.[e.pick]?.title||"已定"):e.chat?.messages?.length?`聊了 ${e.chat.messages.length} 条 · 还没定`:"",done:e=>!!e.themeOk||!!e.existing||!!e.au||e.pick>=0&&!!e.concepts?.[e.pick]},{id:"persona",name:"人设",desc:"主要角色",status:e=>B.modeOf(e)==="world"&&!e.personas.length?"世界卡，人物在 NPC 里":e.personas.map(t=>`${t.name}${t.text?" ✓":""}`).join("、")+(B.modeOf(e)==="multi"&&e.personas.length>1?e.relations?" · 关系网 ✓":" · 关系网没写":""),done:e=>B.modeOf(e)==="world"&&!e.personas.length||e.personas.length>0&&e.personas.every(t=>t.text)&&(B.modeOf(e)!=="multi"||e.personas.length<2||!!e.relations)},{id:"world",name:"世界观",status:e=>[e.world.main?"已写":"",yr(e,"world")?`原卡 ${yr(e,"world")} 条`:""].filter(Boolean).join(" · "),done:e=>!!e.world.main||yr(e,"world")>0},{id:"npc",name:"NPC",status:e=>[e.npcs.length?`${e.npcs.length} 个`:"",yr(e,"npc")?`原卡 ${yr(e,"npc")} 个`:""].filter(Boolean).join(" · "),done:e=>e.npcs.length>0||yr(e,"npc")>0||e.concepts[e.pick]?.npcs===0},{id:"routes",name:"玩家与路线",status:e=>e.routes.length?`${e.routes.filter(t=>t.info).length}/${e.routes.length} 条已写`:"",done:e=>e.routes.length>0&&e.routes.every(t=>t.info)},{id:"tone",name:"基调与规则",desc:"还有自由模块",status:e=>e.tone?"已写":"",done:e=>!!e.tone},{id:"free",name:"自由模块",desc:"系统面板、信物、规则……可选",soft:!0,status:e=>{const t=(e.free??[]).filter(n=>!n.fromStep),n=t.filter(r=>String(r.content??"").trim()).length;return t.length?`${t.length} 个${n<t.length?` · ${t.length-n} 个没写`:""}`:"可选，没有就跳过"},done:e=>(e.free??[]).some(t=>!t.fromStep&&String(t.content??"").trim())},{id:"greet",name:"开场白",status:e=>e.greetings.length?`${e.greetings.length} 个`:"",done:e=>e.greetings.length>0},{id:"play",name:"试玩",desc:"跑几轮看好不好玩，再让 AI 点评",status:e=>e.play?.review?`点评 ${e.play.review.score??""} 分`:e.play?.messages?.length>1?`${e.play.messages.length} 条`:"",done:e=>!!e.play?.review},{id:"check",name:"质检",desc:"查重复、查问题",status:()=>b.checks?"扫描过":"",done:()=>!!b.checks},{id:"dress",soft:!0,name:"状态栏和主页",desc:"配一套状态栏和开场白主页，可跳过",status:e=>e.dress?e.dress.use?`${(nfKPair(e.dress.set).st?.name||"").replace(/^.*·\s*/,"")}${e.dress.ai?" · 已调整":""}`:"跳过":"",done:e=>!!e.dress&&(!e.dress.use||!!e.dress.ai||!!e.dress.ok)},{id:"import",name:"导入酒馆",status:e=>e.imported?`已导入：${e.imported.name}`:"",done:e=>!!e.imported},{id:"intro",name:"简介",desc:"Discord 简介和标题",status:e=>e.intro?.text?"已写":"",done:e=>!!e.intro?.text}];function gs(){const e=N(),t=en(e);if(t)return[fs[0],...kg(t,e).filter(p=>p.id!=="chat"&&p.id!=="tone")];const n=U().customSteps??[],r=[];if(e.au){const i=e.au;r.push({id:"au",name:"AU 内核与映射",desc:"提取内核 → 写 AU 设定 → 映射表",status:()=>i.map?"映射表已写":i.core.some(o=>o.text)?"内核已提取":"",done:()=>!!i.map&&i.core.every(o=>o.text)})}if(e.existing&&!e.existing.fromImport){const i=e.existing;r.push({id:"existing",name:"原卡内容",desc:"原来的描述、世界书条目、开场白",status:()=>`${i.entries.length} 个条目 · ${i.greetings.length} 个开场白`,done:()=>!0})}const s=i=>{const o=e.free.find(c=>c.fromStep===i.id);return{id:`step:${i.id}`,name:i.name||"我的步骤",desc:"我的步骤",custom:i,status:()=>o?.content?"已写":cwzNeedAsk(i)?"等你写要求":"",done:()=>!!o?.content}},a=new Set(U().offPages??[]);for(const i of fs)if(!(i.id==="idea"&&e.au)){a.has(i.id)||r.push(i);for(const o of n)(o.after||"tone")===i.id&&r.push(s(o))}return r}var Yg=e=>gs().find(t=>!t.soft&&!t.done(e))??null;function Kg(){const e=(b.page==="quick"?ht():N()).lastResponse;if(!e||e.status==="pending"||e.page!==b.page)return"";const t=e.status==="parse-error",n=String(e.raw??"");return`<details class="cw-response"><summary>查看 AI 返回原文${t?"（解析失败）":""}</summary>
+    ${e.error?`<p class="cw-err cw-small">${x(e.error)}</p>`:""}
+    <div class="cw-row"><span class="cw-dim cw-small cw-grow">${n.length} 字符${n&&!e.received?" · 回复中断，以下为已收到的部分":""}</span>${n?'<button type="button" class="menu_button cw-btn" data-act="copyRawResponse">复制原文</button>':""}</div>
+    ${n?`<pre class="cw-response-text" tabindex="0">${x(n)}</pre>`:'<p class="cw-dim">未收到返回正文。</p>'}
+  </details>`}const cwzN=n=>"零一二三四五六七八九十"[n]??(n<20?"十"+"零一二三四五六七八九"[n-10]:String(n));function Lp(e){const d=N(),pg=b.page,tool=["load","chatImport","quick","prompts","about","drafts"].includes(pg),cur=tool?"drafts":pg==="import"||pg==="settings"?pg:"home",st=d.imported?"已导入":d.themeOk||d.existing||d.au||d.pick>=0&&d.concepts?.[d.pick]?"在写":"待定";
+return`<div class="cw-top cwz-top"><div class="cwz-head"><div class="cwz-title">Love 写卡机<small>BY IF LOVE</small></div><div class="cwz-draft" data-act="go" data-page="drafts"><em>正在写</em><b>${x(d.name||d.existing?.name||d.imported?.name||d.concepts?.[d.pick]?.title||"新的一张")}</b></div><span class="cwz-stamp">${st}</span><div class="cwz-themesw" data-act="cwzThemeSw" title="切换配色">${U().cwzTheme==="dark"?"☀ 智库色":"☾ 夜间黑"}</div></div>
+<div class="cwz-nav">${[["drafts","草稿"],["home","写卡"],["import","导入"],["settings","设置"]].map(([k,l])=>`<div class="cwz-pill ${cur===k?"on":""}" data-act="go" data-page="${k}">${l}</div>`).join("")}</div>
+${e}</div><div class="cwz-status">
+  <div class="cw-row cw-statusrow ${b.busy?"busy":""}"><span class="cw-spin"></span><span class="cw-status cw-grow"></span><span class="cw-meta cw-dim cw-small"></span><div class="menu_button cw-btn cw-stop" data-act="stop" style="display:${b.busy?"":"none"}">停止</div></div>
+  <div class="cw-stream" style="display:none"><pre></pre></div>
+</div>${Kg()}`}var ws=0,kr="";function hs(e){if(po(e),kr=String(e??""),b.streamChars=kr.length,!kr){clearTimeout(ws),ws=0,b.root&&(0,X.jQuery)(b.root).find(".cw-stream").hide(),bs();return}ws||(ws=setTimeout(()=>{if(ws=0,!b.root)return;const t=(0,X.jQuery)(b.root).find(".cw-stream"),n=kr.length>1500?`……${kr.slice(-1500)}`:kr,r=t.find("pre").get(0);r&&(r.textContent=n,t.show(),r.scrollTop=r.scrollHeight,bs())},120))}function bs(){if(!b.root)return;const e=b.busy&&b.started?Math.floor((Date.now()-b.started)/1e3):0,t=[];b.busy&&t.push(`${e} 秒`),b.busy&&b.streamChars&&t.push(`已收到 ${b.streamChars} 字`),(b.busy||b.stepCalls)&&t.push(`这一步调用 ${b.stepCalls??0} 次`),b.calls&&t.push(`共 ${b.calls} 次`),(0,X.jQuery)(b.root).find(".cw-meta").text(t.join(" · "))}function Xg(e){const t=U(),{n,parts:r}=Uw(e),s=Number(t.maxStepCalls)||0,a=s&&n>s;return`<div class="cw-row cw-small"><span class="cw-grow">${n?`预计约 <b class="cw-estn">${n}</b> 次调用`:"没有要写的了"}${r.length?`<span class="cw-dim">（${r.map(([i,o])=>`${x(i)} ${o}`).join("，")}；八股清理另算）</span>`:""}${a?`<span class="cw-warntext">，超过你设的上限 ${s} 次，会先停下，再点一次接着写</span>`:""}</span></div>
+<div class="cw-row cw-small"><label class="checkbox_label"><input type="checkbox" class="cw-lean" ${t.lean?"checked":""}>省调用：不自动展开经历、不做可预测性测试、不用八股清理改写</label></div>`}function qp(){const e=N(),a=Yg(e),i=gs(),o=i.filter(p=>p.done(e)).length,fl=en(e),cp=e.pick>=0?e.concepts?.[e.pick]:null,themed=fs[0].done(e),stop=b.quickStopAt&&fl?.steps.find(p=>p.id===b.quickStopAt);
+const head=e.au?`<span class="cwz-lab">AU</span><div class="cwz-h2">${x(e.au.original.name)} → ${x(e.name||"新卡")}</div><div class="cwz-sum cw-small">原卡不会动，最后存成一张新卡。</div>`:e.existing?`<span class="cwz-lab">${e.existing.fromImport?"已导入酒馆":"改已有的卡"}</span><div class="cwz-h2">${x(e.existing.name)}</div><div class="cwz-sum cw-small">${e.existing.fromImport?"之后在这里改了什么，到「导入」页点「检查要写回什么」，只写回勾选的部分；你在酒馆里改过的地方不会被改回去。":`${e.existing.world?`世界书 ${x(e.existing.world)}`:"没绑世界书"}。改完到「导入」页，点「检查要写回什么」，勾选后写回。`}</div>`:themed?`<span class="cwz-lab">主题 · 已定${e.cardType&&CWZT[e.cardType]?` · ${x(CWZT[e.cardType].name)}`:""}</span><div class="cwz-h2">${x(cp?.title||e.name||"")}</div>${cp?.relation?`<div class="cwz-sum">${x(cp.relation)}</div>`:""}${(e.tags??[]).length?`<div class="cwz-tags" style="margin-top:6px">${e.tags.slice(0,10).map(t=>`<span class="cwz-tag">${x(t.name??t)}</span>`).join("")}</div>`:""}`:`<span class="cwz-lab">主题 · 还没定</span><div class="cwz-h2">先聊聊想写什么</div><div class="cwz-sum">和 AI 聊几句，把〔user〕是谁、人物、世界和基调聊清楚，定下来再开始写。</div>`;
+const pct=i.length?Math.round(o/i.length*100):0;
+const card=`<div class="cwz-card">${head}<div class="cwz-notch"><i></i><i></i></div>
+<div class="cwz-prog"><span>已写 ${o} / ${i.length}</span><span class="bar"><i style="width:${pct}%"></i></span><span>${a?`下一步：${x(a.name)}`:"都写完了"}</span></div>
+${stop?`<div class="cw-small cwz-warn" style="margin-top:6px">流程停在「${x(xr(stop))}」，等你选好。</div>`:""}
+${themed&&!e.existing&&!e.au?`<div class="cw-row" style="margin-top:10px"><div class="menu_button cw-btn" data-act="go" data-page="chat">回去接着聊</div><span class="cw-dim cw-small cw-grow">改了主题，还没写的步骤会按新主题写。</span></div>`:""}</div>`;
+const steps=`<div class="cw-row cwz-flowrow"><span class="cwz-lab cw-grow">流程 · ${x(fl?.name||"完整工坊")}</span><div class="cwz-link" data-act="go" data-page="quick">换流程</div></div>
+${Da(e)?`<div class="cw-small cwz-flowrow" style="color:#20302c">${Da(e)}</div>`:""}
+<div class="cwz-steps">${i.map((p,n)=>{const dn=p.done(e),cu=a?.id===p.id;return`<div class="cwz-step ${dn?"done":cu?"cur":"todo"}" data-act="go" data-page="${p.id}"><span class="cwz-no"><span class="cwz-seal ${dn?"":cu?"ink":"ghost"}">${cwzN(n+1)}</span></span><i class="cwz-perf"></i><div class="cwz-stx"><b>${x(p.name)}</b><small>${x(p.status?.(e)||p.desc||"还没开始")}</small></div><span class="cwz-go">${dn?"改":cu?"去":""} ›</span></div>`}).join("")}
+${fl?`<div class="cwz-step todo" data-act="go" data-page="free"><span class="cwz-no"><span class="cwz-seal ghost">＋</span></span><i class="cwz-perf"></i><div class="cwz-stx"><b>自由模块</b><small>${x(fs.find(p=>p.id==="free").status(e))}</small></div><span class="cwz-go">›</span></div><div class="cwz-add" data-act="quickAddStep">＋ 加一步</div>${fl.steps.some(p=>p.kind==="builtin"&&p.page==="import")?"":`<div class="cwz-step todo" data-act="go" data-page="import"><span class="cwz-no"><span class="cwz-seal ghost">入</span></span><i class="cwz-perf"></i><div class="cwz-stx"><b>导入酒馆</b><small>写好以后导入成角色卡</small></div><span class="cwz-go">›</span></div>`}`:""}</div>
+${!fl&&themed?`<details class="cwz-fold"><summary>一键出卡大概要调用几次</summary><div class="cwz-card" style="margin-top:6px">${Xg(e)}</div></details>`:""}`;
+const side=`<div class="cw-row" style="margin-top:6px"><span class="cwz-lab" style="color:#20302c">别的工坊</span></div><div class="cwz-tools">
+<div class="cwz-tool" data-act="suite" data-mod="preset"><b>预设工坊</b><small>写提示词、拼预设、导出</small></div>
+<div class="cwz-tool" data-act="suite" data-mod="status"><b>状态栏工坊</b><small>给这张卡配状态栏和开场白主页</small></div></div>`;
+const one=e.existing&&!e.existing.fromImport?"一键补全":e.au?"一键出 AU 卡":"一键出卡";
+const bottom=!themed?`<div class="cwz-bottom"><div class="menu_button cw-btn cw-primary" data-act="go" data-page="chat">去聊主题 ›</div></div>`:fl?`<div class="cwz-bottom">${q("quickContinue",a?o>1?"继续写":"开始写":"再检查一遍",'class="cw-primary"')}${q("quickOneClick","一键出卡")}</div>`:`<div class="cwz-bottom">${a?`<div class="menu_button cw-btn cw-primary" data-act="go" data-page="${a.id}">${o>1?"继续写":"开始写"}：${x(a.name)} ›</div>`:`<div class="menu_button cw-btn cw-primary" data-act="go" data-page="import">去导入 ›</div>`}${q("auto",one)}</div>`;
+return`${Lp("")}${card}${steps}${side}${bottom}`}function Zg(e){const t=gs();let n=t.findIndex(c=>c.id===e);if(n<0&&(e.startsWith("step:")||e.startsWith("q:")||e!=="import"&&e!=="chat"&&ps.some(c=>c[0]===e)&&en()))return b.page=e="home",qp();const r=t[n],s=r?`${n+1}. ${r.name}`:{free:"自由模块",theme:"定主题",drafts:"草稿",quick:"编辑流程",chatImport:"从聊天导入",settings:"设置",prompts:"我的步骤",load:"改已有的卡",about:"关于"}[e]??"",a=r?.missing?'<div class="cw-dim">这一步对应的「我的步骤」已经删掉了。到流程编辑里把它删掉就好。</div>':r?.flowStep&&!r.flowStep.kind?Eg(r.flowStep):r?.custom?ww(r.custom):{theme:Tz,drafts:Dz,quick:Pg,chatImport:Qg,load:Ug,existing:Gg,au:yg,idea:ew,chat:xw,tags:sw,persona:uw,world:mw,npc:fw,routes:gw,tone:hw,free:cwzFree,greet:vw,play:yw,check:Cw,dress:nfDressPage,import:Iw,intro:Nw,prompts:Ow,settings:rh,about:nw}[e](),i=t[n-1],o=e==="quick"||e==="chatImport"?null:t[n+1];return`${Lp(`<div class="cwz-sub"><div class="cwz-back" data-act="go" data-page="${["load","chatImport","quick","prompts","about"].includes(e)?"drafts":"home"}">‹ ${["load","chatImport","quick","prompts","about"].includes(e)?"草稿":"目录"}</div><span class="cw-grow"></span>${U().helpMode==="always"?"":`<span class="cw-helpbtn ${b.helpOn?"on":""}" data-act="toggleHelp">说明</span>`}${r?`<span class="cwz-seal ink">${cwzN(n+1)}</span>`:""}</div><div class="cwz-ptitle"><small>${r?`第${cwzN(n+1)}步`:"Love 写卡机"}</small><b class="cw-ptitle">${x(r?r.name:s)}</b></div>`)}
+<div class="cw-page ${["chat","theme","drafts","settings"].includes(e)?"":"cwp-card"}">${Og(r)}${a}${cw(e)}${cwzPromptBox(e)}</div>
+${!r||e==="chat"?"":`<div class="cw-foot">${i?`<div class="menu_button cw-btn" data-act="go" data-page="${i.id}">← ${x(i.name)}</div>`:""}<span class="cw-grow"></span>${o?`<div class="menu_button cw-btn cw-primary" data-act="go" data-page="${o.id}">下一步：${x(o.name)} →</div>`:'<div class="menu_button cw-btn" data-act="go" data-page="home">回目录</div>'}</div>`}`}var jp=(e,t)=>String(e.diceLock?.[t]??"").split("、").map(n=>n.trim()).filter(Boolean);function $g(e){const t=_t();return`<div class="cw-pickdims">${da.map(n=>{const r=$e(t,n);if(!r?.tags?.length)return"";const s=jp(e,n),a=[...r.tags.map(i=>i.name),...s.filter(i=>!r.tags.some(o=>o.name===i))];return`<details class="cw-pickdim ${s.length?"on":""}" data-dim="${n}" ${b.pickOpen?.[n]?"open":""}><summary><b>${x(r.name)}</b><span class="${s.length?"":"cw-dim"}">${s.length?x(s.join("、")):"随机"}</span></summary>
+<div class="cw-chips">${a.map(i=>`<span class="cw-chip ${s.includes(i)?"on":""}" data-act="dicePickTag" data-dim="${n}" data-tag="${x(i)}">${x(i)}</span>`).join("")}</div></details>`}).join("")}</div>`}function Qp(e,t,n,r=""){return`<div class="cw-seg" role="tablist">${n.map(([s,a])=>`<span role="tab" class="${s===t?"on":""}" data-act="${e}" data-v="${s}" ${r}>${a}</span>`).join("")}</div>`}var Sr=(e,t,n)=>`<div class="cw-pane" data-pane="${e}" ${e===t?"":"hidden"}>${n}</div>`;function _g(e){const t=e.diceSet??{dims:gn,count:gn.length},n=_t(),r=t.dims?.length?t.dims:gn;return`<details class="cw-mini"><summary>骰子和短篇设置（骰 ${Math.min(Number(t.count)||r.length,r.length)}/${r.length} · ${x(U().storyLength)} 字）</summary>
+<div class="cw-row cw-small"><span>骰几个</span><input type="number" min="1" max="${da.length}" class="text_pole cw-in" style="width:5em" data-bind="diceSet.count" value="${x(t.count??r.length)}"><span class="cw-dim cw-grow">从下面勾上的维度里随机挑这么多个，每个抽一个标签；多于勾上的维度数就是全骰。锁住的也算在里面。</span></div>
+<div class="cw-row cw-small"><span>短篇字数</span><input class="text_pole cw-num" data-set="storyLength" value="${x(U().storyLength)}"><span class="cw-dim cw-grow">写短篇时的篇幅，比如 800–1200。</span></div>
+<div class="cw-chips">${da.map(s=>`<label class="cw-chip ${r.includes(s)?"on":""}"><input type="checkbox" data-act="diceDim" data-dim="${s}" ${r.includes(s)?"checked":""}>${x($e(n,s)?.name??s)}</label>`).join("")}</div></details>`}function ew(){const e=N(),t=Object.keys(e.diceLock??{}).length,n=e.ideaMode??(t||Object.keys(e.dice??{}).length?"tags":e.story?.text&&!e.idea?.trim()?"text":"idea");let r=Qp("ideaMode",n,[["idea","写脑洞"],["tags","选标签"],["text","贴现成文字"]]),s=`${Pe("idea",3,"一句话脑洞，比如：“最后抱我一次吧，在春天结束之前。”")}
+<div class="cw-row"><div class="menu_button cw-btn cw-primary" data-act="idea">${e.ideaQA?.some(o=>o.answer?.trim())?"带上回答生成构想":e.concepts.length?"重新生成构想":"生成构想"}</div>${q("ideaQA",e.ideaQA?.length?"换几个问题":"先问我几个问题")}</div>`;e.ideaQA?.length&&(s+=`<div class="cw-box"><div class="cw-sub">关于你的脑洞 <small class="cw-dim">点选或自己写，不想答的留空</small></div>
+${e.ideaQA.map((o,c)=>`<div class="cw-q"><div class="cw-qt">${x(o.q)}</div>${ms(`ideaQA.${c}.answer`,o.options)}</div>`).join("")}</div>`);let a=`<div class="cw-dim cw-small">点开一类，想要几个点几个；没选的那类留“随机”。</div>${$g(e)}
+<div class="cw-row">${t?'<div class="menu_button cw-btn cw-primary" data-act="pickGo">按这些标签生成构想</div>':""}${q("roll",t?"骰子补齐其余":"掷骰子")}${t?q("pickAsk","先问我几个问题"):""}${t?q("dicePickClear","清空"):""}</div>`;if(Object.keys(e.dice??{}).length||e.inspire?.length){const o=Object.entries(e.dice??{}).map(([d,m])=>`<label class="cw-chip ${e.diceLock?.[d]?"on":""}"><input type="checkbox" data-act="lockDice" data-dim="${d}" ${e.diceLock?.[d]?"checked":""}>${x($e(_t(),d)?.name??d)}：${x(m)}</label>`).join(""),c=(e.inspire??[]).map((d,m)=>`<div class="cw-q"><div class="cw-qt">${x(d.q)}</div>${ms(`inspire.${m}.answer`,d.options)}</div>`).join(""),p=(e.inspire??[]).length>0;a+=`<div class="cw-box"><div class="cw-sub">这次的标签 <small class="cw-dim">勾上的再掷时不换</small></div><div class="cw-chips">${o}</div>${c}
+<div class="cw-row"><div class="menu_button cw-btn cw-primary" data-act="ideaFromInspire">${p?"用回答生成构想":"就用这些标签生成构想"}</div>${q("roll","再掷一次")}${q("inspire",p?"换几个问题":"先问我几个问题")}${q("story",e.story?.text?"重写短篇":"先写个短篇")}</div></div>`}a+=_g(e);const i=`<div class="cw-dim cw-small">小说片段、同人、设定笔记都行。AI 从里面提取人物、关系、世界规则和基调出构想；文字里写了的以它为准，没写的不会编。</div>
+${Pe("story.text",10,"把文字贴在这里")}
+<div class="cw-row"><div class="menu_button cw-btn cw-primary" data-act="ideaFromStory">按这段文字生成构想</div>${e.story?.prev?q("storyPrev","换回上一版"):""}${e.story?.text?q("storyClear","清掉"):""}</div>`;return r+=Sr("idea",n,s)+Sr("tags",n,a)+Sr("text",n,i),r+=Ve("idea",e.concepts.length>0),(e.fandom||e.check?.length)&&(r+=`<div class="cw-box"><div class="cw-sub">同人：${x(e.fandom)}</div><div class="cw-dim">确认 AI 没记错原作：</div><ul>${e.check.map(o=>`<li>${x(o)}</li>`).join("")}</ul></div>`),r+=(e.concepts??[]).map((o,c)=>{const p=e.pick===c;return`<div class="cw-card ${p?"picked":""}">
+<div class="cw-ctitle">${x(o.title)}</div>
+${o.lineup.map(d=>`<div><b>${x(d.name)}</b>｜${x(d.identity)}${d.archetype.length?` <small class="cw-dim">${x(d.archetype.join("、"))}</small>`:""}</div>`).join("")}
+${o.user.length?`<div>〔user〕：${x(o.user.join(" / "))}</div>`:""}
+<div class="cw-dim">${x(o.relation)}</div>
+${o.tension.core?`<div>核心：${x(o.tension.core)}</div>`:""}
+${o.tension.expect.length?`<div>期待点：${x(o.tension.expect.join("；"))}</div>`:""}
+<div class="cw-dim cw-small">世界观${x(o.complexity||"")}${o.routes?.length?`，路线：${x(o.routes.map(d=>d.name).join("、"))}`:""}${o.npcs?`，NPC ${o.npcs} 个`:""}</div>
+<div class="cw-row">${p?'<span class="cw-badge ok">已选这个</span>':q("pick","选这个",`data-i="${c}"`)}</div>
+${p?`<details class="cw-mini"><summary>改构想</summary>
+${We(`concepts.${c}.title`,"标题")}
+${(o.lineup??[]).map((d,m)=>`<div class="cw-row" style="flex-wrap:nowrap">${We(`concepts.${c}.lineup.${m}.name`,"名字")}${We(`concepts.${c}.lineup.${m}.identity`,"身份")}</div>`).join("")}
+<label class="cw-small">〔user〕身份（多个用 / 分开）<input class="text_pole cw-in" data-cedit="user" data-i="${c}" value="${x([].concat(o.user??[]).join(" / "))}"></label>
+${Pe(`concepts.${c}.relation`,3,"关系与前情")}
+${We(`concepts.${c}.tension.core`,"关系的核心")}
+<label class="cw-small">期待点（一行一个）<textarea class="text_pole cw-ta" rows="3" data-cedit="expect" data-i="${c}">${x([].concat(o.tension?.expect??[]).join(`
+`))}</textarea></label>
+<div class="cw-small cw-dim">改完后面的步骤会按改过的构想写；已经写好的不会自动重写。</div></details>`:""}
+</div>`}).join(""),r}function nw(){return`<div class="cw-card"><div class="cw-ctitle">Love 写卡机 v${Na}</div>
+<div class="cw-small cw-dim">作者 if love</div>
+<div style="margin-top:6px">在酒馆里写角色卡用的。先跟 AI 把想写的东西聊清楚，定下主题；再一步步写人设、世界观、NPC、路线和开场白；写完查一遍重复，一键导进酒馆。</div></div>
+
+<div class="cw-card"><div class="cw-sub">作者</div>
+<div><b>if love</b></div>
+<div class="cw-dim cw-small cw-help">简介末尾不会自动加署名。想加的话，到「设置 → 简介 → 固定结尾」里写。</div></div>
+
+<div class="cw-card"><div class="cw-sub">能做什么</div>
+<ul class="cw-small">
+<li>聊着定主题：想到哪说到哪，AI 帮你问清楚，最后整理成一份主题草稿，后面每一步都照它写</li>
+<li>单人卡、多人卡（带角色关系）、没有固定角色的世界卡都能写</li>
+<li>人设有前后矛盾检查和「太好猜」测试，写得像套路会提醒你重写</li>
+<li>开场白先出几个梗让你挑，再展开写</li>
+<li>每一块都能按意见改、只改一段、看改了哪里、换回上一版</li>
+<li>自由模块：系统面板、信物、规则、地点……点一下就加</li>
+<li>NSFW 一步，要求由你自己写</li>
+<li>质检：查各块之间重复的设定，让 AI 删掉多余的那份</li>
+<li>试玩几轮，再让 AI 点评，问题直接指到对应的那一步</li>
+<li>token 统计，常驻设定太长会提醒</li>
+<li>接着改旧卡：补路线、添开场白、写回原卡（能撤销），或者做 AU</li>
+<li>自己加步骤、自己排流程</li>
+<li>写 Discord 简介，有几种风格可选</li>
+<li><b>预设工坊</b>（同一个脚本里）：写提示词、存成条目、拼成预设，导出给酒馆用</li>
+<li><b>状态栏工坊</b>（同一个脚本里）：读卡、按你的要求和参考图做状态栏，预览满意了写进角色卡</li>
+</ul></div>
+
+<div class="cw-card"><div class="cw-sub">使用授权</div>
+<div class="cw-small">${Wg.map(e=>`<div>${x(e)}</div>`).join("")}</div></div>
+
+<div class="cw-card"><div class="cw-sub">它会碰你的哪些东西</div>
+<ul class="cw-small">
+<li>调用 API：用你在「设置」里选的连接，默认跟酒馆当前的一样；会带上你绑定的写卡预设、开场白预设里开着的条目。不会改你酒馆当前用的预设和连接。</li>
+<li>读取：角色卡和世界书（接着改旧卡、读卡的时候）；八股清理的设置和「我的八股词」。</li>
+<li>写入：只有你点「导入酒馆」「写回原卡」「写进角色卡」时，才会新建或修改角色卡和世界书。写回前会先备份，可以撤销；不会删条目。</li>
+<li>预设工坊：只有点「保存到酒馆」时，才会新建或覆盖同名预设，不会帮你切换预设。</li>
+<li>状态栏工坊：只有点「写入当前角色卡」时，才会往这张卡里写内嵌正则（并把卡加进允许运行正则的名单），再写一条输出规则（默认放世界书 D1、不可递归；也可以选放角色描述末尾）。「从这张卡里去掉」只删它自己写的东西。</li>
+<li>草稿、步骤、规则、收藏、状态栏设计都存在酒馆的扩展设置里，不会发到别处。参考图只在这次打开时用，不保存。</li>
+</ul></div>`}function rw(){const e=N(),t=B.modeOf({...e,mode:""}),n=B.modeOf(e),r={single:"一个主要角色。",multi:"几个主要角色地位相当。每个人的人设都会知道其他人；人设页多一块“角色关系网”（关系、修罗场、出场规则），常驻在人设后面；开场白和试玩会让至少两个人有戏份。",world:"没有固定角色，AI 扮演整个世界。人设页可以空着；人物写进 NPC 库（默认 6 个起）；基调里会加叙事和 NPC 现编规则；开场白用旁白视角。",rules:"手枪卡：只有世界观和规则。不写人设、不写 NPC 库；世界观写成“设定 + 运行规则”，基调与规则里加叙事、推进、出场人物生成三项；一键出卡跳过人设和 NPC；开场白从场景直接写起。选了“手枪卡”标签会自动用这个。"}[n];return`<div class="cw-box"><div class="cw-row"><span class="cw-sub">卡的类型</span><select class="text_pole cw-in" data-bind="mode" style="width:auto"><option value="" ${e.mode?"":"selected"}>自动（现在是：${x(ss[t])}）</option>${Object.entries(ss).map(([s,a])=>`<option value="${s}" ${e.mode===s?"selected":""}>${x(a)}</option>`).join("")}</select></div>
+<div class="cw-dim cw-small cw-help">${x(r)}自动判断看“卡类型”“人数”标签和主要角色有几个。对应的写法在 提示词 → 规则库 的“多人卡”“世界卡”里，可以改，也可以关掉。</div></div>`}function sw(){const e=N(),t=_t(),n=e.tagSrc??{},r=(a,i)=>`<span class="cw-chip tag ${i?"on":""} src-${n[`${a.dim}:${a.name}`]??"user"}" data-act="tag" data-dim="${a.dim}" data-name="${x(a.name)}">${x(a.name)}${n[`${a.dim}:${a.name}`]==="guess"?"?":""}</span>`;let s=`${rw()}<div class="cw-dim cw-small cw-help">上面是已选的标签，点一下取消；下面按维度展开，点一下选上。实线框是你那句话里识别到的，虚线框是 AI 推荐的，带问号的是 AI 猜的，确认一下。</div>`;if(s+=`<div class="cw-chips">${(e.tags??[]).map(a=>r(a,!0)).join("")||'<span class="cw-dim">还没有标签</span>'}</div>`,e.ai?.novel?.length||e.ai?.surprise){s+='<div class="cw-box">';for(const a of e.ai.novel??[])s+=`<div>新标签：<b>${x(a.name)}</b>（${x($e(t,a.dim)?.name??a.dim)}） ${q("adoptTag","收录并选上",`data-dim="${a.dim}" data-name="${x(a.name)}"`)}</div>`;e.ai.surprise&&(s+=`<div>反差推荐：${r(e.ai.surprise,e.tags.some(a=>a.dim===e.ai.surprise.dim&&a.name===e.ai.surprise.name))} <small class="cw-dim">${x(e.ai.surprise.why)}</small></div>`),s+="</div>"}return s+=t.map(a=>`<details class="cw-mini"><summary>${x(a.name)}${a.single?"（单选）":""} <small class="cw-dim">${x(pt(e.tags,a.key).join("、"))}</small></summary>
+<div class="cw-chips">${a.tags.map(i=>r(i,e.tags.some(o=>o.dim===i.dim&&o.name===i.name))).join("")}</div></details>`).join(""),s}function aw(e,t){if(!e.text?.trim())return"";const n=ga(e.text),r=wa(e.text);return`<div class="cw-row cw-small">${q("backstory",n.found?"重写经历":"展开经历",`data-i="${t}"${r?' class="cw-primary"':""}`)}<span class="cw-grow ${r?"cw-warntext":"cw-dim"}">${r?"还没写经历":`经历 ${n.count?`${n.count} 段 · `:""}${n.chars} 字`}</span></div>
+<div class="cw-dim cw-small cw-help">单独补写或展开经历，保留已定的往事；写完替换人设中的经历部分。长短不作为质量判断。可以在上面“哪里不满意”里写要求。</div>`}function iw(e,t){const n=N();if(!e.text?.trim())return"";const r=n.au.checks?.[e.name],s=(r?.items??[]).filter(a=>a.verdict!=="保留");return`<div class="cw-box cw-small"><div class="cw-row">${q("auCheck",r?"再检查一次":"内核一致性检查",`data-i="${t}"`)}${r&&(s.length||r.leftovers.length)&&!r.fixed?q("auFix",`按检查结果修（${s.length+(r.leftovers.length?1:0)} 处）`,`data-i="${t}" class="cw-primary"`):""}</div>
+${r?`${r.items.map(a=>`<div class="cw-ov"><span class="cw-verdict v-${a.verdict}">${x(a.verdict)}</span> ${x(a.core)}${a.verdict!=="保留"?`<div class="cw-dim">${a.where?`「${x(a.where)}」 `:""}${x(a.fix)}</div>`:""}</div>`).join("")}
+${r.leftovers.length?`<div class="cw-ov"><span class="cw-verdict v-丢了">残留</span> 原作的东西：${x(r.leftovers.join("、"))}</div>`:""}
+${r.fixed?'<span class="cw-badge ok">已按检查结果修过，可以再检查一次</span>':""}`:'<div class="cw-dim">对照内核逐条检查 AU 人设，看有没有被 AU 题材的套路冲掉、有没有原作残留。</div>'}</div>`}var ow=new Set(["au","existing","persona","world","npc","routes","tone","greet","intro","play"]);function Rp(e){return B.textSlots(N(),{all:!0}).filter(t=>t.page===e&&!t.rules&&!Ta(t.get()))}function Hp(e){const t=B.banned(N()),n=ut()?$t(le().extensionSettings,t):null;return Rp(e).map(r=>{const s=to(r.get(),t),a=n?wr(r.get(),n):null;return{s:r,words:s,total:a?.total??0,must:a?.must??0,found:a?.words??[]}})}function cw(e){if(!(ow.has(e)||e.startsWith("step:")))return"";const t=Hp(e);if(!t.length)return"";const n=t.filter(p=>p.words.length||p.total),r=n.reduce((p,d)=>p+d.words.length,0),s=n.reduce((p,d)=>p+d.total,0),a=b.baguPage?.page===e?b.baguPage.report:null,i=n.length?`八股检查：${[r?`禁用词 <b class="cw-err">${r}</b> 个`:"",s?`八股 <b>${s}</b> 处`:""].filter(Boolean).join(" · ")}，在 ${n.length} 块里`:`八股检查：<span class="cw-ok">这一页${ut()?"没有禁用词和八股":"没有禁用词"}</span>`,o=n.map(p=>`<div class="cw-ov"><b>${x(p.s.label)}</b>　${p.words.length?`禁用词：<span class="cw-err">${x(p.words.join("、"))}</span>　`:""}${p.total?`八股 ${p.total} 处${p.must?`（必改 ${p.must}）`:""}：<span class="cw-dim">${x(ho(p.found,8,p.words))}</span>`:""}</div>`).join(""),c=ut()&&n.some(p=>p.total&&!p.s.scanOnly);return`<div class="cw-bagubar ${n.length?"hit":""}">
+<div class="cw-row"><span class="cw-grow cw-small">${i}</span>${c?q("baguPage",`清理这一页（${n.filter(p=>p.total&&!p.s.scanOnly).length} 块）`,`data-page="${x(e)}"`):""}</div>
+${e==="play"?n.length?'<div class="cw-dim cw-small cw-help">试玩回复里的八股不在这里改：多半是人设、开场白或基调带出来的，点评会告诉你去哪一页改。</div>':"":`<div class="cw-small cw-dim"><span class="cw-tok" data-tok-page="${x(e)}">这一页 ${Wn(t.map(p=>p.s.get()))}</span></div>`}
+${n.length?`<details class="cw-mini"><summary>看是哪几块</summary>${o}</details>`:""}
+${ut()?e==="play"?"":c?'<div class="cw-dim cw-small cw-help">只改有八股的句子，每块 1–2 次调用。改完不满意可以“换回上一版”。</div>':"":'<div class="cw-dim cw-small cw-help">装了八股清理扩展能扫出更多套路，还能一键改；现在只查禁用词。</div>'}
+${a?`<div class="cw-box cw-small">${a.map(p=>`<div><b>${x(p.label)}</b>：${p.text}</div>`).join("")}</div>`:""}
+</div>`}function lw(e,t){if(!String(e??"").trim())return"";const n=to(e,B.banned(N())),r=ut()?$t(le().extensionSettings,B.banned(N())):null,s=r?wr(e,r):null;return!n.length&&!s?.total?'<div class="cw-small"><span class="cw-badge ok">没有禁用词和八股</span></div>':`<div class="cw-box cw-small">${n.length?`<div>禁用词：<b class="cw-err">${x(n.join("、"))}</b></div>`:""}${s?.total?`<div>八股 ${s.total} 处：${x(ho(s.words,8,n))}</div>`:""}
+${ut()?`<div class="cw-row">${q("baguOne","只清理这个人设",`data-i="${t}"`)}</div>`:""}</div>`}function pw(e,t){if(!e.text?.trim())return"";const n=N(),r=!!(n.world?.main?.trim()||n.npcs?.length||n.routes?.some(a=>a.info?.trim())||n.relations?.trim()),s=U().personaPlace;return`<div class="cw-box">
+<div class="cw-row"><b class="cw-grow">人设补充 <small class="cw-dim">${s==="description"?"导入到角色描述，接在人设后面":s==="green"?"世界书 · 绿灯，跟人设一起":"世界书 · 蓝灯常驻，紧跟在人设后面"}</small></b>${q("personaExtra",e.extra?"重写":"写补充",`data-i="${t}"${!e.extra&&r?' class="cw-primary"':""}`)}</div>
+<div class="cw-dim cw-small cw-help">${r?"人设是最先写的，那时世界观、NPC、路线都还没有，读起来会有点悬浮。全卡写完后点这里：只写人设里没有、这个世界给他的东西——落脚点、对具体的人、手里的筹码、各条路线里的他、会主动做的事。1 次调用。":"世界观、NPC、路线还都是空的，没东西可接。先把它们写好，再回来补。"}</div>
+${Ve(`personaExtra:${e.name}`,!!e.extra)}${e.extra?Pe(`personas.${t}.extra`,9):""}
+</div>`}function dw(e,t){const n=B.deepOf(e),r=n.filter(i=>(i.a??"").trim()).length;let s=0;const a=ep.map(i=>`<div class="cw-sub">${x(i.name)}</div>${i.qs.map(()=>{const o=s++,c=n[o];return`<div class="cw-q"><div class="cw-qt">${o+1}. ${x(c.q)}${c.ai&&(c.a??"").trim()?' <span class="cw-badge">AI 答的</span>':""}</div><textarea class="text_pole cw-ta" data-bind="personas.${t}.deep.${o}.a" rows="2" placeholder="自己写，或留空让 AI 答">${x(c.a??"")}</textarea></div>`}).join("")}`).join("");return`<div class="cw-deep"><div class="cw-sub">深挖 ${n.length} 问 <small class="cw-dim">已填 ${r}/${n.length}，AI 先答、你来改，或者你自己答</small></div>
+<div class="cw-row">${q("deepAns",r<n.length?"让 AI 答没填的":"都填完了",`data-i="${t}" ${r<n.length?'class="cw-primary"':""}`)}${q("deepClear","清空答案",`data-i="${t}"`)}<span class="cw-dim cw-small cw-grow">1 次调用；你填过的不会被改</span></div>
+${a}</div>`}function uw(){const e=N(),t=B.modeOf(e);if(!e.personas?.length)return t==="rules"?`<div class="cw-box">这是规则卡（手枪卡）：只有世界观和规则，这一页可以不写。出场的人由 AI 按“基调与规则”里的“出场人物生成”现编。如果想要一个固定出场、写得很薄的角色，也可以在这里加。</div><div class="cw-row">${q("add","加一个主要角色",'data-path="personas" data-tpl="persona"')}</div>`:t==="world"?`<div class="cw-box">这是无固定角色的世界卡，主要角色可以不写：人物都放在 NPC 页的 NPC 库里，AI 按世界和 NPC 生成规则来演。想要几个固定出场的关键人物，也可以在这里加。</div><div class="cw-row">${q("add","加一个主要角色",'data-path="personas" data-tpl="persona"')}</div>`:`${Vn("persona")}<div class="cw-dim">${e.existing?"原卡里没有认出Love 写卡机格式的人设。":"先在「主题」把主题定下来，AI 会按主题排好主要角色。"}</div><div class="cw-row">${q("add","手动加一个主要角色",'data-path="personas" data-tpl="persona"')}</div>`;let n=`<div class="cw-row">${q("allPersonas","生成全部人设")}${q("add","加一个主要角色",'data-path="personas" data-tpl="persona"')}</div>
+${t==="multi"?'<div class="cw-dim cw-small cw-help">多人卡：每个人的人设都会参考其他主要角色，张力位置不重复；全部写完后在页面底部写“角色关系网”。</div>':""}
+${vg()}
+<div class="cw-dim cw-small cw-help">想只改一小段：在框里选中那段，下面会出现“局部重写”。</div>
+${Vn("persona")}`;const r=U().personaPlace;return e.personas.forEach((s,a)=>{const i=e.predict?.[s.name],o=(b.pTab?.[a]==="ask"?"main":b.pTab?.[a])??"main",c=B.deepOf(s),p=c.filter(D=>(D.a??"").trim()).length,d=(e.qa?.chars??[]).findIndex(D=>D.name===s.name),m=d>=0?e.qa.chars[d]:null,g=i?.overlaps?.length??0,y=`${We(`personas.${a}.desc`,"一句设想：TA 是谁、和〔user〕和其他人什么关系（可空）")}
+${Ba(`personas.${a}.keys`,"别名/称呼（绿灯关键词，逗号分隔）")}
+${Ve(`persona:${s.name}`,!!s.text)}
+<div class="cw-sub">概要 <small class="cw-dim">${r==="green"?"蓝灯常驻":"给后面步骤参考，不单独导入"}</small></div>${Pe(`personas.${a}.overview`,3)}
+<div class="cw-sub">人设 <small class="cw-dim">${{blue:"世界书 · 蓝灯常驻",green:"世界书 · 绿灯",description:"导入到角色描述"}[r]??""}（在“设置”里改）</small></div>${Pe(`personas.${a}.text`,14)}
+${aw(s,a)}
+${pw(s,a)}`,E=`<div class="cw-dim cw-small">答案会带进写人设和经历。你填过的 AI 不会改。</div>
+<div class="cw-row">${q("qa",e.qa?.chars?.length?"换一批针对性问题":"出几个针对这个构想的问题")}</div>
+${m?`<div class="cw-box">${m.questions.map((D,Q)=>`<div class="cw-q"><div class="cw-qt">${x(D.q)}</div>${ms(`qa.chars.${d}.questions.${Q}.answer`,D.options,"或者自己写；留空让 AI 决定")}</div>`).join("")}</div>`:""}
+${dw(s,a)}`,P=`${lw(s.text,a)}
+${e.au?iw(s,a):""}
+<div class="cw-row">${q("predict",i?"再测一次":"可预测性测试",`data-i="${a}"`)}${g?q("destale",`重写勾选的 ${i.overlaps.filter(D=>!D.skip).length} 处`,`data-i="${a}" class="cw-primary"`):""}</div>
+<div class="cw-dim cw-small cw-help">先让 AI 只看标签猜这类角色的刻板写法，再按意思比对人设。2 次调用。</div>
+${i?`<div class="cw-box cw-small">${i.rewritten?`<span class="cw-badge ok">已重写 ${i.fixed?.length??0} 处，可以再测一次</span>${i.fixed?.length?`<div class="cw-dim">针对的是：${i.fixed.map(D=>`「${x(D.card)}」`).join("")}。改成了什么见“人设”里的“改了什么”。</div>`:""}`:""}${g?i.overlaps.map((D,Q)=>`<div class="cw-ov"><label class="cw-row"><input type="checkbox" data-act="ovSel" data-i="${a}" data-o="${Q}" ${D.skip?"":"checked"}><span class="cw-grow">卡里：<b>${x(D.card)}</b><br><span class="cw-dim">撞上的刻板写法：${x(D.text)}</span></span></label>
+<div class="cw-row"><input class="text_pole cw-in cw-grow" data-act="ovHint" data-i="${a}" data-o="${Q}" placeholder="想怎么改？比如“改成他嘴硬但偷偷照做”（可空，空着让 AI 定）" value="${x(D.hint??"")}">${q("destaleOne","只改这一处",`data-i="${a}" data-o="${Q}"`)}</div></div>`).join(""):i.rewritten?"":'<span class="cw-badge ok">没撞上</span>'}
+${i.predicted?`<details class="cw-mini"><summary>AI 猜的刻板写法</summary>${[...(i.predicted.scenes??[]).map(D=>`${D.scene}：${D.behavior??""}${D.line?`「${D.line}」`:""}`),...i.predicted.traits??[]].map(D=>`<div>· ${x(D)}</div>`).join("")}</details>`:""}</div>`:""}`;n+=`<div class="cw-card">
+<div class="cw-row">${We(`personas.${a}.name`,"名字（空着让 AI 起）","cw-grow")}${q("persona",s.text?"重写":"写这个角色",`data-i="${a}" ${s.text?"":'class="cw-primary"'}`)}${!s.text||s.added?q("del","删",`data-path="personas" data-i="${a}"`):""}</div>
+${Qp("pTab",o,[["main","人设"],["check",g?`检查 · ${g} 处`:"检查"]],`data-i="${a}"`)}
+${Sr("main",o,y)}${Sr("check",o,P)}
+</div>`}),(e.personas.length>1||t==="multi")&&(n+=`<div class="cw-card"><div class="cw-row"><b class="cw-grow">角色关系网</b>${q("relations",e.relations?"重写":"生成",e.personas.filter(s=>s.text).length>1&&!e.relations?'class="cw-primary"':"")}</div>
+<div class="cw-dim cw-small cw-help">多人卡最容易跑成单人卡：AI 只盯着一个人演。这一块写清主要角色之间的关系和账、修罗场怎么触发、一次回复里怎么安排几个人出场、群戏里各自说话的区别。蓝灯常驻，放在人设后面。</div>
+${Ve("relations",!!e.relations)}${Pe("relations",10,"<角色关系>…</角色关系>")}</div>`),n}function mw(){const e=N();return`${Vn("world")}<div class="cw-row">${q("world",e.world.main?"重写":"生成世界观")}</div>
+${Ve("world",!!e.world.main)}
+<div class="cw-sub">总览 <small class="cw-dim">蓝灯</small></div>${Pe("world.main",10)}
+${e.world.extra.map((t,n)=>`<div class="cw-card"><div class="cw-row">${We(`world.extra.${n}.name`,"名称","cw-grow")}${q("del","删",`data-path="world.extra" data-i="${n}"`)}</div>${Ba(`world.extra.${n}.keys`,"关键词（空着就是蓝灯）")}${Pe(`world.extra.${n}.content`,6)}</div>`).join("")}
+<div class="cw-row">${q("add","加一个条目",'data-path="world.extra" data-tpl="extra"')}</div>`}function fw(){const e=N();return`${Vn("npc")}<div class="cw-row">${q("npc",e.npcs.length?"重写全部":"生成 NPC")}${q("add","加一个 NPC",'data-path="npcs" data-tpl="npc"')}</div>
+<div class="cw-dim cw-small cw-help">可以直接生成，名字和设想留空也能写。默认参考《宇宙冷漠》，写人物经历过的事和如今的生活。有要求再填设想；单个和全部重写都会带上修改意见。</div>
+${Ve("npc",e.npcs.length>0)}
+${e.npcs.map((t,n)=>`<div class="cw-card"><div class="cw-row">${We(`npcs.${n}.name`,"名字（空着让 AI 起）","cw-grow")}${q("npcOne",t.content?.trim()?"重写这个":"写这个 NPC",`data-i="${n}" ${t.content?.trim()?"":'class="cw-primary"'}`)}${q("del","删",`data-path="npcs" data-i="${n}"`)}</div>
+${We(`npcs.${n}.desc`,"人物设想（可留空，让 AI 自行创作）")}
+${Ba(`npcs.${n}.keys`)}${Pe(`npcs.${n}.content`,7)}</div>`).join("")}`}function gw(){const e=N();return`${Vn("routes")}<div class="cw-dim cw-small cw-help">每条路线 = 一个〔user〕身份 + 一个时期。导入时只启用第一条，其余在“导入”里切换。</div>
+<div class="cw-row">${q("routes",e.routes.some(t=>t.info)&&e.routes.some(t=>!t.info)?"给新路线写信息":"生成路线信息")}${q("suggestRoutes","想几条新路线")}${q("add","加一条路线",'data-path="routes" data-tpl="route"')}</div>
+${e.routeIdeas?.length?`<div class="cw-box"><div class="cw-sub">新路线的点子 <small class="cw-dim">点“加上”才会加进去</small></div>${e.routeIdeas.map((t,n)=>`<div class="cw-row"><div class="cw-grow"><b>${x(t.name)}</b>｜${x(t.user)} · ${x(t.period)}<div class="cw-dim cw-small cw-help">${x(t.why)}</div></div>${q("addRouteIdea","加上",`data-i="${n}"`)}</div>`).join("")}</div>`:""}
+<div class="cw-dim cw-small cw-help">每条路线都可以自己写，也可以先填身份、时期和一句主题，再点“写这条”只写这一条。上面的“生成”会写所有空着的路线，写好的不动。</div>
+${Ve("routes",e.routes.some(t=>t.info))}
+${e.routes.map((t,n)=>`<div class="cw-card"><div class="cw-row">${We(`routes.${n}.name`,"路线名","cw-grow")}${q("routeOne",t.info?.trim()?"重写这条":"写这条",`data-i="${n}" ${t.info?.trim()?"":'class="cw-primary"'}`)}${q("del","删",`data-path="routes" data-i="${n}"`)}</div>
+<div class="cw-row">${We(`routes.${n}.user`,"〔user〕身份","cw-grow")}${We(`routes.${n}.period`,"时期","cw-grow")}</div>
+${We(`routes.${n}.desc`,"这条路线想写什么（主题，可空）：比如“他失忆了，你是他唯一记得的人”")}
+${Pe(`routes.${n}.info`,8,`<玩家信息>…</玩家信息>
+<关系指导>…</关系指导>`)}</div>`).join("")}`}function ww(e){const t=N(),n=(U().customSteps??[]).indexOf(e),r=t.free.findIndex(i=>i.fromStep===e.id),s=t.free[r],a=e.name||"我的步骤",ask=String(e.template??"").includes("{{作者要求}}");return`${ask?`<div class="cw-sub">你的要求 <small class="cw-dim">自己写，AI 照着写；自动保存，之后每张卡都用这一份</small></div><textarea class="text_pole cw-ta" data-step="${n}" data-key="userAsk" rows="7" placeholder="写你想要的：尺度、偏好、要写哪些部分、不要什么。比如：每个主要角色写身体特征、敏感点、癖好和底线……">${x(e.userAsk??"")}</textarea>`:""}<div class="cw-row">${q("custom",s?.content?"重写":"生成",`data-i="${n}" ${ask&&!String(e.userAsk??"").trim()?"":'class="cw-primary"'}`)}${q("editStep",ask?"更多设置":"改这一步的提示词",`data-i="${n}"`)}</div>
+${Ve(`free:${a}`,!!s?.content)}
+${s?`<div class="cw-sub">${x(a)} <small class="cw-dim">${s.light==="green"?"绿灯":"蓝灯"} · ${s.position==="before"?"角色前":"角色后"}，导入时进世界书</small></div>${Pe(`free.${r}.content`,12)}`:'<div class="cw-dim">还没生成。</div>'}`}const cwzFreeP=[["系统面板", "给 user 的系统或面板：能看到什么、怎么用、有什么限制"], ["信物道具", "一件关键物品：来历、作用、谁在意它"], ["地点", "一个常去的地方：样子、氛围、会发生什么"], ["组织势力", "一个组织：做什么、怎么运作、和角色的关系"], ["规则禁忌", "这个世界或这群人的规矩：不能做什么、违反会怎样"], ["传说预言", "流传的说法：内容、谁信、和主线怎么扯上关系"], ["日常作息", "角色们平常一天怎么过"], ["称呼口癖", "角色之间、对 user 的称呼和说话习惯"]];function cwzFree(){const e=N(),t=(e.free??[]).map((n,r)=>[n,r]).filter(([n])=>!n.fromStep),em=t.filter(([n])=>n.name?.trim()&&!String(n.content??"").trim()).length,fromSteps=(e.free??[]).filter(n=>n.fromStep);
+return`<div class="cw-dim cw-small">上面几步没写到的都放这里：系统面板、信物、规则、地点……每个模块导入时变成一个世界书条目。可选，不写也能出卡。</div>
+<div class="cwz-quickadd"><span class="cwz-lab">点一下就加</span><div class="cwz-chips">${cwzFreeP.map(([n,r])=>q("cwzFreeAdd",`＋ ${x(n)}`,`class="cwz-chip" data-name="${x(n)}" data-desc="${x(r)}"`)).join("")}</div>
+<div class="cwz-addrow"><input class="text_pole cw-in cwz-newname" placeholder="自己起名，比如：契约内容"><input class="text_pole cw-in cwz-newdesc" placeholder="想写什么（可空）">${q("cwzFreeAdd","加",'data-own="1"')}${q("cwzFreeAdd","加并生成",'class="cw-primary" data-own="1" data-gen="1"')}</div></div>
+${t.length?`<div class="cw-row"><span class="cwz-lab cw-grow">已加 ${t.length} 个</span>${em?q("cwzFreeAll",`把没写的 ${em} 个都生成`,'class="cw-primary"'):""}</div>`:""}
+${t.map(([n,r])=>`<div class="cw-card cwz-free" id="cwz-free-${r}"><div class="cw-row">${We(`free.${r}.name`,"模块名","cw-grow")}${q("free",String(n.content??"").trim()?"重写":"生成",`data-i="${r}" ${String(n.content??"").trim()?"":'class="cw-primary"'}`)}${q("del","删",`data-path="free" data-i="${r}"`)}</div>
+${We(`free.${r}.desc`,"几句话说说它是什么（AI 按这个写）")}
+${n.name?Ve(`free:${n.name.trim()}`,!!n.content):""}
+${Pe(`free.${r}.content`,6,"还没写。点「生成」，或者直接在这里写。")}
+<details class="cwz-fold"><summary>放哪里：${n.light==="green"?"绿灯（关键词触发）":"蓝灯常驻"} · ${n.position==="before"?"角色定义之前":"角色定义之后"}</summary><div class="cw-row" style="margin-top:6px"><select class="text_pole" data-bind="free.${r}.light"><option value="blue" ${n.light!=="green"?"selected":""}>蓝灯常驻</option><option value="green" ${n.light==="green"?"selected":""}>绿灯（关键词触发）</option></select>
+<select class="text_pole" data-bind="free.${r}.position"><option value="after" ${n.position!=="before"?"selected":""}>角色定义之后</option><option value="before" ${n.position==="before"?"selected":""}>角色定义之前</option></select></div>${Ba(`free.${r}.keys`)}</details></div>`).join("")}
+${fromSteps.length?`<div class="cw-dim cw-small">另外还有 ${fromSteps.length} 个模块是「我的步骤」写的（${fromSteps.map(n=>x(n.name)).join("、")}），在各自那一步里改。</div>`:""}`}
+function hw(){const e=N(),t=U().customSteps??[];return`${Vn("tone")}<div class="cw-row">${q("tone",e.tone?"重写":"生成基调与规则")}</div>
+${Ve("tone",!!e.tone)}
+<div class="cw-sub">创作文体 <small class="cw-dim">蓝灯，放在角色定义之前</small></div>${Pe("tone",10)}
+<div class="cw-sub">自由模块 <small class="cw-dim">系统面板、信物、预言……上面没覆盖的都放这里</small></div>
+${e.free.map((n,r)=>n.fromStep?"":`<div class="cw-card"><div class="cw-row">${We(`free.${r}.name`,"模块名","cw-grow")}${q("free","生成",`data-i="${r}"`)}${q("del","删",`data-path="free" data-i="${r}"`)}</div>
+${We(`free.${r}.desc`,"几句话描述它是什么")}
+${n.name?Ve(`free:${n.name.trim()}`,!!n.content):""}
+<div class="cw-row"><select class="text_pole" data-bind="free.${r}.light"><option value="blue" ${n.light!=="green"?"selected":""}>蓝灯常驻</option><option value="green" ${n.light==="green"?"selected":""}>绿灯（关键词触发）</option></select>
+<select class="text_pole" data-bind="free.${r}.position"><option value="after" ${n.position!=="before"?"selected":""}>角色定义之后</option><option value="before" ${n.position==="before"?"selected":""}>角色定义之前</option></select></div>
+${Ba(`free.${r}.keys`)}${Pe(`free.${r}.content`,6)}</div>`).join("")}
+<div class="cw-row">${q("add","加一个模块",'data-path="free" data-tpl="free"')}</div>
+${t.length?"":'<div class="cw-dim cw-small cw-help">想在任意两步之间加自己的步骤：目录 → 提示词 → 我的步骤。</div>'}`}function zp(){const e=U();return`<details class="cw-mini cw-extraction"><summary>正文提取范围</summary>
+<div class="cw-form">
+<label class="checkbox_label"><input type="checkbox" data-set="greetingExtract" ${e.greetingExtract!==!1?"checked":""}>仅保留标记内的正文</label>
+<label>开始标记<input type="text" class="text_pole cw-in" data-set="greetingExtractStart" value="${x(e.greetingExtractStart??"<content>")}" placeholder="&lt;content&gt;"></label>
+<label>结束标记<input type="text" class="text_pole cw-in" data-set="greetingExtractEnd" value="${x(e.greetingExtractEnd??"</content>")}" placeholder="&lt;/content&gt;"></label>
+<div class="cw-small cw-dim">默认只取 &lt;content&gt;…&lt;/content&gt; 内部。可以填写自己的起止标记；取消勾选后沿用完整回复。支持多个正文区域，未找到完整区域时保留旧稿并提示。</div>
+</div></details>`}function Fp(e=N()){const t=B.openingMaterials(e);return[...Object.entries(t).filter(([,n])=>n).map(([n,r])=>`【${Ia[n]??"人物概要"}】
+${r}`),mr(e)?`【补充文字】
+${mr(e)}`:""].filter(Boolean).join(`
+
+`)||"没有选择附加资料。"}function bw(e){return`<div class="cw-opening-context">
+<label><span class="cw-sub">发给 AI 的补充文字</span>${Pe("greetingContext.notes",3,"把这次要写的内容、文风要求或参考文字放在这里。")}</label>
+<label class="checkbox_label"><input type="checkbox" data-greeting-notes ${e.greetingContext?.useNotes!==!1?"checked":""}>发送这段补充文字</label>
+<div class="cw-small cw-dim">用于本页聊天、写开场白和修改。自动保存；清空或关闭后不再发送。</div>
+<div class="cw-small cw-dim">默认发送前面已写的全部资料和本页选定的开场白预设。手动关闭的资料除外。</div>
+<details class="cw-mini"><summary>选择附带资料</summary><div class="cw-form">
+${Object.entries(Ia).map(([t,n])=>`<label class="checkbox_label"><input type="checkbox" data-greeting-part="${t}" ${yn(e,t)?"checked":""}>${n}</label>`).join("")}
+<div class="cw-small cw-dim">本页的路线、候选梗和待编辑开场白仍会按任务发送。聊天记录由“发送本页对话”开关控制。</div>
+</div></details>
+<details class="cw-mini" data-opening-preview><summary>查看已选资料与补充文字</summary><pre class="cw-opening-preview"></pre></details>
+</div>`}function vw(){const e=N(),t=U(),n=new Set(e.routes.map(a=>a.name)),r=[...e.routes.map((a,i)=>({...a,i})),{name:"",label:"不分路线",i:-1,free:!0}],s=cp();return`<label class="cw-presetpick">开场白预设<select class="text_pole cw-in" data-set="presetGreeting"><option value="">不用预设</option>${s.map(a=>`<option value="${x(a)}" ${a===t.presetGreeting?"selected":""}>${x(a)}</option>`).join("")}</select></label>
+<div class="cw-small">本页聊一聊、写开场白和修改都用这个预设。</div>
+${bw(e)}
+<div class="cw-dim cw-small cw-help">${s.length?"选你平时玩卡用的正文预设，插件会把它打开的条目一起发出去，不会切换你酒馆当前的预设。":"列表是空的：要先在酒馆里用“对话补全”类 API，才能读到预设。"}AI 会先想清楚时间、地点、人物、现在发生了什么、接下来会怎样、从哪个最有张力的场景开始，再写正文；它的构思可以在「查看 AI 返回原文」里看。「写开场白」会替换这条路线原来的开场白（可以换回上一版），「再写一个」加在后面。</div>
+${zp()}
+${r.map(a=>{const i=a.i,o=(e.greetings??[]).map((d,m)=>({g:d,gi:m})).filter(d=>a.free?!n.has(d.g.route):d.g.route===a.name),c=e.hooks?.[a.name]??[],p=c.filter(d=>d.on).length;return a.free&&e.routes.length&&!o.length&&!b.showFreeGreet?`<div class="cw-row">${q("showFreeGreet","写一个不分路线的开场白")}</div>`:`<div class="cw-card"><div class="cw-row"><b class="cw-grow">${x(a.free?"不分路线":a.name)}</b>${a.free?'<small class="cw-dim">不绑定路线，按人设和世界观写</small>':""}</div>
+<div class="cw-row">${q("greet",o.length?"重写这条路线的开场白":"写开场白",`class="cw-primary" data-i="${i}"`)}${o.length?q("greetMore","再写一个",`data-i="${i}"`):""}</div>
+${Ve(`greet:${a.name}`,o.length>0)}
+${o.map(({gi:d})=>`<div class="cw-row cw-end">${q("del","删",`data-path="greetings" data-i="${d}"`)}</div>${Pe(`greetings.${d}.text`,10)}`).join("")}</div>`}).join("")}
+<div class="cw-dim cw-small cw-help">第一条路线的第一个开场白会成为主开场白，其余按路线顺序放进额外开场白。</div>`}function xw(){const e=N(),t=B.chatOf(e);t.seen=!0;const n=t.messages,br=String(t.brief??"").trim(),stale=br&&(t.briefN??0)<n.length,cp=e.concepts?.[e.pick];
+const card=!n.length&&!br?"":`<div class="cwz-card cwz-theme"><div class="cw-row"><span class="cwz-lab cw-grow">${e.themeOk?"主题 · 已定":"主题草稿 · 边聊边整理"}</span>${br?`<span class="cwz-badge">${stale?"有新聊的还没整理":"已整理"}</span>`:""}</div>
+${e.themeOk&&cp?`<div class="cwz-h2">${x(cp.title)}</div>`:""}
+${br?`<pre class="cwz-brief">${x(br.replace(/<\/?作者定稿>/g,"").trim())}</pre>`:`<div class="cw-dim cw-small">还没整理。聊几句以后点「整理一下」，AI 把聊定的东西写成一张主题草稿；没聊到的会写「未定」。</div>`}
+<div class="cw-row">${n.some(i=>i.role==="user")?q("chatBrief",br?"再整理一下":"整理一下",stale||!br?'class="cw-primary"':""):""}${t.prevBrief?q("chatBriefBack","换回上一版"):""}${br?`<div class="menu_button cw-btn" data-act="go" data-page="theme">改草稿</div>`:""}<span class="cw-dim cw-small cw-grow">整理 1 次调用</span></div><label class="cw-small cwz-check"><input type="checkbox" data-cwzset="themeAutoBrief" ${U().themeAutoBrief?"checked":""}> 每次 AI 回完自动整理（每次多 1 次调用）</label></div>`;
+const typing=b.busy&&(!n.length||n.at(-1)?.role==="user")?`<div class="cwz-msg ai"><div class="cwz-msgtext cwz-typing"><i></i><i></i><i></i></div></div>`:"";const msgs=n.length?`<div class="cwz-chat">${n.map((i,o)=>`<div class="cwz-msg ${i.role==="ai"?"ai":"me"}"><div class="cwz-msgtext">${x(i.text).replace(/\n/g,"<br>")}</div><div class="cwz-msgact">${o===n.length-1&&i.role==="ai"?q("chatRedo","重来"):""}${q("chatCut","删到这里",`data-i="${o}"`)}</div></div>`).join("")}${typing}</div>`:typing?`<div class="cwz-chat">${typing}</div>`:`<div class="cwz-chat"><div class="cwz-msg ai"><div class="cwz-msgtext">你想写一张什么样的卡？<br>题材、人物、〔user〕是谁、想要的感觉，想到哪说到哪，我接着问你。</div></div></div><div class="cwz-chips">${q("chatStart","你先问我",'class="cwz-chip"')}${q("chatQuick","先给我几个方向",'class="cwz-chip" data-text="我还没想好，先给我四五个方向不一样的点子，每个一两句话，我挑一个再细聊。"')}${q("chatQuick","我只有一点感觉",'class="cwz-chip" data-text="我脑子里只有一点模糊的感觉，你问我几个问题，帮我把想写的东西问出来。一次问一两个就好。"')}</div>`;
+return `${card}${msgs}${n.length?`<div class="cw-row cw-end cw-small">${q("chatClear","清空聊天")}</div>`:""}
+<div class="cwz-bottom cwz-compose">
+<div class="cwz-composer"><textarea class="text_pole cw-ta" data-bind="chat.input" rows="2" placeholder="${matchMedia("(pointer:coarse)").matches?"说说你想写什么，想到哪说到哪。":"说说你想写什么。Enter 发送，Shift+Enter 换行。"}">${x(t.input??"")}</textarea>${q("chatSend","发",'class="cw-primary"')}</div>
+${n.some(i=>i.role==="user")||br?`<div class="menu_button cw-btn cwz-gobtn" data-act="go" data-page="theme">${e.themeOk?"改完了，重新定主题 ›":"主题定了，开始写卡 ›"}</div>`:""}
+</div>`}
+function Dz(){const e=N(),t=U(),nm=p=>p.name||p.concepts?.[p.pick]?.title||String(p.idea??"").slice(0,16)||"未命名",tm=p=>p?new Date(p).toLocaleString([],{month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"}):"",kind=p=>p.existing?" · 改已有的卡":p.au?" · AU":"";
+return`<div class="cwz-card"><span class="cwz-lab">现在这张</span>
+<label class="cw-small" style="display:block;margin-top:4px">卡名<input class="text_pole cw-in" data-bind="name" value="${x(e.name)}" placeholder="导入酒馆时用的名字，空着就用主题标题"></label>
+<div class="cw-small cw-dim" style="margin-top:4px">${x(tm(e.updated))}${kind(e)}</div>
+<div class="cw-row" style="margin-top:8px">${q("newDraft","新建一张",'class="cw-primary"')}${q("delCurrent","删除这张")}</div></div>
+<div class="cw-row"><span class="cwz-lab cw-grow" style="color:#20302c">以前的草稿 · ${(t.drafts??[]).length}</span>${t.drafts?.length?q("clearDrafts","全部清空"):""}</div>
+${(t.drafts??[]).map((p,i)=>`<div class="cwz-draftrow"><div class="cw-grow"><b>${x(nm(p))}</b><small>${x(tm(p.updated))}${kind(p)}</small></div>${q("openDraft","打开",`data-i="${i}"`)}${q("delDraft","删",`data-i="${i}"`)}</div>`).join("")||'<div class="cwz-empty"><span>还没有。点「新建一张」时，现在这张会放到这里，最多留 8 份。</span></div>'}
+<div class="cw-row" style="margin-top:6px"><span class="cwz-lab" style="color:#20302c">更多</span></div>
+<div class="cwz-tools">
+<div class="cwz-tool" data-act="go" data-page="load"><b>接着改旧卡</b><small>从酒馆里挑一张卡读进来，补几条路线、添几个开场白，或者另起一个 AU</small></div>
+<div class="cwz-tool" data-act="go" data-page="quick"><b>编辑流程</b><small>换流程、新建流程、调步骤顺序</small></div>
+<div class="cwz-tool" data-act="go" data-page="prompts"><b>我的步骤</b><small>自己写提示词的步骤，可以插进流程</small></div>
+<div class="cwz-tool" data-act="go" data-page="about"><b>关于</b><small>功能、作者、插件会动哪些东西</small></div>
+</div>`}
+function Tz(){const e=N(),t=B.chatOf(e),n=t.messages??[],br=String(t.brief??"").trim(),stale=br&&(t.briefN??0)<n.length;
+return `<div class="cwz-card"><span class="cwz-lab">确认一下</span><div class="cwz-h2">就按这个写？</div>
+${stale?`<div class="cw-row cw-small cwz-warn"><span class="cw-grow">草稿整理后又聊了 ${n.length-(t.briefN??0)} 条。点「确定」会先把它们整理进去。</span>${q("chatBrief","现在整理")}</div>`:""}
+${!br&&!n.some(i=>i.role==="user")?`<div class="cw-small cwz-warn">还没聊过。可以回去聊，也可以直接在下面写主题。</div>`:""}
+<textarea class="text_pole cw-ta" data-brief rows="12" placeholder="主题写在这里：〔user〕是谁、主要角色、世界、基调、一定要有的和不要的。聊过的话点「确定」会自动整理。">${x(br.replace(/<\/?作者定稿>/g,"").trim())}</textarea>
+<div class="cw-dim cw-small">可以直接改，改了就以你改的为准。写「未定」的地方，AI 写的时候自己拿主意。</div>
+<div class="cwz-notch"><i></i><i></i></div>
+<span class="cwz-lab">这是一张什么卡</span>${cwzTypeGrid(e)}<div class="cw-dim cw-small" style="margin-top:6px">${e.cardType?"":"不选的话，确定后 AI 按主题帮你选。"}</div>
+<div class="cwz-notch"><i></i><i></i></div><span class="cwz-lab">这类卡用的预设</span><div class="cwz-presets"><label>写卡预设${cwzPresetSel(e.cardType||"_none","card")}</label><label>开场白预设${cwzPresetSel(e.cardType||"_none","greet")}</label></div><div class="cw-dim cw-small">每种卡记住自己的预设，下次选这种卡自动用上。${e.cardType?"":"先选卡种再绑。"}</div>
+<div class="cwz-notch"><i></i><i></i></div><span class="cwz-lab">标签 · 导入时写进角色卡</span>${cwzTagsBox(e)}<div class="cw-dim cw-small">确定后 AI 会从主题里挑一批，点一下去掉，也能自己加。</div>
+<div class="cw-dim cw-small">${e.themeOk?"重新定主题后，还没写的步骤按新主题写；已经写好的不会自动重写，要改就进那一步点「重写」。":"确定后 AI 先按主题排好人物和路线（1 次调用），然后按流程一步步写。"}</div></div>
+<div class="cwz-bottom"><div class="menu_button cw-btn" data-act="go" data-page="chat">‹ 再聊聊</div>${q("themeGo",e.themeOk?"重新定主题":"确定，开始写 ›",'class="cw-primary"')}</div>`}
+var Cn={persona:"主要人设",world:"世界观",npc:"NPC",routes:"玩家与路线",tone:"基调与规则",greet:"开场白"};function yw(){const e=N(),t=e.play??{},n=B.playGreetings(e);if(!n.length)return'<div class="cw-dim">先去开场白页写一个开场白。</div>';const r=U(),s=t.messages??[],a=B.charName(e),i=String(t.userName??"").trim()||r.userToken||"<user>";let o=`<div class="cw-dim cw-small cw-help">用“开场白预设”跑几轮，看角色跑起来是什么样。发出去的设定和导入酒馆后一样：蓝灯条目、这条路线、最近几条消息里提到关键词的绿灯。</div>
+<label class="cw-presetpick">从哪个开场白开始<select class="text_pole cw-in" data-bind="play.greet">${n.map((g,y)=>`<option value="${y}" ${Number(t.greet??0)===y?"selected":""}>${x(g.label)}：${x(g.text.replace(/\s+/g," ").slice(0,24))}…</option>`).join("")}</select></label>
+<div class="cw-row">${We("play.userName",`试玩时 user 叫什么（空着就是 ${r.userToken||"<user>"}）`,"cw-grow")}${q("playStart",s.length?"重新开始":"开始",s.length?"":'class="cw-primary"')}</div>`;if(!s.length)return o;const c=B.playContext(e),p=[...c.before,...c.card,...c.after];o+=`<div class="cw-dim cw-small">这一轮发出去的设定：${p.length} 块，${yo(p.map(g=>g.text))}${p.length?`<details class="cw-mini"><summary>是哪几块</summary>${p.map(g=>`<div class="cw-tokrow"><span class="cw-grow">${x(g.label)}</span>${yo([g.text])}</div>`).join("")}</details>`:""}</div>`,o+=`<div class="cw-chat">${s.map((g,y)=>`<div class="cw-msg ${g.role}"><div class="cw-row cw-msghead"><b class="cw-grow">${y+1}. ${x(g.role==="char"?a:i)}</b>${y===s.length-1&&y>0&&g.role==="char"?q("playRedo","重来这条"):""}${y>0?q("playCut","删到这里",`data-i="${y}"`):""}</div><div class="cw-msgtext">${x(g.text).replace(/\n/g,"<br>")}</div></div>`).join("")}</div>`;const d=s.at(-1);o+=`<div class="cw-box">
+<textarea class="text_pole cw-ta" data-bind="play.input" rows="2" placeholder="以 user 的身份说点什么，或者让 AI 帮你写一句">${x(t.input??"")}</textarea>
+<div class="cw-row">${q("playSend",d.role==="user"?"让角色回复":"发送",'class="cw-primary"')}${q("playUserOnce","AI 帮我写一句")}</div>
+<div class="cw-row"><span>让 AI 扮</span><select class="text_pole cw-in" data-bind="play.style" style="width:auto">${Object.keys(B.PLAY_STYLES).map(g=>`<option value="${g}" ${(t.style??"普通")===g?"selected":""}>${g}的玩家</option>`).join("")}</select><span>跑</span><input class="text_pole cw-num" type="number" min="1" max="10" data-bind="play.rounds" value="${x(t.rounds??3)}"><span>轮</span>${q("playAuto","开跑")}</div>
+<div class="cw-dim cw-small cw-help">${x(B.PLAY_STYLES[t.style??"普通"]??"")} 每轮 2 次调用。</div>
+</div>
+<div class="cw-row">${q("playReview",t.review?"再点评一次":"试玩点评",s.length>=3?'class="cw-primary"':"")}<span class="cw-dim cw-small cw-grow">看 OOC、抢话、八股、重复、角色会不会主动推剧情，问题出在卡的哪一部分。1 次调用。</span></div>`;const m=t.review;return m&&(o+=`<div class="cw-box"><div class="cw-sub">点评${m.score?`：${m.score} / 10`:""}</div>
+${m.good.length?`<div class="cw-small"><b>好的地方</b>${m.good.map(g=>`<div>· ${x(g)}</div>`).join("")}</div>`:""}
+${m.issues.length?m.issues.map((g,y)=>`<div class="cw-ov cw-small"><div><span class="cw-badge">${x(Cn[g.part]??g.part)}${g.name?` · ${x(g.name)}`:""}</span> ${g.where?`<span class="cw-dim">${x(g.where)}</span> `:""}${x(g.problem)}</div>
+${g.fix?`<div>改法：${x(g.fix)}</div>`:""}<div class="cw-row">${q("playFix",`带着这条意见去“${x(Cn[g.part]??g.part)}”`,`data-i="${y}"`)}</div></div>`).join(""):'<span class="cw-badge ok">没挑出问题</span>'}
+</div>`),o}function kw(){const e=N(),t=e.conflicts;let n=`<div class="cw-box"><div class="cw-sub">标签和内容有没有打架</div>
+<div class="cw-row">${q("conflictCheck",t?"再查一次":"检查冲突",t?"":'class="cw-primary"')}<span class="cw-dim cw-small cw-grow">比如选了“嬷c”，人设里却写成强势的攻；选了 1v1，却写了好几条感情线。1 次调用。</span></div>`;return t&&(t.issues.length?n+=t.issues.map((r,s)=>{const a=r.tag&&(e.tags??[]).some(i=>i.name===r.tag);return`<div class="cw-ov cw-small"><div><span class="cw-badge">${x(Cn[r.part]??r.part)}${r.name?` · ${x(r.name)}`:""}</span>${r.tag?` <span class="cw-badge">${x(r.tag)}</span>`:""}${r.level==="weak"?' <span class="cw-dim">（标签没被体现）</span>':""} ${x(r.problem)}</div>
+<div class="cw-dim">「${x(r.quote)}」</div>${r.fix?`<div>改法：${x(r.fix)}</div>`:""}
+<div class="cw-row">${q("conflictFix",`带着这条意见去“${x(Cn[r.part]??r.part)}”改内容`,`data-i="${s}"`)}${a?q("conflictDropTag",`取消标签“${x(r.tag)}”`,`data-i="${s}"`):""}${q("conflictIgnore","忽略这条",`data-i="${s}"`)}</div></div>`}).join(""):n+='<span class="cw-badge ok">没发现冲突</span>'),`${n}</div>`}function Sw(){const t=N().consistency;let n=`<div class="cw-box"><div class="cw-sub">内容前后对不对得上</div>
+<div class="cw-row">${q("consistencyCheck",t?"再查一次":"检查前后矛盾",t?"":'class="cw-primary"')}<span class="cw-dim cw-small cw-grow">名字写法、年龄和时间线、关系、同一件事两处说法不一样、开场白和人设对不上。1 次调用，长卡写完后查一次。</span></div>`;return t&&(t.issues.length?n+=t.issues.map((r,s)=>`<div class="cw-ov cw-small"><div><span class="cw-badge">${x(Cn[r.part]??r.part)}${r.name?` · ${x(r.name)}`:""}</span>${r.level==="weak"?' <span class="cw-dim">（需要你确认）</span>':""} ${x(r.problem)}</div>
+<div class="cw-dim">「${x(r.quote)}」</div><div class="cw-dim">「${x(r.other)}」<span class="cw-badge">${x(Cn[r.otherPart]??r.otherPart)}</span></div>${r.fix?`<div>改法：${x(r.fix)}</div>`:""}
+<div class="cw-row">${q("consistencyFix",`带着这条意见去“${x(Cn[r.part]??r.part)}”改`,`data-i="${s}"`)}${r.otherPart!==r.part?q("consistencyFix",`去“${x(Cn[r.otherPart]??r.otherPart)}”改`,`data-i="${s}" data-other="1"`):""}${q("consistencyIgnore","忽略这条",`data-i="${s}"`)}</div></div>`).join(""):n+='<span class="cw-badge ok">没发现矛盾</span>'),`${n}</div>`}function cwzDupScan(){const e=N(),t=B.textSlots(e).filter(c=>!c.rules&&!/^梗·/.test(c.label)),n=c=>String(c??"").replace(/<[^>]*>/g,"").replace(/\{\{[^}]*\}\}/g,"").replace(/^[ \t>*-]*[^\n:：]{1,14}[:：][ \t]*/gm,"").replace(/[\s，。、！？；：,.!?;:"'“”‘’（）()【】\[\]{}<>《》—\-…·|*#`~_=+/\\]/g,""),K=12,r=t.map(c=>{const a=n(c.get()),o=new Set;for(let l=0;l+K<=a.length;l++)o.add(a.slice(l,l+K));return{c,a,o,who:(c.label.match(/^(?:人设概要|人设|人设补充)·(.+)$/)||[])[1]}}),s=[];
+for(let c=0;c<r.length;c++)for(let a=c+1;a<r.length;a++){const o=r[c],l=r[a];if(o.who&&o.who===l.who||o.a.length<K||l.a.length<K)continue;const u=new Uint8Array(l.a.length);for(let p=0;p+K<=l.a.length;p++)if(o.o.has(l.a.slice(p,p+K)))for(let m=p;m<p+K;m++)u[m]=1;const f=[];let h=-1;for(let p=0;p<=u.length;p++)p<u.length&&u[p]?h<0&&(h=p):h>=0&&(f.push(l.a.slice(h,p)),h=-1);const g=f.reduce((p,m)=>p+m.length,0);g>=24&&s.push({a:o.c.label,b:l.c.label,total:g,runs:f.sort((p,m)=>m.length-p.length).slice(0,4)})}
+s.sort((c,a)=>a.total-c.total);return{pairs:s,total:s.reduce((c,a)=>c+a.total,0),at:Date.now()}}
+function cwzDupBox(){const e=b.dup;if(!e)return"";const u=b.dedupUndo?`<div class="cw-row cw-small"><span class="cw-grow">刚改了「${x(b.dedupUndo.label)}」。</span>${q("cwzDedupUndo","撤销这次")}</div>`:"";if(!e.pairs.length)return`<div class="cw-box">${u}<span class="cw-badge ok">没查到明显重复的设定</span></div>`;return`<div class="cw-box">${u}<div class="cw-sub">设定重复 <small class="cw-dim">全卡大约 ${e.total} 字是重复的（同一个角色的概要和人设不算）</small></div>
+${e.pairs.slice(0,12).map((t,n)=>`<div class="cwz-dup"><div class="cw-row"><b class="cw-grow">「${x(t.b)}」和「${x(t.a)}」重复约 ${t.total} 字</b></div>${t.runs.map(r=>`<div class="cw-small cw-dim">… ${x(r.length>46?r.slice(0,46)+"…":r)}</div>`).join("")}<div class="cw-row">${q("cwzDedup",`删掉「${x(t.b)}」里重复的`,`data-i="${n}"`)}</div></div>`).join("")}
+${e.pairs.length>12?`<div class="cw-small cw-dim">还有 ${e.pairs.length-12} 处，先改上面的，再查一次。</div>`:""}
+<div class="cw-small cw-dim">AI 只删「后面那块」里和前面重复的句子（前面已经写了，这里最多一句带过），别的不动。改完会自动再查一次。</div></div>`}
+function cwzMyWords(){const e=le().extensionSettings;return`<label class="cw-small" style="display:block;margin-top:6px">我的八股词 <small class="cw-dim">每行一个，扫到就算必改；正则用 re: 开头</small><textarea class="text_pole cw-ta" data-cwzwords rows="4" placeholder="比如：的弧度&#10;骨节分明">${x(e.baguCleaner?.userWords??"")}</textarea></label>`}function Cw(){const e=U(),t=b.checks,n=b.bagu,r=le().extensionSettings,s=ut()?$t(r):null;let a=`<div class="cw-row">${q("cwzDupRun","查重复",'class="cw-primary"')}${q("localCheck","本地扫描")}</div>${cwzDupBox()}`,bg=`<details class="cwz-fold cwz-bagu"><summary>八股清理 · 全篇筛选</summary><div class="cw-row" style="margin-top:6px">${ut()?q("baguScan","全篇八股筛选",'class="cw-primary"')+q("baguFix","八股清理改写"):""}</div>
+<div class="cw-dim cw-small">${ut()?`内置八股词表（${s.rules.length} 条规则，我的八股词 ${String(r.baguCleaner?.userWords??"").split(`
+`).filter(i=>i.trim()).length} 个）`:""}</div>${cwzMyWords()}${n?`<div class="cw-box">${n.map(i=>`<div>${x(i.label)}：${i.text}</div>`).join("")}</div>`:""}</details>`;return t&&(a+=t.sections.length?t.sections.map(i=>`<div class="cw-box"><div class="cw-sub">${x(i.label)}</div>${Jg(i.issues)}</div>`).join(""):'<span class="cw-badge ok">本地扫描没发现问题</span>',t.cross.length&&(a+=`<div class="cw-box"><div class="cw-sub">主要角色太像了</div>${t.cross.map(i=>`<div>${x(i.a)} 和 ${x(i.b)}：${i.count} 处相似${i.pairs.map(o=>`<div class="cw-small cw-dim">「${x(o.a)}」≈「${x(o.b)}」</div>`).join("")}</div>`).join("")}</div>`)),a+=kw(),a+=Sw(),a+=ko(),a+=`<div class="cw-dim cw-small cw-help">可预测性测试在“人设”里每个角色下面。阈值 ${e.predictThreshold}，在设置里改。</div>`,a+=bg,a}function Up(){if(!ut())return"";const e=$t(le().extensionSettings,B.banned(N())),t=B.textSlots(N()).filter(n=>!n.rules&&!Ta(n.get())&&wr(n.get(),e).total).length;return`<div class="cw-box"><div class="cw-sub">导入前过一遍八股清理</div>
+<div class="cw-row"><span class="cw-grow cw-small">${t?`还有 <b>${t}</b> 块有八股`:'<span class="cw-badge ok">全卡没扫出八股</span>'}</span>${t?q("baguFix","一键八股清理改写",'class="cw-primary"'):""}</div></div>`}function nfDState(e){if(!e.dress){const m=B.modeOf(e);e.dress={use:!0,home:!0,set:m==="multi"?"sweet":m==="world"?"moth":"ticket",mode:"day",pal:{},title:"",intro:"",author:null,model:"",preset:"",need:"",ai:null,entries:null}}return e.dress}
+function nfDSrc(e){const t=[`作品名：${e.name||""}`,...(e.personas||[]).map(p=>`【${p.name||"人物"}】${String(p.text||"").slice(0,1800)}`),e.world?.main&&`【世界观】${String(e.world.main).slice(0,1500)}`,e.tone&&`【基调与规则】${String(e.tone).slice(0,1200)}`,(e.npcs||[]).length&&`【NPC】${e.npcs.map(n=>n.name).filter(Boolean).join("、")}`].filter(Boolean).join("\n\n");return{name:String(e.name||e.personas?.[0]?.name||"新角色"),author:U().author||"",text:t,greets:bn(e).map(g=>String(g.text||"").trim()).filter(Boolean)}}
+function nfDRec(e){const m=B.modeOf(e),want=m==="multi"?"multi":m==="world"?"user":"single";return nfKSets().filter(k=>nfKPair(k).st.people===want)}
+function nfDFrame(d,mode){const n=gl(d),h=n.html?(/<head[^>]*>/i.test(n.html)?n.html.replace(/<head[^>]*>/i,y=>y+nfKStub(mode)):nfKStub(mode)+n.html):"<!doctype html><body>没有匹配上</body>";return`<div class="nf-stage nf-loading" style="background:${mode==="night"?"#1c1f24":"#e9e7e1"}"><div class="nf-sk">正在换…</div><iframe sandbox="allow-scripts allow-same-origin" title="预览" onload="var w=this.parentElement;setTimeout(function(){w.classList.remove('nf-loading')},200)" style="color-scheme:light;width:100%;height:560px;border:0;border-radius:10px;background:transparent" srcdoc="${x(h)}"></iframe></div>`}
+function nfDressPage(){const e=N(),K=nfDState(e),v=K.src||"set";if(!nfKSets().length)return nfDressSetPage();const seg=`<div class="cw-sub">状态栏从哪来</div><div class="cw-row lv-seg">${[["set","用现成套装"],["chat","聊天做一个"],["mine","从我的选"]].map(([k,l])=>q("dressSrc",l,`data-v="${k}" ${v===k?'class="cw-primary"':""}`)).join("")}</div>`;let h=nfDressSetPage();const a=h.indexOf('<div class="cw-sub">选一套');if(a<0)return h;if(v==="set"){const z=q("dressSkip","跳过这一步");return h.slice(0,a)+seg+h.slice(a).replace(z,q("dressSave","存进状态栏工坊")+z)}const p=h.indexOf('<div class="cw-row"><span class="cw-grow cw-sub">预览');if(p<0)return h;const c=K.custom||{},src=nfDSrc(e),setName=nfKPair(K.set).st?.name?.replace(/^.*·\s*/,"")||"",slot=k=>{const d=c[k];return`<div class="cw-row"><span class="cw-grow">${lvKindName(k)}：${d?`<b>${x(d.name||lvKindName(k))}</b>`:`<span class="cw-dim">还没有，先用套装「${x(setName)}」的</span>`}</span>${v==="chat"||d?q("dressChat",d?"聊着再改 ↗":"聊着做 ↗",`data-kind="${k}"`):""}${d?q("dressDrop","换掉",`data-kind="${k}"`):""}</div>`};let mid=`<div class="cw-box"><div class="cw-sub">已接上的</div>${slot("status")}${K.home?slot("opening"):""}</div>`;if(v==="chat")mid=`<div class="cw-box"><div class="cw-sub">在状态栏工坊里聊着做</div><div class="cw-small">工坊直接读这份草稿的人设、世界观和开场白，不用先导入。聊定了生成，满意了点「用到这张卡」就回到这里；也能点「保存到“我的”」，以后别的卡接着用。</div><div class="cw-row">${q("dressChat","聊状态栏 ↗",'data-kind="status" class="cw-primary"')}${K.home?q("dressChat","聊开场白主页 ↗",'data-kind="opening"'):""}</div></div>`+mid;else{const ds=(Me().designs||[]).filter(d=>K.home||d.kind!=="opening");mid=`<div class="cw-box"><div class="cw-sub">状态栏工坊「我的」里存过的</div>${ds.length?ds.map(d=>`<div class="cw-row"><span class="cw-grow">${x(d.name||"未命名")} <small class="cw-dim">${lvKindName(d.kind)}${d.savedAt?` · ${new Date(d.savedAt).toLocaleDateString()}`:""}</small></span>${q("dressMine",c[d.kind==="opening"?"opening":"status"]?.lvFrom===d.id?"用着":"用这个",`data-id="${x(d.id)}"`)}</div>`).join(""):'<div class="cw-small cw-dim">还没有存过。可以先「聊天做一个」，做好点「保存到“我的”」；或者在套装页点「存进状态栏工坊」。</div>'}</div>`+mid}const d0=h.indexOf('<details class="cw-mini"><summary>主页文字'),home=!c.opening&&d0>a&&d0<p?h.slice(d0,h.indexOf("</details>",d0)+10)+"\n":"";let tail=h.slice(p).replace(/<div class="cw-small cw-dim">想改颜色：[^<]*<\/div>\n?/,"").replace(q("dressOk","就用这一套",'class="cw-primary"'),q("dressOk","就用这些",'class="cw-primary"'));const sn=nfKDesigns(K,src).S.name;tail=tail.replace(/(<span class="cw-grow cw-sub">预览 · )[^<]*/,(m0,g)=>g+x(sn));return h.slice(0,a)+seg+mid+home+tail}
+function nfDressSetPage(){const e=N(),K=nfDState(e),src=nfDSrc(e),sets=nfKSets();if(!sets.length)return`<div class="cw-dim">模板库还没加载出来${cm?`：${x(cm)}`:"，稍等一下再点进来"}。</div>`;if(!sets.includes(K.set))K.set=sets[0];const{S,O,st}=nfKDesigns(K,src),rec=nfDRec(e),ai=K.ai,aiOk=ai&&ai.instruction&&ai.people===st.people,keys=nfKKeys(aiOk?ai.sample:st.sample);
+const chips=sets.map(k=>{const p=nfKPair(k).st;return`<span class="cw-chip ${k===K.set?"on":""}" data-act="dressSet" data-k="${k}">${x(p.name.replace(/^.*·\s*/,""))} <small class="cw-dim">${nfKPeople[p.people]}版</small>${rec.includes(k)?' <b class="cw-small">推荐</b>':""}</span>`}).join("");
+return`<div class="cw-small cw-help">卡写完了，在这里配一套状态栏和开场白主页。导入酒馆时一起装进卡里：状态栏正则、给 AI 的输出要求（加在角色描述末尾）；主页会插在开场白最前面，原来的开场白往后挪。不需要就点「跳过」，也可以在设置里把这一页关掉。</div>
+<div class="cw-row"><label class="checkbox_label"><input type="checkbox" data-act="dressUse" ${K.use?"checked":""}><span>导入时装上状态栏</span></label><label class="checkbox_label"><input type="checkbox" data-act="dressHome" ${K.home?"checked":""}><span>同时加开场白主页</span></label></div>
+<div class="cw-sub">选一套 <small class="cw-dim">（标“推荐”的人数类型和这张卡对得上）</small></div><div class="cw-chips">${chips}</div>
+<div class="cw-box"><div class="cw-sub">按这张卡定主题</div>
+${Pe("dress.need",2,"补充（可不填）：比如“主题偏悬疑，状态栏要有线索”“主页简介写得俏皮一点”")}
+<div class="cw-row">${q("dressAdjust",aiOk?"重新调整":"按这张卡调整",'class="cw-primary"')}${aiOk?q("dressClear","清掉调整"):""}<span class="cw-dim cw-small cw-grow">AI 读人设、世界观、基调和开场白，定状态栏的主题和项目，再写主页目录。</span></div>
+${aiOk?`<div><b>主题：</b>${x(ai.theme)}</div>`:""}<div class="cw-small cw-dim">${aiOk?"现在的":"模板自带的"}状态栏项：${x(keys.join("、"))}</div></div>
+<details class="cw-mini"><summary>主页文字（留空就用 AI 写的或卡名）</summary><label>作品名${We("dress.title",src.name)}</label><label>简介${Pe("dress.intro",2,"留空就不显示")}</label><label>推荐模型${We("dress.model")}</label><label>推荐预设${We("dress.preset")}</label></details>
+<div class="cw-row"><span class="cw-grow cw-sub">预览 · ${x(st.name)}</span>${q("dressMode","☀ 昼",`data-v="day" ${K.mode==="day"?'class="cw-primary"':""}`)}${q("dressMode","☾ 夜",`data-v="night" ${K.mode==="night"?'class="cw-primary"':""}`)}${q("dressRefresh","刷新预览")}</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px;align-items:start"><div><div class="cw-small cw-dim">状态栏</div>${nfDFrame(S,K.mode)}</div>${K.home?`<div><div class="cw-small cw-dim">开场白主页（共 ${src.greets.length} 条开场白）</div>${nfDFrame(O,K.mode)}</div>`:""}</div>
+<details class="cwz-fold"><summary>状态栏规则（发给 AI 的提示词，可以改）</summary><textarea class="text_pole cw-ta" data-bind="dress.rule" rows="10" placeholder="空着就用这套自动生成的规则">${x(String(K.rule??"").trim()?K.rule:cwzRuleOf({...e,dress:{...K,use:!0,rule:""}}))}</textarea><div class="cw-row cw-small">${String(K.rule??"").trim()?q("dressRuleReset","恢复自动生成的"):""}<span class="cw-dim cw-grow">导入时放进世界书，深度 D1（紧挨着最新一条消息），不可递归；不写进角色描述。</span></div></details>
+<div class="cw-small cw-dim">想改颜色：导入以后在酒馆打开这张卡，到状态栏工坊的「套装」页改，再写一次。</div>
+<div class="cw-row">${q("dressOk","就用这一套",'class="cw-primary"')}${q("dressSkip","跳过这一步")}</div>`}
+async function nfDressApply(n,p,y,av){const card=St();if(!card||card.avatar!==av)throw new Error("新卡没有自动选中。在酒馆里打开这张卡，到状态栏工坊「套装」页再装");const K=n.dress,home=K.home!==!1,src={name:p.ch_name,author:p.creator||"",text:"",greets:y},{S,O}=nfKDesigns(K,src);await Vr(Re().characterId,card,[...Li(mn(card)),...aa(S),...(home?aa(O):[])]);Nl(card);{const dsc=card.data?.description??card.description??"";yl(dsc)&&await Tl(card,xl(dsc))}if(home&&y.length){await El(av,{first_mes:"【主页】",data:{first_mes:"【主页】",alternate_greetings:y}});card.first_mes="【主页】";card.data=card.data||{};card.data.first_mes="【主页】";card.data.alternate_greetings=y;n.existing&&n.existing.base&&(n.existing.base.greetings=["【主页】",...(n.existing.base.greetings||[])]);for(const g of n.greetings||[])Number.isInteger(g.slot)&&(g.slot+=1)}await Yr()}
+function Iw(){const e=N(),t=e.quickCardFields?`<details class="cw-mini" open><summary>快捷出卡正文（可直接修改）</summary>
+<label>卡名${We("name")}</label>
+${Object.entries({description:"角色描述",personality:"性格",scenario:"场景",mes_example:"对话示例"}).map(([r,s])=>`<label>${s}${Pe(`quickCardFields.${r}`,9)}</label>`).join("")}
+${e.greetings[0]?`<label>主开场白${Pe("greetings.0.text",9)}</label>`:""}
+</details>`:"",n=e.imported&&globalThis.__CW_SUITE__?.get("status")?`<div class="cw-box cw-small cw-row"><span class="cw-grow">已导入“${x(e.imported.name)}”。想给它配状态栏，可以在状态栏工坊里聊着做。在酒馆里打开这张卡，做好能直接写进去。</span><div class="menu_button cw-btn" data-act="dressChat" data-kind="status">去状态栏工坊聊 ↗</div></div>`:"";return e.existing?n+t+Up()+Aw()+ko()+`<details class="cw-mini"><summary>另存为一张新卡</summary>${Gp()}</details>`:n+t+Up()+Gp()+ko()}function Aw(){const e=N(),t=e.existing,n=t.backup,r=b.plan;let a=`<div class="cw-card"><div class="cw-sub">${t.fromImport?`更新已导入的卡：${x(t.name)}`:`写回原卡：${x(t.name)}`}</div>
+<div class="cw-small cw-help">先点“检查要写回什么”：会读一遍酒馆里现在的卡和世界书，跟Love 写卡机比，列出每一处的不同。<b>只有Love 写卡机改了的地方默认勾上</b>；你在酒馆里改过的地方默认保留酒馆的（不会被改回去），还会同步回Love 写卡机。勾好再写回，写回前自动备份，可以撤销。</div>
+<div class="cw-row">${q("planWriteBack",r?"重新检查":"检查要写回什么",r?"":'class="cw-primary"')}${n?q("undoWriteBack",`撤销上次写回（${new Date(n.time).toLocaleTimeString()}）`):""}</div>`;return r&&(a+=Tw(r)),a+=`${e.routes.length>1?`<div class="cw-row"><select class="text_pole cw-grow cw-route">${e.routes.map((i,o)=>`<option value="${o}">${x(i.name)}</option>`).join("")}</select>${q("switchRoute","切换到这条路线")}</div>`:""}</div>`,a}var Ew=[["mine","Love 写卡机改了的","默认写回"],["new","新加的","默认写回"],["conflict","两边都改了","默认保留酒馆的；勾上就用Love 写卡机的"],["theirs","只在酒馆里改过","默认保留酒馆的，并同步回Love 写卡机"],["unknown","和酒馆里不一样","这份草稿没有上次同步的记录，分不清是谁改的，自己看着勾"]];function Tw(e){if(!e.items.length)return'<div class="cw-small"><span class="cw-badge ok">Love 写卡机和酒馆里一样，没有要写回的</span></div>';const t=s=>{const a=String(s??"").trim();return a.length>300?`${a.slice(0,300)}……`:a},n=s=>`<div class="cw-planrow"><label class="checkbox_label"><input type="checkbox" class="cw-planchk" data-id="${x(s.id)}" ${s.checked?"checked":""}><span><b>${x(s.label)}</b>${s.deleted?' <span class="cw-dim">（在Love 写卡机删掉了）</span>':""}</span></label>
+${s.status==="new"?`<details class="cw-mini"><summary>看内容</summary><div class="cw-add">${x(t(s.mine)).replace(/\n/g,"<br>")}</div></details>`:`<details class="cw-mini"><summary>看两边的区别</summary><div class="cw-small cw-dim">Love 写卡机的：</div><div class="cw-add">${x(t(s.mine)).replace(/\n/g,"<br>")||"（空）"}</div><div class="cw-small cw-dim">酒馆里现在的：</div><div class="cw-del cw-keep">${x(t(s.theirs)).replace(/\n/g,"<br>")||"（空）"}</div></details>`}</div>`,r=e.items.filter(s=>s.checked).length;return`${Ew.map(([s,a,i])=>{const o=e.items.filter(c=>c.status===s);return o.length?`<div class="cw-box"><div class="cw-sub">${a}（${o.length}）<small class="cw-dim">${i}</small></div>${o.map(n).join("")}</div>`:""}).join("")}
+<div class="cw-row"><div class="menu_button cw-btn ${r?"cw-primary":"disabled"}" data-act="applyWriteBack">写回勾选的 ${r} 处</div><span class="cw-dim cw-small cw-grow">没勾的地方用酒馆里现在的，不会动。</span></div>`}function Gp(){const e=N(),t=cs(e,{personaPlace:U().personaPlace}),n=bn(e),r=e.imported;return`<div class="cw-small">将创建世界书 <b>${x(e.name||"新角色")}</b>（${t.length} 个条目）和角色卡（主开场白 + ${Math.max(0,n.length-1)} 个额外开场白），并绑定。${e.dress?.use?`还会装上状态栏「${x((nfKPair(e.dress.set).st?.name||"").replace(/^.*·\s*/,""))}」${e.dress.home!==!1?"和开场白主页（插在开场白最前面）":""}。`:""}</div>
+<details class="cw-mini"><summary>条目预览</summary>${t.map(s=>`<div class="cw-small">${s.constant?"🔵":"🟢"} ${x(s.comment)} <span class="cw-dim">${s.position===0?"角色前":"角色后"} · 顺序 ${s.order}${s.disable?" · 未启用":""}${s.key?.length?` · ${x(s.key.join("、"))}`:""}</span></div>`).join("")}
+${n.map((s,a)=>`<div class="cw-small">${a===0?"主开场白":`额外开场白 ${a}`}：${x(s.route)}</div>`).join("")}</details>
+<div class="cw-row">${q("import",r?"再导入一张新的":"导入酒馆")}${q("exportDraft","导出草稿")}${q("importDraft","读取草稿")}</div>
+${r?`<div class="cw-box"><div>已导入：角色 <b>${x(r.name)}</b>${r.world?`，世界书 <b>${x(r.world)}</b>`:""}</div>
+${e.routes.length>1?`<div class="cw-row"><select class="text_pole cw-grow cw-route">${e.routes.map((s,a)=>`<option value="${a}">${x(s.name)}</option>`).join("")}</select>${q("switchRoute","切换到这条路线")}</div>`:""}</div>`:""}`}function Nw(){const t=N().intro??{},n=[...String(t.text??"")].length;return`<div class="cw-row">${q("intro",t.text?"重写简介":"生成简介")}</div>
+${Ve("intro",!!t.text)}
+${t.titles?.length?`<div class="cw-opts">${t.titles.map((r,s)=>`<span class="cw-opt ${s===(t.pick??0)?"on":""}" data-act="pickTitle" data-i="${s}">${x(r)}</span>`).join("")}</div>`:""}
+<label class="cw-presetpick">简介风格<select class="text_pole cw-in cw-introstyle"><option value="0">默认</option>${(U().introStyles??[]).map((r,s)=>`<option value="${s+1}" ${Number(U().introStyle)===s+1?"selected":""}>${x(r.name||`风格 ${s+1}`)}</option>`).join("")}</select></label>
+<div class="cw-dim cw-small cw-help">选中的简介风格会参与 AI 生成。像「灵感 / 核心 XP / 推荐玩法」这种自定义文字模板，就是本次生成的唯一格式；不会再混入默认简介。切换风格或重排前会保护手动修改。</div>
+${t.dirty?'<div class="cw-dim cw-small">正文已经手动修改，切换风格或重新排版会先请你确认。</div>':""}
+${Pe("intro.text",16)}
+<div class="cw-row"><span class="cw-dim cw-grow cw-len">${n} 字${n>2e3?"（超过 2000，非 Nitro 要拆两条）":""}</span>${q("copyIntro","复制")}${q("saveIntro","写进角色卡")}</div>
+${t.parts&&Object.keys(t.parts).length?`<details class="cw-mini"><summary>分段修改（改完点“重新排版”）</summary>
+${["题句","简介","关于TA","路线","内心想法"].map(r=>`<div class="cw-sub">${r}</div><textarea class="text_pole cw-ta" data-bind="intro.parts.${r}" rows="3">${x(t.parts[r]??"")}</textarea>`).join("")}
+<div class="cw-row">${q("recompose","重新排版")}</div></details>`:""}
+<div class="cw-dim cw-small cw-help">作者名、授权、预设参考在“设置”里填。</div>`}var Pw=`【任务】为这张卡写……
+
+【构想】
+{{concept}}
+【主要角色概要】
+{{overviews}}
+
+【写法规则】
+{{rules.通用}}`;function Ow(){const e=U(),t=(s,a,i)=>`<option value="${x(s)}" ${s===i?"selected":""}>${x(a)}</option>`,n=[["mine","我的步骤"]];b.ptab="mine";let r="";if(b.ptab==="step"){const s=b.editStep;r=`<div class="cw-dim cw-small cw-help">选一个步骤，直接在框里改或者整段粘贴你自己的提示词，自动保存。改坏了点“恢复默认”。用 {{变量}} 引用前面步骤的产出，下面有列表。</div>
+<select class="text_pole cw-step-sel">${Object.keys(Xt).map(a=>t(a,`${Fn[a]?.name??a}${e.prompts[a]?.trim()?"（已改）":""}`,s)).join("")}</select>
+<textarea class="text_pole cw-ta cw-step-ta" rows="16">${x(e.prompts[s]?.trim()?e.prompts[s]:Xt[s])}</textarea>
+<div class="cw-row">${q("resetStep","恢复这一步的默认")}</div>
+<details class="cw-mini"><summary>可用变量</summary><div class="cw-small">${Object.entries(ef).map(([a,i])=>`<code>{{${x(a)}}}</code> ${x(i)}`).join("<br>")}</div></details>
+<div class="cw-sub">目录里的步骤</div>
+<div class="cw-dim cw-small cw-help">用不上的步骤可以关掉：目录里不显示，一键出卡也跳过。随时可以再打开，写好的内容不会丢。</div>
+<div class="cw-chips">${fs.filter(a=>Vg.includes(a.id)).map(a=>`<label class="cw-chip ${(e.offPages??[]).includes(a.id)?"":"on"}"><input type="checkbox" class="cw-pageon" data-page="${a.id}" ${(e.offPages??[]).includes(a.id)?"":"checked"}>${x(a.name)}</label>`).join("")}</div>`}else if(b.ptab==="rule"){const s=B.ruleList();s.some(d=>d.name===b.editRule)||(b.editRule=s[0]?.name);const a=s.find(d=>d.name===b.editRule),i=a.name,o=Object.keys(Xt).filter(d=>{const m=e.prompts[d]?.trim()?e.prompts[d]:Xt[d];return m.includes(`{{rules.${i}}}`)||i==="人设模板"&&m.includes("{{template}}")}),c=d=>Fn[d]?.name??d,p=d=>`${d.name}${d.builtin?d.edited?"（已改）":"":"（自己加的）"}${d.on?"":"（关）"}${d.mode!=="all"?`（${ss[d.mode]?.slice(0,3)??d.mode}）`:""}`;r=`<div class="cw-dim cw-small cw-help">规则库里每一条都是一个可以插拔的模块：可以开关、改内容、限定只给某种卡用、插到任意步骤里。提示词里写了 {{rules.名称}} 的步骤会在那个位置用它；“另外插到”的步骤会把它加在提示词最后。也可以新建自己的规则（比如你的世界观教程、某个题材的写法）。</div>
+<select class="text_pole cw-rule-sel">${s.map(d=>t(d.name,p(d),i)).join("")}</select>
+<div class="cw-row"><label class="checkbox_label"><input type="checkbox" class="cw-rule-on" ${a.on?"checked":""}>启用</label>
+<select class="text_pole cw-rule-mode" style="width:auto">${[["all","所有卡都用"],["single","只用于单人卡"],["multi","只用于多人卡"],["world","只用于世界卡"]].map(([d,m])=>t(d,m,a.mode)).join("")}</select></div>
+${i==="人设模板"?'<div class="cw-dim cw-small cw-help">写人设时让 AI 照着填的模板。{{name}} 会换成角色名。用不上的字段 AI 会删掉。</div>':""}
+<textarea class="text_pole cw-ta cw-rule-ta" rows="14">${x(a.text)}</textarea>
+<div class="cw-small">写在这些步骤的提示词里：${o.length?o.map(d=>`<span class="cw-badge">${x(c(d))}</span>`).join(" "):'<span class="cw-dim">没有</span>'}</div>
+<details class="cw-mini" ${a.steps.length?"open":""}><summary>另外插到这些步骤（${a.steps.length} 个）</summary><div class="cw-chips">${Object.keys(Xt).filter(d=>!o.includes(d)).map(d=>`<label class="cw-chip ${a.steps.includes(d)?"on":""}"><input type="checkbox" class="cw-rulestep" data-step="${d}" ${a.steps.includes(d)?"checked":""}>${x(c(d))}</label>`).join("")}</div></details>
+<div class="cw-row">${a.builtin?q("resetRule","恢复这条的默认"):q("delRule","删除这条规则")}</div>
+<div class="cw-row"><input class="text_pole cw-in cw-grow cw-newrule" placeholder="新规则的名字，比如：世界观写法、宫斗题材"> ${q("addRule","新建规则")}</div>`}else if(b.ptab==="style")r=`<div class="cw-dim cw-small cw-help">文风只管“怎么写”：用词、句子长短、语气、比喻多不多。可以存好几个，在“主要人设”页顶部给每张卡选一个。选了之后，写人设、展开经历、重写撞车、按意见改人设、局部重写人设都会带上；勾“其他也用”时世界观、NPC、路线、模块、开场白也带上。格式要求（YAML、标签）不受影响。</div>
+${(U().styles??[]).map((s,a)=>`<div class="cw-card">
+<input class="text_pole cw-in cw-stname" data-i="${a}" value="${x(s.name)}" placeholder="文风名">
+<textarea class="text_pole cw-ta cw-sttext" data-i="${a}" rows="8" placeholder="比如：
+- 短句，少用形容词，动作和对白多于心理描写
+- 口语化，像在讲别人的八卦
+- 可以粘一段你喜欢的文字当样例，写明“学它的语气，不抄内容”">${x(s.text)}</textarea>
+<div class="cw-row cw-end">${q("delStyle","删除这个文风",`data-i="${a}"`)}</div></div>`).join("")}
+<div class="cw-row">${q("addStyle","新建一个文风")}</div>`;else if(b.ptab==="tag"){const s=Gi(e.customTags,{}).find(o=>o.key===b.editDim),a=new Set(e.hiddenTags?.[b.editDim]??[]),i=new Set((e.customTags[b.editDim]??[]).map(o=>o.split("|")[0].trim()));r=`<div class="cw-dim cw-small cw-help">每行一个：名称|触发词,触发词|注释。触发词出现在一句话脑洞里就自动勾上；注释是圈内说法的解释，选了这个标签时会一起发给 AI（可不写）。名称和默认标签相同就是改它，触发词留空表示只手选、不自动勾。</div>
+<select class="text_pole cw-dim-sel">${_t().map(o=>t(o.key,o.name,b.editDim)).join("")}</select>
+<textarea class="text_pole cw-ta cw-dim-ta" rows="6" placeholder="蒸汽朋克|蒸汽,齿轮城|机械蒸汽驱动的世界">${x((e.customTags[b.editDim]??[]).join(`
+`))}</textarea>
+<details class="cw-mini"><summary>这个维度的全部标签（${s?.tags.length??0} 个，${a.size} 个已隐藏）</summary>
+${(s?.tags??[]).map(o=>`<div class="cw-row cw-small"><label class="checkbox_label"><input type="checkbox" class="cw-taghide" data-name="${x(o.name)}" ${a.has(o.name)?"checked":""}>隐藏</label>
+<b>${x(o.name)}</b>${i.has(o.name)?'<span class="cw-badge">自己的</span>':""}
+<span class="cw-dim cw-grow">${o.triggers.length?x(o.triggers.join("，")):"无触发词"}${o.gloss?` · ${x(o.gloss)}`:""}</span>
+${q("tagEdit","改",`data-name="${x(o.name)}"`)}</div>`).join("")}</details>`}else b.ptab==="intro"?r=`<div class="cw-dim cw-small cw-help">简介的排版模板。{{标题}} {{题句}} 这类会换成内容；{{#路线}}……{{/路线}} 表示这一块没内容就整段省略；{{路线|引用}} 表示每行前加 &gt;。可用：${Sf.map(s=>`{{${s}}}`).join(" ")}。</div>
+<details class="cw-mini"><summary>默认风格（只读，可以复制一份来改）</summary><textarea class="text_pole cw-ta" rows="12" readonly>${x(Gn)}</textarea></details>
+${(e.introStyles??[]).map((s,a)=>`<div class="cw-card">
+<input class="text_pole cw-in cw-isname" data-i="${a}" value="${x(s.name)}" placeholder="风格名">
+<textarea class="text_pole cw-ta cw-istpl" data-i="${a}" rows="14">${x(s.tpl)}</textarea>
+<div class="cw-row cw-end">${q("delIntroStyle","删除这个风格",`data-i="${a}"`)}</div></div>`).join("")}
+<div class="cw-row">${q("addIntroStyle","复制默认风格，新建一个")}</div>`:r=`<div class="cw-dim cw-small cw-help">自己加的步骤会作为单独一页插进目录，放在你选的那一步后面。产出写成一个自由模块，导入时进世界书。</div>
+${(e.customSteps??[]).map((s,a)=>`<div class="cw-card">
+<input class="text_pole cw-in" data-step="${a}" data-key="name" value="${x(s.name)}" placeholder="步骤名（也是模块名）">
+<label class="cw-presetpick">放在哪一步后面<select class="text_pole cw-in" data-step="${a}" data-key="after">${fs.map((i,o)=>t(i.id,`${o+1}. ${i.name}`,s.after||"tone")).join("")}</select></label>
+<label class="checkbox_label cw-small"><input type="checkbox" data-step="${a}" data-key="auto" ${s.auto?"checked":""}>一键出卡时也跑这一步</label>
+<div class="cw-row"><select class="text_pole" data-step="${a}" data-key="stage">${t("card","用写卡预设",s.stage)}${t("greeting","用开场白预设",s.stage)}</select>
+<select class="text_pole" data-step="${a}" data-key="light">${t("blue","蓝灯",s.light)}${t("green","绿灯",s.light)}</select>
+<select class="text_pole" data-step="${a}" data-key="position">${t("after","角色后",s.position)}${t("before","角色前",s.position)}</select></div>
+<input class="text_pole cw-in" data-step="${a}" data-key="keys" value="${x((s.keys??[]).join("，"))}" placeholder="绿灯关键词">
+<textarea class="text_pole cw-ta" rows="8" data-step="${a}" data-key="template">${x(s.template)}</textarea>
+<div class="cw-row cw-end">${q("delStep","删除这个步骤",`data-i="${a}"`)}</div></div>`).join("")}
+<div class="cw-row">${q("addStep","加一个步骤")}</div>`;return`<div class="cw-tabs">${n.map(([s,a])=>`<span class="cw-tab ${b.ptab===s?"on":""}" data-act="ptab" data-tab="${s}">${a}</span>`).join("")}</div>${r}`}function Dw(){return(U().helpMode||"first")==="always"?!0:!!b.helpOn}function Bw(e){const t=U();b.helpOn=!1,(t.helpMode||"first")==="first"&&(t.seenHelp??(t.seenHelp=[]),t.seenHelp.includes(e)||(t.seenHelp.push(e),b.helpOn=!0,oe()))}function Mw(e){return rp[e]??U().customSteps?.find(t=>`step:${t.id}`===e)?.name??(e.startsWith("q:")?wt()?.steps.find(t=>`q:${t.id}`===e)?.name:null)??"当前页面"}function Lw(e,t){const n=U(),r=p=>(e.existing?.entries??[]).filter(d=>!d.disable&&d.cat===p).map(d=>({name:d.comment,content:d.content}));let s;switch(t){case"persona":s={人设:e.personas,问答:e.qa,人物关系:e.relations,原卡人设:r("persona")};break;case"world":s={世界观:e.world,原卡世界观:r("world")};break;case"npc":s={NPC:e.npcs,原卡NPC:r("npc")};break;case"routes":s={玩家与路线:e.routes,备选路线:e.routeIdeas};break;case"tone":s={基调:e.tone,自由模块:e.free?.filter(p=>!p.fromStep),原卡基调:r("tone")};break;case"greet":s={开场白:e.greetings,候选梗:e.hooks,路线:yn(e,"routes")?e.routes:void 0,原卡开场白:e.existing?.greetings,字数:n.greetingLength,提取:ka(n)};break;case"idea":s={脑洞:e.idea,构想:e.concepts,已选:e.pick,短篇:e.story?.text,问答:e.ideaQA,标签:e.tags};break;case"tags":s={标签:e.tags,构想:e.concepts?.[e.pick]};break;case"existing":s={原卡:e.existing};break;case"au":s={AU:e.au,设想:e.idea};break;case"play":s={试玩:e.play,路线:e.routes};break;case"check":s={质检:b.checks,世界观:e.world,人设:e.personas,NPC:e.npcs};break;case"intro":s={简介:e.intro,署名:n.author,简介备注:n.introNotes};break;case"prompts":s={所选步骤:b.editStep,提示词:n.prompts?.[b.editStep]||Xt[b.editStep],所选规则:b.editRule,规则:n.rules?.[b.editRule]||n.customRules?.[b.editRule]||Ct[b.editRule]};break;case"settings":s={最大回复长度:n.maxTokens,每步调用上限:n.maxStepCalls,人设模板:n.personaTpl,开场白数量:n.greetingCount,开场白字数:n.greetingLength,开场白提取:ka(n),已隐藏页面:n.offPages};break;case"import":s={卡名:e.name,已有导入:e.imported,路线:e.routes,开场白数量:e.greetings?.length,人设位置:n.personaPlace};break;case"load":s={说明:"这一页可读取酒馆已有的角色卡来修改，或以角色卡为基础制作 AU。",当前卡名:e.name};break;case"about":s={版本:Na,说明:"写卡、预设和状态栏三个工坊。作者在各页填写内容或调用 AI。"};break;default:{const p=n.customSteps?.find(m=>`step:${m.id}`===t),d=t.startsWith("q:")?wt()?.steps.find(m=>`q:${m.id}`===t):null;if(d){s={步骤:{名字:d.name,写到:vr(d.output),提示词:d.prompt},当前结果:e.quickState?.done?.[d.id]?.text??"",一句话梗:e.idea};break}s=p?{步骤:p,当前内容:e.free?.find(m=>m.fromStep===p.id)?.content??e.custom?.[p.id]}:{卡名:e.name,构想:e.idea,页面:gs().map(m=>({name:m.name,status:m.status?.(e)}))}}}const a=t==="greet"?Object.fromEntries(Object.entries(B.openingMaterials(e)).map(([p,d])=>[Ia[p]??"人物概要",d])):{卡名:e.name,脑洞:e.idea,构想:e.concepts?.[e.pick],标签:e.tags,作者定稿:e.chat?.use===!1?"":e.chat?.brief,主要人物:t==="persona"?void 0:B.cardMaterials(e).personas,人物概要:t==="persona"?void 0:B.baseVars(e).overviews,世界观:t==="world"?void 0:B.cardMaterials(e).world,NPC:t==="npc"?void 0:B.cardMaterials(e).npcs,人物关系:t==="persona"?void 0:e.relations,玩家与路线:t==="routes"?void 0:e.routes,基调:t==="tone"?void 0:B.cardMaterials(e).tone},i={persona:["persona"],world:["world"],npc:["npc","npcOne"],routes:["routes"],tone:["tone"],greet:["greeting"],idea:["idea"],intro:["intro"]}[t]??[],o=B.ruleList().filter(p=>p.on&&(p.mode==="all"||p.mode===B.modeOf(e))&&p.steps.some(d=>i.includes(d))).map(p=>({name:p.name,text:p.text})),c=["persona","world","npc","routes","tone","greet"].includes(t);return`【本页内容】
+${gt(s,c?1/0:4e4)}
+
+【卡片背景】
+${gt(a,c?1/0:14e3)}${o.length?`
+
+【本页写法参考】
+${gt(o,c?1/0:2e4)}`:""}${t==="greet"&&mr(e)?`
+
+【作者为开场白填写的补充文字】
+${mr(e)}`:""}`}function qw(){if(!b.root||["chat","home","drafts","settings","about","quick","prompts","theme","chatImport","load"].includes(b.page))return;const e=N(),t=b.page,n=!!({idea:1,tags:1,persona:1,world:1,npc:1,routes:1,tone:1,greet:1,play:1,check:1,intro:1,au:1,existing:1}[t]||t.startsWith("step:")||t.startsWith("q:")),r=mo({owner:e,key:t,label:Mw(t),modal:!0,extract:t==="greet"?cwzGreetExtract(e):null,systemExtra:t==="greet"?cwzGreetChatX:"",notice:t==="greet"?()=>`预设：${U().presetGreeting?`${U().presetGreeting}（${lp(U().presetGreeting).length} 条）`:"不用预设"} · 补充文字：${mr(e)?"已启用":e.greetingContext?.useNotes===!1?"已关闭":"未填写"}`:null,applies:n,context:()=>Lw(e,t),busy:()=>b.busy,task:a=>$(a,"本页对话已更新。"),request:a=>hr({...a,stage:t==="greet"?"greeting":"card",temperature:.75}),aborted:()=>b.abort,save:()=>{e.updated=Date.now(),oe()},render:G,confirm:a=>X.confirm(a)}),s=b.root.querySelector(".cw-top");s?s.after(r):b.root.querySelector(".cw")?.prepend(r)}function Eo(){return k.editing?`entry:${k.editing.draft.id}`:k.tab}function Jp(e=Eo()){return e.startsWith("entry:")?`条目 · ${k.editing?.draft.name||se(e.slice(6))?.name||"未命名"}`:{lib:"收藏",gen:"让 AI 写一条",mix:"预设",imp:"导入",set:"设置"}[e]??"当前页面"}function To(e){return String(e?.content??"").trim()?{name:e.name,role:e.role,tags:e.tags,content:e.content}:null}function No(){return k.gen.useSelected?ne().entries.filter(e=>k.selected.has(e.id)).map(To).filter(Boolean):[]}function jw(e){const t=ne();if(e.startsWith("entry:")){const n=k.editing?.draft;return gt({条目:n&&{name:n.name,content:n.content,role:n.role,tags:n.tags,note:n.note},修改意见:k.editing?.comment})}if(e==="gen")return gt({需求:k.gen.need,类型:k.gen.kind,语言:k.gen.lang,拆分多个:k.gen.multi,生成结果:k.gen.results.map(To).filter(Boolean),参考条目:No()});if(e==="mix"){const n=jt();return gt({方案:n&&{name:n.name,items:n.items.map(r=>{if(r.type!=="entry")return{type:r.type,identifier:r.identifier,name:r.name,enabled:r.enabled};const s=r.override;return{type:r.type,enabled:r.enabled,entry:To(mu(n,r)),override:s&&{role:s.role,injection_position:s.injection_position,injection_depth:s.injection_depth}}})}})}return gt(e==="imp"?{待导入文字:k.imp.text,拆分方式:k.imp.splitMode,重复处理:k.imp.dupMode}:e==="set"?{最大回复长度:t.maxTokens,自定义类型:t.customKinds,提示词:{...Ue,...t.templates}}:{条目:t.entries.map(n=>({name:n.name,role:n.role,tags:n.tags,content:k.selected.has(n.id)?n.content:void 0})),搜索:k.search})}function Wp(){const e=ne(),t=Eo();return mo({owner:e,key:t,compact:!0,label:Jp(t),applies:t==="gen"||t==="mix"||t.startsWith("entry:"),systemExtra:t==="mix"?"作者想把聊好的内容放进方案时，告诉作者回到预设页点「让 AI 看整份」（可以只加新条目、只改勾选的条目或改整个方案），这里聊过的内容会自动带上；要从零搭一套就点「AI 写基础版」。":"",context:()=>jw(t),busy:()=>!!k.busy,task:n=>Bn("本页对话",n),request:({system:n,messages:r})=>er(n+(e.antiBagu!==!1&&(t==="gen"||t.startsWith("entry:"))?`
+
+`+nr(e.templates):""),r.map(s=>`${s.role==="user"?"作者":"AI"}：${s.content}`).join(`
+
+`),{dialogue:!1}),save:te,render:F,confirm:ct.yes})}function Vp(e=I.tab){e=String(e).replace(/^lv:.*:/,"");return{design:"状态栏设计",result:"状态栏结果",other:"改现有状态栏",mine:"我的状态栏",set:"状态栏设置"}[e]??"当前页面"}function Qw(e){return e==="set"?gt({最大回复长度:Me().maxTokens,提示词:{...Wt,...Me().templates}}):e==="mine"?gt({已保存:Me().designs.map(t=>({name:t.name,fields:t.fields,instruction:t.instruction}))}):e==="other"?gt({当前角色:lr(St()),载入来源:I.origin&&{name:I.origin.name,where:I.origin.where},当前状态栏:I.cur}):gt({需求:I.need,字段:I.fields,风格:I.styles,风格补充:I.customStyle,选项:I.options,当前结果:I.cur,修改意见:I.revise,参考图说明:I.spec,角色资料:I.card.use?I.card.text:"（作者关闭了角色资料）"},4e4)}function Rw(){const e=Me(),t=I.tab;return mo({owner:e,key:lvKey(t),extract:lvExtract(t),notice:I.lvDraft?()=>`给「${I.lvDraft.name}」做${lvKindName(I.lvDraft.kind)}，聊的内容只跟这份草稿走`:void 0,label:Vp(t),applies:t==="design"||t==="result",context:()=>Qw(t),busy:()=>!!I.busy,task:n=>Ht("本页对话",n),request:({system:n,messages:r})=>pr(n,r.map(s=>`${s.role==="user"?"作者":"AI"}：${s.content}`).join(`
+
+`),["design","result"].includes(t)?I.images:[],{dialogue:!1}),save:Je,render:ue,confirm:Rn.yes})}const cwzNsfwT="【任务】为这张卡写 NSFW 设定，完全按下面「作者的要求」写。写成一个世界书条目的正文，可以直接用。\n\n【作者的要求】\n{{作者要求}}\n\n【构想】\n{{concept}}\n【主要角色概要】\n{{overviews}}\n\n【写法规则】\n{{rules.通用}}";function cwzFlushBind(){if(window.__cwzFlush)return;window.__cwzFlush=1;const e=()=>{try{b.root&&le().saveSettings?.()}catch{}};document.addEventListener("visibilitychange",()=>document.visibilityState==="hidden"&&e()),window.addEventListener("pagehide",e)}function cwzSeed(){cwzFlushBind();const e=U();let t=!1;e.customSteps??=[],e.offPages??=[],e.offPages.includes("tone")||(e.offPages.push("tone"),t=!0),e.cwzNsfw||(e.cwzNsfw=!0,t=!0,e.customSteps.some(n=>/nsfw/i.test(n.name||""))||e.customSteps.push({id:"nsfw",name:"NSFW",stage:"card",light:"blue",position:"after",keys:[],template:cwzNsfwT,output:"free",after:"npc",auto:!0,userAsk:""})),t&&oe()}const cwzNeedAsk=e=>String(e?.template??"").includes("{{作者要求}}")&&!String(e?.userAsk??"").trim();
+var CWZT={"single": {"name": "单人卡", "desc": "一个主角，写深写透", "mode": "single", "steps": [{"kind": "builtin", "page": "persona", "id": "@persona", "optional": false}, {"kind": "builtin", "page": "world", "id": "@world", "optional": false}, {"kind": "builtin", "page": "npc", "id": "@npc", "optional": true}, {"kind": "mine", "stepId": "@nsfw", "id": "@mine-nsfw"}, {"id": "extra", "name": "补充人设", "output": "entry", "prompt": "给每个主要角色写补充人设：塑造他的几段过去、平时的生活和小习惯、对〔user〕的态度以及之后可能怎么变。人设里已经写过的不要再写一遍，只补没写到的。每个角色一块，块前加一行 <<<角色名·补充|角色名>>>。", "optional": false, "pos": "after", "split": true}, {"kind": "builtin", "page": "routes", "id": "@routes", "optional": false}, {"kind": "builtin", "page": "free", "id": "@free", "optional": true}, {"kind": "builtin", "page": "greet", "id": "@greet", "optional": false}, {"kind": "builtin", "page": "play", "id": "@play", "optional": true}, {"kind": "builtin", "page": "check", "id": "@check", "optional": false}, {"kind": "builtin", "page": "dress", "id": "@dress", "optional": true}, {"kind": "builtin", "page": "import", "id": "@import", "optional": false}, {"kind": "builtin", "page": "intro", "id": "@intro", "optional": true}]}, "multi": {"name": "多人卡", "desc": "好几个主角，写关系网", "mode": "multi", "steps": [{"kind": "builtin", "page": "persona", "id": "@persona", "optional": false}, {"kind": "builtin", "page": "world", "id": "@world", "optional": false}, {"kind": "mine", "stepId": "@nsfw", "id": "@mine-nsfw"}, {"id": "extra", "name": "补充人设", "output": "entry", "prompt": "给每个主要角色写补充人设：塑造他的几段过去、平时的生活和小习惯、对〔user〕的态度以及之后可能怎么变。人设里已经写过的不要再写一遍，只补没写到的。每个角色一块，块前加一行 <<<角色名·补充|角色名>>>。", "optional": false, "pos": "after", "split": true}, {"kind": "builtin", "page": "routes", "id": "@routes", "optional": false}, {"kind": "builtin", "page": "npc", "id": "@npc", "optional": true}, {"kind": "builtin", "page": "free", "id": "@free", "optional": true}, {"kind": "builtin", "page": "greet", "id": "@greet", "optional": false}, {"kind": "builtin", "page": "play", "id": "@play", "optional": true}, {"kind": "builtin", "page": "check", "id": "@check", "optional": false}, {"kind": "builtin", "page": "dress", "id": "@dress", "optional": true}, {"kind": "builtin", "page": "import", "id": "@import", "optional": false}, {"kind": "builtin", "page": "intro", "id": "@intro", "optional": true}]}, "world": {"name": "世界卡", "desc": "没有固定主角，世界是主角", "mode": "world", "steps": [{"kind": "builtin", "page": "world", "id": "@world", "optional": false}, {"id": "place", "name": "地点与势力", "output": "entry", "prompt": "写这个世界里会去的地方和各方势力。每个地点、每个势力一块：它是什么样、谁在那里、会发生什么、和别的地方或势力有什么牵扯。世界观里写过的总体设定不要再写。每块前加一行 <<<名称|关键词1,关键词2>>>。", "optional": false, "pos": "before", "split": true}, {"id": "rules", "name": "规则与系统", "output": "entry", "prompt": "写这个世界的规矩：大家都知道的常识、不能碰的禁忌、能力或职业怎么运作、要是有系统或面板就写它怎么用。写成 AI 扮演时要遵守的规则，不讲故事。", "optional": false, "pos": "before", "split": false}, {"kind": "builtin", "page": "npc", "id": "@npc", "optional": false}, {"kind": "mine", "stepId": "@nsfw", "id": "@mine-nsfw", "optional": true}, {"kind": "builtin", "page": "routes", "id": "@routes", "optional": false}, {"kind": "builtin", "page": "free", "id": "@free", "optional": true}, {"kind": "builtin", "page": "greet", "id": "@greet", "optional": false}, {"kind": "builtin", "page": "play", "id": "@play", "optional": true}, {"kind": "builtin", "page": "check", "id": "@check", "optional": false}, {"kind": "builtin", "page": "dress", "id": "@dress", "optional": true}, {"kind": "builtin", "page": "import", "id": "@import", "optional": false}, {"kind": "builtin", "page": "intro", "id": "@intro", "optional": true}]}, "adult": {"name": "手枪卡", "desc": "成人向，NSFW 是重点", "mode": "auto", "steps": [{"kind": "builtin", "page": "persona", "id": "@persona", "optional": false}, {"kind": "builtin", "page": "world", "id": "@world", "optional": true}, {"id": "body", "name": "NSFW · 身体", "output": "entry", "prompt": "按作者的要求写每个主要角色的身体：身材和私密处的具体样子、敏感的地方、被碰到时的反应和声音。\n作者的要求：{{NSFW要求}}\n每个角色一块，块前加一行 <<<角色名·身体|角色名>>>。", "optional": false, "pos": "after", "split": true}, {"id": "kink", "name": "NSFW · 癖好与底线", "output": "entry", "prompt": "按作者的要求写每个主要角色在性上的偏好：喜欢什么、讨厌什么、底线在哪、什么情况下会放开。\n作者的要求：{{NSFW要求}}\n每个角色一块，块前加一行 <<<角色名·癖好|角色名>>>。", "optional": false, "pos": "after", "split": true}, {"id": "play", "name": "NSFW · 玩法与场景", "output": "entry", "prompt": "按作者的要求写这张卡常出现的情色场景和玩法：在哪里、用什么、节奏怎么推进、谁主导，多写几种，写成 AI 扮演时能直接拿来用的参考。\n作者的要求：{{NSFW要求}}", "optional": false, "pos": "after", "split": false}, {"id": "extra", "name": "补充人设", "output": "entry", "prompt": "给每个主要角色写补充人设：平时的样子、和〔user〕独处之外的生活、平常和床上的反差。人设里已经写过的不要再写。每个角色一块，块前加一行 <<<角色名·补充|角色名>>>。", "optional": true, "pos": "after", "split": true}, {"kind": "builtin", "page": "greet", "id": "@greet", "optional": false}, {"kind": "builtin", "page": "check", "id": "@check", "optional": false}, {"kind": "builtin", "page": "dress", "id": "@dress", "optional": true}, {"kind": "builtin", "page": "import", "id": "@import", "optional": false}]}, "game": {"name": "系统 / 游戏卡", "desc": "数值、面板、任务", "mode": "auto", "steps": [{"kind": "builtin", "page": "world", "id": "@world", "optional": false}, {"id": "system", "name": "系统规则", "output": "entry", "prompt": "写这张卡的系统：有哪些数值和属性、面板长什么样、任务怎么发怎么结算、奖励和惩罚。写成 AI 每一轮都要遵守、要更新的规则，写清楚什么情况下数值怎么变。", "optional": false, "pos": "before", "split": false}, {"kind": "builtin", "page": "persona", "id": "@persona", "optional": true}, {"kind": "builtin", "page": "npc", "id": "@npc", "optional": false}, {"kind": "builtin", "page": "routes", "id": "@routes", "optional": false}, {"kind": "builtin", "page": "dress", "id": "@dress", "optional": false}, {"kind": "mine", "stepId": "@nsfw", "id": "@mine-nsfw", "optional": true}, {"kind": "builtin", "page": "greet", "id": "@greet", "optional": false}, {"kind": "builtin", "page": "play", "id": "@play", "optional": false}, {"kind": "builtin", "page": "check", "id": "@check", "optional": false}, {"kind": "builtin", "page": "import", "id": "@import", "optional": false}]}, "dungeon": {"name": "副本卡", "desc": "无限流，多个剧本轮着玩", "mode": "world", "steps": [{"id": "hub", "name": "主空间", "output": "entry", "prompt": "写主空间：每个副本结束后回到的地方、这里的规则、怎么进副本、完成或失败会怎样、积分或奖励怎么用。", "optional": false, "pos": "before", "split": false}, {"id": "dungeons", "name": "副本列表", "output": "entry", "prompt": "设计几个风格不同的副本。每个副本一块：背景、通关目标、危险和规则、里面的关键人物。每块前加一行 <<<副本名|副本名,关键词>>>。", "optional": false, "pos": "after", "split": true}, {"kind": "builtin", "page": "persona", "id": "@persona", "optional": true}, {"kind": "mine", "stepId": "@nsfw", "id": "@mine-nsfw", "optional": true}, {"kind": "builtin", "page": "greet", "id": "@greet", "optional": false}, {"kind": "builtin", "page": "check", "id": "@check", "optional": false}, {"kind": "builtin", "page": "dress", "id": "@dress", "optional": true}, {"kind": "builtin", "page": "import", "id": "@import", "optional": false}]}, "sim": {"name": "模拟器卡", "desc": "校园、后宫、职场，人随来随生成", "mode": "world", "steps": [{"id": "scene", "name": "场景与规则", "output": "entry", "prompt": "写这个模拟器：在什么地方、玩家每天能做什么、时间怎么推进、好感或关系怎么变化、AI 要怎么安排出场的人。", "optional": false, "pos": "before", "split": false}, {"id": "pool", "name": "角色池", "output": "entry", "prompt": "写一批会出场的人，每人一块：身份、外貌一句、性格一句、和〔user〕可能的关系、一句口头禅。块前加一行 <<<名字|名字,身份>>>。", "optional": false, "pos": "after", "split": true}, {"id": "events", "name": "事件表", "output": "entry", "prompt": "写一批会随机发生的事件，每个一两句：在什么时候、什么地方、谁参与、会带来什么变化。", "optional": false, "pos": "after", "split": false}, {"kind": "mine", "stepId": "@nsfw", "id": "@mine-nsfw", "optional": true}, {"kind": "builtin", "page": "dress", "id": "@dress", "optional": false}, {"kind": "builtin", "page": "greet", "id": "@greet", "optional": false}, {"kind": "builtin", "page": "check", "id": "@check", "optional": false}, {"kind": "builtin", "page": "import", "id": "@import", "optional": false}]}, "fandom": {"name": "同人卡", "desc": "先整理原作，再按你的改动写", "mode": "auto", "steps": [{"id": "canon", "name": "原作设定", "output": "entry", "prompt": "先整理原作：作品名、世界观、关键人物（身份、性格、彼此关系）、时间线上的重要事件。然后单独列出这张卡相对原作改了什么（时间点、关系、身份、if 线）。只写原作里真有的，拿不准的标出来，不要编。", "optional": false, "pos": "before", "split": false}, {"kind": "builtin", "page": "persona", "id": "@persona", "optional": false}, {"kind": "builtin", "page": "world", "id": "@world", "optional": false}, {"kind": "mine", "stepId": "@nsfw", "id": "@mine-nsfw"}, {"id": "extra", "name": "补充人设", "output": "entry", "prompt": "给每个主要角色写补充人设：塑造他的几段过去、平时的生活和小习惯、对〔user〕的态度以及之后可能怎么变。人设里已经写过的不要再写一遍，只补没写到的。每个角色一块，块前加一行 <<<角色名·补充|角色名>>>。", "optional": false, "pos": "after", "split": true}, {"kind": "builtin", "page": "routes", "id": "@routes", "optional": false}, {"kind": "builtin", "page": "npc", "id": "@npc", "optional": true}, {"kind": "builtin", "page": "free", "id": "@free", "optional": true}, {"kind": "builtin", "page": "greet", "id": "@greet", "optional": false}, {"kind": "builtin", "page": "play", "id": "@play", "optional": true}, {"kind": "builtin", "page": "check", "id": "@check", "optional": false}, {"kind": "builtin", "page": "dress", "id": "@dress", "optional": true}, {"kind": "builtin", "page": "import", "id": "@import", "optional": false}, {"kind": "builtin", "page": "intro", "id": "@intro", "optional": true}]}};
+function cwzNsfwStep(){const e=U().customSteps??[];return e.find(t=>t.id==="nsfw")||e.find(t=>/nsfw/i.test(t.name||""))}
+function cwzNsfwAsk(){return String(cwzNsfwStep()?.userAsk??"").trim()}
+function cwzTypeFlow(k){const t=CWZT[k];if(!t)return null;const o=U().typeOver?.[k]??{},n=cwzNsfwStep(),r=[];for(const a of t.steps){if(a.kind==="mine"){if(!n)continue;r.push({...a,stepId:n.id,id:`${k}-${a.id}`});continue}const i={...a,id:`${k}-${a.id}`};!a.kind&&o[a.id]&&Object.assign(i,o[a.id]),r.push(i)}const s=(U().customSteps??[]).filter(a=>a!==n);for(const a of s){const i=r.findIndex(c=>c.kind==="builtin"&&c.page===(a.after==="tone"?"routes":a.after||"routes"));r.splice(i<0?r.findIndex(c=>c.page==="greet"):i+1,0,{kind:"mine",stepId:a.id,id:`${k}-mine-${a.id}`,optional:!0})}return{id:`type:${k}`,name:t.name,builtinType:k,steps:r}}
+function cwzGuessType(e){const t=(e.concepts?.[e.pick]?.lineup??[]).length,n=(e.tags??[]).map(r=>r.name||r).join(" ");return/同人|原作/.test(n)?"fandom":/无限流|副本/.test(n)?"dungeon":/模拟/.test(n)?"sim":/系统|游戏|数值/.test(n)?"game":t===0?"world":t>1?"multi":"single"}
+function cwzModeOf(e){const t=CWZT[e.cardType]?.mode;if(t&&t!=="auto")return t;const n=(e.concepts?.[e.pick]?.lineup??[]).length||e.personas?.length||0;return n===0?"world":n>1?"multi":"single"}
+function cwzPreset(e,t){const n=U().draft?.cardType,r=n&&U().typePresets?.[n],s=e==="greeting"?r?.greet:r?.card;return s===void 0||s===null||s==="@follow"?e==="greeting"?t.presetGreeting:t.presetCard:s}
+function cwzSplit(c,p){const e=[...String(p).matchAll(/^\s*<<<\s*([^|>\n]+?)\s*(?:\|\s*([^>\n]*))?>>>\s*$/gm)];if(!c.split||!e.length)return[{name:c.name||"补充设定",desc:"",content:p,light:"blue",keys:[],position:c.pos||"after",fromStep:`quick:${c.id}`}];return e.map((t,n)=>{const r=String(p).slice(t.index+t[0].length,e[n+1]?.index??p.length).trim(),s=String(t[2]??"").split(/[,，、]/).map(a=>a.trim()).filter(Boolean);return{name:t[1].trim(),desc:"",content:r,light:s.length?"green":"blue",keys:s,position:c.pos||"after",fromStep:`quick:${c.id}`}}).filter(t=>t.content)}
+const cwzPromptMap={chat:["chat","chatBrief"],persona:["persona","relations","personaExtra","backstory"],world:["world"],npc:["npc","npcOne"],routes:["routes","newRoutes"],greet:["greeting"],free:["free"],check:["consistency","conflict"],play:["playChar","playReview"],intro:["intro"]};
+function cwzPromptBox(e){const t=cwzPromptMap[e];if(!t)return"";const n=U().prompts??{};return`<details class="cwz-fold cwz-promptbox"><summary>改这一步的提示词</summary>${t.filter(r=>Xt[r]).map(r=>`<div class="cw-row" style="margin-top:8px"><b class="cw-grow cw-small">${x(Fn[r]?.name??r)}${n[r]?.trim()?" · 改过":""}</b>${n[r]?.trim()?q("cwzPromptReset","恢复默认",`data-k="${r}"`):""}</div><textarea class="text_pole cw-ta" data-cwzprompt="${r}" rows="8">${x(n[r]?.trim()?n[r]:Xt[r])}</textarea>`).join("")}<div class="cw-dim cw-small">直接改，自动保存。{{变量}} 会换成前面写好的内容，别删。</div></details>`}
+const cwzGreetChatX="【这一页的对话可以直接写开场白】作者让你写开场白时，直接写完整正文，不要只给思路或提纲，也不要让作者去点别的按钮。每个开场白前单独一行写 <<<开场白>>>，正文紧接着写，不加标题；想说明或讨论的话写在第一个 <<<开场白>>> 之前。作者点你消息下面的「放进开场白」，这些正文就会放进页面。\n每个开场白都要有：时间、地点、在场的人物（开头几句交代清楚）；一两句自然带出这张卡最要紧的设定；现在正在发生什么；接下来马上要来的事或选择；从最有张力的一刻开始写。不替〔user〕说话、做决定或写心理，停在〔user〕可以回应的地方。几个开场白之间，时间、地点和事件明显不同。";
+function cwzGreetParts(t){let e=String(t??"").replace(/<开场构思>[\s\S]*?<\/开场构思>/g,"").replace(/<\/?开场构思>/g,"");const m=/^[ \t]*<<<\s*开场白\s*>>>[ \t]*$/m;let a;if(m.test(e))a=e.split(/^[ \t]*<<<\s*开场白\s*>>>[ \t]*$/m).slice(1);else{try{a=np(e,U())}catch{a=[e]}}return a.map(n=>{try{return Sa(String(n).trim(),U())}catch{return String(n).trim()}}).filter(n=>n.length>10)}
+function cwzGreetExtract(d){const rs=(d.routes??[]).filter(r=>r.name),opts=rs.length<=1?[{label:"放进开场白",route:rs[0]?.name??""}]:[...rs.slice(0,3).map(r=>({label:`放进「${r.name.length>6?r.name.slice(0,6)+"…":r.name}」`,route:r.name})),{label:"放进不分路线",route:""}];return t=>{const n=cwzGreetParts(t).length;return n?opts.map(o=>({label:o.label+(n>1?`（${n} 个）`:""),title:`把这条回复里的 ${n} 个开场白加到${o.route?`「${o.route}」`:"不分路线"}的开场白后面`,run:x2=>{const p=cwzGreetParts(x2);d.greetings??=[];let k=0;for(const g of p)d.greetings.some(h=>h.text===g)||(d.greetings.push({route:o.route,text:g}),k++);o.route||(b.showFreeGreet=!0);d.updated=Date.now();oe();G();k?X.toastr.success(`放进了 ${k} 个开场白${o.route?`（${o.route}）`:""}，在页面里可以接着改`,"Love 写卡机"):X.toastr.info("这几个开场白已经在页面里了","Love 写卡机")}})):[]}}
+function cwzStripSample(e){return String(e??"").replace(/\n?[ \t]*示例\s*[:：][\s\S]*?(?=\n[ \t]*启动\s*[:：]|$)/,"").replace(/\n{3,}/g,"\n\n").trim()}
+function cwzRuleOf(e){try{const t=e.dress;if(!t?.use)return"";const n=String(t.rule??"").trim();if(n)return n;const{S:r}=nfKDesigns(t,nfDSrc(e));return cwzStripSample(Ot(r.instruction))}catch(t){return console.warn("[Love 写卡机] 状态栏规则",t),""}}
+function cwzTypePg(t){const e=CWZT[t.builtinType];return`<div class="cw-form cw-quick"><div class="cw-row">${Np()}${q("quickCopyFlow","复制一份改")}</div>
+<div class="cw-card cw-small">这是「${x(e.name)}」自带的步骤。提示词可以进每一步里直接改；想加减步骤、调顺序，点「复制一份改」变成你自己的流程。</div>
+${t.steps.map((n,r)=>`<div class="cw-card cw-qstep"><b>${r+1}. ${x(xr(n))}</b>${n.optional?' <span class="cw-dim cw-small">· 可选</span>':""}</div>`).join("")}</div>`}
+function cwzTypeGrid(e){const t=U(),n=e.cardType,r=wt(),s=r&&!r.builtinType,a=(i,o)=>`<div class="cwz-type ${n===i&&!s?"on":""}" data-act="cwzType" data-t="${i}"><b>${x(o.name)}</b><small>${x(o.desc)}</small></div>`;return`<div class="cwz-types">${["single","multi","world","adult"].map(i=>a(i,CWZT[i])).join("")}</div>
+<div class="cwz-lab" style="display:block;margin-top:10px">更多</div><div class="cwz-types">${["fandom","game","dungeon","sim"].map(i=>a(i,CWZT[i])).join("")}</div>
+${(t.quickFlows??[]).length?`<div class="cw-row cw-small" style="margin-top:8px"><span>或者用我的流程</span>${Np()}</div>`:""}`}
+function cwzPresetSel(e,t){const n=U().typePresets?.[e]??{},r=n[t]??"@follow",s=cp(),a=(i,o)=>`<option value="${x(i)}" ${i===r?"selected":""}>${x(o)}</option>`;return`<select class="text_pole cw-in" data-cwztp="${t}">${a("@follow","跟设置走")}${a("","不套预设")}${s.map(i=>a(i,i)).join("")}</select>`}
+function cwzTagsBox(e){const t=e.tags??[];return`<div class="cwz-tags">${t.map((n,r)=>`<span class="cwz-tag" data-act="cwzTagDel" data-i="${r}" title="点一下去掉">${x(n.name??n)}</span>`).join("")}<input class="text_pole cw-in cwz-tagin" placeholder="＋ 加一个，回车"></div>`}
+globalThis.__cwzSkin=function(e){if(!e)return;const t=e.matches?.(".pw-overlay,.sf-overlay")?e:e.closest?.(".pw-overlay,.sf-overlay")||e;t.classList.add("cwz-skin"),t.classList.toggle("cwz-dark",U().cwzTheme==="dark");const n=document.createTreeWalker(t,NodeFilter.SHOW_TEXT),r=[];for(;n.nextNode();)/^\s*(false)+\s*$/.test(n.currentNode.nodeValue)&&r.push(n.currentNode);r.forEach(s=>s.remove())};function cwzChatSend(){return $(async()=>{const e=N(),c=B.chatOf(e),v=String(c.input??"").trim();if(v)c.messages.push({role:"user",text:v}),c.input="",ee();else if(c.messages.at(-1)?.role!=="user")throw new Error("先写一句");G(),await B.chatSend(e,""),U().themeAutoBrief&&(Be("顺手整理主题…"),await B.chatBrief(e))},"")}
+function cwzScroller(){let e=b.root;for(;e&&e!==document.body;){const t=getComputedStyle(e).overflowY;if((t==="auto"||t==="scroll")&&e.scrollHeight>e.clientHeight)return e;e=e.parentElement}return null}
+function cwzAfter(){const p=b.page,c=p!==b.cwzLast;b.cwzLast=p;requestAnimationFrame(()=>{const e=cwzScroller();if(!e)return;p==="chat"&&b.root?.querySelector(".cwz-chat,.cwz-typing")?e.scrollTop=e.scrollHeight:c&&(e.scrollTop=0)})}
+function G(){if(!b.root)return;try{cwRender(),cwzAfter()}catch(e){console.error("[Love 写卡机] 页面渲染出错",b.page,e);const p=b.page;if(p!=="home"){b.page="home";try{cwRender();X.toastr?.error?.(`「${p}」页打不开，先回到目录：${e?.message||e}`,"Love 写卡机");return}catch(e2){e=e2}}b.root.innerHTML=`<div class="cw"><div class="cw-box">Love 写卡机页面出错了：${x(String(e?.message||e))}<br><small class="cw-dim">按 F12 看控制台里的 [Love 写卡机] 报错，截图发给作者。</small></div><div class="menu_button cw-btn" data-act="go" data-page="home">回目录</div></div>`}}function cwRender(){try{const dl=b.root.closest("dialog");dl?.classList.add("cwz-dlg"),dl?.classList.toggle("cwz-dark",U().cwzTheme==="dark")}catch{}b.page!==b.helpPage&&(b.helpPage=b.page,Bw(b.page)),xo.clear(),b.root.innerHTML=`<div class="cw ${Dw()?"":"cw-nohelp"}">${b.page==="home"?qp():Zg(b.page)}</div>`,nfFx.cw!==b.page&&(nfFx.cw&&b.root.firstElementChild?.classList.add("nf-enter"),nfFx.cw=b.page),qw(),Ra(b.busy),Be(b.lastStatus??"")}function Be(e){b.lastStatus=e,b.root&&(0,X.jQuery)(b.root).find(".cw-status").html(e),vs()}function vs(){const e=b.busy&&!b.root;let t=(0,X.jQuery)("#cw_float");if(!e){t.remove();return}const n=String(b.lastStatus??"").replace(/<[^>]+>/g,"");t.length||(t=(0,X.jQuery)('<div id="cw_float" class="cw-float"><span class="cw-spin" style="display:inline-block"></span><span class="cw-float-text"></span><span class="menu_button cw-btn" data-fa="open">打开</span><span class="menu_button cw-btn" data-fa="stop">停止</span></div>'),t.on("click",'[data-fa="open"]',()=>Fa()),t.on("click",'[data-fa="stop"]',()=>{b.abort=!0}),(0,X.jQuery)("body").append(t)),t.find(".cw-float-text").text(`Love 写卡机生成中：${n||"…"}${b.stepCalls?`（这一步 ${b.stepCalls} 次）`:""}`)}function Ra(e){b.busy=e,e||hs(""),clearInterval(b.timer),e&&(b.timer=setInterval(()=>{bs(),vs()},1e3)),vs(),b.root&&((0,X.jQuery)(b.root).find(".cw-statusrow").toggleClass("busy",e),bs(),(0,X.jQuery)(b.root).find("[data-act]").not('[data-act="stop"],[data-act="lockDice"],[data-act="go"]').toggleClass("disabled",e),(0,X.jQuery)(b.root).find(".cw-stop").toggle(e))}async function $(e,t=""){if(b.busy)return;b.abort=!1,b.capped=!1,b.started=Date.now(),b.stepCalls=0,Ra(!0);let n=null;try{const r=await e();ee(),b.lastStatus=typeof r=="string"&&r||t||"完成。",n=["success",b.lastStatus]}catch(r){b.capped||console.error("[Love 写卡机]",r),gg(r),ee(),b.capped?(b.lastStatus=x(r?.message||r),X.toastr.info(String(r?.message||r),"Love 写卡机")):(b.lastStatus=`<span class="cw-err">${x(r?.message||r)}</span>`,b.abort||X.toastr.error(String(r?.message||r),"Love 写卡机"))}finally{const r=!b.root;b.busy=!1,G(),vs(),zw(),r&&n&&X.toastr.success(String(n[1]).replace(/<[^>]+>/g,""),"Love 写卡机 · 后台完成了，点魔棒菜单里的Love 写卡机查看",{timeOut:1e4})}}function Hw(e){const t=e.dataset.act;if(["go","ptab","toggleHelp","stop","tag","lockDice","diceDim","dicePick","ovSel","ovHint"].includes(t)){b.anchor=null;return}let n=`[data-act="${t}"]`;for(const r of["i","key","path","r","h"])e.dataset[r]!==void 0&&(n+=`[data-${r}="${String(e.dataset[r]).replace(/["\\]/g,"\\$&")}"]`);t==="localEdit"&&b.sel&&(n=`textarea[data-bind="${b.sel.path}"]`),b.anchor={page:b.page,sel:n}}function zw(){const e=b.anchor;if(b.anchor=null,!e||e.page!==b.page||!b.root)return;let t=null;try{t=b.root.querySelector(e.sel)}catch{t=null}if(!t)return;const r=(t.closest(".cw-card")??t.closest(".cw-box"))?.querySelector(".cw-changes")??t;try{r.scrollIntoView({block:"center"})}catch{}}function Po(e){const t=N();return e>=0&&e<t.routes.length?e:-1}var Ha=e=>e>=0&&N().routes[e]||{name:""},Fw={extra:()=>({name:"",keys:[],content:""}),npc:()=>({name:"",desc:"",keys:[],content:""}),persona:()=>({name:"",desc:"",keys:[],overview:"",text:"",added:!0}),route:()=>({name:`路线${N().routes.length+1}`,user:"",period:"",desc:"",info:""}),free:()=>({name:"",desc:"",content:"",light:"blue",keys:[],position:"after"})};function Uw(e=N()){const t=U(),n=c=>t[c]&&!t.lean,r=c=>!(t.offPages??[]).includes(c),s=e.concepts?.[e.pick]??null,a=[],i=(c,p)=>{p>0&&a.push([c,p])};if(e.au){const c=e.personas.length||1;i("AU 内核与映射",(e.au.core.some(p=>p.text.trim())?0:1)+(e.au.map?0:1)),i("AU 人设",e.personas.filter(p=>!p.text).length),n("autoPredict")&&i("一致性检查",c*2)}else if(e.existing&&!e.existing.fromImport)i("路线",e.routes.some(c=>!c.info)?1:0),i("开场白",e.routes.filter(c=>!c.orig&&!e.greetings.some(p=>p.route===c.name)).length);else{i("构想",e.concepts.length?0:1);const c=Math.max(e.personas.length,s?.lineup?.length??0,1),p=e.personas.filter(m=>!m.text?.trim()).length+Math.max(0,c-e.personas.length);i("人设",p),n("autoBackstory")&&i("经历",p),c>1&&!e.relations&&i("关系网",1),r("world")&&!e.world.main&&i("世界观",1),r("npc")&&!e.npcs.length&&((s?.npcs??0)>0||B.modeOf(e)==="world")&&i("NPC",1);const d=Math.max(e.routes.length,s?.routes?.length??0);r("routes")&&(!e.routes.length||e.routes.some(m=>!m.info))&&i("路线",1),r("tone")&&!e.tone&&i("基调",1),i("开场白",d?Math.max(0,d-e.greetings.filter(m=>e.routes.some(g=>g.name===m.route)).length):e.greetings.length?0:1),n("autoPredict")&&r("check")&&i("可预测性测试",p*2)}return{n:a.reduce((c,[,p])=>c+p,0),parts:a}}async function Oo(){const e=N(),t=U(),n=s=>t[s]&&!t.lean,r=e.personas.some(s=>s.text?.trim()||s.desc?.trim())||!!e.world.main?.trim();if(!e.idea.trim()&&!e.concepts.length&&!e.existing&&!e.au&&!r){X.toastr.info("先在「主题」里聊一聊，把主题定下来","Love 写卡机");return}await $(async()=>{const s=()=>{ee(),G(),Ra(!0)},a=c=>!(t.offPages??[]).includes(c),i=async c=>{for(const p of t.customSteps??[])!p.auto||cwzNeedAsk(p)||(p.after||"tone")!==c||e.free.find(d=>d.fromStep===p.id)?.content||(await B.custom(e,p),s())};if(e.au){if(e.au.core.some(c=>c.text.trim())||(await B.auCore(e),s()),!e.au.map){if(!e.idea.trim())throw new Error("先在“AU 内核与映射”页写 AU 设定");await B.auMap(e),s()}for(const c of e.personas)if(c.text||(Be(`AU 人设：${x(c.name)}…`),await B.persona(e,c.name),s()),n("autoBackstory")&&wa(c.text)&&(Be(`展开经历：${x(c.name)}…`),await B.backstory(e,c.name),s()),n("autoPredict")&&!e.au.checks[c.name]){const p=await B.auCheck(e,c.name);(p.items.some(d=>d.verdict!=="保留")||p.leftovers.length)&&await B.auFix(e,c.name),s()}await i("persona"),e.world.main||(await B.world(e),s()),await i("world"),e.npcs.length||(await B.npc(e),s()),await i("npc"),(!e.routes.length||e.routes.some(c=>!c.info))&&(await B.routes(e),s()),await i("routes"),e.tone||!a("tone")||(await B.tone(e),s()),await i("tone");for(let c=0;c<e.routes.length;c++)e.greetings.some(p=>p.route===e.routes[c].name)||(Be(`开场白：${x(e.routes[c].name)}…`),await In(()=>B.greetings(e,c)),s());return await i("greet"),n("autoBagu")&&ut()&&(await za(),s()),b.checks=B.localCheck(e),b.page="check","AU 卡写好了。看一下质检结果，没问题就导入（会存成一张新卡，原卡不动）。"}if(e.existing&&!e.existing.fromImport){e.routes.some(c=>!c.info)&&(await B.routes(e),s());for(let c=0;c<e.routes.length;c++){const p=e.routes[c];!p.orig&&!e.greetings.some(d=>d.route===p.name)&&(Be(`开场白：${x(p.name)}…`),await In(()=>B.greetings(e,c)),s())}return n("autoBagu")&&ut()&&(await za(),s()),b.checks=B.localCheck(e),b.page="check","补全了。看一下质检结果，没问题就到“导入酒馆”页写回原卡。"}const o=new Set(e.personas.filter(c=>c.text?.trim()));e.concepts.length||(await B.idea(e),s()),(e.pick<0||!e.concepts[e.pick])&&(B.pickConcept(e,0),s()),await i("idea"),await i("tags");for(let c=0;c<e.personas.length;c++){const p=e.personas[c];p.text||(Be(`人设：${x(p.name||"新角色")}…`),await B.persona(e,c),s()),!o.has(p)&&n("autoBackstory")&&wa(p.text)&&(Be(`展开经历：${x(p.name)}…`),await B.backstory(e,p.name),s())}e.personas.filter(c=>c.text).length>1&&!e.relations&&(Be("角色关系网…"),await B.relations(e),s()),await i("persona"),a("world")&&!e.world.main&&(await B.world(e),s()),await i("world"),a("npc")&&!e.npcs.length&&((e.concepts[e.pick]?.npcs??0)>0||B.modeOf(e)==="world")&&(await B.npc(e),s()),await i("npc"),a("routes")&&e.routes.some(c=>!c.info)&&(await B.routes(e),s()),await i("routes"),a("tone")&&!e.tone&&(await B.tone(e),s()),await i("tone"),!e.routes.length&&!e.greetings.length&&(Be("开场白…"),await In(()=>B.greetings(e,-1)),s());for(let c=0;c<e.routes.length;c++)e.greetings.some(p=>p.route===e.routes[c].name)||(Be(`开场白：${x(e.routes[c].name)}…`),await In(()=>B.greetings(e,c)),s());if(await i("greet"),n("autoPredict")&&a("check"))for(const c of e.personas.filter(p=>p.text&&!o.has(p)))Be(`可预测性测试：${x(c.name)}…`),await B.predict(e,c.name),s();if(n("autoBagu")&&ut()){const c=new Set([...o].flatMap(p=>[`人设·${p.name}`,`人设概要·${p.name}`]));await za(p=>!c.has(p.label)),s()}b.checks=B.localCheck(e),b.page="check"},"一键出卡完成。看一下质检结果，没问题就导入。")}async function Do(e,{onlyMust:t=!1,label:n="八股清理"}={}){const r=$t(le().extensionSettings,B.banned(N())),s=await wp(e.map(o=>({text:o.get(),kind:o.kind})),r,(o,c)=>hr({system:o,user:c,stage:"card"}),()=>b.abort,{onlyMust:t,onProgress:({sent:o,rounds:c,retry:p,sentences:d})=>Be(p?`${n}：没改好的句子再来一轮…`:`${n}：${e.length} 块共 ${d} 句，第 ${o}/${c} 批…`)}),a=[];let i=0;return s.forEach((o,c)=>{o.changed&&(e[c].set(o.text),i+=o.changed),a.push({label:e[c].label,text:`改了 ${o.changed} 句${o.failed.length?`，<span class="cw-warntext">${o.failed.length} 句没改好：${x(o.failed.join("、"))}</span>`:""}`})}),{report:a,changed:i}}async function za(e=()=>!0){const t=$t(le().extensionSettings,B.banned(N())),n=B.textSlots(N()).filter(s=>e(s)&&!s.rules&&!Ta(s.get())&&wr(s.get(),t).total),{report:r}=n.length?await Do(n):{report:[]};b.bagu=r.length?r:[{label:"八股清理",text:"没有需要改的句子"}]}var Yp=()=>b.greetCleaned?`顺手改掉了 ${b.greetCleaned} 句带必改词的。`:"";async function In(e){const t=N(),n=new Set(t.greetings??[]),r=await e();if(!U().greetMustClean||!ut()||b.abort)return r;const s=$t(le().extensionSettings,B.banned(t)),a=(t.greetings??[]).filter(o=>!n.has(o)&&wr(o.text,s).must);if(!a.length)return r;const{changed:i}=await Do(a.map((o,c)=>({label:`新开场白 ${c+1}`,kind:"开场白",get:()=>o.text,set:p=>{o.text=p}})),{onlyMust:!0,label:"开场白必改词"});return b.greetCleaned=i,r}var Cr=e=>(N().existing?.entries??[]).filter(t=>(t.cat??"other")===e).map(t=>`exist:entry:${t.uid}`);function Gw(e,t){return t.startsWith("step:")?e.free.filter(n=>`step:${n.fromStep}`===t).map(n=>`free:${n.name}`):{persona:()=>[...e.personas.map(n=>`persona:${n.name}`),...e.personas.map(n=>`personaExtra:${n.name}`),"relations",...Cr("persona")],world:()=>["world",...Cr("world")],npc:()=>["npc",...Cr("npc")],routes:()=>["routes",...Cr("routes")],tone:()=>[...e.free.filter(n=>!n.fromStep&&n.name?.trim()).map(n=>`free:${n.name.trim()}`),...Cr("tone")],greet:()=>[...new Set((e.greetings??[]).map(n=>n.route))].map(n=>`greet:${n}`),intro:()=>["intro"],au:()=>["au:core"],existing:()=>e.existing?[...["description","personality","scenario"].map(n=>`exist:field:${n}`),...Cr("other"),...e.existing.greetings.map((n,r)=>`exist:greet:${r}`)]:[]}[t]?.()??[]}async function Jw(e){const t=N();let n=[],r=0;const a=Gw(t,e).map(o=>[o,structuredClone(B.slotOf(t,o)?.get())]),i=Hp(e).filter(o=>o.total&&!o.s.scanOnly).map(o=>o.s);i.length&&({report:n,changed:r}=await Do(i)),e==="intro"&&t.intro?.parts&&Object.keys(t.intro.parts).length&&(t.intro.text=B.composeIntroFor(t));for(const[o,c]of a)JSON.stringify(c)!==JSON.stringify(B.slotOf(t,o)?.get())&&B.remember(t,o,c);return b.baguPage={page:e,report:n.length?n:[{label:"八股清理",text:"没有要改的句子"}]},r?`这一页改了 ${r} 句。`:"这一页没有要改的句子。"}var An=null;async function Yn(){const e=le();if(!An)try{An=await import("../../../world-info.js")}catch{An={}}return{names:()=>e.getWorldInfoNames?.()??[...An.world_names??[]],load:t=>(e.loadWorldInfo??An.loadWorldInfo)(t),save:(t,n)=>(e.saveWorldInfo??An.saveWorldInfo)(t,n,!0),refresh:()=>(e.updateWorldInfoList??An.updateWorldInfoList)?.(),reload:t=>{try{(e.reloadWorldInfoEditor??An.reloadEditor)?.(t)}catch{}}}}async function Kp(){const e=le(),t=U(),n=N(),r=t.userToken||"<user>",s=va(structuredClone(n),o=>_i(o,r)),a=cs(s,{personaPlace:t.personaPlace});if(!a.length&&!bn(s).length){X.toastr.warning("还没有内容可以导入","Love 写卡机");return}await e.callGenericPopup(`导入“${x(n.name||"新角色")}”：世界书 ${a.length} 个条目，开场白 ${bn(s).length} 个。`,e.POPUP_TYPE.CONFIRM)&&await $(async()=>{const o=await Yn(),c=Gl(n.name||"新角色",o.names());a.length&&(await o.save(c,ro(a)),await o.refresh());const p=so(s,{worldName:a.length?c:"",creator:t.author,intro:s.intro?.text??"",personaPlace:t.personaPlace}),d=await(0,X.fetch)("/api/characters/create",{method:"POST",headers:e.getRequestHeaders(),body:JSON.stringify(p)});if(!d.ok)throw new Error(`创建角色失败（HTTP ${d.status}）：${await d.text()}`);const m=await d.text();await e.getCharacters();const g=e.characters.findIndex(P=>P.avatar===m);g>=0&&await e.selectCharacterById(g),n.imported={avatar:m,world:a.length?c:"",name:p.ch_name,time:Date.now()};const y=[p.first_mes,...p.alternate_greetings??[]].filter(P=>String(P??"").trim());ya(n).forEach((P,D)=>{P.slot=D}),n.existing={avatar:m,name:p.ch_name,world:a.length?c:"",hadWorld:!!a.length,fromImport:!0,fields:{},entries:[],greetings:[],loaded:Date.now(),base:ur({...p,alternate_greetings:y.slice(1),first_mes:y[0]??""},a.length?ro(a):null)},n.dress?.use&&await nfDressApply(n,p,y,m).catch(P=>X.toastr.warning(`状态栏没装上：${P?.message||P}`,"Love 写卡机")),b.plan=null,X.toastr.success(`已导入：${p.ch_name}`,"Love 写卡机")},"已导入酒馆。开场白在角色卡里，世界书已绑定。")}async function Bo(e){const t=le(),n=await(0,X.fetch)("/api/characters/get",{method:"POST",headers:t.getRequestHeaders(),body:JSON.stringify({avatar_url:e})});if(!n.ok)throw new Error("读不到这张卡（可能改名或删了）");return await n.json()}async function Xp(e,t){const n=le(),r=Object.fromEntries(["description","personality","scenario","first_mes","mes_example"].filter(i=>i in t).map(i=>[i,t[i]])),s=await(0,X.fetch)("/api/characters/merge-attributes",{method:"POST",headers:n.getRequestHeaders(),body:JSON.stringify({avatar:e,...r,data:t})});if(!s.ok)throw new Error(`保存角色卡失败（HTTP ${s.status}）`);if(await n.getCharacters?.(),n.characters?.[n.characterId]?.avatar===e){const i={description:"#description_textarea",personality:"#personality_textarea",scenario:"#scenario_pole",first_mes:"#firstmessage_textarea",mes_example:"#mes_example_textarea"};for(const[o,c]of Object.entries(i))o in t&&(0,X.jQuery)(c).val(t[o])}}async function Ww(e){await $(async()=>{const t=await Bo(e),n=t.data?.extensions?.world||"";let r=null;if(n){const a=await Yn();try{r=await a.load(n)}catch{r=null}}Ir();const s=B.loadCard(t,r,n);return s.existing.avatar=e,s.existing.base=ur(t.data,r),b.plan=null,U().draft=s,b.checks=null,b.bagu=null,b.page="existing",`读进来了：${x(s.name)}。${s.personas.length} 个人设、${s.routes.length} 条路线、${s.existing.entries.length} 个其他条目、${s.existing.greetings.length} 个开场白。`})}async function Zp(e){const t=await Bo(e.avatar),n=t.data?.extensions?.world||"";let r=null;if(n)try{r=await(await Yn()).load(n)}catch{r=null}return{card:t,worldName:n,worldData:r}}function $p(){const e=U();return va(structuredClone(N()),t=>_i(t,e.userToken||"<user>"))}async function _p(){const t=N().existing;t&&await $(async()=>{const{card:n,worldData:r}=await Zp(t),s=$l($p(),{personaPlace:U().personaPlace}),a=_l(s,t.base,ur(n.data,r));b.plan={items:a};const i=a.filter(o=>o.checked).length;return a.length?`有 ${a.length} 处不一样，默认勾了 ${i} 处。看一下再写回。`:"没有要写回的。"})}function Vw(e,t){const n=e.existing;if(t.kind==="field"){if(n.fromImport)return!1;const r=t.field==="description"&&e.personas.find(s=>s.fromDescription);return r?r.text=t.theirs:n.fields[t.field]=t.theirs,!0}if(t.kind==="greet"){if(n.fromImport){const r=(e.greetings??[]).find(s=>s.slot===t.index);return r?(r.text=t.theirs??"",!0):!1}return n.greetings[t.index]=t.theirs??"",!0}if(t.kind==="entry"){if(t.key.startsWith("uid:")){const s=n.entries.find(a=>`uid:${a.uid}`===t.key);return s?(s.content=t.theirs,!0):!1}const r=B.textSlots(e).find(s=>s.label===t.key.slice(2));return r?(r.set(t.theirs),!0):!1}return!1}async function Yw(){const e=le(),t=U(),n=N(),r=n.existing;if(!r||!b.plan)return;const s=new Map(b.plan.items.map(a=>[a.id,a.checked]));await e.callGenericPopup(`写回勾选的 ${[...s.values()].filter(Boolean).length} 处到“${x(r.name)}”？<br>没勾的地方保留酒馆里现在的。会先备份，可以撤销。`,e.POPUP_TYPE.CONFIRM)&&await $(async()=>{const{card:a,worldName:i,worldData:o}=await Zp(r);let c=i;const p=$p(),d=$l(p,{personaPlace:t.personaPlace}),m=_l(d,r.base,ur(a.data,o));for(const R of m)s.has(R.id)&&(R.checked=s.get(R.id));const g={time:Date.now(),avatar:r.avatar,card:Object.fromEntries(["description","personality","scenario","mes_example","first_mes","alternate_greetings","character_book"].map(R=>[R,a.data?.[R]??null])),world:c,worldData:o?structuredClone(o):null},y=qf(m,{theirsCard:a.data??{},theirsWorld:o,clean:p,mine:d}),E=await Yn();let P="";y.worldChanged&&Object.keys(y.world.entries).length&&(c||(c=Gl(r.name,E.names()),P=c),await E.save(c,y.world),await E.refresh(),E.reload(c));const D={...y.cardData,...y.worldChanged?{extensions:{world:c},character_book:Nf(c,y.world)}:{}};Object.keys(D).length&&await Xp(r.avatar,D),r.backup={...g,createdWorld:P,newGreetings:y.written.map(R=>ya(n)[R.index]).filter(Boolean).map(R=>structuredClone(R))},r.world=c;const Q=new Set;for(const R of m)!R.checked&&["theirs","conflict","unknown"].includes(R.status)&&Vw(n,R)&&Q.add(R.id);const z=ya(n),M=y.written.map(R=>z[R.index]).filter(Boolean);if(r.fromImport)for(const R of M)R.slot=y.finalGreetings.lastIndexOf(R.text.trim())>=0?y.finalGreetings.lastIndexOf(R.text.trim()):y.finalGreetings.length-1;else{const R=new Map(m.filter(L=>L.kind==="greet"&&!L.checked&&L.status==="mine").map(L=>[L.index,L.mine]));r.greetings=y.finalGreetings.map((L,W)=>R.has(W)?R.get(W):L),n.greetings=(n.greetings??[]).filter(L=>!M.includes(L))}const _={...a.data??{},...y.cardData};y.cardData.first_mes!==void 0&&(_.first_mes=y.cardData.first_mes,_.alternate_greetings=y.cardData.alternate_greetings);const ce=y.worldChanged?y.world:o;r.base=jf(m.map(R=>["theirs","conflict","unknown"].includes(R.status)&&!R.checked&&!Q.has(R.id)?{...R,status:"mine",checked:!1}:R),r.base,ur(_,ce));for(const R of m)["theirs","conflict","unknown"].includes(R.status)&&!R.checked&&!Q.has(R.id)&&(R.kind==="field"&&(r.base.fields[R.field]=R.mine),R.kind==="entry"&&(r.base.entries[R.key]=R.mine),R.kind==="greet"&&(r.base.greetings[R.index]=R.mine));b.plan=null;const V=m.filter(R=>R.checked).length;return X.toastr.success(`已写回 ${V} 处：${r.name}`,"Love 写卡机"),`写回了 ${V} 处${Q.size?`，${Q.size} 处保留了酒馆里的版本并同步回Love 写卡机`:""}。开场白只对新开的聊天生效。`})}async function Kw(){const e=le(),t=N(),n=t.existing?.backup;n&&await e.callGenericPopup(`撤销 ${new Date(n.time).toLocaleString()} 的写回？`,e.POPUP_TYPE.CONFIRM)&&await $(async()=>{const r=await Yn();n.world&&n.worldData&&(await r.save(n.world,n.worldData),r.reload(n.world));const s={...n.card};for(const a of Object.keys(s))s[a]===null&&(s[a]=a==="character_book"?"__@@UNSET@@__":"");if(s.extensions={world:n.world||""},await Xp(n.avatar,s),!t.existing.fromImport)t.existing.greetings=[n.card.first_mes,...n.card.alternate_greetings??[]].filter(a=>String(a??"").trim()),t.greetings=[...t.greetings??[],...n.newGreetings??[]];else for(const a of t.greetings??[])Number.isInteger(a.slot)&&a.slot>=[n.card.first_mes,...n.card.alternate_greetings??[]].filter(i=>String(i??"").trim()).length&&delete a.slot;return t.existing.base=ur(n.card,n.worldData),b.plan=null,t.existing.world=n.world,t.existing.backup=null,`撤销了。${n.createdWorld?`写回时新建的世界书“${x(n.createdWorld)}”还在，只是不再绑定，不要的话可以在酒馆里删掉。`:""}`})}async function Xw(e){const t=N(),n=t.routes[e],r=t.existing?.world||t.imported?.world;if(!r||!n)return X.toastr.info(t.existing?"先写回原卡":"先导入酒馆","Love 写卡机");await $(async()=>{const s=await Yn(),a=await s.load(r);let i=0;for(const o of Object.values(a?.entries??{}))String(o.comment??"").startsWith("路线·")&&(o.disable=o.comment!==`路线·${n.name}`,i++);if(!i)throw new Error("世界书里没找到路线条目");await s.save(r,a),s.reload(r)},`已切换到路线“${x(n.name)}”。开新聊天时选对应的开场白。`)}function Zw(e,t){const n=new Blob([t],{type:"application/json"}),r=it.createElement("a");r.href=URL.createObjectURL(n),r.download=e,it.body.appendChild(r),r.click(),setTimeout(()=>{URL.revokeObjectURL(r.href),r.remove()},1e3)}function Ir(){const e=U(),t=e.draft;!t||!t.idea?.trim()&&!t.concepts?.length&&!t.existing&&!t.au&&!t.personas?.some(n=>n.text)&&!t.chat?.messages?.length&&!Object.values(t.pageDialogues??{}).some(n=>n.messages?.length||n.input?.trim())||(e.drafts=[structuredClone(t),...(e.drafts??[]).filter(n=>n.id!==t.id)].slice(0,8))}var tn={ciOpen:()=>{b.ci=null,b.ci=us(),b.page="chatImport",G()},ciRescan:()=>{const e=Sn();b.ci=us({upto:e.upto,scope:e.scope}),b.ci.name=e.name||b.ci.name,G()},ciLight:e=>{const t=Sn().items.find(n=>n.id===e.dataset.id);t&&(t.light=e.dataset.v),G()},ciPick:e=>{const t=Sn().items.find(n=>n.id===e.dataset.id);t&&(t.pick=Number(e.dataset.v),t.keys=t.versions[t.pick].keys?.length?t.versions[t.pick].keys:t.keys),G()},ciToDraft:()=>{Mp()&&(b.page="home",b.lastStatus="已放进写卡草稿。可以接着改，或去「导入酒馆」建卡。",G())},ciImport:async()=>{Mp()&&(b.page="import",G(),await Kp())},quickNewFlow:()=>{const e=U();La();const t=structuredClone(Pa.quickFlows[0]);t.id=kn("qf"),t.name=`我的流程 ${e.quickFlows.length+1}`,t.steps.forEach(n=>{n.id=kn("qs")}),e.quickFlows.push(t),e.quickFlowId=t.id,b.page="quick",b.lastStatus=`新建了“${x(t.name)}”，主页已换成这套流程。`,oe(),G()},quickCopyFlow:async()=>{const e=U(),t=wt(),n=t?t.name||"未命名流程":"完整工坊";if(!await le().callGenericPopup(`复制“${x(n)}”？会新建一套流程，草稿不复制。`,le().POPUP_TYPE.CONFIRM))return;La();const r=t?structuredClone(t):{name:"",steps:Ng()};r.id=kn("qf"),r.name=`${n} 副本`,r.steps.forEach(s=>{s.id=kn("qs")}),e.quickFlows.push(r),e.quickFlowId=r.id,b.page="quick",b.lastStatus=`复制好了：“${x(r.name)}”。主页已换成这套流程。`,oe(),G()},quickDelFlow:async()=>{const e=U(),t=wt();t&&await le().callGenericPopup(`删除流程“${x(t.name||"未命名流程")}”？不能撤销。正在写的卡会留着，主页换回完整工坊。`,le().POPUP_TYPE.CONFIRM)&&(e.quickFlows=e.quickFlows.filter(n=>n.id!==t.id),e.quickFlowId=br,b.lastStatus=`已删除“${x(t.name||"未命名流程")}”，主页换回完整工坊。`,b.page.startsWith("q:")&&(b.page="home"),oe(),G())},quickAddStep:()=>{b.page!=="quick"?(b.page="quick",b.quickPickOpen=!0):b.quickPickOpen=!b.quickPickOpen,G()},quickPickStep:e=>{const t=U(),n=wt();if(!n)return;let r=null;const s=e.dataset.src;if(s==="builtin")r={kind:"builtin",page:e.dataset.page};else if(s==="mine")r={kind:"mine",stepId:e.dataset.step};else if(s==="flow"){const c=t.quickFlows.find(p=>p.id===e.dataset.flow)?.steps?.find(p=>p.id===e.dataset.step);c&&(r={name:c.name||"新步骤",output:c.output||"entry",prompt:c.prompt??""})}r??={name:"新步骤",output:"entry",prompt:""},r.id=kn("qs");const a=c=>ps.findIndex(p=>p[0]===c),i=c=>c.kind==="builtin"?a(c.page):c.kind==="mine"?a((t.customSteps??[]).find(p=>p.id===c.stepId)?.after||"tone")+.5:a({description:"persona",personality:"persona",name:"persona",scenario:"world",world:"world",tone:"tone",entry:"tone",mes_example:"tone",greeting:"greet"}[c.output]||"tone")+(c.output==="greeting"?.2:.5),o=n.steps.findIndex(c=>i(c)>i(r));n.steps.splice(o<0?n.steps.length:o,0,r),b.quickPickOpen=!1,b.lastStatus=`已添加步骤“${x(xr(r))}”。`,oe(),G()},quickMove:e=>{const t=wt();if(!t)return;const n=Number(e.dataset.i),r=n+Number(e.dataset.dir);t.steps[r]&&([t.steps[n],t.steps[r]]=[t.steps[r],t.steps[n]],oe(),G())},quickDelStep:async e=>{const t=wt(),n=t?.steps[Number(e.dataset.i)];if(!n)return;const r=n.kind?"已经写好的内容会留在卡里。":"这一步写出的内容也会从卡里移除。";if(!await le().callGenericPopup(`从流程里删除“${x(xr(n))}”？${r}`,le().POPUP_TYPE.CONFIRM))return;t.steps.splice(Number(e.dataset.i),1);const s=ht();delete s.quickState.done[n.id],delete s.quickState.skipped[n.id],qa(s,t),(b.page===`q:${n.id}`||b.page.startsWith("step:")&&n.kind==="mine")&&(b.page="home"),ee(),G()},quickContinue:()=>{const e=en();return e?(b.quickStopAt="",$(()=>Ep(e,ht()),"流程跑完了。")):Oo()},quickOneClick:()=>{const e=en();return e?$(()=>Ep(e,ht(),{oneClick:!0}),"一键出卡完成。"):Oo()},quickRunOne:e=>{const t=en(),n=t?.steps.findIndex(r=>r.id===e.dataset.id)??-1;if(!(n<0))return $(async()=>{const r=ht();if(!String(r.idea??"").trim()&&!r.concepts?.length&&!Cp(t,r,n).length)throw new Error("先在「主题」里把主题定下来。");await Ap(t,r,n)},"这一步写好了，可以直接改。")},quickSkip:e=>{const t=ht();return t.quickState.skipped[e.dataset.id]=!0,b.quickStopAt="",ee(),tn.quickContinue()},quickUnskip:e=>{delete ht().quickState.skipped[e.dataset.id],ee(),G()},copyRawResponse:async e=>{try{await X.navigator.clipboard.writeText(String((b.page==="quick"?ht():N()).lastResponse?.raw??"")),e.textContent="已复制"}catch{e.textContent="复制失败，可长按原文复制"}},suite:e=>globalThis.__CW_SUITE__?.switchTo(e.dataset.mod),go:e=>{b.page=e.dataset.page||"home",e.dataset.tab&&(b.ptab=e.dataset.tab),e.dataset.sec&&((b.openSecs??(b.openSecs={}))[e.dataset.sec]=!0),b.busy||(b.lastStatus=""),G();const t=b.root?.closest?.(".popup-content, .popup-body, dialog");try{t?.scrollTo?.(0,0),b.root?.scrollIntoView?.({block:"start"})}catch{}},toggleHelp:()=>{b.helpOn=!b.helpOn,G()},resetHelp:()=>{U().seenHelp=[],oe(),X.toastr.info("下次进每一页都会再显示一遍说明","Love 写卡机")},ptab:e=>{b.ptab=e.dataset.tab,G()},loadCard:()=>{const e=(0,X.jQuery)(b.root).find(".cw-cardsel").val();return e?Ww(e):X.toastr.info("先选一张卡","Love 写卡机")},loadAU:()=>{const e=(0,X.jQuery)(b.root).find(".cw-cardsel").val();return e?$(async()=>{const t=await Bo(e),n=t.data?.extensions?.world||"";let r=null;if(n)try{r=await(await Yn()).load(n)}catch{r=null}return Ir(),U().draft=B.auStart(t,r,n),b.checks=null,b.bagu=null,b.page="au","先从原卡提取内核，再写 AU 设定。"}):X.toastr.info("先选一张卡","Love 写卡机")},backstory:e=>{const t=N().personas[Number(e.dataset.i)],n=N(),r=n.feedback?.[`persona:${t.name}`];return r&&(n.feedback[`backstory:${t.name}`]=r,n.feedback[`persona:${t.name}`]=""),$(async()=>{const s=await B.backstory(n,t.name);return`经历写好了：${s.count} 段，${s.chars} 字（不满意可以换回上一版）。`})},auCore:()=>$(()=>B.auCore(N()),"内核提取好了，看一下，不对就直接改。然后写 AU 设定。"),auMap:()=>$(()=>B.auMap(N()),"映射表写好了，逐条看一下。然后去“主要人设”生成 AU 人设。"),auCheck:e=>{const t=N().personas[Number(e.dataset.i)];return $(()=>B.auCheck(N(),t.name),"检查完了，结果在人设下面。")},auFix:e=>{const t=N().personas[Number(e.dataset.i)];return $(()=>B.auFix(N(),t.name),"按检查结果修好了（不满意可以换回上一版）。")},revise:e=>$(()=>B.revise(N(),e.dataset.key),"按意见改好了（不满意可以换回上一版）。"),suggestRoutes:()=>$(()=>B.suggestRoutes(N()),"看看哪条想要，点“加上”。"),addRouteIdea:e=>{B.addRouteIdea(N(),Number(e.dataset.i)),ee(),b.lastStatus="加上了。点“给新路线写信息”。",G()},planWriteBack:_p,applyWriteBack:Yw,writeBack:_p,undoWriteBack:Kw,ideaQA:()=>N().idea.trim()?$(()=>B.ideaQA(N()),"点选或自己写，然后“带上回答生成构想”。"):X.toastr.info("先写一句话脑洞","Love 写卡机"),classifyLocal:()=>{B.classifyLocal(N()),ee(),G()},classifyAI:()=>$(async()=>`AI 分好了 ${await B.classifyAI(N())} 个条目。`),showFreeGreet:()=>{b.showFreeGreet=!0,G()},hooks:e=>$(()=>B.hooks(N(),Po(Number(e.dataset.i))),"勾选喜欢的梗，可以改字，再点“扩写”。"),expand:e=>$(async()=>(b.greetCleaned=0,`扩写了 ${await In(()=>B.expand(N(),Po(Number(e.dataset.i))))} 个开场白，加在这条路线后面。${Yp()}`)),addHook:e=>{var t,n,r;const s=Ha(Po(Number(e.dataset.i))),a=(0,X.jQuery)(b.root).find(`.cw-newhook[data-r="${e.dataset.i}"]`).val()?.trim();a&&((t=N()).hooks??(t.hooks={}),((n=N().hooks)[r=s.name]??(n[r]=[])).push({text:a,on:!0,mine:!0}),ee(),G())},delHook:e=>{const t=Ha(Number(e.dataset.r));N().hooks?.[t.name]?.splice(Number(e.dataset.h),1),ee(),G()},editStep:()=>{b.page="prompts",b.ptab="mine",G()},recompose:()=>{const e=N();if(!(e.intro?.dirty&&!X.confirm("现在的简介经过手动修改，重新排版会覆盖这些修改。确定继续吗？")))return $(()=>B.restyleIntro(e),"按当前风格重新排版了，旧版已保存。")},addIntroStyle:()=>{const e=U();e.introStyles.push({name:`我的风格 ${e.introStyles.length+1}`,tpl:Gn}),oe(),G()},delIntroStyle:e=>{const t=U(),n=Number(e.dataset.i);t.introStyles.splice(n,1),Number(t.introStyle)===n+1?t.introStyle=0:Number(t.introStyle)>n+1&&(t.introStyle-=1),oe(),G()},restore:e=>{B.restore(N(),e.dataset.key)&&(ee(),b.lastStatus="换回上一版了。再点一次会继续往前换，换一圈回到最新的。",G())},resetStep:()=>{U().prompts[b.editStep]="",oe(),G()},resetRule:()=>{const e=U(),t=b.editRule;e.rules[t]="",delete e.ruleOff[t],delete e.ruleModes[t],delete e.ruleSteps[t],oe(),G()},addRule:()=>{const e=U(),t=String((0,X.jQuery)(b.root).find(".cw-newrule").val()??"").trim();if(!t)return X.toastr.info("先写规则的名字","Love 写卡机");if(/[{}.\s]/.test(t))return X.toastr.warning("名字里不要有空格、点和花括号","Love 写卡机");if(t in Ct||t in e.customRules)return X.toastr.warning("已经有同名的规则了","Love 写卡机");e.customRules[t]="",e.ruleSteps[t]=[],b.editRule=t,oe(),G()},delRule:async()=>{const e=le(),t=U(),n=b.editRule;n in Ct||await e.callGenericPopup(`删除规则“${x(n)}”？`,e.POPUP_TYPE.CONFIRM)&&(delete t.customRules[n],delete t.ruleOff[n],delete t.ruleModes[n],delete t.ruleSteps[n],b.editRule="通用",oe(),G())},cwzType:e=>{const t=N(),n=U();t.cardType=e.dataset.t,(n.quickFlowId&&n.quickFlowId!==br)&&(n.quickFlowId=br),t.themeOk&&(t.mode=cwzModeOf(t)),ee(),oe(),G()},cwzTagDel:e=>{const t=N();t.tags?.splice(Number(e.dataset.i),1),ee(),G()},cwzThemeSw:()=>{const e=U();e.cwzTheme=e.cwzTheme==="dark"?"":"dark",oe(),G()},cwzPromptReset:e=>{const t=U();t.prompts&&delete t.prompts[e.dataset.k],oe(),G()},dressRuleReset:()=>{nfDState(N()).rule="",ee(),G()},cwzFreeAdd:e=>{const t=N(),n=e.dataset.own?(0,X.jQuery)(b.root).find(".cwz-newname").val()?.trim():e.dataset.name,r=e.dataset.own?(0,X.jQuery)(b.root).find(".cwz-newdesc").val()?.trim()??"":e.dataset.desc??"";if(!n)return X.toastr.info("先给模块起个名字","Love 写卡机");if(t.free.some(a=>!a.fromStep&&a.name?.trim()===n))return X.toastr.info(`已经有「${n}」了`,"Love 写卡机");t.free.push({name:n,desc:r,content:"",light:"blue",keys:[],position:"after"}),ee();const s=t.free.length-1;if(e.dataset.gen)return $(()=>B.free(N(),s),`「${x(n)}」写好了。`);G(),setTimeout(()=>b.root?.querySelector(`#cwz-free-${s}`)?.scrollIntoView({block:"center",behavior:"smooth"}),60)},cwzFreeAll:()=>$(async()=>{const e=N();let t=0;for(let n=0;n<e.free.length;n++){if(b.abort)throw new Error("已停止");const r=e.free[n];r.fromStep||!r.name?.trim()||String(r.content??"").trim()||(await B.free(e,n),t++,ee(),G())}return`写好了 ${t} 个模块。`},""),addStep:()=>{U().customSteps.push({id:`step${Date.now().toString(36)}`,name:"",stage:"card",light:"blue",position:"after",keys:[],template:Pw,output:"free",after:"tone",auto:!1}),oe(),G()},delStep:e=>{U().customSteps.splice(Number(e.dataset.i),1),oe(),G()},stop:()=>{b.abort=!0;try{le().stopGeneration?.()}catch{}Be("正在停止…")},openDraft:e=>{const t=U(),n=t.drafts[Number(e.dataset.i)];n&&(Ir(),t.drafts=(t.drafts??[]).filter(r=>r.id!==n.id),t.draft=structuredClone(n),b.checks=null,b.bagu=null,b.page=fs[0].done(t.draft)?"home":"chat",ee(),G())},delDraft:async e=>{const t=le(),n=U(),r=n.drafts[Number(e.dataset.i)];r&&await t.callGenericPopup(`删除草稿“${x(r.name||r.idea?.slice(0,16)||"未命名")}”？删了找不回来。`,t.POPUP_TYPE.CONFIRM)&&(n.drafts.splice(Number(e.dataset.i),1),oe(),G())},delCurrent:async()=>{const e=le();await e.callGenericPopup("删除当前草稿？不会放进历史草稿，删了找不回来。已经导入酒馆的卡和世界书不受影响。",e.POPUP_TYPE.CONFIRM)&&(U().draft=hn(),b.checks=null,b.bagu=null,b.page="home",b.lastStatus="当前草稿已删除。",ee(),G())},clearDrafts:async()=>{const e=le(),t=U();await e.callGenericPopup(`清空全部 ${t.drafts.length} 份历史草稿？当前草稿不动。删了找不回来。`,e.POPUP_TYPE.CONFIRM)&&(t.drafts=[],oe(),G())},newDraft:async()=>{const e=le();await e.callGenericPopup("新建一张卡？当前草稿会放进历史草稿。",e.POPUP_TYPE.CONFIRM)&&(Ir(),U().draft=hn(),b.checks=null,b.bagu=null,b.page="chat",ee(),G())},auto:Oo,idea:()=>{const e=N();return e.idea.trim()?$(()=>B.idea(e),"下面的构想选一个，标签已经自动勾好了。"):X.toastr.info("先写一句话脑洞","Love 写卡机")},roll:()=>{const e=N();B.roll(e),ee(),G()},inspire:()=>$(()=>B.inspire(N(),{reroll:!1}),"点选或自己写答案，然后“用这些回答生成构想”。"),ideaFromInspire:()=>{const e=N();return B.ideaFromInspire(e),e.idea.trim()?$(()=>B.idea(e),"选一个构想。"):X.toastr.info("先掷骰子，或回答至少一个问题","Love 写卡机")},diceDim:e=>{const t=N(),n=t.diceSet??(t.diceSet={dims:[...gn],count:gn.length}),r=new Set(n.dims??[]);e.checked?r.add(e.dataset.dim):r.delete(e.dataset.dim),n.dims=da.filter(s=>r.has(s)),ee(),G()},story:()=>$(()=>B.story(N()),"看看这个短篇，可以直接改；满意了点“按这个短篇生成构想”。"),storyPrev:()=>{const e=N();e.story?.prev&&([e.story.text,e.story.prev]=[e.story.prev,e.story.text],ee(),G())},storyClear:()=>{const e=N();e.story={text:"",prev:e.story?.text||e.story?.prev||""},ee(),G()},ideaFromStory:()=>{const e=N();return e.idea?.trim()||B.ideaFromInspire(e),e.idea?.trim()||(e.idea="以短篇为准"),ee(),$(()=>B.idea(e),"选一个构想。")},dicePick:e=>{const t=N();t.diceLock??(t.diceLock={}),e.value?t.diceLock[e.dataset.dim]=e.value:delete t.diceLock[e.dataset.dim],ee(),G()},ideaMode:e=>{N().ideaMode=e.dataset.v,ee(),G()},pTab:e=>{(b.pTab??(b.pTab={}))[e.dataset.i]=e.dataset.v,G()},pickGo:()=>{const e=N();return Object.keys(e.diceLock??{}).length?(B.useMyTags(e),B.ideaFromInspire(e),ee(),$(()=>B.idea(e),"选一个构想。")):X.toastr.info("先选几个标签","Love 写卡机")},pickAsk:()=>{const e=N();return Object.keys(e.diceLock??{}).length?(B.useMyTags(e),$(()=>B.inspire(e,{reroll:!1}),"点选或自己写答案，然后“用这些回答生成构想”。")):X.toastr.info("先选几个标签","Love 写卡机")},pickTpl:async e=>{const t=Bt(e.dataset.id),n=U();if(String(n.rules?.人设模板??"").trim()){if(!await le().callGenericPopup(`你在“提示词”页改过人设模板。换成「${t.name}」会丢掉你改的那份，确定吗？`,le().POPUP_TYPE.CONFIRM))return;delete n.rules.人设模板}n.personaTpl=t.id,oe(),ed(t.id),X.toastr.success(`之后写人设都按「${t.name}」（作者：${t.author}）来`,"人设模板换好了")},tplReset:async()=>{const e=U();await le().callGenericPopup("丢掉你在“提示词”页改的人设模板，按选的模板来？",le().POPUP_TYPE.CONFIRM)&&(delete e.rules.人设模板,oe(),ed(Bt(e.personaTpl).id),X.toastr.success(`现在按「${Bt(e.personaTpl).name}」来`,"人设模板"))},dicePickTag:e=>{const t=N(),n=e.dataset.dim,r=jp(t,n),s=e.dataset.tag,a=r.includes(s)?r.filter(i=>i!==s):[...r,s];t.diceLock??(t.diceLock={}),a.length?t.diceLock[n]=a.join("、"):delete t.diceLock[n],(b.pickOpen??(b.pickOpen={}))[n]=!0,ee(),G()},dicePickClear:()=>{const e=N();e.diceLock={},ee(),G()},lockDice:e=>{const t=N();t.diceLock??(t.diceLock={}),e.checked?t.diceLock[e.dataset.dim]=t.dice[e.dataset.dim]:delete t.diceLock[e.dataset.dim],ee()},answer:e=>{const t=N(),n=Ft(t,e.dataset.path);ls(t,e.dataset.path,n===e.dataset.val?"":e.dataset.val),ee(),G()},pick:e=>{B.pickConcept(N(),Number(e.dataset.i)),b.lastStatus="选好了。点底部“下一步”继续，或者回目录点“一键出卡”。",ee(),G()},tag:e=>{var t,n;const r=N(),{dim:s,name:a}=e.dataset,i=!r.tags.some(o=>o.dim===s&&o.name===a);r.tags=Kt(r.tags,_t(),s,a,i),i&&(r.tagSrc??(r.tagSrc={}),(t=r.tagSrc)[n=`${s}:${a}`]??(t[n]="user")),ee(),G()},tagEdit:e=>{var t;const n=U(),r=b.editDim,s=Gi(n.customTags,{}).find(i=>i.key===r)?.tags.find(i=>i.name===e.dataset.name);if(!s)return;const a=(t=n.customTags)[r]??(t[r]=[]);a.some(i=>i.split("|")[0].trim()===s.name)||a.push(`${s.name}|${s.triggers.join(",")}${s.gloss?`|${s.gloss}`:""}`),oe(),G()},adoptTag:e=>{const t=U(),n=N(),{dim:r,name:s}=e.dataset;t.customTags[r]=[...t.customTags[r]??[],`${s}|${s}`],n.tags=Kt(n.tags,_t(),r,s,!0),n.ai.novel=n.ai.novel.filter(a=>a.name!==s),ee(),G()},qa:()=>$(()=>B.qa(N()),"点选答案或自己写，然后生成人设。"),deepAns:e=>((b.pTab??(b.pTab={}))[e.dataset.i]="ask",$(async()=>`AI 答了 ${await B.deepAns(N(),Number(e.dataset.i))} 题，逐条看一遍、改一改；改完写人设时会参考。`)),deepClear:async e=>{const t=N().personas[Number(e.dataset.i)];if(!(!t||!await le().callGenericPopup("清空这个角色的深挖答案？",le().POPUP_TYPE.CONFIRM))){for(const n of B.deepOf(t))n.a="",n.ai=!1;ee(),G()}},persona:e=>$(async()=>{const t=N(),n=Number(e.dataset.i),r=!t.personas[n]?.text?.trim(),s=t.personas.filter((o,c)=>c!==n&&o.text?.trim()).length;await B.persona(t,n);const a=t.personas[n],i=[];return r&&s&&(t.relations&&i.push("角色关系网里还没有 TA，到页面底部重写一下"),t.routes.some(o=>o.info?.trim())&&i.push("路线的玩家信息里还没有 TA，可以到“玩家与路线”重写，或者用局部重写补上")),`${x(a.name)} 的人设写好了。${i.length?`<br><span class="cw-warntext">${i.join("；")}。</span>`:""}`}),personaExtra:e=>{const t=N().personas[Number(e.dataset.i)];return $(()=>B.personaExtra(N(),t.name),"人设补充写好了（不满意可以换回上一版）。")},allPersonas:()=>$(async()=>{const e=N();for(let t=0;t<e.personas.length;t++)Be(`人设：${x(e.personas[t].name||"新角色")}…`),await B.persona(e,t),ee()},"人设都写好了。"),predict:e=>{const t=N().personas[Number(e.dataset.i)];return $(()=>B.predict(N(),t.name),"测试完了，结果在角色下面。")},destale:e=>{const t=N().personas[Number(e.dataset.i)],r=(N().predict?.[t.name]?.overlaps??[]).map((s,a)=>s.skip?-1:a).filter(s=>s>=0);return r.length?$(async()=>`勾选的地方重写了，改了 ${await B.destale(N(),t.name,{only:r})} 处，在人设框上面“改了什么”里看。`):X.toastr.info("先勾上要改的地方","Love 写卡机")},destaleOne:e=>{const t=N().personas[Number(e.dataset.i)];return $(async()=>`这一处重写了，改了 ${await B.destale(N(),t.name,{only:[Number(e.dataset.o)]})} 处，在人设框上面“改了什么”里看。别的撞车的地方没动。`)},ovSel:e=>{const t=N().predict?.[N().personas[Number(e.dataset.i)]?.name]?.overlaps?.[Number(e.dataset.o)];t&&(e.checked?delete t.skip:t.skip=!0,ee(),G())},ovHint:e=>{const t=N().predict?.[N().personas[Number(e.dataset.i)]?.name]?.overlaps?.[Number(e.dataset.o)];t&&(t.hint=e.value,ee())},world:()=>$(()=>B.world(N()),"世界观写好了。"),npc:()=>$(()=>B.npc(N()),"NPC 写好了。"),relations:()=>$(()=>B.relations(N()),"角色关系网写好了。"),routeOne:e=>$(async()=>{const t=N(),n=t.routes[Number(e.dataset.i)];return await B.routes(t,Number(e.dataset.i)),`路线“${x(n.name)}”写好了，别的路线没动。`}),npcOne:e=>$(async()=>{const t=await B.npcOne(N(),Number(e.dataset.i));return`${x(t.name)} 写好了，别的 NPC 没动。`}),routes:()=>$(()=>B.routes(N()),"路线信息写好了。"),tone:()=>$(()=>B.tone(N()),"基调与规则写好了。"),free:e=>$(()=>B.free(N(),Number(e.dataset.i)),"模块写好了。"),custom:e=>{const t=U().customSteps[Number(e.dataset.i)];return $(()=>B.custom(N(),t),`${x(t.name)} 完成，产出在自由模块里。`)},greet:e=>$(async()=>(b.greetCleaned=0,await In(()=>B.greetings(N(),Number(e.dataset.i))),`开场白写好了。${Yp()}`)),greetMore:e=>$(async()=>{b.greetCleaned=0;const t=N(),n=Number(e.dataset.i),r=n>=0?t.routes[n]?.name??"":"",a=(t.greetings??[]).filter(c=>c.route===r);await In(()=>B.greetings(t,n,1));const i=(t.greetings??[]).filter(c=>c.route===r);t.greetings=[...t.greetings.filter(c=>c.route!==r),...a,...i];return`又写了一个，加在这条路线最后。${Yp()}`},""),add:e=>{Ft(N(),e.dataset.path).push(Fw[e.dataset.tpl]()),ee(),G()},del:e=>{const t=Ft(N(),e.dataset.path);e.dataset.path==="existing.greetings"?t[Number(e.dataset.i)]="":t.splice(Number(e.dataset.i),1),ee(),G()},localCheck:()=>{b.checks=B.localCheck(N()),b.dup=cwzDupScan(),G()},cwzDupRun:()=>{b.dup=cwzDupScan(),b.lastStatus=b.dup.pairs.length?`查到 ${b.dup.pairs.length} 处重复，大约 ${b.dup.total} 字。`:"没查到明显重复。",G()},cwzDedup:e=>$(async()=>{const t=b.dup?.pairs?.[Number(e.dataset.i)];if(!t)throw new Error("先点「查重复」");const n=N(),r=B.textSlots(n),s=r.find(o=>o.label===t.b),a=r.find(o=>o.label===t.a);if(!s)throw new Error(`找不到「${t.b}」，再查一次`);const i=s.get();Be(`删「${t.b}」里的重复…`);let o=await hr({system:"你是角色卡编辑，只做删减重复，不加新内容。",user:`下面是角色卡里的一块「${t.b}」。它有些内容和另一块「${t.a}」重复了。\n\n【要做的】\n删掉或压缩「${t.b}」里和「${t.a}」重复的部分：那边已经写过，这里不要再背一遍，确实需要时用一句话带过。其他内容一个字都不要改，原来的格式（标签、YAML、分块标记）照原样保留。\n\n【重复的片段（去掉了标点，供定位）】\n${t.runs.map(c=>`- ${c}`).join("\n")}\n\n【「${t.a}」全文，供对照】\n${String(a?.get()??"").slice(0,4e3)}\n\n【「${t.b}」全文，改这一块】\n${i}\n\n【输出】只输出改好的「${t.b}」全文，不加解释，不用代码块。`,stage:"card",preserveOutput:!0});o=String(o??"").replace(/^```[a-z]*\n?|\n?```$/gi,"").trim();if(!o)throw new Error("AI 返回了空内容");if(o.length<i.length*.3)throw new Error("AI 删得太多了，没有采用，可以再点一次");s.set(o),b.dedupUndo={label:t.b,old:i},ee(),b.dup=cwzDupScan();return`「${x(t.b)}」少了 ${Math.max(0,i.length-o.length)} 字。不满意可以点「撤销」。`},""),cwzDedupUndo:()=>{const e=b.dedupUndo;if(!e)return;const t=B.textSlots(N()).find(n=>n.label===e.label);t&&(t.set(e.old),ee()),b.dedupUndo=null,b.dup=cwzDupScan(),b.lastStatus=`「${e.label}」换回去了。`,G()},baguScan:()=>{const e=$t(le().extensionSettings,B.banned(N()));b.bagu=B.textSlots(N()).filter(t=>!t.rules&&!Ta(t.get())).map(t=>({s:t,r:wr(t.get(),e)})).filter(t=>t.r.total).map(t=>({label:t.s.label,text:`${t.r.must?`<b class="cw-err">必改 ${t.r.must}</b> · `:""}八股 ${t.r.total} 处：${x(ho(t.r.words,10))}`})),b.bagu.length||(b.bagu=[{label:"八股清理",text:"没扫到八股"}]),G()},baguFix:()=>$(()=>za(),"八股清理完成。"),localEdit:()=>$(async()=>{const e=N(),t=b.sel;if(!t)throw new Error("先在框里选中要改的那段");const n=hg(e,t.path)??{},r=await B.localEdit(e,{...t,instruction:b.selNote??"",key:n.key,label:n.label});return b.sel=null,b.selNote="",`改好了这一段（${[...r.before.trim()].length} 字 → ${[...r.after.trim()].length} 字）。${n.key?"原来的和现在的在这一块上面“改了什么”里看，不满意点“换回上一版”。":""}`}),addStyle:()=>{U().styles.push({name:`文风 ${U().styles.length+1}`,text:""}),oe(),G()},delStyle:e=>{const t=Number(e.dataset.i);U().styles.splice(t,1);const n=N();Number(n.style)===t+1?n.style=0:Number(n.style)>t+1&&(n.style-=1),oe(),ee(),G()},chatAsk:()=>$(()=>B.chatAsk(N()),"点选或自己写，答完点“记下回答”。"),chatAnswer:()=>{const e=B.chatAnswer(N());ee(),G(),X.toastr.success(`记下 ${e} 个回答`,"Love 写卡机")},chatStart:()=>$(async()=>{G(),await B.chatReply(N(),{opener:!0})},""),chatSend:()=>cwzChatSend(),chatQuick:e=>{B.chatOf(N()).input=e.dataset.text||"";return cwzChatSend()},chatRedo:()=>$(async()=>{const e=N(),t=B.chatOf(e);t.messages.at(-1)?.role==="ai"&&t.messages.pop(),G(),await B.chatReply(e,{opener:!t.messages.length})},""),chatCut:e=>{B.chatOf(N()).messages.splice(Number(e.dataset.i)),ee(),G()},chatClear:async()=>{const e=B.chatOf(N());await le().callGenericPopup("清空聊天记录？已经整理的定稿不会删。",le().POPUP_TYPE.CONFIRM)&&(e.messages=[],ee(),G())},chatBrief:()=>$(()=>B.chatBrief(N()),"定稿整理好了，可以直接改。后面各步会按它写。"),themeGo:()=>$(async()=>{const e=N(),t=B.chatOf(e),n=t.messages??[];n.some(o=>o.role==="user")&&(!String(t.brief??"").trim()||(t.briefN??0)<n.length)&&(Be("整理主题…"),await B.chatBrief(e),ee());const r=String(t.brief??"").trim();if(!r)throw new Error("先聊几句，或者在框里写下主题");t.use=!0,e.themeOk=!0,e.idea=r.replace(/<\/?作者定稿>/g,"").trim(),ee(),Be("按主题排人物和路线…"),await B.idea(e),B.pickConcept(e,0),e.cardType||=cwzGuessType(e),e.mode=cwzModeOf(e),ee(),b.page="home";const a=Yg(e);return`主题定好了：${x(e.concepts?.[e.pick]?.title||"")}。${a?`下一步写「${x(a.name)}」。`:""}`},""),chatBriefBack:()=>{const e=B.chatOf(N());e.prevBrief!=null&&([e.brief,e.prevBrief]=[e.prevBrief,e.brief],ee(),G())},playStart:()=>{const e=N();B.playStart(e,Number(e.play?.greet??0)),ee(),G()},playSend:()=>$(async()=>{const e=N(),t=String(e.play?.input??"").trim();t&&(e.play.messages.push({role:"user",text:t}),e.play.input=""),await B.playChar(e)},""),playUserOnce:()=>$(()=>B.playUser(N(),{send:!1}),"AI 写的 user 在输入框里，可以改了再发送。"),playAuto:()=>$(async()=>`跑了 ${await B.playAuto(N(),N().play?.rounds??3)} 轮。`),playRedo:()=>$(()=>B.playRedo(N()),""),playCut:e=>{const t=N();t.play.messages.splice(Math.max(1,Number(e.dataset.i))),t.play.review=null,ee(),G()},playReview:()=>$(()=>B.playReview(N()),"点评好了。"),playFix:e=>{const t=N(),n=t.play?.review?.issues?.[Number(e.dataset.i)];if(!n)return;const r=B.reviewTarget(t,n);t.feedback??(t.feedback={});const s=[n.problem&&`试玩发现：${n.problem}`,n.fix].filter(Boolean).join("；");t.feedback[r.key]=[t.feedback[r.key],s].filter(a=>String(a??"").trim()).join(`
+`),ee(),b.page=r.page,G(),X.toastr.info("意见已经填进“哪里不满意”框里，点重写或按意见改","Love 写卡机")},conflictCheck:()=>$(async()=>{const e=await B.conflictCheck(N());return e.issues.length?`找到 ${e.issues.length} 处可能矛盾的地方。`:"没发现冲突。"}),conflictFix:e=>{const t=N(),n=t.conflicts?.issues?.[Number(e.dataset.i)];if(!n)return;const r=B.reviewTarget(t,n);t.feedback??(t.feedback={});const s=[n.problem&&`和标签${n.tag?`“${n.tag}”`:""}矛盾：${n.problem}`,n.fix].filter(Boolean).join("；");t.feedback[r.key]=[t.feedback[r.key],s].filter(a=>String(a??"").trim()).join(`
+`),t.conflicts.issues.splice(Number(e.dataset.i),1),ee(),b.page=r.page,G(),X.toastr.info("意见已经填进“哪里不满意”框里，点重写或按意见改","Love 写卡机")},consistencyCheck:()=>$(async()=>{const e=await B.consistencyCheck(N());return e.issues.length?`找到 ${e.issues.length} 处前后对不上的地方。`:"没发现前后矛盾。"}),consistencyFix:e=>{const t=N(),n=t.consistency?.issues?.[Number(e.dataset.i)];if(!n)return;const r=e.dataset.other?n.otherPart:n.part,s=B.reviewTarget(t,{...n,part:r});t.feedback??(t.feedback={});const a=[`前后矛盾：${n.problem}（另一处：「${e.dataset.other?n.quote:n.other}」）`,n.fix].filter(Boolean).join("；");t.feedback[s.key]=[t.feedback[s.key],a].filter(i=>String(i??"").trim()).join(`
+`),t.consistency.issues.splice(Number(e.dataset.i),1),ee(),b.page=s.page,G(),X.toastr.info("意见已经填进“哪里不满意”框里，点重写或按意见改","Love 写卡机")},consistencyIgnore:e=>{N().consistency?.issues?.splice(Number(e.dataset.i),1),ee(),G()},conflictDropTag:e=>{const t=N(),n=t.conflicts?.issues?.[Number(e.dataset.i)];n?.tag&&(t.tags=Kt(t.tags,_t(),n.tagDim||t.tags.find(r=>r.name===n.tag)?.dim,n.tag,!1),t.conflicts.issues.splice(Number(e.dataset.i),1),ee(),G())},conflictIgnore:e=>{N().conflicts?.issues?.splice(Number(e.dataset.i),1),ee(),G()},baguPage:e=>$(()=>Jw(e.dataset.page)),baguOne:e=>$(async()=>{const t=N().personas[Number(e.dataset.i)],n=$t(le().extensionSettings,B.banned(N())),r=await rg(t.text,"人设",n,(s,a)=>hr({system:s,user:a,stage:"card"}),()=>b.abort);return t.text=r.text,`改了 ${r.changed} 句${r.failed.length?`，${r.failed.length} 句没改好，可以手改`:""}。`}),import:Kp,dressSet:e=>{const d=nfDState(N());d.set=e.dataset.k;d.ok=!0;ee();G()},dressOk:()=>{const d=nfDState(N());d.ok=!0;d.use=!0;ee();b.page=gs().some(t=>t.id==="import")?"import":"home";G()},dressMode:e=>{nfDState(N()).mode=e.dataset.v;ee();G()},dressUse:()=>{const d=nfDState(N());d.use=!d.use;ee();G()},dressHome:()=>{const d=nfDState(N());d.home=!d.home;ee();G()},dressRefresh:()=>G(),dressClear:()=>{nfDState(N()).ai=null;ee();G()},dressSkip:()=>{nfDState(N()).use=!1;ee();b.page="import";G()},dressSrc:e=>{nfDState(N()).src=e.dataset.v;ee();G()},dressChat:e=>lvOpen(e.dataset.kind),dressDrop:e=>{const K=nfDState(N());K.custom&&delete K.custom[e.dataset.kind];ee();G()},dressMine:e=>{const m=(Me().designs||[]).find(d=>d.id===e.dataset.id);if(!m)return;const K=nfDState(N()),k=m.kind==="opening"?"opening":"status";K.custom=K.custom||{};K.custom[k]={...Pt(m),lvFrom:m.id};K.use=!0;k==="opening"&&(K.home=!0);ee();G()},dressSave:()=>{const e=N(),K=nfDState(e),f=nfDSrc(e),{S,O}=nfKDesigns(K,f),m=Me(),now=Date.now(),put=d=>m.designs.unshift({...Pt(d),name:`${String(d.name||"").replace(/^套装·/,"")} · ${f.name}`.slice(0,40),id:ar("d"),savedAt:now}),n=[S,K.home&&O].filter(Boolean);n.reverse().forEach(put);Je();X.toastr.success(`存进状态栏工坊「我的」了：${n.length===2?"状态栏和开场白主页":"状态栏"}`,"Love 写卡机")},dressAdjust:()=>$(async()=>{const e=N(),K=nfDState(e),t=await hr({system:nfKSys,user:nfKPrompt(K,nfDSrc(e),""),stage:"card",preserveOutput:!0}),ai=nfKParse(t,K);K.ai=ai;K.entries=null;K.ok=!0;ee();return`调整好了。主题：${x(ai.theme)}`}),switchRoute:()=>Xw(Number((0,X.jQuery)(b.root).find(".cw-route").val())),exportDraft:()=>Zw(`Love 写卡机_${N().name||"草稿"}.json`,JSON.stringify(N(),null,2)),importDraft:()=>{const e=it.createElement("input");e.type="file",e.accept=".json,application/json",e.onchange=async()=>{try{const t=JSON.parse(await e.files[0].text());if(!t||typeof t!="object"||!("idea"in t))throw new Error("不是Love 写卡机的草稿");Ir(),U().draft={...hn(),...t},ee(),G()}catch(t){X.toastr.error(String(t.message||t),"Love 写卡机")}},e.click()},intro:()=>$(()=>B.intro(N()),"简介已按当前选中的模板生成。"),pickTitle:e=>{const t=N();if(t.intro?.dirty&&!X.confirm("你手动修改过简介。换标题会重新排版并覆盖修改，确定继续吗？"))return;const n=t.intro.pick;return t.intro.pick=Number(e.dataset.i),$(async()=>{try{await B.restyleIntro(t)}catch(r){throw t.intro.pick=n,r}},"新标题已经应用到简介。")},copyIntro:async()=>{try{await X.navigator.clipboard.writeText(N().intro.text??""),X.toastr.success("已复制","Love 写卡机")}catch{X.toastr.warning("复制失败，手动全选复制吧","Love 写卡机")}},saveIntro:async()=>{const e=le(),t=N();if(!t.imported?.avatar)return X.toastr.info("先导入酒馆","Love 写卡机");const n=await(0,X.fetch)("/api/characters/merge-attributes",{method:"POST",headers:e.getRequestHeaders(),body:JSON.stringify({avatar:t.imported.avatar,data:{creator_notes:t.intro.text}})});n.ok?X.toastr.success("简介已写进角色卡的作者备注","Love 写卡机"):X.toastr.error(`写入失败（HTTP ${n.status}）`,"Love 写卡机")}};function $w(e){const t=(0,X.jQuery)(e);e.addEventListener?.("toggle",s=>{const a=s.target;a?.classList?.contains("cw-sec")&&((b.openSecs??(b.openSecs={}))[a.dataset.sec]=a.open),a?.classList?.contains("cw-pickdim")&&((b.pickOpen??(b.pickOpen={}))[a.dataset.dim]=a.open),a?.matches?.("[data-opening-preview]")&&a.open&&(a.querySelector("pre").textContent=Fp())},!0),t.on("click","[data-act]",function(s){const a=this.dataset.act;a==="lockDice"||a==="diceDim"||a==="dicePick"||a==="ovSel"||a==="ovHint"||this.classList.contains("disabled")&&a!=="stop"||(s.preventDefault(),Hw(this),tn[a]?.(this))}),t.on("change",'input[data-act="lockDice"]',function(){tn.lockDice(this)}),t.on("change",'input[data-act="diceDim"]',function(){tn.diceDim(this)}),t.on("change",'select[data-act="dicePick"]',function(){tn.dicePick(this)}),t.on("change","input[data-chatopt]",function(){const s=B.chatOf(N()),a=this.dataset.chatopt;s[a]=this.checked,this.checked&&a!=="use"&&(s.use=!0),a==="use"&&!this.checked&&(s.dropConcept=!1,s.dropOverview=!1),ee(),G()}),t.on("change",'input[data-act="ovSel"]',function(){tn.ovSel(this)}),t.on("input change",'input[data-act="ovHint"]',function(){tn.ovHint(this)}),t.on("input change","[data-cedit]",function(){const s=N().concepts?.[Number(this.dataset.i)];s&&(this.dataset.cedit==="user"&&(s.user=this.value.split(/\s*[\/／]\s*/).map(a=>a.trim()).filter(Boolean)),this.dataset.cedit==="expect"&&(s.tension??={core:"",expect:[]},s.tension.expect=this.value.split(/\n|；/).map(a=>a.trim()).filter(Boolean)),ee())}),t.on("input","[data-brief]",function(){const c=B.chatOf(N()),v=this.value.trim();c.brief=v?`<作者定稿>\n${v}\n</作者定稿>`:"",c.briefN=Math.max(c.briefN??0,(c.messages??[]).length),ee()}),t.on("change","[data-cwztp]",function(){const c=U(),p=N().cardType;if(!p)return X.toastr.info("先选卡种","Love 写卡机");c.typePresets??={},(c.typePresets[p]??={})[this.dataset.cwztp]=this.value,oe()}),t.on("keydown",".cwz-tagin",function(c){if(c.key!=="Enter"||c.isComposing)return;c.preventDefault();const p=this.value.trim();if(!p)return;const m=N();m.tags??=[],m.tags.some(g=>(g.name??g)===p)||m.tags.push({name:p,custom:!0}),ee(),G()}),t.on("input","[data-cwzprompt]",function(){const c=U(),p=this.dataset.cwzprompt;c.prompts??={},this.value.trim()===String(Xt[p]).trim()?delete c.prompts[p]:c.prompts[p]=this.value,oe()}),t.on("input","[data-cwzwords]",function(){const c=le().extensionSettings;c.baguCleaner??={},c.baguCleaner.userWords=this.value,oe()}),t.on("change","[data-cwzset]",function(){U()[this.dataset.cwzset]=this.checked,oe()}),t.on("keydown",'textarea[data-bind="chat.input"]',function(c){c.key!=="Enter"||c.isComposing||c.keyCode===229||(c.ctrlKey||c.metaKey||!c.shiftKey&&!matchMedia("(pointer:coarse)").matches)&&(c.preventDefault(),b.busy||cwzChatSend())}),t.on("input",'textarea[data-bind="chat.input"]',function(){this.style.height="auto",this.style.height=Math.min(this.scrollHeight+2,180)+"px"}),t.on("input change","[data-bind]",function(){const s=N();ls(s,this.dataset.bind,this.value),this.dataset.bind==="name"&&(s.nameAuto=!1),this.dataset.bind==="intro.text"&&(s.intro.dirty=!0,t.find(".cw-len").text(`${[...this.value].length} 字`));const a=this.dataset.bind,i=t.find(".cw-tok[data-tok-path]").filter((o,c)=>c.dataset.tokPath===a);i.length&&(i.text(Wn([this.value],{exact:!1})),clearTimeout(b.tokTimer),b.tokTimer=setTimeout(yp,800)),ee(),a==="greetingContext.notes"&&n()});function n(){const s=e.querySelector("[data-opening-preview][open] pre");s&&(s.textContent=Fp())}if(t.on("change","[data-greeting-part], [data-greeting-notes]",function(){const s=N();s.greetingContext??={notes:"",useNotes:!0,parts:{}},this.hasAttribute("data-greeting-notes")?s.greetingContext.useNotes=this.checked:(s.greetingContext.parts??={})[this.dataset.greetingPart]=this.checked,ee(),n()}),t.on("select keyup mouseup touchend","textarea[data-bind]",function(){const s=this;setTimeout(()=>kp(s),0)}),!b.selListen){b.selListen=!0;let s=null;it.addEventListener("selectionchange",()=>{const a=it.activeElement;!a?.matches?.("textarea[data-bind]")||!b.root?.contains(a)||(clearTimeout(s),s=setTimeout(()=>kp(a),150))})}t.on("input","textarea[data-bind]",function(){(0,X.jQuery)(this).nextAll(".cw-selbar").first().remove()}),t.on("input",".cw-selin",function(){b.selNote=this.value}),t.on("change",'select[data-bind="mode"]',()=>setTimeout(G,0)),t.on("change",".cw-planchk",function(){const s=b.plan?.items.find(a=>a.id===this.dataset.id);s&&(s.checked=this.checked,G())}),e.addEventListener("toggle",s=>{const a=s.target;if(!a?.classList?.contains("cw-orig"))return;b.openOrig??(b.openOrig=new Set);const i=Number(a.dataset.uid);a.open?b.openOrig.add(i):b.openOrig.delete(i)},!0),t.on("change",".cw-excat",function(){const s=N().existing?.entries[Number(this.dataset.i)];s&&(s.cat=this.value,ee(),G(),X.toastr.info(`已放到“${xa[this.value]}”页`,"Love 写卡机"))}),t.on("change",".cw-stylesel",function(){N().style=Number(this.value)||0,ee(),G()}),t.on("change",".cw-styleall",function(){N().styleAll=this.checked,ee()}),t.on("input",".cw-stname",function(){const s=U().styles[Number(this.dataset.i)];s&&(s.name=this.value,oe())}),t.on("input",".cw-sttext",function(){const s=U().styles[Number(this.dataset.i)];s&&(s.text=this.value,oe())}),t.on("input","[data-bind-list]",function(){ls(N(),this.dataset.bindList,this.value.split(/[,，、]/).map(s=>s.trim()).filter(Boolean)),ee()});const r=()=>U();t.on("change",".cw-lean",function(){r().lean=this.checked,oe(),G()}),t.on("input change","[data-set]",function(s){let a=this.type==="checkbox"?this.checked:this.value;this.dataset.num!==void 0&&(a=Number(a)||0),ls(r(),this.dataset.set,a),oe(),s.type==="change"&&th(this)}),t.on("change",".cw-step-sel",function(){b.editStep=this.value,G()}),t.on("input",".cw-step-ta",function(){r().prompts[b.editStep]=this.value.trim()===Xt[b.editStep].trim()?"":this.value,oe()}),t.on("change",".cw-rule-sel",function(){b.editRule=this.value,G()}),t.on("input",".cw-rule-ta",function(){const s=b.editRule,a=s==="人设模板"?Bt(r().personaTpl).text:Ct[s];s in Ct?r().rules[s]=this.value.trim()===String(a).trim()?"":this.value:r().customRules[s]=this.value,oe()}),t.on("change",".cw-rule-on",function(){r().ruleOff[b.editRule]=!this.checked,this.checked&&delete r().ruleOff[b.editRule],oe(),G()}),t.on("change",".cw-rule-mode",function(){r().ruleModes[b.editRule]=this.value,oe(),G()}),t.on("change",".cw-rulestep",function(){const s=B.ruleList().find(i=>i.name===b.editRule),a=new Set(s?.steps??[]);this.checked?a.add(this.dataset.step):a.delete(this.dataset.step),r().ruleSteps[b.editRule]=[...a],oe(),G()}),t.on("change",".cw-pageon",function(){const s=new Set(r().offPages??[]);this.checked?s.delete(this.dataset.page):s.add(this.dataset.page),r().offPages=[...s],oe(),G()}),t.on("change",".cw-dim-sel",function(){b.editDim=this.value,G()}),t.on("change",".cw-taghide",function(){var s;const a=(s=r()).hiddenTags??(s.hiddenTags={}),i=new Set(a[b.editDim]??[]);this.checked?i.add(this.dataset.name):i.delete(this.dataset.name),a[b.editDim]=[...i],oe(),G()}),t.on("input",".cw-dim-ta",function(){r().customTags[b.editDim]=this.value.split(`
+`).map(s=>s.trim()).filter(Boolean),oe()}),t.on("input change","[data-step]",function(){const s=r().customSteps[Number(this.dataset.step)];if(!s)return;const a=this.dataset.key;s[a]=a==="keys"?this.value.split(/[,，、]/).map(i=>i.trim()).filter(Boolean):a==="auto"?this.checked:this.value,oe(),a==="userAsk"&&t.find(`[data-act="custom"][data-i="${this.dataset.step}"]`).toggleClass("disabled",!this.value.trim()).toggleClass("cw-primary",!!this.value.trim())}),t.on("change","[data-ci-on], [data-ci-gon]",function(){const s=Sn(),a=this.dataset.ciOn?s.items.find(i=>i.id===this.dataset.ciOn):s.greets.find(i=>i.id===this.dataset.ciGon);a&&(a.on=this.checked),G()}),t.on("input","[data-ci-text], [data-ci-gtext], [data-ci-name], [data-ci-keys], [data-ci-cardname]",function(){const s=Sn();this.dataset.ciCardname!==void 0&&(s.name=this.value);const a=s.items.find(o=>o.id===(this.dataset.ciText??this.dataset.ciName??this.dataset.ciKeys));a&&this.dataset.ciText&&(a.versions[a.pick].content=this.value),a&&this.dataset.ciName&&(a.name=this.value),a&&this.dataset.ciKeys&&(a.keys=Co(this.value));const i=s.greets.find(o=>o.id===this.dataset.ciGtext);i&&(i.text=this.value)}),t.on("change","[data-ci-scope]",function(){const s=Sn();b.ci=us({upto:s.upto,scope:this.value}),b.ci.name=s.name||b.ci.name,G()}),e.addEventListener("toggle",s=>{const a=s.target?.dataset?.ciOpen;a&&b.ci&&(b.ci.open[a]=s.target.open)},!0),t.on("change",".cw-qflow-sel",function(){U().quickFlowId=this.value,b.quickPickOpen=!1,b.quickStopAt="",b.page!=="quick"&&(b.page="home"),b.lastStatus=this.value===br?"主页换回完整工坊。":"主页已换成这套流程。",oe(),G()}),t.on("input change","[data-qflow], [data-qstep]",function(){const s=wt();if(!s)return;if(this.dataset.qflow==="name"){if(s.builtinType)return;s.name=this.value}else{const i=s.steps[Number(this.dataset.qstep)];if(!i)return;if(s.builtinType){const c=U();c.typeOver??={},c.typeOver[s.builtinType]??={};const p=i.id.slice(s.builtinType.length+1);(c.typeOver[s.builtinType][p]??={})[this.dataset.key]=this.value}else i[this.dataset.key]=this.value}oe();const a=e.querySelector(".cw-qsave");a&&(a.textContent="已保存。改过提示词的步骤，下次跑流程会重写。")}),t.on("input change","[data-qbind]",function(){const s=ht();if(this.dataset.qbind.startsWith("quickState.done.")&&this.dataset.qbind.endsWith(".text")){const a=wt(),i=this.dataset.qbind.slice(16,-5),o=a?.steps.find(c=>c.id===i);if(!o)return;s.quickState.done[i]={signature:ds(o),text:this.value},qa(s,a)}else ls(s,this.dataset.qbind,this.value);ee()}),t.on("change",".cw-exen",function(){const s=N().existing?.entries?.[Number(this.dataset.i)];s&&(s.disable=!this.checked,ee())}),t.on("input",".cw-cardfilter",function(){const s=this.value.trim().toLowerCase();t.find(".cw-cardsel option").each((a,i)=>{i.hidden=!!s&&!i.textContent.toLowerCase().includes(s)})}),t.on("dblclick",".cw-cardsel option",()=>tn.loadCard()),t.on("change",".cw-hookcheck",function(){const s=N().hooks?.[Ha(Number(this.dataset.r)).name]?.[Number(this.dataset.h)];s&&(s.on=this.checked,ee(),G())}),t.on("input",".cw-hooktext",function(){const s=N().hooks?.[Ha(Number(this.dataset.r)).name]?.[Number(this.dataset.h)];s&&(s.text=this.value,ee())}),t.on("keydown",".cw-newhook",function(s){s.key==="Enter"&&tn.addHook({dataset:{i:this.dataset.r}})}),t.on("change",".cw-introstyle",function(){const s=Number(this.value)||0,a=Number(r().introStyle)||0,i=N();if(i.intro?.text&&i.intro?.dirty&&!X.confirm("你手动修改过简介，换风格会重排并覆盖修改。确定继续吗？")){this.value=String(a);return}if(r().introStyle=s,oe(),i.intro?.parts&&String(i.intro.parts.简介??"").trim())return $(()=>B.restyleIntro(i),"已经按新风格排版，旧版保留在历史里。");G()}),t.on("input",".cw-isname",function(){const s=r().introStyles[Number(this.dataset.i)];s&&(s.name=this.value,oe())}),t.on("input",".cw-istpl",function(){const s=r().introStyles[Number(this.dataset.i)];s&&(s.tpl=this.value,oe())})}function _w(e){const t=e.ownerDocument,n=t.defaultView||X,r=n.visualViewport;let s=null,a=0,i=Math.max(n.innerHeight,r?.height||0),o=!1,c=!1,p=!1;const d=new Set,m=L=>!!L&&e.contains(L)&&L.getClientRects().length&&(L.tagName==="TEXTAREA"||L.isContentEditable||L.tagName==="INPUT"&&!/^(checkbox|radio|button|submit|reset|range|color|file|hidden)$/i.test(L.type)),g=()=>{if(a=0,o)return;if(!s){if(s=e.closest("dialog"),!s)return;R.disconnect(),s.classList.add("cw-viewport")}const L=n.matchMedia("(max-width: 700px), (pointer: coarse)").matches,W=t.activeElement,Ce=m(W),pe=c,me=p;if(c=p=!1,s.classList.toggle("cw-mobile",L),s.classList.toggle("cw-input-active",Ce),!L){e.style.removeProperty("padding-bottom");return}const J=r?.height||n.innerHeight;i=Math.max(i,J,n.innerHeight);const re=Ca(n,J,i),xe=re.height,de=Ce&&!re.detected&&M&&t.activeElement===_;de?e.style.setProperty("padding-bottom","60dvh"):e.style.removeProperty("padding-bottom");const Le=r?.offsetTop||0;s.style.setProperty("--cw-viewport-height",`${xe}px`),s.style.setProperty("--cw-viewport-top",`${Le}px`);const ie=e.closest(".popup-content")||e.closest(".popup-body");if(!ie)return;const he=ie.getBoundingClientRect(),Ie=Math.max(Le+12,he.top+12);let Ae=Math.min(Le+xe-12,he.bottom-12);de&&(Ae=Ie+Math.max(120,(Ae-Ie)*.45));const _e=Math.max(40,Math.floor(Ae-Ie));if(s.style.setProperty("--cw-editor-height",`${Math.max(40,Math.floor(_e*.75))}px`),!Ce||!pe||Ae<=Ie)return;const Ye=W.getBoundingClientRect();let Te=(Ye.top+Ye.bottom)/2;if(W.tagName==="TEXTAREA"){const At=fc(W),et=Math.min(24,W.clientHeight/4);At-W.scrollTop<et?W.scrollTop=Math.max(0,At-et):At-W.scrollTop>W.clientHeight-et&&(W.scrollTop=At-W.clientHeight+et),Te=Ye.top+W.clientTop+At-W.scrollTop}const qe=(Ie+Ae)/2,nn=Math.min(36,_e/5);let rn=0;me?rn=(Ye.height<=_e?(Ye.top+Ye.bottom)/2:Te)-qe:(Te<Ie+nn||Te>Ae-nn)&&(rn=Te-qe),Math.abs(rn)>1&&(ie.scrollTop+=rn)},y=(L=!1,W=!1)=>{c||=L,p||=W,!o&&!a&&(a=n.requestAnimationFrame(g))},E=()=>y(!0,!0),P=()=>{n.setTimeout(()=>{m(t.activeElement)||(M=!1,_=null),y()},0)};let D=0,Q=0;const z=()=>{const L=120-(Date.now()-Q);L<=0?(Q=Date.now(),y(!0)):D||(D=n.setTimeout(()=>{D=0,Q=Date.now(),y(!0)},L))};let M=!1,_=null;const ce=()=>{const L=t.activeElement;_!==L&&(M=!1),_=L,y(!0,!0);const W=n.setTimeout(()=>{d.delete(W),t.activeElement===L&&(M=!0,y(!0,!0))},900);d.add(W);for(const Ce of[300,650]){const pe=n.setTimeout(()=>{d.delete(pe),t.activeElement===L&&y(!0)},Ce);d.add(pe)}},V=()=>{m(t.activeElement)&&z()},R=new n.MutationObserver(()=>y());return R.observe(t.body,{childList:!0,subtree:!0}),e.addEventListener("focusout",P,!0),e.addEventListener("compositionend",z,!0),e.addEventListener("input",z,!0),e.addEventListener("focusin",ce,!0),t.addEventListener("selectionchange",V),n.addEventListener("resize",E),r?.addEventListener("resize",E),r?.addEventListener("scroll",E),n.navigator?.virtualKeyboard?.addEventListener("geometrychange",E),y(),()=>{o=!0,R.disconnect(),a&&n.cancelAnimationFrame(a),e.removeEventListener("focusout",P,!0),e.removeEventListener("compositionend",z,!0),e.removeEventListener("input",z,!0),e.removeEventListener("focusin",ce,!0),e.style.removeProperty("padding-bottom"),t.removeEventListener("selectionchange",V),D&&n.clearTimeout(D);for(const L of d)n.clearTimeout(L);if(n.removeEventListener("resize",E),r?.removeEventListener("resize",E),r?.removeEventListener("scroll",E),n.navigator?.virtualKeyboard?.removeEventListener("geometrychange",E),s){s.classList.remove("cw-viewport","cw-mobile","cw-input-active");for(const L of["--cw-viewport-height","--cw-viewport-top","--cw-editor-height"])s.style.removeProperty(L)}}}async function Fa(){if(b.root?.isConnected&&b.root.closest("dialog")?.open)return;try{cwzSeed()}catch(z){console.warn("[Love 写卡机]",z)}try{b.page==="home"&&!fs[0].done(N())&&(b.page="chat")}catch{}if(Fa.busy)return;Fa.busy=!0;b.root=null;const e=le();try{await Promise.race([gp(),new Promise(r=>setTimeout(r,1500))])}catch{}const t=it.createElement("div");let n=()=>{};try{b.root=t,b.helpPage=null,$w(t),G();try{n=_w(t)}catch(o){console.warn("[Love 写卡机] 视口适配",o)}const pp=e.callGenericPopup(t,e.POPUP_TYPE.TEXT,"",{wide:!0,large:!0,allowVerticalScrolling:!0,okButton:"关闭"});try{const dl=t.closest("dialog");dl?.classList.add("cwz-dlg"),dl?.classList.toggle("cwz-dark",U().cwzTheme==="dark")}catch{}Fa.busy=!1;await pp}finally{Fa.busy=!1;try{n()}catch{}try{le().saveSettings?.()}catch{}b.root===t&&(b.root=null);try{ee()}catch{}vs()}}function eh(e,t){const n=e.split(/<div class="cw-sub">(.*?)<\/div>/);if(n.length<3)return e;b.openSecs??(b.openSecs={});let r=n[0];for(let s=1;s<n.length;s+=2){const a=`${t}:${n[s]}`,i=a in b.openSecs?b.openSecs[a]:s===1;r+=`<details class="cw-sec" data-sec="${x(a)}" ${i?"open":""}><summary>${n[s]}</summary>${n[s+1]}</details>`}return r}function th(e){const t=e.closest("label")??e.parentElement;t&&(t.classList.remove("cw-saved"),t.offsetWidth,t.classList.add("cw-saved"),clearTimeout(t._cwSaved),t._cwSaved=setTimeout(()=>t.classList.remove("cw-saved"),1500))}function ed(e){b.tplFlash=e,G(),clearTimeout(b.tplFlashT),b.tplFlashT=setTimeout(()=>{b.tplFlash=null,(0,X.jQuery)(b.root).find(".cw-tplcard.cw-flash").removeClass("cw-flash")},1600)}function nh(){const e=U(),t=Bt(e.personaTpl).id;return`<div class="cw-dim cw-small cw-help">写人设时按哪个模板填。换了以后，新写或重写的人设都按新模板来，已经写好的不会自动变。</div>
+${!!String(e.rules?.人设模板??"").trim()?`<div class="cw-box cw-small">你在“提示词”页改过人设模板，现在用的是你改的那份，下面的选择暂时不生效。${q("tplReset","不用我改的，按下面选的来")}</div>`:""}
+<div class="cw-tpls" role="radiogroup">${Ki.map(r=>{const s=r.id===t;return`<div class="cw-tplcard ${s?"on":""} ${b.tplFlash===r.id?"cw-flash":""}" role="radio" aria-checked="${s}">
+<div class="cw-row"><b class="cw-grow">${x(r.name)}</b>${s?'<span class="cw-badge ok">正在用</span>':q("pickTpl","换成这个",`data-id="${r.id}"`)}</div>
+<div class="cw-small cw-dim">作者：${x(r.author)}</div>
+<div class="cw-small">${x(r.desc)}</div>
+<details class="cw-mini"><summary>看看模板</summary><pre class="cw-pre cw-small">${x(r.text)}</pre></details></div>`}).join("")}</div>`}function rh(){const e=U(),t=Kf(),n=cp(),r=(a,i,o)=>`<option value="${x(a)}" ${a===o?"selected":""}>${x(i)}</option>`,s=a=>`<select class="text_pole cw-in" data-set="${a}">${r("","不用预设",e[a])}${n.map(i=>r(i,i,e[a])).join("")}</select>`;return`<div class="cw-form">${eh(`
+<div class="cw-sub">API</div>
+<label>用哪个 API<select class="text_pole cw-in" data-set="apiProfile">${r("","酒馆当前连接的 API",e.apiProfile)}${t.map(a=>r(a.id,`连接配置文件：${a.name}`,e.apiProfile)).join("")}</select></label>
+<div class="cw-dim cw-small cw-help">默认用酒馆现在连着的 API。想写卡和聊天用不同的模型，先在酒馆的“连接配置文件”里存一个，再在这里选。</div>
+<label>两次调用间隔（秒）<input class="text_pole cw-num" type="number" min="0" step="1" data-set="minInterval" data-num value="${e.minInterval}"></label>
+<div class="cw-dim cw-small cw-help">老是 429 就调大。遇到 429 插件会自动等 15/30/60 秒重试。</div>
+<label>一步最多调用几次<input class="text_pole cw-num" type="number" min="0" step="1" data-set="maxStepCalls" data-num value="${e.maxStepCalls}"></label>
+<div class="cw-dim cw-small cw-help">0 = 不限。一键出卡之类一步里会调用很多次；设了上限，到数就停下，写好的都保留，再点一次会从没写的地方接着往下。</div>
+<label>最大回复长度<input class="text_pole cw-num" type="number" data-set="maxTokens" data-num value="${e.maxTokens}"></label>
+<div class="cw-dim cw-small cw-help">0 = 跟酒馆设置。世界观、人设比较长，回复被截断就调大，比如 8000。</div>
+<label>流式生成<select class="text_pole cw-in" data-set="stream">${r("preset","跟随预设（看酒馆预设里的「流式传输」开关）",Rs(e.stream))}${r("on","总是流式：边写边显示",Rs(e.stream))}${r("off","不流式：写完一次显示",Rs(e.stream))}</select></label>
+<div class="cw-dim cw-small cw-help">写卡、预设工坊、状态栏工坊和各页聊一聊都按这里。选了连接配置文件就看那个配置绑定的预设；接口不支持流式会自动退回普通请求。</div>
+<label class="checkbox_label"><input type="checkbox" data-set="useTemperature" ${e.useTemperature?"checked":""}>用连接配置文件时按步骤调温度（构想高、质检低）</label>
+<label>排除附加参数<textarea class="text_pole cw-in" rows="3" data-set="excludedParameters" spellcheck="false" placeholder="- temperature&#10;- top_p">${x(e.excludedParameters)}</textarea></label>
+<div class="cw-dim cw-small">自动保存。每行一个参数名，可保留开头的“-”。写卡生成、修改和聊一聊都会排除这些参数；清空则跟随原来的参数设置。排除 temperature 时，上面的调温度选项不生效。</div>
+
+<div class="cw-sub">预设</div>
+<label>写卡预设<small class="cw-dim">构想、人设、世界观、质检用</small>${s("presetCard")}</label>
+<label>开场白预设<small class="cw-dim">选你平时玩卡用的正文预设</small>${s("presetGreeting")}</label>
+<div class="cw-dim cw-small cw-help">插件会把这个预设里打开的提示词条目一起发出去（聊天记录、角色描述这类占位条目跳过），不会切换你酒馆当前的预设。列表里是对话补全预设。</div>
+${zp()}
+
+<div class="cw-sub">界面</div>
+<label>说明小字<select class="text_pole cw-in" data-set="helpMode">${r("first","第一次进每一页时显示（默认）",e.helpMode||"first")}${r("always","一直显示",e.helpMode)}${r("never","不显示（页面标题旁点“说明”看）",e.helpMode)}</select></label>
+<div class="cw-row">${q("resetHelp","把所有说明再显示一遍")}</div>
+
+<div class="cw-sub">写卡</div>
+<label>人设放哪里<select class="text_pole cw-in" data-set="personaPlace">${r("blue","世界书 · 蓝灯常驻",e.personaPlace)}${r("description","角色卡的角色描述",e.personaPlace)}${r("green","世界书 · 绿灯 + 蓝灯概要",e.personaPlace)}</select></label>
+<label>玩家写法<input class="text_pole cw-in" data-set="userToken" value="${x(e.userToken)}"></label>
+<label>每条路线开场白<span class="cw-row"><input class="text_pole cw-num" type="number" min="1" max="5" data-set="greetingCount" data-num value="${e.greetingCount}"> 个，每个 <input class="text_pole cw-num" data-set="greetingLength" value="${x(e.greetingLength)}"> 字</span></label>
+<label class="checkbox_label"><input type="checkbox" data-set="noNumbers" ${e.noNumbers!==!1?"checked":""}>不写具体数字，绝对不出现「三」（写完还有就自动改一次）</label>
+<label class="checkbox_label"><input type="checkbox" data-set="autoBackstory" ${e.autoBackstory?"checked":""}>一键出卡时，缺少经历才单独补写（每个角色多 1 次调用）</label>
+<label>经历篇幅<input class="text_pole cw-in" data-set="backstoryCount" value="${x(e.backstoryCount)}"></label>
+<label class="checkbox_label"><input type="checkbox" data-set="autoPredict" ${e.autoPredict?"checked":""}>一键出卡时检查常见写法，列出结果供选择，不自动改写（每个角色多 2 次调用）</label>
+<label class="checkbox_label"><input type="checkbox" data-set="autoBagu" ${e.autoBagu?"checked":""}>一键出卡时用八股清理改写</label>
+<label class="checkbox_label"><input type="checkbox" data-set="greetMustClean" ${e.greetMustClean?"checked":""}>开场白一写完，带禁用词和“我的八股词”的句子立刻改掉（只改这几句，所有新开场白合在一起，通常 1–2 次调用）</label>
+<label>常驻设定 token 上限<input class="text_pole cw-num" type="number" min="0" step="500" data-set="blueBudget" data-num value="${e.blueBudget}"></label>
+<div class="cw-dim cw-small cw-help">蓝灯条目 + 当前路线 + 角色描述加起来超过这个数，目录和导入页会标出来。0 = 不提示。用酒馆当前 API 的分词器算，算不了时按字数估。</div>
+
+<div class="cw-sub">试玩</div>
+<label>角色每次回复大约多少字<input class="text_pole cw-num" type="number" min="50" step="50" data-set="playLength" data-num value="${e.playLength}"></label>
+
+<div class="cw-sub">简介</div>
+<label>作者<input class="text_pole cw-in" data-set="author" value="${x(e.author)}"></label>
+<label>二传<input class="text_pole cw-in" data-set="license.repost" value="${x(e.license.repost)}"></label>
+<label>二改<input class="text_pole cw-in" data-set="license.edit" value="${x(e.license.edit)}"></label>
+<label>商用<input class="text_pole cw-in" data-set="license.commercial" value="${x(e.license.commercial)}"></label>
+<label>预设参考<input class="text_pole cw-in" data-set="presetNote" value="${x(e.presetNote)}" placeholder="空着就写开场白预设的名字"></label>
+<label>其他说明<input class="text_pole cw-in" data-set="introNotes" value="${x(e.introNotes)}"></label>
+<label>固定结尾<small class="cw-dim">每篇简介最后都会原样加上这段，可以写致谢、链接、签名；支持 Discord 的 Markdown</small><textarea class="text_pole cw-in" rows="4" data-set="introEnding" placeholder="比如：-# 感谢某某老师的预设">${x(e.introEnding??e.introThanks??"")}</textarea></label>
+<div class="cw-dim cw-small cw-help">空着就不加。自己的简介风格里写了 {{固定结尾}} 的，放在你写的位置。</div>
+`,"settings")}</div>`}function eb(){return`
+<div class="cw-settings">
+  <div class="inline-drawer">
+    <div class="inline-drawer-toggle inline-drawer-header">
+      <b>Love 写卡机 v${Na}</b>
+      <div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div>
+    </div>
+    <div class="inline-drawer-content">
+      <div class="menu_button cw-open"><i class="fa-solid fa-feather-pointed"></i> 打开Love 写卡机</div>
+      <small class="cw-dim">API 和预设在 Love 写卡机的「设置」里。</small>
+    </div>
+  </div>
+</div>`}function tb(){(0,X.jQuery)(".cw-settings").on("click",".cw-open",Fa)}(0,X.jQuery)(async()=>{U(),globalThis.__CW_SUITE__?.cardReady?.(Fa,()=>b.root);try{globalThis.__CW_SUITE__?.register?.("chatImport",{open:()=>Hg(null),close:()=>{},isOpen:()=>!1})}catch(e){console.warn("[Love 写卡机] 魔棒·从聊天导入",e)}try{zg()}catch(e){console.warn("[Love 写卡机] 聊天导入按钮",e)}gp()})})()})();
