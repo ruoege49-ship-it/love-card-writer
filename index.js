@@ -1620,38 +1620,38 @@ body:has(dialog.cwz-dlg.cwz-dark[open]) .cw-chat-compose{box-shadow:0 4px 0 rgba
 `);if(t==="hr"){const g=[];let y=[],E=!1;for(const P of a)/^\s*```/.test(P)&&(E=!E),!E&&/^\s*(-{3,}|={3,}|\*{3,})\s*$/.test(P)?(g.push(y),y=[]):y.push(P);return g.push(y),g.map(P=>P.join(`
 `).trim()).filter(Boolean).map(P=>({name:on(P,n),content:P}))}let i=!1;const o=[];if(a.forEach((g,y)=>{if(/^\s*```/.test(g)&&(i=!i),i)return;const E=g.match(/^(#{1,3})\s+(.+?)\s*#*\s*$/);E&&o.push({i:y,level:E[1].length,title:E[2]})}),!o.length)return s();const c=Math.min(...o.map(g=>g.level)),p=o.filter(g=>g.level===c),d=[],m=a.slice(0,p[0].i).join(`
 `).trim();return m&&d.push({name:on(m,n),content:m}),p.forEach((g,y)=>{const E=y+1<p.length?p[y+1].i:a.length,P=a.slice(g.i+1,E).join(`
-`).trim();d.push({name:g.title,content:P||g.title})}),d}function tc(e,{label:t="导入",splitMode:n="heading"}={}){const s=String(e??"").replace(/^﻿/,"").trim();if(!s)return{kind:"empty",label:t};if(/^[\[{]/.test(s)){let i;try{i=JSON.parse(s)}catch{i=void 0}if(i!==void 0)return i&&!Array.isArray(i)&&Array.isArray(i.prompts)?ii(i,t):i&&i.kind===$a||i&&!Array.isArray(i)&&Array.isArray(i.entries)?Ms(i,t):Array.isArray(i)&&i.length&&i.every(o=>o&&typeof o=="object"&&"content"in o)?Ms({entries:i},t):{kind:"unknown",label:t}}const a=ec(s,n,t);return{kind:"text",label:t,items:a.map((i,o)=>({key:`t:${o}`,entry:Xe({name:i.name,content:i.content,source:t,tags:[`来自:${t}`]})}))}}function nc(e,t){const n=new Map,r=[...e],s=[];let a=0;for(const o of t.items){const c=o.srcId||o.entry.id,{status:p,match:d}=Dn(r,o.entry);if(p==="dup"){n.set(c,d.id),a++;continue}const m=Xe({...o.entry,id:r.some(g=>g.id===c)?ae("pw"):c||ae("pw")});p==="samename"&&(m.name=qt(r,m.name)),r.push(m),s.push(m),n.set(c,m.id)}const i=(t.combos||[]).map(o=>{const c=$n(o.name||"导入的方案"),p=new Map;return c.presetName=o.presetName||c.name,c.templateSource=String(o.templateSource||""),c.entries=(Array.isArray(o.entries)?o.entries:[]).map(d=>{const m=Xe({...d,id:ae("pw")});return p.set(d.id,m.id),m}),c.items=(o.items||[]).map(d=>d.type==="marker"?{uid:ae("it"),type:"marker",identifier:d.identifier,name:d.name||"",enabled:d.enabled!==!1}:{uid:ae("it"),type:"entry",entryId:p.get(d.entryId)||n.get(d.entryId)||d.entryId,enabled:d.enabled!==!1,override:d.override||{}}).filter(d=>d.type==="marker"||r.concat(c.entries).some(m=>m.id===d.entryId)),c.removedEntryIds=(o.removedEntryIds||[]).map(d=>p.get(d)||n.get(d)||d),c});return{added:s,combos:i,dups:a}}function Ls(e,t=[]){return{kind:$a,version:1,exportedAt:new Date().toISOString(),entries:e.map(({history:n,...r})=>r),combos:t}}var qs=[{id:"module",label:"功能模块"},{id:"rules",label:"规则清单"},{id:"style",label:"文风"},{id:"author",label:"指定作家文风"},{id:"wish",label:"规则（按愿望写）"},{id:"free",label:"自由"}];function rc(e=[],t=[]){const n=new Set(t),r=[...qs.filter(s=>!n.has(s.id)).map(s=>({...s,custom:!1})),...e.map(s=>({id:s.id,label:String(s.label||"").trim()||"未命名类型",custom:!0}))];return r.length?r:[{...qs.find(s=>s.id==="free"),custom:!1}]}function oi(e="新类型",t="",n=""){const r=String(e).trim()||"新类型";return{id:ae("ck"),label:r,prompt:t||`条目类型：${r}。`,tags:n}}var Ue={common:`你是 SillyTavern 角色扮演预设的提示词编辑。根据作者的需求和本页对话，写出可以直接使用的预设条目。
+`).trim();d.push({name:g.title,content:P||g.title})}),d}function tc(e,{label:t="导入",splitMode:n="heading"}={}){const s=String(e??"").replace(/^﻿/,"").trim();if(!s)return{kind:"empty",label:t};if(/^[\[{]/.test(s)){let i;try{i=JSON.parse(s)}catch{i=void 0}if(i!==void 0)return i&&!Array.isArray(i)&&Array.isArray(i.prompts)?ii(i,t):i&&i.kind===$a||i&&!Array.isArray(i)&&Array.isArray(i.entries)?Ms(i,t):Array.isArray(i)&&i.length&&i.every(o=>o&&typeof o=="object"&&"content"in o)?Ms({entries:i},t):{kind:"unknown",label:t}}const a=ec(s,n,t);return{kind:"text",label:t,items:a.map((i,o)=>({key:`t:${o}`,entry:Xe({name:i.name,content:i.content,source:t,tags:[`来自:${t}`]})}))}}function nc(e,t){const n=new Map,r=[...e],s=[];let a=0;for(const o of t.items){const c=o.srcId||o.entry.id,{status:p,match:d}=Dn(r,o.entry);if(p==="dup"){n.set(c,d.id),a++;continue}const m=Xe({...o.entry,id:r.some(g=>g.id===c)?ae("pw"):c||ae("pw")});p==="samename"&&(m.name=qt(r,m.name)),r.push(m),s.push(m),n.set(c,m.id)}const i=(t.combos||[]).map(o=>{const c=$n(o.name||"导入的方案"),p=new Map;return c.presetName=o.presetName||c.name,c.templateSource=String(o.templateSource||""),c.entries=(Array.isArray(o.entries)?o.entries:[]).map(d=>{const m=Xe({...d,id:ae("pw")});return p.set(d.id,m.id),m}),c.items=(o.items||[]).map(d=>d.type==="marker"?{uid:ae("it"),type:"marker",identifier:d.identifier,name:d.name||"",enabled:d.enabled!==!1}:{uid:ae("it"),type:"entry",entryId:p.get(d.entryId)||n.get(d.entryId)||d.entryId,enabled:d.enabled!==!1,override:d.override||{}}).filter(d=>d.type==="marker"||r.concat(c.entries).some(m=>m.id===d.entryId)),c.removedEntryIds=(o.removedEntryIds||[]).map(d=>p.get(d)||n.get(d)||d),c});return{added:s,combos:i,dups:a}}function Ls(e,t=[]){return{kind:$a,version:1,exportedAt:new Date().toISOString(),entries:e.map(({history:n,...r})=>r),combos:t}}var qs=[{id:"module",label:"功能模块"},{id:"rules",label:"规则清单"},{id:"style",label:"文风"},{id:"author",label:"指定作家文风"},{id:"wish",label:"规则（按愿望写）"},{id:"free",label:"自由"}];function rc(e=[],t=[]){const n=new Set(t),r=[...qs.filter(s=>!n.has(s.id)).map(s=>({...s,custom:!1})),...e.map(s=>({id:s.id,label:String(s.label||"").trim()||"未命名类型",custom:!0}))];return r.length?r:[{...qs.find(s=>s.id==="free"),custom:!1}]}function oi(e="新类型",t="",n=""){const r=String(e).trim()||"新类型";return{id:ae("ck"),label:r,prompt:t||`条目类型：${r}。`,tags:n}}var Ue={common:`你在帮作者写 SillyTavern 角色扮演预设里的条目。照作者的要求和这一页的聊天，写出能直接放进预设用的条目。
 
-先弄清作者要改变哪一部分输出，已有内容有哪些需要保留。没有依据的设定不要自行补成事实；确实缺少信息时，在说明块里指出。
+动手前先弄明白：作者想改的是输出里的哪一部分，现有的哪些东西要留着。没有依据的设定别自己补成事实；真缺信息，就在说明块里讲出来。
 
-【写提示词】
-功能模块需要明确字段、输出位置和数据规则；文风与人物描写则说明文字该怎样组织、应该注意什么。不要把所有需求都套成“触发条件 → 固定动作”。
-用普通、准确的文字说明要求。删掉反复强调同一个意思的句子，以及没有说明怎么写的口号。形容词不能一律换成数字；作者没有要求时，不给每段安排动作次数、身体反应、心理占比和固定结尾。状态栏数值、格式长度和程序条件等实际需要的数字仍须写清。
-作者给了文字样本，就从样本中判断其写法；没有样本时按已说明的偏好写，不擅自编造示例台词、小剧场或正反对照。作者明确要求示例时再提供。
-说明取材和表达方法，给实际写作留出余地。不要把某种情绪绑定成每次都会出现的眼神、笑容或动作，也不要列一串同义的程度词充当人物差异。
-只处理作者提出的问题。已有功能、变量名、标签和酒馆宏需要保留，不能为了调整文风破坏格式或改变数据含义。用户给出的禁词表按原文保留。
+写的时候：
+功能模块要讲清字段、放在哪、数据怎么算；文风和人物描写要讲清字该怎么组织、要留意什么。别把什么需求都套成「遇到某情况 → 做某动作」。
+用平常、准确的话写要求。反复强调同一件事的句子、只喊口号不说怎么写的句子都删掉。形容词不必一律换成数字；作者没要求时，不给每段规定动作次数、身体反应、心理占比和固定的结尾。状态栏的数值、格式长度、程序判断这类真用得着的数字照样写清。
+作者给了文字样本，就从样本里看出他要的写法；没给样本就照他说过的喜好写，不自己编示例台词、小剧场或好坏对照。作者明说要示例才给。
+说清从哪取材、怎么表达，给真正写的时候留余地。别把某种情绪绑死在每回都出现的眼神、笑或动作上，也别拿一串同义的程度词充当人物之间的区别。
+只处理作者提的问题。已有的功能、变量名、标签和酒馆宏都要留着，不能为了改文风弄坏格式或改变数据的意思。作者给的禁词表一字不改。
 
-【组织条目】
-按内容选择简明段落或必要的列表。作者指定结构时沿用；功能模块有明确格式时给出格式。文风条目不强制填写无关字段。需要拆分时，让每个条目各自说明一件事，同一句要求不要在不同部分反复出现。
-不要使用 Human:、Assistant: 这类对话前缀。提到角色时直接写 char；提到用户时写 ⟦⟦user⟧⟧。其他 ⟦⟦…⟧⟧ 是酒馆宏，原样保留。
-默认中文。作者指定英文时，用英文写条目内容，条目名、tags 和说明块仍用中文。最后严格遵守本次的 entry 输出格式。`,module:`条目类型：功能模块（例如状态栏、思维链、特殊格式输出）。
-结构：用一个标签包住整个模块，里面按「要求 → 资料 → 任务启动」组织：
-要求里写触发条件（什么时候输出）、输出格式（逐字段写清楚）、生成步骤（编号）、边界情况（缺信息时怎么办）；
-资料里放模型要参照的设定；最后一句是启动指令。
-格式示例必须是可以直接复制使用的完整示例，不要用省略号代替内容。`,rules:`条目类型：规则清单。
-围绕作者要解决的问题写清要求，同一项要求只写一次。功能条件需要分支时再写条件；人物和文风要求不强制套入触发分支。
-作者指出某种写法有问题时，说明需要调整哪部分表达，以及如何保留原意。不要给每条禁令硬凑一条固定动作或示例。用必要的分组方便阅读，不为填满模板重复内容。`,style:`条目类型：文风。
-从作者提供的样本和偏好中提炼句子组织、叙述视角、用词与对话的写法，说明这些写法适合如何使用。保留作者想要的文学风味，删去八股时也保留句子的意思和节奏。
-不预设每段的句数、感官数量、心理占比和结尾动作。没有样本时，不编造仿写或正反例。禁词表按作者原文保留，不自行删改。`,author:`条目类型：指定作家文风配置。用户给出作家名、文本样本或风格描述，你生成一份可执行的风格配置。
-方法：运用叙事学（Genette 的叙事话语理论）、文体学（Leech 偏离理论）、修辞学。
-篇幅：条目约 1000 tokens（上下浮动 100）。属性值每条 1 句，动词开头（使用/避免/优先）；markers 4-6 个词，逗号分隔；core 4-5 个关键词，斜杠分隔。
-禁止用词：独特的、善于、富有、常用、巧妙地。
-关于 example（重要）：
-- 用户贴了文本样本：example 从样本里截取，30-80 字，保持原语言，不改字。
-- 用户没贴样本：example 写成「仿写」，30-80 字，保持作者的书写语言，并在字段前标注「仿写」，不要冒充原文，也不要凭记忆写出看似引文的句子。
-- 对作家或作品了解有限时，在说明块的“假设”里写「基于有限资料」，把 example 减到 4 段，并建议用户提供文本样本。
-- 作家有多个时期、风格不同的，在 categories 里分期标注。
-结构（条目内容用下面的 XML，括号里是要填的内容）：
+排条目：
+按内容用简短的段落，必要时用列表。作者指定了结构就照用；功能模块有明确格式就把格式给出来。文风条目不硬填用不上的栏目。要拆成几条时，每条只讲一件事，同一句要求别在不同地方反复出现。
+不用 Human:、Assistant: 这类对话前缀。说到角色直接写 char；说到用户写 ⟦⟦user⟧⟧。别的 ⟦⟦…⟧⟧ 是酒馆宏，原样留着。
+默认写中文。作者指定英文时，条目正文用英文，条目名、tags 和说明块照旧用中文。最后严格按这次给的 entry 格式交稿。`,module:`这次写的是功能模块（比如状态栏、思维链、特殊格式的输出）。
+用一个标签包住整个模块，里面分三块，按顺序是「要求 → 资料 → 开始」：
+要求里写什么时候输出、输出成什么样（每个字段逐一写清）、按什么步骤生成（编号）、信息不够时怎么办；
+资料里放模型要参照的设定；最后一句是让它开始执行的指令。
+格式示例要完整、能直接复制来用，不拿省略号代替内容。`,rules:`这次写的是规则清单。
+围绕作者要解决的事把要求写清，一项要求只写一次。功能上确实要分情况时才写条件；人物和文风的要求不硬套「如果……就……」。
+作者指出某种写法有毛病时，说清要调整哪部分表达、怎样保住原意。别给每条禁令都硬配一个固定动作或例子。必要时分组方便读，不为填满格子重复内容。`,style:`这次写的是文风。
+从作者给的样本和喜好里提炼：句子怎么组织、站在谁的角度讲、用词和对话怎么写，再说明这些写法适合用在哪。作者想要的文学味道要留住，删套话时也保住句子的意思和节奏。
+不预先规定每段几句、几种感官、心理占几成、结尾做什么动作。没有样本就不编仿写，也不编好坏对照。禁词表照作者原文留着，不自己删改。`,author:`这次写的是「指定作家的文风」。用户给了作家名、文字样本或风格描述，请据此写一份能直接指导写作的风格配置。
+可以借用的方法：叙事学（热奈特的叙事话语理论）、文体学（利奇的偏离理论）、修辞学。
+篇幅：条目大约 1000 tokens（上下差 100 以内）。每个属性值一句话，用「使用 / 避免 / 优先」这类动词开头；markers 写 4–6 个词，逗号隔开；core 写 4–5 个关键词，斜杠隔开。
+不许出现的词：独特的、善于、富有、常用、巧妙地。
+关于 example（要紧）：
+- 用户贴了文字样本：example 从样本里截，30–80 字，保留原语言，一个字都不改。
+- 用户没贴样本：example 写成仿写，30–80 字，用这位作家的书写语言，并在前面标「仿写」；不要冒充原文，也不要凭记忆写出像引文的句子。
+- 对这位作家或作品了解不多时，在说明块的「补的地方」里写「资料有限」，example 减到 4 段，并建议用户贴样本。
+- 作家不同时期风格差得多的，在 categories 里分期写。
+结构（条目正文用下面的 XML，括号里是要填的）：
 <writing_style author="作家名">
   <narrative_system>
     <structure type="类型" progression="推进" ending="结局"/>
@@ -1673,145 +1673,41 @@ body:has(dialog.cwz-dlg.cwz-dark[open]) .cw-chat-compose{box-shadow:0 4px 0 rgba
     <telos>美学目标</telos>
   </aesthetics_system>
 </writing_style>
-质检（写完自查，问题写进说明块）：
-- 叙事学术语用对：聚焦不等于视角，时距不等于时序
-- 各个系统之间不矛盾，参数与 example 互相印证
-- 文化术语保留原语（物哀、陰翳、間之类），不生硬套用西方理论
-- 每项参数能直接指导 AI 写作，正向指令与负向约束并存，无歧义
-- 字数落在 950-1050 tokens；超 1100 压缩属性值措辞（不压 example），不足 900 补 markers 与 categories`,wish:`条目类型：按作者的写作愿望调整输出。
-先确定作者不满意的是哪一部分、希望得到什么效果，然后围绕这件事写提示词。作者说想多写或少写某种内容时，说明应该把笔墨放在哪里、哪些重复可以删去；没有明确要求，不自行设百分比、字数配额或动作次数。
-人物与场景描写从已给设定和当前情境取材，不凭职业默认衣服磨损，也不凭性格标签安排固定表情。需要补充信息时，指出缺少什么，不用无关细节填空。
-条目只保留有用的要求和必要的边界。作者没有要求示例，就不生成小剧场、台词或正反对照。不另加一组和正文重复的自检表。作者给出的实际功能条件与数值限制照常保留。`,free:"条目类型：自由。按用户的需求直接写，不额外套结构；准则仍然适用。",single:"数量：只写 1 个条目。",multi:"数量：按需求拆成 2 到 6 个条目，每个条目只管一件事，条目名要能看出各自的职责。",note:`在所有条目之前，先输出一个说明块（这是“条目之外不要写其他文字”的唯一例外），最多 6 行：
+写完自己对一遍，有问题写进说明块：
+- 术语别用混：聚焦不等于视角，时距不等于时序
+- 各部分之间不打架，参数和 example 对得上
+- 有文化特色的概念保留原文（物哀、陰翳、間这类），不生搬西方理论
+- 每项参数都能直接指导 AI 写，有该做的也有不该做的，没有歧义
+- 字数落在 950–1050 tokens；超过 1100 就精简属性值的措辞（不压 example），不到 900 就补 markers 和 categories`,wish:`这次是照作者的写作愿望调整输出。
+先弄清作者不满意的是输出的哪一块、想要什么效果，再围绕这件事写。作者想多写或少写某样东西时，说清笔墨该落在哪、哪些重复可以删；没明说的话，不自己定百分比、字数配额或动作次数。
+人物和场景描写从已有设定和眼前的情形里取材：别因为职业就默认衣服磨旧，也别因为性格标签就安排固定表情。缺信息时说缺什么，不拿无关细节填空。
+条目里只留有用的要求和必要的边界。作者没要示例，就不写小剧场、台词或好坏对照，也不另附一张和正文重复的自查表。作者给的功能条件和数值限制照常留着。`,free:"这次不限类型：照用户的要求直接写，不额外套结构，上面的写法照样适用。",single:"数量：只写 1 条。",multi:"数量：按需要拆成 2–6 条，每条只管一件事，条目名要看得出各管什么。",note:`所有条目前面先交一个说明块（这是「条目以外不写别的字」唯一的例外），最多 6 行：
 <说明>
-要求：一句话
-目的：一句话
-假设：需求没写清、你补上的地方；没有就写「无」
-矛盾检查：条目内部、或条目和需求之间的矛盾和可疑之处；没有就写「无」
-放置：条目名 → 头部 / 中段 / 尾部，一句理由（最重要的约束放头部或尾部；放中段的，靠 XML 标签名把注意力引过去）
-</说明>`,revise:`任务：按修改意见修改当前条目。
-只改意见说到的地方，其余内容一字不动（包括标签名、缩进、编号）。输出完整的修改后条目，不要只输出改动片段。
-如果意见和已有规则冲突，以意见为准，并在冲突处就近改写，不要再新增一条互相矛盾的规则。`,format:`输出格式：每个条目用下面的格式，属性值里不要出现英文双引号：
+要的是：一句话
+为了什么：一句话
+补的地方：要求里没说清、你替他补上的；没有就写「无」
+打架的地方：条目内部、或条目和要求之间对不上或可疑的；没有就写「无」
+放哪：条目名 → 开头 / 中间 / 末尾，附一句理由（最要紧的约束放开头或末尾；放中间的，靠 XML 标签名把注意力引过去）
+</说明>`,revise:`这次是照修改意见改当前条目。
+只改意见说到的地方，其余一个字都不动（标签名、缩进、编号也一样）。交改好的完整条目，不要只交改动的片段。
+意见和已有的规则冲突时，以意见为准，就在冲突的那句附近改，不要另加一条互相矛盾的规则。`,format:`交稿格式：每个条目照下面写，属性值里不要出现英文双引号：
 <entry name="条目名" role="system" tags="标签1,标签2">
 条目内容
 </entry>
-role 只能是 system、user、assistant 之一，默认 system。tags 写 1 到 2 个简短标签。
-条目之外不要写前言、解释或总结。
-必须用上面的 XML 标签输出（<entry> 和 <说明>）：不用代码块（反引号围栏）包裹，不加 <content>、<output> 之类的外层包装；预设要求先写 <planing> 之类的思考块时，写在最前面，成品仍然必须是这些 XML 标签。`,baguWhat:`【什么是八股】
-这里的八股指反复套用的措辞、句式和人物反应。换个人名、换个场景仍能原样使用，读完没有获得新的信息，这类文字尤其需要检查。
-常见问题包括：用“不是……而是……”“与其说……不如说……”反复解释；连排几个意思接近的形容词；动作之后再补一句性格或情绪总结；反复写“眼底闪过”“嘴角勾起”“笑意不达眼底”等现成反应。
-八股也会藏在内容安排里：每次紧张都做同一动作，每次亲近都套用同一套占有话语，把人物写成只剩一种身份的反应程序；为了显得具体，随意添加精确时长、衣物磨损、颜色变化和无关物件。
-提示词本身也会制造重复。给每段规定同样的动作数和心理占比、强制每轮点名某个身体部位、把示例台词当作常用台词，都会让后续文字反复走同一条路。
-检查时结合上下文。格式标签、变量、必要的数据范围，以及作者明确指定的文字有实际用途，不因重复出现就删除。`,baguHow:`【如何反八股】
-读作者的需求和已有文字，先保留要表达的意思。找出没有增加信息的修饰、同义反复和解释性收尾，能删的直接删。需要改写时重组句子，不沿着旧句式逐词换近义词。
-把要求落在写法上。人物已有的经历、关系和当下要做的事可以提供内容，描述时按作者的关注点展开；不要用一串性格评价代替人物，也不要为了证明性格补一幕固定的小故事。
-作者给出“笑面虎”等人物风味时保留这个方向，避免继续堆同义标签或指定每次出现的招牌动作。写表情与动作要看当时正在发生什么，不把某种眼神、发颤或发白当作通用的情绪答案。
-外貌和服饰按已有设定写。没有依据时，不补洗硬、褪色、发旧、污渍或破损。富裕人物的衣着也不默认磨损。具体细节应当有用，不靠材质、数字和零碎物件填充篇幅。
-写文风提示词时，说明作者希望采用的表达方法；只保留与目标有关的限制。删除无依据的次数和占比，不把它们换成另一套固定分支。功能模块实际需要的触发条件、数字、字段和输出位置照常保留。
-改已有条目时，保留其功能、角色关系、变量、酒馆宏、标签和作者提供的事实。用户的禁词表原文不变。用于说明问题的坏例不要当作可模仿的正文，也不要在成品里额外添加示例和自检评语。`},yd={common:`你是 SillyTavern 角色扮演预设的提示词工程师。你把用户的需求写成可以直接放进预设条目的提示词。
-
-【动笔前】先确认两件事：
-- 要求：用户要什么
-- 目的：希望模型做什么
-这两点没写清时，按最合理的读法补上，并在说明块里写出你补了什么。需求里互相矛盾、或和目的无关的部分，不写进条目，在说明块里指出。
-
-【写法准则】
-1. 提示词的作用是约束输出范围：没有提示词时模型能输出很多种内容，条目要把它压到只剩符合要求的少数几种。每条规则写完，要能说出它排除了哪些输出；排除不了任何输出的句子，删掉。
-2. 机械化、规则驱动：每条规则写成「触发条件 → 具体动作」，让模型照做就能执行，而不是描述一种感觉或愿景。
-3. 不写模糊的要求，不堆程度副词和空泛形容词（非常、极其、深刻、细腻、生动之类），用具体的格式、数量、位置、顺序代替。
-4. 不写对目的没有帮助的内容：多一句废话就多一份 token，还多一分和其他规则打架的机会。
-5. 可验证：每条规则，旁人要能判断模型有没有照做。判断不了的，改写或删掉。
-6. 禁止必须给替代：写「不要 X」时，同一条里给出「改为 Y」的具体写法。只有禁令、没有替代的规则不要写。
-7. 尽可能给出一个完整的示例，能直接照抄使用，不用省略号代替内容。文风类用户没给样例时，不要编造样例冒充用户的风格。
-8. 结构化：外层用 XML 标签分区，标签名简短，方便其他条目引用，也能把模型的注意力引到这一块；区内用 YAML 风格的键值和列表。结构化优先级（针对 Claude；不同模型读格式化文本的能力不一样）是 Json > Yaml > XML > Markdown > 自然语言；但需要模型自己输出的内容（尤其是推理过程）不要用 Json，用 XML 或 Yaml。
-9. 通用结构：要求 → 资料 → 任务启动。要求是规则；资料是模型要参照的设定和数据；任务启动是触发动作的最后一句指令，放在条目末尾。需要分步完成的，写成按顺序的列表。
-10. 一个条目只管一件事。需求里有多件事时拆开；同一件事只在一处写，不重复。
-11. 不要写「Human:」「Assistant:」这类角色前缀（模型会顺着补全）。需要规定输出格式时，给出格式模板，让模型顺着模板补全。
-12. 提到角色时直接写 char，不要写成双花括号的宏；提到用户时写 ⟦⟦user⟧⟧。内容里其他的 ⟦⟦…⟧⟧ 是酒馆宏（原文是双花括号），原样保留，不要改动也不要解释。
-13. 默认用中文写。【语言】里指定了英文，就用英文写条目内容（条目名、tags、说明块仍用中文）；英文通常更省 token，模型对英文提示词的遵循通常也更好。`,rules:`条目类型：规则清单（例如叙事规则、行为约束、禁用清单）。
-结构：按主题分组，每组一个小标签；组内用编号，每条一行：「当……时 → ……；不要……，改为……」。
-每组不超过 8 条。同一件事只在一处写，不要在不同组里重复。`,style:`条目类型：文风。
-结构：写法规则（句长、人称、视角、感官优先级、对话与动作的比例）→ 句式限制（每条附替代写法）→ 禁用清单。
-只有用户给了样例文字时才写「正反对照」；没给就不要编造样例冒充用户的风格。文风条目只管怎么写，不管写什么。`,wish:`条目类型：规则（按用户的写作愿望写）。用户说一句愿望，比如“服装更丰富”“心理话变多”“视角聚焦 char”，你把它写成 AI 能逐条执行、逐条自检的规则。
-方法：指令工程（可执行、可验证）、叙事学（聚焦与时距）、文体学。
-
-【需求拆解】先判断愿望的类型，再转化：
-- 增量（更丰富、更多）：设下限与占比，并指定细节的取材来源，同时设上限防止堆砌。
-- 减量（少说教、少总结）：设上限，列出要删的句型，并给替代写法防止写空。
-- 转向（视角、人称、距离）：定义聚焦类型和叙述距离，写明越界信息怎么处理，防止视角漂移。
-一句愿望里含两个以上变量，拆成多条；每条只解决一件事。愿望含糊（“写得好一点”）时，在说明块里指出缺什么，按最合理的读法写。
-
-【写法】
-- 可数：形容词换成数量、位置、频率。“多写心理”写成“每回复至少 2 处 char 的内心活动，占正文 15%-25%”。阈值写区间，不写单值。
-- 可查：每条要求能用是/否判定。
-- 有触发：写明什么时候生效、什么时候不生效（战斗高潮、对话密集段、用户要求快进）。
-- 有来源：细节取材顺序写明，例如“设定 > 场景与季节 > 身份常识推断”。
-- 有边界：同时写不要做什么，防止矫正过度。
-- 有优先级：与用户主权、角色一致冲突时让位。不替 ⟦⟦user⟧⟧ 写言行与心理；愿望要求这样做时，改写成“char 观察到的外在反应”，并在说明块里说明。
-- 禁用词：适当地、尽量、丰富的、细腻的、生动的、自然地、巧妙地、富有。出现即换成数量或判定条件。
-- 篇幅：单条 400-700 tokens，每条至少含 1 个量化阈值、1 项正向指令、1 项负向约束、1 组自检。
-
-结构（条目内容用下面的 XML）：
-<rule_module name="规则名">
-  <goal>1句，动词开头，写可观察的结果</goal>
-  <scope>
-    <applies>生效场景与对象</applies>
-    <exempt>不生效的场景</exempt>
-    <priority>与其他规则冲突时的让位关系</priority>
-  </scope>
-  <rules>
-    <do>2-5条，每条含数量、位置或判定条件</do>
-    <dont>2-5条，每条对应一种常见的过度或偏离</dont>
-    <source>细节取材顺序</source>
-  </rules>
-  <example>
-    <weak>达不到要求的写法，30-60字</weak>
-    <strong>同一场景、达到要求的写法，30-80字；与弱例的差异只在目标变量上</strong>
-  </example>
-  <check>4-5项，每项能用是/否判定；末尾写“未通过：修正动作”</check>
-  <fallback>信息不足、设定缺失或冲突时的处理</fallback>
-</rule_module>
-
-质检（写完自查，问题写进说明块）：
-- 增量规则有上限，减量规则有替代写法，转向规则写了越界处理
-- 不与用户主权冲突，priority 与 exempt 已写
-- 多条规则之间阈值不互相抵消
-- 每个 check 项能对应到 do 或 dont
-在条目后的说明块“放置”里，附一句调参提示：想更明显把哪个数字调到多少，想更克制调到多少。
-
-示例（“服装更丰富”的一条）：
-<rule_module name="服饰描写">
-  <goal>让每个出场人物的穿着成为读者记得住的画面信息。</goal>
-  <scope>
-    <applies>人物首次出场、换装、场景切换后、服饰与情境相关时</applies>
-    <exempt>战斗高潮、对话密集段、用户要求快进的概要段</exempt>
-    <priority>低于用户主权与角色一致；不挤占对话与推进的篇幅</priority>
-  </scope>
-  <rules>
-    <do>
-      - 人物首次出场写这几项：款式、材质或颜色、一个细节（磨损、配饰、穿法）
-      - 每回复至少 1 处服饰细节，占正文 10%-15%
-      - 让动作带出服饰（袖口、衣摆、纽扣），服饰与身份、季节、场合、心情之一呼应
-    </do>
-    <dont>
-      - 不写罗列清单（“白衬衫黑裤子皮鞋”），改为一个细节带一个动作
-      - 同一件衣服连续两轮不重复同一措辞
-      - 不为服饰中断对话，不写 ⟦⟦user⟧⟧ 未提及的服饰
-    </dont>
-    <source>设定中的穿着 > 场景与季节 > 身份与职业的常识推断</source>
-  </rules>
-  <example>
-    <weak>她穿着一件好看的裙子，站在门口。</weak>
-    <strong>她的墨绿裙摆沾着泥点，袖口的银扣少了一颗，站在门口时下意识把那只手背到身后。</strong>
-  </example>
-  <check>
-    - [ ] 本回复至少 1 处服饰细节
-    - [ ] 首次出场人物含款式、材质或颜色、细节这几项
-    - [ ] 服饰细节出现在动作中，而非单独成句
-    - [ ] 服饰占比未超过 15%
-    未通过：补写或删减，使服饰融入动作句。
-  </check>
-  <fallback>设定无服饰信息时按身份与场景保守推断，不新增重大道具。</fallback>
-</rule_module>`};function sc({kind:e="module",kindPrompt:t,need:n="",refs:r=[],multi:s=!1,tags:a=[],lang:i="zh",templates:o,antiBagu:c=!0}={}){const p={...Ue,...o||{}},d=typeof t=="string"?t:p[e]??p.module,m=[p.common,d,c?nr(p):"",s?p.multi:p.single,p.note,p.format].filter(y=>String(y??"").trim()).join(`
+role 只能是 system、user、assistant 之一，默认 system。tags 写 1–2 个短标签。
+条目以外不写开场白、解释或总结。
+一定要用上面的 XML 标签交稿（<entry> 和 <说明>）：不用代码块（反引号围栏）包起来，不加 <content>、<output> 这类外壳；预设要求先写 <planing> 这类思考块的，思考块放最前面，成品照样得是这些 XML 标签。`,baguWhat:`【什么算八股】
+八股是那些翻来覆去套用的说法、句式和人物反应：换个名字、换个场面照样能原封不动地用，读完却什么新东西都没得到。
+常见的样子：一再用「不是……而是……」「与其说……不如说……」来解释；一口气排几个意思差不多的形容词；写完动作再补一句性格或情绪的总结；「眼底闪过」「嘴角勾起」「笑意不达眼底」这类现成反应用个没完。
+八股也会藏在安排里：一紧张就做同一个动作，一亲近就套同一套占有的话，把人写成只剩一种身份的反应机器；为了显得具体，随手添上精确的时长、衣服的磨损、颜色的变化和不相干的小物件。
+提示词自己也会造出重复：给每段规定一样的动作数和心理占比，强制每轮点到某个身体部位，把示例台词当常用台词，后面的文字就会一遍遍走同一条路。
+判断时看上下文。格式标签、变量、必要的数值范围，以及作者明确指定的文字是有用的，不能因为重复出现就删。`,baguHow:`【怎么去掉八股】
+先读懂作者的要求和现有文字，把要表达的意思留住。找出没带来新信息的修饰、同义反复和解释式的收尾，能删的直接删。要改写就把句子重新组织，不顺着旧句式挨个换近义词。
+把要求落到写法上。人物的经历、关系和眼下要做的事本身就能提供内容，照作者在意的地方展开；别拿一串性格评价顶替人物，也别为了证明性格再补一场固定的小戏。
+作者给了「笑面虎」这类人物味道，就保住这个方向，但别接着堆同义标签，也别规定他每次出场的招牌动作。表情和动作要看当时在发生什么，别把某种眼神、发抖或脸色发白当成万能的情绪答案。
+长相和衣着照已有设定写。没有依据时，不补洗得发硬、褪色、发旧、污渍或破洞。有钱人的衣服也不默认磨损。细节要有用，不靠材质、数字和零碎物件凑篇幅。
+写文风提示词时，说清作者想要的表达方法，只留跟目标有关的限制。没依据的次数和占比删掉，也不换成另一套固定分支。功能模块真需要的触发条件、数字、字段和输出位置照常留着。
+改现有条目时，功能、人物关系、变量、酒馆宏、标签和作者给的事实都留着。用户的禁词表一字不改。拿来说明问题的坏例子不是让人模仿的正文，成品里也别另加示例和自评。`},yd={};function sc({kind:e="module",kindPrompt:t,need:n="",refs:r=[],multi:s=!1,tags:a=[],lang:i="zh",templates:o,antiBagu:c=!0}={}){const p={...Ue,...o||{}},d=typeof t=="string"?t:p[e]??p.module,m=[p.common,d,c?nr(p):"",s?p.multi:p.single,p.note,p.format].filter(y=>String(y??"").trim()).join(`
 
 `),g=[`【需求】
 ${String(n).trim()}`];return r.length&&g.push(`【参考条目（只用来衔接、避免重复，不要照抄，也不要重写）】
@@ -1830,7 +1726,7 @@ ${e.content}
 【修改意见】
 ${String(t).trim()}`;return{system:a,prompt:o}}function li(e){const t=e.match(/^\s*```[a-zA-Z]*\n([\s\S]*?)\n```\s*$/);return t?t[1]:e}function js(e){const t=String(e??"").match(/<说明>([\s\S]*?)(?:<\/说明>|(?=<entry\b)|$)/);return t?t[1].trim():""}function Qs(e){const t=String(e??"").replace(/<说明>[\s\S]*?(?:<\/说明>|(?=<entry\b)|$)/g,""),n=[],r=/<entry\b([^>]*)>([\s\S]*?)(?:<\/entry>|$)/gi;let s;for(;s=r.exec(t);){const a={};for(const c of s[1].matchAll(/(\w+)\s*=\s*(?:"([^"]*)"|'([^']*)'|“([^”]*)”|「([^」]*)」)/g))a[c[1].toLowerCase()]=c[2]??c[3]??c[4]??c[5]??"";const i=/<\/entry>/i.test(s[0]),o=li(s[2].trim()).trim();if(o&&(n.push({name:(a.name||"").trim()||on(o,"未命名条目"),role:vt.includes((a.role||"").trim())?a.role.trim():"system",tags:ft(a.tags||""),content:o,truncated:!i}),!i))break}if(!n.length){const a=li(t.trim()).trim();a&&n.push({name:on(a,"未命名条目"),role:"system",tags:[],content:a,truncated:!1})}return n}var pi=()=>X.SillyTavern.getContext();function Rs(e){return e===!1||e==="off"?"off":e===!0||e==="on"?"on":"preset"}function kd(e){try{const t=pi();if(e){const r=t.ConnectionManagerRequestService?.getProfile?.(e)??t.extensionSettings?.connectionManager?.profiles?.find(s=>s.id===e);if(r){let s=null;try{s=t.ConnectionManagerRequestService?.validateProfile?.(r)??t.CONNECT_API_MAP?.[r.api]}catch{}const a=s?s.selected==="openai":r.mode!=="tc",i=r.preset?t.getPresetManager?.(a?"openai":"textgenerationwebui")?.getCompletionPresetByName?.(r.preset):null,o=a?i?.stream_openai:i?.streaming;if(typeof o=="boolean")return o;const c=a?t.chatCompletionSettings?.stream_openai:t.textCompletionSettings?.streaming;if(typeof c=="boolean")return c}}const n=!t.mainApi||t.mainApi==="openai"?t.chatCompletionSettings?.stream_openai:t.textCompletionSettings?.streaming;return typeof n=="boolean"?n:!0}catch{return!0}}function ac(e){try{const t=Rs(pi().extensionSettings?.loveCardWriter?.stream);return t==="on"?!0:t==="off"?!1:kd(e)}catch{return!0}}async function ic(e,t){let n="";for await(const r of e()){const c=typeof r=="string"?r:r?.text;if(!c)continue;n=String(c);try{t?.(n)}catch{}}return n}async function oc({profile:e,messages:t,maxTokens:n,temperature:r,onText:s}={}){if(!ac(e)||typeof s!="function")return;const a=pi();let i="";const o=c=>{i=c,s(c)};try{if(e&&a.ConnectionManagerRequestService){const p=await a.ConnectionManagerRequestService.sendRequest(e,t,n,{stream:!0,extractData:!0,includePreset:!1,includeInstruct:!1},{});return typeof p=="function"?await ic(p,o):typeof p=="string"?p:String(p?.content??"")}const c=a.chatCompletionSettings;if(a.ChatCompletionService&&c&&(!a.mainApi||a.mainApi==="openai")){const p=await a.ChatCompletionService.processRequest({stream:!0,messages:t,max_tokens:n,model:a.getChatCompletionModel?a.getChatCompletionModel(c):void 0,chat_completion_source:c.chat_completion_source,custom_url:c.custom_url,reverse_proxy:c.reverse_proxy,proxy_password:c.proxy_password,custom_prompt_post_processing:c.custom_prompt_post_processing,vertexai_region:c.vertexai_region,zai_endpoint:c.zai_endpoint,temperature:typeof r=="number"?r:c.temp_openai,top_p:c.top_p_openai,frequency_penalty:c.freq_pen_openai,presence_penalty:c.pres_pen_openai},{},!0);return typeof p=="function"?await ic(p,o):String(p?.content??"")}}catch(c){if(i)throw c}}var Gt="preset-workshop",cc="0.75",ze=(()=>{try{if(window.parent&&window.parent!==window&&window.parent.document.getElementById("extensionsMenu"))return window.parent}catch{}return window})(),je=ze.document,Sd=ze!==window,cn=`pw${Date.now().toString(36)}${Math.random().toString(36).slice(2,6)}`,Cd=()=>globalThis.SillyTavern??ze.SillyTavern,xt=()=>Cd().getContext(),Pr=globalThis.__CW_SUITE__||null,ct={yes:e=>{try{return ze.confirm(e)}catch{return confirm(e)}},text:(e,t)=>{try{return ze.prompt(e,t)}catch{return prompt(e,t)}}};function yt(e){try{const t=globalThis[e];if(typeof t=="function")return t;const n=ze.TavernHelper;if(typeof n?.[e]=="function")return n[e].bind(n)}catch{}return null}function lc(){return{version:1,entries:[],combos:[],bases:[],currentComboId:"",profileId:"",followCard:!0,maxTokens:3e3,templates:{},customKinds:[],hiddenKinds:[],antiBagu:!0,generationDraft:null}}function ne(){const e=xt().extensionSettings;e[Gt]||(e[Gt]=lc());const t=e[Gt];for(const[n,r]of Object.entries(lc()))t[n]===void 0&&(t[n]=r);return Rd(t)&&xt().saveSettingsDebounced?.(),t}var Or={phase:"idle",timer:null,eventSource:null,off:null,message:""},te=()=>Sc();function jt(){const e=ne();return e.combos.find(t=>t.id===e.currentComboId)||e.combos[0]||null}function di(){const e=ne();let t=jt();return t||(t=$n(`预设 ${e.combos.length+1}`),e.combos.push(t)),e.currentComboId=t.id,t}var se=e=>{const t=ne();return t.entries.find(n=>n.id===e)||t.combos.flatMap(n=>n.entries||[]).find(n=>n.id===e)},k={tab:"mix",search:"",tag:"",selected:new Set,editing:null,gen:{kind:"module",need:"",multi:!1,tags:"",lang:"zh",useSelected:!0,results:[],note:""},imp:{text:"",splitMode:"heading",dupMode:"skip",sources:[]},mix:{addSearch:"",addOpen:!1,expanded:new Set},setOpen:new Set,trash:[],quick:{open:!1,name:"",role:"system",content:""},busy:null},ye=null,ve=null,Et=null;function u(e,t,...n){const r=je.createElement(e),s=t||{};for(const[a,i]of Object.entries(s))i==null||i===!1||a==="value"||(a==="class"?r.className=i:a==="style"?r.style.cssText=i:a.startsWith("on")&&typeof i=="function"?r.addEventListener(a.slice(2).toLowerCase(),i):a in r?r[a]=i:r.setAttribute(a,i===!0?"":i));for(const a of n.flat(1/0))a==null||a===!1||r.append(a.nodeType?a:je.createTextNode(String(a)));return"value"in s&&s.value!=null&&(r.value=s.value),r}var H=(e,t,n="",r={})=>u("button",{type:"button",class:`pw-btn ${n}`,onclick:t,...r},e),we=(e,t)=>{const n=globalThis.toastr??ze.toastr;try{n?.[e]?.(t,"预设机")}catch{}n||console.log(`[${Gt}] ${t}`)},Jt=e=>Vo(e),Zh=(e,t=90)=>String(e).replace(/\s+/g," ").slice(0,t),pc=e=>String(e||"预设").replace(/[\\/:*?"<>|]/g,"_").slice(0,60);function Hs(e,t){const n=new ze.Blob([t],{type:"application/json;charset=utf-8"}),r=ze.URL.createObjectURL(n),s=je.createElement("a");s.href=r,s.download=e,je.body.append(s),s.click(),setTimeout(()=>{ze.URL.revokeObjectURL(r),s.remove()},1e3)}async function ui(e){try{await ze.navigator.clipboard.writeText(e)}catch{const t=u("textarea",{style:"position:fixed;opacity:0"});t.value=e,je.body.append(t),t.select(),je.execCommand("copy"),t.remove()}we("success","已复制")}var _n={loaded:!1,fingerprint:"",pending:!1};function mi(e){const t=r=>typeof r=="string"?r:"",n=r=>(Array.isArray(r)?r:[]).filter(s=>s&&typeof s=="object").map(s=>({key:t(s.key)||ae("generated"),name:t(s.name),content:t(s.content),role:vt.includes(s.role)?s.role:"system",tags:ft(s.tags),checked:s.checked!==!1,open:!!s.open,truncated:!!s.truncated,...typeof s.beforeBagu=="string"?{beforeBagu:s.beforeBagu}:{}}));return{kind:t(e.kind)||"module",need:t(e.need),multi:!!e.multi,tags:t(e.tags),lang:e.lang==="en"?"en":"zh",useSelected:e.useSelected!==!1,results:n(e.results),note:t(e.note),raw:t(e.raw),optionsOpen:!!e.optionsOpen,noteOpen:!!e.noteOpen,saveTarget:e.saveTarget==="both"?"both":"library",discarded:e.discarded&&Array.isArray(e.discarded.results)?{results:n(e.discarded.results),note:t(e.discarded.note)}:null}}function Id(){const e=_n;if(e.loaded)return;const t=ne().generationDraft;t?.version===1&&t.data&&typeof t.data=="object"&&Object.assign(k.gen,mi(t.data)),e.loaded=!0,e.fingerprint=JSON.stringify(mi(k.gen))}function De({persist:e=!0}={}){const t=_n,n=mi(k.gen),r=JSON.stringify(n);t.loaded=!0,r!==t.fingerprint&&(ne().generationDraft={version:1,updatedAt:Date.now(),data:n},t.fingerprint=r,t.pending=!0,e&&te())}function dc(){const e=ne().generationDraft,t=Or.phase;return e?_n.pending?t==="error"?"草稿保存失败，请重试；当前内容仍在页面中":t==="unconfirmed"?"草稿保存尚未确认，请重试后再刷新":"草稿自动保存中…":"草稿已保存 · 无需加入收藏即可保留":"生成结果和修改会自动保存为草稿"}function uc(e){_n.pending&&(e.preventDefault(),e.returnValue="")}function fi(){const e=ne();return Pr&&e.followCard?xt().extensionSettings?.loveCardWriter?.apiProfile||"":e.profileId}function Ad(){try{return xt().extensionSettings?.connectionManager?.profiles||[]}catch{return[]}}async function Ed(e,t){const n=xt(),r=ne(),s=ei(e),a=ei(t),i=await oc({profile:fi(),messages:[{role:"system",content:s},{role:"user",content:a}],maxTokens:r.maxTokens,onText:c=>{po(c),k.busy&&(k.busy.stream=c,tr())}});if(i!==void 0)return i;if(fi()&&n.ConnectionManagerRequestService){const c=await n.ConnectionManagerRequestService.sendRequest(fi(),[{role:"system",content:s},{role:"user",content:a}],r.maxTokens,{stream:!1,extractData:!0,includePreset:!1,includeInstruct:!1},{});return String(c?.content??"")}if(!n.generateRaw)throw new Error("这个版本的酒馆没有 generateRaw");let o;try{o=await n.generateRaw(a,null,!1,!1,s,r.maxTokens)}catch(c){if(!/prompt|argument|object/i.test(String(c?.message)))throw c;o=await n.generateRaw({prompt:a,systemPrompt:s,responseLength:r.maxTokens})}return typeof o!="string"&&(o=String(o?.content??o??"")),o}async function er(e,t,{dialogue:n=!0,dialogueKey:r=Eo()}={}){n&&(t+=Zt(ne(),r,Jp(r)));const s=[5,15,30];for(let a=0;;a++)try{k.busy&&(k.busy.calls++,k.busy.stream="");const i=Yo(await Ed(e,t));if(!i.trim())throw new Error("AI 返回了空内容");return i}catch(i){const o=String(i?.message||i);if(!/429|5\d\d|timeout|timed out|network|fetch|空内容/i.test(o)||a>=s.length)throw i;for(let p=s[a];p>0;p--)k.busy&&(k.busy.note=`出错（${o.slice(0,40)}），${p} 秒后重试`),tr(),await new Promise(d=>setTimeout(d,1e3));k.busy&&(k.busy.note="")}}async function Bn(e,t){if(k.busy){we("warning","上一个任务还没结束");return}k.busy={label:e,start:Date.now(),calls:0,note:""},tr();const n=setInterval(tr,500);try{return await t()}catch(r){console.error(`[${Gt}]`,r),we("error",`${e}失败：${r?.message||r}`);return}finally{clearInterval(n),k.busy=null,tr(),F()}}function tr(){if(!Et)return;if(!k.busy){Et.textContent="",Et.classList.remove("pw-on");return}const e=Math.floor((Date.now()-k.busy.start)/1e3);if(Et.textContent=`⏳ ${k.busy.label}… ${e}s · 调用 ${k.busy.calls} 次${k.busy.stream?` · 已收到 ${k.busy.stream.length} 字`:""}${k.busy.note?` · ${k.busy.note}`:""}`,Et.classList.add("pw-on"),k.busy.stream){const t=it.createElement("pre");t.className="pw-stream",t.textContent=k.busy.stream.length>1200?`……${k.busy.stream.slice(-1200)}`:k.busy.stream,Et.append(t),t.scrollTop=t.scrollHeight}}function zs(e,t,n=null,{draggable:r=!0}={}){k.readExpanded??=new Set;const s=k.readExpanded.has(t),a=u("div",{class:"pw-entry-prose",id:ae("read")},e.content||"（空）"),i=u("summary",{class:`pw-entry-summary${n?` pw-card-title${r?" pw-drag-handle":""}`:""}`,role:"button","aria-expanded":String(s),"aria-controls":a.id,title:n?`点击展开或收起正文${r?"；长按拖动排序":""}`:""},n||(s?"收起正文":"展开全文")),o=u("details",{class:`pw-entry-reading${n?" pw-reading-heading":""}`,open:s},i);let c=s;const p=()=>{if(!o.isConnected)return;const m=o.open;if(m?k.readExpanded.add(t):k.readExpanded.delete(t),i.setAttribute("aria-expanded",String(m)),n||(i.textContent=m?"收起正文":"展开全文"),!m&&c&&ve){const g=i.getBoundingClientRect().top,y=ve.getBoundingClientRect();(g<y.top||g>y.bottom-44)&&(ve.scrollTop+=g-y.top-12)}c=m},d=H("收起正文",()=>{o.open=!1,p(),i.focus({preventScroll:!0})},"pw-read-toggle");return o.append(u("div",{class:"pw-entry-content"},a,d)),o.addEventListener("toggle",p),o}function Td(e){const t=u("div",{class:"pw-combo-list",role:"list","aria-label":"预设条目"},e.items.map((n,r)=>du(e,n,r)));return ye._pwComboDrag=Nd(t,e),t}function Nd(e,t){const n=e.ownerDocument,r=n.defaultView,s=ve;let a=null,i=0,o=0,c=!1;const p=()=>[...e.children].filter(J=>J.matches(".pw-combo-row")),d=()=>{i&&r.cancelAnimationFrame(i),i=0},m=()=>{const J=a;if(!J?.active||!e.isConnected)return;const re=s.getBoundingClientRect(),xe=Math.max(re.top+20,Math.min(re.bottom-20,J.y));J.ghost.style.top=`${xe}px`;const Le=p().filter(ie=>ie!==J.row).find(ie=>{const he=ie.getBoundingClientRect();return J.y<he.top+he.height/2});Le?J.row.nextElementSibling!==Le&&e.insertBefore(J.row,Le):e.lastElementChild!==J.row&&e.append(J.row)},g=()=>{i=0;const J=a;if(!J?.active)return;if(!e.isConnected){P(!1);return}const re=s.getBoundingClientRect(),xe=Math.min(64,re.height/4),de=Math.max(0,Math.min(1,(re.top+xe-J.y)/xe)),Le=Math.max(0,Math.min(1,(J.y-re.bottom+xe)/xe));(de||Le)&&(s.scrollTop+=(Le-de)*12),m(),i=r.requestAnimationFrame(g)},y=()=>{const J=a;if(!J||!e.isConnected)return;J.timer=0,J.active=!0,c=!0;const re=J.handle.getBoundingClientRect();J.anchorStyle=s.style.overflowAnchor,s.style.overflowAnchor="none",e.classList.add("pw-sorting"),J.row.classList.add("pw-sort-source"),s.scrollTop+=J.handle.getBoundingClientRect().top-re.top;const xe=J.row.getBoundingClientRect();J.ghost=u("div",{class:"pw-sort-ghost","aria-hidden":"true"},J.row.querySelector(".pw-row-name")?.textContent||J.handle.textContent),Object.assign(J.ghost.style,{left:`${xe.left}px`,width:`${xe.width}px`}),ye.append(J.ghost),n.getSelection()?.removeAllRanges(),m(),i=r.requestAnimationFrame(g)},E=()=>{n.removeEventListener("touchend",_,!0),n.removeEventListener("touchcancel",L,!0),n.removeEventListener("pointermove",V,!0),n.removeEventListener("pointerup",R,!0),n.removeEventListener("pointercancel",L,!0),n.removeEventListener("keydown",W,!0),n.removeEventListener("visibilitychange",Ce),r.removeEventListener("blur",L)};function P(J,re,xe=!0){const de=a;if(!de||(de.active&&re?.cancelable&&re.preventDefault(),r.clearTimeout(de.timer),d(),E(),a=null,!de.active))return;const Le=de.handle.getBoundingClientRect().top;let ie=!1;if(J&&e.isConnected){const he=p().map(Ae=>Ae.dataset.pwComboUid),Ie=new Map(t.items.map(Ae=>[Ae.uid,Ae]));he.length===Ie.size&&new Set(he).size===Ie.size&&he.every(Ae=>Ie.has(Ae))&&(ie=he.some((Ae,_e)=>t.items[_e].uid!==Ae),ie&&(t.items.splice(0,t.items.length,...he.map(Ae=>Ie.get(Ae))),te()))}else for(const he of de.originalRows)e.append(he);de.ghost.remove(),de.row.classList.remove("pw-sort-source"),e.classList.remove("pw-sorting"),J?s.scrollTop+=de.handle.getBoundingClientRect().top-Le:s.scrollTop=de.scrollBefore,s.style.overflowAnchor=de.anchorStyle,ie&&xe&&(o=r.requestAnimationFrame(()=>{o=0,e.isConnected&&F()})),r.setTimeout(()=>{c=!1},400)}function D(J,re,xe,de,Le){if(a){P(!1);return}const ie=J.closest?.(".pw-drag-handle"),he=ie?.closest(".pw-combo-row");!he||he.parentElement!==e||t.items.length<2||(c=!1,a={handle:ie,row:he,x:re,y:xe,startX:re,startY:xe,kind:de,id:Le,active:!1,originalRows:p(),scrollBefore:s.scrollTop},a.timer=r.setTimeout(y,450),n.addEventListener("touchend",_,{capture:!0,passive:!1}),n.addEventListener("touchcancel",L,!0),n.addEventListener("pointermove",V,!0),n.addEventListener("pointerup",R,!0),n.addEventListener("pointercancel",L,!0),n.addEventListener("keydown",W,!0),n.addEventListener("visibilitychange",Ce),r.addEventListener("blur",L))}const Q=(J,re,xe)=>{const de=a;if(de){if(!de.active&&Math.hypot(J-de.startX,re-de.startY)>9){P(!1);return}de.x=J,de.y=re,de.active&&(xe.cancelable&&xe.preventDefault(),m())}};function z(J){if(J.touches.length!==1){P(!1);return}const re=J.changedTouches[0];D(J.target,re.clientX,re.clientY,"touch",re.identifier)}function M(J){if(a?.kind!=="touch")return;if(J.touches.length!==1){P(!1,J);return}const re=[...J.touches].find(xe=>xe.identifier===a.id);re&&Q(re.clientX,re.clientY,J)}function _(J){a?.kind==="touch"&&[...J.changedTouches].some(re=>re.identifier===a.id)&&P(!0,J)}function ce(J){J.pointerType==="touch"||J.button!==0||D(J.target,J.clientX,J.clientY,"pointer",J.pointerId)}function V(J){a?.kind==="pointer"&&J.pointerId===a.id&&Q(J.clientX,J.clientY,J)}function R(J){a?.kind==="pointer"&&J.pointerId===a.id&&P(!0,J)}function L(J){J?.type==="pointercancel"&&a?.kind==="touch"||P(!1,J)}function W(J){J.key==="Escape"&&(J.preventDefault(),P(!1))}function Ce(){n.hidden&&P(!1)}function pe(J){(c||a?.active)&&(J.preventDefault(),J.stopImmediatePropagation())}function me(J){J.target.closest?.(".pw-drag-handle")&&J.preventDefault()}return e.addEventListener("touchstart",z,{passive:!0}),e.addEventListener("touchmove",M,{passive:!1}),e.addEventListener("pointerdown",ce),e.addEventListener("click",pe,!0),e.addEventListener("contextmenu",me),{dispose(){P(!1,null,!1),d(),o&&r.cancelAnimationFrame(o),e.removeEventListener("touchstart",z),e.removeEventListener("touchmove",M),e.removeEventListener("pointerdown",ce),e.removeEventListener("click",pe,!0),e.removeEventListener("contextmenu",me)}}}function mc(e,t=null){const n=t?[t].filter(r=>r.matches?.("textarea.pw-readable, .cw-dialogue-input")):e.querySelectorAll("textarea.pw-readable, .cw-dialogue-input");for(const r of n){if(!r.getClientRects().length)continue;const s=r.ownerDocument.defaultView.getComputedStyle(r),a=r.cloneNode(!1);a.removeAttribute("id"),a.removeAttribute("aria-label"),a.setAttribute("aria-hidden","true"),a.tabIndex=-1,a.value=r.value,Object.assign(a.style,{position:"fixed",left:"-100000px",top:"0",visibility:"hidden",pointerEvents:"none",width:`${r.getBoundingClientRect().width}px`,margin:"0"});for(const[o,c]of[["height","0px"],["min-height","0px"],["max-height","none"]])a.style.setProperty(o,c,"important");r.parentElement.append(a);const i=`${Math.ceil(a.scrollHeight+parseFloat(s.borderTopWidth)+parseFloat(s.borderBottomWidth))}px`;a.remove(),r.style.height!==i&&(r.style.height=i)}}function fc(e){const t=e.ownerDocument,n=t.defaultView.getComputedStyle(e),r=t.createElement("div"),s=["fontFamily","fontSize","fontWeight","fontStyle","fontVariant","lineHeight","letterSpacing","wordSpacing","textTransform","textIndent","textAlign","direction","tabSize","paddingTop","paddingRight","paddingBottom","paddingLeft","wordBreak","overflowWrap"];for(const c of s)r.style[c]=n[c];Object.assign(r.style,{position:"fixed",left:"-100000px",top:"0",visibility:"hidden",pointerEvents:"none",boxSizing:"border-box",width:`${e.clientWidth}px`,height:"auto",minHeight:"0",maxHeight:"none",whiteSpace:"pre-wrap",overflow:"hidden",border:"0",margin:"0"}),r.setAttribute("aria-hidden","true");const a=e.selectionDirection==="backward"?e.selectionStart:e.selectionEnd;r.append(t.createTextNode(e.value.slice(0,a??e.value.length)));const i=t.createElement("span");i.textContent="​",r.append(i,t.createTextNode(e.value.slice(a??e.value.length))),t.body.append(r);const o=i.getBoundingClientRect().top-r.getBoundingClientRect().top+i.getBoundingClientRect().height/2;return r.remove(),o}function Pd(e,t){let n=e.querySelector(".pw-kb-debug");if(!ne().kbDebug){n?.remove();return}n||(n=e.ownerDocument.createElement("div"),n.className="pw-kb-debug",e.append(n)),n.textContent=`窗口${t.inner} 可见${Math.round(t.measured)} 最大${Math.round(t.tallest)} 用${Math.round(t.used)} 偏移${Math.round(t.top)} ${t.editing?"输入中":"未输入"} 键盘:${t.detected?"测到":t.guessed?"估算":"无"}`}function Od(e){const t=e.ownerDocument,n=t.defaultView||ze,r=n.visualViewport,s=e.querySelector(".pw-body");let a=0,i=!1,o=0,c=n.innerWidth,p=Math.max(n.innerHeight,r?.height||0),d=!1,m=!0,g=0,y=0;const E=L=>!!L&&e.contains(L)&&L.getClientRects().length&&(L.tagName==="TEXTAREA"||L.isContentEditable||L.tagName==="INPUT"&&!/^(checkbox|radio|button|submit|reset|range|color|file|hidden)$/i.test(L.type)),P=()=>{if(a=0,i||!e.isConnected)return;const L=n.matchMedia("(max-width:700px), (pointer:coarse)").matches,W=t.activeElement,Ce=!!E(W);e.classList.toggle("pw-viewport-mobile",L);const pe=r?.height||n.innerHeight,me=r?.offsetTop||0;Math.abs(n.innerWidth-c)>80?(c=n.innerWidth,p=Math.max(n.innerHeight,pe)):p=Math.max(p,n.innerHeight,pe);const J=Math.abs((r?.scale||1)-1)>=.05,re=Ca(n,pe,p),xe=L&&Ce&&!J&&(re.detected||re.guessed),de=xe&&W.matches(".cw-dialogue-input")?W.closest(".cw-dialogue-compose"):null;let Le=d;d=!1;const ie=m;if(m=!1,Le&&!ie&&Date.now()-g<120&&(Le=!1,y||(y=n.setTimeout(()=>{y=0,D(!0)},120))),Le&&(g=Date.now()),e.classList.toggle("pw-input-active",xe),e.classList.toggle("pw-chat-typing",!!de),e.style.setProperty("--pw-visible-height",`${re.height}px`),Pd(e,{inner:n.innerHeight,measured:pe,tallest:p,used:re.height,top:me,detected:re.detected,guessed:re.guessed,editing:Ce}),e.style.setProperty("--pw-visible-top",`${me}px`),ie?mc(e):Ce&&mc(e,W),e.style.setProperty("--pw-composer-height",de?`${Math.ceil(de.getBoundingClientRect().height)+16}px`:"0px"),!Ce||!Le)return;const he=W.getBoundingClientRect();let Ie=(he.top+he.bottom)/2;if(W.tagName==="TEXTAREA"){const Te=fc(W),qe=Math.min(20,W.clientHeight/4);Te-W.scrollTop<qe?W.scrollTop=Math.max(0,Te-qe):Te-W.scrollTop>W.clientHeight-qe&&(W.scrollTop=Te-W.clientHeight+qe),Ie=he.top+W.clientTop+Te-W.scrollTop}if(de)return;const Ae=s.getBoundingClientRect(),_e=Math.max(me,Ae.top)+32,Ye=Math.min(me+re.height,Ae.bottom)-32;Ye<=_e||(Ie<_e?s.scrollTop+=Ie-_e:Ie>Ye&&(s.scrollTop+=Ie-Ye))},D=(L=!1,W=!1)=>{d||=L,m||=W,!i&&!a&&(a=n.requestAnimationFrame(P))},Q=()=>D(!0),z=()=>D(!1,!0),M=()=>{D(!0,!0);for(const L of[300,650])n.setTimeout(()=>D(!0,!0),L)},_=()=>{E(t.activeElement)&&Q()},ce=["input","compositionend"];for(const L of ce)e.addEventListener(L,Q,!0);e.addEventListener("focusin",M,!0),e.addEventListener("focusout",z,!0),e.addEventListener("toggle",z,!0),t.addEventListener("selectionchange",_);const V=()=>D(!0,!0);n.addEventListener("resize",V),r?.addEventListener("resize",V),r?.addEventListener("scroll",Q),n.navigator?.virtualKeyboard?.addEventListener("geometrychange",V);const R=new n.ResizeObserver(L=>{const W=L[0].contentRect.width;Math.abs(W-o)>.5&&(o=W,z())});return R.observe(s),z(),{refresh:z,dispose:()=>{i=!0,a&&n.cancelAnimationFrame(a),R.disconnect();for(const L of ce)e.removeEventListener(L,Q,!0);e.removeEventListener("focusin",M,!0),y&&n.clearTimeout(y),e.removeEventListener("focusout",z,!0),e.removeEventListener("toggle",z,!0),t.removeEventListener("selectionchange",_),n.removeEventListener("resize",V),r?.removeEventListener("resize",V),r?.removeEventListener("scroll",Q),n.navigator?.virtualKeyboard?.removeEventListener("geometrychange",V)}}}function Dr(){if(ye)return;Id(),ye=u("div",{class:"pw-overlay",id:"pw-root","data-pw-owner":cn}),ye.addEventListener("mousedown",t=>{t.target===ye&&Fs()}),ve=u("div",{class:"pw-body"}),Et=u("div",{class:"pw-status"});const e=u("div",{class:"pw-panel"},u("div",{class:"pw-head"},u("div",{class:"pw-heading"},u("h3",null,`预设机 v${cc}`),ru()),H("关闭",Fs)),u("div",{id:"pw-tabs-host"}),ve,Et);ye.append(e),je.body.append(ye),ye.addEventListener("input",()=>kc()),ye.addEventListener("change",()=>queueMicrotask(ln)),ye._pwViewport=Od(ye),F(),ve.scrollTop=k.panelScroll||0}function Fs(){if(!(k.busy&&!ct.yes("还有任务在跑，关掉面板不会中断它。确定关闭？"))){for(const e of je.querySelectorAll(`.pw-focus-editor[data-pw-owner="${cn}"]`))e.close();ye?._pwComboDrag?.dispose(),ye?._pwViewport?.dispose(),k.panelScroll=ve?.scrollTop||0,ye?.remove(),ye=ve=Et=null}}function Dd(e){const t=e.firstElementChild,n=e.lastElementChild,r=t.querySelector("button"),s=t.querySelector(".pw-primary"),a=t.querySelector("b")?.textContent||"编辑条目",i=n.querySelector(".pw-danger");return t.remove(),n.remove(),i&&e.append(u("details",null,u("summary",null,"删除条目"),i)),Qt(a,e,[r,s],()=>r.click(),"full-editor")}function F(){if(!ye)return;ye._pwComboDrag?.dispose(),ye._pwComboDrag=null;const e=ve.scrollTop,t=ye.querySelector("#pw-tabs-host");let n;k.editing?n=Dd(Ud()):k.tab==="lib"?n=jd():k.tab==="gen"?n=Jd():k.tab==="mix"?n=vi():k.tab==="imp"?n=Uu():n=em();const r=n._pwScreen;t.replaceChildren(r?u("div",{class:"pw-screen-nav"},H(k.tab==="mix"?"← 预设":"← 返回",r.onback,"pw-sm",{"aria-label":"返回上一页"}),u("b",null,r.title)):k.tab==="gen"||k.tab==="imp"?u("div",{class:"pw-screen-nav"},H("← 预设",()=>Us("mix"),"pw-sm"),u("b",null,k.tab==="gen"?"让 AI 写一条":"导入")):Bd()),ye.querySelector(".pw-panel > .pw-screen-footer")?.remove();const s=r?.actions||n._pwActions;s?.some(Boolean)&&Et.before(u("div",{class:"pw-screen-footer"},s));const a=new Set(["skeleton","remake","full-editor"]),i=r?String(n.className.match(/pw-screen-([\w-]+)/)?.[1]||""):"";r?a.has(i)?ve.replaceChildren(n,Wp()):ve.replaceChildren(n):ve.replaceChildren(n,Wp()),ve.scrollTop=e,ye._pwViewport?.refresh(),ln(),tr();try{globalThis.__cwzSkin?.(ye)}catch{}}function Us(e){k.tab===e&&!k.editing||(k.tabScroll??={},k.tabScroll[k.tab]=ve?.scrollTop||0,k.tab=e,k.libMenu&&(k.libMenu.menuUid=null),k.mix.menuUid=null,F(),ve.scrollTop=k.tabScroll[e]||0)}function Bd(){return u("div",{class:"pw-tabs"},[["mix","预设"],["lib","收藏"],["set","设置"]].map(([t,n])=>u("button",{type:"button",class:`pw-tab${(k.tab===t||t==="mix"&&(k.tab==="gen"||k.tab==="imp"))&&!k.editing?" pw-active":""}`,onclick:()=>{Us(t)}},n)))}function gc(e){const t=di();let n=0;for(const r of e)Ds(t,r)&&n++;te(),we(n?"success":"info",n?`已加入「${t.name}」${n} 条`:"这些条目已经在预设里了"),F()}function wc(e){const t=ne(),n=new Set(e),r=[],s=[{entries:t.entries,comboId:null},...t.combos.map(a=>({entries:a.entries||[],comboId:a.id}))];for(const a of s)a.entries.forEach((i,o)=>{n.has(i.id)&&r.push({entry:i,index:o,ownerComboId:a.comboId,refs:[]})});if(r.length){for(const a of r)for(const i of t.combos)i.items.forEach((o,c)=>{o.type==="entry"&&o.entryId===a.entry.id&&a.refs.push({comboId:i.id,index:c,item:o})});t.entries=t.entries.filter(a=>!n.has(a.id));for(const a of t.combos)a.entries&&(a.entries=a.entries.filter(i=>!n.has(i.id))),a.items=a.items.filter(i=>i.type!=="entry"||!n.has(i.entryId));k.trash.push(r),k.trash.length>20&&k.trash.shift();for(const a of e)k.selected.delete(a);te()}}function Md(){const e=k.trash.pop();if(!e)return;const t=ne(),n=new Set;for(const s of[...e].sort((a,i)=>a.index-i.index)){const a=s.ownerComboId?t.combos.find(o=>o.id===s.ownerComboId):null;if(s.ownerComboId&&!a)continue;const i=a?wi(a):t.entries;i.some(o=>o.id===s.entry.id)||i.splice(Math.min(s.index,i.length),0,s.entry),n.add(s.entry.id)}const r=e.flatMap(s=>n.has(s.entry.id)?s.refs.map(a=>({...a,entryId:s.entry.id})):[]);for(const s of r.sort((a,i)=>a.index-i.index)){const a=t.combos.find(i=>i.id===s.comboId);!a||a.items.some(i=>i.type==="entry"&&i.entryId===s.entryId)||a.items.splice(Math.min(s.index,a.items.length),0,s.item)}te(),we("success","已恢复条目及其原来的位置")}function Ld(){if(!k.trash.length)return null;const e=k.trash[k.trash.length-1],t=e.length===1?`「${e[0].entry.name}」`:`${e.length} 个条目`;return u("div",{class:"pw-row pw-undo"},u("span",null,`已删除 ${t}`),H("撤销",()=>{Md(),F()},"pw-sm pw-primary"),k.trash.length>1&&u("span",{class:"pw-dim"},`还能再撤销 ${k.trash.length-1} 步`),H("不用了",()=>{k.trash=[],F()},"pw-sm"))}function qd(e,t=[]){k.tab==="lib"&&(k.tag&&!e.tags.includes(k.tag)&&(k.tag=e.tags.find(n=>!t.includes(n))||""),k.search&&!ni([e],{search:k.search}).length&&(k.search=""))}function gi(e=null){k.libMenu&&(k.libMenu.menuUid=null),k.editing={draft:e?fe(e):He({name:"新条目"}),isNew:!e,undo:null,comment:"",returnScroll:ve?.scrollTop||0},F(),ve.scrollTop=0}function hc(e){const t=ne().combos.filter(n=>n.items.some(r=>r.type==="entry"&&e.includes(r.entryId)));t.length&&!ct.yes(`删除这 ${e.length} 条库内条目，也会移除 ${t.length} 个预设中对它们的引用。删除后可以撤销。继续？`)||(wc(e),F())}function jd(){const e=ne(),t=jt(),n=ju();k.tag&&!ti(e.entries).some(c=>c.tag===k.tag)&&(k.tag=""),n.tag=k.tag;const r=Qu(e.entries,{...n,search:k.search},t),s=e.entries.filter(c=>k.selected.has(c.id)).map(c=>c.id),a=u("input",{type:"search",class:"pw-wide","aria-label":"搜索收藏",placeholder:"搜索名称、内容或标签",value:k.search,oninput:c=>{k.search=c.target.value,clearTimeout(a._t),a._t=setTimeout(()=>{if(!a.isConnected)return;F();const p=ve.querySelector("input[type=search]");p&&(p.focus({preventScroll:!0}),p.setSelectionRange(p.value.length,p.value.length))},300)}}),i=Ru(n,{includeTags:!0,onChange:()=>k.tag=n.tag,onClear:()=>k.tag=""}),o=u("div",{class:"pw-section pw-library"},u("div",{class:"pw-row"},a,H("新建条目",()=>gi(),"pw-primary")),i,Ld(),u("div",{class:"pw-row pw-list-tools"},u("span",{class:"pw-dim"},`显示 ${r.length} / ${e.entries.length} 条`),H("全选当前列表",()=>{r.forEach(c=>k.selected.add(c.id)),F()},"pw-sm",{disabled:!r.length}),s.length>0&&H("清空选择",()=>{k.selected.clear(),F()},"pw-sm")),!e.entries.length&&u("p",{class:"pw-hint"},"还没有库内条目。点「新建条目」可直接粘贴正文，也可以从「写提示词」或「导入」保存。"),e.entries.length>0&&!r.length&&u("div",{class:"pw-box"},"没有匹配的条目。",H("清除搜索和筛选",()=>{k.search=k.tag="",Object.assign(n,{role:"",tag:"",status:"all",content:"all"}),F()},"pw-sm")),r.map(c=>Qd(c)));if(s.length){const c=s.filter(p=>!r.some(d=>d.id===p)).length;o._pwActions=[u("div",{class:"pw-batch-actions"},u("span",{class:"pw-dim"},`已选 ${s.length} 条${c?`（含筛选外 ${c} 条）`:""}`),u("div",{class:"pw-row"},u("select",{"aria-label":"加入哪个预设",value:t?.id||"",onchange:p=>{e.currentComboId=p.target.value,te(),F()}},!e.combos.length&&u("option",{value:""},"新建预设"),e.combos.map(p=>u("option",{value:p.id},p.name))),H("加入所选预设",()=>gc(s),"pw-primary")),u("div",{class:"pw-row"},H("导出所选条目",()=>Hs(`收藏-${s.length}条.json`,JSON.stringify(Ls(e.entries.filter(p=>s.includes(p.id))),null,2)),"pw-sm"),H("删除所选条目",()=>hc(s),"pw-sm pw-danger")))]}return o}function Qd(e){const t=jt(),n=k.libMenu||(k.libMenu={}),r=!!t?.items.some(p=>p.type==="entry"&&p.entryId===e.id),s=u("span",{class:"pw-library-name",title:e.name},e.name),a=zs(e,`lib:${e.id}`,s,{draggable:!1}),i=Mn("more",`更多：${e.name}`,()=>{n.menuUid=n.menuUid===e.id?null:e.id,F()},{"aria-expanded":String(n.menuUid===e.id)}),o=n.menuUid===e.id&&u("div",{class:"pw-row-actions"},H(r?"已在当前预设":`加入「${t?.name||"新预设"}」`,()=>{n.menuUid=null,gc([e.id])},"pw-sm",{disabled:r}),H("复制为新条目",()=>{const p=He({...fe(e),id:void 0,name:qt(ne().entries,e.name),history:[]});ne().entries.unshift(p),n.menuUid=null,te(),gi(p)},"pw-sm"),H("删除库内条目",()=>{n.menuUid=null,hc([e.id])},"pw-sm pw-danger")),c=u("div",{class:"pw-card pw-library-card"},u("label",{class:"pw-check"},u("input",{type:"checkbox","aria-label":`选择库内条目：${e.name}`,checked:k.selected.has(e.id),onchange:p=>{p.target.checked?k.selected.add(e.id):k.selected.delete(e.id),F()}})),u("div",{class:"pw-card-main"},a,u("div",{class:"pw-library-meta"},`${e.role} · ${Jt(e.content)} token${e.tags.length?` · ${e.tags.join(" / ")}`:""}`)),u("div",{class:"pw-library-buttons"},Mn("edit",`编辑：${e.name}`,()=>gi(e)),i),o);return o&&Oc(o,i,e.id,n),c}function nr(e={}){const t={...Ue,...e};return[t.baguWhat,t.baguHow].filter(n=>String(n??"").trim()).join(`
 
-`)}function Rd(e){if((e.presetWritingVersion??0)>=1)return!1;e.templates??={};for(const[t,n]of Object.entries(yd))e.templates[t]===n&&delete e.templates[t];return e.presetWritingVersion=1,!0}function Hd({title:e="编辑提示词",get:t,oninput:n}){const r=u("dialog",{class:"pw-focus-editor","data-pw-owner":cn,"aria-label":e}),s=u("textarea",{class:"pw-focus-text",value:t(),spellcheck:!1,wrap:"soft","aria-label":e,oninput:c=>n(c.target.value)});r.append(u("div",{class:"pw-focus-head"},u("b",null,e),H("复制",()=>ui(s.value)),H("完成",()=>r.close(),"pw-primary")),s);const a=je.defaultView||ze,i=a.visualViewport,o=()=>{const c=i?.height||a.innerHeight;r.style.setProperty("--pw-visible-height",`${Ca(a,c,c).height}px`),r.style.setProperty("--pw-visible-top",`${i?.offsetTop||0}px`)};return a.addEventListener("resize",o),i?.addEventListener("resize",o),i?.addEventListener("scroll",o),a.navigator?.virtualKeyboard?.addEventListener("geometrychange",o),r.addEventListener("close",()=>{a.removeEventListener("resize",o),i?.removeEventListener("resize",o),i?.removeEventListener("scroll",o),a.navigator?.virtualKeyboard?.removeEventListener("geometrychange",o),r.remove(),F()},{once:!0}),je.body.append(r),o(),r.showModal(),s.focus({preventScroll:!0}),s.setSelectionRange(0,0),s.scrollTop=0,r}function Br({title:e="条目正文",get:t,oninput:n,className:r="",tools:s=[]}){const a=u("textarea",{class:`pw-code pw-readable ${r}`,value:t(),rows:14,spellcheck:!1,wrap:"soft","aria-label":e,oninput:i=>n(i.target.value)});return u("div",{class:"pw-text-editor"},u("div",{class:"pw-row pw-editor-tools"},u("b",{class:"pw-editor-label"},e),H("放大编辑",()=>Hd({title:e,get:t,oninput:n}),"pw-sm"),H("复制",()=>ui(t()),"pw-sm"),...s),a)}function zd(){const e=ne(),t=(n,r)=>{const s=e.templates[n]!==void 0&&e.templates[n]!==Ue[n],a=u("summary",null,r,s?"（已修改）":""),i=H("恢复默认",()=>{delete e.templates[n],te(),F()},"pw-sm",{disabled:!s});return u("details",{class:"pw-bagu-part"},a,Br({title:r,get:()=>e.templates[n]??Ue[n],oninput:o=>{e.templates[n]=o,i.disabled=o===Ue[n],a.textContent=r+(i.disabled?"":"（已修改）"),te()},className:"pw-guide-text"}),u("div",{class:"pw-row"},i))};return u("div",{class:"pw-box pw-bagu-controls"},u("label",null,u("input",{type:"checkbox",checked:e.antiBagu!==!1,onchange:n=>{e.antiBagu=n.target.checked,te()}})," 生成和修改时使用反八股规则"),t("baguWhat","什么是八股"),t("baguHow","如何反八股"))}async function Fd(e){return Bn("去八股",async()=>{const t=ne(),n=e.content;if(!String(n??"").trim())return;const{system:r,prompt:s}=ci({entry:{...e,content:n},comment:"检查并修改这份提示词里的八股。删改重复句型、空泛解释、固定反应，以及没有实际用途的次数或占比；保留作者要求的风味与条目的功能。不得改变变量、宏、字段、必要的数值、角色设定和禁词表。输出完整条目。",templates:t.templates,antiBagu:!0}),a=await er(r,s,{dialogueKey:"gen"});if(!/<entry\b[^>]*>[\s\S]*?<\/entry>/i.test(a))throw new Error("没有收到完整条目，原文已保留。");const i=Qs(a),o=i[0];if(i.length!==1||!o?.content?.trim()||o.truncated)throw new Error("没有收到完整的单个条目，原文已保留。");if(e.content!==n)throw new Error("你在等待时修改了正文，本次结果未覆盖你的修改。");e.beforeBagu=n,e.content=Os(o.content),e.truncated=!1,De()})}function Ud(){const e=k.editing,t=e.draft,n=ne(),r=e.comboId?n.combos.find(M=>M.id===e.comboId):k.tab==="mix"?jt():null,s=()=>r?.items.find(M=>M.type==="entry"&&(e.itemUid?M.uid===e.itemUid:M.entryId===t.id));s()&&(e.override??=fe(s().override||{}));const a=M=>e.override?.[M]??t[M],i=(M,_)=>{t[M]=_,e.override&&delete e.override[M]},o=()=>{k.editing=null,r&&(k.mix.screen=e.returnScreen||null),F(),typeof ve<"u"&&ve&&(ve.scrollTop=e.returnScroll??(r?k.mix.homeScroll:0)??0)},c=u("input",{type:"text",class:"pw-wide","aria-label":"条目名称",value:t.name,oninput:M=>{t.name=M.target.value}}),p=u("select",{"aria-label":"条目角色",onchange:M=>{i("role",M.target.value)}},vt.map(M=>u("option",{value:M,selected:a("role")===M},M))),d=u("input",{type:"text",class:"pw-wide",placeholder:"标签，用逗号分隔","aria-label":"条目标签",value:t.tags.join(", "),oninput:M=>{t.tags=ft(M.target.value)}}),m=u("select",{"aria-label":"条目注入位置",onchange:M=>{i("injection_position",Number(M.target.value)),y.hidden=a("injection_position")!==1}},u("option",{value:0,selected:a("injection_position")===0},"相对（按预设顺序）"),u("option",{value:1,selected:a("injection_position")===1},"深度（插进聊天记录里）")),g=u("input",{type:"number",min:0,"aria-label":"注入深度",style:"width:70px",value:a("injection_depth"),oninput:M=>{i("injection_depth",Math.max(0,Number(M.target.value)||0))}}),y=u("label",{class:"pw-field",hidden:a("injection_position")!==1},"聊天深度",g),E=u("span",{class:"pw-dim"},`约 ${Jt(t.content)} token`),P=Ac({entry:t,owner:e,combo:r||jt(),allowInit:!!r,oninput:M=>{E.textContent=`约 ${Jt(M)} token`},tools:[E]}),D=u("input",{type:"text",class:"pw-wide",placeholder:"备注（不会导出）",value:t.note,oninput:M=>{t.note=M.target.value}}),Q=u("input",{type:"text",class:"pw-wide",placeholder:"修改意见，例如：调整第 3 条规则的措辞，保留其他内容",value:e.comment,oninput:M=>{e.comment=M.target.value}}),z=()=>{if(e.comboId&&!r||e.itemUid&&(!s()||s().entryId!==t.id)){we("warning","原预设或条目位置已被移除，请返回后重新打开。");return}const M=se(t.id);if(!M&&!e.isNew){we("warning","这个条目已被删除");return}const _=[...M?.tags||[]],ce=r;let V=s();const R=M&&ce&&Js(ce,M.id,V?.uid),L=Xe({...t,id:R?ae("pw"):t.id,updatedAt:Date.now()});M&&M.content!==L.content&&(L.history=[{content:M.content,at:Date.now()},...M.history||[]].slice(0,5)),R?(lt(ce,L),V&&(V.entryId=L.id)):M?Object.assign(M,L):ce?lt(ce,L):n.entries.unshift(L),V&&e.override&&(V.override=fe(e.override)),e.moveToTop&&ce&&(V||(V={uid:ae("it"),type:"entry",entryId:L.id,enabled:!0,override:{}},ce.items.push(V)),Lr(e,ce,V)),qd(L,_),k.libTagEdits?.delete(t.id),ce&&e.setWritten&&Nt(L)!=="init"&&Fc(ce)&&we("info","已自动更新预设最上方的「变量初始化」"),te(),o(),we("info","已提交保存")};return u("div",{class:`pw-section${r?" pw-mix-editor":""}`,...s()?{"data-mix-edit":s().uid}:{}},u("div",{class:"pw-row"},H("取消",o),u("b",{style:"flex:1"},e.isNew?"新建条目":"编辑条目"),H("保存",z,"pw-primary")),u("p",{class:"pw-hint"},r?`保存到预设「${r.name}」`:"保存到收藏"),u("label",{class:"pw-field"},"名称",c),u("details",{class:"pw-entry-settings",open:!!e.settingsOpen,ontoggle:M=>e.settingsOpen=M.target.open},u("summary",null,"角色、标签与位置"),u("div",{class:"pw-entry-settings-grid"},u("label",{class:"pw-field"},"角色",p),u("label",{class:"pw-field"},"标签",d),u("label",{class:"pw-field"},"注入位置",m),y,u("label",{class:"pw-field"},"备注",D))),P,u("details",{class:"pw-entry-ai",open:!!e.aiOpen,ontoggle:M=>e.aiOpen=M.target.open},u("summary",null,"让 AI 按意见改"),Q,u("div",{class:"pw-row"},H("按意见改",()=>Bn("按意见改",async()=>{if(!e.comment.trim()&&!Zt(n,`entry:${t.id}`)){we("warning","先写修改意见，或在本页对话里说明");return}const{system:M,prompt:_}=ci({entry:Xe(t),comment:e.comment||"按本页对话中作者的要求修改。",templates:n.templates,antiBagu:n.antiBagu!==!1}),ce=await er(M,_,{dialogueKey:`entry:${t.id}`}),V=Qs(ce);if(V.length>1)throw e.reviseRaw=ce,new Error(`AI 返回了 ${V.length} 个条目，当前编辑页一次只能修改一个。原文未改，完整回复已保留在下方，可复制后分别添加。`);const R=V[0];if(!R)throw new Error("没解析出条目");delete e.reviseRaw,R.content=Os(R.content),R.truncated&&we("warning","回复被截断了，可以在设置里调大最大回复长度"),e.undo={content:t.content,name:t.name,tags:[...t.tags]},t.content=R.content,R.name&&(t.name=R.name),R.tags.length&&(t.tags=R.tags)})),H("换回改之前",()=>{e.undo&&(Object.assign(t,e.undo),e.undo=null,F())},"",{disabled:!e.undo}))),e.reviseRaw&&u("details",{open:!0},u("summary",null,"AI 返回了多个条目，尚未应用"),u("textarea",{class:"pw-wide",rows:10,readOnly:!0,"aria-label":"未应用的 AI 原回复",value:e.reviseRaw})),!e.isNew&&(se(t.id)?.history||[]).length>0&&u("details",null,u("summary",null,`历史版本（${se(t.id).history.length}）`),se(t.id).history.map((M,_)=>u("div",{class:"pw-box"},u("div",{class:"pw-row"},u("span",{class:"pw-dim"},new Date(M.at).toLocaleString()),H("用这一版",()=>{t.content=M.content,F()},"pw-sm")),u("pre",{class:"pw-pre"},M.content)))),u("div",{class:"pw-row"},H("保存并返回",z,"pw-primary"),!e.isNew&&!r&&!e.comboId&&H("删除",()=>{ct.yes("删除这个条目？预设里对应的位置也会一起去掉。")&&(wc([t.id]),k.editing=null,F())},"pw-danger")))}async function Gd(){const e=ne(),t=k.gen;if(!t.need.trim()&&!Zt(e,"gen")){we("warning","先写要求，或在本页对话里说说想法");return}const n=e.customKinds.find(d=>d.id===t.kind),r=ft([...ft(t.tags),...ft(n?.tags)]),{system:s,prompt:a}=sc({kind:t.kind,kindPrompt:n?.prompt,need:t.need,refs:No(),multi:t.multi,tags:r,lang:t.lang,templates:e.templates,antiBagu:e.antiBagu!==!1}),i=await er(s,a,{dialogueKey:"gen"}),o=Qs(i);if(!o.length)throw t.raw=i,De(),new Error("没解析出条目，原回复已保留在结果区。");t.raw="",t.note=js(i),o.some(d=>d.truncated)&&we("warning","回复被截断了，最后一条可能不完整；请补全后再保存");const c=ae("generated"),p=o.map((d,m)=>({...d,content:Os(d.content),tags:ft([...d.tags,...r]),key:`${c}_${m}`,checked:!0,open:o.length===1&&!t.results.length}));t.results.unshift(...p),De(),we("success",`新增 ${p.length} 条结果，共 ${t.results.length} 条待入库`)}function Jd(){const e=ne(),t=k.gen,n=No(),r=Aa(e,"gen"),s=Jn(r).length,a=rc(e.customKinds,e.hiddenKinds);a.some(p=>p.id===t.kind)||(t.kind=a[0].id);const i=H(t.results.length?"再写一批":"写",async()=>{i.disabled=!0,await Bn("生成条目",Gd)},"pw-primary",{disabled:!!k.busy}),o=t.results.filter(p=>p.checked&&p.content.trim()).length,c=u("div",{class:"pw-section"},u("p",{class:"pw-hint","data-pw-generation-draft":"",role:"status","aria-live":"polite"},dc()),u("div",{class:"pw-gen-options"},u("div",{class:"pw-gen-primary"},u("span",null,"类型"),u("select",{"aria-label":"提示词类型",value:t.kind,onchange:p=>{t.kind=p.target.value,De()}},a.map(p=>u("option",{value:p.id},p.label))),H("管理类型",()=>{k.settingsReturn={tab:"gen",scroll:ve.scrollTop},k.setOpen.add("section-kinds"),Us("set"),ve.querySelector('[data-settings-section="section-kinds"]')?.scrollIntoView({block:"start"})},"pw-sm"))),u("textarea",{class:"pw-tall pw-gen-need","aria-label":"提示词要求",placeholder:"希望这份提示词做到什么？可以写用途、写法和需要保留的内容。",value:t.need,oninput:p=>{t.need=p.target.value,De()}}),u("details",{class:"pw-gen-optional",open:!!t.optionsOpen,ontoggle:p=>{p.target.isConnected&&t.optionsOpen!==p.target.open&&(t.optionsOpen=p.target.open,De())}},u("summary",null,`生成选项 · ${t.multi?"允许多条":"单条"} · ${t.lang==="en"?"英文":"中文"}${t.useSelected&&n.length?` · 参考 ${n.length} 条`:""}`),u("div",{class:"pw-section"},u("label",null,u("input",{type:"checkbox",checked:t.multi,onchange:p=>{t.multi=p.target.checked,De(),F()}})," 允许拆成多个条目"),u("label",{class:"pw-field"},"语言",u("select",{"aria-label":"生成语言",value:t.lang,onchange:p=>{t.lang=p.target.value,De(),F()}},u("option",{value:"zh"},"中文"),u("option",{value:"en"},"English"))),u("label",{class:"pw-field"},"默认标签",u("input",{type:"text",placeholder:"可选，用逗号分隔",value:t.tags,oninput:p=>{t.tags=p.target.value,De()}})),u("label",null,u("input",{type:"checkbox",checked:t.useSelected,onchange:p=>{t.useSelected=p.target.checked,De(),F()}})," 使用收藏中勾选的内容作为参考"),t.useSelected&&u("span",{class:"pw-dim"},`当前参考 ${n.length} 条`))),u("div",{class:"pw-generation-context","data-pw-dialogue-context":""},u("label",{class:"pw-check"},u("input",{type:"checkbox","aria-label":"生成时发送本页对话",checked:r.use!==!1,onchange:p=>{r.use=p.target.checked,te(),F()}})," 生成时发送本页对话"),u("span",{class:"pw-hint"},r.use===!1?"已关闭 · 本次不发送聊天记录":s?`已开启 · 本次发送 ${s} 条对话`:"已开启 · 聊过后会自动带入")),u("div",{class:"pw-row"},i,t.results.length>0&&u("span",{class:"pw-dim"},"新结果会追加，已有结果继续保留")),t.note&&u("details",{class:"pw-note-details",open:!!t.noteOpen,ontoggle:p=>{p.target.isConnected&&t.noteOpen!==p.target.open&&(t.noteOpen=p.target.open,De())}},u("summary",null,"本次 AI 的说明"),u("pre",{class:"pw-pre"},t.note)),t.raw&&u("details",{open:!0},u("summary",null,"未解析的原回复"),u("textarea",{readOnly:!0,class:"pw-code",value:t.raw,"aria-label":"未解析的生成回复"})),t.discarded?.results.length>0&&u("div",{class:"pw-row pw-undo"},`已清空 ${t.discarded.results.length} 条草稿`,H("撤销清空",()=>{t.results.push(...t.discarded.results),t.note||(t.note=t.discarded.note),t.discarded=null,De(),F()},"pw-sm")),t.results.length>0&&u("div",{class:"pw-row pw-list-tools"},u("b",null,`草稿（${t.results.length}）`),H("全选",()=>{t.results.forEach(p=>p.checked=!0),De(),F()},"pw-sm"),H("清空选择",()=>{t.results.forEach(p=>p.checked=!1),De(),F()},"pw-sm"),H("清空结果",()=>{t.discarded={results:t.results,note:t.note},t.results=[],t.note="",De(),F()},"pw-sm")),t.results.map((p,d)=>Wd(p,d)));return t.results.length&&(c._pwActions=[u("div",{class:"pw-batch-actions"},u("label",{class:"pw-field"},"加入",u("select",{"aria-label":"生成结果加入位置",value:t.saveTarget||"both",onchange:p=>{t.saveTarget=p.target.value,De()}},u("option",{value:"both"},`放进预设「${jt()?.name||"新建预设"}」`),u("option",{value:"library"},"只存到收藏"))),H(`加入所选（${o}）`,()=>Yd((t.saveTarget||"both")==="both"),"pw-primary",{disabled:!o}))]),c}function Wd(e,t=0){const n=u("summary",null,`${t+1}. ${e.name||"未命名条目"}`),r=u("span",{class:"pw-dim"},`约 ${Jt(e.content)} token`);return u("div",{class:"pw-box pw-gen-result"},u("label",{class:"pw-check"},u("input",{type:"checkbox","aria-label":`选择生成结果：${e.name}`,checked:e.checked,onchange:s=>{e.checked=s.target.checked,De(),F()}})),u("details",{open:!!e.open,ontoggle:s=>{s.target.isConnected&&e.open!==s.target.open&&(e.open=s.target.open,De())}},n,u("div",{class:"pw-section"},u("label",{class:"pw-field"},"名称",u("input",{type:"text","aria-label":"生成条目名称",value:e.name,oninput:s=>{e.name=s.target.value,De(),n.textContent=`${t+1}. ${e.name||"未命名条目"}`}})),u("div",{class:"pw-row"},u("label",{class:"pw-field"},"角色",u("select",{"aria-label":"生成条目角色",value:e.role,onchange:s=>{e.role=s.target.value,De()}},vt.map(s=>u("option",{value:s},s)))),r),e.truncated&&u("div",{class:"pw-warnbox"},"这一条可能被截断，请补全后再保存。"),u("label",{class:"pw-field"},"标签",u("input",{type:"text",value:e.tags.join(", "),oninput:s=>{e.tags=ft(s.target.value),De()}})),Br({title:"条目正文",get:()=>e.content,oninput:s=>{e.content=s,De(),r.textContent=`约 ${Jt(s)} token`,Vd()},tools:[H("去八股",()=>Fd(e),"pw-sm",{disabled:!!k.busy}),e.beforeBagu!==void 0&&H("撤回去八股",()=>{e.content=e.beforeBagu,delete e.beforeBagu,De(),F()},"pw-sm")]}))))}function Vd(){const e=ye?.querySelector(".pw-screen-footer .pw-primary");if(!e||k.tab!=="gen")return;const t=k.gen.results.filter(n=>n.checked&&n.content.trim()).length;e.textContent=`加入所选（${t}）`,e.disabled=!t}function Yd(e){const t=ne(),n=k.gen.results.filter(a=>a.checked&&a.content.trim());if(!n.length){we("warning","没有勾选的结果");return}const r=[...t.entries],s=n.map(a=>{const i=He({name:qt(r,a.name),role:a.role,tags:a.tags,content:a.content,source:"AI 生成"});return r.push(i),i});if(t.entries.unshift(...s),k.gen.results=k.gen.results.filter(a=>!n.includes(a)),k.gen.results.length||(k.gen.note=""),e){const a=di();s.forEach(i=>Ds(a,i.id))}De({persist:!1}),te(),we("success",`已存入 ${s.length} 条${e?"，并放进当前预设":""}`),e?Us("mix"):F()}function Gs(e){return(e.presetName||e.name||"预设").trim()||"预设"}function wi(e){return Array.isArray(e.entries)?e.entries:e.entries=[]}function bc(e,t){return(e.entries||[]).some(n=>n.id===t)}function Js(e,t,n=null){const r=ne();return!bc(e,t)||r.entries.some(s=>s.id===t)||r.combos.some(s=>s.id!==e.id&&((s.entries||[]).some(a=>a.id===t)||s.items.some(a=>a.type==="entry"&&a.entryId===t)))||!!n&&e.items.some(s=>s.type==="entry"&&s.entryId===t&&s.uid!==n)}function lt(e,t){return wi(e).push(t),t}function Kd(e){const t=fe(e),n=new Map;return t.id=ae("cb"),t.name=`${e.name} 副本`,t.presetName=t.name,delete t.syncPrevious,t.entries=(e.entries||[]).map(r=>{const s=He({...fe(r),id:ae("pw")});return n.set(r.id,s.id),s}),t.items.forEach(r=>{r.uid=ae("it"),n.has(r.entryId)&&(r.entryId=n.get(r.entryId))}),t.removedEntryIds=(t.removedEntryIds||[]).map(r=>n.get(r)||r),t}function vc(e){const t=ne(),n=Dn(t.entries,e);if(n.status==="dup"){we("info",`收藏里已有「${n.match.name}」`);return}const r=He({...fe(e),id:ae("pw"),name:qt(t.entries,e.name),history:[]});t.entries.unshift(r),te(),F(),we("success",`已存入收藏「${r.name}」`)}function xc(e,t){const n=ne(),r=new Map,s=e.items.map(i=>{const o=He({...i.entry,id:ae("pw"),history:[],createdAt:Date.now(),updatedAt:Date.now()});return r.set(i.key,o.id),o}),a=si(qt(n.combos,t||e.label||"模板预设"),e.order,r);if(a.entries=s,a.templateSource=e.label||"",Object.keys(e.base||{}).length){const i={id:ae("bs"),name:a.name,settings:fe(e.base)};n.bases.push(i),a.baseId=i.id}return n.combos.push(a),n.currentComboId=a.id,a}function Xd(e){const t=new Set(e.items.filter(a=>a.type==="entry").map(a=>a.entryId)),n=(e.entries||[]).filter(a=>!t.has(a.id));if(!n.length)return null;const r=u("div",{class:"pw-local-reserve-list"},n.map(a=>u("div",{class:"pw-card","data-pw-reserve-entry":a.id},u("div",{class:"pw-card-main"},u("div",{class:"pw-card-title"},a.name),zs(a,`reserve:${e.id}:${a.id}`)),u("div",{class:"pw-card-btns"},H("加入预设",()=>{Ds(e,a.id),te(),F()},"pw-sm"),H("编辑",()=>{k.editing={draft:fe(a),isNew:!1,undo:null,comment:"",comboId:e.id,returnScroll:ve?.scrollTop||0,returnScreen:k.mix.screen?fe(k.mix.screen):null},F()},"pw-sm"),H("存入库",()=>vc(a),"pw-sm"))))),s=Gc(e,"reserveOpen",`预设内备用（${n.length}）`,r,!1);return s.classList.add("pw-local-reserve"),s}function Zd(e,t=""){const n=ne(),r=new Set([...e.items.filter(i=>i.type==="entry").map(i=>i.entryId),...e.removedEntryIds||[]]),s=[...n.entries.filter(i=>r.has(i.id)),...e.entries||[]],a=new Set(s.filter(i=>i.source&&i.tags?.includes(`来自:${i.source}`)).map(i=>i.source));return e.templateSource&&a.add(e.templateSource),t&&(a.clear(),a.add(t)),n.entries.filter(i=>a.has(i.source)&&i.tags?.includes(`来自:${i.source}`))}function $d(e,t){const n=ne(),r=new Set(t),s=[];n.entries.forEach((a,i)=>{if(!r.has(a.id))return;const o={entry:a,index:i,locals:[]};for(const c of n.combos){const p=c.items.some(g=>g.type==="entry"&&g.entryId===a.id),d=c.removedEntryIds?.includes(a.id);if(c.id!==e.id&&!p&&!d)continue;const m=lt(c,He({...fe(a),id:ae("pw")}));c.items.forEach(g=>{g.type==="entry"&&g.entryId===a.id&&(g.entryId=m.id)}),c.removedEntryIds&&(c.removedEntryIds=c.removedEntryIds.map(g=>g===a.id?m.id:g)),o.locals.push({comboId:c.id,id:m.id,snapshot:JSON.stringify(m)})}s.push(o),k.selected.delete(a.id),k.libTagEdits?.delete(a.id)}),s.length&&(n.entries=n.entries.filter(a=>!r.has(a.id)),k.mix.legacyUndo={comboId:e.id,batch:s},k.mix.legacyRepair=null,te(),F(),we("success",`已将 ${s.length} 条移回预设，未加入的内容保留在预设内备用`))}function _d(){const e=k.mix.legacyUndo;if(!e)return;const t=ne();for(const n of[...e.batch].sort((r,s)=>r.index-s.index)){t.entries.some(r=>r.id===n.entry.id)||t.entries.splice(Math.min(n.index,t.entries.length),0,n.entry);for(const r of n.locals){const s=t.combos.find(i=>i.id===r.comboId);if(!s)continue;const a=(s.entries||[]).find(i=>i.id===r.id);!a||JSON.stringify(a)!==r.snapshot||(s.items.forEach(i=>{i.type==="entry"&&i.entryId===r.id&&(i.entryId=n.entry.id)}),s.removedEntryIds&&(s.removedEntryIds=s.removedEntryIds.map(i=>i===r.id?n.entry.id:i)),s.entries=s.entries.filter(i=>i.id!==r.id))}}k.mix.legacyUndo=null,k.mix.legacyRepair=null,te(),F(),we("success","收藏已恢复，整理后编辑的预设内容已保留")}function eu(e){const t=[...new Set(ne().entries.filter(s=>s.source&&s.tags?.includes(`来自:${s.source}`)).map(s=>s.source))];if(!t.length)return null;k.mix.legacyRepair?.comboId!==e.id&&(k.mix.legacyRepair={comboId:e.id,source:"",selected:null,open:!1});const n=k.mix.legacyRepair;n.source&&!t.includes(n.source)&&(n.source="",n.selected=null);const r=Zd(e,n.source);return n.selected||(n.selected=new Set(r.map(s=>s.id))),u("details",{class:"pw-legacy-repair",open:n.open,ontoggle:s=>{s.target.isConnected&&(n.open=s.target.open)}},u("summary",{onclick:s=>{n.open=!s.currentTarget.parentElement.open}},`整理旧模板条目${r.length?`（${r.length}）`:""}`),u("select",{"aria-label":"旧模板来源",value:n.source,onchange:s=>{n.source=s.target.value,n.selected=null,n.open=!0,F()}},u("option",{value:""},"当前预设相关来源"),t.map(s=>u("option",{value:s},s))),u("p",{class:"pw-hint"},"勾选要移回预设的同源条目。其他预设的引用会各自保留，未加入的内容放入本预设备用区。"),!r.length&&u("p",{class:"pw-hint"},"请先选择旧模板来源。"),u("div",{class:"pw-legacy-choices"},r.map(s=>u("label",null,u("input",{type:"checkbox",checked:n.selected.has(s.id),onchange:a=>{a.target.checked?n.selected.add(s.id):n.selected.delete(s.id)}}),s.name))),H("转为预设专用",()=>$d(e,r.filter(s=>n.selected.has(s.id)).map(s=>s.id)),"pw-sm",{disabled:!r.length}))}function tu(e){return k.mix.legacyUndo?.comboId!==e.id?null:u("div",{class:"pw-row pw-legacy-undo"},u("span",{class:"pw-dim"},"旧模板条目已移回预设"),H("撤销整理",_d,"pw-sm"))}function Mr(e,t,n=!1){return t?(n?["name","content","tags","role","note","injection_position","injection_depth","injection_order","variableInitPrefix"]:["name","content","variableInitPrefix"]).some(s=>JSON.stringify(e[s]??(s==="variableInitPrefix"?"":null))!==JSON.stringify(t[s]??(s==="variableInitPrefix"?"":null))):!0}function nu(){let e=0;k.editing&&(k.editing.isNew||k.editing.moveToTop||Mr(k.editing.draft,se(k.editing.draft.id),!0))&&e++;for(const[n,r]of k.mix.edits||[]){const s=ne().combos.flatMap(i=>i.items.map(o=>({combo:i,item:o}))).find(({combo:i,item:o})=>pn(i,o)===n)?.item,a=s&&se(s.entryId);a&&(r.moveToTop||Mr(r.draft,a))&&e++}for(const[n,r]of k.libTagEdits||[])JSON.stringify(ft(r.value))!==JSON.stringify(se(n)?.tags||[])&&e++;k.mix.insert?.mode==="new"&&(k.mix.insert.name||k.mix.insert.content)&&e++,(k.quick?.content||k.quick?.name)&&e++,k.mix.init?.dirty&&e++;const t=k.mix.screen;if(t?.kind==="position"&&t.override){const n=jt()?.items.find(r=>r.uid===t.itemUid);n&&JSON.stringify(t.override)!==JSON.stringify(n.override||{})&&e++}return e}var yc={last:0,timer:null};function kc(){const e=yc,t=Date.now(),n=150-(t-e.last);if(n<=0&&!e.timer){e.last=t,ln();return}e.timer||(e.timer=setTimeout(()=>{e.timer=null,e.last=Date.now(),ln()},Math.max(n,30)))}function ln(){if(!ye)return;const e=nu(),t=Or;let n=e?`${e} 处未保存`:t.phase==="saving"?"保存中…":t.phase==="saved"?"已保存到预设机":t.phase==="unconfirmed"?"保存尚未确认":t.phase==="error"?"保存失败":"未修改";t.phase==="error"&&(n="保存失败"+(e?` · ${e} 处未保存`:""));const r=ye.querySelector(".pw-save-feedback");r&&(r.querySelector("span").textContent=n,r.dataset.state=t.phase==="error"?"error":e?"dirty":t.phase,r.title=t.message||"修改正文后点保存；排序和开关会自动保存。保存到预设机不会切换酒馆预设。",r.querySelector("button").hidden=!["error","unconfirmed"].includes(t.phase));for(const s of ye.querySelectorAll("[data-pw-generation-draft]"))s.textContent=dc(),s.dataset.state=_n.pending?t.phase:"saved";for(const s of ye.querySelectorAll("[data-pw-draft-status]")){const a=k.mix.edits?.get(s.dataset.pwDraftStatus);a&&(s.textContent=a.moveToTop||Mr(a.draft,se(a.draft.id))?"未保存":"未修改")}}function Sc(){const e=Or,t=xt(),n=t.eventSource,r=(t.eventTypes||t.event_types)?.SETTINGS_UPDATED;if(n?.on&&r&&e.eventSource!==n){e.off?.();const a=()=>{e.phase!=="saving"&&e.phase!=="unconfirmed"||(clearTimeout(e.timer),e.phase="saved",_n.pending=!1,e.message="酒馆已确认保存预设机设置。",ln())};n.on(r,a),e.eventSource=n,e.off=()=>{n.removeListener?n.removeListener(r,a):n.off?.(r,a)}}clearTimeout(e.timer),e.phase="saving",e.message="正在等待酒馆保存预设机设置。",ln();const s=a=>{clearTimeout(e.timer),e.phase="error",e.message=String(a?.message||a||"保存失败，可点击重试。"),ln()};try{if(typeof t.saveSettingsDebounced!="function")throw new Error("当前酒馆没有提供保存接口。");const a=t.saveSettingsDebounced();a?.catch&&a.catch(s),e.phase==="saving"&&(e.timer=setTimeout(()=>{e.phase==="saving"&&(e.phase="unconfirmed",e.message="尚未收到酒馆的保存确认，可点击重试。当前内容仍保留在页面中。",ln())},12e3))}catch(a){s(a)}}function ru(){return u("div",{class:"pw-save-feedback",role:"status","aria-live":"polite"},u("span",null,"未修改"),H("重试保存",()=>Sc(),"pw-sm",{hidden:!0}))}function Cc(e){return e.variableTools??={mode:"",scope:"local",name:"",position:"cursor",caret:null,selected:new Set,initial:new Map,initSelected:null,error:"",notice:""}}function Ic(e){const t=String(e||"");return Ln(t).find(n=>n.kind==="set"&&n.value!==null&&!t.slice(0,n.start).trim()&&!t.slice(n.end).trim())||null}function hi(e,t=null){const n=[];for(const s of e?.items||[]){if(s.type!=="entry")continue;const a=se(s.entryId),i=t?.id===s.entryId?t:a;if(!i)continue;const o=i.variableInitPrefix&&i.content.startsWith(i.variableInitPrefix)?i.variableInitPrefix.length:0;if(!o&&Nt(i)==="init")continue;const c=Ln(i.content).filter(d=>d.kind==="set"&&d.start>=o&&d.value!==null),p=[...new Map(c.map(d=>[d.key,d])).values()];p.length&&n.push({item:s,entry:i,vars:p})}const r=new Set(n.flatMap(s=>s.vars.filter(a=>a.value.trim()).map(a=>a.key)));return n.map(s=>({...s,vars:s.vars.filter(a=>a.value.trim()||!r.has(a.key))})).filter(s=>s.vars.length)}function su(e){if(!e||/[{}\r\n\\]/.test(e)||e.includes("::"))throw new Error("变量名不能为空，也不能含双冒号、花括号或换行。")}function Lr(e,t,n){!e?.moveToTop||!t||!n||(t.items=t.items.filter(r=>r.uid!==n.uid),t.items.unshift(n),n.enabled=!0,n.override={...n.override||{},injection_position:0},e.moveToTop=!1)}function Ac({entry:e,owner:t,combo:n=jt(),allowInit:r=!0,title:s="条目正文",tools:a=[],oninput:i}){const o=Cc(t),c=u("div",{class:"pw-entry-body-editor"}),p=u("div",{class:"pw-entry-variable-panel"}),d=u("div",{class:"pw-variable-notice",role:"status"}),m=Br({title:s,get:()=>e.content,oninput:M=>{e.content=M,i?.(M),kc()},tools:a}),g=m.querySelector("textarea"),y=()=>{o.caret=g.selectionStart};for(const M of["select","keyup","click","input","blur"])g.addEventListener(M,y);o.caret!==null&&g.setSelectionRange(Math.min(o.caret,g.value.length),Math.min(o.caret,g.value.length));const E=(M,_=M.length)=>{e.content=M,g.value=M,o.caret=_,g.setSelectionRange(_,_),g.dispatchEvent(new je.defaultView.Event("input",{bubbles:!0})),o.error="",o.mode="",o.notice="已写入正文，尚未保存",t.variableEdited=!0,F()},P=M=>{try{M()}catch(_){o.error=String(_.message||_),z()}},D=M=>{if(o.mode=o.mode===M?"":M,o.error="",o.notice="",M==="set"){const _=Ic(e.content);o.name=_?.name||o.name||ku(e.name),o.scope=_?.scope||o.scope}z()},Q=u("div",{class:"pw-row pw-entry-variable-tools"},H("设为 SET",()=>D("set"),"pw-sm",{title:"把本条正文存为变量"}),H("获取 GET",()=>D("get"),"pw-sm",{title:"选择来源条目，在本条正文中调用变量"}),null);function z(){if(p.replaceChildren(),p.hidden=!o.mode,d.textContent=o.notice,d.hidden=!o.notice,Q.querySelectorAll("button").forEach((M,_)=>M.setAttribute("aria-pressed",String(o.mode===["set","get","init"][_]))),!!o.mode){if(o.mode==="set")p.append(u("div",{class:"pw-variable-fields"},u("label",null,"变量名",u("input",{type:"text","aria-label":"SET 变量名",value:o.name,oninput:M=>o.name=M.target.value})),u("label",null,"作用域",u("select",{"aria-label":"SET 作用域",value:o.scope,onchange:M=>o.scope=M.target.value},u("option",{value:"local"},"当前聊天"),u("option",{value:"global"},"全局"))))),p.append(H("写入 SET",()=>P(()=>{const M=o.name.trim();su(M);const _=Ic(e.content),ce=_?_.value:e.content;if(!Lc(ce))throw new Error("正文里有未配对的双花括号，请先补齐。");if(e.variableInitPrefix)throw new Error("这条包含初始化，请另选正文条目设置 SET。");const V=Ks("set",{name:M,scope:o.scope},ce);E(_?e.content.slice(0,_.start)+V+e.content.slice(_.end):V),t.setWritten=!0}),"pw-sm pw-primary"));else if(o.mode==="get"){const M=hi(n,e),_=u("div",{class:"pw-get-choices"});if(!M.length)p.append(u("p",{class:"pw-hint"},"当前预设还没有 SET 变量。先在来源条目里点 SET 并保存。"));else{const ce=u("input",{type:"search",placeholder:"搜索变量名或来源条目","aria-label":"搜索 GET 来源",oninput:R=>{const L=R.target.value.trim().toLowerCase();for(const W of _.children)W.hidden=!W.dataset.search.includes(L)}});p.append(ce);const V=[];for(const R of M)for(const L of R.vars){const W=V.find(Ce=>Ce.v.key===L.key);W?W.from.push(R):V.push({v:L,from:[R]})}for(const{v:R,from:L}of V){const W=`${R.name}${R.scope==="global"?"（全局）":""}`,Ce=u("label",{"data-search":`${R.name} ${L.map(pe=>pe.entry.name).join(" ")}`.toLowerCase()},u("input",{type:"checkbox","aria-label":`GET 变量：${W}`,checked:o.selected.has(R.key),onchange:pe=>{pe.target.checked?o.selected.add(R.key):o.selected.delete(R.key)}}),u("span",null,W,u("small",null,`来自：${L.map(pe=>pe.entry.name+(pe.item.enabled===!1?"（已关闭）":"")).join("、")}`)));_.append(Ce)}p.append(_,u("select",{"aria-label":"GET 插入位置",value:o.position,onchange:R=>o.position=R.target.value},u("option",{value:"cursor"},"光标处"),u("option",{value:"start"},"正文开头"),u("option",{value:"end"},"正文末尾")),H("插入 GET",()=>P(()=>{const R=[...new Map(M.flatMap(Ce=>Ce.vars.filter(pe=>o.selected.has(pe.key)).map(pe=>[pe.key,pe]))).values()];if(!R.length)throw new Error("先勾选要调用的变量。");const L=R.map(Ce=>Ks("get",Ce)).join(`
+`)}function Rd(e){if((e.presetWritingVersion??0)>=1)return!1;e.templates??={};for(const[t,n]of Object.entries(yd))e.templates[t]===n&&delete e.templates[t];return e.presetWritingVersion=1,!0}function Hd({title:e="编辑提示词",get:t,oninput:n}){const r=u("dialog",{class:"pw-focus-editor","data-pw-owner":cn,"aria-label":e}),s=u("textarea",{class:"pw-focus-text",value:t(),spellcheck:!1,wrap:"soft","aria-label":e,oninput:c=>n(c.target.value)});r.append(u("div",{class:"pw-focus-head"},u("b",null,e),H("复制",()=>ui(s.value)),H("完成",()=>r.close(),"pw-primary")),s);const a=je.defaultView||ze,i=a.visualViewport,o=()=>{const c=i?.height||a.innerHeight;r.style.setProperty("--pw-visible-height",`${Ca(a,c,c).height}px`),r.style.setProperty("--pw-visible-top",`${i?.offsetTop||0}px`)};return a.addEventListener("resize",o),i?.addEventListener("resize",o),i?.addEventListener("scroll",o),a.navigator?.virtualKeyboard?.addEventListener("geometrychange",o),r.addEventListener("close",()=>{a.removeEventListener("resize",o),i?.removeEventListener("resize",o),i?.removeEventListener("scroll",o),a.navigator?.virtualKeyboard?.removeEventListener("geometrychange",o),r.remove(),F()},{once:!0}),je.body.append(r),o(),r.showModal(),s.focus({preventScroll:!0}),s.setSelectionRange(0,0),s.scrollTop=0,r}function Br({title:e="条目正文",get:t,oninput:n,className:r="",tools:s=[]}){const a=u("textarea",{class:`pw-code pw-readable ${r}`,value:t(),rows:14,spellcheck:!1,wrap:"soft","aria-label":e,oninput:i=>n(i.target.value)});return u("div",{class:"pw-text-editor"},u("div",{class:"pw-row pw-editor-tools"},u("b",{class:"pw-editor-label"},e),H("放大编辑",()=>Hd({title:e,get:t,oninput:n}),"pw-sm"),H("复制",()=>ui(t()),"pw-sm"),...s),a)}function zd(){const e=ne(),t=(n,r)=>{const s=e.templates[n]!==void 0&&e.templates[n]!==Ue[n],a=u("summary",null,r,s?"（已修改）":""),i=H("恢复默认",()=>{delete e.templates[n],te(),F()},"pw-sm",{disabled:!s});return u("details",{class:"pw-bagu-part"},a,Br({title:r,get:()=>e.templates[n]??Ue[n],oninput:o=>{e.templates[n]=o,i.disabled=o===Ue[n],a.textContent=r+(i.disabled?"":"（已修改）"),te()},className:"pw-guide-text"}),u("div",{class:"pw-row"},i))};return u("div",{class:"pw-box pw-bagu-controls"},u("label",null,u("input",{type:"checkbox",checked:e.antiBagu!==!1,onchange:n=>{e.antiBagu=n.target.checked,te()}})," 生成和修改时使用反八股规则"),t("baguWhat","什么是八股"),t("baguHow","如何反八股"))}async function Fd(e){return Bn("去八股",async()=>{const t=ne(),n=e.content;if(!String(n??"").trim())return;const{system:r,prompt:s}=ci({entry:{...e,content:n},comment:"把这条提示词里的八股找出来改掉：重复的句式、空泛的解释、固定的反应、没实际用处的次数和占比，删的删、改的改；作者要的味道和这条的功能留着。变量、宏、字段、必要的数值、人物设定和禁词表都不能动。交完整条目。",templates:t.templates,antiBagu:!0}),a=await er(r,s,{dialogueKey:"gen"});if(!/<entry\b[^>]*>[\s\S]*?<\/entry>/i.test(a))throw new Error("没有收到完整条目，原文已保留。");const i=Qs(a),o=i[0];if(i.length!==1||!o?.content?.trim()||o.truncated)throw new Error("没有收到完整的单个条目，原文已保留。");if(e.content!==n)throw new Error("你在等待时修改了正文，本次结果未覆盖你的修改。");e.beforeBagu=n,e.content=Os(o.content),e.truncated=!1,De()})}function Ud(){const e=k.editing,t=e.draft,n=ne(),r=e.comboId?n.combos.find(M=>M.id===e.comboId):k.tab==="mix"?jt():null,s=()=>r?.items.find(M=>M.type==="entry"&&(e.itemUid?M.uid===e.itemUid:M.entryId===t.id));s()&&(e.override??=fe(s().override||{}));const a=M=>e.override?.[M]??t[M],i=(M,_)=>{t[M]=_,e.override&&delete e.override[M]},o=()=>{k.editing=null,r&&(k.mix.screen=e.returnScreen||null),F(),typeof ve<"u"&&ve&&(ve.scrollTop=e.returnScroll??(r?k.mix.homeScroll:0)??0)},c=u("input",{type:"text",class:"pw-wide","aria-label":"条目名称",value:t.name,oninput:M=>{t.name=M.target.value}}),p=u("select",{"aria-label":"条目角色",onchange:M=>{i("role",M.target.value)}},vt.map(M=>u("option",{value:M,selected:a("role")===M},M))),d=u("input",{type:"text",class:"pw-wide",placeholder:"标签，用逗号分隔","aria-label":"条目标签",value:t.tags.join(", "),oninput:M=>{t.tags=ft(M.target.value)}}),m=u("select",{"aria-label":"条目注入位置",onchange:M=>{i("injection_position",Number(M.target.value)),y.hidden=a("injection_position")!==1}},u("option",{value:0,selected:a("injection_position")===0},"相对（按预设顺序）"),u("option",{value:1,selected:a("injection_position")===1},"深度（插进聊天记录里）")),g=u("input",{type:"number",min:0,"aria-label":"注入深度",style:"width:70px",value:a("injection_depth"),oninput:M=>{i("injection_depth",Math.max(0,Number(M.target.value)||0))}}),y=u("label",{class:"pw-field",hidden:a("injection_position")!==1},"聊天深度",g),E=u("span",{class:"pw-dim"},`约 ${Jt(t.content)} token`),P=Ac({entry:t,owner:e,combo:r||jt(),allowInit:!!r,oninput:M=>{E.textContent=`约 ${Jt(M)} token`},tools:[E]}),D=u("input",{type:"text",class:"pw-wide",placeholder:"备注（不会导出）",value:t.note,oninput:M=>{t.note=M.target.value}}),Q=u("input",{type:"text",class:"pw-wide",placeholder:"修改意见，例如：调整第 3 条规则的措辞，保留其他内容",value:e.comment,oninput:M=>{e.comment=M.target.value}}),z=()=>{if(e.comboId&&!r||e.itemUid&&(!s()||s().entryId!==t.id)){we("warning","原预设或条目位置已被移除，请返回后重新打开。");return}const M=se(t.id);if(!M&&!e.isNew){we("warning","这个条目已被删除");return}const _=[...M?.tags||[]],ce=r;let V=s();const R=M&&ce&&Js(ce,M.id,V?.uid),L=Xe({...t,id:R?ae("pw"):t.id,updatedAt:Date.now()});M&&M.content!==L.content&&(L.history=[{content:M.content,at:Date.now()},...M.history||[]].slice(0,5)),R?(lt(ce,L),V&&(V.entryId=L.id)):M?Object.assign(M,L):ce?lt(ce,L):n.entries.unshift(L),V&&e.override&&(V.override=fe(e.override)),e.moveToTop&&ce&&(V||(V={uid:ae("it"),type:"entry",entryId:L.id,enabled:!0,override:{}},ce.items.push(V)),Lr(e,ce,V)),qd(L,_),k.libTagEdits?.delete(t.id),ce&&e.setWritten&&Nt(L)!=="init"&&Fc(ce)&&we("info","已自动更新预设最上方的「变量初始化」"),te(),o(),we("info","已提交保存")};return u("div",{class:`pw-section${r?" pw-mix-editor":""}`,...s()?{"data-mix-edit":s().uid}:{}},u("div",{class:"pw-row"},H("取消",o),u("b",{style:"flex:1"},e.isNew?"新建条目":"编辑条目"),H("保存",z,"pw-primary")),u("p",{class:"pw-hint"},r?`保存到预设「${r.name}」`:"保存到收藏"),u("label",{class:"pw-field"},"名称",c),u("details",{class:"pw-entry-settings",open:!!e.settingsOpen,ontoggle:M=>e.settingsOpen=M.target.open},u("summary",null,"角色、标签与位置"),u("div",{class:"pw-entry-settings-grid"},u("label",{class:"pw-field"},"角色",p),u("label",{class:"pw-field"},"标签",d),u("label",{class:"pw-field"},"注入位置",m),y,u("label",{class:"pw-field"},"备注",D))),P,u("details",{class:"pw-entry-ai",open:!!e.aiOpen,ontoggle:M=>e.aiOpen=M.target.open},u("summary",null,"让 AI 按意见改"),Q,u("div",{class:"pw-row"},H("按意见改",()=>Bn("按意见改",async()=>{if(!e.comment.trim()&&!Zt(n,`entry:${t.id}`)){we("warning","先写修改意见，或在本页对话里说明");return}const{system:M,prompt:_}=ci({entry:Xe(t),comment:e.comment||"照这一页聊天里作者说的改。",templates:n.templates,antiBagu:n.antiBagu!==!1}),ce=await er(M,_,{dialogueKey:`entry:${t.id}`}),V=Qs(ce);if(V.length>1)throw e.reviseRaw=ce,new Error(`AI 返回了 ${V.length} 个条目，当前编辑页一次只能修改一个。原文未改，完整回复已保留在下方，可复制后分别添加。`);const R=V[0];if(!R)throw new Error("没解析出条目");delete e.reviseRaw,R.content=Os(R.content),R.truncated&&we("warning","回复被截断了，可以在设置里调大最大回复长度"),e.undo={content:t.content,name:t.name,tags:[...t.tags]},t.content=R.content,R.name&&(t.name=R.name),R.tags.length&&(t.tags=R.tags)})),H("换回改之前",()=>{e.undo&&(Object.assign(t,e.undo),e.undo=null,F())},"",{disabled:!e.undo}))),e.reviseRaw&&u("details",{open:!0},u("summary",null,"AI 返回了多个条目，尚未应用"),u("textarea",{class:"pw-wide",rows:10,readOnly:!0,"aria-label":"未应用的 AI 原回复",value:e.reviseRaw})),!e.isNew&&(se(t.id)?.history||[]).length>0&&u("details",null,u("summary",null,`历史版本（${se(t.id).history.length}）`),se(t.id).history.map((M,_)=>u("div",{class:"pw-box"},u("div",{class:"pw-row"},u("span",{class:"pw-dim"},new Date(M.at).toLocaleString()),H("用这一版",()=>{t.content=M.content,F()},"pw-sm")),u("pre",{class:"pw-pre"},M.content)))),u("div",{class:"pw-row"},H("保存并返回",z,"pw-primary"),!e.isNew&&!r&&!e.comboId&&H("删除",()=>{ct.yes("删除这个条目？预设里对应的位置也会一起去掉。")&&(wc([t.id]),k.editing=null,F())},"pw-danger")))}async function Gd(){const e=ne(),t=k.gen;if(!t.need.trim()&&!Zt(e,"gen")){we("warning","先写要求，或在本页对话里说说想法");return}const n=e.customKinds.find(d=>d.id===t.kind),r=ft([...ft(t.tags),...ft(n?.tags)]),{system:s,prompt:a}=sc({kind:t.kind,kindPrompt:n?.prompt,need:t.need,refs:No(),multi:t.multi,tags:r,lang:t.lang,templates:e.templates,antiBagu:e.antiBagu!==!1}),i=await er(s,a,{dialogueKey:"gen"}),o=Qs(i);if(!o.length)throw t.raw=i,De(),new Error("没解析出条目，原回复已保留在结果区。");t.raw="",t.note=js(i),o.some(d=>d.truncated)&&we("warning","回复被截断了，最后一条可能不完整；请补全后再保存");const c=ae("generated"),p=o.map((d,m)=>({...d,content:Os(d.content),tags:ft([...d.tags,...r]),key:`${c}_${m}`,checked:!0,open:o.length===1&&!t.results.length}));t.results.unshift(...p),De(),we("success",`新增 ${p.length} 条结果，共 ${t.results.length} 条待入库`)}function Jd(){const e=ne(),t=k.gen,n=No(),r=Aa(e,"gen"),s=Jn(r).length,a=rc(e.customKinds,e.hiddenKinds);a.some(p=>p.id===t.kind)||(t.kind=a[0].id);const i=H(t.results.length?"再写一批":"写",async()=>{i.disabled=!0,await Bn("生成条目",Gd)},"pw-primary",{disabled:!!k.busy}),o=t.results.filter(p=>p.checked&&p.content.trim()).length,c=u("div",{class:"pw-section"},u("p",{class:"pw-hint","data-pw-generation-draft":"",role:"status","aria-live":"polite"},dc()),u("div",{class:"pw-gen-options"},u("div",{class:"pw-gen-primary"},u("span",null,"类型"),u("select",{"aria-label":"提示词类型",value:t.kind,onchange:p=>{t.kind=p.target.value,De()}},a.map(p=>u("option",{value:p.id},p.label))),H("管理类型",()=>{k.settingsReturn={tab:"gen",scroll:ve.scrollTop},k.setOpen.add("section-kinds"),Us("set"),ve.querySelector('[data-settings-section="section-kinds"]')?.scrollIntoView({block:"start"})},"pw-sm"))),u("textarea",{class:"pw-tall pw-gen-need","aria-label":"提示词要求",placeholder:"希望这份提示词做到什么？可以写用途、写法和需要保留的内容。",value:t.need,oninput:p=>{t.need=p.target.value,De()}}),u("details",{class:"pw-gen-optional",open:!!t.optionsOpen,ontoggle:p=>{p.target.isConnected&&t.optionsOpen!==p.target.open&&(t.optionsOpen=p.target.open,De())}},u("summary",null,`生成选项 · ${t.multi?"允许多条":"单条"} · ${t.lang==="en"?"英文":"中文"}${t.useSelected&&n.length?` · 参考 ${n.length} 条`:""}`),u("div",{class:"pw-section"},u("label",null,u("input",{type:"checkbox",checked:t.multi,onchange:p=>{t.multi=p.target.checked,De(),F()}})," 允许拆成多个条目"),u("label",{class:"pw-field"},"语言",u("select",{"aria-label":"生成语言",value:t.lang,onchange:p=>{t.lang=p.target.value,De(),F()}},u("option",{value:"zh"},"中文"),u("option",{value:"en"},"English"))),u("label",{class:"pw-field"},"默认标签",u("input",{type:"text",placeholder:"可选，用逗号分隔",value:t.tags,oninput:p=>{t.tags=p.target.value,De()}})),u("label",null,u("input",{type:"checkbox",checked:t.useSelected,onchange:p=>{t.useSelected=p.target.checked,De(),F()}})," 使用收藏中勾选的内容作为参考"),t.useSelected&&u("span",{class:"pw-dim"},`当前参考 ${n.length} 条`))),u("div",{class:"pw-generation-context","data-pw-dialogue-context":""},u("label",{class:"pw-check"},u("input",{type:"checkbox","aria-label":"生成时发送本页对话",checked:r.use!==!1,onchange:p=>{r.use=p.target.checked,te(),F()}})," 生成时发送本页对话"),u("span",{class:"pw-hint"},r.use===!1?"已关闭 · 本次不发送聊天记录":s?`已开启 · 本次发送 ${s} 条对话`:"已开启 · 聊过后会自动带入")),u("div",{class:"pw-row"},i,t.results.length>0&&u("span",{class:"pw-dim"},"新结果会追加，已有结果继续保留")),t.note&&u("details",{class:"pw-note-details",open:!!t.noteOpen,ontoggle:p=>{p.target.isConnected&&t.noteOpen!==p.target.open&&(t.noteOpen=p.target.open,De())}},u("summary",null,"本次 AI 的说明"),u("pre",{class:"pw-pre"},t.note)),t.raw&&u("details",{open:!0},u("summary",null,"未解析的原回复"),u("textarea",{readOnly:!0,class:"pw-code",value:t.raw,"aria-label":"未解析的生成回复"})),t.discarded?.results.length>0&&u("div",{class:"pw-row pw-undo"},`已清空 ${t.discarded.results.length} 条草稿`,H("撤销清空",()=>{t.results.push(...t.discarded.results),t.note||(t.note=t.discarded.note),t.discarded=null,De(),F()},"pw-sm")),t.results.length>0&&u("div",{class:"pw-row pw-list-tools"},u("b",null,`草稿（${t.results.length}）`),H("全选",()=>{t.results.forEach(p=>p.checked=!0),De(),F()},"pw-sm"),H("清空选择",()=>{t.results.forEach(p=>p.checked=!1),De(),F()},"pw-sm"),H("清空结果",()=>{t.discarded={results:t.results,note:t.note},t.results=[],t.note="",De(),F()},"pw-sm")),t.results.map((p,d)=>Wd(p,d)));return t.results.length&&(c._pwActions=[u("div",{class:"pw-batch-actions"},u("label",{class:"pw-field"},"加入",u("select",{"aria-label":"生成结果加入位置",value:t.saveTarget||"both",onchange:p=>{t.saveTarget=p.target.value,De()}},u("option",{value:"both"},`放进预设「${jt()?.name||"新建预设"}」`),u("option",{value:"library"},"只存到收藏"))),H(`加入所选（${o}）`,()=>Yd((t.saveTarget||"both")==="both"),"pw-primary",{disabled:!o}))]),c}function Wd(e,t=0){const n=u("summary",null,`${t+1}. ${e.name||"未命名条目"}`),r=u("span",{class:"pw-dim"},`约 ${Jt(e.content)} token`);return u("div",{class:"pw-box pw-gen-result"},u("label",{class:"pw-check"},u("input",{type:"checkbox","aria-label":`选择生成结果：${e.name}`,checked:e.checked,onchange:s=>{e.checked=s.target.checked,De(),F()}})),u("details",{open:!!e.open,ontoggle:s=>{s.target.isConnected&&e.open!==s.target.open&&(e.open=s.target.open,De())}},n,u("div",{class:"pw-section"},u("label",{class:"pw-field"},"名称",u("input",{type:"text","aria-label":"生成条目名称",value:e.name,oninput:s=>{e.name=s.target.value,De(),n.textContent=`${t+1}. ${e.name||"未命名条目"}`}})),u("div",{class:"pw-row"},u("label",{class:"pw-field"},"角色",u("select",{"aria-label":"生成条目角色",value:e.role,onchange:s=>{e.role=s.target.value,De()}},vt.map(s=>u("option",{value:s},s)))),r),e.truncated&&u("div",{class:"pw-warnbox"},"这一条可能被截断，请补全后再保存。"),u("label",{class:"pw-field"},"标签",u("input",{type:"text",value:e.tags.join(", "),oninput:s=>{e.tags=ft(s.target.value),De()}})),Br({title:"条目正文",get:()=>e.content,oninput:s=>{e.content=s,De(),r.textContent=`约 ${Jt(s)} token`,Vd()},tools:[H("去八股",()=>Fd(e),"pw-sm",{disabled:!!k.busy}),e.beforeBagu!==void 0&&H("撤回去八股",()=>{e.content=e.beforeBagu,delete e.beforeBagu,De(),F()},"pw-sm")]}))))}function Vd(){const e=ye?.querySelector(".pw-screen-footer .pw-primary");if(!e||k.tab!=="gen")return;const t=k.gen.results.filter(n=>n.checked&&n.content.trim()).length;e.textContent=`加入所选（${t}）`,e.disabled=!t}function Yd(e){const t=ne(),n=k.gen.results.filter(a=>a.checked&&a.content.trim());if(!n.length){we("warning","没有勾选的结果");return}const r=[...t.entries],s=n.map(a=>{const i=He({name:qt(r,a.name),role:a.role,tags:a.tags,content:a.content,source:"AI 生成"});return r.push(i),i});if(t.entries.unshift(...s),k.gen.results=k.gen.results.filter(a=>!n.includes(a)),k.gen.results.length||(k.gen.note=""),e){const a=di();s.forEach(i=>Ds(a,i.id))}De({persist:!1}),te(),we("success",`已存入 ${s.length} 条${e?"，并放进当前预设":""}`),e?Us("mix"):F()}function Gs(e){return(e.presetName||e.name||"预设").trim()||"预设"}function wi(e){return Array.isArray(e.entries)?e.entries:e.entries=[]}function bc(e,t){return(e.entries||[]).some(n=>n.id===t)}function Js(e,t,n=null){const r=ne();return!bc(e,t)||r.entries.some(s=>s.id===t)||r.combos.some(s=>s.id!==e.id&&((s.entries||[]).some(a=>a.id===t)||s.items.some(a=>a.type==="entry"&&a.entryId===t)))||!!n&&e.items.some(s=>s.type==="entry"&&s.entryId===t&&s.uid!==n)}function lt(e,t){return wi(e).push(t),t}function Kd(e){const t=fe(e),n=new Map;return t.id=ae("cb"),t.name=`${e.name} 副本`,t.presetName=t.name,delete t.syncPrevious,t.entries=(e.entries||[]).map(r=>{const s=He({...fe(r),id:ae("pw")});return n.set(r.id,s.id),s}),t.items.forEach(r=>{r.uid=ae("it"),n.has(r.entryId)&&(r.entryId=n.get(r.entryId))}),t.removedEntryIds=(t.removedEntryIds||[]).map(r=>n.get(r)||r),t}function vc(e){const t=ne(),n=Dn(t.entries,e);if(n.status==="dup"){we("info",`收藏里已有「${n.match.name}」`);return}const r=He({...fe(e),id:ae("pw"),name:qt(t.entries,e.name),history:[]});t.entries.unshift(r),te(),F(),we("success",`已存入收藏「${r.name}」`)}function xc(e,t){const n=ne(),r=new Map,s=e.items.map(i=>{const o=He({...i.entry,id:ae("pw"),history:[],createdAt:Date.now(),updatedAt:Date.now()});return r.set(i.key,o.id),o}),a=si(qt(n.combos,t||e.label||"模板预设"),e.order,r);if(a.entries=s,a.templateSource=e.label||"",Object.keys(e.base||{}).length){const i={id:ae("bs"),name:a.name,settings:fe(e.base)};n.bases.push(i),a.baseId=i.id}return n.combos.push(a),n.currentComboId=a.id,a}function Xd(e){const t=new Set(e.items.filter(a=>a.type==="entry").map(a=>a.entryId)),n=(e.entries||[]).filter(a=>!t.has(a.id));if(!n.length)return null;const r=u("div",{class:"pw-local-reserve-list"},n.map(a=>u("div",{class:"pw-card","data-pw-reserve-entry":a.id},u("div",{class:"pw-card-main"},u("div",{class:"pw-card-title"},a.name),zs(a,`reserve:${e.id}:${a.id}`)),u("div",{class:"pw-card-btns"},H("加入预设",()=>{Ds(e,a.id),te(),F()},"pw-sm"),H("编辑",()=>{k.editing={draft:fe(a),isNew:!1,undo:null,comment:"",comboId:e.id,returnScroll:ve?.scrollTop||0,returnScreen:k.mix.screen?fe(k.mix.screen):null},F()},"pw-sm"),H("存入库",()=>vc(a),"pw-sm"))))),s=Gc(e,"reserveOpen",`预设内备用（${n.length}）`,r,!1);return s.classList.add("pw-local-reserve"),s}function Zd(e,t=""){const n=ne(),r=new Set([...e.items.filter(i=>i.type==="entry").map(i=>i.entryId),...e.removedEntryIds||[]]),s=[...n.entries.filter(i=>r.has(i.id)),...e.entries||[]],a=new Set(s.filter(i=>i.source&&i.tags?.includes(`来自:${i.source}`)).map(i=>i.source));return e.templateSource&&a.add(e.templateSource),t&&(a.clear(),a.add(t)),n.entries.filter(i=>a.has(i.source)&&i.tags?.includes(`来自:${i.source}`))}function $d(e,t){const n=ne(),r=new Set(t),s=[];n.entries.forEach((a,i)=>{if(!r.has(a.id))return;const o={entry:a,index:i,locals:[]};for(const c of n.combos){const p=c.items.some(g=>g.type==="entry"&&g.entryId===a.id),d=c.removedEntryIds?.includes(a.id);if(c.id!==e.id&&!p&&!d)continue;const m=lt(c,He({...fe(a),id:ae("pw")}));c.items.forEach(g=>{g.type==="entry"&&g.entryId===a.id&&(g.entryId=m.id)}),c.removedEntryIds&&(c.removedEntryIds=c.removedEntryIds.map(g=>g===a.id?m.id:g)),o.locals.push({comboId:c.id,id:m.id,snapshot:JSON.stringify(m)})}s.push(o),k.selected.delete(a.id),k.libTagEdits?.delete(a.id)}),s.length&&(n.entries=n.entries.filter(a=>!r.has(a.id)),k.mix.legacyUndo={comboId:e.id,batch:s},k.mix.legacyRepair=null,te(),F(),we("success",`已将 ${s.length} 条移回预设，未加入的内容保留在预设内备用`))}function _d(){const e=k.mix.legacyUndo;if(!e)return;const t=ne();for(const n of[...e.batch].sort((r,s)=>r.index-s.index)){t.entries.some(r=>r.id===n.entry.id)||t.entries.splice(Math.min(n.index,t.entries.length),0,n.entry);for(const r of n.locals){const s=t.combos.find(i=>i.id===r.comboId);if(!s)continue;const a=(s.entries||[]).find(i=>i.id===r.id);!a||JSON.stringify(a)!==r.snapshot||(s.items.forEach(i=>{i.type==="entry"&&i.entryId===r.id&&(i.entryId=n.entry.id)}),s.removedEntryIds&&(s.removedEntryIds=s.removedEntryIds.map(i=>i===r.id?n.entry.id:i)),s.entries=s.entries.filter(i=>i.id!==r.id))}}k.mix.legacyUndo=null,k.mix.legacyRepair=null,te(),F(),we("success","收藏已恢复，整理后编辑的预设内容已保留")}function eu(e){const t=[...new Set(ne().entries.filter(s=>s.source&&s.tags?.includes(`来自:${s.source}`)).map(s=>s.source))];if(!t.length)return null;k.mix.legacyRepair?.comboId!==e.id&&(k.mix.legacyRepair={comboId:e.id,source:"",selected:null,open:!1});const n=k.mix.legacyRepair;n.source&&!t.includes(n.source)&&(n.source="",n.selected=null);const r=Zd(e,n.source);return n.selected||(n.selected=new Set(r.map(s=>s.id))),u("details",{class:"pw-legacy-repair",open:n.open,ontoggle:s=>{s.target.isConnected&&(n.open=s.target.open)}},u("summary",{onclick:s=>{n.open=!s.currentTarget.parentElement.open}},`整理旧模板条目${r.length?`（${r.length}）`:""}`),u("select",{"aria-label":"旧模板来源",value:n.source,onchange:s=>{n.source=s.target.value,n.selected=null,n.open=!0,F()}},u("option",{value:""},"当前预设相关来源"),t.map(s=>u("option",{value:s},s))),u("p",{class:"pw-hint"},"勾选要移回预设的同源条目。其他预设的引用会各自保留，未加入的内容放入本预设备用区。"),!r.length&&u("p",{class:"pw-hint"},"请先选择旧模板来源。"),u("div",{class:"pw-legacy-choices"},r.map(s=>u("label",null,u("input",{type:"checkbox",checked:n.selected.has(s.id),onchange:a=>{a.target.checked?n.selected.add(s.id):n.selected.delete(s.id)}}),s.name))),H("转为预设专用",()=>$d(e,r.filter(s=>n.selected.has(s.id)).map(s=>s.id)),"pw-sm",{disabled:!r.length}))}function tu(e){return k.mix.legacyUndo?.comboId!==e.id?null:u("div",{class:"pw-row pw-legacy-undo"},u("span",{class:"pw-dim"},"旧模板条目已移回预设"),H("撤销整理",_d,"pw-sm"))}function Mr(e,t,n=!1){return t?(n?["name","content","tags","role","note","injection_position","injection_depth","injection_order","variableInitPrefix"]:["name","content","variableInitPrefix"]).some(s=>JSON.stringify(e[s]??(s==="variableInitPrefix"?"":null))!==JSON.stringify(t[s]??(s==="variableInitPrefix"?"":null))):!0}function nu(){let e=0;k.editing&&(k.editing.isNew||k.editing.moveToTop||Mr(k.editing.draft,se(k.editing.draft.id),!0))&&e++;for(const[n,r]of k.mix.edits||[]){const s=ne().combos.flatMap(i=>i.items.map(o=>({combo:i,item:o}))).find(({combo:i,item:o})=>pn(i,o)===n)?.item,a=s&&se(s.entryId);a&&(r.moveToTop||Mr(r.draft,a))&&e++}for(const[n,r]of k.libTagEdits||[])JSON.stringify(ft(r.value))!==JSON.stringify(se(n)?.tags||[])&&e++;k.mix.insert?.mode==="new"&&(k.mix.insert.name||k.mix.insert.content)&&e++,(k.quick?.content||k.quick?.name)&&e++,k.mix.init?.dirty&&e++;const t=k.mix.screen;if(t?.kind==="position"&&t.override){const n=jt()?.items.find(r=>r.uid===t.itemUid);n&&JSON.stringify(t.override)!==JSON.stringify(n.override||{})&&e++}return e}var yc={last:0,timer:null};function kc(){const e=yc,t=Date.now(),n=150-(t-e.last);if(n<=0&&!e.timer){e.last=t,ln();return}e.timer||(e.timer=setTimeout(()=>{e.timer=null,e.last=Date.now(),ln()},Math.max(n,30)))}function ln(){if(!ye)return;const e=nu(),t=Or;let n=e?`${e} 处未保存`:t.phase==="saving"?"保存中…":t.phase==="saved"?"已保存到预设机":t.phase==="unconfirmed"?"保存尚未确认":t.phase==="error"?"保存失败":"未修改";t.phase==="error"&&(n="保存失败"+(e?` · ${e} 处未保存`:""));const r=ye.querySelector(".pw-save-feedback");r&&(r.querySelector("span").textContent=n,r.dataset.state=t.phase==="error"?"error":e?"dirty":t.phase,r.title=t.message||"修改正文后点保存；排序和开关会自动保存。保存到预设机不会切换酒馆预设。",r.querySelector("button").hidden=!["error","unconfirmed"].includes(t.phase));for(const s of ye.querySelectorAll("[data-pw-generation-draft]"))s.textContent=dc(),s.dataset.state=_n.pending?t.phase:"saved";for(const s of ye.querySelectorAll("[data-pw-draft-status]")){const a=k.mix.edits?.get(s.dataset.pwDraftStatus);a&&(s.textContent=a.moveToTop||Mr(a.draft,se(a.draft.id))?"未保存":"未修改")}}function Sc(){const e=Or,t=xt(),n=t.eventSource,r=(t.eventTypes||t.event_types)?.SETTINGS_UPDATED;if(n?.on&&r&&e.eventSource!==n){e.off?.();const a=()=>{e.phase!=="saving"&&e.phase!=="unconfirmed"||(clearTimeout(e.timer),e.phase="saved",_n.pending=!1,e.message="酒馆已确认保存预设机设置。",ln())};n.on(r,a),e.eventSource=n,e.off=()=>{n.removeListener?n.removeListener(r,a):n.off?.(r,a)}}clearTimeout(e.timer),e.phase="saving",e.message="正在等待酒馆保存预设机设置。",ln();const s=a=>{clearTimeout(e.timer),e.phase="error",e.message=String(a?.message||a||"保存失败，可点击重试。"),ln()};try{if(typeof t.saveSettingsDebounced!="function")throw new Error("当前酒馆没有提供保存接口。");const a=t.saveSettingsDebounced();a?.catch&&a.catch(s),e.phase==="saving"&&(e.timer=setTimeout(()=>{e.phase==="saving"&&(e.phase="unconfirmed",e.message="尚未收到酒馆的保存确认，可点击重试。当前内容仍保留在页面中。",ln())},12e3))}catch(a){s(a)}}function ru(){return u("div",{class:"pw-save-feedback",role:"status","aria-live":"polite"},u("span",null,"未修改"),H("重试保存",()=>Sc(),"pw-sm",{hidden:!0}))}function Cc(e){return e.variableTools??={mode:"",scope:"local",name:"",position:"cursor",caret:null,selected:new Set,initial:new Map,initSelected:null,error:"",notice:""}}function Ic(e){const t=String(e||"");return Ln(t).find(n=>n.kind==="set"&&n.value!==null&&!t.slice(0,n.start).trim()&&!t.slice(n.end).trim())||null}function hi(e,t=null){const n=[];for(const s of e?.items||[]){if(s.type!=="entry")continue;const a=se(s.entryId),i=t?.id===s.entryId?t:a;if(!i)continue;const o=i.variableInitPrefix&&i.content.startsWith(i.variableInitPrefix)?i.variableInitPrefix.length:0;if(!o&&Nt(i)==="init")continue;const c=Ln(i.content).filter(d=>d.kind==="set"&&d.start>=o&&d.value!==null),p=[...new Map(c.map(d=>[d.key,d])).values()];p.length&&n.push({item:s,entry:i,vars:p})}const r=new Set(n.flatMap(s=>s.vars.filter(a=>a.value.trim()).map(a=>a.key)));return n.map(s=>({...s,vars:s.vars.filter(a=>a.value.trim()||!r.has(a.key))})).filter(s=>s.vars.length)}function su(e){if(!e||/[{}\r\n\\]/.test(e)||e.includes("::"))throw new Error("变量名不能为空，也不能含双冒号、花括号或换行。")}function Lr(e,t,n){!e?.moveToTop||!t||!n||(t.items=t.items.filter(r=>r.uid!==n.uid),t.items.unshift(n),n.enabled=!0,n.override={...n.override||{},injection_position:0},e.moveToTop=!1)}function Ac({entry:e,owner:t,combo:n=jt(),allowInit:r=!0,title:s="条目正文",tools:a=[],oninput:i}){const o=Cc(t),c=u("div",{class:"pw-entry-body-editor"}),p=u("div",{class:"pw-entry-variable-panel"}),d=u("div",{class:"pw-variable-notice",role:"status"}),m=Br({title:s,get:()=>e.content,oninput:M=>{e.content=M,i?.(M),kc()},tools:a}),g=m.querySelector("textarea"),y=()=>{o.caret=g.selectionStart};for(const M of["select","keyup","click","input","blur"])g.addEventListener(M,y);o.caret!==null&&g.setSelectionRange(Math.min(o.caret,g.value.length),Math.min(o.caret,g.value.length));const E=(M,_=M.length)=>{e.content=M,g.value=M,o.caret=_,g.setSelectionRange(_,_),g.dispatchEvent(new je.defaultView.Event("input",{bubbles:!0})),o.error="",o.mode="",o.notice="已写入正文，尚未保存",t.variableEdited=!0,F()},P=M=>{try{M()}catch(_){o.error=String(_.message||_),z()}},D=M=>{if(o.mode=o.mode===M?"":M,o.error="",o.notice="",M==="set"){const _=Ic(e.content);o.name=_?.name||o.name||ku(e.name),o.scope=_?.scope||o.scope}z()},Q=u("div",{class:"pw-row pw-entry-variable-tools"},H("设为 SET",()=>D("set"),"pw-sm",{title:"把本条正文存为变量"}),H("获取 GET",()=>D("get"),"pw-sm",{title:"选择来源条目，在本条正文中调用变量"}),null);function z(){if(p.replaceChildren(),p.hidden=!o.mode,d.textContent=o.notice,d.hidden=!o.notice,Q.querySelectorAll("button").forEach((M,_)=>M.setAttribute("aria-pressed",String(o.mode===["set","get","init"][_]))),!!o.mode){if(o.mode==="set")p.append(u("div",{class:"pw-variable-fields"},u("label",null,"变量名",u("input",{type:"text","aria-label":"SET 变量名",value:o.name,oninput:M=>o.name=M.target.value})),u("label",null,"作用域",u("select",{"aria-label":"SET 作用域",value:o.scope,onchange:M=>o.scope=M.target.value},u("option",{value:"local"},"当前聊天"),u("option",{value:"global"},"全局"))))),p.append(H("写入 SET",()=>P(()=>{const M=o.name.trim();su(M);const _=Ic(e.content),ce=_?_.value:e.content;if(!Lc(ce))throw new Error("正文里有未配对的双花括号，请先补齐。");if(e.variableInitPrefix)throw new Error("这条包含初始化，请另选正文条目设置 SET。");const V=Ks("set",{name:M,scope:o.scope},ce);E(_?e.content.slice(0,_.start)+V+e.content.slice(_.end):V),t.setWritten=!0}),"pw-sm pw-primary"));else if(o.mode==="get"){const M=hi(n,e),_=u("div",{class:"pw-get-choices"});if(!M.length)p.append(u("p",{class:"pw-hint"},"当前预设还没有 SET 变量。先在来源条目里点 SET 并保存。"));else{const ce=u("input",{type:"search",placeholder:"搜索变量名或来源条目","aria-label":"搜索 GET 来源",oninput:R=>{const L=R.target.value.trim().toLowerCase();for(const W of _.children)W.hidden=!W.dataset.search.includes(L)}});p.append(ce);const V=[];for(const R of M)for(const L of R.vars){const W=V.find(Ce=>Ce.v.key===L.key);W?W.from.push(R):V.push({v:L,from:[R]})}for(const{v:R,from:L}of V){const W=`${R.name}${R.scope==="global"?"（全局）":""}`,Ce=u("label",{"data-search":`${R.name} ${L.map(pe=>pe.entry.name).join(" ")}`.toLowerCase()},u("input",{type:"checkbox","aria-label":`GET 变量：${W}`,checked:o.selected.has(R.key),onchange:pe=>{pe.target.checked?o.selected.add(R.key):o.selected.delete(R.key)}}),u("span",null,W,u("small",null,`来自：${L.map(pe=>pe.entry.name+(pe.item.enabled===!1?"（已关闭）":"")).join("、")}`)));_.append(Ce)}p.append(_,u("select",{"aria-label":"GET 插入位置",value:o.position,onchange:R=>o.position=R.target.value},u("option",{value:"cursor"},"光标处"),u("option",{value:"start"},"正文开头"),u("option",{value:"end"},"正文末尾")),H("插入 GET",()=>P(()=>{const R=[...new Map(M.flatMap(Ce=>Ce.vars.filter(pe=>o.selected.has(pe.key)).map(pe=>[pe.key,pe]))).values()];if(!R.length)throw new Error("先勾选要调用的变量。");const L=R.map(Ce=>Ks("get",Ce)).join(`
 `),W=o.position==="start"?0:o.position==="end"?e.content.length:Math.max(0,Math.min(o.caret??e.content.length,e.content.length));E(e.content.slice(0,W)+L+e.content.slice(W),W+L.length)}),"pw-sm pw-primary"))}}o.error&&p.append(u("div",{class:"pw-errbox",role:"alert"},o.error))}}return c.append(Q,p,d,m),z(),c}function Qt(e,t,n,r=()=>Ze(),s=""){const a=u("div",{class:`pw-section pw-mix-screen pw-screen-${s}`},t);return a._pwScreen={title:e,onback:r,actions:n},a}function Tt(e,t={}){k.mix.screen||(k.mix.homeScroll=ve?.scrollTop||0),k.mix.screen={kind:e,...t},k.mix.menuUid=null,F(),ve.scrollTop=0}function Ze(e=null){k.mix.screen=null,k.mix.menuUid=null,F(),ve.scrollTop=k.mix.homeScroll||0,e&&Ws(e)}function Ec(e,t,n,r=!1){const s=se(t.entryId);if(!s)throw new Error("这个条目已被删除。");r=r||Js(e,s.id,t.uid);const a=n.draft,i=Xe({...s,...n.full?a:{name:a.name,content:a.content,variableInitPrefix:a.variableInitPrefix},id:r?ae("pw"):s.id,updatedAt:Date.now()});s.content!==i.content&&(i.history=[{content:s.content,at:Date.now()},...s.history||[]].slice(0,5)),r?(lt(e,i),t.entryId=i.id):Object.assign(s,i),Lr(n,e,t),k.mix.edits?.delete(pn(e,t))}function au(e,t){const n=se(t.entryId);if(!n)return;if(Nt(n)==="init"||n.variableInitPrefix&&n.content===n.variableInitPrefix){Nc(e);return}const r=k.mix.edits?.get(pn(e,t));k.editing={...r||{},draft:fe(r?.draft||n),isNew:!1,undo:null,comment:"",comboId:e.id,itemUid:t.uid,override:fe(t.override||{}),returnScroll:ve?.scrollTop||0,returnScreen:k.mix.screen?fe(k.mix.screen):null},k.mix.edits?.delete(pn(e,t)),k.mix.menuUid=null,F(),ve.scrollTop=0}function bi(e,t=null){let n=k.mix.insert;(!n||n.comboId!==e.id)&&(n={comboId:e.id,mode:"new",side:t?"after":"end",name:"",content:"",role:"system",query:"",entryId:"",markerId:""}),n.anchorUid=t,n.side=t?"after":"end",k.mix.insert=n,Tt("insert",{comboId:e.id})}function iu(e){const t=k.mix.insert;if(!t||t.comboId!==e.id)return k.mix.screen=null,vi();const n=fu(e,t.anchorUid),r=n.lastElementChild,s=()=>{const p=t.anchorUid;k.mix.insert=null,Ze(p)};r.lastElementChild.replaceWith(H("取消",s));const i=r.querySelector(".pw-primary");if(i&&t.mode==="new"&&(i.textContent="添加条目"),n.querySelector(":scope > b")?.remove(),t.anchorUid){const p=e.items.find(d=>d.uid===t.anchorUid);n.prepend(u("p",{class:"pw-hint"},`位置参照：${p?.type==="entry"?se(p.entryId)?.name:p?.name||"固定位置"}`))}return r.remove(),Qt("添加条目",n,[...r.children].reverse(),s,"insert")}function Tc(e,t,n){const r=[...new Map(hi(e,t).flatMap(i=>i.vars.map(o=>[o.key,o]))).values()],a=[t.variableInitPrefix||(Nt(t)==="init"?t.content:""),...(e?.items||[]).filter(i=>i.type==="entry"&&i.entryId!==t.id).map(i=>se(i.entryId)?.variableInitPrefix||"")];for(const i of a.flatMap(o=>Ln(o)).filter(o=>o.kind==="set"))r.some(o=>o.key===i.key)||r.push(i),n.initial.has(i.key)||n.initial.set(i.key,i.value??"");return n.initSelected===null&&(n.initSelected=new Set(r.map(i=>i.key))),r}function ou(e,t,n){const r=n.filter(i=>t.initSelected.has(i.key));if(!r.length)throw new Error("先勾选需要初始化的变量。");for(const i of r)if(!Lc(t.initial.get(i.key)??""))throw new Error(`「${i.name}」的初始值含未配对的双花括号。`);let s=e.content;if(e.variableInitPrefix){if(!s.startsWith(e.variableInitPrefix))throw new Error("初始化段已被手动修改。请直接编辑该段，或换一个条目写入初始化。");s=s.slice(e.variableInitPrefix.length)}else Nt(e)==="init"&&(s="");const a=r.map(i=>Ks("set",i,t.initial.get(i.key)??"")).join(`
 `)+(s?`
 
@@ -1840,26 +1736,26 @@ ${y.textContent}${!r&&s?`
 长按拖动排序`}`,!r&&s&&g.querySelector(".pw-entry-content").prepend(u("div",{class:"pw-row-detail"},u("b",null,c),y));const P=M=>{Xo(e.items,n,M),k.mix.menuUid=null,te(),F(),Ws(t.uid)},D=p&&u("div",{class:`pw-row-actions${n>=e.items.length-2?" pw-actions-above":""}`,id:ae("row-actions"),role:"group","aria-label":`条目操作：${c}`},H("上移",()=>P(-1),"pw-sm",{disabled:n===0}),H("下移",()=>P(1),"pw-sm",{disabled:n===e.items.length-1}),H("前面插入",()=>{bi(e,t.uid),k.mix.insert.side="before",F()},"pw-sm"),H("后面插入",()=>bi(e,t.uid),"pw-sm"),!r&&s&&bc(e,s.id)&&H("存入收藏",()=>{k.mix.menuUid=null,vc(s)},"pw-sm")),Q=Mn("more",`更多操作：${c}`,()=>{k.mix.menuUid=k.mix.menuUid===t.uid?null:t.uid,F()},{"aria-expanded":String(p),"aria-controls":D?D.id:null}),z=u("div",{role:"listitem","data-pw-combo-uid":t.uid,style:`--pw-row-action-count: ${2+(!r&&s?1:0)+(!r&&s&&Nt(s)!=="init"?1:0)}`,class:`pw-card pw-combo-row pw-compact-row${t.enabled===!1?" pw-off":""}${r?" pw-marker":""}`},Mn("grip",`排序：${c}`,()=>{k.mix.menuUid=k.mix.menuUid===t.uid?null:t.uid,F()},{class:"pw-btn pw-row-icon pw-row-grip pw-drag-handle",title:"长按拖动排序；点击打开排序操作"}),g,u("div",{class:"pw-row-buttons"},Mn("remove","移出预设",()=>{k.mix.menuUid=null,Hu(e,t)}),!r&&s&&Nt(s)!=="init"&&Mn("copy","复制条目",()=>pu(e,t)),!r&&s&&Mn("edit","编辑",()=>au(e,t)),u("label",{class:"pw-row-switch",title:`${t.enabled===!1?"启用":"停用"}：${c}`},u("input",{type:"checkbox","aria-label":`启用：${c}`,checked:t.enabled!==!1,onchange:M=>{t.enabled=M.target.checked,te(),F()}}),u("span",{class:"pw-switch-track","aria-hidden":"true"})),Q),D);return D&&Oc(D,Q,t.uid),z}function uu(e){const t=ne(),n=Zo({combo:e,entries:t.entries,base:t.bases.find(o=>o.id===e.baseId)?.settings}),r=$o(n),s=k.mix.exportMode||"download",a={download:"下载酒馆预设 JSON",tavern:"保存到酒馆预设列表",copy:"复制预设 JSON"},i=()=>{if(r.errors.length){we("error","先处理页面中的错误");return}if(s==="tavern")return Bn("保存到酒馆",()=>zu(Gs(e),n,r));if(s==="copy")return ui(JSON.stringify(n,null,2));Hs(`${pc(Gs(e))}.json`,JSON.stringify(n,null,2))};return Qt("导出预设",u("div",{class:"pw-section"},r.errors.map(o=>u("div",{class:"pw-errbox"},o)),r.warnings.map(o=>u("div",{class:"pw-warnbox"},o)),u("label",{class:"pw-field"},"预设名称",u("input",{type:"text","aria-label":"导出预设名称",value:Gs(e),oninput:o=>{e.presetName=o.target.value,te()}})),u("label",{class:"pw-field"},"导出方式",u("select",{"aria-label":"导出方式",value:s,onchange:o=>{k.mix.exportMode=o.target.value,F()}},Object.entries(a).map(([o,c])=>u("option",{value:o},c)))),u("p",{class:"pw-hint"},s==="tavern"?"保存后可在酒馆的对话补全预设列表中选择；不会自动切换当前预设。遇到同名预设时会先询问。":"用于酒馆的「对话补全预设」导入。包含提示词内容、顺序和开关。"),u("details",{open:!!k.mix.exportOptionsOpen,ontoggle:o=>{o.target.isConnected&&(k.mix.exportOptionsOpen=o.target.open)}},u("summary",null,"采样参数"),u("label",{class:"pw-field"},"基础设置",u("select",{"aria-label":"导出基础设置",value:e.baseId||"",onchange:o=>{e.baseId=o.target.value,te(),F()}},u("option",{value:""},"仅导出提示词，沿用酒馆当前参数"),t.bases.map(o=>u("option",{value:o.id},o.name))))),u("details",{open:!!k.mix.backupOpen,ontoggle:o=>{o.target.isConnected&&(k.mix.backupOpen=o.target.open)}},u("summary",null,"备份这份预设"),u("p",{class:"pw-hint"},"用于以后导回预设机继续编辑，包含备用条目。请在预设机的「导入」页读取。"),H("下载预设机备份",()=>{const o=new Set(e.items.filter(c=>c.type==="entry").map(c=>c.entryId));Hs(`${pc(e.name)}-预设机备份.json`,JSON.stringify(Ls(t.entries.filter(c=>o.has(c.id)),[e]),null,2))}))),[H(a[s],i,"pw-primary",{disabled:!!r.errors.length||!!k.busy})],void 0,"export")}function pn(e,t){return`${e.id}:${t.uid}`}function mu(e,t){const n=se(t.entryId),r=k.mix.edits?.get(pn(e,t))?.draft;return r?{...n,name:r.name,content:r.content}:n}function Ws(e,t=".pw-drag-handle"){const n=ye;je.defaultView.requestAnimationFrame(()=>{if(!n?.isConnected||n!==ye)return;const r=[...n.querySelectorAll(".pw-combo-row")].find(o=>o.dataset.pwComboUid===e),s=r?.querySelector(t)||r;if(!s)return;const a=ve.getBoundingClientRect(),i=s.getBoundingClientRect();(i.top<a.top||i.bottom>a.bottom)&&(ve.scrollTop+=i.top-a.top-12)})}function Dc(e,t){Bc(e,[t])}function Bc(e,t){const n=k.mix.insert,r=yi(e,n);e.items.splice(r,0,...t);for(const s of t)n?.mode==="new"&&Lr(n,e,s),s.type==="entry"&&Jc(e,s.entryId);Uc(e).itemsOpen=!0,k.mix.insert=null,te(),Ze(t[0]?.uid)}function fu(e,t=null){const n=k.mix.insert;if(!n||n.comboId!==e.id||n.anchorUid!==t)return null;const r=ne(),s=()=>{if(!n.name.trim()&&!n.content.trim()){we("warning","先写条目名称或正文");return}try{yi(e,n)}catch(c){we("warning",c.message);return}const o=He({name:n.name.trim()||on(n.content,"新条目"),content:n.content,role:n.role,source:"预设中新建",variableInitPrefix:n.variableInitPrefix});lt(e,o),Dc(e,{uid:ae("it"),type:"entry",entryId:o.id,enabled:!0,override:{}})};let a,i;if(n.mode==="library"||n.mode==="preset")({fields:a,insert:i}=yu(e,n));else if(n.mode==="marker"){const o=ot.filter(c=>!e.items.some(p=>p.type==="marker"&&p.identifier===c.identifier));o.some(c=>c.identifier===n.markerId)||(n.markerId=o[0]?.identifier||""),a=o.length?u("select",{"aria-label":"选择固定位置",value:n.markerId,onchange:c=>{n.markerId=c.target.value}},o.map(c=>u("option",{value:c.identifier},c.label))):u("p",{class:"pw-hint"},"固定位置已经全部加入。"),i=H("插入",()=>{const c=ot.find(p=>p.identifier===n.markerId);!c||e.items.some(p=>p.type==="marker"&&p.identifier===c.identifier)||Dc(e,{uid:ae("it"),type:"marker",identifier:c.identifier,name:c.name,enabled:!0})},"pw-primary",{disabled:!n.markerId})}else a=[u("div",{class:"pw-row"},u("input",{type:"text",class:"pw-wide","aria-label":"新条目名称",placeholder:"条目名称",value:n.name,oninput:o=>{n.name=o.target.value}}),u("select",{"aria-label":"新条目角色",value:n.role,onchange:o=>{n.role=o.target.value}},vt.map(o=>u("option",{value:o},o)))),Ac({entry:n,owner:n,combo:e,title:"新条目正文"})],i=H("插入",s,"pw-primary");return u("div",{class:"pw-mix-insert"},u("div",{class:"pw-add-sources",role:"tablist","aria-label":"条目来源"},[["new","新建／粘贴"],["preset","从预设选"],["library","从收藏选"],["marker","固定位置"]].map(([o,c])=>u("button",{type:"button",role:"tab",class:`pw-btn pw-source-tab${n.mode===o?" pw-active":""}`,"aria-selected":String(n.mode===o),onclick:()=>{n.mode=o,F()}},c))),u("label",{class:"pw-field"},"添加到",u("select",{"aria-label":"插入位置",value:n.side,onchange:o=>{n.side=o.target.value}},t?[u("option",{value:"before"},"这条前面"),u("option",{value:"after"},"这条后面")]:[u("option",{value:"start"},"预设开头"),u("option",{value:"end"},"预设末尾")])),a,u("div",{class:"pw-row"},i,H("取消",()=>{k.mix.insert=null,F(),t&&Ws(t)})))}function Vs(){return k.mix.template??={open:!1,text:"",name:"",preview:null,error:"",loading:!1,request:0}}function qr(e,t){const n=JSON.parse(String(e).replace(/^\uFEFF/,""));if(!n||!Array.isArray(n.prompts)||!n.prompts.length)throw new Error("请选择含有 prompts 条目的酒馆预设 JSON。");const r=new Set;for(const i of n.prompts){if(!i||typeof i.identifier!="string"||!i.identifier)throw new Error("预设中有缺少 identifier 的条目。");if(r.has(i.identifier))throw new Error(`预设里有重复标识：${i.identifier}`);r.add(i.identifier)}const s=Tr(n.prompt_order);(!s||!Array.isArray(s.order))&&(n.prompt_order=[{character_id:100001,order:n.prompts.map(i=>({identifier:i.identifier,enabled:i.enabled!==!1}))}]);const a=Tr(n.prompt_order).order;for(const i of a){if(!i?.identifier)throw new Error("预设顺序中有缺少 identifier 的项目。");if(!r.has(i.identifier)){const o=ot.find(c=>c.identifier===i.identifier);if(!o)throw new Error(`顺序中的条目不存在：${i.identifier}`);n.prompts.push({identifier:o.identifier,name:o.name,marker:!0}),r.add(o.identifier)}}return ii(n,t)}function xi(e,t){const n=Vs();n.preview=null,n.error="";try{n.preview=qr(e,t),n.name=t||"模板预设"}catch(r){n.error=r instanceof SyntaxError?"JSON 格式有误，请检查文件或粘贴内容。":String(r.message||r)}F()}function gu(){const e=Vs(),t=e.preview;if(!t||e.loading)return;const n=xc(t,e.name.trim());e.open=!1,e.preview=null,e.text="",e.error="",k.mix.insert=null,k.mix.screen=null,te(),F(),ve.scrollTop=0,we("success",`已建立「${n.name}」，模板内容仅保存在本预设`)}function wu(){const e=Vs();if(!e.open)return null;const t=qn();t.includes(e.pick)||(e.pick=t[0]||"");const n=u("input",{type:"file",accept:".json,application/json",hidden:!0,"aria-label":"导入模板文件",onchange:async s=>{const a=s.target.files?.[0];if(!a)return;const i=++e.request;e.loading=!0,e.error="",e.preview=null,F();try{const o=await a.text();if(i!==e.request)return;e.loading=!1,xi(o,a.name.replace(/\.[^.]+$/,""))}catch(o){i===e.request&&(e.loading=!1,e.error=`读不到这个文件：${o.message||o}`,F())}}}),r=s=>{e.request++,e.loading=!1;const a=s==="current"?Si():{name:e.pick,json:jr(e.pick)};if(!a?.json){e.preview=null,e.error="读不到这个预设，请选择 JSON 文件导入。",F();return}xi(JSON.stringify(a.json),a.name)};return u("div",{class:"pw-box pw-mix-template"},u("b",null,"导入预设作模板"),u("p",{class:"pw-hint"},"建立独立的新预设，条目仅保存在预设内；保留原顺序、开关和注入位置。"),n,u("div",{class:"pw-row"},H("选择预设 JSON",()=>n.click(),"pw-primary"),H("读取当前预设",()=>r("current"))),t.length>0&&u("div",{class:"pw-row"},u("select",{"aria-label":"酒馆已有预设",value:e.pick,onchange:s=>{e.pick=s.target.value}},t.map(s=>u("option",{value:s},s))),H("读取这个预设",()=>r("named"),"pw-sm")),u("details",null,u("summary",null,"粘贴预设 JSON"),u("textarea",{class:"pw-code","aria-label":"模板 JSON",value:e.text,oninput:s=>{e.text=s.target.value,e.preview=null,e.error="",e.request++,e.loading=!1;const a=s.target.closest(".pw-mix-template");a.querySelector(".pw-mix-template-preview")?.remove(),a.querySelector('[role="alert"]')?.remove()}}),H("读取粘贴内容",()=>{e.request++,e.loading=!1,xi(e.text,"模板预设")},"pw-sm")),e.loading&&u("p",{class:"pw-hint"},"正在读取…"),e.error&&u("p",{class:"pw-errbox",role:"alert"},e.error),e.preview&&u("div",{class:"pw-mix-template-preview"},u("p",{class:"pw-hint"},`顺序中有 ${e.preview.order.length} 项，已关闭 ${e.preview.order.filter(s=>s.enabled===!1).length} 项。${e.preview.items.some(s=>!s.inOrder)?"未编入顺序的条目保留在预设内备用区。":""}`),u("input",{type:"text",class:"pw-wide","aria-label":"模板预设名称",value:e.name,oninput:s=>{e.name=s.target.value}}),H("创建模板预设",gu,"pw-primary")))}function hu(e,t){return e.pickers??={},e.pickers[t]??={source:"",rows:null,selected:new Set,query:"",error:"",request:0}}function bu(e){return[{key:"current",type:"current",label:"酒馆当前使用的预设"},...qn().map(t=>({key:`tavern:${t}`,type:"tavern",name:t,label:`酒馆 · ${t}`})),...ne().combos.filter(t=>t.id!==e.id).map(t=>({key:`combo:${t.id}`,type:"combo",id:t.id,label:`预设机 · ${t.name}`}))]}function Mc(e){const t=new Map(e.items.map(s=>[s.key,s])),n=(e.order||[]).filter(s=>s.type==="entry"&&t.has(s.key)).map(s=>s.key);return[...new Set([...n,...e.items.map(s=>s.key)])].map(s=>{const a=t.get(s);return{key:s,entry:fe(a.entry),enabled:a.enabled!==!1,inOrder:a.inOrder!==!1}})}function vu(e){if(e.type==="combo"){const r=ne().combos.find(i=>i.id===e.id);if(!r)throw new Error("这个预设已被移除，请重新选择。");const s=r.items.filter(i=>i.type==="entry"&&se(i.entryId)).map(i=>({key:i.uid,entry:Xe({...fe(se(i.entryId)),...fe(i.override||{})}),enabled:i.enabled!==!1,inOrder:!0})),a=new Set(r.items.map(i=>i.entryId));for(const i of r.entries||[])a.has(i.id)||s.push({key:`reserve:${i.id}`,entry:fe(i),enabled:!0,inOrder:!1});return s}const t=e.type==="current"?Si():null,n=t?.json||(e.type==="tavern"?jr(e.name):null);if(!n)throw new Error("暂时读不到这个预设，可以上传它的 JSON 文件。");return Mc(qr(JSON.stringify(n),t?.name||e.name))}function yi(e,t){if(t?.anchorUid){const n=e.items.findIndex(r=>r.uid===t.anchorUid);if(n<0)throw new Error("原来的插入位置已被移除，请返回后重新选择。");return n+(t.side==="before"?0:1)}return t?.side==="start"?0:e.items.length}function xu(e,t,n){const r=(n.rows||[]).filter(i=>n.selected.has(i.key));if(!r.length)throw new Error("先勾选要添加的条目。");yi(e,t);const s=r.map(i=>He({...fe(i.entry),id:ae("pw"),history:[],createdAt:Date.now(),updatedAt:Date.now()})),a=s.map((i,o)=>({uid:ae("it"),type:"entry",entryId:i.id,enabled:r[o].enabled!==!1,override:{}}));for(const i of s)lt(e,i);return Bc(e,a),s.length}function yu(e,t){const n=t.mode,r=hu(t,n);n==="library"&&!r.rows&&(r.rows=ne().entries.map(g=>({key:g.id,entry:fe(g),enabled:!0,inOrder:!0})));const s=r.rows||[],a=g=>`${g.entry.name} ${g.entry.content} ${(g.entry.tags||[]).join(" ")}`.toLowerCase().includes(r.query.trim().toLowerCase()),i=u("span",{class:"pw-dim","aria-live":"polite"}),o=H(`添加选中（${r.selected.size}）`,()=>{try{const g=xu(e,t,r);we("success",`已添加 ${g} 个独立条目`)}catch(g){r.error=String(g.message||g),F()}},"pw-primary",{disabled:!r.selected.size}),c=()=>{i.textContent=`已选 ${r.selected.size} / ${s.length} 条`,o.textContent=`添加选中（${r.selected.size}）`,o.disabled=!r.selected.size},p=u("div",{class:"pw-picker-list"},s.map((g,y)=>u("div",{class:"pw-picker-row","data-pick-key":g.key,hidden:!a(g)},u("label",{class:"pw-picker-check"},u("input",{type:"checkbox",checked:r.selected.has(g.key),"aria-label":`选择条目 ${y+1}：${g.entry.name}`,onchange:E=>{E.target.checked?r.selected.add(g.key):r.selected.delete(g.key),c()}})),u("details",null,u("summary",null,u("span",{class:"pw-picker-title"},g.entry.name),u("span",{class:"pw-dim"},`${g.entry.role}${g.inOrder===!1?" · 未编排":g.enabled===!1?" · 已关闭":""}`)),u("pre",{class:"pw-pre"},g.entry.content||"（空正文）")))));c();let d=null;if(n==="preset"){const g=bu(e),y=u("input",{type:"file",accept:".json,application/json",hidden:!0,"aria-label":"上传预设文件",onchange:async E=>{const P=E.target.files?.[0];if(!P)return;const D=++r.request;try{const Q=await P.text();if(D!==r.request||k.mix.insert!==t)return;const z=Mc(qr(Q,P.name));Object.assign(r,{source:"file",fileName:P.name,rows:z,selected:new Set,query:"",error:""})}catch(Q){if(D!==r.request||k.mix.insert!==t)return;r.error=`读取失败：${Q.message||Q}`}E.target.value="",F()}});d=u("div",{class:"pw-picker-source"},u("label",{class:"pw-field"},"选择预设",u("select",{"aria-label":"选择条目来源预设",value:r.source,onchange:E=>{r.request++;const P=g.find(D=>D.key===E.target.value);if(Object.assign(r,{source:E.target.value,rows:[],selected:new Set,query:"",error:""}),P)try{r.rows=vu(P)}catch(D){r.error=String(D.message||D)}F()}},u("option",{value:""},"请选择预设…"),g.map(E=>u("option",{value:E.key},E.label)),r.source==="file"&&u("option",{value:"file"},r.fileName))),H("上传预设 JSON",()=>y.click(),"pw-sm"),y)}const m=s.length?[u("input",{type:"search",class:"pw-wide","aria-label":"搜索待选条目",placeholder:"搜索名称、正文或标签",value:r.query,oninput:g=>{r.query=g.target.value;for(const[y,E]of[...p.children].entries())E.hidden=!a(s[y])}}),u("div",{class:"pw-row"},i,H("全选搜索结果",()=>{for(const g of s.filter(a))r.selected.add(g.key);for(const[g,y]of[...p.children].entries())y.querySelector("input").checked=r.selected.has(s[g].key);c()},"pw-sm"),H("清空选择",()=>{r.selected.clear();for(const g of p.children)g.querySelector("input").checked=!1;c()},"pw-sm")),p]:u("p",{class:"pw-hint"},n==="preset"&&!r.source?"选择一个预设，再勾选其中的条目。":"这里没有可选的条目。");return{fields:[d,m,s.length>0&&u("p",{class:"pw-hint"},"添加为当前预设的独立副本，保留原条目的顺序和开关。"),r.error&&u("p",{class:"pw-errbox",role:"alert"},r.error)],insert:o}}const Ys={init:"preset-workshop:variable-init",get:"preset-workshop:variable-get"};function Ln(e){e=String(e||"");const t=[],n=[];for(let r=0;r<e.length-1;r++)if(e.slice(r,r+2)==="{{")t.push(r),r++;else if(e.slice(r,r+2)==="}}"&&t.length){const s=t.pop(),a=e.slice(s+2,r),i=/^\s*(setglobalvar|setvar|getglobalvar|getvar)(?=\s|:|$)/i.exec(a);if(i){const o=a.slice(i[0].length).replace(/^\s*:{1,2}\s*/,"").trimStart();let c=-1,p=0;for(let y=0;y<o.length-1;y++)if(o.slice(y,y+2)==="{{")p++,y++;else if(o.slice(y,y+2)==="}}")p--,y++;else if(!p&&o.slice(y,y+2)==="::"){c=y;break}const d=(c<0?o:o.slice(0,c)).trim(),m=i[1].toLowerCase(),g=m.includes("global")?"global":"local";d&&!/[{}\r\n]/.test(d)&&!d.includes("::")&&n.push({name:d,scope:g,kind:m.startsWith("set")?"set":"get",key:`${g}:${d}`,value:c<0?null:o.slice(c+2),start:s,end:r+2})}r++}return n.sort((r,s)=>r.start-s.start)}function Nt(e){if(!e)return"";for(const a of["init","get"])if(e.source===Ys[a])return a;const t=e.name==="变量初始化"?"init":e.name==="变量调用 GET"?"get":"";if(!t)return"";const n=Ln(e.content),r=n.filter(a=>!n.some(i=>i.start<a.start&&i.end>a.end));if(!r.length||r.some(a=>a.kind!==(t==="init"?"set":"get")))return"";let s=e.content;for(const a of[...r].reverse())s=s.slice(0,a.start)+s.slice(a.end);return s.trim()?"":t}function ku(e){return String(e||"条目").replace(/[{}\r\n\\]/g,"_").replace(/::/g,"_").trim()||"条目"}function Ks(e,t,n=""){const r=`${e}${t.scope==="global"?"global":""}var`;return e==="get"?`{{${r}::${t.name}}}`:`{{${r}::${t.name}::${n}}}`}function Lc(e){let t=0;for(let n=0;n<e.length-1;n++)if(e.slice(n,n+2)==="{{")t++,n++;else if(e.slice(n,n+2)==="}}"){if(!t)return!1;t--,n++}return t===0}var Xs="preset-workshop:skeleton";function qc(){return k.mix.skel??={need:"",picks:[],files:[],name:"基础版预设",error:"",note:""}}function Zs(e,t){const n=qr(JSON.stringify(e),t),r=new Map(n.items.map(a=>[a.key,a])),s=[];for(const a of n.order||[]){if(a.type==="marker"){const p=ot.find(d=>d.identifier===a.identifier);s.push(`[固定位置] ${p?.label||a.name||a.identifier}（id=${a.identifier}）${a.enabled===!1?" · 关闭":""}`);continue}const i=r.get(a.key);if(!i)continue;const o=i.entry,c=String(o.content||"").replace(/\s+/g," ").trim().slice(0,90);s.push(`${o.name}（${o.role}，约 ${Jt(o.content)} token${a.enabled===!1?"，关闭":""}）：${c}${String(o.content||"").length>90?"……":""}`)}return`<参考预设 name="${t}">
 ${s.join(`
 `)}
-</参考预设>`}function Su({need:e="",refs:t=[],templates:n,antiBagu:r=!0}={}){const s={...Ue,...n||{}},i=`任务：写一个基础版预设，作者之后会往里填自己的条目。
-先看参考预设的结构：它们分了哪些条目、按什么顺序、固定位置放在哪里。取它们共同、合理的骨架，按作者的需求和对话调整，不照抄参考预设的正文。
-每个条目只写最基础、能直接用的版本，短一点；需要作者自己补的地方写成【待填：这里写什么】。
-固定位置（角色描述、世界书、聊天记录等）用单独一行 <marker id="标识"/> 表示，放在它该在的位置。可用的标识：${ot.map(d=>`${d.identifier}：${d.label}`).join("；")}。
-从上到下按预设里的顺序输出，固定位置和条目混排。
-要用变量时，直接在条目里写 {{setvar::变量名::内容}}，在别处用 {{getvar::变量名}} 取；不要另写“初始变量/变量初始化”条目，插件会自动在最上方生成。`,c=[s.common,i,r?nr(s):"",`输出格式：
-先输出一个说明块：
+</参考预设>`}function Su({need:e="",refs:t=[],templates:n,antiBagu:r=!0}={}){const s={...Ue,...n||{}},i=`这次要搭一个基础版预设，作者之后会往里面添自己的条目。
+先看参考预设是怎么搭的：分了哪些条目、什么顺序、固定位置放在哪。取它们共通、合理的骨架，再照作者的要求和聊天调整，参考预设的正文不要照抄。
+每个条目只写最基本、能直接用的版本，短一些；要作者自己补的地方写成【待填：这里写什么】。
+固定位置（角色描述、世界书、聊天记录等）单独一行写 <marker id="标识"/>，放在它该在的地方。可用的标识：${ot.map(d=>`${d.identifier}：${d.label}`).join("；")}。
+从上到下照预设里的顺序交，固定位置和条目穿插着排。
+要用变量就直接在条目里写 {{setvar::变量名::内容}}，别处用 {{getvar::变量名}} 取；不用另写「初始变量 / 变量初始化」条目，插件会自动在最上面生成。`,c=[s.common,i,r?nr(s):"",`交稿格式：
+先交一个说明块：
 <说明>
-结构：一两句话说这个基础版分了哪几块、为什么这样排
-待填：作者接下来最该补的几处
+骨架：一两句话说分了哪几块、为什么这么排
+待填：作者接下来最该先补的几处
 </说明>
-然后按顺序输出，每个条目：
+然后照顺序交，每个条目：
 <entry name="条目名" role="system">
 条目内容
 </entry>
-每个固定位置：<marker id="标识"/>
-role 只能是 system、user、assistant。属性值里不要出现英文双引号。不用代码块包裹，标签外不写别的文字。`].filter(d=>String(d??"").trim()).join(`
+每个固定位置写成：<marker id="标识"/>
+role 只能填 system、user、assistant。属性值里别出现英文双引号。不用代码块包，标签外面不写别的字。`].filter(d=>String(d??"").trim()).join(`
 
-`),p=[`【作者想要的预设】
-${String(e).trim()||"（没有另外写，按对话和参考预设来）"}`];return t.length&&p.push(`【参考预设的结构】（只看结构，不照抄正文）
+`),p=[`【作者要的预设】
+${String(e).trim()||"（没另外写，照聊天和参考预设来）"}`];return t.length&&p.push(`【参考预设的骨架】（只看怎么搭，正文不照抄）
 ${t.join(`
 
 `)}`),{system:c,prompt:p.join(`
@@ -1867,57 +1763,57 @@ ${t.join(`
 `)}}function jc(e){const t=String(e??"").replace(/<说明>[\s\S]*?(?:<\/说明>|(?=<entry\b|<marker\b)|$)/g,""),n=[],r=/<marker\s+id\s*=\s*["'“]?([A-Za-z]+)["'”]?\s*\/?>(?:\s*<\/marker>)?|<entry\b([^>]*)>([\s\S]*?)(?:<\/entry>|$)/gi;let s;for(;s=r.exec(t);){if(s[1]){ot.some(o=>o.identifier===s[1])&&n.push({type:"marker",identifier:s[1]});continue}const a={};for(const o of s[2].matchAll(/(\w+)\s*=\s*(?:"([^"]*)"|'([^']*)'|“([^”]*)”)/g))a[o[1].toLowerCase()]=o[2]??o[3]??o[4]??"";const i=li(s[3].trim()).trim();i&&n.push({type:"entry",name:(a.name||"").trim()||on(i,"未命名条目"),role:vt.includes((a.role||"").trim())?a.role.trim():"system",ref:(a.ref||"").trim(),after:(a.after||"").trim(),content:i})}return n}function Cu(e,t,n=""){const r=ne();if(!e.some(i=>i.type==="entry"))throw new Error("AI 的回复里没有条目，可能被截断了。到设置里把最大回复长度调大再试。");const s=$n(qt(r.combos,t||"基础版预设"));for(const i of e){if(i.type==="marker"){Bs(s,i.identifier);continue}const o=He({name:i.name,role:i.role,content:i.content,tags:["基础版"],source:Xs});lt(s,o),s.items.push({uid:ae("it"),type:"entry",entryId:o.id,enabled:!0,override:{}})}const a=ri(s);return s.skeletonNote=n,r.combos.push(s),r.currentComboId=s.id,{combo:s,added:a}}async function Iu(){const e=qc(),t=ne();e.error="";const n=[];for(const i of e.picks){const o=jr(i);if(!o){e.error=`读不到预设「${i}」`,F();return}try{n.push(Zs(o,i))}catch(c){e.error=`预设「${i}」读不出结构：${c.message||c}`,F();return}}for(const i of e.files)try{n.push(Zs(JSON.parse(i.text),i.name))}catch(o){e.error=`「${i.name}」读不出结构：${o.message||o}`,F();return}const{system:r,prompt:s}=Su({need:e.need,refs:n,templates:t.templates,antiBagu:t.antiBagu!==!1}),a=await Bn("写基础版预设",()=>er(r,s,{dialogueKey:"mix"}));if(a)try{const i=js(a),{combo:o,added:c}=Cu(jc(a),e.name.trim(),i);k.mix.skel=null,te(),Ze(),we("success",`已建好「${o.name}」：${o.items.filter(p=>p.type==="entry").length} 个条目${c?`，补了 ${c} 个固定位置`:""}。点条目进去填内容`)}catch(i){e.error=String(i.message||i),F()}}function Au(){const e=qc(),t=qn(),n=u("input",{type:"file",accept:".json,application/json",hidden:!0,"aria-label":"上传参考预设",onchange:async a=>{for(const i of a.target.files||[])e.files.push({name:i.name.replace(/\.[^.]+$/,""),text:await i.text()});a.target.value="",F()}}),r=a=>{e.picks.includes(a)?e.picks=e.picks.filter(i=>i!==a):e.picks.push(a),F()},s=e.picks.length+e.files.length;return Qt("AI 写基础版预设",[u("p",{class:"pw-hint"},"先在上面的「和 AI 聊聊 · 预设」里说想要什么样的预设，聊过的会一起带上。再选几个参考预设，AI 照它们的结构写一个基础版，建成新预设；每个条目只有基础内容，之后你点进去自己填。"),u("label",{class:"pw-field"},"想要什么样的预设（可空）",u("textarea",{rows:3,"aria-label":"想要的预设",placeholder:"比如：古风言情，第三人称，重文风和人物，不要状态栏",value:e.need,oninput:a=>e.need=a.target.value})),u("b",null,`参考预设（已选 ${s}）`),t.length?u("div",{class:"pw-chips"},t.map(a=>u("button",{type:"button",class:`pw-chip${e.picks.includes(a)?" pw-on":""}`,"aria-pressed":String(e.picks.includes(a)),onclick:()=>r(a)},a))):u("p",{class:"pw-hint"},"酒馆里没有读到对话补全预设，可以上传预设 JSON。"),e.files.length>0&&u("div",{class:"pw-chips"},e.files.map((a,i)=>u("button",{type:"button",class:"pw-chip pw-on",title:"点一下移除",onclick:()=>{e.files.splice(i,1),F()}},`${a.name} ✕`))),u("div",{class:"pw-row"},H("上传预设 JSON",()=>n.click(),"pw-sm"),n),u("label",{class:"pw-field"},"新预设的名字",u("input",{type:"text","aria-label":"新预设名",value:e.name,oninput:a=>e.name=a.target.value})),e.error&&u("p",{class:"pw-errbox",role:"alert"},e.error)],[H("取消",()=>{k.mix.skel=null,Ze()}),H("生成基础版",()=>Iu(),"pw-primary",{disabled:!!k.busy})],()=>Ze(),"skeleton")}function Eu(e){return e.items.map(t=>{if(t.type==="marker")return`<marker id="${t.identifier}"/>`;const n=se(t.entryId);return n?`<entry name="${String(n.name).replace(/"/g,"'")}" role="${n.role}" ref="${t.uid}"${t.enabled===!1?' enabled="false"':""}>
 ${n.content}
 </entry>`:""}).filter(Boolean).join(`
-`)}function Tu({combo:e,request:t="",templates:n,antiBagu:r=!0}={}){const s={...Ue,...n||{}},i=`任务：按作者的修改意见改整个预设。
-只改意见（和本页对话里作者明确提出的要求）说到的地方。没提到的条目，名字和正文一字不动地原样输出。可以增加、删除、合并条目，也可以调整顺序。
-保留已有条目的 ref 属性，用它区分同名条目；每个 ref 只能出现一次。新加的条目不写 ref。ref 只用于对应位置，不写进正文。
-固定位置用单独一行 <marker id="标识"/> 表示。可用的标识：${ot.map(c=>`${c.identifier}：${c.label}`).join("；")}。
-从上到下按预设里的顺序，输出修改后的完整预设。
-要用变量时，直接在条目里写 {{setvar::变量名::内容}}，在别处用 {{getvar::变量名}} 取；不要另写“初始变量/变量初始化”条目，插件会自动在最上方生成。`;return{system:[s.common,i,r?nr(s):"",`输出格式：
-先输出一个说明块：
+`)}function Tu({combo:e,request:t="",templates:n,antiBagu:r=!0}={}){const s={...Ue,...n||{}},i=`这次是照作者的意见改整份预设。
+只改意见（以及这一页聊天里作者明说的要求）提到的地方。没提到的条目，名字和正文原封不动地交回来。可以增、删、合并条目，也可以调顺序。
+已有条目的 ref 属性留着，靠它分辨同名条目；每个 ref 只出现一次。新加的条目不写 ref。ref 只用来对位置，不写进正文。
+固定位置单独一行写 <marker id="标识"/>。可用的标识：${ot.map(c=>`${c.identifier}：${c.label}`).join("；")}。
+从上到下照预设里的顺序，交改好的完整预设。
+要用变量就直接在条目里写 {{setvar::变量名::内容}}，别处用 {{getvar::变量名}} 取；不用另写「初始变量 / 变量初始化」条目，插件会自动在最上面生成。`;return{system:[s.common,i,r?nr(s):"",`交稿格式：
+先交一个说明块：
 <说明>
-改了什么：一两句话
-待填：还需要作者补的地方（没有就写「无」）
+改了哪：一两句话
+待填：还要作者补的地方（没有就写「无」）
 </说明>
-然后按顺序输出，每个条目：
+然后照顺序交，每个条目：
 <entry name="条目名" role="system">
 条目内容
 </entry>
-每个固定位置：<marker id="标识"/>
-role 只能是 system、user、assistant。属性值里不要出现英文双引号。不用代码块包裹，标签外不写别的文字。`].filter(c=>String(c??"").trim()).join(`
+每个固定位置写成：<marker id="标识"/>
+role 只能填 system、user、assistant。属性值里别出现英文双引号。不用代码块包，标签外面不写别的字。`].filter(c=>String(c??"").trim()).join(`
 
 `),prompt:`【当前预设】
 ${Eu(e)}
 
 【修改意见】
-${String(t).trim()||"按本页对话中作者的要求修改。"}`}}function Nu(e,t,n=""){if(!t.some(c=>c.type==="entry"))throw new Error("AI 的回复里没有条目，可能被截断了。到设置里把最大回复长度调大再试。");const r=e.items.filter(c=>c.type==="entry"),s=new Set;for(const c of t.filter(p=>p.type==="entry"&&p.ref)){if(s.has(c.ref)||!r.some(p=>p.uid===c.ref))throw new Error("AI 返回了重复或无法对应的条目标识，尚未保存。请检查下面的原回复后重试。");s.add(c.ref)}e.skeletonPrev={items:fe(e.items),entries:fe(e.entries||[]),at:Date.now()};const a=new Set,i=[];for(const c of t){if(c.type==="marker"){const y=e.items.find(E=>E.type==="marker"&&E.identifier===c.identifier);i.some(E=>E.type==="marker"&&E.identifier===c.identifier)||i.push(y?fe(y):{uid:ae("it"),type:"marker",identifier:c.identifier,name:"",enabled:!0});continue}const p=r.filter(y=>!a.has(y.uid)&&(c.ref?y.uid===c.ref:!s.has(y.uid))),d=p.find(y=>se(y.entryId)?.name===c.name&&se(y.entryId)?.role===c.role&&se(y.entryId)?.content.trim()===c.content.trim());if(d){a.add(d.uid),i.push(d);continue}const m=c.ref?p[0]:p.find(y=>se(y.entryId)?.name===c.name),g=He({name:c.name,role:c.role,content:c.content,tags:["基础版"],source:Xs});lt(e,g),m&&a.add(m.uid),i.push({uid:m?.uid||ae("it"),type:"entry",entryId:g.id,enabled:m?m.enabled!==!1:!0,override:m?fe(m.override||{}):{}})}e.items=i;const o=new Set(i.filter(c=>c.type==="entry").map(c=>c.entryId));return e.entries=(e.entries||[]).filter(c=>o.has(c.id)||c.source!==Xs),e.skeletonNote=n,e}function Qc(e){const t=e.skeletonPrev;t&&(e.items=t.items,e.entries=t.entries,delete e.skeletonPrev)}function Pu(e){return e.items.map(t=>{if(t.type==="marker")return`[固定位置] ${ot.find(s=>s.identifier===t.identifier)?.label||t.identifier}`;const n=se(t.entryId);if(!n)return"";const r=String(n.content||"").replace(/\s+/g," ").trim().slice(0,60);return`${n.name}（${n.role}${t.enabled===!1?"，关闭":""}，ref=${t.uid}）：${r}${String(n.content||"").length>60?"……":""}`}).filter(Boolean).join(`
-`)}var Rc=[["add","只加新条目"],["pick","只改勾选的条目"],["all","改整个预设"]];function Ou({combo:e,mode:t,picked:n=[],request:r="",refs:s=[],templates:a,antiBagu:i=!0}={}){const o={...Ue,...a||{}},c=t==="add"?`任务：按作者的意见给这个预设加新条目。已有的条目一个都不改，也不要重新输出。
-每个新条目用 after 属性写放在哪个已有条目后面（写那个条目的名字）；放在最前面写 after="开头"，放在最后写 after="末尾"。
-要用变量时，直接在条目里写 {{setvar::变量名::内容}}，在别处用 {{getvar::变量名}} 取；不要另写“初始变量/变量初始化”条目，插件会自动在最上方生成。`:"任务：按作者的意见修改下面列出的条目。每条各输出一次，name 和 ref 保持原样不改；同名条目用 ref 区分，不合并、不遗漏。没让改的地方一字不动，输出完整的修改后正文。预设里的其他条目不要输出。ref 只用于对应位置，不写进正文。",p=`输出格式：
-先输出一个说明块：
+${String(t).trim()||"照这一页聊天里作者说的改。"}`}}function Nu(e,t,n=""){if(!t.some(c=>c.type==="entry"))throw new Error("AI 的回复里没有条目，可能被截断了。到设置里把最大回复长度调大再试。");const r=e.items.filter(c=>c.type==="entry"),s=new Set;for(const c of t.filter(p=>p.type==="entry"&&p.ref)){if(s.has(c.ref)||!r.some(p=>p.uid===c.ref))throw new Error("AI 返回了重复或无法对应的条目标识，尚未保存。请检查下面的原回复后重试。");s.add(c.ref)}e.skeletonPrev={items:fe(e.items),entries:fe(e.entries||[]),at:Date.now()};const a=new Set,i=[];for(const c of t){if(c.type==="marker"){const y=e.items.find(E=>E.type==="marker"&&E.identifier===c.identifier);i.some(E=>E.type==="marker"&&E.identifier===c.identifier)||i.push(y?fe(y):{uid:ae("it"),type:"marker",identifier:c.identifier,name:"",enabled:!0});continue}const p=r.filter(y=>!a.has(y.uid)&&(c.ref?y.uid===c.ref:!s.has(y.uid))),d=p.find(y=>se(y.entryId)?.name===c.name&&se(y.entryId)?.role===c.role&&se(y.entryId)?.content.trim()===c.content.trim());if(d){a.add(d.uid),i.push(d);continue}const m=c.ref?p[0]:p.find(y=>se(y.entryId)?.name===c.name),g=He({name:c.name,role:c.role,content:c.content,tags:["基础版"],source:Xs});lt(e,g),m&&a.add(m.uid),i.push({uid:m?.uid||ae("it"),type:"entry",entryId:g.id,enabled:m?m.enabled!==!1:!0,override:m?fe(m.override||{}):{}})}e.items=i;const o=new Set(i.filter(c=>c.type==="entry").map(c=>c.entryId));return e.entries=(e.entries||[]).filter(c=>o.has(c.id)||c.source!==Xs),e.skeletonNote=n,e}function Qc(e){const t=e.skeletonPrev;t&&(e.items=t.items,e.entries=t.entries,delete e.skeletonPrev)}function Pu(e){return e.items.map(t=>{if(t.type==="marker")return`[固定位置] ${ot.find(s=>s.identifier===t.identifier)?.label||t.identifier}`;const n=se(t.entryId);if(!n)return"";const r=String(n.content||"").replace(/\s+/g," ").trim().slice(0,60);return`${n.name}（${n.role}${t.enabled===!1?"，关闭":""}，ref=${t.uid}）：${r}${String(n.content||"").length>60?"……":""}`}).filter(Boolean).join(`
+`)}var Rc=[["add","只加新条目"],["pick","只改勾选的条目"],["all","改整个预设"]];function Ou({combo:e,mode:t,picked:n=[],request:r="",refs:s=[],templates:a,antiBagu:i=!0}={}){const o={...Ue,...a||{}},c=t==="add"?`这次是照作者的意见给预设添新条目。已有的条目一条都不改，也不要重新交。
+每个新条目用 after 属性写它跟在哪个已有条目后面（填那个条目的名字）；要放最前面写 after="开头"，放最后写 after="末尾"。
+要用变量就直接在条目里写 {{setvar::变量名::内容}}，别处用 {{getvar::变量名}} 取；不用另写「初始变量 / 变量初始化」条目，插件会自动在最上面生成。`:"这次是照作者的意见改下面列出的几条。每条交一次，name 和 ref 原样不动；同名条目靠 ref 分开，不合并、不漏。没让改的地方一个字都不动，交改好的完整正文。预设里别的条目不要交。ref 只用来对位置，不写进正文。",p=`交稿格式：
+先交一个说明块：
 <说明>
-改了什么：一两句话
-待填：还需要作者补的地方（没有就写「无」）
+改了哪：一两句话
+待填：还要作者补的地方（没有就写「无」）
 </说明>
-然后每个条目：
+然后交每个条目：
 <entry name="条目名" role="system"${t==="add"?' after="已有条目名"':' ref="原条目的 ref"'}>
 条目内容
 </entry>
-role 只能是 system、user、assistant。属性值里不要出现英文双引号。不用代码块包裹，标签外不写别的文字。`,d=[`【当前预设的目录】（顺序、条目名、开头几句）
+role 只能填 system、user、assistant。属性值里别出现英文双引号。不用代码块包，标签外面不写别的字。`,d=[`【现在这份预设的目录】（顺序、条目名、开头几句）
 ${Pu(e)}`];return t==="pick"&&d.push(`【要改的条目】
 ${n.map(m=>`<entry name="${String(m.name).replace(/"/g,"'")}" role="${m.role}" ref="${m.ref}">
 ${m.content}
 </entry>`).join(`
-`)}`),s.length&&d.push(`【参考预设的结构】（只看结构和思路，不照抄正文）
+`)}`),s.length&&d.push(`【参考预设的骨架】（只看怎么搭、怎么想，正文不照抄）
 ${s.join(`
 
 `)}`),d.push(`【修改意见】
-${String(r).trim()||"按本页对话中作者的要求修改。"}`),{system:[o.common,c,i?nr(o):"",p].filter(m=>String(m??"").trim()).join(`
+${String(r).trim()||"照这一页聊天里作者说的改。"}`),{system:[o.common,c,i?nr(o):"",p].filter(m=>String(m??"").trim()).join(`
 
 `),prompt:d.join(`
 
 `)}}function Hc(e){e.skeletonPrev={items:fe(e.items),entries:fe(e.entries||[]),at:Date.now()}}function Du(e,t,n=""){const r=t.filter(a=>a.type==="entry");if(!r.length)throw new Error("AI 没有写出新条目，可能被截断了，或者换个说法再试。");Hc(e);let s=null;for(const a of r){const i=He({name:a.name,role:a.role,content:a.content,tags:["基础版"],source:Xs});lt(e,i);const o={uid:ae("it"),type:"entry",entryId:i.id,enabled:!0,override:{}};let c;if(a.after==="开头"){const p=e.items.findIndex(d=>d.type==="entry"&&Nt(se(d.entryId))==="init");c=p>=0?p+1:0}else if(a.after==="末尾")c=e.items.length;else if(!a.after)c=s??e.items.length;else{const p=e.items.findIndex(d=>d.type==="entry"&&se(d.entryId)?.name===a.after);c=p>=0?p+1:s??e.items.length}e.items.splice(c,0,o),s=c+1}return e.skeletonNote=n,r.length}function Bu(e,t,n,r=""){const s=e.items.filter(p=>p.type==="entry"&&n.includes(p.uid)&&se(p.entryId)),a=t.filter(p=>p.type==="entry");if(!s.length||a.length!==s.length)throw new Error(`勾选了 ${s.length} 个条目，AI 返回了 ${a.length} 个，尚未保存。请检查下面的原回复后重试。`);const i=new Set;for(const p of a.filter(d=>d.ref)){if(i.has(p.ref)||!s.some(d=>d.uid===p.ref))throw new Error("AI 返回了重复或无法对应的条目标识，尚未保存。请检查下面的原回复后重试。");i.add(p.ref)}const o=[],c=new Set;for(const p of a){const d=s.filter(g=>!c.has(g.uid)&&(p.ref?g.uid===p.ref:!i.has(g.uid))),m=p.ref?d[0]:d.find(g=>se(g.entryId)?.name===p.name)||(s.length===1?d[0]:null);if(!m)throw new Error(`AI 返回的「${p.name}」无法对应勾选条目，尚未保存。请检查下面的原回复后重试。`);c.add(m.uid),o.push({it:m,content:p.content})}if(!o.length)throw new Error("AI 的回复里没有对上勾选的条目，换个说法再试。");Hc(e);for(const{it:p,content:d}of o){const m=se(p.entryId),g=Xe({...m,id:Js(e,m.id,p.uid)?ae("pw"):m.id,content:d,updatedAt:Date.now(),history:[{content:m.content,at:Date.now()},...m.history||[]].slice(0,5)});g.id===m.id?Object.assign(m,g):(lt(e,g),p.entryId=g.id)}return e.skeletonNote=r,o.length}function zc(){return k.mix.remake??={request:"",error:"",mode:"add",picked:[],picks:[],files:[]}}function Mu(e){const t=[];for(const n of e.picks||[]){const r=jr(n);if(!r)throw new Error(`读不到预设「${n}」`);t.push(Zs(r,n))}for(const n of e.files||[])t.push(Zs(JSON.parse(n.text),n.name));return t}async function Lu(e){const t=zc(),n=ne();if(t.error="",!t.request.trim()&&!Zt(n,"mix","预设")){t.error="先写哪里要改，或者在上面的对话里说。",F();return}const r=e.items.filter(c=>t.picked.includes(c.uid)&&c.type==="entry"&&se(c.entryId)).map(c=>({...se(c.entryId),ref:c.uid}));if(t.mode==="pick"&&!r.length){t.error="先勾选要改的条目。",F();return}let s;try{s=Mu(t)}catch(c){t.error=String(c.message||c),F();return}const a=t.mode==="all"?Tu({combo:e,request:t.request,templates:n.templates,antiBagu:n.antiBagu!==!1}):Ou({combo:e,mode:t.mode,picked:r,request:t.request,refs:s,templates:n.templates,antiBagu:n.antiBagu!==!1});t.mode==="all"&&s.length&&(a.prompt+=`
 
-【参考预设的结构】（只看结构和思路，不照抄正文）
+【参考预设的骨架】（只看怎么搭、怎么想，正文不照抄）
 ${s.join(`
 
 `)}`);const i=Rc.find(c=>c[0]===t.mode)[1],o=await Bn(i,()=>er(a.system,a.prompt,{dialogueKey:"mix"}));if(o){t.raw=o;try{const c=jc(o),p=js(o);let d;t.mode==="add"?d=`加了 ${Du(e,c,p)} 个条目`:t.mode==="pick"?d=`改了 ${Bu(e,c,t.picked,p)} 个条目`:(Nu(e,c,p),d="改好了"),k.mix.remake=null,te(),Ze(),we("success",`${d}。不满意可以再改，或者点「换回上一版」`)}catch(c){t.error=String(c.message||c),F()}}}function qu(e){const t=zc(),n=qn(),r=u("input",{type:"file",accept:".json,application/json",hidden:!0,"aria-label":"上传参考预设",onchange:async i=>{for(const o of i.target.files||[])t.files.push({name:o.name.replace(/\.[^.]+$/,""),text:await o.text()});i.target.value="",F()}}),s={add:"已有的条目一个都不动，AI 只写新条目，并说放在哪个条目后面。发给 AI 的是预设目录（条目名和开头几句），不发全文。",pick:"只改下面勾选的条目，其他条目不动。发给 AI 的是预设目录和勾选条目的全文。",all:"AI 改整个预设：没提到的条目原样保留，可以增删、调顺序。会把整个预设的全文发给 AI。"}[t.mode],a=e.items.filter(i=>i.type==="entry"&&se(i.entryId));return Qt("AI 改预设",[u("div",{class:"pw-chips",role:"radiogroup","aria-label":"改哪些"},Rc.map(([i,o])=>u("button",{type:"button",class:`pw-chip${t.mode===i?" pw-on":""}`,role:"radio","aria-checked":String(t.mode===i),onclick:()=>{t.mode=i,F()}},o))),u("p",{class:"pw-hint"},s),t.mode==="pick"&&u("div",{class:"pw-get-choices"},a.map(i=>u("label",null,u("input",{type:"checkbox","aria-label":`要改的条目：${se(i.entryId).name}`,checked:t.picked.includes(i.uid),onchange:o=>{o.target.checked?t.picked.push(i.uid):t.picked=t.picked.filter(c=>c!==i.uid)}}),u("span",null,se(i.entryId).name)))),u("label",{class:"pw-field"},t.mode==="add"?"想加什么":"哪里要改",u("textarea",{rows:4,"aria-label":"整个预设的修改意见",placeholder:t.mode==="add"?"比如：加一条思考链，放在破限后面；再加一条状态栏":t.mode==="pick"?"比如：文风条目写具体一点，加两条禁止":"比如：平台风格只留海棠和晋江；去掉起点；破限挪到最后",value:t.request,oninput:i=>t.request=i.target.value})),u("details",{class:"pw-remake-refs"},u("summary",null,`参考预设（可选，已选 ${(t.picks||[]).length+(t.files||[]).length}）`),u("p",{class:"pw-hint"},"选了会把它的结构（条目名、顺序、每条开头几句）一起发给 AI，不发全文。"),n.length?u("div",{class:"pw-chips"},n.map(i=>u("button",{type:"button",class:`pw-chip${t.picks.includes(i)?" pw-on":""}`,"aria-pressed":String(t.picks.includes(i)),onclick:()=>{t.picks.includes(i)?t.picks=t.picks.filter(o=>o!==i):t.picks.push(i),F()}},i))):u("p",{class:"pw-hint"},"酒馆里没有读到预设，可以上传 JSON。"),t.files.length>0&&u("div",{class:"pw-chips"},t.files.map((i,o)=>u("button",{type:"button",class:"pw-chip pw-on",onclick:()=>{t.files.splice(o,1),F()}},`${i.name} ✕`))),u("div",{class:"pw-row"},H("上传预设 JSON",()=>r.click(),"pw-sm"),r)),e.skeletonPrev&&u("p",{class:"pw-hint"},"上一次改之前的版本还留着，可以换回去。"),t.error&&u("p",{class:"pw-errbox",role:"alert"},t.error),t.error&&t.raw&&u("details",null,u("summary",null,"查看并复制 AI 原回复"),u("textarea",{class:"pw-wide",rows:10,readOnly:!0,"aria-label":"未保存的 AI 原回复",value:t.raw}))],[H("取消",()=>{k.mix.remake=null,Ze()}),e.skeletonPrev&&H("换回上一版",()=>{ct.yes("换回上一次改之前的版本？")&&(Qc(e),te(),Ze())}),H(t.mode==="add"?"加条目":"按意见改",()=>Lu(e),"pw-primary",{disabled:!!k.busy})],()=>Ze(),"remake")}function Fc(e){if(!e||e.tavernSync&&e.tavernSync.fingerprint===rr(e))return!1;const t=e.items.filter(d=>d.type==="entry");if(t.some(d=>se(d.entryId)?.variableInitPrefix))return!1;const n=[...new Map(hi(e).flatMap(d=>d.vars.map(m=>[m.key,m]))).values()];if(!n.length)return!1;const r=d=>{if(!d||!/初始化?变量|变量初始|^init/i.test(d.name||""))return!1;const m=Ln(d.content);let g=String(d.content||"");for(const y of[...m].reverse())g=g.slice(0,y.start)+g.slice(y.end);return!g.trim()&&m.every(y=>y.kind==="set")},s=t.find(d=>Nt(se(d.entryId))==="init")||t.find(d=>r(se(d.entryId))),a=s?se(s.entryId):null,i=a?Ln(a.content).filter(d=>d.kind==="set"):[],o=new Map(i.map(d=>[d.key,d.value??""])),p=[...n,...i.filter(d=>!n.some(m=>m.key===d.key))].map(d=>Ks("set",d,o.get(d.key)??"")).join(`
@@ -1926,82 +1822,82 @@ ${s.join(`
 条目类型：规则模块。
 结构：按主题分组，每组一个 XML 标签……
 必须包含：每条规则的触发条件、替代写法。`,oninput:i=>{a.prompt=i.target.value,te()}}),u("div",{class:"pw-row"},H("删除这个类型",()=>{ct.yes(`删除类型「${a.label}」？已经生成的条目不受影响。`)&&(e.customKinds=e.customKinds.filter(i=>i!==a),t.delete(`c_${a.id}`),te(),F())},"pw-sm pw-danger"))));return u("div",{class:"pw-box"},u("div",{class:"pw-h"},"条目类型（「写提示词」页的“类型”下拉）"),u("p",{class:"pw-hint"},"可以新增自己的类型，比如“文风”“规则模块”“状态栏模块”，每个类型自己写一段提示词。内置的也能改、能隐藏、能复制成新类型再改。"),r,s,u("div",{class:"pw-row"},H("＋ 新增类型",()=>{const a=ct.text("新类型的名字（例如：文风 / 规则模块 / 状态栏模块）","");if(!a||!a.trim())return;const i=oi(a);e.customKinds.push(i),t.add(`c_${i.id}`),te(),F()},"pw-primary")))}function _u(e,t,n,r=!1){return k.setSeen??=new Set,k.setSeen.has(e)||(k.setSeen.add(e),r&&k.setOpen.add(e)),u("details",{class:"pw-settings-section","data-settings-section":e,open:k.setOpen.has(e),ontoggle:s=>{s.target.isConnected&&(s.target.open?k.setOpen.add(e):k.setOpen.delete(e))}},u("summary",null,t),n)}function em(){const e=ne(),t=Ad(),n=u("div",{class:"pw-section"},u("div",{class:"pw-box"},u("div",{class:"pw-h"},"AI 来源"),Pr&&u("label",null,u("input",{type:"checkbox",checked:e.followCard,onchange:i=>{e.followCard=i.target.checked,te(),F()}})," 跟Love 写卡机用同一个 API（Love 写卡机 → 设置 → 用哪个 API）"),u("div",{class:"pw-row"},u("select",{disabled:!!(Pr&&e.followCard),onchange:i=>{e.profileId=i.target.value,te()}},u("option",{value:"",selected:!e.profileId},"酒馆当前连接的 API"),t.map(i=>u("option",{value:i.id,selected:e.profileId===i.id},`连接配置：${i.name}`))),u("span",null,"最大回复长度"),u("input",{type:"number",min:256,step:256,style:"width:100px",value:e.maxTokens,oninput:i=>{e.maxTokens=Math.max(256,Number(i.target.value)||3e3),te()}})),u("p",{class:"pw-hint"},"生成条目只用「写提示词」页和这里的准则，不会带上你酒馆当前的预设和角色卡。")),u("div",{class:"pw-box"},u("div",{class:"pw-h"},"手机键盘"),u("p",{class:"pw-hint"},"界面随实际可见区域调整。键盘收起后恢复高度，光标留在输入框中也不会让页面继续缩小。"),u("label",null,u("input",{type:"checkbox",checked:!!e.kbDebug,onchange:i=>{e.kbDebug=i.target.checked,te(),ye?._pwViewport?.refresh()}})," 显示调试数字（右上角，截图发给作者排查用）")),zd(),$u(),u("div",{class:"pw-box"},u("div",{class:"pw-h"},"写提示词用的准则"),u("p",{class:"pw-hint"},"想让生成的条目换一种风格，改这里。改过的会标出来，可以单独恢复默认。"),Zu.map(([i,o])=>{const c=e.templates[i]??Ue[i],p=e.templates[i]!==void 0&&e.templates[i]!==Ue[i];return u("details",null,u("summary",null,o,p?"（已修改）":""),Br({title:o,get:()=>e.templates[i]??Ue[i],oninput:d=>{e.templates[i]=d,te()}}),u("div",{class:"pw-row"},H("恢复默认",()=>{delete e.templates[i],te(),F()},"pw-sm",{disabled:!p})))})),e.bases.length>0&&u("div",{class:"pw-box"},u("div",{class:"pw-h"},"基础设置（采样参数等）"),e.bases.map(i=>u("div",{class:"pw-row"},u("span",null,`${i.name}（${Object.keys(i.settings).length} 项）`),H("删除",()=>{e.bases=e.bases.filter(o=>o!==i);for(const o of e.combos)o.baseId===i.id&&(o.baseId="");te(),F()},"pw-sm pw-danger")))),u("div",{class:"pw-box"},u("div",{class:"pw-h"},"数据"),u("p",{class:"pw-hint"},`条目 ${e.entries.length} 个，预设 ${e.combos.length} 个，保存在酒馆的扩展设置里。`),u("div",{class:"pw-row"},H("备份收藏和全部预设",()=>Hs("预设机-全部.json",JSON.stringify(Ls(e.entries,e.combos),null,2))),u("details",{class:"pw-danger-zone"},u("summary",null,"清空数据"),H("清空收藏和预设",()=>{ct.yes("清空全部条目和预设？这个操作不能撤销，建议先导出备份。")&&(e.entries=[],e.combos=[],e.currentComboId="",k.selected.clear(),te(),F())},"pw-danger"))))),r=[...n.children],s=[["section-api","AI 连接",!0],["section-keyboard","手机键盘",!1],["section-bagu","反八股规则",!1],["section-kinds","条目类型",!1],["section-guides","写作准则",!1],...e.bases.length?[["section-bases","基础设置 · 采样参数",!1]]:[],["section-data","数据与备份",!0]],a=[u("p",{class:"pw-hint"},"本页设置会自动保存。"),k.settingsReturn&&H("← 返回写提示词",()=>{const i=k.settingsReturn;k.settingsReturn=null,k.tabScroll??={},k.tabScroll[i.tab]=i.scroll,Us(i.tab)},"pw-sm"),...r.map((i,o)=>(i.firstElementChild?.classList.contains("pw-h")&&i.firstElementChild.remove(),_u(s[o][0],s[o][1],i,s[o][2])))];return n.replaceChildren(...a.filter(Boolean)),n}function tm({name:e="新条目",content:t="",role:n="system",tags:r=[],source:s="外部"}={}){const a=ne(),i=He({name:qt(a.entries,String(e).trim()||"新条目"),content:t,role:n,tags:ft(r),source:s});return a.entries.unshift(i),te(),ye&&F(),i}var el={"data-pw-owner":cn};function nm(){ze.removeEventListener("beforeunload",uc),Or.off?.(),clearTimeout(Or.timer),clearTimeout(yc.timer),ye?._pwComboDrag?.dispose(),ye?._pwViewport?.dispose();for(const e of je.querySelectorAll(`.pw-focus-editor[data-pw-owner="${cn}"]`))e.close();for(const e of je.querySelectorAll(`[data-pw-owner="${cn}"]`))e.remove();ye=ve=Et=null,ze.PresetWorkshop?.owner===cn&&delete ze.PresetWorkshop}function tl(){for(const e of["pw-menu-btn","pw-drawer","pw-root"])je.getElementById(e)?.remove();if(!Pr){const e=je.getElementById("extensionsMenu");if(e&&e.append(u("div",{id:"pw-menu-btn",...el,class:"list-group-item flex-container flexGap5 pw-menu-item",onclick:()=>{Dr(),e.style.display="none"}},u("div",{class:"fa-solid fa-puzzle-piece extensionsMenuExtensionButton"}),u("span",null,"预设机"))),Sd){const t=yt("eventOn"),n=yt("getButtonEvent");if(t&&n)try{t(n("预设机"),Dr),yt("appendInexistentScriptButtons")?.([{name:"预设机",visible:!0}])}catch(r){console.warn(`[${Gt}] 脚本按钮注册失败，仍可从魔棒菜单打开`,r)}}else{const t=je.getElementById("extensions_settings2")||je.getElementById("extensions_settings");t&&t.append(u("div",{id:"pw-drawer",...el,class:"inline-drawer"},u("div",{class:"inline-drawer-toggle inline-drawer-header"},u("b",null,`预设机 v${cc}`),u("div",{class:"inline-drawer-icon fa-solid fa-circle-chevron-down down"})),u("div",{class:"inline-drawer-content"},H("打开预设机",Dr))))}}ze.PresetWorkshop={open:Dr,close:Fs,core:Jo,owner:cn},Pr?.register("preset",{open:Dr,close:Fs,isOpen:()=>!!ye,addEntry:tm}),window.addEventListener("pagehide",nm),ze.addEventListener("beforeunload",uc)}je.readyState==="loading"?je.addEventListener("DOMContentLoaded",tl):tl();var nl={};On(nl,{DEFAULT_TEMPLATES:()=>Wt,EXTERNAL_NOTE:()=>hl,IMAGE_MODES:()=>ll,LIB_KIND:()=>Ai,REGEX_PREFIX:()=>sr,RULE_TAG:()=>dn,STYLES:()=>ea,TEMPLATE_LABELS:()=>sl,applyDesign:()=>gl,asRegexLiteral:()=>Di,buildAnalyzePrompt:()=>pl,buildCheckPrompt:()=>ul,buildDesignPrompt:()=>al,buildFieldsPrompt:()=>ol,buildRevisePrompt:()=>cl,clone:()=>Pt,countGroups:()=>ml,designToText:()=>na,exportLibrary:()=>kl,externalDesign:()=>Mi,fieldsToText:()=>ta,guessImageType:()=>om,guessSample:()=>Bi,hasRule:()=>yl,imageModeText:()=>Hr,newDesign:()=>ir,normText:()=>Ot,parseDesign:()=>ra,parseFields:()=>Rr,parseRegexLiteral:()=>Fr,parseSpec:()=>dl,plainChar:()=>Ei,previewDoc:()=>wl,protectMacros:()=>Ti,readCard:()=>Pi,readLibrary:()=>Sl,replaceScript:()=>Ur,restoreMacros:()=>rl,ruleBlock:()=>ia,specKind:()=>zr,specScene:()=>Oi,summarizeCard:()=>rm,summarizeWorld:()=>Ni,tidyHtml:()=>un,toRegexScripts:()=>aa,uid:()=>ar,validateDesign:()=>sa,withRule:()=>vl,withoutOurRegex:()=>Li,withoutRule:()=>xl});var Ai="status-forge-library",sr="【状态栏】",dn="status_bar_rule",ar=(e="sf")=>`${e}_${Math.random().toString(36).slice(2,8)}${Date.now().toString(36).slice(-4)}`,Pt=e=>e===void 0?void 0:JSON.parse(JSON.stringify(e)),Ot=e=>String(e??"").replace(/\r\n?/g,`
-`).replace(/[ \t]+$/gm,"").trim(),Ei=e=>String(e??"").replace(/\{\{\s*char\s*\}\}/gi,"char"),Ti=e=>String(e??"").replace(/\{\{/g,"⟦⟦").replace(/\}\}/g,"⟧⟧"),rl=e=>String(e??"").replace(/⟦⟦/g,"{{").replace(/⟧⟧/g,"}}"),ea=[{id:"card",label:"圆角卡片",desc:"浅色或深色圆角卡片，柔和阴影，字段两列排布，靠字号层级区分标题和数值"},{id:"terminal",label:"终端/HUD",desc:"等宽字体，深色底，细边框，字段像终端输出或游戏 HUD，少量荧光色强调"},{id:"journal",label:"手帐/便签",desc:"米色纸张质感，手写感标题，胶带或折角装饰（只用 CSS），字段像贴纸"},{id:"magazine",label:"杂志排版",desc:"大标题加细线，衬线字体，留白多，字段像杂志侧栏的小标注"},{id:"minimal",label:"极简一行",desc:"一行或两行小字，低对比度，不抢正文，用分隔符和少量图标"},{id:"ancient",label:"古风卷轴",desc:"宣纸色底，朱红只用在标题或重点数值，竖排小标题，字体偏楷体/宋体"},{id:"cyber",label:"赛博霓虹",desc:"深紫或深蓝底，霓虹描边，切角（clip-path），进度条用渐变"},{id:"glass",label:"玻璃拟态",desc:"半透明模糊底（backdrop-filter），细白边，渐变背景色块，圆润大字号数值"},{id:"letter",label:"复古情书",desc:"奶油纸、锈红字、打字机标签、手写信纸的错落排版"},{id:"archive",label:"档案/案件",desc:"旧档案纸、打孔线、文件夹式字段分组、打字机字体"},{id:"horror",label:"黑白恐怖",desc:"黑白铜版画的高对比度、克制血红点缀、细刻线和不规则边缘"},{id:"blueprint",label:"蓝图/打孔",desc:"克莱因蓝与米白纸交叠，打孔、分割线、网格和剪影装饰"},{id:"fantasy",label:"西幻手稿",desc:"羊皮纸与羊毛灰色调、纹章、旧地图网格、金属细饰边"},{id:"game",label:"游戏角色面板",desc:"分栏属性卡、数值徽章、任务追踪、道具栏和紧凑的资源条"},{id:"mono",label:"黑白刊物",desc:"高对比黑白、网点、报纸分栏与剪贴纸条，避免多余装饰"},{id:"dream",label:"梦核/朦胧",desc:"低饱和渐变、雾状留白、漂浮的小标题与半透明卡片"},{id:"collage",label:"拼贴",desc:"几块不同材质、形状的块错落叠放，怎么排由 AI 按卡来想；留出图片位，图片由玩家自己填链接"}],Wt={common:`你是“酒馆状态栏设计师”，同时是写提示词的老手。任务：为一张角色卡设计一个状态栏，它由四部分组成，缺一不可：
-1. 文本块：角色扮演模型每次回复末尾（或开头）输出的固定格式文本；
-2. 输出要求（instruction）：写进角色卡，约束角色扮演模型怎么写、怎么更新这个块；
-3. 正则（find / replace）：酒馆在聊天显示时把文本块替换成 HTML；
-4. 样例（sample）：一段真实的文本块，用来在预览里验证正则。
+`).replace(/[ \t]+$/gm,"").trim(),Ei=e=>String(e??"").replace(/\{\{\s*char\s*\}\}/gi,"char"),Ti=e=>String(e??"").replace(/\{\{/g,"⟦⟦").replace(/\}\}/g,"⟧⟧"),rl=e=>String(e??"").replace(/⟦⟦/g,"{{").replace(/⟧⟧/g,"}}"),ea=[{id:"card",label:"圆角卡片",desc:"浅色或深色圆角卡片，柔和阴影，字段两列排布，靠字号层级区分标题和数值"},{id:"terminal",label:"终端/HUD",desc:"等宽字体，深色底，细边框，字段像终端输出或游戏 HUD，少量荧光色强调"},{id:"journal",label:"手帐/便签",desc:"米色纸张质感，手写感标题，胶带或折角装饰（只用 CSS），字段像贴纸"},{id:"magazine",label:"杂志排版",desc:"大标题加细线，衬线字体，留白多，字段像杂志侧栏的小标注"},{id:"minimal",label:"极简一行",desc:"一行或两行小字，低对比度，不抢正文，用分隔符和少量图标"},{id:"ancient",label:"古风卷轴",desc:"宣纸色底，朱红只用在标题或重点数值，竖排小标题，字体偏楷体/宋体"},{id:"cyber",label:"赛博霓虹",desc:"深紫或深蓝底，霓虹描边，切角（clip-path），进度条用渐变"},{id:"glass",label:"玻璃拟态",desc:"半透明模糊底（backdrop-filter），细白边，渐变背景色块，圆润大字号数值"},{id:"letter",label:"复古情书",desc:"奶油纸、锈红字、打字机标签、手写信纸的错落排版"},{id:"archive",label:"档案/案件",desc:"旧档案纸、打孔线、文件夹式字段分组、打字机字体"},{id:"horror",label:"黑白恐怖",desc:"黑白铜版画的高对比度、克制血红点缀、细刻线和不规则边缘"},{id:"blueprint",label:"蓝图/打孔",desc:"克莱因蓝与米白纸交叠，打孔、分割线、网格和剪影装饰"},{id:"fantasy",label:"西幻手稿",desc:"羊皮纸与羊毛灰色调、纹章、旧地图网格、金属细饰边"},{id:"game",label:"游戏角色面板",desc:"分栏属性卡、数值徽章、任务追踪、道具栏和紧凑的资源条"},{id:"mono",label:"黑白刊物",desc:"高对比黑白、网点、报纸分栏与剪贴纸条，避免多余装饰"},{id:"dream",label:"梦核/朦胧",desc:"低饱和渐变、雾状留白、漂浮的小标题与半透明卡片"},{id:"collage",label:"拼贴",desc:"几块不同材质、形状的块错落叠放，怎么排由 AI 按卡来想；留出图片位，图片由玩家自己填链接"}],Wt={common:`你要给一张角色卡设计状态栏。你既懂界面，也会写提示词。一套状态栏有四样东西，一样都不能少：
+1. 文本块：扮演用的模型每次回复末尾（或开头）吐出的一段固定格式文字；
+2. 输出要求（instruction）：写进角色卡，规定扮演模型怎么写、怎么更新这段文字；
+3. 正则（find / replace）：酒馆显示聊天时，把文本块换成 HTML；
+4. 样例（sample）：一段真实的文本块，拿来在预览里检验正则。
 
 <文本块>
-- 先定主题：读角色卡，判断这张卡的状态栏讲什么、玩家最该一眼看到什么。比如修仙卡看境界和伤势，校园卡看课表和社团，悬疑卡看线索和嫌疑，日常恋爱卡看身体、心事和约定。主题写进 sf_note。
-- 再按主题定字段：没有哪一项是必须的，不默认加身体、心理、计划。主题需要什么就写什么，可以是身体各部位、心事、接下来的打算，也可以是这张卡特有的量（境界、线索、课表、资源、任务进度、某段关系的阶段……），能用卡里的专有名词就用（地名、组织、物品、称谓）。
-- 不要默认套用好感度、警戒度这类通用数值，除非卡里本来就有这类玩法。
-- 字段只留对这张卡有用的，宁少勿多（一般 4-9 个）。
-- 用一个固定的外层标签包住（如 <status>…</status>）。做法 B 每行一个“键：值”，字段顺序固定，值只写一行；做法 A 每行一个“[键|值]”，同一个键可以出现多次（身体各部位、计划）。
-- 需要画进度条的字段，值只能是 0-100 的整数，不带单位和百分号。
+- 先想清这张卡的状态栏讲什么：读完角色卡，判断玩家最想一眼看到的是什么。修仙卡也许是境界和伤，校园卡是课表和社团，悬疑卡是线索和嫌疑，日常恋爱卡是身体、心事和约定。想好的主题写进 sf_note。
+- 再照主题挑字段：没有哪一项是非有不可的，不默认放身体、心理、计划。主题要什么就放什么：可以是身体各处、心事、接下来的打算，也可以是这张卡独有的东西（境界、线索、课表、资源、任务进度、某段关系走到哪一步……）。能用卡里的专有名词就用（地名、组织、物件、称呼）。
+- 卡里本来没有好感度、警戒度这类玩法，就别默认塞进去。
+- 只留对这张卡有用的字段，宁少勿多（一般 4–9 个）。
+- 外面用一个固定标签包住（比如 <status>…</status>）。做法 B 每行一个「键：值」，字段顺序固定，值只占一行；做法 A 每行一个「[键|值]」，同一个键可以出现好几次（身体各处、待办）。
+- 要画进度条的字段，值只能是 0–100 的整数，不带单位和百分号。
 </文本块>
 
-<输出要求的写法>
-输出要求是给另一个模型看的提示词，它的唯一作用是约束输出范围。写法：
-- 结构按“要求 → 资料 → 任务启动”：外层用 XML 标签分区，区内用 YAML 风格的“键: 值”。
-- 要求区（硬性规则，逐条、机械化，不用“适当”“尽量”“合理”这类模糊词）：
-  · 何时输出：每一次回复都输出，放在回复的最末尾（或开头），一次只输出一个块；
-  · 格式锁定：外层标签、键名、字段顺序、冒号都不得改动，不得增删字段，值内不得换行；
-  · 块内只写值，不写解释、不加 Markdown、不用代码块包裹；块外的正文不得复述块内的数值；
-  · 继承：本轮没有变化的字段，原样沿用上一次块里的值，不得重置或随意改动；
-  · 更新：对每个会变化的字段写清“什么情况下变、每次最多变多少、依据什么”（例：好感度：char 被 {{user}} 真心帮助 +4~6，被冒犯 -5~10，单轮变化不超过 10）；
-  · 初始值：第一条回复用的初始值（从角色卡资料推出来，资料里没有就自己定一个合理值并写死）。
-- 资料区：字段表，每个字段一行，写含义、取值类型（整数范围 / 枚举可选值 / 短语且不超过 N 个字）。
-- 示例区：一段完整的文本块，必须和 sample 完全一致。
-- 启动：最后一句话，命令模型从本条回复开始按以上规则输出。
-- 提到角色一律写 char（不要写 {{char}}），用户写 {{user}}。不要出现 Human: / Assistant: 前缀。
-- 写完检查：要求之间、要求和示例之间有没有矛盾；有就改掉。
-</输出要求的写法>
+<输出要求怎么写>
+输出要求是写给另一个模型看的提示词，唯一的用处是把它的输出框住。写法：
+- 按「要求 → 资料 → 开始」排：外层用 XML 标签分块，块里用 YAML 风格的「键: 值」。
+- 要求块（硬规矩，一条一条写死，不用「适当」「尽量」「合理」这种含糊词）：
+  · 什么时候输出：每次回复都输出，放在回复最末尾（或开头），一次只出一个块；
+  · 格式锁死：外层标签、键名、字段顺序、冒号都不许改，字段不许增删，值里不许换行；
+  · 块里只写值，不写解释、不加 Markdown、不用代码块包；块外的正文不复述块里的数；
+  · 沿用：这一轮没变的字段，照抄上一个块里的值，不许重置或乱改；
+  · 变化：每个会变的字段写清「什么时候变、一次最多变多少、看什么来定」（例：好感度：char 被 {{user}} 真心帮了 +4~6，被冒犯 -5~10，一轮最多变 10）；
+  · 起始值：第一条回复用的值（从角色卡里推出来，卡里没有就自己定一个合理的写死）。
+- 资料块：字段表，一个字段一行，写它是什么意思、取什么值（整数范围 / 几个可选值 / 不超过 N 个字的短语）。
+- 示例块：一段完整的文本块，必须和 sample 一模一样。
+- 开始：最后一句，让模型从这条回复起照上面的规矩输出。
+- 说到角色一律写 char（不写 {{char}}），用户写 {{user}}。不出现 Human: / Assistant: 前缀。
+- 写完自己对一遍：要求和要求之间、要求和示例之间有没有打架；有就改。
+</输出要求怎么写>
 
 <正则>
-- 用 /pattern/flags 的形式。做法 B 每个字段一个捕获组，按字段顺序；做法 A 只用一个捕获组抓整个块。
-- 匹配键时同时兼容中文冒号“：”和英文冒号“:”，冒号前后允许空格；字段之间用 \\s* 跨行；值用 (.*?) 或 ([^\\n]*?) ，不依赖块尾有没有换行；外层标签前后允许空白。
-- 不要写会大量回溯的嵌套量词。
+- 写成 /pattern/flags。做法 B 每个字段一个捕获组，按字段顺序；做法 A 只用一个捕获组抓整个块。
+- 匹配键名时中文冒号「：」和英文冒号「:」都要认，冒号前后可以有空格；字段之间用 \\s* 跨行；值用 (.*?) 或 ([^\\n]*?) ，不管块尾有没有换行都能匹配；外层标签前后可以有空白。
+- 别写会大量回溯的嵌套量词。
 </正则>
 
 <两种做法>
-先选一种，在 sf_note 里写明选了哪种：
-A. 完整网页（推荐，参考模板都是这种）：replace 用 \`\`\`html 开头、\`\`\` 收尾，中间是一份完整网页（<!DOCTYPE html> 到 </html>）。酒馆助手会把它渲染成独立页面，可以写 <script>、引用网络字体。find 只要一个捕获组抓整个块：/<标签>([\\s\\S]*?)<\\/标签>/ ；网页里放 <script type="text/plain" id="raw">$1<\/script>，再用脚本读出来逐行解析。
-  · 文本块可以用“[键|值]”一行一条，同一个键可以出现多次（比如身体各部位、待办）；多人用“[人物|姓名|身份]”开新一段。
-  · 这种做法字段数不必等于捕获组数，sf_fields 照常列出全部字段。
-B. 纯 HTML：replace 只用 HTML + CSS，每个字段一个捕获组，用 $1 $2 … 引用。适合不装酒馆助手的用户。
+先挑一种，在 sf_note 里写明用的哪种：
+A. 完整网页（推荐，参考模板都是这种）：replace 以 \`\`\`html 开头、\`\`\` 结尾，中间是一份完整网页（<!DOCTYPE html> 到 </html>）。酒馆助手会把它当独立页面显示，可以写 <script>、引用网上的字体。find 只要一个捕获组抓整个块：/<标签>([\\s\\S]*?)<\\/标签>/ ；网页里放 <script type="text/plain" id="raw">$1<\/script>，再用脚本读出来一行行解析。
+  · 文本块可以一行一条「[键|值]」，同一个键能出现好几次（比如身体各处、待办）；多人时用「[人物|姓名|身份]」另起一段。
+  · 这种做法字段数不用等于捕获组数，sf_fields 照样列出全部字段。
+B. 纯 HTML：replace 只用 HTML + CSS，每个字段一个捕获组，用 $1 $2 … 引用。适合没装酒馆助手的人。
 </两种做法>
 
 <HTML 与 CSS>
-- 字面的美元符号写成 $$。
-- 做法 B：不写 <script>、不写事件属性（onclick 等）、不引用外部资源；CSS 写在开头的 <style> 里，类名带唯一前缀（如 sf-xxxx-），不写 body、html、:root、*、.mes 这类全局选择器；外层只有一个根元素；HTML 里不能有空行，不要用 4 个以上空格缩进。
-- 做法 A：网页自成一体，可以写全局样式；字体从 fonts.googleapis.com 或 cdn.jsdelivr.net 引用，并写好系统字体兜底；不要依赖酒馆主题变量。
-- 手机优先：宽度自适应，box-sizing:border-box，不用 position:fixed，字号不小于 12px，用 flex/grid 换行。
-- 进度条用内层元素的 width（对应字段必须是 0-100 整数）。可折叠用 <details><summary>。
+- 要显示美元符号就写成 $$。
+- 做法 B：不写 <script>、不写 onclick 这类事件属性、不引用外部资源；CSS 写在开头的 <style> 里，类名带一个独有的前缀（如 sf-xxxx-），不写 body、html、:root、*、.mes 这类全局选择器；最外层只有一个根元素；HTML 里不能有空行，缩进别超过 4 个空格。
+- 做法 A：网页自成一体，可以写全局样式；字体从 fonts.googleapis.com 或 cdn.jsdelivr.net 引用，并写好系统字体兜底；别依赖酒馆主题的变量。
+- 先顾手机：宽度自适应，box-sizing:border-box，不用 position:fixed，字号不小于 12px，用 flex / grid 让内容自己换行。
+- 进度条靠里层元素的 width 表现（对应字段必须是 0–100 的整数）。要折叠就用 <details><summary>。
 </HTML 与 CSS>
 
 <美化要求>
-- 状态栏就是状态栏：内容按主题定（身体、心事、计划，或者境界、线索、课表这类卡里特有的东西），不做聊天框、弹幕、小游戏这类花样。
-- 配色只用两到四种颜色，定义成 CSS 变量；做白天、夜晚两套（:root 一套，:root[data-mode="night"] 一套），做法 A 加一个“昼 / 夜”切换按钮，选择存进 localStorage 的 nf-status-mode。
-- 要有质感：用纸纹、网点、小网格、色块、硬阴影、粗描边这类手段；不要光滑渐变、玻璃拟态、发光、莫名其妙的细线，不要没有意义的 SVG 装饰。
-- 不要用只有一侧带颜色的边框做强调。
-- 标题和正文用不同字体：正文用楷体（LXGW WenKai、KaiTi 一类），标题可以用更有个性的中文字体。
-- 装饰文字全部用中文，不写英文。
-- 不放没有来由的印章、签章、火漆、编号贴、邮戳。只有卡里本来就有这种东西（比如官府文书、信件），而且它对应某个字段时才用。
+- 状态栏就是状态栏：内容照主题定（身体、心事、计划，或者境界、线索、课表这类卡里独有的东西），不做聊天框、弹幕、小游戏这些花样。
+- 只用两到四种颜色，定义成 CSS 变量；做白天、夜里两套（:root 一套，:root[data-mode="night"] 一套），做法 A 加一个「昼 / 夜」切换按钮，选择存进 localStorage 的 nf-status-mode。
+- 要有质感：纸纹、网点、小网格、色块、硬阴影、粗描边都可以用；不要顺滑的渐变、毛玻璃、发光、莫名其妙的细线。
+- 不要只有一侧带颜色的边框。
+- 标题和正文用不同的字体：正文用楷体（LXGW WenKai、KaiTi 一类），标题可以用更有个性的中文字体。
+- 装饰用的字全用中文，不写英文。
+- 不放没来由的印章、签章、火漆、编号贴、邮戳。只有卡里本来就有这种东西（比如官府文书、信件），而且它对应某个字段时才用。
 - 不用 emoji 当图标或装饰，也不用 emoji 撑场面。需要图标就用文字小标签，或者 CSS 画的简单几何形。
 - 不靠堆 SVG 来显得华丽。内联 SVG 只画真正带信息的东西（地图路线、雷达图、进度环这类），没有这种需要就一个都不用；纯装饰的 SVG 花纹、角花、植物、星星一律不要。
-- 华丽靠的是讲究：字体和字号层级、字距、对齐、数字的写法、分组和留白、纸张或布料这类质感、配色的分寸。元素少而做细，比元素多更好看。
-- 每个装饰都要说得出它为什么在这里；说不出来就删掉。
+- 华丽靠的是讲究：字体和字号的层次、字距、对齐、数字的写法、分组和留白、纸张或布料这类质感、配色的分寸。东西少而做细，比东西多更好看。
+- 每个装饰都要说得出它为什么在这里；说不出就删掉。
 - 不管什么风格，写代码前先在 sf_note 里写一段布局构思：分几块，每块放在哪、什么形状、是什么东西或材质、放哪些字段，写到别人照着就能画出来的程度，再照着构思写 HTML。
 </美化要求>
 
 <拼贴状态栏>
-用户选了「拼贴」风格，或者要求里提到拼贴、剪贴、照片墙时，按这里做。
+用户选了「拼贴」风格，或者要求里提到拼贴、剪贴、照片墙时，照这里做。
 
-拼贴是什么：把几块不同的块叠在一张底上，块和块的材质、形状、大小都不一样，错落着压在一起。字段分散写在不同的块上，每一项仍然一眼读得清。怎么排完全由你按这张卡来想，没有固定构图：可以是照片墙、剪报本、票据堆、杂志页、贴满东西的手机壳，也可以是你想到的别的样子。
+拼贴是什么：把几块不同的块叠在一张底上，块和块的材质、形状、大小都不一样，错落着压在一起。字段分散写在不同的块上，每一项仍然一眼读得清。怎么排完全由你照这张卡来想，没有固定构图：可以是照片墙、剪报本、票据堆、杂志页、贴满东西的手机壳，也可以是你想到的别的样子。
 
 图片由玩家自己提供，你负责留位置：
-- 图片位放几个，按用户要求来；用户没说就放一到三个。
+- 图片位放几个，照用户要求来；用户没说就放一到三个。
 - 你只决定每个图片位在哪、多大、什么形状（竖框、横框、方框、圆形、剪成不规则的边……），不决定图片里是什么。注释和说明里按位置称呼它们，比如「图 1：左上竖框」，不要写成「角色图」「场景图」。
 - 玩家的图可能是任何比例，用 object-fit:cover（或 background-size:cover）铺满框，不拉伸变形；可以给每个图片位留一个 --sf-pos-1 这样的变量调整取景位置（默认 center）。
 - 图片链接集中写在网页最上面一处，例如 :root{--sf-img-1:url("");--sf-pos-1:center;} 或 const IMG=["",""]，旁边写中文注释「把图片链接填在引号里：图 1 是左上竖框，图 2 是……」。
@@ -2021,108 +1917,108 @@ B. 纯 HTML：replace 只用 HTML + CSS，每个字段一个捕获组，用 $1 $
 通用规矩：
 - 块和块之间靠底色、纹理、阴影（向下偏移的小阴影）和剪边区分，不用线框隔开。
 - 不用 emoji，不贴 SVG 花样，不放没来由的印章和胶带；好看靠材质对比和摆放的错落。
-- 手机上（窄于 380px）按构思里写的窄屏排法重排，只保留轻微错位和角度，保证没有块盖住文字。
+- 手机上（窄于 380px）照构思里写的窄屏排法重排，只保留轻微错位和角度，保证没有块盖住文字。
 - sf_note 里写清图片链接填在哪一行、一共几个图片位、各在什么位置。
 </拼贴状态栏>
 
-写完自查：做法 B 字段数 = 捕获组数；replace 里每个 $n 都存在；sample 能被 find 匹配；instruction 的示例和 sample 一致；没有自相矛盾的要求。`,image:`用户给了参考图。参考图有两种用法，先看“参考图用法”和“参考图拆解”里的“类型”：
+交之前自己核一遍：做法 B 字段数 = 捕获组数；replace 里每个 $n 都有对应；sample 能被 find 匹配；instruction 的示例和 sample 一致；要求之间不打架。`,image:`用户给了参考图。参考图有两种用法，先看「参考图用法」和「参考图拆解」里写的「类型」：
 
 <类型：界面>（图本身就是状态栏、游戏 HUD、App 界面、网页卡片）
-目标是“放在一起看像同一个设计”：
-- 复刻优先级：布局结构 > 配色 > 形状细节（圆角、边框、阴影、分隔线）> 字体气质 > 装饰。
-- 以拆解为准逐项实现：每一个区域、颜色、组件都要在 HTML/CSS 里有对应；尺寸按比例估，以手机宽度约 360px 为基准换算。
-- 颜色用拆解里的十六进制值，不换成你喜欢的颜色，不擅自加图里没有的渐变、阴影、装饰。
-- 图里的文字只是占位，换成用户的字段；图里有、字段里没有的区域，映射到最接近的字段或去掉，在说明里写清楚。
+目标是「放在一起看，像同一个设计」：
+- 先后顺序：布局结构 > 配色 > 形状细节（圆角、边框、阴影、分隔）> 字体气质 > 装饰。
+- 照拆解一项项做出来：每块区域、每个颜色、每个组件在 HTML / CSS 里都要有对应；尺寸按比例估，以手机宽度约 360px 为基准换算。
+- 颜色用拆解里的十六进制值，别换成你喜欢的颜色，也别自作主张加图里没有的渐变、阴影和装饰。
+- 图里的文字只是占位，换成用户的字段；图里有、字段里没有的区域，对到最接近的字段或者去掉，在说明里写清楚。
 </类型：界面>
 
-<类型：风格图>（插画、照片、海报、壁纸、游戏 CG、配色卡、任何“我喜欢这个感觉”的图）
-不要复刻图里的内容（人物、风景、物件），而是把它的风格语言“翻译”成一个状态栏 UI，让人一看就觉得“和这张图是一套的”：
-- 色板：用拆解里从图中取的颜色，按角色分配（底色、面板、主文字、次文字、强调、边框）。文字和底色的对比度要够，看不清就在同一色相里调深或调浅，不换色相。
-- 质感：图的材质感（纸张、水彩、金属、玻璃、布料、霓虹、胶片颗粒……）用 CSS 表现：渐变、叠加的 radial-gradient、box-shadow、inset 阴影、细描边、backdrop-filter、repeating-linear-gradient 做纹理。
-- 形状语言：图里是圆润还是锐利、手绘还是几何、对称还是错落——落实到圆角大小、切角（clip-path）、边框样式、排布方式。
-- 装饰母题：图里有代表性的元素，用配色、纹理、形状和排版去体现（比如水墨图就用留白和墨色深浅，齿轮图就用切角和刻度），不要真的画花瓣、星星、藤蔓贴上去；不用 emoji，不堆 SVG 花纹。
-- 情绪：拆解里的情绪关键词决定整体的密度、留白、字重和动感。
-- 组件跟着风格走：进度条、标签、分隔线都要“像这张图里会出现的东西”（例：水彩风的进度条用晕染渐变和不规则圆角，赛博风用切角和发光描边），不要用千篇一律的默认样式。
-- 在说明里写一句：你从图里取了哪些风格元素、分别用在了哪里。
+<类型：风格图>（插画、照片、海报、壁纸、游戏 CG、配色卡，任何「我喜欢这个感觉」的图）
+不要复刻图里画的东西（人物、风景、物件），而是把它的风格「翻译」成一个状态栏，让人一看就觉得「跟这张图是一套」：
+- 色板：用拆解里从图中取的颜色，按用途分配（底色、面板、主文字、次文字、强调、边框）。文字和底色要够对比，看不清就在同一色相里调深调浅，不换色相。
+- 质感：图里的材质（纸、水彩、金属、玻璃、布料、霓虹、胶片颗粒……）用 CSS 表现：叠加的 radial-gradient、box-shadow、inset 阴影、描边、repeating-linear-gradient 做纹理。
+- 形状：图里是圆润还是锋利、手绘还是几何、对称还是错落，落实到圆角大小、切角（clip-path）、边框样式和排布方式上。
+- 代表性的元素：用配色、纹理、形状和排版去体现（比如水墨图就用留白和墨色深浅，齿轮图就用切角和刻度），不要真的画花瓣、星星、藤蔓贴上去；不用 emoji，不堆 SVG 花纹。
+- 情绪：拆解里的情绪关键词决定整体的疏密、留白、字重和动感。
+- 组件跟着风格走：进度条、标签、分隔都要「像这张图里会出现的东西」（例：水彩风的进度条用晕开的渐变和不规整的圆角，赛博风用切角），别用千篇一律的默认样子。
+- 在说明里写一句：从图里取了哪些风格元素，各用在哪里。
 </类型：风格图>
 
-两种情况通用：CSS 做不到的（照片、复杂插画、特殊字体）用最接近的 CSS 写法替代并在说明里写出来，不拿 emoji 或一堆 SVG 去凑；参考图只决定视觉，文本块、输出要求和正则的稳定性要求不变。`,analyze:`你是视觉分析师。用户给了一张或几张参考图，之后会有人根据它用 HTML + CSS 做一个角色扮演用的状态栏。只描述看到的东西，不要设计状态栏本身。
+两种都适用：CSS 做不出来的（照片、复杂插画、特殊字体）用最接近的 CSS 写法替代，并在说明里写出来，不拿 emoji 或一堆 SVG 去凑；参考图只管样子，文本块、输出要求和正则的稳定性要求不变。`,analyze:`你负责看图。用户给了一张或几张参考图，之后会有人照它用 HTML + CSS 做一个角色扮演用的状态栏。你只描述看到的东西，不要动手设计状态栏。
 
-第一步，判断类型（用户在“参考图用法”里指定了的就按用户的来）：
-- 界面：图本身就是状态栏、游戏 HUD、App/网页界面、信息卡片——要照着复刻；
-- 风格图：插画、照片、海报、壁纸、CG、配色卡等——不复刻内容，只提炼风格。
+第一步，判断类型（用户在「参考图用法」里指定了的就照用户的）：
+- 界面：图本身就是状态栏、游戏 HUD、App / 网页界面、信息卡片，要照着复刻；
+- 风格图：插画、照片、海报、壁纸、CG、配色卡等，不复刻内容，只提炼风格。
 
-第二步，按类型输出。只输出一个 <sf_spec> 标签，里面用 YAML 风格，第一行必须是“类型: 界面”或“类型: 风格图”，第二行必须是“画面: ”——如实写图里有什么（主体、构图、看得清的文字照抄），这一行是给用户核对你是不是真的看到了图。
+第二步，照类型交稿。只交一个 <sf_spec> 标签，里面用 YAML 风格，第一行必须是「类型: 界面」或「类型: 风格图」，第二行必须是「画面: 」，老老实实写图里有什么（主体、构图，看得清的字照抄）。这一行是给用户核对你是不是真看到了图。
 
-如果你没有收到任何图片、或者图片打不开看不清，只输出 <sf_spec>类型: 无图</sf_spec>，绝对不要凭空编造。
+如果你没收到图、或者图打不开看不清，只交 <sf_spec>类型: 无图</sf_spec>，绝对不要凭空编。
 
 类型是界面时：
 <sf_spec>
 类型: 界面
-画面: 如实写图里有什么，看得清的文字照抄
-整体: 形状、宽高比、背景（十六进制/渐变/纹理）、外框（圆角 px、边框粗细与颜色、阴影）
-配色: 背景、面板、主文字、次要文字、强调色（可多个）、边框/分隔线，全部写十六进制
+画面: 老老实实写图里有什么，看得清的字照抄
+整体: 形状、宽高比、背景（十六进制 / 渐变 / 纹理）、外框（圆角 px、边框粗细和颜色、阴影）
+配色: 背景、面板、主文字、次文字、强调色（可以多个）、边框 / 分隔，全写十六进制
 布局:
-  - 区域: 从上到下、从左到右逐个写，每个写位置、宽度占比、内容类型（标题/标签+数值/进度条/图标/胶囊标签/大号数字）、对齐、原文
-组件样式: 进度条、标签/胶囊、分隔线、图标各自的样式
-字体: 气质（无衬线/衬线/等宽/手写/楷宋）、字号层级（如 18/14/12）、粗细与字间距
-装饰: 逐个写
-复刻难点: CSS 难做到的部分和替代方案
+  - 区域: 从上到下、从左到右一块块写，每块写位置、宽度占比、内容类型（标题 / 标签+数值 / 进度条 / 图标 / 胶囊标签 / 大号数字）、对齐、原文
+组件样式: 进度条、标签 / 胶囊、分隔、图标各是什么样
+字体: 气质（无衬线 / 衬线 / 等宽 / 手写 / 楷宋）、字号层次（如 18/14/12）、粗细和字距
+装饰: 一个个写
+难复刻的地方: CSS 不好做的部分和替代办法
 </sf_spec>
 
 类型是风格图时：
 <sf_spec>
 类型: 风格图
-画面: 如实写图里有什么，看得清的文字照抄
-色板: 5-8 个颜色，每个写十六进制和它在图里的位置/占比，例如 "#2b3a55 大面积夜空"
-建议配色角色: 底色、面板、主文字、次文字、强调、边框各用哪个色（文字和底色要有足够对比度）
-质感: 材质与笔触（纸张/水彩/油画/金属/玻璃/布料/霓虹/胶片颗粒…），以及可用的 CSS 表现手法
-形状语言: 圆润/锐利、手绘/几何、对称/错落、线条粗细
-装饰母题: 图里有代表性的元素，各写一句可以怎么用配色、纹理、形状或排版体现（不写 emoji，不建议画成 SVG 贴图）
-光影: 柔光/硬光/逆光/发光/高对比/低饱和…
-情绪关键词: 4-5 个
+画面: 老老实实写图里有什么，看得清的字照抄
+色板: 5–8 个颜色，每个写十六进制和它在图里的位置 / 占多少，例如 "#2b3a55 大片夜空"
+配色建议: 底色、面板、主文字、次文字、强调、边框各用哪个色（文字和底色要够对比）
+质感: 材质和笔触（纸 / 水彩 / 油画 / 金属 / 玻璃 / 布料 / 霓虹 / 胶片颗粒…），以及可以用的 CSS 做法
+形状: 圆润 / 锋利、手绘 / 几何、对称 / 错落、线条粗细
+代表性元素: 图里有代表性的元素，各写一句可以怎么用配色、纹理、形状或排版体现（不写 emoji，不建议画成 SVG 贴图）
+光影: 柔光 / 硬光 / 逆光 / 发光 / 高对比 / 低饱和…
+情绪关键词: 4–5 个
 字体气质: 适合这张图的字体类型和字重
-转译建议: 这种风格的状态栏大概长什么样（整体形状、进度条和标签像什么、装饰放哪）
+怎么转成状态栏: 这种风格的状态栏大概长什么样（整体形状、进度条和标签像什么、装饰放哪）
 </sf_spec>
-不要输出 <sf_spec> 之外的任何文字。`,check:`你会拿到参考图（和它的拆解）以及一份已经写好的状态栏设计。按拆解里的“类型”对照：
-- 类型是界面：逐项找 replace（HTML/CSS）和参考图不一致的地方——布局结构、各区域比例、配色值、圆角/边框/阴影、进度条和标签样式、字体气质与字号层级、装饰。
-- 类型是风格图：不要求内容一样，检查“像不像一套”——色板是否取自图里且角色分配合理、质感和形状语言是否体现、装饰母题有没有用上且不过量、组件是否跟着风格走而不是默认样式、文字是否清晰可读。
-再检查 instruction：每个字段是否有取值类型、更新规则、继承规则和初始值，示例是否和 sample 一致。
-然后输出修正后的完整设计（格式同下）。在 <sf_note> 里加一行“差异：”逐条列出你改了什么；确实没有要改的，原样输出设计并写“差异：无”。字段、捕获组和文本块格式不要改。`,card:`角色卡资料会附在后面（角色卡字段、绑定的世界书、开场白，可能还有最近几条聊天）。这是设计的主要依据，先读完再动手：
-- 提取：char 是谁、和 {{user}} 是什么关系、故事在什么时间地点、卡的核心矛盾和玩法、世界书里有哪些会随剧情变化的东西（资源、阶段、秘密、规则）。
-- 字段、措辞、初始值都从这里来；初始值优先用开场白和最近聊天里的实际状态。
-- 视觉气质也要贴合这张卡（古风卡不要赛博风），除非用户明确要求或参考图就是那样——有参考图时，视觉按参考图，内容按卡。
-- 资料里写了的设定不要改，没写的不要编成“设定”。`,fields:`你是“酒馆状态栏设计师”。根据角色卡资料和用户需求，为状态栏推荐字段。要求：
-- 4 到 9 个字段，宁少勿多，每个都必须对这张卡的玩法有用（推动剧情、记录关系或资源、提醒时间地点）；
-- 不要放与本卡无关的通用字段；
-- 每个字段给出：键（2-6 个字）、含义与取值规则（取值类型 + 范围或字数上限 + 怎么变化）、示例值；
-- 要画进度条的字段，取值写成 0-100 的整数；
-- 输出格式：每行一个字段，“键｜含义与取值规则｜示例”，用全角竖线分隔，不要任何别的文字。`,output:`输出格式（严格遵守。必须用下面这些 XML 标签输出，标签外不用代码块（反引号围栏）；只有做法 A 的 sf_replace 里面用 \`\`\`html 围栏、不加 <content> 之类的外层包装；预设要求先写 <planing> 之类的思考块时写在最前面，成品仍然是这些标签。标签名不要改，每个标签只出现一次，按这个顺序）：
+<sf_spec> 以外不交任何字。`,check:`你会拿到参考图（以及对它的拆解）和一份写好的状态栏设计。照拆解里的「类型」来对：
+- 类型是界面：一项项找 replace（HTML / CSS）和参考图不一样的地方：整体布局、各块比例、颜色值、圆角 / 边框 / 阴影、进度条和标签的样子、字体气质和字号层次、装饰。
+- 类型是风格图：不要求内容一样，看的是「像不像一套」：色板是不是从图里取的、分配得合不合理，质感和形状有没有体现，图里的代表性元素有没有用配色、纹理、形状体现出来（不靠 emoji 和 SVG 花纹），组件是不是跟着风格走而不是默认样子，字看不看得清。
+再看 instruction：每个字段有没有取值类型、变化规则、沿用规则和起始值，示例和 sample 是否一致。
+然后交改好的完整设计（格式同下）。在 <sf_note> 里加一行「改动：」，一条条列出你改了什么；真没什么要改的，原样交回设计并写「改动：无」。字段、捕获组和文本块的格式别动。`,card:`后面会附上角色卡资料（角色卡字段、绑定的世界书、开场白，也许还有最近几条聊天）。这是设计最主要的依据，先读完再动手：
+- 先弄清：char 是谁，和 {{user}} 是什么关系，故事在什么时候、什么地方，这张卡最核心的矛盾和玩法是什么，世界书里有哪些会跟着剧情变的东西（资源、阶段、秘密、规矩）。
+- 字段、用词、起始值都从这里来；起始值优先用开场白和最近聊天里实际的状态。
+- 视觉气质也要贴着这张卡（古风卡别做成赛博风），除非用户明说要那样或参考图就是那样。有参考图时，样子照参考图，内容照卡。
+- 资料里写了的设定别改，没写的别编成「设定」。`,fields:`请照角色卡资料和用户的要求，给状态栏推荐字段：
+- 4 到 9 个，宁少勿多，每个都要对这张卡的玩法有用（推剧情、记关系或资源、提醒时间地点）；
+- 跟这张卡无关的通用字段不放；
+- 每个字段给出：键（2–6 个字）、意思和取值规则（取什么值 + 范围或字数上限 + 怎么变）、示例值；
+- 要画进度条的字段，值写成 0–100 的整数；
+- 交稿格式：每行一个字段，「键｜意思和取值规则｜示例」，用全角竖线隔开，不加别的字。`,output:`交稿格式（一定照做。必须用下面这些 XML 标签交，标签外面不用代码块（反引号围栏）；只有做法 A 的 sf_replace 里面用 \`\`\`html 围栏，不加 <content> 这类外壳；预设要求先写 <planing> 这类思考块的，思考块放最前面，成品照样是这些标签。标签名别改，每个只出现一次，照这个顺序）：
 <sf_note>
-理解：用户要什么（一句话）
+要的是：用户想要什么（一句话）
 主题：这张卡的状态栏讲什么（一句话）
-假设：你补充的假设（没有写“无”）
-配色：主色/辅色/背景/强调色（十六进制）
+补的地方：你替他补的设想（没有写「无」）
+配色：主色 / 辅色 / 底色 / 强调色（十六进制）
 对应：字段 → 捕获组编号
-字段依据：每个字段 → 角色卡里的哪条设定（引原话的关键词）；没有角色卡资料就写“无资料”
-矛盾检查：发现的矛盾（没有写“无”）
+字段依据：每个字段 → 角色卡里哪条设定（引原话的关键词）；没有角色卡资料就写「无资料」
+打架的地方：发现的矛盾（没有写「无」）
 </sf_note>
-<sf_name>设计名称，2-8 个字</sf_name>
+<sf_name>设计名称，2–8 个字</sf_name>
 <sf_fields>
-键｜含义与取值规则｜示例
-（每行一个字段，全角竖线分隔，顺序 = 捕获组顺序）
+键｜意思和取值规则｜示例
+（每行一个字段，全角竖线隔开，顺序 = 捕获组顺序）
 </sf_fields>
 <sf_instruction>
-给角色扮演模型的输出要求（会写进角色卡），按“要求 → 资料 → 示例 → 启动”的结构。
+给扮演模型的输出要求（会写进角色卡），照「要求 → 资料 → 示例 → 开始」排。
 </sf_instruction>
 <sf_find>/正则/flags</sf_find>
 <sf_replace>
-做法 A：\`\`\`html 围栏包住的完整网页，里面用 $1 放入整个块；做法 B：开头是 <style> 的 HTML 字符串，用 $1 $2 … 引用捕获组，没有空行
+做法 A：\`\`\`html 围栏包住的完整网页，里面用 $1 放进整个块；做法 B：以 <style> 开头的 HTML 字符串，用 $1 $2 … 引用捕获组，没有空行
 </sf_replace>
 <sf_sample>
-一段完整的文本块（含外层标签），能被 sf_find 匹配，和 instruction 里的示例一致
+一段完整的文本块（带外层标签），能被 sf_find 匹配，和 instruction 里的示例一致
 </sf_sample>
-除上面的标签外不要输出任何文字，不要用 Markdown 代码块包裹。`,revise:"你会拿到一份现有的状态栏设计和用户的修改意见。只改意见涉及的部分，其余保持不变（字段顺序、捕获组数量变了的话，要同步改 find、replace、instruction、sample）。输出仍然是完整的一份设计，格式同上。"},sl=[["common","通用设计准则（头部，含输出要求的写法）"],["image","参考图怎么用（界面 / 风格图）"],["analyze","参考图拆解"],["check","对照参考图自查"],["card","角色卡资料怎么用"],["fields","推荐字段"],["output","输出格式"],["revise","修改设计"]],Vt=(e,t)=>{const n=Ot(e);return n.length>t?`${n.slice(0,t)}…`:n};function Ni(e,{constantChars:t=900,otherChars:n=160,max:r=40}={}){const s=e?.entries,a=(Array.isArray(s)?s:Object.values(s||{})).filter(d=>d&&!d.disable&&d.enabled!==!1&&Ot(d.content)),i=d=>!!d.constant,o=d=>d.comment||d.name||[].concat(d.key||d.keys||[]).slice(0,3).join("/")||"未命名";return{text:[...a.filter(i),...a.filter(d=>!i(d))].slice(0,r).map(d=>i(d)?`【常驻】${o(d)}
+上面这些标签以外不写任何字，也不用 Markdown 代码块包起来。`,revise:"你会拿到一份现有的状态栏设计和用户的修改意见。只改意见说到的部分，其余照旧（字段顺序或捕获组数量变了，find、replace、instruction、sample 要跟着一起改）。交的仍然是一整份设计，格式同上。"},sl=[["common","通用设计准则（头部，含输出要求的写法）"],["image","参考图怎么用（界面 / 风格图）"],["analyze","参考图拆解"],["check","对照参考图自查"],["card","角色卡资料怎么用"],["fields","推荐字段"],["output","输出格式"],["revise","修改设计"]],Vt=(e,t)=>{const n=Ot(e);return n.length>t?`${n.slice(0,t)}…`:n};function Ni(e,{constantChars:t=900,otherChars:n=160,max:r=40}={}){const s=e?.entries,a=(Array.isArray(s)?s:Object.values(s||{})).filter(d=>d&&!d.disable&&d.enabled!==!1&&Ot(d.content)),i=d=>!!d.constant,o=d=>d.comment||d.name||[].concat(d.key||d.keys||[]).slice(0,3).join("/")||"未命名";return{text:[...a.filter(i),...a.filter(d=>!i(d))].slice(0,r).map(d=>i(d)?`【常驻】${o(d)}
 ${Vt(d.content,t)}`:`【触发：${[].concat(d.key||d.keys||[]).slice(0,4).join("、")||"无关键词"}】${o(d)}：${Vt(d.content,n)}`).join(`
 
 `),total:a.length,constant:a.filter(i).length}}function Pi(e,{world:t=null,worldName:n="",chat:r=[],limit:s=14e3}={}){if(!e)return{text:"",stats:[]};const a=e.data||{},i=(D,Q)=>Ot(D??Q??""),o=[],c=[],p=(D,Q,z)=>{Q&&(c.push(`[${D}]
@@ -2147,7 +2043,7 @@ ${p.instruction}
 参考 replace HTML/CSS/脚本：
 ${p.replace}
 </参考模板>
-<参考使用要求>把这份参考状态栏当成版式、代码和交互范本；适配当前角色卡、字段与需求。保留所选模板具有辨识度的结构，完成独立、可运行的 HTML 与正则；不要照搬原稿中的固定数据、示例人物或资源省略标记。</参考使用要求>`:"",Q=[e&&`<角色卡资料>
+<参考怎么用>把这份参考状态栏当成版式、代码和交互的样板，改成适合这张卡、这些字段和这次要求的样子。保留这个模板最认得出的结构，做出能独立运行的 HTML 和正则；原稿里写死的数据、示例人物和省略记号不要照搬。</参考怎么用>`:"",Q=[e&&`<角色卡资料>
 ${e}
 </角色卡资料>`,D,n.trim()&&`<想要的字段>
 ${n.trim()}
@@ -2167,22 +2063,22 @@ ${t.trim()||"（用户没有额外需求，按资料和字段自行设计）"}
 
 `);return{system:g,prompt:Q}}function sm(){if(I.lvDraft){const g=I.lvDraft.greets;return g.length?g.map((r,s)=>`开场白 ${s+1}（新增主页后目标 swipe_id=${s+1}）：${String(r).slice(0,700)}`).join("\n\n"):"草稿里还没有开场白，先做空目录，提醒作者写好开场白后同步调整目标索引。"}const e=St();if(!e)return"当前没有角色卡，请使用作者提供的资料并为目录预留条目。";const t=e.data||{};return[e.first_mes??t.first_mes??"",...t.alternate_greetings||e.alternate_greetings||[]].filter(r=>String(r).trim()&&String(r).trim()!=="【主页】").map((r,s)=>`开场白 ${s+1}（新增主页后目标 swipe_id=${s+1}）：${String(r).slice(0,700)}`).join(`
 
-`)||"当前角色卡没有真实开场白，先制作空目录，提醒作者新增开场白后同步调整目标索引。"}const il=`你正在制作“开场白主页正则”，不是角色回复末尾的状态栏。作者选择的固定开场白参考优先于普通状态栏模板。
+`)||"当前角色卡没有真实开场白，先制作空目录，提醒作者新增开场白后同步调整目标索引。"}const il=`你在做的是「开场白主页」正则，不是角色每次回复末尾的状态栏。作者选的固定开场白参考，比普通状态栏模板优先。
 
-【美化】主页要有质感：两到四种颜色、白天和夜晚两套、纸纹网点或色块，不要发光和光滑渐变，装饰文字全用中文，正文用楷体。\n\n【严格运行契约】
-- find 使用 /【主页】/s，作用在酒馆开场白主页标记；不要匹配所有聊天消息。
-- replace 必须用 \`\`\`html 开头，完整包含 <!DOCTYPE html>、<html>、<body>、</body>、</html>，最后用 \`\`\` 收尾；酒馆助手按 fenced HTML 和完整 body 识别 iframe。
-- replace 内允许 <script> 和真实点击事件；目录按钮须通过酒馆助手 getChatMessages / setChatMessages，或与原参考等效的真实 SillyTavern 接口切换第 0 楼 swipe_id；失败时显示错误。不能生成只有装饰、点击没作用的网页。
-- 默认先新增一个独立主页开场白（原文仅【主页】）；原有开场白按顺序保留，在主页后面排列。第一个故事进入 swipe_id=1，第二个故事=2，以此类推。
-- 所有可显示的目录标题和简介根据所给角色卡真实开场白写，标题 2–6 字，简介 15–40 字，不剧透，禁止暴露模型提示词或演示角色。
-- CSS 要隔离到独立的页面根节点，手机宽度自动适配。参考稿有省略内容，须补全成完整正则，不得把省略标记复制进成品。
-- 如果没有足够的原卡开场白，做可编辑的目录示例并明确说明，禁止伪称已创建额外开场白。
+【样子】主页要有质感：两到四种颜色，白天和夜里两套，用纸纹、网点或色块，不要发光和顺滑的渐变；装饰用的字全用中文，正文用楷体；不放没来由的印章，不用 emoji 和装饰性 SVG。\n\n【一定要守的运行规矩】
+- find 用 /【主页】/s，只作用在酒馆开场白主页的标记上，不要匹配所有聊天消息。
+- replace 必须以 \`\`\`html 开头，完整包含 <!DOCTYPE html>、<html>、<body>、</body>、</html>，最后以 \`\`\` 结尾；酒馆助手是靠带围栏的 HTML 和完整的 body 认出要渲染成 iframe 的。
+- replace 里可以写 <script> 和真正能点的事件；目录按钮要通过酒馆助手的 getChatMessages / setChatMessages，或者和原参考等效的真实 SillyTavern 接口，去切第 0 楼的 swipe_id；切不过去要显示错误。不能做成只好看、点了没反应的网页。
+- 默认先加一个单独的主页开场白（原文只有【主页】）；原来的开场白按顺序保留，排在主页后面。第一个故事是 swipe_id=1，第二个是 2，依此类推。
+- 目录里显示的标题和简介都照这张卡真实的开场白写，标题 2–6 字，简介 15–40 字，不剧透，不许露出提示词或演示用的角色。
+- CSS 要关在主页自己的根节点里，手机宽度自动适配。参考稿里有省略的地方，要补全成完整的正则，不能把省略记号抄进成品。
+- 原卡开场白不够的话，做一个能改的目录示例并说清楚，不许假装已经建好了别的开场白。
 
-【输出格式】只输出以下标签，每个一次，严格按顺序，不要在外围用 Markdown 代码块包裹。注意 sf_replace 内的 HTML 围栏必须原样保留：
-<sf_note>设计说明与设置方法：需在角色卡第一个开场白放【主页】，后面放原来的故事开场白；写清楚缺少哪些信息。</sf_note>
+【交稿格式】只交下面这些标签，每个一次，严格照顺序，外面不用 Markdown 代码块包。注意 sf_replace 里的 HTML 围栏必须原样保留：
+<sf_note>设计说明和设置方法：角色卡第一个开场白放【主页】，后面放原来的故事开场白；写清楚还缺哪些信息。</sf_note>
 <sf_name>开场白主页名称</sf_name>
 <sf_fields></sf_fields>
-<sf_instruction>给作者的安装和目录维护说明（这段不能强制模型每轮输出主页）</sf_instruction>
+<sf_instruction>给作者的安装和目录维护说明（这段不能要求模型每轮都输出主页）</sf_instruction>
 <sf_find>/【主页】/s</sf_find>
 <sf_replace>
 \`\`\`html
@@ -2367,7 +2263,7 @@ A("div",{class:"sf-line",style:"flex-wrap:wrap;gap:6px"},ge(aiOk?"重新调整":
 aiOk&&A("p",null,A("b",null,"主题："),ai.theme),A("div",{class:"sf-hint"},`${aiOk?"现在的":"模板自带的"}状态栏项：${keys.join("、")}`)),
 A("div",{class:"sf-box"},A("div",{class:"sf-h"},"主页文字"),inp("title","作品名（默认用角色卡名字）",K.title||ai?.home?.title||src?.name||""),inp("intro","简介（留空就不显示）",K.intro||ai?.home?.intro||"",!0),A("div",{style:"display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:6px"},inp("author","作者",K.author??src?.author??""),inp("model","推荐模型",K.model),inp("preset","推荐预设",K.preset)),A("details",{class:"sf-fold"},A("summary",null,`目录（${home.entries.length} 条，对应开场白顺序）`),ents)),
 A("div",{class:"sf-bar",style:"flex-wrap:wrap"},ge("一起写进角色卡",()=>Ht("写入套装",()=>nfKWrite(!0)),"sf-primary",{disabled:!src||!!I.busy,title:src?"":"先在酒馆里打开一张角色卡"}),ge("只要状态栏",()=>Ht("写入状态栏",()=>nfKWrite(!1)),"",{disabled:!src||!!I.busy}),ge("状态栏去结果页细改",()=>nfKToResult("status"),"sf-sm"),ge("主页去结果页细改",()=>nfKToResult("home"),"sf-sm"),ge("带这款去「① 设计」",()=>{zi(st.id);I.tab="design";ue()},"sf-sm")))}function Cm(e,t,n,r){return A("button",{type:"button",class:`sf-chip${t?" sf-on":""}`,title:r||"",onclick:n},e)}function Yt(){Me().designOptions=Pt(I.options),Je()}function Im(e){const t=(s,a,i)=>A("label",{class:"sf-field"},A("span",null,s),A("select",{value:e[a],onchange:o=>{e[a]=o.target.value,Yt()}},i.map(([o,c])=>A("option",{value:o,selected:e[a]===o},c)))),n=(s,a)=>A("label",null,A("input",{type:"checkbox",checked:!!e[a],onchange:i=>{e[a]=i.target.checked,Yt()}}),` ${s}`),r=(s,a,i)=>A("label",{class:"sf-field"},A("span",null,s),A("textarea",{rows:2,class:"sf-code",value:e[a]||"",placeholder:i,oninput:o=>{e[a]=o.target.value,Yt()}}));return A("details",{class:"sf-fold"},A("summary",null,"细调状态栏",A("span",{class:"sf-dim"},"版式 · 材质 · 字体 · 组件 · 手机 · 动效")),A("p",{class:"sf-hint"},"下面选项会一同发送给 AI；写明的条件优先于风格标签。留在“自动”就由 AI 按角色卡与参考图决定。"),A("div",{class:"sf-h"},"布局与信息密度"),A("div",{class:"sf-row"},t("版式","layout",[["auto","自动"],["single","单列卡片"],["two","双列字段"],["grid","多格信息面板"],["asym","错落杂志式"],["timeline","纵向时间轴"]]),t("密度","density",[["auto","自动"],["tight","超紧凑"],["normal","常规"],["airy","宽松留白"]]),t("字段数量","fieldCount",[["auto","AI 决定"],["3-5","3–5 个"],["6-8","6–8 个"],["9-12","9–12 个"]])),A("div",{class:"sf-line"},n("显示题头","showTitle"),n("字段分组","groupFields")),A("div",{class:"sf-h"},"颜色、材料与文字"),A("div",{class:"sf-row"},t("表面质感","surface",[["auto","自动"],["paper","纸张/磨损"],["ink","深墨/黑底"],["glass","玻璃半透明"],["solid","纯色块"],["transparent","透明底"]]),t("字体感觉","font",[["auto","自动"],["serif","宋体/衬线"],["sans","现代无衬线"],["mono","打字机/等宽"],["hand","手写感（回退可读字体）"]]),t("边框","border",[["auto","自动"],["none","无边框"],["fine","细实线"],["dash","虚线"],["double","双线"],["rough","不规则纸边"]])),A("div",{class:"sf-row"},t("装饰程度","decoration",[["auto","自动"],["none","无装饰"],["light","少量"],["rich","丰富但不遮内容"]]),t("强调组件","progress",[["auto","自动"],["bar","横向进度条"],["pill","标签/徽章"],["ring","圆环数值"],["text","纯文字数值"]])),A("div",{class:"sf-row"},A("label",{class:"sf-field"},"强调色（可填 #A3262C）",A("input",{type:"text",class:"sf-wide",placeholder:"留空自动取色",value:e.accentColor||"",oninput:s=>{e.accentColor=s.target.value,Yt()}})),A("label",{class:"sf-field"},"底色（可填 #EFE5D8）",A("input",{type:"text",class:"sf-wide",placeholder:"留空自动取色",value:e.backgroundColor||"",oninput:s=>{e.backgroundColor=s.target.value,Yt()}}))),A("div",{class:"sf-h"},"手机与交互"),A("div",{class:"sf-row"},t("手机排版","mobile",[["stack","窄屏自动单列"],["wrap","窄屏自动换行"],["keep","尽量保持列结构"]]),t("动效","motion",[["off","无动效"],["subtle","轻微渐入/呼吸"],["interactive","CSS 悬停反馈（触屏兼容）"]])),A("p",{class:"sf-hint"},"动效只用 CSS，并提供减少动画偏好兼容；状态栏仍需离线可用、不要依赖外部字体或图片。"),r("一定要出现的元素","mustHave","例如：头像旁带月相、红色细绳分割线、体力用横向条"),r("明确不要的元素","avoid","例如：不要渐变、不要 Emoji、不要玻璃质感或粗边框"))}function Am(){const e=I.lvDraft?null:St(),t=Zr(),n=t?.kind==="opening";Wr();const r=I.options,s=A("textarea",{class:"sf-code",placeholder:"没有读到角色卡。可以手动贴人设、世界观、玩法进来。",value:I.card.text,oninput:m=>{I.card.text=m.target.value}}),a=A("textarea",{rows:3,placeholder:n?"例如：把开场白做成书页目录，有几条世界线可选；点击进入对应开场，手机上别太高，保留当前卡的原始开场白。":"例如：古风宫廷卡，想要一个像宫中账簿的状态栏，显示日期时辰、位份、圣宠值（0-100）和当前所在宫殿；手机上别太高。",value:I.need,oninput:m=>{I.need=m.target.value}}),i=A("textarea",{class:"sf-code",placeholder:`每行一个字段：键｜含义与取值规则｜示例
-留空，AI 会自己定字段。也可以点上面“让 AI 推荐字段”。`,value:I.fields,oninput:m=>{I.fields=m.target.value}}),o=I.card.use?I.card.text:"",c=ji(e),p=Rr(I.fields).length,d=`${r.position==="top"?"回复开头":"回复末尾"}${r.compact?" · 紧凑":""}${r.collapsible?" · 可折叠":""}`;return A("div",{class:"sf-section"},A("div",{class:"sf-box"},A("div",{class:"sf-line"},A("div",{class:"sf-h sf-grow"},e?`当前角色卡：${lr(e)}`:I.lvDraft?"草稿资料":"当前角色卡"),e&&A("span",{class:"sf-badge"},n?"开场白主页":c.rule||c.regex?`已有状态栏：${[c.rule&&"要求",c.regex&&"正则"].filter(Boolean).join("+")}`:"还没有状态栏"),e&&ge("重新读取",()=>Wr(!0),"sf-sm")),!e&&A("p",{class:"sf-hint"},I.lvDraft?`读到：${I.card.stats.join(" · ")}。导入时开场白主页会自动排在最前面，原来的开场白往后挪。`:"当前没有选中角色卡。可以手动贴资料，但“写入角色卡”要先在酒馆里打开一张卡。"),e&&A("p",{class:"sf-hint"},I.card.stats.length?`读到：${I.card.stats.join(" · ")}`:"正在读卡……（只有名字的话，说明这张卡的设定都在别处，可以手动贴进下面）"),A("div",{class:"sf-line"},A("label",null,A("input",{type:"checkbox",checked:I.card.use,onchange:m=>{I.card.use=m.target.checked}})," 把资料发给 AI"),A("label",{title:"初始值会按实际剧情定"},A("input",{type:"checkbox",checked:I.card.chat,onchange:m=>{I.card.chat=m.target.checked,Wr(!0)}})," 带上最近 8 条聊天")),A("details",null,A("summary",null,`查看 / 修改资料（${I.card.text.length} 字）`),s)),A("div",{class:"sf-box"},A("div",{class:"sf-h"},"想要什么"),a,A("div",{class:"sf-h"},"风格"),A("div",{class:"sf-line"},A("span",{class:"sf-hint"},t?`参考模板：${t.name}`:"参考模板：未选择"),ge(t?"换一款":"从套装里选",()=>{I.tab="refs",ue()},"sf-sm"),t&&ge("取消",()=>zi(""),"sf-sm")),A("div",{class:"sf-chips"},ea.map(m=>Cm(m.label,I.styles.includes(m.id),()=>{I.styles=I.styles.includes(m.id)?I.styles.filter(g=>g!==m.id):[...I.styles,m.id],ue()},m.desc))),A("input",{type:"text",class:"sf-wide",placeholder:"再补一句，例如：配色参考水墨，偏灰青",value:I.customStyle,oninput:m=>{I.customStyle=m.target.value}}),A("div",{class:"sf-folds"},A("details",{class:"sf-fold",style:n?"display:none":"",open:I.foldFields||p>0,ontoggle:m=>{I.foldFields=m.target.open}},A("summary",null,"字段",A("span",{class:"sf-dim"},p?`已填 ${p} 个`:"AI 按角色卡来定")),A("div",null,ge("让 AI 推荐字段",Em,"sf-sm",{disabled:!!I.busy})),i),A("details",{class:"sf-fold",style:n?"display:none":""},A("summary",null,"更多选项",A("span",{class:"sf-dim"},d)),A("div",{class:"sf-line"},A("span",null,"位置"),A("select",{onchange:m=>{r.position=m.target.value,Yt()}},A("option",{value:"bottom",selected:r.position==="bottom"},"回复末尾"),A("option",{value:"top",selected:r.position==="top"},"回复开头")),A("select",{onchange:m=>{r.lang=m.target.value,Yt()}},A("option",{value:"zh",selected:r.lang==="zh"},"显示中文"),A("option",{value:"en",selected:r.lang==="en"},"显示 English"))),A("div",{class:"sf-line"},A("label",null,A("input",{type:"checkbox",checked:r.compact,onchange:m=>{r.compact=m.target.checked,Yt(),ue()}})," 紧凑"),A("label",null,A("input",{type:"checkbox",checked:r.collapsible,onchange:m=>{r.collapsible=m.target.checked,Yt(),ue()}})," 可折叠"))))),n?A("p",{class:"sf-hint"},"这页生成的是开场白主页/目录正则。会用原卡的主开场白与额外开场白自动整理目录；写入正则后，还需在角色卡最前面新增一条内容为【主页】的开场白。"):Im(r),bm(),I.cur&&A("p",{class:"sf-hint"},"想改已经生成的，去“结果”页写修改意见，比重新生成更稳。"),A("div",{class:"sf-bar"},ge(I.cur?"重新生成":n?"生成开场白主页":"生成状态栏",()=>Tm(o),"sf-primary",{disabled:!!I.busy,title:I.cur?"会覆盖当前结果，旧版可以换回":""}),I.cur&&ge("看当前结果",()=>{I.tab="result",ue()})))}async function Em(){const{system:e,prompt:t}=ol({card:I.card.use?I.card.text:"",need:I.need,templates:Me().templates}),n=await Ht("推荐字段",()=>pr(e,t));if(!n)return;const r=Rr(Ei(n));if(!r.length){Oe("warning","AI 的回复里没有认出字段，换个说法再试");return}I.fields=ta(r),ue()}function Pl(e,{keepOld:t,kind:n="status"}){const r=ra(e,n);return r.ok?(r.replace=r.kind==="opening"?String(r.replace||"").trim():un(r.replace),I.origin&&I.cur?.external&&(r.external=!0,r.sample.trim()||(r.sample=I.cur.sample)),t&&I.cur&&I.history.push(I.cur),I.history.length>8&&I.history.shift(),I.cur=r,Me().draft=Pt(r),Je(),I.tab="result",r.truncated&&Oe("warning","回复可能被截断了（没有看到结尾），预览和检查结果请留意"),!0):(I.lastRaw=e,Oe("error","AI 的回复里没有找到完整的 find 和 replace，可能被截断了。到设置里把“最大回复长度”调大再试"),!1)}var Ol=e=>{I.busy&&(I.busy.label=e,Hn())};async function Tm(e){const t=Me(),n=Zr()?.kind==="opening";fn(null);const r=I.images;let s=null;const a=await Ht(n?"设计开场白主页":"设计状态栏",async()=>{r.length&&I.analyze&&!Kr()&&await Hi();const i=r.length&&I.analyze?I.spec:"";Ol(n?"设计开场白主页":"设计状态栏");const{system:o,prompt:c}=al({card:e,need:I.need,fields:I.fields,styles:I.styles,customStyle:I.customStyle,reference:Zr(),options:I.options,images:r.length,spec:i,mode:I.imgMode,templates:t.templates});let p=await pr(o,c,r);if(r.length&&I.selfCheck&&!n){const d=ra(p);if(d.ok){Ol("对照参考图自查");const m=ul({design:d,spec:i,images:r.length,mode:I.imgMode,templates:t.templates});try{const g=await pr(m.system,m.prompt,r);ra(g).ok&&(s=d,p=g)}catch(g){Oe("warning",`自查失败，先用第一版：${g?.message||g}`)}}}return p});a&&(Pl(a,{keepOld:!0,kind:n?"opening":"status"})&&s&&(s.replace=un(s.replace),I.history.push(s)),ue(),kt&&(kt.scrollTop=0))}async function Nm(){const e=I.revise.trim()||(Zt(Me(),lvKey("result"))?"按本页对话中作者的要求修改。":"");if(!e&&!I.images.length){Oe("warning","写一句修改意见，或者加一张参考图");return}const{system:t,prompt:n}=cl({design:dr(),request:`${I.cur?.external?`${hl}
+留空，AI 会自己定字段。也可以点上面“让 AI 推荐字段”。`,value:I.fields,oninput:m=>{I.fields=m.target.value}}),o=I.card.use?I.card.text:"",c=ji(e),p=Rr(I.fields).length,d=`${r.position==="top"?"回复开头":"回复末尾"}${r.compact?" · 紧凑":""}${r.collapsible?" · 可折叠":""}`;return A("div",{class:"sf-section"},A("div",{class:"sf-box"},A("div",{class:"sf-line"},A("div",{class:"sf-h sf-grow"},e?`当前角色卡：${lr(e)}`:I.lvDraft?"草稿资料":"当前角色卡"),e&&A("span",{class:"sf-badge"},n?"开场白主页":c.rule||c.regex?`已有状态栏：${[c.rule&&"要求",c.regex&&"正则"].filter(Boolean).join("+")}`:"还没有状态栏"),e&&ge("重新读取",()=>Wr(!0),"sf-sm")),!e&&A("p",{class:"sf-hint"},I.lvDraft?`读到：${I.card.stats.join(" · ")}。导入时开场白主页会自动排在最前面，原来的开场白往后挪。`:"当前没有选中角色卡。可以手动贴资料，但“写入角色卡”要先在酒馆里打开一张卡。"),e&&A("p",{class:"sf-hint"},I.card.stats.length?`读到：${I.card.stats.join(" · ")}`:"正在读卡……（只有名字的话，说明这张卡的设定都在别处，可以手动贴进下面）"),A("div",{class:"sf-line"},A("label",null,A("input",{type:"checkbox",checked:I.card.use,onchange:m=>{I.card.use=m.target.checked}})," 把资料发给 AI"),A("label",{title:"初始值会按实际剧情定"},A("input",{type:"checkbox",checked:I.card.chat,onchange:m=>{I.card.chat=m.target.checked,Wr(!0)}})," 带上最近 8 条聊天")),A("details",null,A("summary",null,`查看 / 修改资料（${I.card.text.length} 字）`),s)),A("div",{class:"sf-box"},A("div",{class:"sf-h"},"想要什么"),a,A("div",{class:"sf-h"},"风格"),A("div",{class:"sf-line"},A("span",{class:"sf-hint"},t?`参考模板：${t.name}`:"参考模板：未选择"),ge(t?"换一款":"从套装里选",()=>{I.tab="refs",ue()},"sf-sm"),t&&ge("取消",()=>zi(""),"sf-sm")),A("div",{class:"sf-chips"},ea.map(m=>Cm(m.label,I.styles.includes(m.id),()=>{I.styles=I.styles.includes(m.id)?I.styles.filter(g=>g!==m.id):[...I.styles,m.id],ue()},m.desc))),A("input",{type:"text",class:"sf-wide",placeholder:"再补一句，例如：配色参考水墨，偏灰青",value:I.customStyle,oninput:m=>{I.customStyle=m.target.value}}),A("div",{class:"sf-folds"},A("details",{class:"sf-fold",style:n?"display:none":"",open:I.foldFields||p>0,ontoggle:m=>{I.foldFields=m.target.open}},A("summary",null,"字段",A("span",{class:"sf-dim"},p?`已填 ${p} 个`:"AI 按角色卡来定")),A("div",null,ge("让 AI 推荐字段",Em,"sf-sm",{disabled:!!I.busy})),i),A("details",{class:"sf-fold",style:n?"display:none":""},A("summary",null,"更多选项",A("span",{class:"sf-dim"},d)),A("div",{class:"sf-line"},A("span",null,"位置"),A("select",{onchange:m=>{r.position=m.target.value,Yt()}},A("option",{value:"bottom",selected:r.position==="bottom"},"回复末尾"),A("option",{value:"top",selected:r.position==="top"},"回复开头")),A("select",{onchange:m=>{r.lang=m.target.value,Yt()}},A("option",{value:"zh",selected:r.lang==="zh"},"显示中文"),A("option",{value:"en",selected:r.lang==="en"},"显示 English"))),A("div",{class:"sf-line"},A("label",null,A("input",{type:"checkbox",checked:r.compact,onchange:m=>{r.compact=m.target.checked,Yt(),ue()}})," 紧凑"),A("label",null,A("input",{type:"checkbox",checked:r.collapsible,onchange:m=>{r.collapsible=m.target.checked,Yt(),ue()}})," 可折叠"))))),n?A("p",{class:"sf-hint"},"这页生成的是开场白主页/目录正则。会用原卡的主开场白与额外开场白自动整理目录；写入正则后，还需在角色卡最前面新增一条内容为【主页】的开场白。"):Im(r),bm(),I.cur&&A("p",{class:"sf-hint"},"想改已经生成的，去“结果”页写修改意见，比重新生成更稳。"),A("div",{class:"sf-bar"},ge(I.cur?"重新生成":n?"生成开场白主页":"生成状态栏",()=>Tm(o),"sf-primary",{disabled:!!I.busy,title:I.cur?"会覆盖当前结果，旧版可以换回":""}),I.cur&&ge("看当前结果",()=>{I.tab="result",ue()})))}async function Em(){const{system:e,prompt:t}=ol({card:I.card.use?I.card.text:"",need:I.need,templates:Me().templates}),n=await Ht("推荐字段",()=>pr(e,t));if(!n)return;const r=Rr(Ei(n));if(!r.length){Oe("warning","AI 的回复里没有认出字段，换个说法再试");return}I.fields=ta(r),ue()}function Pl(e,{keepOld:t,kind:n="status"}){const r=ra(e,n);return r.ok?(r.replace=r.kind==="opening"?String(r.replace||"").trim():un(r.replace),I.origin&&I.cur?.external&&(r.external=!0,r.sample.trim()||(r.sample=I.cur.sample)),t&&I.cur&&I.history.push(I.cur),I.history.length>8&&I.history.shift(),I.cur=r,Me().draft=Pt(r),Je(),I.tab="result",r.truncated&&Oe("warning","回复可能被截断了（没有看到结尾），预览和检查结果请留意"),!0):(I.lastRaw=e,Oe("error","AI 的回复里没有找到完整的 find 和 replace，可能被截断了。到设置里把“最大回复长度”调大再试"),!1)}var Ol=e=>{I.busy&&(I.busy.label=e,Hn())};async function Tm(e){const t=Me(),n=Zr()?.kind==="opening";fn(null);const r=I.images;let s=null;const a=await Ht(n?"设计开场白主页":"设计状态栏",async()=>{r.length&&I.analyze&&!Kr()&&await Hi();const i=r.length&&I.analyze?I.spec:"";Ol(n?"设计开场白主页":"设计状态栏");const{system:o,prompt:c}=al({card:e,need:I.need,fields:I.fields,styles:I.styles,customStyle:I.customStyle,reference:Zr(),options:I.options,images:r.length,spec:i,mode:I.imgMode,templates:t.templates});let p=await pr(o,c,r);if(r.length&&I.selfCheck&&!n){const d=ra(p);if(d.ok){Ol("对照参考图自查");const m=ul({design:d,spec:i,images:r.length,mode:I.imgMode,templates:t.templates});try{const g=await pr(m.system,m.prompt,r);ra(g).ok&&(s=d,p=g)}catch(g){Oe("warning",`自查失败，先用第一版：${g?.message||g}`)}}}return p});a&&(Pl(a,{keepOld:!0,kind:n?"opening":"status"})&&s&&(s.replace=un(s.replace),I.history.push(s)),ue(),kt&&(kt.scrollTop=0))}async function Nm(){const e=I.revise.trim()||(Zt(Me(),lvKey("result"))?"照这一页聊天里作者说的改。":"");if(!e&&!I.images.length){Oe("warning","写一句修改意见，或者加一张参考图");return}const{system:t,prompt:n}=cl({design:dr(),request:`${I.cur?.external?`${hl}
 `:""}${e||"参照附图调整，让它和参考图更像一套。"}`,card:I.card.use?I.card.text:"",images:I.images.length,spec:I.images.length&&Kr()?I.spec:"",mode:I.imgMode,templates:Me().templates}),r=await Ht("按意见修改",()=>pr(t,n,I.images));r&&(Pl(r,{keepOld:!0,kind:I.cur?.kind==="opening"?"opening":"status"})&&(I.revise=""),ue())}function dr(){const e=I.cur;return{...e,replace:e.kind==="opening"?String(e.replace||"").trim():un(e.replace),instruction:Ot(e.instruction)}}function $r(){Me().draft=Pt(I.cur),Je()}function Pm(e){try{const t=e.contentDocument;if(!t?.documentElement)return;const n=Math.ceil(t.documentElement.scrollHeight);e.style.height=`${Math.min(Math.max(n+2,90),640)}px`}catch{}}function Dl(){const e=dr(),t=sa(e),n=gl(e),r=A("iframe",{class:"sf-frame",style:n.fenced?`color-scheme:light;background:${I.dark?"#1c1f24":"#e9e7e1"}`:"",sandbox:n.fenced?"allow-scripts allow-same-origin":"allow-same-origin",title:"预览",srcdoc:n.fenced?(n.html?((st,h)=>/<head[^>]*>/i.test(h)?h.replace(/<head[^>]*>/i,m=>m+st):st+h)("<script>window.setChatMessages=async()=>{};window.getChatMessages=async()=>[{swipes:Array(20).fill('')}];try{var nfM='"+(I.dark?"night":"day")+"',nfG=Storage.prototype.getItem,nfS=Storage.prototype.setItem;Storage.prototype.getItem=function(k){return k==='nf-status-mode'?nfM:nfG.call(this,k)};Storage.prototype.setItem=function(k,v){if(k==='nf-status-mode'){nfM=v;return}return nfS.call(this,k,v)}}catch(e){}window.BroadcastChannel=void 0;<\/script>",n.html):"<!doctype html><body>没有匹配上，预览是空的</body>"):wl(n.html||'<p style="opacity:.6">（没有匹配上，预览是空的）</p>',I.dark)});return r.addEventListener("load",()=>Pm(r)),[A("div",{class:"sf-previewhead"},A("span",{class:"sf-h"},"预览（手机宽度）"),ge(I.dark?"换浅色底":"换深色底",()=>{I.dark=!I.dark,Bl()},"sf-sm")),r,t.errors.length>0&&A("div",{class:"sf-errbox"},t.errors.map(s=>A("div",null,`✕ ${s}`))),t.warns.length>0&&A("div",{class:"sf-warnbox"},t.warns.map(s=>A("div",null,`! ${s}`))),t.errors.length===0&&t.warns.length===0&&A("div",{class:"sf-okbox"},e.kind==="opening"?"✓ 开场白主页：格式与静态结构检查通过；真实点击需要在酒馆助手里验证":(/^\s*```html/i.test(String(e.replace))?"✓ 检查通过：完整网页状态栏，样例能匹配；点按钮和昼夜切换要在酒馆里试一下":`✓ 检查通过：${t.groups} 个捕获组，样例能匹配，没有脚本和外部资源`))]}function Bl(){cr&&cr.replaceChildren(...Dl().filter(Boolean))}function Om(){const e=I.cur;if(!e)return A("div",{class:"sf-section"},A("p",{class:"sf-hint"},"还没有设计。到“① 设计”生成一个，或者去“我的”里载入以前存的。"),ge("去设计",()=>{I.tab="design",ue()},"sf-primary"));const t=um(Bl,250),n=(p,d={})=>({value:p==="fields"?ta(e.fields):e[p],oninput:m=>{p==="fields"?e.fields=Rr(m.target.value):e[p]=m.target.value,$r(),t()},...d});cr=A("div",{class:"sf-section"},...Dl().filter(Boolean));const r=St(),s=ji(r),a=I.write,i=(p,d,m,...g)=>A("details",{class:"sf-fold",open:I.resOpen.has(p),ontoggle:y=>{y.target.open?I.resOpen.add(p):I.resOpen.delete(p)}},A("summary",null,d,m&&A("span",{class:"sf-dim"},m)),g),o=e.kind==="opening"?"开场白主页正则（不会覆盖现有状态栏）":[a.regex&&"正则",a.rule&&"输出要求",a.hideHistory&&"历史不进上下文"].filter(Boolean).join(" + ")||"没选",c=I.origin;return A("div",{class:"sf-section"},c&&A("div",{class:"sf-origin"},A("span",null,`正在改：「${c.name}」（${c.where==="card"?`角色卡 ${c.charName||""}`:"全局正则"}）`),ge("不改了",()=>{fn(null),ue()},"sf-sm")),A("input",{type:"text",class:"sf-wide",title:"设计名称",...n("name")}),cr,A("div",{class:"sf-folds"},e.note&&i("note","AI 的说明","理解 · 假设 · 配色 · 字段依据",A("pre",{class:"sf-pre"},e.note)),i("revise","按意见修改",I.history.length?`可换回 ${I.history.length} 版`:"",A("textarea",{rows:3,placeholder:"例如：整体再紧凑一点；好感度改成进度条；换成更暗的底色，强调色用金色；把时间放到最左边。",value:I.revise,oninput:p=>{I.revise=p.target.value}}),A("p",{class:"sf-hint"},I.images.length?`会带上 ${I.images.length} 张参考图（在“① 设计”里管理）。`:"想让它参照一张图改，先在“① 设计”页加参考图。"),A("div",{class:"sf-line"},ge("按意见修改",Nm,"sf-primary",{disabled:!!I.busy}),ge(`换回上一版（${I.history.length}）`,()=>{I.cur=I.history.pop(),$r(),ue()},"",{disabled:I.history.length===0}))),!c&&i("write","写入选项",o,A("p",{class:"sf-hint"},e.kind==="opening"?"这是开场白主页正则：写入只会替换状态栏机之前添加的开场白主页正则，保留角色卡现有状态栏。需要手动在角色卡最前面新增【主页】开场白，其他开场白依次放到后面。":r?`目标：${lr(r)}${s.rule||s.regex?`（已有：${[s.rule&&"要求",s.regex&&"正则"].filter(Boolean).join("+")}，写入会覆盖旧的）`:""}`:"现在没有选中角色卡。可以用“导出与复制”手动放进去。"),A("label",{style:e.kind==="opening"?"display:none":""},A("input",{type:"checkbox",checked:a.regex,onchange:p=>{a.regex=p.target.checked,ue()}})," 正则（角色卡内嵌，只改显示，自动允许这张卡的正则）"),A("label",{style:e.kind==="opening"?"display:none":""},A("input",{type:"checkbox",checked:a.rule,onchange:p=>{a.rule=p.target.checked,ue()}})," 给模型的输出要求（状态栏规则）"),a.rule&&e.kind!=="opening"&&A("div",{class:"cwz-where"},A("label",null,A("input",{type:"radio",name:"cwzwhere",checked:a.where!=="desc",onchange:()=>{a.where="world",ue()}})," 世界书 · 深度 D1，不可递归",A("small",{class:"sf-hint"},r?.data?.extensions?.world?`（这张卡绑了「${r.data.extensions.world}」，推荐）`:"（这张卡没绑世界书，会自动改写进角色描述）")),A("label",null,A("input",{type:"radio",name:"cwzwhere",checked:a.where==="desc",onchange:()=>{a.where="desc",ue()}})," 角色描述末尾")),A("label",{style:e.kind==="opening"?"display:none":""},A("input",{type:"checkbox",checked:a.hideHistory,onchange:p=>{a.hideHistory=p.target.checked,ue()}})," 历史楼层的状态栏不发给模型（省 token，但模型看不到上一次的数值）"),e.kind!=="opening"&&A("div",null,ge("从这张卡里去掉",async()=>{Rn.yes("把本工具写进这张卡的状态栏要求和正则去掉？")&&await Ht("去掉状态栏",gm)},"sf-danger sf-sm",{disabled:!r||!(s.rule||s.regex)||!!I.busy}))),i("export","导出与复制","写入失败或想放进别处时用",A("div",{class:"sf-line"},ge("下载正则 JSON",()=>{aa(dr(),{hideHistory:I.write.hideHistory}).forEach((d,m)=>Al(`${dm(d.scriptName)}${m?`-${m}`:""}.json`,JSON.stringify(d,null,2)))},"sf-sm"),ge(e.kind==="opening"?"复制安装说明":"复制输出要求",()=>oa(e.kind==="opening"?e.instruction:ia(e.instruction)),"sf-sm"),ge("复制 HTML",()=>oa(e.kind==="opening"?e.replace:un(e.replace)),"sf-sm"),ge("复制 find 正则",()=>oa(e.find),"sf-sm"),e.kind!=="opening"&&Qn?.get("preset")&&ge("输出要求存进预设机",()=>{const p=Qn.get("preset").addEntry({name:`状态栏·${e.name}`,content:ia(e.instruction),role:"system",tags:["状态栏"],source:"状态栏机"});Oe("success",`已存进预设机的收藏：${p.name}`)},"sf-sm"))),i("edit","手动编辑","改了上面的预览和检查会实时更新",A("div",{class:"sf-h"},e.kind==="opening"?"字段（开场白主页无需动态字段）":"字段（键｜含义与取值规则｜示例；顺序 = 捕获组顺序）"),A("textarea",{class:"sf-code",...n("fields")}),A("div",{class:"sf-h"},e.kind==="opening"?"安装与目录说明":"给模型的输出要求"),A("textarea",{class:"sf-code sf-tall",...n("instruction")}),A("div",{class:"sf-h"},"find 正则（/pattern/flags）"),A("input",{type:"text",class:"sf-wide sf-mono",...n("find")}),A("div",{class:"sf-h"},e.kind==="opening"?"replace（保留完整 fenced HTML、body 与交互脚本）":"replace（HTML，用 $1 $2 … 引用捕获组）"),A("textarea",{class:"sf-code sf-tall",...n("replace")}),A("div",{class:"sf-h"},"样例（模型会输出的那段块）"),A("textarea",{class:"sf-code",...n("sample")}))),A("div",{class:"sf-bar"},c?[ge("写回原来的正则",()=>Ht("写回正则",Mm),"sf-primary",{disabled:!!I.busy}),c.written&&ge("撤销写回",()=>Ht("撤销写回",Lm),"",{disabled:!!I.busy})]:I.lvDraft?[ge("用到这张卡",lvUse,"sf-primary",{disabled:!!I.busy}),I.lvDraft.imported&&r?.avatar===I.lvDraft.imported&&ge(e.kind==="opening"?"写入开场白主页正则":"直接写进已导入的卡",()=>Ht("写入角色卡",fm),"",{disabled:!!I.busy})]:ge(e.kind==="opening"?"写入开场白主页正则":"写入当前角色卡",()=>Ht("写入角色卡",fm),"sf-primary",{disabled:!r||!!I.busy,title:r?"":"先在酒馆里打开一张角色卡"}),ge("保存到“我的”",Dm)))}function Dm(){const e=Me(),t=dr(),n=(Rn.text("存成什么名字？",t.name)||"").trim();n&&(t.name=n,I.cur.name=n,e.designs.unshift({...Pt(t),id:ar("d"),savedAt:Date.now()}),Je(),Oe("success",`已保存「${n}」`),ue())}function fn(e){I.origin=e,Me().draftOrigin=e?Pt(e):null,Je()}var Fi=()=>Array.isArray(Re().extensionSettings?.regex)?Re().extensionSettings.regex:[],Ml=()=>(Re().chat||[]).filter(e=>!e.is_user).map(e=>e.mes||"");function Bm(e,t){const n=St(),r=Bi(t.findRegex,Ml());I.cur&&I.history.push(I.cur),I.cur=Mi(t,r),fn({where:e,id:t.id||"",name:t.scriptName||"",avatar:e==="card"?n?.avatar:"",charName:e==="card"?lr(n):"",backup:Pt(t),written:!1}),$r(),I.tab="result",I.resOpen.add("revise"),r?Oe("success",`已载入「${I.cur.name}」，写修改意见就能改`):(I.resOpen.add("edit"),Oe("info","聊天里没找到能匹配它的消息：在“手动编辑”最下面贴一段样例，才能预览")),ue(),kt&&(kt.scrollTop=0)}async function Mm(){const e=I.origin,t=dr(),n=sa(t);if(!(n.errors.length&&!Rn.yes(`检查还有问题：${n.errors[0]}
 仍然写回吗？`))){if(e.where==="card"){const r=St();if(!r||r.avatar!==e.avatar)throw new Error(`先在酒馆里打开原来那张卡「${e.charName}」`);const s=Ur(mn(r),e,t);if(s.index<0)throw new Error("角色卡里找不到原来那条正则了（可能被删了或改了名字）");await Vr(Re().characterId,r,s.list)}else{const r=Re().extensionSettings,s=Ur(Fi(),e,t);if(s.index<0)throw new Error("全局正则里找不到原来那条了（可能被删了或改了名字）");r.regex=s.list,Je()}e.written=!0,fn(e),await Yr(),Oe("success",`已写回「${e.name}」`),ue()}}async function Lm(){const e=I.origin,t=ir({find:e.backup.findRegex,replace:e.backup.replaceString});if(e.where==="card"){const n=St();if(!n||n.avatar!==e.avatar)throw new Error(`先在酒馆里打开原来那张卡「${e.charName}」`);const r=Ur(mn(n),e,t);if(r.index<0)throw new Error("找不到原来那条正则了");r.list[r.index].replaceString=e.backup.replaceString,await Vr(Re().characterId,n,r.list)}else{const n=Ur(Fi(),e,t);if(n.index<0)throw new Error("找不到原来那条正则了");n.list[n.index].replaceString=e.backup.replaceString,Re().extensionSettings.regex=n.list,Je()}e.written=!1,fn(e),await Yr(),Oe("success","已换回原来的样子"),ue()}function qm(){const e=St(),t=mn(e),n=Fi(),r=I.regexImported,s=I.regexSearch.trim().toLowerCase(),a=d=>d.filter(m=>!s||[m.scriptName,m.findRegex,m.replaceString].some(g=>String(g||"").toLowerCase().includes(s))),i=d=>{I.cur&&I.history.push(I.cur),I.cur=Mi(d,Bi(d.findRegex,Ml())),fn(null),$r(),I.tab="result",I.resOpen.add("edit"),ue()},o=A("input",{type:"file",accept:".json,application/json",style:"display:none",onchange:async d=>{const m=d.target.files?.[0];if(d.target.value="",!!m)try{const g=mm(await m.text());if(!g.length)throw new Error("文件里没有找到 regex_scripts 正则数组。请导出角色卡 JSON 或酒馆正则 JSON。");I.regexImported=g,Oe("success",`从「${m.name}」读到 ${g.length} 条正则`),ue()}catch(g){Oe("error",`读取正则失败：${g.message||g}`)}}}),c=(d,m)=>A("div",{class:"sf-card"},A("div",{class:"sf-card-main"},A("div",{class:"sf-card-title"},m.scriptName||"（没名字）",A("span",{class:"sf-dim"},[m.disabled?"已停用":"已启用",`${String(m.replaceString||"").length} 字`,Array.isArray(m.placement)?`位置 ${m.placement.join("/")}`:""].filter(Boolean).join(" · "))),A("div",{class:"sf-preview sf-mono"},String(m.findRegex||"").slice(0,140)),A("details",null,A("summary",{class:"sf-hint"},"查看替换代码"),A("pre",{class:"sf-pre"},String(m.replaceString||"").slice(0,9e3)))),A("div",{class:"sf-card-btns"},ge(d==="import"?"载入到结果":"拿来改",()=>d==="import"?i(m):Bm(d,m),"sf-sm sf-primary",{disabled:!String(m.findRegex||"").trim()}))),p=(d,m,g,y)=>A("div",{class:"sf-box"},A("div",{class:"sf-h"},`${d}（${m.length} 条）`),a(m).length?a(m).map(E=>c(g,E)):A("p",{class:"sf-hint"},m.length?"没有匹配搜索词的正则。":y));return A("div",{class:"sf-section"},A("p",{class:"sf-hint"},"这里会读取当前角色卡内嵌的正则和酒馆全局正则。选一条“拿来改”，可以保留它的运行位置、启用状态等设置，只修改匹配与替换内容。"),A("div",{class:"sf-line"},A("input",{type:"search",class:"sf-wide sf-grow",placeholder:"按名称、查找式、HTML 搜索",value:I.regexSearch,onchange:d=>{I.regexSearch=d.target.value,ue()}}),ge("刷新当前卡",()=>{Wr(!0),ue()},"sf-sm"),ge("从角色卡 / 正则 JSON 读取",()=>o.click(),"sf-sm"),o),p(e?`角色卡 · ${lr(e)}`:"当前角色卡",t,"card",e?"当前角色对象里还没找到内嵌正则。可以尝试刷新，或从导出的角色卡 JSON 读取。":"先打开一张角色卡，再来读取。"),p("酒馆全局正则",n,"global","没有全局正则。"),r.length?p("从文件读取（不会覆盖来源）",r,"import","文件里没有可用正则。"):null)}function jm(){const e=Me(),t=A("input",{type:"file",accept:".json,application/json",style:"display:none",onchange:async n=>{const r=n.target.files[0];if(n.target.value="",!r)return;const s=Sl(await r.text());if(s.error){Oe("error",s.error);return}e.designs.unshift(...s.designs),Je(),Oe("success",`导入了 ${s.designs.length} 个`),ue()}});return A("div",{class:"sf-section"},A("div",{class:"sf-row"},ge("导入",()=>t.click()),ge("导出全部",()=>Al("状态栏机-我的.json",JSON.stringify(kl(e.designs),null,2)),"",{disabled:!e.designs.length}),t),e.designs.length===0&&A("p",{class:"sf-hint"},"还没有保存的状态栏。在“结果”页点“保存到我的”，以后换卡可以直接载入再按意见改。"),e.designs.map(n=>A("div",{class:"sf-card"},A("div",{class:"sf-card-main"},A("div",{class:"sf-card-title"},n.name,A("span",{class:"sf-dim"},`${(n.fields||[]).length} 个字段 · ${n.savedAt?new Date(n.savedAt).toLocaleDateString():""}`)),A("div",{class:"sf-preview"},(n.instruction||"").replace(/\s+/g," ").slice(0,100))),A("div",{class:"sf-card-btns"},ge("载入",()=>{fn(null),I.cur&&I.history.push(I.cur),I.cur=ir(Pt(n)),$r(),I.tab="result",ue()},"sf-sm"),ge("删除",()=>{Rn.yes(`删除「${n.name}」？`)&&(e.designs=e.designs.filter(r=>r!==n),Je(),ue())},"sf-sm sf-danger")))))}function Qm(){const e=Me(),t=vm();return A("div",{class:"sf-section"},A("div",{class:"sf-box"},A("div",{class:"sf-h"},"AI 来源"),Qn&&A("label",null,A("input",{type:"checkbox",checked:e.followCard,onchange:n=>{e.followCard=n.target.checked,Je(),ue()}})," 跟Love 写卡机用同一个 API（Love 写卡机 → 设置 → 用哪个 API）"),A("div",{class:"sf-row"},A("select",{disabled:!!(Qn&&e.followCard),onchange:n=>{e.profileId=n.target.value,Je()}},A("option",{value:"",selected:!e.profileId},"酒馆当前连接的 API"),t.map(n=>A("option",{value:n.id,selected:e.profileId===n.id},`连接配置：${n.name}`))),A("span",null,"最大回复长度"),A("input",{type:"number",min:1024,step:1e3,style:"width:100px",value:e.maxTokens,oninput:n=>{e.maxTokens=Math.max(1024,Number(n.target.value)||12e3),Je()}})),A("p",{class:"sf-hint"},"设计一次要输出输出要求 + 正则 + 一大段 HTML，默认 12000。带参考图时要选支持看图的模型（连接配置或当前连接）；有图时一次生成最多调用 3 次：拆解 → 设计 → 自查（可以在参考图那里关掉）。")),A("div",{class:"sf-box"},A("div",{class:"sf-h"},"设计准则（头部）"),A("p",{class:"sf-hint"},"想让 AI 换一种做法，改这里。改过的会标出来，可以单独恢复默认。"),sl.map(([n,r])=>{const s=e.templates[n]??Wt[n],a=e.templates[n]!==void 0&&e.templates[n]!==Wt[n];return A("details",null,A("summary",null,r,a?"（已修改）":""),A("textarea",{class:"sf-code sf-tall",value:s,oninput:i=>{e.templates[n]=i.target.value,Je()}}),A("div",{class:"sf-row"},ge("恢复默认",()=>{delete e.templates[n],Je(),ue()},"sf-sm",{disabled:!a})))})),A("div",{class:"sf-box"},A("div",{class:"sf-h"},"数据"),A("p",{class:"sf-hint"},`已保存 ${e.designs.length} 个状态栏，存在酒馆的扩展设置里。参考图只在当前会话里用，不会保存。`),ge("清空当前设计",()=>{Rn.yes("清掉当前设计和草稿？（“我的”里保存的不受影响）")&&(I.cur=null,I.history=[],e.draft=null,fn(null),ue())},"sf-danger")))}var Ll={"data-sf-owner":Jr};function Rm(){for(const e of nt.querySelectorAll(`[data-sf-owner="${Jr}"]`))e.remove();rt=kt=Rt=cr=null,Ge.StatusForge?.owner===Jr&&delete Ge.StatusForge}function ql(){I.options={...I.options,...Me().designOptions||{}},I.referenceId=Me().referenceId||"",I.referenceCategory=Zr()?.kind==="opening"?"opening":"status";for(const e of["sf-menu-btn","sf-drawer","sf-root"])nt.getElementById(e)?.remove();if(!Qn){const e=nt.getElementById("extensionsMenu");if(e&&e.append(A("div",{id:"sf-menu-btn",...Ll,class:"list-group-item flex-container flexGap5 sf-menu-item",onclick:()=>{Xr(),e.style.display="none"}},A("div",{class:"fa-solid fa-chart-simple extensionsMenuExtensionButton"}),A("span",null,"状态栏机"))),lm){const t=qi("eventOn"),n=qi("getButtonEvent");if(t&&n)try{t(n("状态栏机"),Xr),qi("appendInexistentScriptButtons")?.([{name:"状态栏机",visible:!0}])}catch(r){console.warn(`[${jn}] 脚本按钮注册失败，仍可从魔棒菜单打开`,r)}}else{const t=nt.getElementById("extensions_settings2")||nt.getElementById("extensions_settings");t&&t.append(A("div",{id:"sf-drawer",...Ll,class:"inline-drawer"},A("div",{class:"inline-drawer-toggle inline-drawer-header"},A("b",null,`状态栏机 v${Cl}`),A("div",{class:"inline-drawer-icon fa-solid fa-circle-chevron-down down"})),A("div",{class:"inline-drawer-content"},ge("打开状态栏机",Xr))))}}Ge.StatusForge={open:Xr,close:pa,core:nl,owner:Jr},Qn?.register("status",{open:Xr,close:pa,isOpen:()=>!!rt}),window.addEventListener("pagehide",Rm)}nt.readyState==="loading"?nt.addEventListener("DOMContentLoaded",ql):ql();var Hm={},{W:zm,DOC:Dt,IN_SCRIPT:Fm}=Er,zn="data-cw-suite";if(!Fm&&!globalThis.__CW_INLINE_CSS__)for(const e of["preset/style.css","status/style.css"])try{const t=new URL(e,Hm.url).href;if(!Dt.querySelector(`link[href="${t}"]`)){const n=Dt.createElement("link");n.rel="stylesheet",n.href=t,n.setAttribute(zn,""),Dt.head.append(n)}}catch(t){console.warn("[Love 写卡机] 样式加载失败",t)}var Um=[{id:"preset",label:"预设机",icon:"fa-puzzle-piece"},{id:"status",label:"状态栏机",icon:"fa-chart-simple"}];var nfOwn=Math.random().toString(36).slice(2),nfDead=!1,nfObs=null;try{zm.__CW_MENU_OWNER=nfOwn}catch{}for(const e of Dt.querySelectorAll(`[${zn}-menu]`))e.remove();Dt.getElementById("cw_menu_button")?.remove();function _r(){if(nfDead)return;try{if(zm.__CW_MENU_OWNER&&zm.__CW_MENU_OWNER!==nfOwn)return}catch{}const e=Dt.getElementById("extensionsMenu");if(!e)return;for(const x of e.querySelectorAll(`[${zn}-menu]`))x.getAttribute("data-cw-own")!==nfOwn&&x.remove();let t=Dt.getElementById("cw_menu_button");t||(t=Dt.createElement("div"),t.id="cw_menu_button",t.className="list-group-item flex-container flexGap5 interactable",t.tabIndex=0,t.innerHTML='<div class="fa-solid fa-feather-pointed extensionsMenuExtensionButton"></div>Love 写卡机',t.setAttribute(`${zn}-menu`,"card"),t.setAttribute("data-cw-own",nfOwn),t.addEventListener("click",()=>{Er.switchTo("card"),e.style.display="none"}),e.append(t));for(const n of Um){let r=Dt.querySelector(`[${zn}-menu="${n.id}"]`);r||(r=Dt.createElement("div"),r.className="list-group-item flex-container flexGap5 interactable",r.setAttribute(`${zn}-menu`,n.id),r.setAttribute("data-cw-own",nfOwn),r.tabIndex=0,r.innerHTML=`<div class="fa-solid ${n.icon} extensionsMenuExtensionButton"></div>${n.label}`,r.addEventListener("click",()=>{Er.switchTo(n.id),e.style.display="none"})),t?t.after(r):e.append(r),t=r}}_r();const nfMenuBtn=()=>_r();try{const em=Dt.getElementById("extensionsMenu");em&&(nfObs=new zm.MutationObserver(()=>{nfDead||em.querySelector(`[data-cw-own="${nfOwn}"]`)||setTimeout(_r,60)}),nfObs.observe(em,{childList:!0}));Dt.getElementById("extensionsMenuButton")?.addEventListener("click",nfMenuBtn,!0)}catch(e){console.warn("[Love 写卡机] 魔棒入口守护",e)}var Ui=[{name:"Love 写卡机",id:"card"},{name:"预设机",id:"preset"},{name:"状态栏机",id:"status"}],es=new Set;function ts(){const e=zm.TavernHelper||window.TavernHelper,t=a=>typeof globalThis[a]=="function"?globalThis[a].bind(globalThis):typeof window[a]=="function"?window[a].bind(window):typeof e?.[a]=="function"?e[a].bind(e):null,n=t("eventOn"),r=t("getButtonEvent"),s=t("appendInexistentScriptButtons");if(typeof n!="function"||typeof r!="function")return!1;for(const a of Ui)if(!es.has(a.name)){if(globalThis.__CW_EARLY_BOUND?.has(a.name)){es.add(a.name);continue}try{const i=r(a.name);if(!i)continue;n(i,()=>Er.switchTo(a.id)),es.add(a.name)}catch(i){console.warn(`[Love 写卡机] 魔术棒按钮 ${a.name} 注册失败`,i)}}if(es.size&&typeof s=="function")try{s(Ui.map(({name:i})=>({name:i,visible:!0})))?.catch?.(i=>console.warn("[Love 写卡机] 魔术棒按钮补全失败",i))}catch(a){console.warn("[Love 写卡机] 魔术棒按钮补全失败",a)}return es.size===Ui.length}Er.readyHooks.push(()=>{_r(),ts()}),ts(),window.addEventListener("load",()=>{_r(),ts()},{once:!0}),setTimeout(()=>{_r(),ts()},700),setTimeout(()=>{_r(),ts()},2500),window.addEventListener("pagehide",()=>{nfDead=!0;try{nfObs?.disconnect();Dt.getElementById("extensionsMenuButton")?.removeEventListener("click",nfMenuBtn,!0)}catch{}for(const e of Dt.querySelectorAll(`[data-cw-own="${nfOwn}"],link[${zn}]`))e.remove();try{zm.__CW_MENU_OWNER===nfOwn&&(zm.__CW_MENU_OWNER="")}catch{}});var Gm=[{key:"cardType",name:"卡类型",single:!0,required:!0,tags:["单人卡|单人,一个角色","多人卡|多人卡,多角色,几个男主,几个女主","世界卡|世界卡,无固定角色,没有固定角色,无主角,世界书卡","大世界卡|大世界,开放世界,冒险,RPG,跑团","手枪卡|手枪,纯肉,h卡","模拟器/系统卡|模拟器,系统卡,经营,养成卡"]},{key:"source",name:"来源",single:!0,required:!0,tags:["原创|原创","同人|同人,原作,二创,衍生,原著"]},{key:"cp",name:"性向",required:!0,tags:["BG|BG,言情,男女主","GB|GB,女攻,女强男弱","BL|BL,耽美,男男","GL|GL,百合,女女","无CP|无CP,不谈恋爱,纯友情,事业线"]},{key:"count",name:"人数",single:!0,required:!0,tags:["1v1|1v1,1V1,一对一,双洁","NP|NP,多男主,多女主,后宫","群像|群像,多人,小队,团队","多线可选|多线,多路线,多结局"]},{key:"userRole",name:"user 身份",single:!0,tags:["主角|","旁观者|旁观,路人","自定义|"]},{key:"userGender",name:"user 性别",single:!0,tags:["女|女主,女user,女性向","男|男主视角,男user,男性向","不限|不限性别"]},{key:"cu",name:"c/u 定位",tags:["强c弱u|强c弱u,强c","弱c强u|弱c强u,强u","双强|双强","公c|公c,攻c","嬷c|嬷c,受c","公u|公u,攻u","嬷u|嬷u,受u","泥塑c|泥塑c,女化c","泥塑u|泥塑u,女化u","整塑c|整塑c,男化c","整塑u|整塑u,男化u","爹系c|爹系,爹c","疯c|疯c","乖c|乖c,听话","狗c|狗c,小狗c,大狗","宠u|宠妻,宠溺,宠u,护短","虐u|虐u","c追u|c追u","u追c|u追c,倒追","万人迷u|万人迷u,团宠"]},{key:"era",name:"时代与题材",tags:["现言|现代,都市,现言","古言|古代,古风,古言,王爷,侯爷","民国|民国,军阀,上海滩","年代|年代文,七零,八零,九十年代","仙侠|仙侠,修仙,仙尊,宗门,师尊,飞升","玄幻|玄幻,异世,魔法","武侠|武侠,江湖,门派,侠客","宫廷|宫廷,皇宫,太子,后妃","宅斗|宅斗,嫡庶,侯府,主母","豪门|豪门,世家,继承人,联姻","娱乐圈|娱乐圈,明星,影帝,影后,顶流,爱豆","电竞|电竞,战队,职业选手","校园|校园,学校,学长,学姐,同桌,高中,大学","职场|职场,上司,公司,同事,下属","刑侦|刑侦,刑警,破案,法医,凶案","悬疑|悬疑,谜团,凶手,真相","灵异|灵异,鬼魂,阴阳,驱魔,捉鬼","规则怪谈|规则怪谈,怪谈","末世|末世,丧尸,天灾,避难所","废土|废土","星际|星际,星舰,机甲,帝国元帅","赛博朋克|赛博,义体,赛博朋克","西幻|西幻,骑士,魔王,精灵,教会,主教,圣女","克苏鲁|克苏鲁,邪神,古神,不可名状","ABO|ABO,alpha,omega,信息素,发情期","兽人|兽人,兽世,兽耳","种田|种田,农家,田园","无限流|无限流,副本,逃生游戏","快穿|快穿","穿书|穿书,炮灰,原书剧情","都市异能|异能,超能力,觉醒者","军旅|军旅,军人,部队,军校","医疗|医院,医疗,外科,急诊","宗教神明|神明,信徒,神殿,神父,修女,神谕","哨向|哨兵,向导,哨向","血族|吸血鬼,血族","妖怪|妖怪,狐妖,狐狸精,妖族","人外|人外,非人","机器人/AI|仿生人,机器人,人造人,AI恋人","海洋|人鱼,海妖,深海","游戏|网游,游戏世界,NPC觉醒","贵族学院|贵族学院,贵族学校","权谋|","大逃杀|大逃杀,生存游戏","高干|高干,红三代","职校|职校,技校","魔法校园|魔法校园,魔法学院","港风|港风,港片,九龙","乱世|","末法时代|末法时代,末法","志怪|志怪","神话|神话","谍战|谍战","战争|","密室逃脱|密室逃脱","剧本杀|剧本杀","直播|直播","荒岛求生|荒岛求生,荒岛","和风|和风,阴阳寮","维多利亚|维多利亚","体育|","美食|"]},{key:"archetype",name:"角色原型",tags:["霸总|霸总,总裁,董事长,CEO","京圈太子爷|太子爷,京圈","疯批|疯批","病娇|病娇,偏执","清冷仙尊|仙尊,清冷","高岭之花|高岭之花,高冷","魔尊|魔尊,魔头","神明|神明,神祇","帝王|帝王,皇帝,陛下,暴君","将军|将军,大将军","杀手|杀手,刺客","黑道|黑道,黑帮,帮派老大","反派|反派,大反派","忠犬|忠犬,野性忠犬","狼狗|狼狗","奶狗|奶狗","腹黑|腹黑","白切黑|白切黑","美强惨|美强惨","小白花|小白花","绿茶|绿茶","落魄贵族|落魄,没落贵族","学霸|学霸","混混|混混,校霸,不良","偶像|偶像","医生|医生","律师|律师","警察|警察,刑警","老师|老师,教授,导师","神父/修女|神父,修女,牧师","竹马|竹马","继兄|继兄,继妹,继姐","质子|质子","公主|公主","魔女|魔女,女巫","骑士|骑士","扒手/盗贼|扒手,小偷,盗贼,怪盗","孤儿|孤儿","男妈妈|男妈妈,妈系,老妈子,人夫感","人夫|人夫,好男人,温柔人夫","恋爱脑|恋爱脑","毒舌|毒舌","社恐|社恐","笨蛋美人|笨蛋美人","钓系|钓系,钓系美人","斯文败类|斯文败类","禁欲系|禁欲","大狗狗|大狗狗,金毛","野狗|野狗","阴湿男鬼|阴湿,男鬼","暗卫|暗卫","少年将军|少年将军","纨绔|纨绔,二世祖","大叔|大叔","御姐|御姐","恶役|恶役,穿成恶役","恶女|恶女","大小姐|大小姐","疯美人|疯美人","万人嫌|万人嫌","兄系|兄系"]},{key:"trait",name:"性格与特质",tags:["语言障碍|语言障碍","倒贴男|倒贴男,倒贴","妒夫|妒夫","明骚|明骚","闷骚|闷骚","眼镜男|眼镜男,眼镜","自卑敏感|自卑敏感,自卑","占有欲强|占有欲强,占有欲","黏人|","焦虑型依恋|焦虑型依恋,焦虑型","回避型|回避型","非典型道德观|非典型道德观,非典型","直男（伪）|直男（伪）,伪直男","重力系|重力系","傲娇|傲娇","毒舌心软|毒舌心软","工作狂|","外柔内刚|外柔内刚","直球|","温润如玉|温润如玉","精致利己|精致利己","伪善|","傲慢|","冷血|","情感空洞|情感空洞","享乐主义|","暴躁|","嘴臭|","嘴硬|","好面子|好面子","防备心重|防备心重,防备心","沉稳可靠|沉稳可靠,沉稳","内核稳定|内核稳定","理想主义|","感情迟钝|感情迟钝,迟钝","厨艺精湛|厨艺精湛,厨艺","控制狂|控制狂,控制欲","野心家|野心家,野心","乐子人|乐子人,乐子","笑面虎|笑面虎","毁容|","双耳失聪|双耳失聪,失聪","病美人|病美人","糙汉|糙汉","骄纵少爷|骄纵少爷,骄纵","小太阳|小太阳","冰山|","病弱|","反社会|反社会","口是心非|口是心非,嘴硬心软","爱撒娇|","醋精|醋精,爱吃醋","洁癖|洁癖","强迫症|强迫症","沉默寡言|","死心眼|","缺爱|","讨好型人格|讨好型人格,讨好型","安全感缺失|安全感缺失,没安全感","反骨|","失明|","失语|","纯爱战神|纯爱战神","偏执|偏执,偏执狂"]},{key:"job",name:"职业与身份",tags:["猎人|","黑道少主|黑道少主","亡国公主|亡国公主,亡国","神女|神女","谋士|","皇子|","狼人|狼人","魅魔|魅魔","梦魇|梦魇","女仆|女仆","领主|","财阀|财阀","贫困优等生|贫困优等生,贫困生","社畜|社畜","药师|药师","留学生|留学生,留学","艺术生|艺术生,艺考","作家|","首辅|首辅","包租公|包租公,包租","法学生|法学生,法学","电竞选手|电竞选手","游戏主播|游戏主播,主播","退役选手|退役选手,退役","黑粉|","便利店店员|便利店店员,便利店","音乐人|音乐人","宗主|宗主","刀客|刀客","骗子|","刽子手|刽子手","舞者|","琴师|琴师","药人|药人","游医|游医","神医|神医","男模|男模","博主|","演员|","调酒师|调酒师,调酒","凤凰男|凤凰男","攻略者|攻略者,攻略","创业者|","刀修|刀修","转学生|转学生,转学","宅男|","画师|","UP主|UP主,up主","权臣|权臣","傀儡师|傀儡师,傀儡","国师|国师","佛子|佛子","剑灵|剑灵","剑修|剑修","官员|","赛车手|赛车手,赛车","魔法少年|魔法少年","家族弃子|家族弃子,弃子","医毒双修|医毒双修,医毒","鳏夫|鳏夫","摄影师|摄影师","记者|记者","厨师|厨师","咖啡师|咖啡师","侦探|侦探","消防员|消防员","飞行员|飞行员","拳手|拳手","经纪人|经纪人","保镖|保镖","家庭教师|家庭教师","学生会长|学生会长","戏子|戏子","捕快|捕快","仵作|仵作","太医|太医","道士|道士","阴阳师|阴阳师","炼丹师|炼丹师","器灵|器灵","妖王|妖王","恶魔|","心理医生|心理医生","体育生|体育生"]},{key:"relation",name:"关系结构",tags:["青梅竹马|青梅竹马,一起长大,从小认识","天降|天降","契约婚姻|契约,协议结婚,合约","先婚后爱|先婚后爱","联姻|联姻,商业联姻","宿敌|宿敌","死对头|死对头,冤家","师徒|师徒,徒弟","主仆|主仆,侍卫,管家,侍从","君臣|君臣","养成|养成,养成系,从小养大,捡来,收养,养父,义父,养母","年上|年上","年下|年下","强取豪夺|强取豪夺,强制爱","追妻火葬场|火葬场,追妻","破镜重圆|破镜重圆,重逢,分手","救赎|救赎","互相救赎|互相救赎","替身|替身,白月光","暗恋|暗恋","双向暗恋|双向暗恋","假戏真做|假戏真做,假扮情侣","伪骨科|伪骨科","禁忌|禁忌,不伦","敌对阵营|敌对,阵营,卧底","前任|前任,前男友,前女友","网恋奔现|网恋,奔现","相爱相杀|相爱相杀","金主|金主,包养","仇人|仇人,杀父,灭门","同居|同居,合租","邻居|邻居","姐弟恋|姐弟恋","上下级|上下级","一见钟情|一见钟情","日久生情|日久生情","室友|","恶友|恶友","入赘|入赘,上门女婿","娃娃亲|娃娃亲,指腹为婚","协议情侣|协议情侣,协议恋爱","健康恋爱|健康恋爱,健康的恋爱","先恨后爱|先恨后爱,欢喜冤家","相亲|相亲","和亲|和亲,和亲公主","地下恋|地下恋,不公开","无爱婚姻|无爱婚姻,无爱","异地恋|异地恋,异地","妻管严|妻管严,怕老婆","朋友变恋人|朋友变恋人,友达以上","阶层差距|阶层差距,门不当户不对","引导型恋人|引导型恋人,引导型","第三者|","情人|","对抗路情侣|对抗路情侣,对抗路","异国恋|异国恋,异国","房东与租客|房东与租客,房东,租客","恋爱磨合|恋爱磨合,磨合","离异|","不婚|","才能差距|才能差距,天才与凡人","师兄弟|师兄弟,师兄,师弟,同门","兄弟|","情敌|","搭档|","盟友|","共犯|","师生|","粉丝|","前辈后辈|前辈后辈,前辈,后辈","医患|医患,患者","办公室恋情|办公室恋情","暧昧|","推拉|","双向奔赴|双向奔赴","隐婚|隐婚","恋人未满|恋人未满","互相利用|互相利用"]},{key:"plot",name:"情节梗",tags:["重生|重生","穿越|穿越","系统|系统","掉马|掉马","马甲|马甲","双重身份|双重身份,隐藏身份","修罗场|修罗场","黑化|黑化","失忆|失忆,不记得,忘了我","替嫁|替嫁","退婚|退婚","逃婚|逃婚","带球跑|带球跑","打脸|打脸","复仇|复仇,报仇","真假千金|真假千金,真千金,假千金","扮猪吃虎|扮猪吃虎","囚禁|囚禁,关起来,金丝雀","循环|循环,轮回,重置,回档","死遁|死遁,假死","HE|HE,圆满","BE|BE,永别,离去","开放结局|开放结局","久别重逢|久别重逢","先虐后甜|先虐后甜","误会|误会,误会纠葛","养崽|养崽,带娃","追夫火葬场|追夫","恋综|恋综,恋爱综艺","筑巢|筑巢","破产|","冷战|","自由探索|","属性成长|","势力周旋|","家仇国恨|家仇国恨,国恨家仇","复国|复国","认错救命恩人|认错救命恩人,认错恩人","历劫|历劫","誓约束缚|誓约束缚,誓约","反霸凌|反霸凌,霸凌","毁灭式测试|毁灭式测试,毁灭测试","共同创伤|共同创伤","女扮男装|女扮男装","背叛|","共同穿越|共同穿越,一起穿越","钟情蛊|钟情蛊,情蛊","隐居|","嫉妒|","学习成长|","以身殉道|以身殉道,殉道","卜算|卜算","学院竞争|学院竞争","行侠仗义|行侠仗义","原生家庭矛盾|原生家庭矛盾,原生家庭","江湖恩怨|江湖恩怨,恩怨","玩偶变身|玩偶变身,变成玩偶","白手起家|白手起家","灵魂互换|灵魂互换,互换身体","校园活动|","职业体验|","研学旅行|研学旅行","抢婚|抢婚","宠妾灭妻|宠妾灭妻,宠妾","复活|","能力觉醒|能力觉醒,觉醒","商战|商战","古穿今|古穿今,古人穿越","转世续缘|转世续缘,转世,前世今生","无情道|无情道","血脉觉醒|血脉觉醒,血脉","因伤退役|因伤退役,伤病退役","夺嫡|夺嫡","宫变|宫变","刺杀|","下毒|","绑架|","逃亡|","追杀|","解谜|","出道|","夺冠|","告白|","求婚|","订婚|","复婚|","奉子成婚|奉子成婚","英雄救美|英雄救美","照顾病人|","记忆篡改|记忆篡改","白月光回国|白月光回国","意外同居|意外同居","联手|"]},{key:"flavor",name:"风味",tags:["甜宠|甜宠,甜文,小甜","虐恋|虐恋,虐文,很虐","极限拉扯|拉扯","酸涩|酸涩,遗憾,错过","糖里藏刀|糖里藏刀","刀子|刀子","沙雕|沙雕,搞笑,搞怪","轻松日常|日常,轻松","治愈|治愈","温情|温情,温馨","暗黑|暗黑,黑暗向","致郁|致郁","爽文|爽文,爽点","悬疑烧脑|烧脑","史诗|史诗","群像戏|群像戏","高甜|高甜","慢热|慢热","发疯文学|发疯","下饭|下饭","哥特|哥特,哥特风","全员恶人|全员恶人,全员恶","抓马|","狗血|","恋爱喜剧|恋爱喜剧,爱情喜剧","市井烟火|市井烟火,烟火气,市井","慢节奏|","快节奏|","文艺|","反转|","黑色幽默|黑色幽默","荒诞|","意难平|意难平","宿命感|宿命感","破碎感|破碎感","氛围感|氛围感","电影感|电影感","细水长流|细水长流"]},{key:"rating",name:"尺度",single:!0,tags:["清水|清水","微肉|微肉","肉|NSFW,色色,涩涩,开车"]},{key:"platform",name:"平台味",single:!0,tags:["晋江味|晋江","起点味|起点","长佩味|长佩","番茄味|番茄"]},{key:"complexity",name:"世界观复杂度",single:!0,tags:["简单|","中等|","复杂|"]}],Jm={晋江味:"情感拉扯为主线，心理细腻，关系的每一步推进都要有来由和代价",起点味:"事业线与成长为主线，目标清楚，爽点节奏明确，感情服务于成长",长佩味:"克制细腻，生活质感强，情感在日常细节里慢慢积累",番茄味:"节奏快，钩子密，冲突直给，每段都有推进"};function jl(e,t){const[n,r="",...s]=String(e).split("|"),a=r.split(/[,，]/).map(c=>c.trim()).filter(Boolean),i={name:n.trim(),dim:t,triggers:a},o=s.join("|").trim();return o&&(i.gloss=o),i}function Gi(e={},t={}){return Gm.map(n=>{const r=n.tags.map(a=>jl(a,n.key)).filter(a=>a.name);for(const a of e?.[n.key]??[]){const i=jl(a,n.key);if(!i.name)continue;const o=r.findIndex(c=>c.name===i.name);o>=0?r[o]=i:r.push(i)}const s=new Set(t?.[n.key]??[]);return{...n,tags:r.filter(a=>!s.has(a.name)).map(a=>a.gloss||!Ji[a.name]?a:{...a,gloss:Ji[a.name]})}})}function $e(e,t){return e.find(n=>n.key===t||n.name===t)}function ns(e,t,n){const r=String(t??"").trim();if(!r)return null;if(n){const a=$e(e,n)?.tags.find(i=>i.name===r);if(a)return a}for(const s of e){const a=s.tags.find(i=>i.name===r);if(a)return a}return null}var Wm=e=>/^[\x20-\x7e]+$/.test(e),Vm=e=>e.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");function Ym(e,t){return t?Wm(t)?new RegExp(`(?<![A-Za-z])${Vm(t)}(?![A-Za-z])`,"i").test(e):e.includes(t):!1}function Km(e,t){const n=String(e??""),r=[];for(const s of t){const a=[];for(const i of s.tags){const o=i.triggers.find(c=>Ym(n,c));o&&a.push({dim:s.key,name:i.name,hit:o})}s.single?a.length&&(a.sort((i,o)=>n.indexOf(i.hit)-n.indexOf(o.hit)),r.push(a[0])):r.push(...a)}return r}function Xm(e,t=["complexity"]){return e.filter(n=>!t.includes(n.key)).map(n=>`${n.name}${n.single?"（单选）":""}：${n.tags.map(r=>r.name).join("、")}`).join(`
 `)}function Kt(e,t,n,r,s=!0){const a=$e(t,n);let i=(e??[]).filter(o=>!(o.dim===n&&o.name===r));return s&&(a?.single&&(i=i.filter(o=>o.dim!==n)),i.push({dim:n,name:r})),i}function rs(e,t){const n=[];for(const r of e??[]){const s=typeof r=="string"?r:r?.name,a=ns(t,s,typeof r=="object"?r?.dim:void 0);a&&!n.some(i=>i.dim===a.dim&&i.name===a.name)&&n.push({dim:a.dim,name:a.name})}return n}var Ji={公c:"角色是左位，即攻",嬷c:"角色是右位，即受",公u:"user 是左位，即攻",嬷u:"user 是右位，即受",泥塑c:"角色被女性化处理（泥塑）",泥塑u:"user 被女性化处理（泥塑）",整塑c:"角色被男性化处理（整塑）",整塑u:"user 被男性化处理（整塑）",重力系:"爱得沉重、执念深，付出带着独占欲，让对方有压力（比病娇内敛，多是精神层面，不直接伤害）",钓系:"很会撩、像花花公子但不油腻，看着对你有意思又抓不住（捉摸不定）",养成:"从小养大的关系，年龄差通常较大（养成系）",纯爱战神:"只认一个人（1v1），爱情纯粹，不掺家庭、财富、地位等外界因素",引导型恋人:"一方耐心引导、陪另一方（常是拧巴、回避的人）慢慢打开自己",对抗路情侣:"互相怼、互相嘴硬，吵吵闹闹里是深情（来自游戏对抗路的梗）",明骚:"外表直白地撩人、不藏",闷骚:"外表闷、不主动，私下很会",乐子人:"爱看热闹、爱添乱的人",凤凰男:"出身贫寒、靠自己上位，家里是拖累",攻略者:"带着任务或系统来攻略别人的人",倒贴男:"男方单方面倒追、不断付出",妒夫:"爱吃醋的丈夫或伴侣",地下恋:"不对外公开的恋情",毁灭式测试:"用伤害关系的方式试探对方会不会留下","直男（伪）":"自称直男，其实不是",万人嫌:"谁见了都讨厌的人",醋精:"爱吃醋的人",兄系:"像哥哥一样照顾人、靠得住",恶役:"故事里的反派角色身份，常见于穿成恶役",强c弱u:"角色强势、user 弱势",弱c强u:"角色弱势、user 强势",双强:"两人都强",爹系c:"角色像爹一样管着、护着 user",疯c:"角色是疯批",乖c:"角色乖顺听话",狗c:"角色是小狗型",宠u:"角色宠 user",虐u:"user 被虐",c追u:"角色追 user",u追c:"user 追角色",万人迷u:"user 是万人迷、被所有人喜欢"};function Wi(e,t){return t.map(n=>{const r=(e??[]).filter(s=>s.dim===n.key).map(s=>{const a=n.tags.find(i=>i.name===s.name)?.gloss??Ji[s.name];return a?`${s.name}（${a}）`:s.name});return r.length?`${n.name}：${r.join("、")}`:""}).filter(Boolean).join("；")}function pt(e,t){return(e??[]).filter(n=>n.dim===t).map(n=>n.name)}function Zm(e,t=8){const n=["cp","count","era","relation","flavor","plot","archetype","rating"],r=[];for(const s of n)for(const a of e??[])a.dim===s&&!r.includes(a.name)&&r.push(a.name);return r.slice(0,t)}var da=["era","archetype","trait","job","relation","plot","flavor"],gn=["era","archetype","relation","plot","flavor"];function $m(e,t={},n=Math.random,{dims:r=gn,count:s}={}){const a=[...new Set([...r,...Object.keys(t).filter(g=>t[g])])].filter(g=>$e(e,g)?.tags.length),i=a.filter(g=>t[g]),o=a.filter(g=>!t[g]),c=s==null?a.length:Math.max(1,Math.floor(Number(s))||1),p=Math.max(0,Math.min(o.length,c-i.length)),d=new Set(o);if(p<o.length){const g=[...o];for(let y=g.length-1;y>0;y--){const E=Math.floor(n()*(y+1));[g[y],g[E]]=[g[E],g[y]]}d.clear();for(const y of g.slice(0,p))d.add(y)}const m={};for(const g of a){if(t[g]){m[g]=t[g];continue}if(!d.has(g))continue;const y=$e(e,g).tags;m[g]=y[Math.floor(n()*y.length)].name}return m}var Vi="〔user〕",Ct={通用:`作者写明的设定、喜好和限制一律照办。作者没写到的生活、往事、人际可以补；作者说了“先留白”“以后再定”或“只整理不扩写”的地方就照做。没逐项写到不等于不许写，但新编的内容不能推翻已经定下的事实。
@@ -2377,26 +2273,29 @@ A("div",{class:"sf-bar",style:"flex-wrap:wrap"},ge("一起写进角色卡",()=>H
 关系可以直说亲近、信任、喜欢或怨恨，不必全改写成动作让人去猜。两边的过去和各自的看法都要留着；有感情的关系里照样可以有失望、分歧和各自的生活。已经定下的感情照写，以后会怎么变，不替作者或〔user〕决定。
 细节看需要。数字、物件、衣服上的痕迹不是用来“显得真实”的；没有依据就不要补磨损、褪色、污渍，也别把人物本来有的钱、权和活动范围写小。示例只帮你理解写法，不要搬其中的人物、情节、台词和经历。
 设定里可以直接列“不要做什么”。作者给的限制都留着；理由、例外或替代做法有依据时才写，不为填满字段去猜动机。
-句子要清楚、连贯。不要拿固定小动作、口头禅、套话和作者旁白充数。示例台词和行为是帮助理解这个人的，不是让正文反复照演的。`,人物层次:`分开三样东西：客观上发生了什么、人物自己怎么认为、作者要扮演的 AI 怎么演。人物可以看错自己、信错别人，他嘴上的理由不一定是全部原因，不要把他的看法写成这个世界的真相。
-先找他的底子：拿掉眼下的感情线和职业身份以后，这个人还剩下怎样的脾气和待人方式。能力、处境、手段、一时的火气，或者“喜欢〔user〕”，都不能独占这一项。别人第一眼看到的样子可以和底子接近，也可以差得远，不必硬写成外冷内热或表里不一。
+句子要清楚、连贯。不要拿固定小动作、口头禅、套话和作者旁白充数。示例台词和行为是帮助理解这个人的，不是让正文反复照演的。
+写进卡里的文字只写这个世界和这些人，不出戏：不出现「AI」「扮演」「预设」「模型」「角色卡」「本卡」「设定里」「玩家」这类词，也不写「你要演」「请扮演」这种对 AI 说话的句子。要提到用户就写〔user〕。基调与规则里要交代写法时，也直接说「用旁白视角」「节奏放慢」，不说「AI 要怎样」。
+不写具体的时间：不写年份、日期、几点几分、「三年前」「上个月」这类精确时间，年龄也只在设定确实需要时写。事情有先后时，用时间轴交代：按顺序写「阶段：发生了什么」，从早到晚排，最后一格是「故事开始」。
+世界书里的字会一直留着，剧情却会往前走。所以不写会过期的「现在」「目前」「眼下」「最近」「如今」这类状态，只写长期成立的事实：脾气、来历、关系的底子、世界的规矩。故事开头那一刻的情形，写成时间轴的最后一格「故事开始：……」，说明这只是起点，之后会随剧情变。`,人物层次:`分开三样东西：客观上发生了什么、人物自己怎么认为、作者要扮演的 AI 怎么演。人物可以看错自己、信错别人，他嘴上的理由不一定是全部原因，不要把他的看法写成这个世界的真相。
+先找他的底子：拿掉眼下的感情线和职业身份以后，这个人还剩下怎样的脾气和待人方式。能力、处境、手段、一时的火气，或者“喜欢〔user〕”，都不能独占这一项。别人第一眼看到的样子可以和底子接近，也可以差得远，不必硬写成外冷内热或表里不一。至少给他一处真正反第一印象的地方（比如强势的人吵架会哭，爱上了反而冷下来），并写出它的来由。
 再找他放不下的两头：他同时在乎、却没法时时兼顾的东西，各自对他意味着什么；在什么情况下他偏向哪一头，选完以后心里还挂着什么。不是写两个反义词就算完，也不要一句“其实都是因为爱”把所有想法收成一个原因。
 这些取舍要能套到不同的事情上，不要写成“遇到 X 就做 Y”的对照表。不用凑够几条，也别把每个人都写得犹豫、阴暗、口是心非；干脆、温柔、忠心的人一样成立，照样能写出他还在意别的什么。
-最后把来历、想法、关系、行事放在一起看：彼此要有联系，又各自多给一点信息。面对不同的人、在不同年纪和处境里，他会露出不同的一面；整张卡不该只是在反复证明最开始那个标签。`,零度写作:`像说明书一样把这个世界讲清楚：这里的人怎么过日子，规矩怎么运转，人能做什么、不能做什么，眼下正在发生什么。某个人物或组织自己的说法，要注明是谁说的，不替它打包票。
+最后把来历、想法、关系、行事放在一起看：彼此要有联系，又各自多给一点信息。面对不同的人、在不同年纪和处境里，他会露出不同的一面；整张卡不该只是在反复证明最开始那个标签。`,零度写作:`像说明书一样把这个世界讲清楚：这里的人怎么过日子，规矩怎么运转，人能做什么、不能做什么，故事开始前发生过什么。某个人物或组织自己的说法，要注明是谁说的，不替它打包票。
 已有的利益冲突、互相依赖和种种不便都可以写，和人物生活有关的空白也可以补。不用宏大的评语代替事实，也不给每个地方、每个组织都安排秘密或争斗。
-该写的写清，常识不展开成百科。用词以好懂为先，不要因为追求客观而把事实之间的因果删掉。`,开场构思:`题材从人物的来历、彼此的关系和这个世界的日常里找；作者没给具体剧情时，主动提出来。设定里还没展开的部分可以接着写，不必总围着构想里最显眼的身份或同一个矛盾转。
-一批候选里每条讲一件不同的、值得写下去的事。每条用一小段说清：这次发生了什么，人物为什么卷进来，〔user〕可以怎么参与。让作者一看就知道接下来能写什么，不要拿“张力”“试探”“升温”这类词代替情节。
-整批放在一起检查：如果换个地点、天气、道具或出场顺序，后面还是同一件事、同一种互动，就换掉。几条不能只是同一件事的不同片段，也不能把同一种邀约、照顾或争吵换个皮反复出现。
-可以写人物各自的生活，也可以用到他和别人的关系；平常相处也能成立，按题材挑。不要每批都固定分配“日常、误会、秘密、意外”各一条，也不靠接连出事或突然揭秘制造差别。NPC 有合适的戏才出场。
-沿用这条路线已有的身份、时期和关系；没定的事可以补，但不要为了新鲜另造身世、能力或往事。作者明确要同一件事的几个版本时，按作者给的范围想。
-分清资料怎么用：构想、经历和短篇提供人物和前情，想新点子时不要默认重演里面写过的事；文风示例只学表达，不带进其中的事件和台词，也不换个名字重演一遍。现有候选和旧开场用来避免重复。作者选定了某个点子，或要求改写、续写某段时，照作者指定的来。`,开场白:`顺着选定的事写一段小说正文，让读的人亲历这一次相处。人物带着自己的来历和眼下的心事说话做事，不要逐条表演性格标签，也不要把人设介绍改成台词再念一遍。
-从这段故事最合适的地方切入，需要的前情顺手带出来，不必每次都从开门、进场或递东西写起。环境、心理和对白按内容安排，不要靠摆弄道具、固定小动作或反复写眼神凑字数。
-给人物留下值得继续相处、继续琢磨的地方。写到〔user〕可以接话的地方就停，可以停在对话或事情的半截，不必非得以提问、命令、突然打断或反转收尾；不要把本该让玩家玩的部分提前写完。
-不替〔user〕说话、行动、做决定，不写〔user〕心里在想什么。照作者的文风要求写，正文后面不附剧情分析。`,对白:`把上下两句连起来读：这一句有没有接住对方刚说的，有没有回应眼前的事。对方问的是小事，先回答这件小事，别急着讲一番两人关系的大道理。人物心里另有事时，可以答一半、答偏、改口，但要说得出他此刻为什么这么说。
-两人都知道的背景，不用借对话互相讲给读者听。人物可以有行话和自己的说法，但不会一开口就亮明身份，也不会为了让读者看懂性格而背人设。冷淡、亲近、客气、不耐烦，体现在这一次怎么对待对方上，不用规定一套固定口癖。
-允许人物说普通的话，不是每句都要漂亮、完整、有深意。该直说就直说，别把日常回话写成格言、谜语或宣判；省略、停顿、反问看这次谈话需不需要，不逐条安排。话说完了就接着做事，叙述不必在每句台词后面解释它是什么意思。`,措辞:`设定和小说正文用处不同。设定要把人物的想法、感情和做事的缘由讲明白；正文可以让读者从相处里自己体会，不必每个动作、每句台词后都解释。不要拿正文“少解释”的要求，把人设里的内心也删空。
-不要靠程度副词和绝对化的判断去加重同一个特点。作者定下的性格、感情和底线保留；需要说明分寸时，写清他所处的情境、关系和顾虑，不要给每种反应机械地配次数和条件。
-说话方式可以概括，但要结合身份、教养、交往的人和当时的事。示例里可以有普通的话，不要求每句都独一无二，也不用每句都标语气。日常回话不写成格言和人格宣言。
-一个意思说一遍。形容词、心理和感情词按内容用，不堆空泛的大词，也不要拿道具、小动作和脸色变化代替所有情绪。人与人的区别来自各自的整段人生和想法，不必人人藏一个秘密或一件专属道具。`,行文:`这一条管正文（开场白、扩写、试玩回复）怎么写；也会写进基调与规则，让之后的正文照着来。
+该写的写清，常识不展开成百科。用词以好懂为先，不要因为追求客观而把事实之间的因果删掉。`,开场构思:`点子从人物的过去、他们之间的牵扯和这个世界的日常里找。作者没给具体剧情时，你主动提。设定里还没展开的部分可以拿来用，不用每次都绕着构想里最显眼的身份或同一个矛盾打转。
+这一批里每个点子讲一件不一样、值得往下演的事。每个用一小段说明白：这回出了什么事，人物为什么会卷进来，〔user〕能从哪里插手。要让作者一看就知道后面能演什么，别拿「张力」「拉扯」「暧昧升温」这类词充当情节。
+交之前把整批摆在一起看：要是换个地点、天气、道具或谁先出场，底下还是同一件事、同一种来回，就换掉。几个点子不能是同一件事切成几段，也不能是同一种邀约、照顾或吵架换身衣服反复出现。
+可以写人物各自的日子，也可以借他和别人的关系；平平常常的相处也可以是好点子，看题材挑。别每批都机械地分一个日常、一个误会、一个秘密、一个意外，也别靠接二连三出事或突然揭底来拉开差别。NPC 有合适的戏份才让他出来。
+这条路线已经定的身份、时期和关系照用；没定的可以补，但别为了新鲜另给人物编身世、本事或往事。作者明说要同一件事的几种写法时，照作者给的范围想。
+资料各有用处：构想、经历和短篇交代的是人物和前情，想新点子时别默认把里面写过的事再演一遍；文风示例只学说话的味道，不把里面的事和台词搬进来，也不换个名字重演。现有候选和旧开场白是拿来躲重复的。作者已经选中某个点子，或要你改写、接着写某一段时，照作者指的来。`,开场白:`照选中的点子写一段小说正文，让读的人像亲身经历这一回相处。人物带着自己的过去和眼下的心事去说、去做，不必把性格标签挨个演一遍，也别把人设介绍改成台词念出来。
+从这段故事最合适的地方切进去，需要的前情顺手带出来；不用每次都从推门、进屋或递东西写起。景、心思和对话按内容安排轻重，别靠摆弄小道具、固定小动作或反复写眼神来凑字。
+给人物留点让人想继续相处、继续琢磨的地方。写到〔user〕能接话的地方就停，可以停在一句话或一件事的半截，不必非用提问、命令、突然打断或反转来收；本该留给玩家玩的部分别先写完。
+不替〔user〕说话、动手、拿主意，不写〔user〕心里在想什么。照作者的文风要求写，正文后面不附剧情分析。`,对白:`每句台词都和上一句连起来读：有没有接住对方刚说的话，有没有回应眼前这件事。对方问的是件小事，就先把小事答了，别马上扯到两人关系上讲道理。人物心里另有事时，可以只答一半、答偏、说到一半改口，但得说得出他此刻为什么这么说。
+两人都知道的事，不借着对话讲给读者听。人可以有行话和自己的说法，但不会一张嘴就报上身份，也不会为了让读者明白他的性格而背人设。冷淡、亲近、客气、不耐烦，体现在这一回他怎么对待对方，而不是一套固定的口头禅。
+允许人说普通的话，不是每句都得漂亮、完整、意味深长。该直说的就直说，别把家常的回话写成格言、谜语或判词；省略、停顿、反问看这场谈话用不用得着，不逐句安排。话说完了就接着做事，叙述不用在每句台词后面解释它的意思。`,措辞:`设定和小说正文是两回事。设定要把人物的想法、感情和做事的缘故讲明白；正文才可以让读者从相处里自己体会，不用每个动作、每句台词都解释。别拿正文「少解释」的要求，把人设里的心思也删光。
+别靠「极其」「从不」「唯一」这类程度词和绝对说法去加重同一个特点。作者定下的性格、感情和底线照留；要说明分寸时，写清他身处的情形、关系和顾虑，别给每种反应硬配次数和条件。
+说话方式可以总起来讲，但要跟身份、教养、常打交道的人和当时的事连起来。示例里可以有家常话，不要求句句与众不同，也不用每句都标语气。日常回话别写成格言和人生宣言。
+一个意思说一遍就够。形容词、心理词、感情词按内容用，不堆空泛的大词，也别拿道具、小动作和脸色变化顶替所有情绪。人和人的区别来自各自整段人生和想法，不需要人人揣着一个秘密或一件专属物件。`,行文:`这一条管正文（开场白、扩写、试玩回复）怎么写；也会写进基调与规则，让之后的正文照着来。
 1. 句子要完整，说清谁做了什么，不靠上下文去猜，也不絮叨。
 2. 写完动作就停，不跟一句解释。一个人在路口站了很久，读者自己知道他在等，不必再补“他在等人”。
 3. 不用“不是 A，也不是 B，而是 C”这种句式。真要解释，就把前因后果连起来说。
@@ -2473,133 +2372,140 @@ A("div",{class:"sf-bar",style:"flex-wrap:wrap"},ge("一起写进角色卡",()=>H
 毫不犹豫
 统统
 悉数
-尽数`,禁令格式:`禁止项直接写成一句话即可；作者指定了写法就照作者的。没有依据的理由和替代做法不补；作者不想要某种剧情，不代表人物本人持有某种观念。`,多人卡:`这是多人卡：有 2 个以上主要角色，地位相当，不是“一个主角加几个配角”。
-1. 每个主要角色在故事里的位置不同，对〔user〕的态度、想要的东西、矛盾轴互不重复。
-2. 主要角色之间有自己的关系：彼此怎么看、在意什么、在哪些事上想法不同，不全围着〔user〕转。
-3. 写一个角色时要知道其他人在哪、在干什么；同一件事，每个人的反应和理由不一样。
-4. 开场白和剧情里至少两个主要角色有戏份，不让其中一个变成背景板，也不每段把所有人都塞进来。
-5. 不写“所有人都爱〔user〕”的平均分配：每段关系各有各的样子；有修罗场时写清什么情况会触发。
-6. 出构想时 lineup 写 2–4 个主要角色。`,世界卡:`这是没有固定角色的世界卡：没有固定的男女主，AI 扮演整个世界和其中所有的人。
-1. 世界本身是主角：写清势力、规则、地点和正在发生的事，〔user〕走到哪里都有事发生、有人想要什么。
-2. 人物写成 NPC 库：每个 NPC 轻量（身份、想要、说话特点），按名字触发；关键的几个可以写详细一点。数量宁多勿少，覆盖不同势力和阶层。
-3. 要有 NPC 生成规则：遇到没写过的人时按什么原则现编（属于哪个势力、有自己的目的、不全是好人、不都围着〔user〕转、名字风格）。
-4. 叙事用旁白视角，不绑定某一个角色；开场白从〔user〕所处的场景写起。
-5. 世界不因〔user〕而存在：不写“天选之人”，〔user〕的行动会有后果。
-6. 写基调与规则时，加“叙事:”（旁白怎么写、节奏、什么时候让 NPC 主动找上门）和“NPC生成:”两项。
-7. 出构想时 lineup 留空数组 []，npcs 写 6–12；relation 写〔user〕和这个世界的关系，tension 写这个世界最有意思的地方。`,规则卡:`这是规则卡（手枪卡）：只有世界观和规则，没有固定的主要角色，也没有 NPC 库。以本条为准：和别的要求冲突时，按这里写。
-1. 世界观写成“这个世界的设定和运行规则”：这是个什么样的世界、〔user〕在里面处在什么位置、世界里有哪些固定的设定（身份和等级制度、社会规矩、特殊体质或机制、特殊场所），以及这些设定具体怎么作用到〔user〕身上。写成能直接执行的条目，不写剧情，不写抒情。势力和地点只写和规则有关的，可以简写。
-2. 规则是核心。分块写清：
-   - 推进：节奏怎么走、分几个阶段、什么条件下进入下一阶段或转场，一次回复推进多少。
-   - 出场人物的现编原则：遇到没写过的人时怎么现编（身份从世界设定里取、有自己的欲望和边界、不全围着〔user〕转、说话方式要有区别、名字风格），而不是写一个个固定的人。
-   - 〔user〕的选择与后果：〔user〕做了什么，世界怎么回应；〔user〕没说话的时候 AI 能做什么、不能替〔user〕做什么。
-   - 尺度、用词、描写重点这类要求，按作者在规则里写的来，不替作者加限制，也不替作者删。
-3. 不写人设，不写 NPC 库。只有作者自己加了主要角色时才按人设写。
-4. 叙事用旁白视角，不绑定某个角色；开场白从〔user〕所处的场景写起，直接进入情境，不铺垫世界观。
-5. 路线可有可无。有的话，一条路线是一种开局或一种玩法分支，只写这条路线的情境和特别规则。没有就不写。
-6. 写基调与规则时，加“叙事:”“推进:”“出场人物生成:”这几项。
-7. 出构想时 lineup 留空数组 []，npcs 写 0；relation 写〔user〕和这个世界的关系，tension 写这个世界最核心的设定或规则。`},_m=`角色详情:
+尽数`,禁令格式:`禁止项直接写成一句话即可；作者指定了写法就照作者的。没有依据的理由和替代做法不补；作者不想要某种剧情，不代表人物本人持有某种观念。`,多人卡:`这张是多人卡：主要角色有两个以上，分量差不多，不是一个主角带几个配角。
+1. 每个主要角色在故事里站的位置不同：对〔user〕的态度、想要的东西、心里拉扯的事都不重样。
+2. 主要角色彼此之间也有来往：怎么看对方、在乎什么、在哪些事上谈不拢，不是所有人都只围着〔user〕。
+3. 写其中一个人时，心里要有数其他人在哪、在忙什么；同一件事，每个人的反应和理由都不一样。
+4. 开场白和剧情里至少两个主要角色有戏，别让谁沦为背景，也别每段都把所有人塞进来。
+5. 不写「大家都爱〔user〕」的平均分配：每段关系各有各的样子；有修罗场的话写清什么情况下会起。
+6. 出构想时 lineup 写 2–4 个主要角色。`,世界卡:`这张是世界卡：没有固定的男女主，AI 扮演整个世界和里面所有的人。
+1. 世界本身就是主角：写清势力、规矩、地方，以及各方长期在争、在做的事，〔user〕走到哪都有事、都有人想要点什么。
+2. 人物写成 NPC 库：每个 NPC 轻一点（身份、想要什么、说话的特点），按名字触发；要紧的几个可以写细。宁多勿少，各个势力和阶层都要有人。
+3. 要有现编 NPC 的规则：碰上没写过的人时照什么原则编（归哪个势力、有自己的打算、不全是好人、不都围着〔user〕转、名字什么风格）。
+4. 用旁白视角叙事，不绑在某一个人身上；开场白从〔user〕所在的地方写起。
+5. 世界不是为〔user〕存在的：不写天选之人，〔user〕做的事会有后果。
+6. 写基调与规则时，加「叙事:」（旁白怎么写、节奏、什么时候让 NPC 主动找上门）和「NPC生成:」两项；这两项也直接写写法，不用「AI」「扮演」这类出戏的词。
+7. 出构想时 lineup 交空数组 []，npcs 填 6–12；relation 写〔user〕和这个世界的关系，tension 写这个世界最有意思的地方。`,规则卡:`这张是规则卡（手枪卡）：只有世界观和规则，没有固定的主要角色，也没有 NPC 库。这一条说了算，跟别的要求冲突时照这里写。
+1. 世界观写成「这个世界怎么设定、怎么运转」：是个什么样的世界，〔user〕在里面处在什么位置，有哪些固定设定（身份和等级、社会规矩、特殊体质或机制、特殊场所），这些设定具体怎么落到〔user〕身上。写成能直接照着执行的条目，不写剧情，不抒情。势力和地方只写跟规则有关的，可以简短。
+2. 规则是主体，分几块写清：
+   - 推进：节奏怎么走，分几段，什么条件进下一段或换场景，一次回复推进多少。
+   - 出场人物怎么现编：碰上没写过的人怎么编（身份从世界设定里来，有自己的欲望和边界，不全围着〔user〕，说话要有分别，名字什么风格），而不是一个个写死的人。
+   - 〔user〕的选择和后果：〔user〕做了什么，世界怎么回应；〔user〕不出声时 AI 能做什么、不能替〔user〕做什么。
+   - 尺度、用词、写哪里多写哪里少，照作者在规则里写的来，不替作者加限制，也不替作者删。
+3. 不写人设，不写 NPC 库。只有作者自己加了主要角色时才写人设。
+4. 用旁白视角叙事，不绑在某个人身上；开场白从〔user〕所在的场景写起，直接进情境，不先铺世界观。
+5. 路线可有可无。有的话，一条路线就是一种开局或一种玩法分支，只写这条线的情境和特别规则；没有就不写。
+6. 写基调与规则时，加「叙事:」「推进:」「出场人物生成:」这几项；直接写写法，不用「AI」「扮演」这类出戏的词。
+7. 出构想时 lineup 交空数组 []，npcs 填 0；relation 写〔user〕和这个世界的关系，tension 写这个世界最核心的设定或规则。`},_m=`角色详情:
   {{name}}:
     这个人: 他是谁，靠什么过日子；长什么样，平常怎么穿
     来路:
-      - 阶段: 人生的哪一段
+      - 阶段: 人生的哪一段（按时间轴从早到晚排，不写具体年份日期）
         经过: 这段日子里发生了什么，跟谁打交道，后来怎样；要紧的展开，不替每个性格编故事
-    眼下: 现在处在什么境地，自己在操心什么
+      - 阶段: 故事开始
+        经过: 开场那一刻他处在什么境地、心里挂着什么（只是起点，之后会随剧情变）
     身边的人: 跟具体的人怎么相处，有过什么、怎么想、哪里有分歧
     脾气底子: 比较稳定的脾气和待人方式，跟别人第一眼看到的他有什么关系
     心里: 怎么看自己和别人，同时放不下哪些事，哪里两头难顾
+    出人意料的一面: 和别人对他的第一设想正好相反的地方；什么情况下会露出来，为什么会这样
     做事: 生活、工作、交往和要紧关头里的不同侧面；跟前面的来路和想法连得上，不列固定反应
     说话: 平常怎么说话，对不同的人有什么变化；示例只帮助理解，不照抄
-    不要: 作者明确的限制照留；有依据才写原因（没有就删）`,Ki=[{id:"live",name:"叙述式人设",author:"Love 写卡机",rule:"用连贯的叙述写清这个人的日子、脾气、心里和人际。性格词、心理、行为都能写；每一栏补不同的信息，不要把所有字段写成动作清单。",desc:"字段少一些，写日子、脾气、心里、人际和选择；照样保留人物的不同侧面，不要求每栏都写行为。",text:_m}],Bt=e=>Ki.find(t=>t.id===e)??Ki[0];Ct.输出格式="1. 必须按本任务【格式】给的写法输出：外层用 XML 标签（例如 <世界观>…</世界观>、<角色名>…</角色名>）包住内容，标签里面用 YAML 键值；需要分块的，用单独一行的 <<<类型:名称|关键词>>> 标记。标签名照抄，不改、不翻译，每个开始标签都要有结束标签。\n2. 只输出成品：不用 ``` 代码块包裹，不加 <content>、<output> 之类的外层包装，不在标签外写解释、前言或总结。\n3. 如果预设或系统指令要求先写 <planing>、<think> 这类思考块：可以写，放在成品之前；成品本身仍然必须是上面的 XML 标签，程序只认这些标签。",Ct.人设模板=_m,Ct.NPC写法=`用几段连贯的话写这个人的来路和现在。简短也要把事情讲清楚，不要为了省字把经历省掉。
+    不要: 作者明确的限制照留；有依据才写原因（没有就删）`,Ki=[{id:"live",name:"叙述式人设",author:"Love 写卡机",rule:"用连贯的叙述写清这个人的日子、脾气、心里和人际。性格词、心理、行为都能写；每一栏补不同的信息，不要把所有字段写成动作清单。",desc:"字段少一些，写日子、脾气、心里、人际和选择；照样保留人物的不同侧面，不要求每栏都写行为。",text:_m}],Bt=e=>Ki.find(t=>t.id===e)??Ki[0];Ct.输出格式="1. 照这次任务给的交稿格式写：外面用 XML 标签（比如 <世界观>…</世界观>、<角色名>…</角色名>）包住，标签里用 YAML 键值；要分块的，单独一行写 <<<类型:名称|关键词>>> 标记。标签名照抄，不改、不翻译，有开就有关。\n2. 只交成品：不用 ``` 代码块包，不加 <content>、<output> 这类外壳，标签外面不写说明、开场白或总结。\n3. 预设或系统指令要你先写 <planing>、<think> 这类思考块的，可以写，放在成品前面；成品照样得是上面的 XML 标签，程序只认这些。",Ct.人设模板=_m,Ct.NPC写法=`用几段连贯的话写这个人的来路和平常的日子。简短也要把事情讲清楚，不要为了省字把经历省掉。
 作者没给设想时，按这张卡已有的世界观自己编：名字、脾气都由你定，直接交出人物。作者写了的部分照写，其余你来补。
-来历要写到真正发生过的事：他当时处境如何，做了什么选择，后来怎样了。挑和他现在生活有关的往事写。只交代入行年纪、职业和每天的活，不算写了来历。普通的日子也是来历，不必给每个人都安排灾祸、创伤或救命之恩。
+来历要写到真正发生过的事：他当时处境如何，做了什么选择，后来怎样了。挑和他平常生活有关的往事写，按先后顺序讲，不写具体年份日期。只交代入行年纪、职业和每天的活，不算写了来历。普通的日子也是来历，不必给每个人都安排灾祸、创伤或救命之恩。
 重要的人际要有来由。写他信任、依赖或记恨谁，就交代两人之间发生过什么，让读者明白他为什么这样看对方。他可以误会人、偏听偏信，叙述不必替他的判断背书。不要另编一件小事来证明性格标签，也不要用一件往事解释他整个人。
-写清他现在怎么过日子、在乎什么、怎么看自己和别人。对不同的人感情可以不同，对同一个人也可以有好几种念头。性格词可以直接用，接着写出这个人怎么想，不反复证明同一个特点。他有自己的生活，介绍不必全围着主角的秘密转。不规定他必须承担什么剧情作用。
+写清他平常怎么过日子、在乎什么、怎么看自己和别人。对不同的人感情可以不同，对同一个人也可以有好几种念头。性格词可以直接用，接着写出这个人怎么想，不反复证明同一个特点。他有自己的生活，介绍不必全围着主角的秘密转。不规定他必须承担什么剧情作用。
 外貌直接写长相和平常的穿着，穿着要符合家境和他自己的喜好。不要从职业硬推出身上或衣服上的痕迹，不要为了显得细致随手加磨损、污渍、褪色；没有依据的这类细节直接省掉，也不要把有钱人的衣服一律写旧。外貌不用来证明身份或性格。
 说话方式按需要写进介绍，不拿固定小动作和口头禅凑特点，不列“遇到什么就怎样”的对照。
 句子要完整连贯，不堆排比，不用“不是……而是……”，段尾不加总结或感悟，不替〔user〕写言行和心理。`;var ua={通用:{mode:"all",steps:["idea","persona","personaExtra","backstory","world","routes","relations","tone","revise","localEdit","destale","deepAns","free"]},人物层次:{mode:"all",steps:["persona","personaExtra","backstory","relations","deepAns"]},零度写作:{mode:"all",steps:["world"]},对白:{mode:"all",steps:["persona","npc","npcOne","tone","story","greeting","expand","playChar"]},NPC写法:{mode:"all",steps:["npc","npcOne"]},行文:{mode:"all",steps:["story","greeting","expand","tone","playChar"]},措辞:{mode:"all",steps:["story","idea","persona","personaExtra","backstory","world","routes","tone","relations","greeting","hooks","expand","revise","localEdit","destale","playChar"]},输出格式:{mode:"all",steps:["persona","personaExtra","backstory","world","routes","tone","relations","free","destale","chatBrief"]},多人卡:{mode:"multi",steps:["idea","qa","persona","backstory","world","routes","tone","greeting","hooks","expand","playChar","playReview"]},世界卡:{mode:"world",steps:["idea","world","routes","tone","greeting","hooks","expand","playChar","playReview"]},规则卡:{mode:"rules",steps:["idea","world","tone","routes","greeting","hooks","expand","playChar","playReview"]}},ss={single:"单人卡",multi:"多人卡（NP、群像）",world:"无固定角色（世界卡）",rules:"规则卡（手枪卡：只有世界观和规则）"},Xi=`你是资深的中文网文编辑，也是 SillyTavern（酒馆）角色卡作者。你写的内容是给另一个 AI 读的提示词，用来让它扮演角色、推进故事。
-写法约定：玩家一律写作〔user〕，不要换成名字，也不要写成“你”。只输出要求的内容，不解释，不寒暄，不加 Markdown 代码块。`,Ql="你在写一部中文网络小说的正文。玩家一律写作〔user〕，不要换成名字。只输出正文，不解释。",Xt={inspire:`【任务】作者现在没有想法。下面是随机抽到的几个标签，围绕它们给作者出 4 个问题，帮他找到想写的东西。
-【随机标签】{{dice}}
-【作者已选的标签】{{tags}}
+写法约定：玩家一律写作〔user〕，不要换成名字，也不要写成“你”。只输出要求的内容，不解释，不寒暄，不加 Markdown 代码块。`,Ql="你在写一部中文网络小说的正文。玩家一律写作〔user〕，不要换成名字。只输出正文，不解释。",Xt={inspire:`作者这会儿还没有想法。系统随机抽了几个标签，请借着它们问作者 4 个问题，帮他摸到自己想写的东西。
 
-【要求】
-- 问题要能激发脑洞：问人物是什么样的人、两人怎么认识、现在是什么关系、故事从哪一刻开始。不问“你喜欢什么风格”这种问题。
-- 每个问题给 4 个方向明显不同的答案选项，其中一个可以出人意料。每个选项不超过 30 字。
-- 问题之间要能拼成一个故事的开头。
+抽到的标签：{{dice}}
+作者自己选的标签：{{tags}}
 
-【输出】只输出 JSON：
-{"questions":[{"q":"问题","options":["","","",""]}]}`,story:`【任务】用下面的标签和线索写一个短篇。它的用处：让主要角色先在故事里活一遍，之后从这个故事里提取角色卡，所以人物要靠行为立起来。
+出题的方向：
+- 问能长出故事的东西：这个人是做什么的、脾气怎样，两个人怎么碰上的，现在走到哪一步，故事从哪个瞬间开场。别问「喜欢什么风格」这种问不出东西的题。
+- 每题 4 个答案，方向要拉得开，其中一个可以出格一点。每个答案 30 字以内。
+- 4 题答完，最好能凑成一个故事的开头。
 
-【随机标签】{{dice}}
-【作者已选的标签】{{tags}}
-【作者的脑洞和回答】
+只交 JSON：
+{"questions":[{"q":"问题","options":["","","",""]}]}`,story:`请用下面的标签和线索写一个短篇。这篇是拿来「试人」的：主要角色先在故事里过一遍日子，之后再从故事里整理出角色卡，所以人要靠他做的事立起来。
+
+抽到的标签：{{dice}}
+作者自己选的标签：{{tags}}
+作者的脑洞和回答：
 {{seed}}
 
-【篇幅】{{storyLength}} 字。
+篇幅：{{storyLength}} 字。
 
-【写法】
-- 只写一个完整的小片段：一个场景，或者一晚、一天。有起因，有一个转折，停在还没解决的地方，不写结局。
-- 主要人物两个：一个是角色，一个是〔user〕。〔user〕只通过说话和动作出现，不写他的心理。可以有一两个配角，让世界有别的人。
-- 每个人物给一个别人猜不到的具体细节：一个习惯、一件旧东西、一个怕的东西。不要靠形容词立人。
-- 关系只写人做了什么、说了什么，不写“他爱上了她”“两人关系变了”这类结论，让读的人自己看出来。
-- 世界的规则和设定通过事情露出来，不用旁白解释。
-- 标签里的圈内说法按注释理解。性向、人数、定位、风味要在故事里看得出来。
-- 从最常见的写法里避开：不写“命运的齿轮”“目光交汇”这类八股。
+怎么写：
+- 只写一段：一个场景，或者一个晚上、一天。有个起头，中间拐一下，停在事情还悬着的地方，不收尾。
+- 两个主要人物：角色和〔user〕。〔user〕只露出说的话和做的事，不写他心里想什么。可以带一两个旁人，让这个世界不只有他们俩。
+- 给每个人一样别人想不到的具体东西：一个习惯、一件留了很久的旧物、一样怕的东西。别拿形容词堆人。
+- 关系只看他们怎么做、怎么说，不下「他喜欢上她了」「两人之间变了」这种结论。
+- 世界的规矩从发生的事里带出来，不另起旁白解释。
+- 标签里的圈内说法照注释理解；性向、人数、攻受、口味要能在故事里看出来。
+- 躲开用烂的写法，比如「命运的齿轮」「四目相对」。
 
-【输出】只输出短篇正文，第一行是标题（不超过 12 字），空一行后写正文。不要解释。`,ideaQA:`【任务】作者已经有了一个脑洞。先别急着写构想，针对这个脑洞问作者 4 个问题，帮他把还没想清楚、但最影响故事走向的地方定下来。
+交稿：第一行写标题（12 字以内），空一行接正文。不要附说明。`,ideaQA:`作者已经有个脑洞了。先别急着出构想，针对这个脑洞问他 4 个问题，把最影响故事走向、他又还没想好的地方先定下来。
 
-【脑洞】{{idea}}
-【作者已选的标签】{{tags}}
+脑洞：{{idea}}
+作者选的标签：{{tags}}
 
-【要求】
-- 只问脑洞里没交代、而且答案不同故事就完全不同的地方：人物是什么样的人、两人是什么关系、故事从哪一刻开始、往哪个方向走。
-- 脑洞里已经写明的不要再问。不问“你喜欢什么风格”这种问题。
-- 每个问题给 4 个方向明显不同的答案，其中一个可以出人意料。每个选项不超过 30 字。
+问什么：
+- 只问脑洞没交代、答案一变故事就整个变了的地方：人是什么样的，两人什么关系，从哪一刻开始，往哪边走。
+- 脑洞里写明了的别再问；也别问「喜欢什么风格」。
+- 每题 4 个答案，方向拉开，可以有一个出格的。每个答案 30 字以内。
 
-【输出】只输出 JSON：
-{"questions":[{"q":"问题","options":["","","",""]}]}`,idea:`【任务】根据一句话脑洞，给出 4 个方向不同的角色卡构想，并从标签库里挑标签。
+只交 JSON：
+{"questions":[{"q":"问题","options":["","","",""]}]}`,idea:`作者给了一句话脑洞。请出 4 个走向不同的角色卡构想，再从标签库里替他挑标签。
 
-【脑洞】{{idea}}
+脑洞：{{idea}}
 {{ideaAnswers}}
-【作者已选的标签】{{tags}}
-【本地识别到的标签】{{matched}}
+作者选的标签：{{tags}}
+程序在脑洞里认出的标签：{{matched}}
 
-【标签库】（只能从这里选）
+标签库（只能从这里挑）：
 {{tagLibrary}}
 
-【要求】
-1. 这些构想要真的不同：题材、关系结构或关系的核心至少有一样不同。先在心里想出最常见、最俗的那个构想，把它排除，再写剩下的这几个。
-2. 主流网文梗可以用，霸总、青梅竹马、追妻火葬场都行。梗要清楚，新意放在“这个角色为什么这样”“这段关系是什么样的”。
-3. 作者已选的标签必须保留。
-4. 每个构想包含：
-   - title：标题，约 20 字，直接给最好的梗
-   - lineup：主要角色数组，每个写 name（起一个不俗套的名字）、identity（一句话身份）、archetype（从“角色原型”里选，数组）
-   - user：〔user〕的身份候选，1–2 个
-   - relation：主要角色和〔user〕之间发生过什么、现在处于什么状态，2–4 句
-   - tension：core（这段关系的核心是什么，一句话）、expect（玩家最想看到的几个时刻）
-   - complexity：世界观复杂度，简单 / 中等 / 复杂；reason：一句话理由
-   - routes：可能的路线数组，每条写 name、user（这条线〔user〕的身份）、period（时期）
-   - npcs：建议的 NPC 数量（数字）
-   - tags：这个构想对应的标签名数组（只能从标签库选）
+几条要求：
+1. 4 个构想得真的不一样：题材、关系的格局、关系里最要紧的那件事，至少有一样不同。先在心里把最容易想到、最俗的那个写法划掉，再出剩下的。
+2. 流行梗随便用，霸总、竹马、追妻都行，梗要摆得明白；新鲜感放在「这个人为什么会这样」「这段关系是什么滋味」上。
+3. 作者选过的标签一个不能丢。
+4. 每个构想要有：
+   - title：标题，20 字左右，把最抓人的梗直接摆出来
+   - lineup：主要角色数组，每人写 name（别起烂大街的名字）、identity（一句话身份）、archetype（从「角色原型」里选，数组）
+   - user：〔user〕可以是什么身份，1–2 个
+   - relation：主要角色和〔user〕之间有过什么、现在是什么状态，2–4 句
+   - tension：core（这段关系最要紧的是什么，一句话）、expect（玩家最想看到的几个瞬间）
+   - complexity：世界观规模，简单 / 中等 / 复杂；reason：一句话说为什么
+   - routes：可能的路线数组，每条写 name、user（这条线上〔user〕的身份）、period（时期）
+   - npcs：建议几个 NPC（数字）
+   - tags：这个构想对应的标签名数组（只从标签库挑）
 5. 标签：
-   - picked：脑洞里明确提到、所有构想都适用的标签名
-   - guessed：脑洞没提到的必填维度（卡类型、来源、性向、人数）的推测，写成 {"维度名":"标签名"}
-   - novel：标签库里没有、但这个脑洞明显需要的新标签，最多 2 个，写成 {"dim":"维度名","name":"标签名"}
-   - surprise：从别的维度挑 1 个意外但能激发脑洞的标签，写成 {"dim":"维度名","name":"标签名","why":"一句话"}
-6. 如果是同人：fandom 写原作名、角色和时间点；check 列几条你对原作关键设定的理解，让作者确认你没有记错。不是同人就留空。
+   - picked：脑洞里明说了、4 个构想都适用的标签名
+   - guessed：脑洞没说、但必须填的几项（卡类型、来源、性向、人数），写成 {"维度名":"标签名"}
+   - novel：标签库没有、这个脑洞又明显需要的新标签，最多 2 个，写成 {"dim":"维度名","name":"标签名"}
+   - surprise：从别的维度挑 1 个意料之外、但能打开思路的标签，写成 {"dim":"维度名","name":"标签名","why":"一句话"}
+6. 是同人的话：fandom 写原作名、角色和时间点；check 列几条你记得的原作关键设定，让作者确认没记错。不是同人就留空。
 
-【输出】只输出 JSON：
-{"tags":{"picked":[],"guessed":{},"novel":[],"surprise":{}},"concepts":[{"title":"","lineup":[{"name":"","identity":"","archetype":[]}],"user":[],"relation":"","tension":{"core":"","expect":[]},"complexity":"","reason":"","routes":[{"name":"","user":"","period":""}],"npcs":2,"tags":[]}],"fandom":"","check":[]}`,qa:`【任务】为下面这个构想里的每个主要角色出 4 个问题，帮作者想清楚这个角色和刻板印象不一样的地方。
+只交 JSON：
+{"tags":{"picked":[],"guessed":{},"novel":[],"surprise":{}},"concepts":[{"title":"","lineup":[{"name":"","identity":"","archetype":[]}],"user":[],"relation":"","tension":{"core":"","expect":[]},"complexity":"","reason":"","routes":[{"name":"","user":"","period":""}],"npcs":2,"tags":[]}],"fandom":"","check":[]}`,qa:`给下面这个构想里的每个主要角色各出 4 个问题，帮作者找到这个人和同类角色不一样的地方。
 
-【构想】
+构想：
 {{concept}}
-【标签】{{tags}}
+标签：{{tags}}
 
-【要求】
-- 问这个人的天性、成长、在乎什么、怎么对待〔user〕。不问一句话就能填完、换个人答案也一样的题。
-- 问题要具体到这个组合：换一个角色就不成立的问题才算好问题。
-- 每个问题给 4 个方向明显不同的答案，其中一个可以出人意料，不给“以上都有”。每个选项不超过 30 字。
+问什么：
+- 问他的脾气是怎么来的、怎么长大的、心里最放不下什么、怎么对〔user〕。一句话能填完、换个人也一样答的题不要。
+- 好问题只对这一组人成立，换一个角色就问不出来。
+- 每题 4 个答案，不给「都有」，每个 30 字以内，顺序固定：
+  1. 最顺理成章的：照他的身份和第一印象，大家最容易想到的那种；
+  2、3. 往两个不同方向偏一点的；
+  4. 最反第一印象的：和大家对这类人的第一设想正好相反，但放在他身上说得通。比如看着是霸总，真起冲突时反而会哭；爱上〔user〕之后不是更热烈，而是热情慢慢退下去。别用「外冷内热」这种早就被写烂的反差。
+- 4 个题里至少有一题，问的就是他身上和第一印象最不一样的地方。
 
-【输出】只输出 JSON：
+只交 JSON：
 {"chars":[{"name":"角色名","questions":[{"q":"问题","options":["","","",""]}]}]}`,persona:`你要替这张卡写一个人：「{{name}}」。
 {{tplRule}}
 
@@ -2625,55 +2531,56 @@ NPC 和人物关系：
 {{rules.人物层次}}
 {{rules.禁令格式}}
 {{npRule}}
-现有资料里作者定下的身份、往事、感情和限制都算数，重写时照样留着；空着的地方由你补。动笔前先想清楚：这个人平常一天怎么过，过去哪几件事把他带到今天，他看重谁、提防谁、躲着什么。每一栏都要让读的人多知道一点新东西，别让整份人设绕着一个标签打转。
+现有资料里作者定下的身份、往事、感情和限制都算数，重写时照样留着；空着的地方由你补。动笔前先想清楚：这个人平常一天怎么过，过去哪几件事把他带到故事开头，他看重谁、提防谁、躲着什么。每一栏都要让读的人多知道一点新东西，别让整份人设绕着一个标签打转。
+给他找一处「最反第一印象」的地方：别人照他的身份和外表会怎么想他，他在某件具体的事上偏偏相反。比如看着是霸总，真吵起来反而会哭；爱上〔user〕之后热情不是越来越旺，而是慢慢退下去。这一处要写清楚在什么情况下露出来、为什么会这样（跟他的来历或心事接得上），不能是凭空加的怪癖，也别用「外冷内热」「表面冷漠其实温柔」这种被写烂的反差。作者已经定了的性格照留，反差只补在没定的地方。
 
 —— 交稿格式 ——
 只用下面两行做分隔，不加其他标题：
 <<<概要>>>
-（三到五句：他是谁，脾气的底子怎样，眼下卡在什么处境里，身边最要紧的是谁。不要只写职业和他对〔user〕的态度）
+（三到五句：他是谁，脾气的底子怎样，故事开始时处在什么处境，身边最要紧的是谁。不要只写职业和他对〔user〕的态度）
 <<<人设>>>
 <{{name}}>
 （YAML，照模板填，用不上的字段删掉；同一个意思只在一个字段里说）
 {{template}}
-</{{name}}>`,deepAns:`【任务】替作者先答一遍下面这些关于角色「{{name}}」的问题，作者会逐条检查、修改。你的答案是草稿，要有可改的具体内容，不要含糊。
+</{{name}}>`,deepAns:`下面是关于「{{name}}」的几个问题。请先替作者答一遍，他会一条条看、一条条改，所以答案要具体，留得下可以改的东西，别含糊。
 
-【角色】
+这个人：
 作者的设想：{{desc}}
 概要：{{overview}}
 标签：{{tags}}
 
-【构想】
+构想：
 {{concept}}
-【世界观】
+世界观：
 {{world}}
-【主要角色概要】
+主要角色概要：
 {{overviews}}
 
-【作者已经答了的】（这些题不要再答，答案要和它们一致）
+作者已经答过的（这些不用再答，你的答案要跟它们对得上）：
 {{done}}
 
-【怎么答】
-- 按这个人本来的样子答。不预设伤痛和悲剧：他可以幸福地长大，可以没有遗憾，可以没有不喜欢自己的地方，那就照实写。
-- 感情按作者已定的关系和这个人的性情写。不要自动美化、道德评判或反向加重他；爱、信任、怨恨和不同意见可以并存。
-- 简短直接地答，不复述问题。允许说明性情、心理和顾虑，不把所有答案都改写成动作；不举小故事逐项证明。
-- 写这个角色独有的答案；一看就是“这类角色都这样”的答案不要。
-- 不要把角色写得比构想、世界观和人设里已有的更厉害，没有的能力不要加。
-- 〔user〕的身份、双方的关系，以构想和作者定稿为准，不自己另编。
-- 事实与时间线前后一致；内心同时存在不同想法可以保留，说明它们各自与什么有关。
+答的时候：
+- 照这个人本来的样子答。不默认他受过伤：他可以过得很好、没什么遗憾、对自己挺满意，是这样就照写。
+- 感情照作者定下的关系和这个人的性子写，不替他洗白、不评判、也不故意写得更狠。喜欢、信任、怨气和意见不合可以同时存在。
+- 直接答，不复述题目。性子、心思和顾虑可以直说，不必全改成动作，也别每条都编个小故事来证明。
+- 写只属于他的答案；一看就是「这类人都这样」的不要。
+- 不要比构想、世界观和人设里写的更厉害，没有的本事别加。
+- 〔user〕是谁、两人什么关系，以构想和作者定稿为准，不另编。
+- 事实和时间要前后对得上；心里同时有几种念头可以留着，说清各自从哪来。
 
-【写法规则】
+写法规则：
 {{rules.通用}}
 
-【要答的问题】
+要答的问题：
 {{questions}}
 
-【格式】每题用序号标记开头，只输出这些，不加别的：
+交稿：每题用序号标记开头，只交这些：
 <<<序号>>>
 答案
-（序号按上面给的，题目没列出的序号不写）`,chatQs:`【任务】你是作者的写卡搭档。动笔之前，你先审这份设定，找出逻辑问题和没定下来的地方，然后出几道选择题让作者点选。作者不用打字，点选项就行。
+（序号照上面给的，没列出的序号不写）`,chatQs:`你是作者写卡时的搭档。动笔前先把这份设定过一遍，找出说不通和没定下来的地方，出几道选择题让作者点。作者不用打字，点答案就行。
 
-【你手上有的】
-脑洞/构想：
+你手上有：
+脑洞 / 构想：
 {{concept}}
 标签：{{tags}}
 已有的人设概要：{{overviews}}
@@ -2683,25 +2590,25 @@ NPC 和人物关系：
 已经问过、作者答过的：
 {{transcript}}
 
-【先审，再问】逐项过一遍，有问题才问，没问题的不问：
-1. boss、反派、对手：他为什么强？他每个行动的动机是什么？有没有为了推剧情让他变蠢（不查、不防、白白放人、明显漏洞不处理）？聪明人在他的位置上会怎么做？
-2. 玩家〔user〕：是谁、什么身份、为什么在这里、想要什么、能做什么、不能做什么。
-3. 因果和时间线：谁在什么时候做了什么；重生、预知这类设定，谁知道什么、不知道什么。
-4. 背景和规则：规则怎么运作，规则之间会不会互相打架，背景里有没有构想没要求、却被硬加进去的冲突。
-5. 构想、概要自己有没有前后矛盾、说不通。有就直接指出，别照着它往下问。
-6. 卡种还没定的话，出一题让作者选：单人卡、多人卡、世界卡、手枪卡、系统 / 游戏卡、副本卡、模拟器卡、同人卡里挑合适的 2–4 个。
+先过一遍，有问题才出题：
+1. 对头、反派、boss：凭什么厉害？每一步的理由是什么？有没有为了推剧情变笨（不查、不防、放人走、破绽不管）？聪明人在他的位置会怎么做？
+2. 〔user〕：是谁、什么身份、为什么在这儿、想要什么、能做什么、做不到什么。
+3. 前因后果和时间：谁在什么时候做了什么；重生、预知这类设定，谁知道什么、不知道什么。
+4. 世界的规矩：怎么运转，会不会互相打架，有没有构想没要、却被硬塞进来的冲突。
+5. 构想、概要自己前后对不上、说不通的，直接指出，别顺着往下问。
+6. 卡种还没定的话，出一题让作者选：从单人卡、多人卡、世界卡、手枪卡、系统 / 游戏卡、副本卡、模拟器卡、同人卡里挑合适的 2–4 个。
 
-【出题要求】
-- 一共 4 题，只问最关键、最影响后面写作的。已经答过的不再问。
-- 每题 2–4 个选项。选项是你给出的具体改法或设定，不是“是/否”，也不是空话；每个选项自己说得通，并带一句代价。选项写得具体，直接就能当设定用。
-- 每题带 why：一句话说这题为什么要问（指出哪里有逻辑问题）。
-- findings：用 1–2 句大白话总结你看出的最大问题。
+出题：
+- 一共 4 题，只问最要紧、最影响后面写法的；答过的不再问。
+- 每题 2–4 个答案。答案是你给的具体改法或设定，不是「是 / 否」，也不是空话；每个答案自己说得通，附一句代价，具体到可以直接拿去当设定。
+- 每题带 why：一句话说为什么问（哪里说不通）。
+- findings：用一两句大白话说你看到的最大毛病。
 
-只输出 JSON，不加别的文字：
-{"findings":"…","questions":[{"q":"问题","why":"为什么问","options":["",""]}]}`,chat:`【任务】你是作者的写卡搭档。现在是动笔之前的讨论阶段：和作者把设定聊到逻辑通顺、不留含糊，之后才开始写。你不写成品设定，只聊。
+只交 JSON，不加别的字：
+{"findings":"…","questions":[{"q":"问题","why":"为什么问","options":["",""]}]}`,chat:`你是作者写卡时的搭档。现在还没动笔，先陪作者把设定聊顺：逻辑通、没有含糊的地方，之后再开写。这一段只聊，不写成品。
 
-【你手上有的】
-脑洞/构想：
+你手上有：
+脑洞 / 构想：
 {{concept}}
 标签：{{tags}}
 已有的人设概要：{{overviews}}
@@ -2709,45 +2616,45 @@ NPC 和人物关系：
 作者已经聊定的（作者定稿）：
 {{brief}}
 
-【怎么聊】
-- 每次先回应作者刚说的：同意就说同意，有问题直接指出。然后最多问 1–2 个最关键的问题，不要一口气抛十个。
-- 主动查逻辑，发现问题就说，并给 2 个改法让作者选，每个改法说一句代价：
-  1. 反派、boss、对手：他为什么强？他的每个行动有没有动机？有没有为了推剧情让他变蠢（不查、不防、白白放人、有明显漏洞却不处理）？一个聪明的人在他的位置上会怎么做？
-  2. 玩家〔user〕：是谁、什么身份、为什么在这里、想要什么、能做什么、不能做什么。身份没说清就问。
-  3. 因果和时间线：谁在什么时候做了什么，结果是什么；重生、穿越、预知这类设定，哪些信息谁知道、谁不知道。
-  4. 背景和规则：规则怎么运作，规则之间有没有互相打架，有没有硬加进去的冲突。
-  5. 构想或概要本身有没有前后矛盾、说不通的地方。有就直接指出来，不要照着它往下聊。
-  6. 这是一张什么卡：单人卡、多人卡、世界卡（没有固定主角）、手枪卡（成人向）、系统 / 游戏卡、副本卡、模拟器卡、同人卡。作者没说的话，按聊到的内容建议一种，说一句理由，问作者行不行。
-- 作者没想法的地方，你可以给建议，但说明这是你的建议，让作者点头才算定下来。
-- 不重复问已经聊定的事。
-- 口语、简短，每次回复不超过 300 字，不写标题，不列长清单。不要输出成品设定。`,chatBrief:`【任务】把下面作者和搭档的聊天整理成《作者定稿》。后面所有写作步骤都会以它为准。
-只写聊天里作者明确定下来的，或者作者认可了的建议。没聊到的写「未定」，不要自己补设定。聊天里改掉了原构想或概要的地方，写在“对原构想的修正”里。有已有定稿时合并：聊天里新定的覆盖旧的，没被推翻的保留。
+聊法：
+- 先接作者刚说的话：赞成就说赞成，看出毛病就直说。然后最多再问一两个最要紧的问题，别一口气抛一串。
+- 自己留意下面几处，发现说不通就讲出来，给两个改法让作者挑，每个改法顺带一句要付出什么：
+  1. 对头、反派、boss：凭什么厉害？每一步有没有理由？有没有为了让剧情往下走而变笨（不查、不防、放人走、明摆着的破绽不管）？换个聪明人站在他那个位置会怎么做？
+  2. 〔user〕：是谁、什么身份、为什么在这儿、想要什么、能做什么、做不到什么。没说清就问。
+  3. 前因后果和时间：谁在什么时候做了什么，结果怎样；重生、穿越、预知这类设定，谁知道什么、谁不知道。
+  4. 世界的规矩：怎么运转，规矩之间会不会打架，有没有硬塞进去的冲突。
+  5. 构想或概要自己前后对不上、说不通的地方，直接指出，别顺着往下聊。
+  6. 这是张什么卡：单人卡、多人卡、世界卡（没有固定主角）、手枪卡（成人向）、系统 / 游戏卡、副本卡、模拟器卡、同人卡。作者没说就按聊到的内容建议一种，说一句理由，问他行不行。
+- 作者没主意的地方你可以出主意，但要说明这是你的建议，作者点头了才算定。
+- 聊定的事别反复问。
+- 说话口语、简短，一次不超过 300 字，不写标题，不列长清单，不交成品设定。`,chatBrief:`把下面作者和搭档的聊天整理成一份《作者定稿》，后面每一步都照它写。
+只记作者明确拍板的，或者作者认可了的建议；没聊到的写「未定」，不要自己补。聊天里改掉原构想或概要的地方，写进「改动」。已经有定稿的话就合并：新定的盖掉旧的，没被推翻的照留。
 
-【已有定稿】
+已有定稿：
 {{brief}}
 
-【聊天记录】
+聊天记录：
 {{transcript}}
 
-【格式】只输出一个 <作者定稿> XML 标签，里面用 YAML 风格，没有的项写「未定」，不加别的文字：
+交稿：只交一个 <作者定稿> 标签，里面用 YAML，没有的写「未定」，不加别的字：
 <作者定稿>
 卡种: 单人卡 / 多人卡 / 世界卡 / 手枪卡 / 系统游戏卡 / 副本卡 / 模拟器卡 / 同人卡 里选一个；没聊到写「未定」
-玩家身份: 〔user〕是谁、在故事里的身份、想要什么、能做什么、不能做什么
+玩家: 〔user〕是谁、在故事里什么身份、想要什么、能做什么、做不到什么
 主要角色:
-  角色名: 定位；能力和边界；行动动机（为什么这样做说得通，不降智）
-核心矛盾与因果: 谁因为什么和谁冲突，事情的先后顺序
-世界规则要点:
-  - 规则 / 代价
-对原构想的修正:
+  角色名: 在故事里的位置；本事和极限；为什么这么做（要说得通，不降智）
+冲突和前因后果: 谁因为什么跟谁起冲突，事情的先后
+世界规矩:
+  - 规矩 / 代价
+改动:
   - 原来怎么写 → 现在怎么定
-必须写进去:
-  - 
-明确不要:
-  - 
-未定:
-  - 
+一定要有:
+  -
+一定不要:
+  -
+还没定:
+  -
 </作者定稿>`,world:`这一步写这张卡的世界观。规模：{{complexity}}。
-世界观回答的是：这些人活在一个什么样的地方。已经写下的人设、关系和处境都要能在这里站得住；没定的部分你可以接着编。重点放在平常日子怎么过、眼下正在发生什么；矛盾和限制按题材需要来，不必每个地方都安排一场争斗。
+世界观回答的是：这些人活在一个什么样的地方。已经写下的人设、关系和处境都要能在这里站得住；没定的部分你可以接着编。重点放在平常日子怎么过、规矩怎么运转、故事开始前发生过哪些事；矛盾和限制按题材需要来，不必每个地方都安排一场争斗。
 
 材料：
 · 构想
@@ -2789,7 +2696,9 @@ NPC 和人物关系：
   组织名: 是什么，在哪，干什么，有什么规矩，跟主要角色什么关系
 规矩:
   - 规矩：怎么运作
-开场时: 故事开始那一刻是什么局面
+时间轴:
+  - 阶段: 发生了什么（从早到晚排，不写具体年份日期）
+  - 故事开始: 开场那一刻世界是什么局面（只是起点，之后会变）
 </世界观>
 规模是“中等”或“复杂”时，把重要的组织和地点另拆成独立条目，每条前单独一行写：
 <<<条目:名称|关键词1,关键词2>>>
@@ -2820,7 +2729,7 @@ NPC 和人物关系：
 交稿：每个人前面单独一行写识别标记，介绍放在名字标签里：
 <<<NPC:名字|关键词1,关键词2>>>
 <名字>
-用几段连贯的话写他的来路和现在：过去发生过什么，如今怎么过。不要只列年龄、职业和每天干的活，也不要列固定字段。
+用几段连贯的话写他的来路：过去发生过什么、平常怎么过日子、长期在乎什么。不写会过期的「现在」「如今」，不写具体年份日期，也不要只列年龄、职业和每天干的活，不列固定字段。
 </名字>
 只交这次写的人。`,relations:`这一步整理主要角色之间的关系，缺的补上。
 
@@ -2846,26 +2755,26 @@ NPC 和人物关系：
 <角色关系>
 关系:
   甲 与 乙:
-    怎么走到现在:
+    怎么认识、经过了什么（按先后，不写具体时间）:
     甲怎么看乙:
     乙怎么看甲:
     平时怎么相处，哪里谈不拢:
 同场规矩:
 各人说话的区别:
-</角色关系>`,classify:`【任务】下面是一张角色卡（主角：{{charName}}）世界书里的条目，是别人按自己的习惯写的。把每一条分到Love 写卡机的一页里，方便作者分开改。
+</角色关系>`,classify:`下面是一张角色卡（主角：{{charName}}）世界书里的条目，原作者有自己的写法。请把每一条归到写卡机的某一页，方便作者分开改。
 
-【可以分到】
-- persona：主要角色的人设（主角或几个地位相当的主要角色）
-- npc：配角、路人、家人、朋友、敌人等其他人物
-- world：世界观、地点、势力、组织、种族、历史、物品、规则设定
+可以归到：
+- persona：主要角色的人设（主角，或几个分量相当的主要角色）
+- npc：配角、路人、家人、朋友、对头等其他人
+- world：世界观、地点、势力、组织、种族、历史、物件、规则设定
 - routes：玩家（user）的身份、开局、路线、玩家信息
 - tone：文风、写作要求、输出格式、禁止事项、给 AI 的指令
-- other：都不像，或者说不清
+- other：哪页都不像，或者看不明白
 
-【条目】
+条目：
 {{items}}
 
-【输出】只输出 JSON：{"items":[{"id":"条目的 id","cat":"npc"}]}，每条都要有。`,npcOne:`这一步只写一个 NPC。作者没提要求的话就由你来编，直接交人物介绍。
+只交 JSON：{"items":[{"id":"条目的 id","cat":"npc"}]}，每一条都要有。`,npcOne:`这一步只写一个 NPC。作者没提要求的话就由你来编，直接交人物介绍。
 
 这个人：
 名字：{{name}}
@@ -2895,7 +2804,7 @@ NPC 和人物关系：
 交稿：前面单独一行写识别标记，介绍放在名字标签里：
 <<<NPC:名字|关键词1,关键词2>>>
 <名字>
-用几段连贯的话写他的来路和现在：过去发生过什么，如今怎么过。不要只列年龄、职业和每天干的活，也不要列固定字段。
+用几段连贯的话写他的来路：过去发生过什么、平常怎么过日子、长期在乎什么。不写会过期的「现在」「如今」，不写具体年份日期，也不要只列年龄、职业和每天干的活，不列固定字段。
 </名字>
 只交这一个人。`,routes:`这一步给每条路线写两样东西：〔user〕的玩家信息，以及角色在这条线上该怎么演的关系指导。
 
@@ -2917,10 +2826,10 @@ NPC 和人物关系：
 {{otherRoutes}}
 
 玩家信息：
-- 用一小段叙述说清〔user〕在这条线上是谁、和{{charNames}}分别是什么关系、之前发生过什么，最后落在眼下的处境。可以带一句能看出关系的台词。
+- 用一小段叙述说清〔user〕在这条线上是谁、和{{charNames}}分别是什么关系、之前发生过什么（按先后讲，不写具体时间），最后落在故事开始时的处境。可以带一句能看出关系的台词。
 - 每个角色单独交代，不要合成一句“和大家的关系”。只有一个角色时不超过 250 字，每多一个角色可多 150 字。
 关系指导：
-- 按每个人的脾气和两人的过去，说明这段关系现在走到哪一步：他怎么看〔user〕，相处时还惦记什么、哪里有分歧。已经确定的喜欢、信任或敌意可以直接写，但不能拿它代替整个人；不替〔user〕决定心里怎么想、怎么反应、最后选谁。不用强行给每段关系配一副对外、一副对内的面孔。
+- 按每个人的脾气和两人的过去，说明故事开始时这段关系走到了哪一步：他怎么看〔user〕，相处时还惦记什么、哪里有分歧。已经确定的喜欢、信任或敌意可以直接写，但不能拿它代替整个人；不替〔user〕决定心里怎么想、怎么反应、最后选谁。不用强行给每段关系配一副对外、一副对内的面孔。
 通用：
 - 一律写角色的名字，不写“主要角色”“男主”“他们”。
 - 同一个角色出现在不同路线时，要看得出时期不同：年纪、处境、对〔user〕的态度。
@@ -2955,7 +2864,7 @@ NPC 和人物关系：
 
 怎么写：
 - 基调从作者的要求和已经写出来的内容里来：以后主要写哪种日子、哪些关系、哪类事情，哪些人和人之间的不同要保住，不把整张卡的感情和行为都归到同一个主题上。
-- 想要什么写法就直接说，不用“要 A 但不要 B”这种句式。作者给了参照作品就写参考它哪一点，没给就不硬凑作品名。
+- 想要什么写法就直接说，不用“要 A 但不要 B”这种句式，也不写「AI 要扮演」「你是」这种对 AI 说话的句子。作者给了参照作品就写参考它哪一点，没给就不硬凑作品名。
 - 作者写明的禁止项照抄保留；只有已有设定真的需要时才补，不定条数，不给每张卡套同一份清单。
 {{rules.禁令格式}}
 - 多人卡写关系怎么推进、修罗场怎么处理；大世界卡写玩法（战斗、成长、资源）。用不上的部分删掉。
@@ -3011,178 +2920,178 @@ NPC 和人物关系：
 {{rules.开场白}}
 不替〔user〕说话、做决定或写心理；停在〔user〕可以回应的地方。
 
-【格式】先写 <开场构思>，再写正文。每个开场白前加一行 <<<开场白>>>，正文直接写，不加标题。`,auCore:`【任务】下面是一张已经写好的角色卡。要把角色搬进一个新的 AU（换世界观、换身份），人还是那个人。先把每个主要角色拆成两层：内核（换到哪个世界都不变的东西）和外壳（属于原作世界、AU 里要换掉的东西）。
+【格式】先写 <开场构思>，再写正文。每个开场白前加一行 <<<开场白>>>，正文直接写，不加标题。`,auCore:`下面是一张写好的角色卡。现在要把角色搬进一个 AU（换世界、换身份），但人还得是那个人。先把每个主要角色拆成两层：「内核」是换到哪个世界都不会变的东西，「外壳」是原作世界才有、搬去 AU 要换掉的东西。
 
-【原卡】
+原卡：
 {{original}}
 
-【内核写什么】每个角色写这几项，写成能指导行为的话，不写标签：
-- 矛盾轴与落点：两个互相拉扯的倾向，他在哪里让步、哪里不让，为什么
-- 对〔user〕的底色：这段关系里他真正在意的是什么
-- 说话方式：他谈什么、不谈什么
-- 决策方式：遇到危机先做什么
-- 底线：什么事他不会做，为什么
-内核里不能出现原作世界的地名、组织、道具、职业。
+内核：每个角色写下面几项，写成能拿来判断他怎么做的话，不写标签：
+- 心里两头拉扯的是什么，在哪儿让步、在哪儿不让，为什么
+- 他对〔user〕：这段关系里他真正在乎的是什么
+- 说话：他爱说什么，不碰什么
+- 拿主意：出事时第一反应做什么
+- 底线：什么事他不干，为什么
+内核里不能出现原作世界的地名、组织、物件和职业。
 
-【外壳写什么】原作里属于那个世界的东西：身份、职业、时代、组织、地点、道具、关键经历、外貌里的时代细节。一行一个。
+外壳：原作里属于那个世界的东西——身份、职业、年代、组织、地点、物件、关键经历、外貌里带年代感的细节。一行一项。
 
-【格式】每个角色一块，最后一块写外壳：
+交稿：每个角色一块，最后一块写外壳：
 <<<内核:角色名>>>
 （内核）
 <<<外壳>>>
-（外壳清单）`,auMap:`【任务】把原作的外壳一项项换成 AU 里的对应，让角色在 AU 里长出同样的内核。
+（外壳清单）`,auMap:`把原作的外壳一项一项换成 AU 里的对应物，让角色在新世界里长出同一个内核。
 
-【AU 设定】
+AU 设定：
 {{idea}}
 {{ideaAnswers}}
-【标签】{{tags}}
+标签：{{tags}}
 
-【角色内核】（必须保留）
+角色内核（必须留住）：
 {{core}}
 
-【原作的外壳】
+原作外壳：
 {{shell}}
 
-【原卡摘要】（只用来理解，不要照搬原作的设定）
+原卡摘要（只用来理解，别照搬原作设定）：
 {{original}}
 
-【要求】
-- 每一行：原：xxx → AU：xxx｜为什么在 AU 里还能长出同样的内核（一句话）
-- 关键经历不能平移，要反推：原作的经历让他长成了哪条内核，AU 里换一段什么经历也能长出这条。
-- 〔user〕的身份和两人的关系也要映射。
-- 名字默认保留，要改就写一行“名字：原 → AU”。
-- AU 题材的套路可以用，但角色的反应要来自他的内核，而不是这个题材的默认角色。
+换法：
+- 每行写：原：xxx → AU：xxx｜为什么在 AU 里还能长出同样的内核（一句话）
+- 关键经历不能原样平移，要倒着推：原来那段经历让他长出了哪条内核，AU 里换哪段经历也能长出这一条。
+- 〔user〕的身份和两人的关系也要换过去。
+- 名字默认不变，要改就单写一行「名字：原 → AU」。
+- AU 题材的套路可以用，但他的反应要从内核里来，不是从这个题材的默认角色里来。
 
-【格式】只输出映射表，一行一条。`,auCheck:`【任务】检查 AU 版人设有没有保住原作角色的内核。逐条对照，看 AU 人设里这条内核还在不在、有没有被 AU 题材的套路冲掉。
+交稿：只交对照表，一行一条。`,auCheck:`检查 AU 版人设有没有把原角色的内核留住。逐条对：这条内核在 AU 人设里还在不在，有没有被 AU 题材的套路盖掉。
 
-【角色】{{name}}
-【内核】
+角色：{{name}}
+内核：
 {{core}}
 
-【AU 版人设】
+AU 版人设：
 {{persona}}
 
-【AU 题材】{{tags}}
+AU 题材：{{tags}}
 
-【要求】
-- verdict 只能是：保留 / 偏离 / 丢了
-- 偏离或丢了的，where 写 AU 人设里对应的原句（没有就写“没写到”），fix 写一句怎么改
-- 另外检查 AU 人设里有没有原作世界的地名、组织、道具残留，有就放进 leftovers
+怎么判：
+- verdict 只能填：保留 / 偏离 / 丢了
+- 偏离或丢了的，where 抄 AU 人设里对应的原句（找不到就写「没写到」），fix 用一句话说怎么改
+- 顺便看 AU 人设里有没有原作世界的地名、组织、物件没换掉，有就放进 leftovers
 
-【输出】只输出 JSON：
-{"items":[{"core":"内核这一条","verdict":"保留","where":"","fix":""}],"leftovers":[]}`,newRoutes:`【任务】这是一张已经写好的卡。给它想 {{n}} 条新路线：每条路线 = 一个〔user〕身份 + 一个时期，要和已有路线明显不同，能玩出新的关系和张力。
+只交 JSON：
+{"items":[{"core":"内核这一条","verdict":"保留","where":"","fix":""}],"leftovers":[]}`,newRoutes:`这张卡已经写好了。请给它想 {{n}} 条新路线：一条路线就是「〔user〕的一个身份 + 一个时期」，要和已有路线拉开距离，能玩出不一样的关系。
 
-【这张卡】
+这张卡：
 {{concept}}
-【已有路线】
+已有路线：
 {{routes}}
 
-【要求】
-- 身份或时期至少换一样；同一对人换个处境，往往比换个新身份更好玩。
-- 每条说清这条线好玩在哪：两人在这条线上是什么关系。
-- 不写八股。
+想法：
+- 身份和时期至少换一样。同样两个人换个处境，常常比硬造一个新身份好玩。
+- 每条都说清好玩在哪：这条线上两个人是什么关系。
+- 不写套话。
 
-【输出】只输出 JSON：
-{"routes":[{"name":"路线名","user":"〔user〕的身份","period":"时期","why":"一句话：这条线好玩在哪"}]}`,revise:`【任务】按作者的意见修改下面这段角色卡内容。只改意见说到的地方，其他内容和格式保持原样，输出修改后的完整内容。
+只交 JSON：
+{"routes":[{"name":"路线名","user":"〔user〕的身份","period":"时期","why":"一句话：这条线好玩在哪"}]}`,revise:`作者对下面这段内容提了意见，请照意见改。意见没提到的地方和格式都别动，交回改好的全文。
 
-【这段是】{{label}}
-【作者的意见】
+这段是：{{label}}
+作者的意见：
 {{fb}}
 
-【这张卡】
+这张卡：
 {{concept}}
 
-【写法规则】
+写法规则：
 {{rules.通用}}
 
-【原文】
+原文：
 {{text}}
 
-【输出】只输出修改后的完整内容，不解释，不加标题。`,backstory:`【任务】为角色「{{name}}」补写或展开经历。
+只交改好的全文，不解释，不加标题。`,backstory:`给「{{name}}」补写或展开经历。
 
-【构想】
+构想：
 {{concept}}
-【已有的人设】
+已有人设：
 {{persona}}
-【作者的回答】
+作者的回答：
 {{answers}}
-【世界观与人物关系】
+世界观和人物关系：
 {{world}}
 {{relations}}
 
-【篇幅设置】{{count}}
-按作者明确要求的篇幅写；未指定时，以交代清楚生活为准，不凑段数。
-沿着这个人的人生写：长期的家庭生活、教养、交往和发生过的事都可以成为经历。重要的事展开，普通的阶段可以概述，不逐条给性格编一个起源故事，不要求每段都带一句领悟。
-已有的事实、人物和先后顺序保留。创作任务允许补足未定部分；作者明确不许编造的过往、指定保持未知的地方照办。不强制加童年、创伤、救命之恩，也不为了关联〔user〕而让尚未相识的人提前认识。
-讲清那段生活和后来怎样，必要时说明它怎样影响如今的想法，不用一件事解释他整个人。
+篇幅：{{count}}
+作者说了多长就写多长；没说就以把日子讲清楚为准，不硬凑段数。
+顺着这个人的一生往下写：家里怎么过日子、怎么被带大、跟谁来往、碰上过什么事，都算经历。要紧的展开，平淡的几年一句带过；不给每个性格编一个由来，也不要求每段末尾来一句感悟。
+已有的事、人和先后顺序都留着。没定的部分可以补；作者说了不许编的往事、要留白的地方照办。不硬塞童年阴影、创伤或救命之恩，也不为了跟〔user〕扯上关系，让还没认识的人提前认识。
+写清那段日子和后来怎样了，需要时说一句它怎么影响他后来的想法，不拿一件事解释整个人。时期按先后写成「少年时」「入行那几年」这类阶段，不写具体年份日期；最后一段停在故事开始。
 {{rules.通用}}
 
-【格式】只输出 YAML，已有经历按时间顺序合并保留：
+交稿：只交 YAML，已有经历按时间顺序合并进去：
 life_story:
   - 时期:
-    经历:`,hooks:`【任务】为路线「{{route}}」想 {{n}} 个可供挑选的开场剧情，先不写正文。
+    经历:`,hooks:`给路线「{{route}}」想 {{n}} 个开场点子让作者挑，这一步先不写正文。
 
-【路线】
+路线：
 {{routeInfo}}
-【构想】
+构想：
 {{concept}}
-【主要角色概要】
+主要角色概要：
 {{overviews}}
-【主要角色人设与补充】
+主要角色人设和补充：
 {{personas}}
-【人物关系】
+人物关系：
 {{relations}}
-【世界观】
+世界观：
 {{world}}
-【NPC】
+NPC：
 {{npcs}}
-【基调】
+基调：
 {{tone}}
-【当前已有的候选，仅用于避重】
+现有的候选（只用来避开重复）：
 {{existing}}
-【已经写出的开场白，仅用于避重】
+已经写好的开场白（只用来避开重复）：
 {{existingGreetings}}
-这两份旧稿用于避开重复，不直接作为新结果返回，也不换名或换词复写。作者明确要求继续某个方向时，按作者要求。
+这两份旧稿是拿来对照、躲开重复的，别把它们原样交回来，也别换个名字或换几个词再交。作者明说要接着某个方向想时，照作者说的。
 
-【构思】
+怎么想：
 {{rules.开场构思}}
-每个候选用一小段写清剧情，不列分析字段，不提前替〔user〕安排反应或选择，不加点评。输出前比较这一批，重写同一事件的变体，再交给作者挑选。
+每个点子用一小段把事情说清，不列分析栏目，不替〔user〕先安排好反应和选择，不附点评。交之前把这一批放在一起比一比，是同一件事换皮的就重想。
 
-【输出】只输出 JSON：
-{"hooks":["",""]}`,localEdit:`【任务】只改下面原文里用【【 】】括起来的那一段，其他部分一个字都不要动。
+只交 JSON：
+{"hooks":["",""]}`,localEdit:`下面原文里用【【 】】括起来的那一段要改，其余部分一个字也别碰。
 
-【这段是】{{label}}
-【作者的要求】{{instruction}}
+这段是：{{label}}
+作者要求：{{instruction}}
 
-【这张卡】
+这张卡：
 {{concept}}
 
-【写法规则】
+写法规则：
 {{rules.通用}}
 
-【原文】（要改的部分在【【 】】里，前后是上下文）
+原文（要改的在【【 】】里，前后是上下文）：
 {{context}}
 
-【输出】只输出【【 】】里那一段改好后的文字，不带【【 】】，不带前后文，不解释。保持原来的格式：缩进、YAML 键名、列表符号、换行方式都跟原来一样。`,playChar:`【任务】下面是一张角色卡导入酒馆后会发出去的全部设定。你来扮演卡里的角色（主要是{{char}}，需要时也扮演 NPC 和世界），和〔user〕进行角色扮演。
+只交【【 】】里那一段改好的文字：不带【【 】】，不带前后文，不解释。格式跟原来一样：缩进、YAML 键名、列表符号、换行方式都别变。`,playChar:`下面是这张卡导入酒馆后会发给 AI 的全部设定。请你来演卡里的人（主要是{{char}}，需要时也演 NPC 和这个世界），和〔user〕对戏。
 
-【角色卡】
+角色卡：
 {{card}}
 
-【要求】
-- 只写角色和世界的反应。不替〔user〕说话，不替〔user〕做决定，不写〔user〕的心理。
-- 每次回复 {{length}} 字左右。
-- 按设定里的性格、说话方式和行为逻辑来演，不要把设定原句搬出来。`,playUser:`【任务】你在帮作者测试一张角色卡。扮演玩家〔user〕，给角色回一条消息。
+演法：
+- 只写角色和世界这一边。不替〔user〕说话、拿主意，也不写〔user〕心里想什么。
+- 每次回复 {{length}} 字上下。
+- 照设定里的脾气、说话方式和做事逻辑来演，别把设定原句搬出来念。`,playUser:`你在帮作者试一张卡。请你扮玩家〔user〕，给角色回一条消息。
 
-【玩家风格】{{style}}
-【〔user〕在这条路线的身份】
+玩家风格：{{style}}
+〔user〕在这条路线的身份：
 {{routeInfo}}
-【到目前为止的对话】
+目前为止的对话：
 {{transcript}}
 
-【要求】
-- 像真实玩家在酒馆里打字：1–2 句，可以带动作（用括号或星号），也可以只说一句话。
-- 按玩家风格来。不替角色说话，不总结剧情，不解释。
-【输出】只输出这条消息。`,personaExtra:`「{{name}}」的人设已经写完了。现在全卡的世界观、NPC、关系和路线也有了，请回头补一份「补充」：把这个人放回这个世界里，写出人设里还没写、但这个世界让他有了的东西。
+回法：
+- 像真人在酒馆里打字：一两句，可以带个动作（用括号或星号），也可以只说一句话。
+- 照玩家风格来。不替角色说话，不总结剧情，不解释。
+只交这条消息。`,personaExtra:`「{{name}}」的人设已经写完了。现在全卡的世界观、NPC、关系和路线也有了，请回头补一份「补充」：把这个人放回这个世界里，写出人设里还没写、但这个世界让他有了的东西。
 
 已写好的人设（不要复述，也不要改动里面定下的性情和底线）：
 {{persona}}
@@ -3229,13 +3138,13 @@ life_story:
 他自己在忙的:
   - …
 </{{name}}补充>
-只交这一块。`,conflict:`【任务】检查这张角色卡里，作者选的标签和写出来的内容有没有互相矛盾。只找真正矛盾的地方，不做文笔点评。
+只交这一块。`,conflict:`检查这张卡里，作者选的标签和写出来的内容有没有打架。只找真打架的地方，不评文笔。
 
-【作者选的标签】
+作者选的标签：
 {{tags}}
 （c = 角色，u = user；公/左位 = 攻，嬷/右位 = 受；泥塑 = 女性化处理，整塑 = 男性化处理）
 
-【卡的内容】
+卡的内容：
 主要人设：
 {{personas}}
 世界观：
@@ -3249,22 +3158,22 @@ NPC：
 开场白：
 {{greetings}}
 
-【逐项对照】
-- 性向、人数（如 1v1、多人）、user 性别、攻受/强弱定位、关系类型（如双向、单箭头、追逐方向）、时代题材、基调（如甜、虐）、玩法（如是否有数值、系统）。
-- 标签之间自己互相冲突的也要列（比如“强c弱u”和“弱c强u”同时选）。
-- 内容之间前后不一致（名字、年龄、身份、时间线）不在这次范围，除非直接违背某个标签。
-- 标签没有被内容体现（选了但完全没写）也算，但标成 level=weak。
+对照这些：
+- 性向、人数（1v1、多人等）、user 性别、攻受和强弱、关系类型（双向、单箭头、谁追谁）、年代题材、基调（甜、虐）、玩法（有没有数值、系统）。
+- 标签和标签自己打架的也要列（比如「强c弱u」和「弱c强u」一起选了）。
+- 内容自己前后不一致（名字、年龄、身份、时间线）不归这一项管，除非它直接违背了某个标签。
+- 选了标签、内容里完全没体现的也算，但 level 标 weak。
 
-【要求】
-- 每条都要引用卡里的原话（quote，一句以内），没有原话就不要列。
-- side：这一条更可能是“标签选错了”（tag）还是“内容写偏了”（content）。拿不准写 content。
-- part：问题出在卡的哪一部分：persona、world、npc、routes、tone、greet。name 是涉及的角色名，没有就留空。
-- tag 写涉及的标签名（原样照抄，如 嬷c），没有就留空。
-- fix 写给作者的修改意见，一两句，能直接当重写意见用。
-- 没有矛盾就返回空数组，不要硬凑。
-【输出】只输出 JSON：{"issues":[{"level":"strong|weak","tag":"","part":"persona","name":"","quote":"","problem":"","side":"content","fix":""}]}`,consistency:`【任务】检查这张角色卡的内容前后有没有对不上的地方（卡的内部矛盾）。只找真正对不上的，不做文笔点评，不管标签。
+要求：
+- 每条都要引卡里的原话（quote，一句以内），引不出原话就不列。
+- side：更像是「标签选错了」（tag）还是「内容写歪了」（content）。拿不准填 content。
+- part：问题在卡的哪一块：persona、world、npc、routes、tone、greet。name 是涉及的角色名，没有就空着。
+- tag 照抄涉及的标签名（如 嬷c），没有就空着。
+- fix 给作者一两句改法，能直接拿去当重写意见。
+- 没有打架就交空数组，别硬凑。
+只交 JSON：{"issues":[{"level":"strong|weak","tag":"","part":"persona","name":"","quote":"","problem":"","side":"content","fix":""}]}`,consistency:`检查这张卡的内容自己有没有前后对不上的地方。只找真对不上的，不评文笔，不管标签。
 
-【卡的内容】
+卡的内容：
 主要人设：
 {{personas}}
 世界观：
@@ -3278,171 +3187,171 @@ NPC：
 开场白：
 {{greetings}}
 
-【逐项对照】
-- 名字：同一个人前后写法不同（错字、换了称呼却没交代、全名对不上）。
-- 年龄、生日、辈分、时间线：年龄和经历的年份算不通，先后顺序倒了，说是同龄却差了很多。
-- 身份、职业、住处、外貌：同一个人在不同地方说法不一样（比如一处写黑发一处写银发）。
-- 关系：谁是谁的亲人、上司、前任，两处说法冲突；A 说认识 B，B 的资料却写没见过。
-- 同一件事：人设、NPC、世界观对同一件事（谁做的、什么时候、结果如何）说法不同。
-- 世界规则：一处说有某种力量或制度，另一处否认；规则里的数值、界限前后不一样。
-- 开场白：人物状态、地点、关系和人设对不上（比如人设写已经分手，开场白却在热恋）。
-- 有意的反差（角色撒谎、假身份、前后变化）不算矛盾，除非卡里没有任何交代。
+对照这些：
+- 名字：同一个人写法不一样（错字、换了称呼没交代、全名对不上）。
+- 年龄、生日、辈分、时间：年龄和经历的年份算不拢，先后颠倒，说是同龄却差了好几岁。
+- 身份、职业、住处、长相：同一个人在不同地方说法不同（一处黑发一处银发）。
+- 关系：谁是谁的亲人、上司、前任，两处说的不一样；A 说认识 B，B 那边却写没见过。
+- 同一件事：人设、NPC、世界观对同一件事（谁干的、什么时候、结果怎样）说法不同。
+- 世界规矩：一处说有某种力量或制度，另一处说没有；数值、界限前后不一样。
+- 开场白：人物状态、地点、关系和人设对不上（人设写已经分手，开场白却在热恋）。
+- 故意的反差（撒谎、假身份、人前后变了）不算，除非卡里一点交代都没有。
 
-【要求】
-- 每条都要引用卡里的两处原话：quote 是一处，other 是和它对不上的另一处（各一句以内），拿不出两处原话就不要列。
-- part 和 otherPart：两处各自在卡的哪一部分，取 persona、world、npc、routes、tone、greet 之一。name 是涉及的角色名，没有就留空。
-- level：确定对不上写 strong；可能是笔误或需要作者确认写 weak。
-- fix 写给作者的修改意见，一两句，要说清以哪一处为准或怎么统一。拿不准以哪个为准就让作者选。
-- 没有矛盾就返回空数组，不要硬凑。
-【输出】只输出 JSON：{"issues":[{"level":"strong|weak","part":"persona","otherPart":"world","name":"","quote":"","other":"","problem":"","fix":""}]}`,playReview:`【任务】下面是一张角色卡的试玩记录。用挑剔的老玩家和写卡作者的眼光点评：这张卡跑起来好不好玩，问题出在卡的哪一部分，怎么改。
+要求：
+- 每条都要引两处原话：quote 一处，other 是跟它对不上的另一处（各一句以内）。拿不出两处原话就不列。
+- part 和 otherPart：两处各在卡的哪一块，从 persona、world、npc、routes、tone、greet 里选。name 是涉及的角色名，没有就空着。
+- level：确定对不上填 strong；可能是笔误、需要作者确认的填 weak。
+- fix 给作者一两句：以哪一处为准、怎么统一。拿不准就让作者选。
+- 没有就交空数组，别硬凑。
+只交 JSON：{"issues":[{"level":"strong|weak","part":"persona","otherPart":"world","name":"","quote":"","other":"","problem":"","fix":""}]}`,playReview:`下面是一张卡的试玩记录。请站在挑剔的老玩家和写卡人的角度点评：这张卡跑起来好不好玩，毛病出在卡的哪一块，怎么改。
 
-【主要角色概要】
+主要角色概要：
 {{overviews}}
-【路线】
+路线：
 {{routeInfo}}
-【试玩记录】
+试玩记录：
 {{transcript}}
 
-【逐项看】
-- 角色像不像设定里那个人：说话方式、做决定的方式有没有跑偏（OOC）。
-- 有没有替〔user〕说话、做决定、写〔user〕的心理（抢话）。
-- 有没有八股、八股，有没有重复的动作和句式。
-- 角色有没有自己想要的东西、会不会主动推剧情，还是只会接话。
-- 有没有让人想接着聊的钩子；哪一轮最无聊。
-- 好的地方也要说，作者要知道哪些该保留。
+看这些：
+- 角色还像不像设定里那个人：说话和拿主意的方式有没有跑偏。
+- 有没有替〔user〕说话、拿主意、写〔user〕的心思。
+- 有没有套话，动作和句式有没有翻来覆去。
+- 角色有没有自己想要的东西，会不会主动往前推，还是只会接话。
+- 有没有让人想接着聊下去的地方；哪一轮最没意思。
+- 好的地方也要说，作者得知道哪些该留。
 
-【要求】
-- 每条问题都要指出是第几条消息、具体哪句。
-- part 是问题出在卡的哪一部分：persona（人设）、world（世界观）、npc、routes（路线/玩家信息）、tone（基调与规则）、greet（开场白）。
-- fix 写给作者的修改意见，一两句，能直接当成重写意见用；不要写“加强”“丰富”这种空话。
-- 只是模型本身的问题（和卡无关）就不要列。
-【输出】只输出 JSON：
-{"score":7,"good":[""],"issues":[{"where":"第 N 条","problem":"","part":"persona","name":"相关的角色名或路线名，可以空","fix":""}]}`,expand:`【任务】把下面每个梗扩写成一个完整的开场白，按顺序一个梗写一个，长度 {{length}} 字左右。
+要求：
+- 每个问题都要指出是第几条消息、哪一句。
+- part：毛病在卡的哪一块：persona（人设）、world（世界观）、npc、routes（路线 / 玩家信息）、tone（基调与规则）、greet（开场白）。
+- fix 给作者一两句能直接拿去重写的意见，别写「加强」「丰富」这种空话。
+- 纯属模型自身的毛病、跟卡无关的不列。
+只交 JSON：
+{"score":7,"good":[""],"issues":[{"where":"第 N 条","problem":"","part":"persona","name":"相关的角色名或路线名，可以空","fix":""}]}`,expand:`把下面每个点子写成一个完整的开场白，按顺序一个点子写一个，每个 {{length}} 字上下。
 
-【梗】
+点子：
 {{hooks}}
 
-【路线】
+路线：
 {{routeInfo}}
-【构想】
+构想：
 {{concept}}
-【主要角色概要】
+主要角色概要：
 {{overviews}}
-【主要角色人设与补充】
+主要角色人设和补充：
 {{personas}}
-【人物关系】
+人物关系：
 {{relations}}
-【世界观】
+世界观：
 {{world}}
-【NPC】
+NPC：
 {{npcs}}
-【基调】
+基调：
 {{tone}}
 
-【写法】
+写法：
 {{rules.开场白}}
-- 保留每个选定梗的事情和相处方式，按顺序分别写；需要的经过可以补足，不把不同的梗改回同一种见面、送东西或问答开头。作者在梗里指定的开头、停顿点按要求写。
+- 每个点子里的事和两人的相处方式都要留住，按顺序各写各的；需要的来龙去脉可以补，但别把不同的点子写回同一种碰面、送东西或一问一答的开头。作者在点子里指定了开头或停在哪，照办。
 
-【格式】每个开场白前加一行 <<<开场白>>>，正文直接写，不加标题。`,predict:`【任务】下面只给你一个角色的类型标签。凭你对这类角色的印象，写出他最典型、最常见的表现。
+交稿：每个开场白前单独一行 <<<开场白>>>，正文直接写，不加标题。`,predict:`这里只给你一个角色的类型。请凭你对这类角色的印象，写出他最典型、最常见的样子。
 
-【角色类型】{{archetype}}
-【题材与关系】{{tags}}
+角色类型：{{archetype}}
+题材和关系：{{tags}}
 
-【场景】
+四个场面：
 1. 第一次见到〔user〕
-2. 〔user〕和别人走得很近
-3. 他的秘密被〔user〕撞破
-4. 〔user〕受了伤
+2. 〔user〕跟别人走得很近
+3. 他的秘密被〔user〕撞见
+4. 〔user〕受伤了
 
-【输出】只输出 JSON：
-{"scenes":[{"scene":"场景","behavior":"他会怎么做，一句话","line":"他最可能说的一句话"}],"traits":["这类角色最常见的 5 种性格写法，每条一句"]}`,judge:`【任务】左边是“这类角色最常见的刻板写法”，右边是角色「{{name}}」的人设。找出人设里本质上就是刻板写法的句子：意思一样就算，不看字面。空泛的标签式描写（“病态偏执”“唯一的执念”“活体神明”这类）也算。
+只交 JSON：
+{"scenes":[{"scene":"场面","behavior":"他会怎么做，一句话","line":"他最可能说的一句话"}],"traits":["这类角色最常见的 5 种性格写法，每条一句"]}`,judge:`左边是「这类角色最常见的写法」，右边是「{{name}}」的人设。请找出人设里其实就是常见写法的句子：意思一样就算，不看字面。只贴标签的空话（「病态偏执」「唯一的执念」「活体神明」这种）也算。
 
-【刻板写法】
+常见写法：
 {{stereotypes}}
 
-【人设】
+人设：
 {{persona}}
 
-【要求】先看这句话在整份人设中是否已有具体的经历、想法和关系作为依据。常见性格、题材和作者明确选定的偏好本身不算问题；不能因为与预测相似就判定必须重写。只列缺少人物依据、反复重复同一标签或只用八股代替内容的地方，说明依据。card 必须是人设里的原句，没有就返回空数组。
+判法：先看这句话在整份人设里有没有具体的经历、想法和关系撑着。常见的性格、题材和作者自己选的口味本身不算毛病，不能因为跟常见写法像就说要重写。只挑出没有依据撑着、反复念同一个标签、或者拿套话顶替内容的地方，并说明依据。card 必须是人设里的原句，没有就交空数组。
 
-【输出】只输出 JSON：
-{"overlaps":[{"card":"人设原句","stereotype":"对应的刻板写法","why":"一句话"}]}`,destale:`【任务】角色「{{name}}」的人设里有几处和“这类角色的刻板写法”撞了。要改的是手法，不是措辞。
+只交 JSON：
+{"overlaps":[{"card":"人设原句","stereotype":"对应的常见写法","why":"一句话"}]}`,destale:`「{{name}}」的人设里有几处跟这类角色的常见写法撞了。要改的是写法，不是换几个词。
 
-【怎么改】
-作者选择要改的地方按意见处理，未涉及的原文保留。先分清这句话的问题：空话补成这个人的想法，重复的合并；已有的身份、能力、往事、感情和红线不能因为“常见”就换掉。
-结合已有经历和关系写出尚未说清的部分，不规定必须换多少动作或因果，也不一律把人物的事情缩成小事。没有作者要求，不为求新鲜给他增加创伤、秘密、能力或新关系。
-保留实际的权力、财力和活动范围，同时保留已有的限制。只输出完整人设。
+改法：
+作者勾了要改的地方照意见改，没勾的原文照留。先分清这句是什么毛病：空话就补成这个人真实的想法，重复的就合并；已有的身份、本事、往事、感情和底线，不能因为「常见」就换掉。
+用已有的经历和关系把没说清的部分写出来，不规定要换几个动作或原因，也别一律把他的事写小。作者没要求的话，不为了新鲜给他加伤痛、秘密、本事或新关系。
+他实际有的权力、钱和活动范围照留，已有的限制也照留。交完整人设。
 
-【撞上的地方】
+撞上的地方：
 {{overlaps}}
 
-【构想】
+构想：
 {{concept}}
-【作者的回答】
+作者的回答：
 {{answers}}
-【世界观】
+世界观：
 {{world}}
 
-【写法规则】
+写法规则：
 {{rules.通用}}
 
-【人设原文】
+人设原文：
 {{persona}}
 
-【输出】完整人设，格式不变，从 <{{name}}> 到 </{{name}}>。`,free:`【任务】为这张卡写一个附加模块「{{name}}」。
+交稿：完整人设，格式不变，从 <{{name}}> 到 </{{name}}>。`,free:`给这张卡写一个附加模块「{{name}}」。
 
-【作者的描述】{{desc}}
-【构想】
+作者的描述：{{desc}}
+构想：
 {{concept}}
-【主要角色概要】
+主要角色概要：
 {{overviews}}
 
-【写法规则】
+写法规则：
 {{rules.通用}}
 
-【格式】用 <{{name}}> 标签包住内容，标签内用 YAML。只输出这个模块。`,intro:`【任务】为这张卡写一篇发到 Discord 的简介，并给出 4 个标题。
+交稿：用 <{{name}}> 标签包住，里面用 YAML。只交这个模块。`,intro:`给这张卡写一篇发在 Discord 上的简介，再配 4 个标题。
 
-【标签】{{introTags}}
-【构想】
+标签：{{introTags}}
+构想：
 {{concept}}
-【主要角色概要】
+主要角色概要：
 {{overviews}}
-【路线】
+路线：
 {{routes}}
-【开场白节选】
+开场白节选：
 {{greetingSample}}
 
-【标题要求】约 20 字，直接给最好的梗、最吸引人的处境，尺度允许时可以直给。这些标题用不同写法：关系错位、规则被打破、一句台词、一个反常的物件。
+标题：20 字左右，把最抓人的梗或处境直接摆出来，尺度允许时可以直说。4 个标题换 4 种写法：关系错位、规矩被打破、一句台词、一个不对劲的物件。
 
-【正文要求】
-- 只用 Discord 支持的 Markdown：**加粗** *斜体* __下划线__ ~~删除线~~ -# 小字 ||剧透|| > 引用 # ## ### 标题 - 列表。不用表格。
-- 简介第一句直接进冲突：一个画面或一句台词，不先铺世界观；结尾留一个悬念。需要隐藏的反转用 ||剧透||。
-- “关于TA”每段先一句话身份，再写矛盾点，写行为不写性格标签。
-- 多路线时写“路线”段，每条一行：> **路线名**｜关系定位 · 调性。只有一条路线就省略这一段。
-- “内心想法”写角色真正会想、但不会说出口的话，要是这个角色独有的，只看类型就能猜到的话不要。
-- 题句用角色台词或原创句，不用名人名言。
-- 不写八股，不复述长篇剧情。正文控制在 1300 字以内。
+正文：
+- 只用 Discord 认的 Markdown：**加粗** *斜体* __下划线__ ~~删除线~~ -# 小字 ||剧透|| > 引用 # ## ### 标题 - 列表。不用表格。
+- 简介第一句就进冲突：一个画面或一句台词，不先讲世界观；结尾留个钩子。要藏的反转用 ||剧透||。
+- 「关于TA」每人一段：先一句话身份，再写他心里拧着的地方，写他做什么，不贴性格标签。
+- 多条路线时写「路线」段，每条一行：> **路线名**｜关系定位 · 调性。只有一条就不写这段。
+- 「内心想法」写这个角色心里真会想、嘴上不会说的话，要只属于他；看类型就能猜到的不要。
+- 题句用角色的台词或自己写的句子，不用名人名言。
+- 不写套话，不复述长剧情。正文 1300 字以内。
 
-【格式】
+交稿格式：
 <<<标题>>>
-（每行一个标题，一共 4 行）
+（每行一个，共 4 行）
 <<<题句>>>
-题句（可以是一行英文加一行中文翻译，也可以只有中文）
+题句（可以一行英文加一行中文，也可以只有中文）
 <<<简介>>>
-（第一句进冲突的简介，2–4 段）
-||剧透（没有就写“无”）||
+（第一句进冲突，2–4 段）
+||剧透（没有就写「无」）||
 <<<关于TA>>>
 **角色名**｜一句话身份
-矛盾点，2–4 句。
+他心里拧着的地方，2–4 句。
 （每个主要角色一段）
 **〔user〕**｜一句话身份
-〔user〕在故事里的位置，以及能改变什么。
+〔user〕在故事里站在哪，能改变什么。
 **关系**
-目前的关系和主要矛盾，一两句。
+现在是什么关系，卡在哪，一两句。
 <<<路线>>>
 （多路线时才写）
 <<<内心想法>>>
-角色真正会想、但不会说出口的话。`},Fn={chat:{name:"先聊聊",stage:"card",temp:.85},deepAns:{name:"深挖问答（AI 先答）",stage:"card",temp:.8},chatQs:{name:"审设定出选择题",stage:"card",temp:.7},chatBrief:{name:"整理定稿",stage:"card",temp:.3},inspire:{name:"灵感问答",stage:"card",temp:1},story:{name:"试写短篇",stage:"greeting",temp:.95},ideaQA:{name:"脑洞问答",stage:"card",temp:.95},hooks:{name:"开场白想梗",stage:"greeting",temp:1},backstory:{name:"展开经历",stage:"card",temp:.85},newRoutes:{name:"想新路线",stage:"card",temp:1},revise:{name:"按意见修改",stage:"card",temp:.6},auCore:{name:"提取内核",stage:"card",temp:.4},auMap:{name:"映射表",stage:"card",temp:.8},auCheck:{name:"内核一致性检查",stage:"card",temp:.2},expand:{name:"开场白扩写",stage:"greeting",temp:.9},relations:{name:"角色关系网",stage:"card",temp:.8},classify:{name:"原卡条目分类",stage:"card",temp:.1},npcOne:{name:"单个 NPC",stage:"card",temp:.85},localEdit:{name:"局部重写",stage:"card",temp:.8},playChar:{name:"试玩·角色回复",stage:"greeting",temp:.9},playUser:{name:"试玩·AI 扮 user",stage:"card",temp:1},playReview:{name:"试玩点评",stage:"card",temp:.3},conflict:{name:"标签与内容冲突检查",stage:"card",temp:.2},consistency:{name:"内容一致性检查",stage:"card",temp:.2},personaExtra:{name:"人设补充",stage:"card",temp:.75},idea:{name:"一句话构想",stage:"card",temp:.95},qa:{name:"人设问答",stage:"card",temp:.95},persona:{name:"主要人设",stage:"card",temp:.8},world:{name:"世界观",stage:"card",temp:.7},npc:{name:"NPC",stage:"card",temp:.8},routes:{name:"玩家与路线",stage:"card",temp:.8},tone:{name:"基调与规则",stage:"card",temp:.7},greeting:{name:"开场白",stage:"greeting",temp:.9},predict:{name:"可预测性测试",stage:"card",temp:.3},judge:{name:"刻板比对",stage:"card",temp:.2},destale:{name:"重写撞车部分",stage:"card",temp:.7},free:{name:"自由模块",stage:"card",temp:.8},intro:{name:"简介",stage:"card",temp:.9}},ef={idea:"一句话脑洞",tags:"选中的标签",concept:"选中的构想",platform:"平台味说明",overviews:"主要角色概要",personas:"主要角色人设全文",answers:"问答里作者的回答",world:"世界观",npcs:"NPC",relations:"人物关系",existingGreetings:"已经写出的开场白（想梗时避开重复）",npcIdeas:"作者已有的 NPC 名字与设想","rules.NPC写法":"规则库：NPC 写法",routes:"路线信息",tone:"基调与规则",cardMode:"卡的类型（单人卡 / 多人卡 / 无固定角色 / 规则卡）","rules.通用":"规则库：通用","rules.人物层次":"规则库：人物层次","rules.零度写作":"规则库：零度写作","rules.开场白":"规则库：开场白","rules.开场构思":"规则库：开场构思","rules.禁令格式":"规则库：禁令格式","rules.禁用词":"规则库：禁用词（每行一个）"};function as(e,t){return String(e??"").replace(/\{\{\s*([^{}\s]+)\s*\}\}/g,(n,r)=>{if(Object.prototype.hasOwnProperty.call(t,r)){const s=t[r];return s==null?"":String(s)}return n}).replace(/\n{3,}/g,`
+角色心里真会想、嘴上不会说的话。`},Fn={chat:{name:"先聊聊",stage:"card",temp:.85},deepAns:{name:"深挖问答（AI 先答）",stage:"card",temp:.8},chatQs:{name:"审设定出选择题",stage:"card",temp:.7},chatBrief:{name:"整理定稿",stage:"card",temp:.3},inspire:{name:"灵感问答",stage:"card",temp:1},story:{name:"试写短篇",stage:"greeting",temp:.95},ideaQA:{name:"脑洞问答",stage:"card",temp:.95},hooks:{name:"开场白想梗",stage:"greeting",temp:1},backstory:{name:"展开经历",stage:"card",temp:.85},newRoutes:{name:"想新路线",stage:"card",temp:1},revise:{name:"按意见修改",stage:"card",temp:.6},auCore:{name:"提取内核",stage:"card",temp:.4},auMap:{name:"映射表",stage:"card",temp:.8},auCheck:{name:"内核一致性检查",stage:"card",temp:.2},expand:{name:"开场白扩写",stage:"greeting",temp:.9},relations:{name:"角色关系网",stage:"card",temp:.8},classify:{name:"原卡条目分类",stage:"card",temp:.1},npcOne:{name:"单个 NPC",stage:"card",temp:.85},localEdit:{name:"局部重写",stage:"card",temp:.8},playChar:{name:"试玩·角色回复",stage:"greeting",temp:.9},playUser:{name:"试玩·AI 扮 user",stage:"card",temp:1},playReview:{name:"试玩点评",stage:"card",temp:.3},conflict:{name:"标签与内容冲突检查",stage:"card",temp:.2},consistency:{name:"内容一致性检查",stage:"card",temp:.2},personaExtra:{name:"人设补充",stage:"card",temp:.75},idea:{name:"一句话构想",stage:"card",temp:.95},qa:{name:"人设问答",stage:"card",temp:.95},persona:{name:"主要人设",stage:"card",temp:.8},world:{name:"世界观",stage:"card",temp:.7},npc:{name:"NPC",stage:"card",temp:.8},routes:{name:"玩家与路线",stage:"card",temp:.8},tone:{name:"基调与规则",stage:"card",temp:.7},greeting:{name:"开场白",stage:"greeting",temp:.9},predict:{name:"可预测性测试",stage:"card",temp:.3},judge:{name:"刻板比对",stage:"card",temp:.2},destale:{name:"重写撞车部分",stage:"card",temp:.7},free:{name:"自由模块",stage:"card",temp:.8},intro:{name:"简介",stage:"card",temp:.9}},ef={idea:"一句话脑洞",tags:"选中的标签",concept:"选中的构想",platform:"平台味说明",overviews:"主要角色概要",personas:"主要角色人设全文",answers:"问答里作者的回答",world:"世界观",npcs:"NPC",relations:"人物关系",existingGreetings:"已经写出的开场白（想梗时避开重复）",npcIdeas:"作者已有的 NPC 名字与设想","rules.NPC写法":"规则库：NPC 写法",routes:"路线信息",tone:"基调与规则",cardMode:"卡的类型（单人卡 / 多人卡 / 无固定角色 / 规则卡）","rules.通用":"规则库：通用","rules.人物层次":"规则库：人物层次","rules.零度写作":"规则库：零度写作","rules.开场白":"规则库：开场白","rules.开场构思":"规则库：开场构思","rules.禁令格式":"规则库：禁令格式","rules.禁用词":"规则库：禁用词（每行一个）"};function as(e,t){return String(e??"").replace(/\{\{\s*([^{}\s]+)\s*\}\}/g,(n,r)=>{if(Object.prototype.hasOwnProperty.call(t,r)){const s=t[r];return s==null?"":String(s)}return n}).replace(/\n{3,}/g,`
 
 `)}var Zi=["永远"],tf=e=>String(e??"").split(`
 `).filter(t=>!Zi.includes(t.trim())).join(`
@@ -3549,8 +3458,8 @@ ${t.end}
 `)}function Zt(e,t,n=t){const r=e.pageDialogues?.[t];return r?.use===!1||!Jn(r).some(s=>s.role==="user")?"":`
 
 【${n}页的创作对话】
-以下是作者针对本页的讨论。执行作者明确提出的要求；作者后来纠正的内容以新说法为准。AI 的建议只有在作者采纳后才成为设定。问句、引用和被否定的例子不等于写作要求。按本次任务的格式输出正文，不复述对话。
-${Ff(r)}`}function Uf(e){return`你正在和作者讨论「${e}」页面的内容。结合当前页面已有的文字和完整对话，直接回答作者这一次的问题，帮助作者决定怎么写、怎么改。作者已经说明的偏好继续沿用，不重复盘问。作者让你写时就写；只问原因或讨论方向时，先回应这个问题。没有依据的设定应当作为建议提出，不擅自视为定稿。当前调用只会在对话区显示回复，不能操作页面或改正文，不要声称已经保存、替换、应用或生成到正文里。作者要写入正文时，说明用本页原有的生成或修改按钮即可。用中文自然交谈，避免机械列规则和无关的例子。`}function gt(e,t=3e4){const n=typeof e=="string"?e:JSON.stringify(e,null,2);return n.length>t?n.slice(0,t)+`
+这是作者在这一页上和 AI 的聊天。作者明说要的照做；前后说法不同时，以后说的为准。AI 提的主意，作者点头了才算数。作者的提问、引用的例子和被否掉的写法都不是要求。照这次任务的格式交正文，不复述聊天。
+${Ff(r)}`}function Uf(e){return`你在和作者聊「${e}」这一页。看着这页已经写的内容和前面的聊天，直接回答作者这次问的，帮他想清楚怎么写、怎么改。作者说过的喜好接着用，别反复追问。作者让你写就直接写；他只是问为什么、或者想商量方向，就先答这个。没有依据的设定当成建议提出来，不当成已经定了。你的回复只会出现在聊天框里，碰不到页面上的正文，所以别说「已经保存」「已经替换」「已经写进去了」；作者想放进正文，告诉他用这页本来的按钮。用中文正常聊天，不用一条条列规矩，不举不相干的例子。`}function gt(e,t=3e4){const n=typeof e=="string"?e:JSON.stringify(e,null,2);return n.length>t?n.slice(0,t)+`
 （本页资料较长，此处省略后文。）`:n}async function uo(e,t=!1){const n=Aa(e.owner,e.key);if(e.busy()||vn.has(n))return;const r=String(n.input??"").trim();if(!t&&!r||t&&Jn(n).at(-1)?.role!=="user")return;const s=e.context();return e.task(async()=>{t||(n.messages.push({role:"user",text:r}),n.input=""),n.error="",n.open=!0,vn.add(n),e.save(),e.render();const a=Jn(n).map(i=>({role:i.role,content:i.text}));xn={record:n,text:""};try{const i=await e.request({system:Uf(e.label)+(e.systemExtra?`
 ${e.systemExtra}`:"")+`
 
@@ -3572,7 +3481,7 @@ ${w.content}`);function D(l){return{personas:[...(l.personas??[]).filter(f=>!f.d
 `)}}const Q=l=>!!(l.chat?.dropConcept&&T(l.chat?.brief));function z(l){const f=M(l),w=l.chat;return T(w?.brief)&&(w.dropConcept&&(f.concept="（作者选择不参考构想梗概，一切以【作者定稿】为准）",f.answers="（无）"),w.dropOverview&&(f.overviews="（作者选择不参考人设概要，以【作者定稿】和人设全文为准）")),f}function M(l){const f=D(l);return{idea:l.idea,tags:Wi(l.tags,n())||"（未选）",concept:(g(l)?ha(g(l)):l.au?Le(l):l.existing?Pf(l):[T(l.idea)&&`脑洞：${T(l.idea)}`,ad(l)].filter(Boolean).join(`
 `)||ha(null))+uh(l),platform:y(l),overviews:Fl(l),personas:f.personas,relations:f.relations,answers:ba(l),world:f.world||"（无）",npcs:f.npcs||"（无）",routes:yf(l),tone:f.tone||"（无）",...nf(d(l)),cardMode:ss[i(l)]}}const _=l=>{const f=new Set((l.tags??[]).map(v=>v.name)),w=eo(d().禁用词).filter(v=>!f.has(v));return Qa()&&!w.includes("三")?[...w,"三"]:w},ce=(l,f)=>{const w=_(f).filter(h=>!Zi.includes(h)&&h!=="三"),v=Qa()?`${l}
 ${Io}`:l;return w.length?`${v}
-下面这些词一律不要出现，换成具体、平实的写法：${w.join("、")}`:v},V=l=>sf(l,d().直接删),R=(l,f)=>T(l.feedback?.[f]);function L(l,f,w){var v;if(w==null||(typeof w=="string"?!w.trim():Array.isArray(w)?!w.length:!Object.values(w).some(O=>typeof O=="string"?O.trim():Array.isArray(O)?O.length:O)))return;l.history??(l.history={}),l.changes?.[f]&&delete l.changes[f];const S=(v=l.history)[f]??(v[f]=[]);S.push(structuredClone(w)),S.length>5&&S.shift()}function W(l,f){const[w,...v]=f.split(":"),h=v.join(":"),S=()=>l.personas.find(C=>C.name===h),O=()=>l.free.find(C=>C.name===h);return{idea:{get:()=>({concepts:l.concepts,pick:l.pick}),set:C=>{l.concepts=C.concepts,l.pick=C.pick}},persona:{get:()=>({overview:S()?.overview??"",text:S()?.text??""}),set:C=>{const j=S();j&&Object.assign(j,C)}},personaExtra:{get:()=>S()?.extra??"",set:C=>{const j=S();j&&(j.extra=C)}},world:{get:()=>l.world,set:C=>{l.world=C}},npc:{get:()=>l.npcs,set:C=>{l.npcs=C}},routes:{get:()=>l.routes.map(C=>C.info),set:C=>{l.routes.forEach((j,K)=>{j.info=C[K]??j.info})}},tone:{get:()=>l.tone,set:C=>{l.tone=C}},relations:{get:()=>l.relations??"",set:C=>{l.relations=C}},greet:{get:()=>l.greetings.filter(C=>C.route===h).map(C=>C.text),set:C=>{l.greetings=[...l.greetings.filter(j=>j.route!==h),...C.map(j=>({route:h,text:j}))]}},free:{get:()=>O()?.content??"",set:C=>{const j=O();j&&(j.content=C)}},intro:{get:()=>l.intro,set:C=>{l.intro=C}},exist:Ce(l,h),au:{get:()=>h==="map"?l.au?.map:{core:l.au?.core,shell:l.au?.shell},set:C=>{h==="map"?l.au.map=C:(l.au.core=C.core,l.au.shell=C.shell)}},route:{get:()=>l.routes.find(C=>C.name===h)?.info??"",set:C=>{const j=l.routes.find(K=>K.name===h);j&&(j.info=C)}}}[w]}function Ce(l,f){const w=l.existing;if(!w)return;const[v,h]=f.split(":");if(v==="field")return{get:()=>w.fields[h]??"",set:S=>{w.fields[h]=S}};if(v==="entry"){const S=()=>w.entries.find(O=>String(O.uid)===h);return{get:()=>S()?.content??"",set:O=>{S()&&(S().content=O)}}}if(v==="greet")return{get:()=>w.greetings[Number(h)]??"",set:S=>{w.greetings[Number(h)]=S}}}function pe(l,f){const[w,...v]=f.split(":"),h=v.join(":"),S={persona:`人设·${h}`,world:"世界观",tone:"基调与规则",free:`模块·${h}`,route:`路线·${h}`,exist:h.startsWith("field:")?{description:"角色描述",personality:"性格",scenario:"场景",mes_example:"对话示例"}[h.slice(6)]??h:h.startsWith("greet:")?`开场白 ${Number(h.slice(6))+1}`:l.existing?.entries.find(C=>`entry:${C.uid}`===h)?.comment??"条目"};if(w==="persona"){const C=l.personas.find(j=>j.name===h);return C&&{label:S.persona,get:()=>C.text,set:j=>{C.text=j}}}if(w==="personaExtra"){const C=l.personas.find(j=>j.name===h);return C&&{label:`人设补充·${h}`,get:()=>C.extra??"",set:j=>{C.extra=j}}}if(w==="world")return{label:S.world,get:()=>l.world.main,set:C=>{l.world.main=C}};if(w==="tone")return{label:S.tone,get:()=>l.tone,set:C=>{l.tone=C}};if(w==="relations")return{label:"角色关系",get:()=>l.relations??"",set:C=>{l.relations=C}};const O=W(l,f);return O&&S[w]&&{label:S[w],...O}}async function me(l,f){const w=pe(l,f);if(!w)throw new Error("这一块不能按意见改");const v=R(l,f)||(fo(l,"revise",f)?"按本页对话中作者的要求修改。":"");if(!v)throw new Error("先在本页对话或“哪里不满意”里写意见");const h=w.get();if(!T(h))throw new Error("这一块是空的，没法改");const S=f.startsWith("exist:greet:"),O=await be("revise",l,{label:w.label,fb:v,text:h},{styleKey:f,greetingOutput:S}),C=S?O.join(`
+下面这些词一律不要出现，换成具体、平实的写法：${w.join("、")}`:v},V=l=>sf(l,d().直接删),R=(l,f)=>T(l.feedback?.[f]);function L(l,f,w){var v;if(w==null||(typeof w=="string"?!w.trim():Array.isArray(w)?!w.length:!Object.values(w).some(O=>typeof O=="string"?O.trim():Array.isArray(O)?O.length:O)))return;l.history??(l.history={}),l.changes?.[f]&&delete l.changes[f];const S=(v=l.history)[f]??(v[f]=[]);S.push(structuredClone(w)),S.length>5&&S.shift()}function W(l,f){const[w,...v]=f.split(":"),h=v.join(":"),S=()=>l.personas.find(C=>C.name===h),O=()=>l.free.find(C=>C.name===h);return{idea:{get:()=>({concepts:l.concepts,pick:l.pick}),set:C=>{l.concepts=C.concepts,l.pick=C.pick}},persona:{get:()=>({overview:S()?.overview??"",text:S()?.text??""}),set:C=>{const j=S();j&&Object.assign(j,C)}},personaExtra:{get:()=>S()?.extra??"",set:C=>{const j=S();j&&(j.extra=C)}},world:{get:()=>l.world,set:C=>{l.world=C}},npc:{get:()=>l.npcs,set:C=>{l.npcs=C}},routes:{get:()=>l.routes.map(C=>C.info),set:C=>{l.routes.forEach((j,K)=>{j.info=C[K]??j.info})}},tone:{get:()=>l.tone,set:C=>{l.tone=C}},relations:{get:()=>l.relations??"",set:C=>{l.relations=C}},greet:{get:()=>l.greetings.filter(C=>C.route===h).map(C=>C.text),set:C=>{l.greetings=[...l.greetings.filter(j=>j.route!==h),...C.map(j=>({route:h,text:j}))]}},free:{get:()=>O()?.content??"",set:C=>{const j=O();j&&(j.content=C)}},intro:{get:()=>l.intro,set:C=>{l.intro=C}},exist:Ce(l,h),au:{get:()=>h==="map"?l.au?.map:{core:l.au?.core,shell:l.au?.shell},set:C=>{h==="map"?l.au.map=C:(l.au.core=C.core,l.au.shell=C.shell)}},route:{get:()=>l.routes.find(C=>C.name===h)?.info??"",set:C=>{const j=l.routes.find(K=>K.name===h);j&&(j.info=C)}}}[w]}function Ce(l,f){const w=l.existing;if(!w)return;const[v,h]=f.split(":");if(v==="field")return{get:()=>w.fields[h]??"",set:S=>{w.fields[h]=S}};if(v==="entry"){const S=()=>w.entries.find(O=>String(O.uid)===h);return{get:()=>S()?.content??"",set:O=>{S()&&(S().content=O)}}}if(v==="greet")return{get:()=>w.greetings[Number(h)]??"",set:S=>{w.greetings[Number(h)]=S}}}function pe(l,f){const[w,...v]=f.split(":"),h=v.join(":"),S={persona:`人设·${h}`,world:"世界观",tone:"基调与规则",free:`模块·${h}`,route:`路线·${h}`,exist:h.startsWith("field:")?{description:"角色描述",personality:"性格",scenario:"场景",mes_example:"对话示例"}[h.slice(6)]??h:h.startsWith("greet:")?`开场白 ${Number(h.slice(6))+1}`:l.existing?.entries.find(C=>`entry:${C.uid}`===h)?.comment??"条目"};if(w==="persona"){const C=l.personas.find(j=>j.name===h);return C&&{label:S.persona,get:()=>C.text,set:j=>{C.text=j}}}if(w==="personaExtra"){const C=l.personas.find(j=>j.name===h);return C&&{label:`人设补充·${h}`,get:()=>C.extra??"",set:j=>{C.extra=j}}}if(w==="world")return{label:S.world,get:()=>l.world.main,set:C=>{l.world.main=C}};if(w==="tone")return{label:S.tone,get:()=>l.tone,set:C=>{l.tone=C}};if(w==="relations")return{label:"角色关系",get:()=>l.relations??"",set:C=>{l.relations=C}};const O=W(l,f);return O&&S[w]&&{label:S[w],...O}}async function me(l,f){const w=pe(l,f);if(!w)throw new Error("这一块不能按意见改");const v=R(l,f)||(fo(l,"revise",f)?"照这一页聊天里作者说的改。":"");if(!v)throw new Error("先在本页对话或“哪里不满意”里写意见");const h=w.get();if(!T(h))throw new Error("这一块是空的，没法改");const S=f.startsWith("exist:greet:"),O=await be("revise",l,{label:w.label,fb:v,text:h},{styleKey:f,greetingOutput:S}),C=S?O.join(`
 
 `):O;return L(l,(f.startsWith("persona:"),f),f.startsWith("persona:")?{overview:l.personas.find(j=>j.name===f.slice(8))?.overview??"",text:h}:h),w.set(C.trim()),et(l,f,h,C.trim(),`按意见改：${v.slice(0,40)}`),l.feedback[f]="",l}async function J(l,f=3){const w=dt(await be("newRoutes",l,{n:f},{json:!0}));return l.routeIdeas=Se(w.routes).map(v=>({name:T(v?.name),user:T(v?.user),period:T(v?.period),why:T(v?.why)})).filter(v=>v.name),l}function re(l,f){const w=l.routeIdeas?.[f];if(!w)return l;let v=w.name;for(let h=2;l.routes.some(S=>S.name===v);h++)v=`${w.name}${h}`;return l.routes.push({name:v,user:w.user,period:w.period,info:""}),l.routeIdeas.splice(f,1),l}function xe(l,f=9e3){const w=l.au?.original;if(!w)return"";const v=[`卡名：${w.name}`];for(const h of w.personas)v.push(`【人设·${h.name}】${h.overview?`
 概要：${h.overview}`:""}
@@ -3598,10 +3507,10 @@ ${f.map}`:"","写的时候只写 AU 世界里的样子：原作的地名、组�
 【你上一次的回答在这里断掉了。从断掉的地方直接接着写，不要重复已经写的内容，不要解释】
 ……${l.slice(-1500)}`,stage:h,temperature:S});a();const C=l+O.replace(/^\s*……/,"");return{out:C,cut:!C.includes(f)}}const nn=new Set(["persona","personaExtra","backstory","destale"]),rn=new Set(["world","npc","npcOne","routes","free","greeting","expand","custom"]);function At(l,f,w=""){const v=(t().styles??[])[Number(l.style)-1];return T(v?.text)&&(nn.has(f)||String(w).startsWith("persona:")||String(w).startsWith("personaExtra:")||l.styleAll&&(rn.has(f)||["revise","localEdit"].includes(f)))?v.text:""}function et(l,f,w,v,h=""){const S=Qf(w,v);return l.changes??(l.changes={}),l.changes[f]={at:Date.now(),how:h,hunks:S.slice(0,40),more:Math.max(0,S.length-40)},S.length}const Mo=new Set(["qa","persona","personaExtra","backstory","world","npc","npcOne","routes","tone","relations","greeting","hooks","expand","free","revise","destale","intro"]);function xs(l,f){const w=l.chat;return!Mo.has(f)||!T(w?.brief)||w.use===!1&&!w.dropConcept&&!w.dropOverview?"":`
 
-【作者定稿（最高优先级）】下面是作者和搭档聊定的设定。有冲突时沿用作者最新定下的内容。创作任务可以补写尚未规定的生活、想法和关系；作者要求保持未知、留待决定或只整理原文的地方不能擅自补定。
-${w.brief}`}const Ua={world:"人物经历、人物之间的关系和前情已经写在构想和人设里，导入后和这一条一起发给 AI。这里不复述这些，只写世界本身：地方、日常、组织、规则。提到主要角色时用一句话点明身份即可；「现在」只写世界层面的状况，不写主要角色之间发生了什么。",npc:"主要角色的人设、前情和他们与〔user〕的关系已经写过，这里不复述。NPC 和主要角色的关系用一句话写清，篇幅留给 NPC 自己。",npcOne:"主要角色的人设、前情和他们与〔user〕的关系已经写过，这里不复述。NPC 和主要角色的关系用一句话写清，篇幅留给 NPC 自己。",routes:"人设、世界观和构想里已有的内容不复述，只写这条路线自己的〔user〕信息、时期和起点。",tone:"不复述剧情、人物经历、关系前情和世界观（这些在人设、世界观里都有，会一起发给 AI）。这里只写写法：写什么样的故事、侧重什么、怎么写、禁止什么。",free:"人设、世界观、基调里已有的内容不复述，只写这个模块负责的部分。"};function En(l){return Ua[l]?`
+【作者定稿 · 最优先】这是作者和搭档聊定的设定，跟别处冲突时以这里最新定的为准。没定到的日子、想法和人际可以补；作者说了要留白、以后再定、或者只整理原文的地方，不要替他定下来。
+${w.brief}`}const Ua={world:"人物的过去、彼此的关系和前情已经在构想和人设里，导入后会和这一条一起发给 AI。这里不再讲这些，只写世界本身：地方、日子怎么过、组织、规矩。提到主要角色时一句话交代身份就行；时间轴里只写世界层面的大事，不写主要角色之间发生了什么。",npc:"主要角色的人设、前情，以及他们和〔user〕的关系都写过了，这里不再讲。NPC 和主要角色是什么关系，一句话交代清楚，篇幅留给 NPC 自己。",npcOne:"主要角色的人设、前情，以及他们和〔user〕的关系都写过了，这里不再讲。NPC 和主要角色是什么关系，一句话交代清楚，篇幅留给 NPC 自己。",routes:"人设、世界观和构想里有的不再讲，只写这条路线上〔user〕的信息、时期和起点。",tone:"不讲剧情、人物经历、关系前情和世界观（这些人设和世界观里都有，会一起发给 AI）。这里只写写法：写什么样的故事、偏重什么、怎么写、不许什么。",free:"人设、世界观、基调里有的不再讲，只写这个模块管的部分。"};function En(l){return Ua[l]?`
 
-【不重复】${Ua[l]}`:""}async function be(l,f,w={},{stage:v,system:h,json:S=!1,key:O,prev:C,close:j,styleKey:K,greetingOutput:Z=!1,dialoguePath:Y="",templateOverride:ke=""}={}){a();const Ke=Z?Hf(t()):"",sn=Fn[l]??{name:l,stage:"card",temp:.8};r(`${sn.name}…`);const st=ap(f,l,K??O,Y)==="greet",Lt=ke||m(l),bt=st?Lo(f):null,Tn={...z(f),...w,...bt};if(st){const Ut=yn(f,"concept")&&!(yn(f,"brief")&&Q(f)),Ya=new Set((f.personas??[]).filter(at=>!at.disable).map(at=>at.name));Ut||(Tn.idea=Tn.tags=""),Tn.answers=ba({qa:{chars:yn(f,"personas")?(f.qa?.chars??[]).filter(at=>Ya.has(at.name)):[]},inspire:Ut?f.inspire:[]})}let Fe=as(Lt,Tn);if(Fe+=p(f,l),Fe+=En(l),st||(Fe+=xs(f,l)),Fe+=fo(f,l,K??O,Y),st){const Ut=new Set([...String(Lt??"").matchAll(/\{\{\s*([^{}\s]+)\s*\}\}/g)].map(at=>at[1]));for(const[at,Ka]of Object.entries(bt))!T(Ka)||Ut.has(at)||(Fe+=at==="brief"?xs(f,"greeting"):`
+【别重复】${Ua[l]}`:""}async function be(l,f,w={},{stage:v,system:h,json:S=!1,key:O,prev:C,close:j,styleKey:K,greetingOutput:Z=!1,dialoguePath:Y="",templateOverride:ke=""}={}){a();const Ke=Z?Hf(t()):"",sn=Fn[l]??{name:l,stage:"card",temp:.8};r(`${sn.name}…`);const st=ap(f,l,K??O,Y)==="greet",Lt=ke||m(l),bt=st?Lo(f):null,Tn={...z(f),...w,...bt};if(st){const Ut=yn(f,"concept")&&!(yn(f,"brief")&&Q(f)),Ya=new Set((f.personas??[]).filter(at=>!at.disable).map(at=>at.name));Ut||(Tn.idea=Tn.tags=""),Tn.answers=ba({qa:{chars:yn(f,"personas")?(f.qa?.chars??[]).filter(at=>Ya.has(at.name)):[]},inspire:Ut?f.inspire:[]})}let Fe=as(Lt,Tn);if(Fe+=p(f,l),Fe+=En(l),st||(Fe+=xs(f,l)),Fe+=fo(f,l,K??O,Y),st){const Ut=new Set([...String(Lt??"").matchAll(/\{\{\s*([^{}\s]+)\s*\}\}/g)].map(at=>at[1]));for(const[at,Ka]of Object.entries(bt))!T(Ka)||Ut.has(at)||(Fe+=at==="brief"?xs(f,"greeting"):`
 
 【${Ia[at]??"人物概要"}】
 ${Ka}`);for(const[at,Ka]of Object.entries({routeInfo:"本次路线",hooks:"本次选中的剧情",existingGreetings:"已经写出的开场白，仅用于避重"}))T(w[at])&&!Ut.has(at)&&(Fe+=`
@@ -3612,7 +3521,7 @@ ${w[at]}`);const Ya=mr(f);Ya&&(Fe+=`
 【作者为开场白填写的补充文字】
 ${Ya}`)}const Ne=At(f,l,K??O);Ne&&(Fe+=`
 
-【文风】作者指定的文风如下。它只管用词和句子怎么写；内容、格式和上面的要求都不变，格式要求冲突时以格式为准。
+【文风】下面是作者指定的文风，只管遣词造句；写什么、交什么格式照上面的要求，两边冲突时格式优先。
 ${Ne}`);const Nn=O?R(f,O):"";Nn&&(Fe+=`
 
 【作者对上一版的修改意见，必须优先满足】
@@ -3632,7 +3541,7 @@ ${h[Y].q}`).join(`
 
 `),12e3),v=await be("chatBrief",l,{transcript:w,brief:T(f.brief)||"（无）"},{json:!0}),h=String(v).match(/<作者定稿>[\s\S]*?<\/作者定稿>/),S=h?h[0]:T(v);if(!S)throw new Error("AI 没有整理出定稿");return f.prevBrief=f.brief,f.brief=S,f.briefN=f.messages.length,(()=>{try{const g=cwzTypeFromBrief(S);g&&!l.cardType&&(l.cardType=g)}catch{}})(),S}function rd(l){const f=l.diceSet??{};return l.dice=$m(n(),l.diceLock??{},Math.random,{dims:f.dims?.length?f.dims:void 0,count:Number(f.count)>0?Number(f.count):void 0}),l.inspire=[],l.dice}async function lh(l,{reroll:f=!0}={}){(f||!Object.keys(l.dice??{}).length)&&rd(l);const w=Object.entries(l.dice).map(([h,S])=>`${$e(n(),h)?.name??h}：${S}`).join("；"),v=dt(await be("inspire",l,{dice:w},{json:!0}));return l.inspire=Se(v.questions).slice(0,4).map(h=>({q:T(h.q),options:Se(h.options).map(T).filter(Boolean).slice(0,4),answer:""})),l}async function ph(l){if(!T(l.idea))throw new Error("先写一句话脑洞");const f=dt(await be("ideaQA",l,{},{json:!0}));return l.ideaQA=Se(f.questions).slice(0,4).map(w=>({q:T(w.q),options:Se(w.options).map(T).filter(Boolean).slice(0,4),answer:""})),l}const ys=l=>T(l.story?.text),dh=l=>ys(l)?`【短篇或素材】（构想以这段文字为准：人物、关系、张力、世界规则都从里面提取，lineup 用里面的人，名字、称呼、设定照原文不改。如果是同人，原作设定照文字里写的。稳定的特质才算设定；某一幕里发生的具体事件放进路线或经历，别把剧情当成设定。文字里没写的不要编，缺的部分留给后面的步骤。）
 ${Qe(ys(l),6e3)}`:"",uh=l=>ys(l)?`
-【参考短篇】（人物先在这个故事里活过，写的时候以里面的行为和细节为依据；稳定的特质写进设定，某一幕的具体事件写进经历或路线，别把一幕当成人设。）
+【参考短篇】（人物在这篇里先过了一回日子。写的时候拿里面他们做的事和细节当依据：一直如此的特点写进设定，某一场里发生的具体事写进经历或路线，别把一场戏当成整个人。）
 ${ys(l)}`:"";async function mh(l){const f=Object.entries(l.dice??{}).map(([O,C])=>`${$e(n(),O)?.name??O}：${C}`).join("；"),w=(l.inspire??[]).filter(O=>T(O.answer)).map(O=>`${O.q} → ${T(O.answer)}`),v=[T(l.idea),...w].filter(Boolean).join(`
 `);if(!f&&!(l.tags??[]).length&&!v)throw new Error("先掷骰子，或者选几个标签、写一句脑洞");const h=T(await be("story",l,{dice:f||"（无）",seed:v||"（无）",storyLength:T(t().storyLength)||"800–1200"}));if(!h)throw new Error("AI 没有写出短篇");const S=ys(l);return l.story={text:h,prev:S||T(l.story?.prev),time:Date.now()},l.story}const Ga=l=>{const f=(l.ideaQA??[]).filter(w=>T(w.answer));return f.length?`【作者补充】
 ${f.map(w=>`${w.q}
@@ -3643,9 +3552,9 @@ ${w.map(h=>`- ${h.name||"（还没起名）"}：${Qe(T(h.overview)||T(h.desc)||T
 ${Qe(l.world.main,800)}`);const v=(l.routes??[]).filter(h=>T(h.info));return v.length&&f.push(`已写好的路线（routes 必须包含这些，名字不改）：
 ${v.map(h=>`- ${h.name}：${Qe(h.info,300)}`).join(`
 `)}`),T(l.tone)&&f.push(`已写好的基调：
-${Qe(l.tone,400)}`),f.length?`【作者已经写好的内容】（最高优先级。三个构想都必须建立在这些内容上，不能换人、换设定；只补还没写的部分）
+${Qe(l.tone,400)}`),f.length?`【作者已经写好的】（最优先。每个构想都要建在这些上面，不能换人、换设定，只补还没写的部分）
 ${f.join(`
-`)}`:""}async function wh(l){const f=n(),w=sd(l),v=dt(await be("idea",l,{matched:w.map(h=>h.name).join("、")||"（无）",tagLibrary:Xm(f),ideaAnswers:[l.cardType&&CWZT[l.cardType]?`【卡种】${CWZT[l.cardType].name}：${CWZT[l.cardType].desc}`:"",l.themeOk&&String(l.chat?.brief??"").trim()?`【作者定稿】（最高优先级：这是作者和搭档聊定的主题。只给 1 个构想，完全照定稿写：人物、名字、身份、关系、世界规则一个都不改；定稿写「未定」的地方再由你补。）
+`)}`:""}async function wh(l){const f=n(),w=sd(l),v=dt(await be("idea",l,{matched:w.map(h=>h.name).join("、")||"（无）",tagLibrary:Xm(f),ideaAnswers:[l.cardType&&CWZT[l.cardType]?`【卡种】${CWZT[l.cardType].name}：${CWZT[l.cardType].desc}`:"",l.themeOk&&String(l.chat?.brief??"").trim()?`【作者定稿】（最优先：这是作者和搭档聊定的主题。只出 1 个构想，完全照定稿来，人物、名字、身份、关系、世界规矩一样都不改；定稿里写着「未定」「还没定」的地方再由你补。）
 ${l.chat.brief}`:"",Ga(l),dh(l),ad(l)].filter(Boolean).join(`
 `)},{json:!0,key:"idea",prev:(l.concepts??[]).map(h=>h.title).join(`
 `)}));if(L(l,"idea",{concepts:l.concepts,pick:l.pick}),l.concepts=Se(v.concepts).slice(0,4).map(Rf),!l.concepts.length)throw new Error("AI 没有给出构想");l.tagSrc??(l.tagSrc={});for(const h of rs(Se(v.tags?.picked),f))$e(f,h.dim)?.single&&pt(l.tags,h.dim).length||l.tags.some(O=>O.dim===h.dim&&O.name===h.name)||(l.tags=Kt(l.tags,f,h.dim,h.name,!0),l.tagSrc[`${h.dim}:${h.name}`]="ai");for(const[h,S]of Object.entries(v.tags?.guessed??{})){const O=$e(f,h)??f.find(j=>j.name.includes(h)),C=ns(f,S,O?.key);!C||pt(l.tags,C.dim).length||(l.tags=Kt(l.tags,f,C.dim,C.name,!0),l.tagSrc[`${C.dim}:${C.name}`]="guess")}return l.ai={novel:Se(v.tags?.novel).map(h=>({dim:($e(f,h?.dim)??f.find(S=>S.name.includes(T(h?.dim))))?.key??"plot",name:T(h?.name)})).filter(h=>h.name&&!ns(f,h.name)).slice(0,2),surprise:(()=>{const h=v.tags?.surprise,S=ns(f,T(h?.name),($e(f,h?.dim)??{}).key);return S?{dim:S.dim,name:S.name,why:T(h?.why)}:null})()},l.fandom=T(v.fandom),l.check=Se(v.check).map(T).filter(Boolean),l.pick=-1,l}function hh(l,f){const w=n(),v=l.concepts[f];if(!v)return l;l.pick=f;const h=new Map((l.personas??[]).map(C=>[C.name,C])),S=C=>T(C.text)||T(C.desc)||C.added;l.personas=[...v.lineup.map(C=>h.get(C.name)??{name:C.name,keys:[],overview:"",text:""}),...(l.personas??[]).filter(C=>S(C)&&!v.lineup.some(j=>j.name===C.name))];const O=l.routes??[];l.routes=[...v.routes.map(C=>({...C,info:O.find(j=>j.name===C.name)?.info??""})),...O.filter(C=>T(C.info)&&!v.routes.some(j=>j.name===C.name))],(!l.name||l.nameAuto)&&(l.name=v.lineup.length===1?v.lineup[0].name:v.title.slice(0,20),l.nameAuto=!0),l.tagSrc??(l.tagSrc={});for(const C of rs(v.tags,w))$e(w,C.dim)?.single&&pt(l.tags,C.dim).length||l.tags.some(K=>K.dim===C.dim&&K.name===C.name)||(l.tags=Kt(l.tags,w,C.dim,C.name,!0),l.tagSrc[`${C.dim}:${C.name}`]="ai");for(const C of v.lineup)for(const j of rs(C.archetype.map(K=>({dim:"archetype",name:K})),w))l.tags.some(K=>K.dim===j.dim&&K.name===j.name)||(l.tags=Kt(l.tags,w,j.dim,j.name,!0));return l.tags=Kt(l.tags,w,"complexity",v.complexity,!0),l}async function bh(l){const f=dt(await be("qa",l,{},{json:!0})),w=(l.personas??[]).map(v=>v.name);return l.qa={chars:Se(f.chars).map((v,h)=>({name:w.includes(T(v.name))?T(v.name):w[h]??T(v.name),questions:Se(v.questions).slice(0,4).map(S=>({q:T(S.q),options:Se(S.options).map(T).filter(Boolean).slice(0,4),answer:""}))}))},l}async function vh(l,f){const w=typeof f=="number"?l.personas[f]:l.personas.find(Ne=>Ne.name===f);if(!w)throw new Error(`没有角色 ${f}`);const v="〔新角色〕",h=!T(w.name),S=h?v:T(w.name),O=l.personas.filter(Ne=>Ne!==w&&!Ne.disable&&T(Ne.name)),C=Q(l)?[]:g(l)?.lineup??[],j=[...O.map(Ne=>[Ne.name,Ne.overview||C.find(Nn=>Nn.name===Ne.name)?.identity,Ne.text,Ne.extra].filter(T).join(`
@@ -3655,10 +3564,10 @@ ${j.join(`
 `)}`:"",Y=O.length||i(l)==="multi"?`- 这张卡有多个主要角色。${S} 在故事里的位置要和其他人不同，他对〔user〕的态度、他想要的东西、他的矛盾轴都不能和其他人重复。`:"",ke=(l.qa?.chars??[]).filter(Ne=>Ne.name===S).flatMap(Ne=>Ne.questions).filter(Ne=>Ne.answer?.trim()).map(Ne=>`${Ne.q}
 → ${Ne.answer.trim()}`).join(`
 `),Ke=(Q(l)?[]:g(l)?.lineup??[]).find(Ne=>Ne.name===S)?.identity,sn=[T(w.desc)?`【作者对这个角色的设想】（必须落实）
-${T(w.desc)}`:"",Ke?`【构想里的身份】${Ke}`:"",h?`【名字】还没起。你来起一个不俗套、合这张卡的名字，在最前面单独输出一块：
+${T(w.desc)}`:"",Ke?`【构想里的身份】${Ke}`:"",h?`【名字】还没起。请起一个合这张卡、不烂大街的名字，在最前面单独交一块：
 <<<名字>>>
 名字
-后面所有写着“${v}”的地方都换成这个名字。`:"",!Ke&&!T(w.desc)&&!w.text&&(l.existing||O.length)?"【这是新加进来的角色】根据这张卡已有的内容，补一个卡里缺的、能和已有角色形成张力的人。":""].filter(Boolean).join(`
+后面所有写着“${v}”的地方都换成这个名字。`:"",!Ke&&!T(w.desc)&&!w.text&&(l.existing||O.length)?"【这是新加的角色】照这张卡已有的内容，补一个卡里还缺、能和现有角色碰出火花的人。":""].filter(Boolean).join(`
 `),st=await be("persona",l,{name:S,brief:sn,currentPersona:[w.overview,w.text,w.extra].filter(T).join(`
 
 `)||"（尚未写）",others:K,npRule:Y,answers:nd(w,ke)||(Q(l)?"":ba(l)),template:as(d(l).人设模板||_m,{name:S}),tplRule:!T(t().rules?.人设模板)&&Bt(t().personaTpl).rule?`【所选模板写法】${Bt(t().personaTpl).rule}`:"",...!T(t().rules?.人设模板)&&Bt(t().personaTpl).id==="live"?{"rules.禁令格式":""}:{}},{key:`persona:${S}`,prev:w.text,close:h?void 0:`</${S}>`}),Lt=wn(st);let bt=S;if(h){bt=T(ma(Lt,"名字")).split(`
@@ -3720,7 +3629,7 @@ ${j}`:"",w=D(l),v=(l.personas??[]).filter(C=>!C.disable),h=l.existing?.fields??{
 ${f.text}`),...(l.existing?.greetings??[]).filter(T)].filter(Boolean).join(`
 
 `)||"（无）",qo=(l,f)=>({route:f.label??f.name,routeInfo:f.info||`${f.name}｜〔user〕身份：${f.user||"未定"}｜时期：${f.period||"未定"}`,length:t().greetingLength||"600–900",existingGreetings:id(l),...Lo(l)});async function Dh(l,f,w=5){var v,h;const S=Ja(l,f);l.hooks??(l.hooks={});const O=(v=l.hooks)[h=S.name]??(v[h]=[]),C=dt(await be("hooks",l,{...qo(l,S),n:w,existing:O.filter(K=>T(K.text)).map(K=>`- ${K.text}`).join(`
-`)||"（无）",existingGreetings:id(l)},{json:!0,key:`hooks:${S.name}`,system:"你是和作者一起构思小说的编辑。本次只提供可供选择的开场剧情，按任务要求输出 JSON，不写小说正文或分析过程。玩家一律写作〔user〕。"})),j=Se(C.hooks).map(T).filter(Boolean).map(K=>V(K));return l.hooks[S.name]=[...O.filter(K=>K.on||K.mine||K.used),...j.map(K=>({text:K,on:!1}))],l}async function Bh(l,f){const w=Ja(l,f),v=(l.hooks?.[w.name]??[]).filter(S=>S.on&&T(S.text));if(!v.length)throw new Error("先勾选要扩写的梗，或者自己写一个");const h=await be("expand",l,{...qo(l,w),hooks:v.map((S,O)=>`${O+1}. ${S.text}`).join(`
+`)||"（无）",existingGreetings:id(l)},{json:!0,key:`hooks:${S.name}`,system:"你在陪作者想故事。这一次只交几个开场点子给作者挑，照要求交 JSON，不写小说正文，也不写分析过程。玩家一律写作〔user〕。"})),j=Se(C.hooks).map(T).filter(Boolean).map(K=>V(K));return l.hooks[S.name]=[...O.filter(K=>K.on||K.mine||K.used),...j.map(K=>({text:K,on:!1}))],l}async function Bh(l,f){const w=Ja(l,f),v=(l.hooks?.[w.name]??[]).filter(S=>S.on&&T(S.text));if(!v.length)throw new Error("先勾选要扩写的梗，或者自己写一个");const h=await be("expand",l,{...qo(l,w),hooks:v.map((S,O)=>`${O+1}. ${S.text}`).join(`
 `)},{key:`greet:${w.name}`,greetingOutput:!0});L(l,`greet:${w.name}`,(l.greetings??[]).filter(S=>S.route===w.name).map(S=>S.text)),l.greetings??(l.greetings=[]),l.greetings.push(...h.map(S=>({route:w.name,text:S})));for(const S of v)S.on=!1,S.used=!0;return h.length}function Mh(l){for(const f of l.existing?.entries??[])f.cat=Vl(f,{charName:l.existing?.name||l.name});return l.existing?.entries??[]}async function Lh(l){const f=l.existing?.entries??[];if(!f.length)throw new Error("原卡里没有其他条目");const w=f.map(O=>({id:String(O.uid),名称:O.comment,关键词:(O.key??[]).join("、"),灯:O.constant?"蓝":"绿",开头:Qe(O.content,200)})),v=dt(await be("classify",l,{charName:l.existing?.name||l.name,items:JSON.stringify(w,null,1)},{json:!0})),h=new Map(Se(v.items).map(O=>[T(O.id),T(O.cat)]));let S=0;for(const O of f){const C=h.get(String(O.uid));C&&xa[C]&&(O.cat=C,S++)}return S}const qh=(l,f)=>f.split(".").reduce((w,v)=>w?.[v],l),jh=(l,f,w)=>{const v=f.split("."),h=v.pop();v.reduce((S,O)=>S[O]??(S[O]={}),l)[h]=w};async function Qh(l,{path:f,start:w,end:v,instruction:h="",key:S="",label:O=""}){const C=String(qh(l,f)??"");if(!(v>w)||v>C.length)throw new Error("先在框里选中要改的那段");const j=C.slice(w,v);if(!T(j))throw new Error("选中的是空白");const K=2500,Z=C.slice(Math.max(0,w-K),w),Y=C.slice(v,v+K),ke=`${w>K?"……":""}${Z}【【${j}】】${Y}${v+K<C.length?"……":""}`,Ke=/^(?:greetings\.\d+\.text|existing\.greetings\.\d+)$/.test(f),sn=await be("localEdit",l,{label:O||f,instruction:T(h)||"重写这一段：意思和信息保留，写得更具体、更像这个角色自己，去掉八股和空泛的形容。",context:ke},{styleKey:S,greetingOutput:Ke,dialoguePath:f});let st=(Ke?sn.join(`
 
 `):String(sn)).replace(/【【|】】/g,"").trim();const Lt=j.match(/^\s*(?:[-*]\s+)?(?:[A-Za-z_\u4e00-\u9fa5][\w\u4e00-\u9fa5]{0,20}:\s+)?/)[0],bt=j.match(/^\s*/)[0],Tn=j.match(/\s*$/)[0];if(st=(Lt.trim()&&!st.startsWith(Lt.trim())?Lt:bt)+st+Tn,S){const Fe=W(l,S);Fe&&L(l,S,structuredClone(Fe.get()))}return jh(l,f,C.slice(0,w)+st+C.slice(v)),S&&(l.changes??(l.changes={}),l.changes[S]={at:Date.now(),how:`局部重写${T(h)?`：${T(h).slice(0,40)}`:""}`,hunks:[{before:j.trim(),after:st.trim()}],more:0}),{before:j,after:st}}const Wa=l=>T(l.existing?.name)||T(l.personas?.[0]?.name)||T(l.name)||"角色";function od(l){const f=[],w=l.routes.find(h=>h.orig)?.name??l.routes[0]?.name??"";(l.existing?.greetings??[]).forEach((h,S)=>{T(h)&&f.push({label:`原卡·${S===0?"主开场白":`开场白 ${S+1}`}`,text:h,route:w})});const v={};for(const h of bn(l))v[h.route]=(v[h.route]??0)+1,f.push({label:`${h.route||"主线"} · ${v[h.route]}`,text:h.text,route:h.route});return f}function cd(l,f){const w=l.play??{};let v=String(f??"").replace(/\{\{char\}\}|〔char〕/gi,Wa(l));const h=T(w.userName);if(h){const S=T(t().userToken)||"<user>";v=v.split(S).join(h).replace(/\{\{user\}\}|〔user〕|<user>/gi,h)}return v}function ld(l,f=8e3){const v=(l.play?.messages??[]).map((h,S)=>`[第 ${S+1} 条] ${h.role==="char"?Wa(l):"〔user〕"}：${h.text}`).join(`
@@ -3734,11 +3643,11 @@ ${v.slice(-f)}`:v}const jo=l=>{const f=l.routes.findIndex(w=>w.name===l.play?.ro
   刻板写法（${Y.from}）：「${Y.text}」${T(Y.hint)?`
   作者要的改法：${T(Y.hint)}`:""}`).join(`
 `),j=v.text;let K=is(await be("destale",l,{name:f,overlaps:C,persona:j}),f);if(!T(K))throw new Error("AI 没有返回修改后的人设，原文已保留");L(l,`persona:${f}`,{overview:v.overview,text:j}),v.text=K;const Z=et(l,`persona:${f}`,j,v.text,`重写撞车的 ${O.length} 处`);return h.fixed=[...h.fixed??[],...O.map(Y=>({card:Y.card,text:Y.text}))],h.overlaps=S.filter(Y=>!O.includes(Y)),h.rewritten=!0,Z}function Yh(l){const f=(l.personas??[]).map(C=>C.name).concat((l.npcs??[]).map(C=>C.name)),w=E(l),v=[],h=_(l),S=(C,j,K)=>{const Z=hf(j,K,{names:f,pistol:w});for(const Y of to(j,h))Z.push({type:"cliche",level:"warn",label:"禁用词",match:Y});Z.length&&v.push({label:C,issues:Z})};S("基调与规则",l.tone,"tone"),S("世界观",l.world?.main,"world");for(const C of l.world?.extra??[])S(`世界观·${C.name}`,C.content,"world");for(const C of l.personas??[])S(`人设·${C.name}`,`${C.overview}
-${C.text}`,"persona"),S(`人设补充·${C.name}`,C.extra,"persona");for(const C of l.npcs??[])S(`NPC·${C.name}`,C.content,"npc");for(const C of l.routes??[])S(`路线·${C.name}`,C.info,"route");bn(l).forEach((C,j)=>S(`开场白 ${j+1}（${C.route}）`,C.text,"greeting"));for(const C of l.free??[])S(`模块·${C.name}`,C.content,"free");l.intro?.text&&S("简介",l.intro.text,"intro");const O=(l.personas??[]).length>1?vf(Object.fromEntries(l.personas.filter(C=>C.text).map(C=>[C.name,C.text]))):[];return{sections:v,cross:O}}function Kh(l,{all:f=!1}={}){const w=[],v=(h,S,O,C,j,K={})=>{T(C())&&w.push({label:h,kind:S,page:O,get:C,set:j,...K})};if(v("基调与规则","世界书条目","tone",()=>l.tone,h=>{l.tone=h},{rules:!0}),v("世界观","世界书条目","world",()=>l.world.main,h=>{l.world.main=h}),l.world.extra.forEach(h=>v(`世界观·${h.name}`,"世界书条目","world",()=>h.content,S=>{h.content=S})),l.personas.forEach(h=>{v(`人设概要·${h.name}`,"人设","persona",()=>h.overview,S=>{h.overview=S}),v(`人设·${h.name}`,"人设","persona",()=>h.text,S=>{h.text=S}),v(`人设补充·${h.name}`,"人设","persona",()=>h.extra,S=>{h.extra=S})}),v("角色关系","世界书条目","persona",()=>l.relations,h=>{l.relations=h}),l.npcs.forEach(h=>v(`NPC·${h.name}`,"世界书条目","npc",()=>h.content,S=>{h.content=S})),l.routes.forEach(h=>v(`路线·${h.name}`,"世界书条目","routes",()=>h.info,S=>{h.info=S})),l.free.forEach(h=>v(`模块·${h.name}`,"世界书条目",h.fromStep?`step:${h.fromStep}`:"tone",()=>h.content,S=>{h.content=S})),f)for(const[h,S]of Object.entries(l.hooks??{}))(S??[]).forEach((O,C)=>v(`梗·${h} ${C+1}`,"开场白的梗","greet",()=>O.text,j=>{O.text=j}));if((l.greetings??[]).forEach((h,S)=>v(`开场白 ${S+1}`,"开场白","greet",()=>h.text,O=>{h.text=O})),l.existing){for(const[h,S]of[["description","角色描述"],["personality","性格"],["scenario","场景"]])v(`原卡·${S}`,"角色卡","existing",()=>l.existing.fields[h],O=>{l.existing.fields[h]=O});l.existing.entries.forEach(h=>v(`原卡·${h.comment}`,"世界书条目",Af[h.cat??"other"]??"existing",()=>h.content,S=>{h.content=S})),l.existing.greetings.forEach((h,S)=>v(`原卡·开场白 ${S+1}`,"开场白","existing",()=>l.existing.greetings[S],O=>{l.existing.greetings[S]=O}))}if(f&&l.play?.messages&&l.play.messages.forEach((h,S)=>{S>0&&h.role==="char"&&v(`试玩·第 ${S+1} 条`,"对话","play",()=>h.text,O=>{h.text=O},{scanOnly:!0})}),f&&l.au&&(l.au.core??[]).forEach(h=>v(`AU 内核·${h.name}`,"人设","au",()=>h.text,S=>{h.text=S})),f&&l.intro){const h=l.intro.parts??{};if(Object.values(h).some(S=>T(S)))for(const S of Object.keys(h))v(`简介·${S}`,"角色卡简介","intro",()=>h[S],O=>{h[S]=O},{introPart:!0});else v("简介","角色卡简介","intro",()=>l.intro.text,S=>{l.intro.text=S})}return w}async function ud(l){const f=t(),w=bn(l)[0],v={introTags:Wi(l.tags,n()),greetingSample:w?Qe(w.text,600):"（无）"},h=Ho(f);if(ao(h)){const K=String(f.prompts?.intro??"").trim(),Z=K&&K!==Xt.intro?`【作者额外设定的简介写法】
+${C.text}`,"persona"),S(`人设补充·${C.name}`,C.extra,"persona");for(const C of l.npcs??[])S(`NPC·${C.name}`,C.content,"npc");for(const C of l.routes??[])S(`路线·${C.name}`,C.info,"route");bn(l).forEach((C,j)=>S(`开场白 ${j+1}（${C.route}）`,C.text,"greeting"));for(const C of l.free??[])S(`模块·${C.name}`,C.content,"free");l.intro?.text&&S("简介",l.intro.text,"intro");const O=(l.personas??[]).length>1?vf(Object.fromEntries(l.personas.filter(C=>C.text).map(C=>[C.name,C.text]))):[];return{sections:v,cross:O}}function Kh(l,{all:f=!1}={}){const w=[],v=(h,S,O,C,j,K={})=>{T(C())&&w.push({label:h,kind:S,page:O,get:C,set:j,...K})};if(v("基调与规则","世界书条目","tone",()=>l.tone,h=>{l.tone=h},{rules:!0}),v("世界观","世界书条目","world",()=>l.world.main,h=>{l.world.main=h}),l.world.extra.forEach(h=>v(`世界观·${h.name}`,"世界书条目","world",()=>h.content,S=>{h.content=S})),l.personas.forEach(h=>{v(`人设概要·${h.name}`,"人设","persona",()=>h.overview,S=>{h.overview=S}),v(`人设·${h.name}`,"人设","persona",()=>h.text,S=>{h.text=S}),v(`人设补充·${h.name}`,"人设","persona",()=>h.extra,S=>{h.extra=S})}),v("角色关系","世界书条目","persona",()=>l.relations,h=>{l.relations=h}),l.npcs.forEach(h=>v(`NPC·${h.name}`,"世界书条目","npc",()=>h.content,S=>{h.content=S})),l.routes.forEach(h=>v(`路线·${h.name}`,"世界书条目","routes",()=>h.info,S=>{h.info=S})),l.free.forEach(h=>v(`模块·${h.name}`,"世界书条目",h.fromStep?`step:${h.fromStep}`:"tone",()=>h.content,S=>{h.content=S})),f)for(const[h,S]of Object.entries(l.hooks??{}))(S??[]).forEach((O,C)=>v(`梗·${h} ${C+1}`,"开场白的梗","greet",()=>O.text,j=>{O.text=j}));if((l.greetings??[]).forEach((h,S)=>v(`开场白 ${S+1}`,"开场白","greet",()=>h.text,O=>{h.text=O})),l.existing){for(const[h,S]of[["description","角色描述"],["personality","性格"],["scenario","场景"]])v(`原卡·${S}`,"角色卡","existing",()=>l.existing.fields[h],O=>{l.existing.fields[h]=O});l.existing.entries.forEach(h=>v(`原卡·${h.comment}`,"世界书条目",Af[h.cat??"other"]??"existing",()=>h.content,S=>{h.content=S})),l.existing.greetings.forEach((h,S)=>v(`原卡·开场白 ${S+1}`,"开场白","existing",()=>l.existing.greetings[S],O=>{l.existing.greetings[S]=O}))}if(f&&l.play?.messages&&l.play.messages.forEach((h,S)=>{S>0&&h.role==="char"&&v(`试玩·第 ${S+1} 条`,"对话","play",()=>h.text,O=>{h.text=O},{scanOnly:!0})}),f&&l.au&&(l.au.core??[]).forEach(h=>v(`AU 内核·${h.name}`,"人设","au",()=>h.text,S=>{h.text=S})),f&&l.intro){const h=l.intro.parts??{};if(Object.values(h).some(S=>T(S)))for(const S of Object.keys(h))v(`简介·${S}`,"角色卡简介","intro",()=>h[S],O=>{h[S]=O},{introPart:!0});else v("简介","角色卡简介","intro",()=>l.intro.text,S=>{l.intro.text=S})}return w}async function ud(l){const f=t(),w=bn(l)[0],v={introTags:Wi(l.tags,n()),greetingSample:w?Qe(w.text,600):"（无）"},h=Ho(f);if(ao(h)){const K=String(f.prompts?.intro??"").trim(),Z=K&&K!==Xt.intro?`【作者另外定的简介写法】
 `+K+`
-若其输出格式与以下模板不同，以以下模板为准。`:"",Y=["【任务】根据这张角色卡的资料，严格按照作者提供的发卡模板，直接写出一篇可以复制到 Discord 发布的成品简介。","【最高优先级：作者自己的发卡模板】",h,"【填写方式】","1. 严格使用上述模板的章节顺序、标题和装饰，不要额外加入‘简介、关于TA、路线、内心想法’等默认版栏目，也不要输出两个版本。","2. ‘角色卡名称’、‘这里填写’、‘核心 XP｜’、‘推荐玩法｜’、‘制卡灵感｜’、‘预期剧情｜’是待填位置。用本卡资料认真填写，不能照抄占位说明。","3. 避雷说明只有在卡片确实有需要注明的内容时才填写；没有就删掉整行。示例词‘不洁、乱伦、女绿、NTR’不是既定设定。","4. 测试信息按已知内容填写，不知道就标‘未填写’；保留作者明确写好的二改、二传、商用要求。保留作者的话和下载信息等固定文字。","5. ‘02 关于故事’围绕已写好的角色设定、故事冲突和可玩性填写具体内容，不编造未定的经历，不泄露作者留待游玩探索的秘密。","6. 最终回答只能有一篇完整成品。不要解释、提示词、代码围栏、<<<段落标记>>> 或 <content> 标签。","【卡片构想】","{{concept}}","【主要角色概要】","{{overviews}}","【人物人设全文】","{{personas}}","【主要角色关系】","{{relations}}","【世界观】","{{world}}","【NPC】","{{npcs}}","【路线】","{{routes}}","【基调与规则】","{{tone}}","【开场白参考】","{{greetingSample}}","【卡片标签】","{{introTags}}",Z,"【输出格式优先级】只用上面的作者模板作为唯一结构，不能混入内置默认简介的格式。"].join(`
+它的格式要是跟下面的模板不一样，以下面的模板为准。`:"",Y=["请照作者自己的发卡模板，用这张卡的资料填出一篇能直接贴到 Discord 的简介成品。","【作者的发卡模板 · 最优先】",h,"【怎么填】","1. 模板的段落顺序、标题和装饰原样照用，不额外加「简介、关于TA、路线、内心想法」这些默认栏目，也只交一个版本。","2. 「角色卡名称」「这里填写」「核心 XP｜」「推荐玩法｜」「制卡灵感｜」「预期剧情｜」这类是空位，用这张卡的资料认真填上，不能把占位说明原样留着。","3. 避雷那一行只有卡里真有需要提醒的内容才填，没有就整行删掉；模板里举的「不洁、乱伦、女绿、NTR」只是例子，不是这张卡的设定。","4. 测试信息照已知的填，不知道就写「未填写」；作者写好的二改、二传、商用说明，作者的话和下载信息这些固定文字都原样保留。","5. 「02 关于故事」按已写好的人物、故事里的冲突和好玩的地方填具体内容，不编还没定的往事，不剧透作者想留给玩家自己发现的秘密。","6. 只交一篇完整成品。不要解释，不要提示词、代码围栏、<<<段落标记>>> 或 <content> 标签。","【构想】","{{concept}}","【主要角色概要】","{{overviews}}","【人设全文】","{{personas}}","【主要角色的关系】","{{relations}}","【世界观】","{{world}}","【NPC】","{{npcs}}","【路线】","{{routes}}","【基调与规则】","{{tone}}","【开场白参考】","{{greetingSample}}","【标签】","{{introTags}}",Z,"【格式】只按上面作者的模板来，不要混进内置简介的格式。"].join(`
 
-`),ke=await be("intro",l,v,{key:"intro",prev:l.intro?.text,templateOverride:Y,system:"你是给 Discord 上的真实读者写角色卡发布简介的中文编辑。当前任务是按作者自己的发卡模板填内容，不写扮演用的 XML/YAML 提示词。模板的章节顺序、数字编号、装饰线与固定文字必须保留；人物设定要忠实于提供的素材。只输出一个完整的成品简介。"}),Ke=Un(ke).replace(/^\s*<content>\s*/i,"").replace(/\s*<\/content>\s*$/i,"").trim();if(!Ke||Ke.length<80||/这里填写|在这里填|角色卡名称|如果有什么需要避雷|\[待填\]/.test(Ke))throw new Error("AI 没有照你的简介模板填完内容。本次没有覆盖已有简介，可查看 AI 原文后重试。");return L(l,"intro",l.intro),l.intro={titles:[],pick:0,parts:{},text:Ke,dirty:!1,appliedStyle:Number(f.introStyle)||0,renderMode:"author-prompt",notice:""},l}const S=await be("intro",l,v,{key:"intro",prev:l.intro?.text}),O=wn(S),C=Object.fromEntries(O.blocks.map(K=>[K.type,K.body]));if(!String(C.简介??"").trim())throw new Error("AI 没有按 <<<简介>>> 等标记返回内容；本次未覆盖旧简介。请查看 AI 返回原文。");const j={titles:If(C.标题),pick:0,parts:C,text:"",dirty:!1,appliedStyle:Number(f.introStyle)||0,renderMode:"slots",notice:""};return j.text=Wl(C,{title:j.titles[0]??l.concepts?.[l.pick]?.title??"",tags:l.tags,author:f.author,license:f.license??{},presetNote:f.presetNote||f.presetGreeting||"",notes:f.introNotes,charName:l.personas?.[0]?.name??"",ending:zo(f)},h),L(l,"intro",l.intro),l.intro=j,l}const Ho=(l=t())=>{const f=Number(l.introStyle??0);return f>0&&l.introStyles?.[f-1]?.tpl||Gn};function zo(l=t()){return String(l.introEnding??l.introThanks??"").trim()}function md(l,f=t()){const w=l.intro??{},v=Ho(f);return Wl(w.parts??{},{title:w.titles?.[w.pick??0]??l.concepts?.[l.pick]?.title??"",tags:l.tags,author:f.author,license:f.license??{},presetNote:f.presetNote||f.presetGreeting||"",notes:f.introNotes,charName:l.personas?.[0]?.name??"",ending:zo(f)},ao(v)?Gn:v)}async function Xh(l,{rememberPrevious:f=!0}={}){const w=l.intro;return ao(Ho(t()))||!String(w?.parts?.简介??"").trim()?ud(l):(f&&L(l,"intro",structuredClone(w)),w.text=md(l),w.renderMode="slots",w.appliedStyle=Number(t().introStyle)||0,w.dirty=!1,w.notice="",l)}return{banned:_,strip:V,restore:Te,remember:L,slotOf:W,localEdit:Qh,classifyLocal:Mh,classifyAI:Lh,routeOf:Ja,npcOne:Ih,relations:Ch,modeOf:i,ruleList:o,introEnding:zo,noteChanges:et,styleOf:At,playGreetings:od,playStart:Rh,playChar:Qo,playUser:dd,playAuto:Hh,playRedo:zh,playReview:Fh,conflictCheck:Uh,consistencyCheck:Gh,story:mh,personaExtra:xh,reviewTarget:Jh,playContext:pd,charName:Wa,PLAY_STYLES:Ro,deepAns:sh,deepOf:tp,chatOf:Ar,chatReply:td,chatSend:oh,chatAsk:ah,chatAnswer:ih,chatBrief:ch,roll:rd,useMyTags:fh,inspire:lh,ideaFromInspire:gh,ideaQA:ph,hooks:Dh,expand:Bh,revise:me,textSlot:pe,suggestRoutes:J,addRouteIdea:re,loadCard:Ye,backstory:yh,auStart:ie,auCore:he,auMap:Ie,auCheck:Ae,auFix:_e,localTags:sd,idea:wh,pickConcept:hh,qa:bh,persona:vh,world:kh,npc:Sh,routes:Eh,tone:Th,free:Nh,custom:Ph,greetings:Oh,predict:Wh,destale:Vh,localCheck:Yh,textSlots:Kh,intro:ud,restyleIntro:Xh,composeIntroFor:md,baseVars:z,cardMaterials:D,openingMaterials:Lo}}var ip=`- temperature
+`),ke=await be("intro",l,v,{key:"intro",prev:l.intro?.text,templateOverride:Y,system:"你在帮作者写发到 Discord 给真人看的角色卡简介。这次是往作者自己的发卡模板里填内容，不写扮演用的 XML / YAML 提示词。模板的段落顺序、编号、装饰线和固定文字都要留着；人物写法要忠于给你的资料。只交一篇完整成品。"}),Ke=Un(ke).replace(/^\s*<content>\s*/i,"").replace(/\s*<\/content>\s*$/i,"").trim();if(!Ke||Ke.length<80||/这里填写|在这里填|角色卡名称|如果有什么需要避雷|\[待填\]/.test(Ke))throw new Error("AI 没有照你的简介模板填完内容。本次没有覆盖已有简介，可查看 AI 原文后重试。");return L(l,"intro",l.intro),l.intro={titles:[],pick:0,parts:{},text:Ke,dirty:!1,appliedStyle:Number(f.introStyle)||0,renderMode:"author-prompt",notice:""},l}const S=await be("intro",l,v,{key:"intro",prev:l.intro?.text}),O=wn(S),C=Object.fromEntries(O.blocks.map(K=>[K.type,K.body]));if(!String(C.简介??"").trim())throw new Error("AI 没有按 <<<简介>>> 等标记返回内容；本次未覆盖旧简介。请查看 AI 返回原文。");const j={titles:If(C.标题),pick:0,parts:C,text:"",dirty:!1,appliedStyle:Number(f.introStyle)||0,renderMode:"slots",notice:""};return j.text=Wl(C,{title:j.titles[0]??l.concepts?.[l.pick]?.title??"",tags:l.tags,author:f.author,license:f.license??{},presetNote:f.presetNote||f.presetGreeting||"",notes:f.introNotes,charName:l.personas?.[0]?.name??"",ending:zo(f)},h),L(l,"intro",l.intro),l.intro=j,l}const Ho=(l=t())=>{const f=Number(l.introStyle??0);return f>0&&l.introStyles?.[f-1]?.tpl||Gn};function zo(l=t()){return String(l.introEnding??l.introThanks??"").trim()}function md(l,f=t()){const w=l.intro??{},v=Ho(f);return Wl(w.parts??{},{title:w.titles?.[w.pick??0]??l.concepts?.[l.pick]?.title??"",tags:l.tags,author:f.author,license:f.license??{},presetNote:f.presetNote||f.presetGreeting||"",notes:f.introNotes,charName:l.personas?.[0]?.name??"",ending:zo(f)},ao(v)?Gn:v)}async function Xh(l,{rememberPrevious:f=!0}={}){const w=l.intro;return ao(Ho(t()))||!String(w?.parts?.简介??"").trim()?ud(l):(f&&L(l,"intro",structuredClone(w)),w.text=md(l),w.renderMode="slots",w.appliedStyle=Number(t().introStyle)||0,w.dirty=!1,w.notice="",l)}return{banned:_,strip:V,restore:Te,remember:L,slotOf:W,localEdit:Qh,classifyLocal:Mh,classifyAI:Lh,routeOf:Ja,npcOne:Ih,relations:Ch,modeOf:i,ruleList:o,introEnding:zo,noteChanges:et,styleOf:At,playGreetings:od,playStart:Rh,playChar:Qo,playUser:dd,playAuto:Hh,playRedo:zh,playReview:Fh,conflictCheck:Uh,consistencyCheck:Gh,story:mh,personaExtra:xh,reviewTarget:Jh,playContext:pd,charName:Wa,PLAY_STYLES:Ro,deepAns:sh,deepOf:tp,chatOf:Ar,chatReply:td,chatSend:oh,chatAsk:ah,chatAnswer:ih,chatBrief:ch,roll:rd,useMyTags:fh,inspire:lh,ideaFromInspire:gh,ideaQA:ph,hooks:Dh,expand:Bh,revise:me,textSlot:pe,suggestRoutes:J,addRouteIdea:re,loadCard:Ye,backstory:yh,auStart:ie,auCore:he,auMap:Ie,auCheck:Ae,auFix:_e,localTags:sd,idea:wh,pickConcept:hh,qa:bh,persona:vh,world:kh,npc:Sh,routes:Eh,tone:Th,free:Nh,custom:Ph,greetings:Oh,predict:Wh,destale:Vh,localCheck:Yh,textSlots:Kh,intro:ud,restyleIntro:Xh,composeIntroFor:md,baseVars:z,cardMaterials:D,openingMaterials:Lo}}var ip=`- temperature
 - top_p`;function op(e){const t=String(e??ip).trim();if(!t)return[];const n=t.replace(/^\[/,"").replace(/\]$/,"").split(/[\n,，]/).map(r=>r.replace(/\s+#.*$/,"").trim().replace(/^-\s+/,"").replace(/^["']|["']$/g,"")).filter(r=>r&&!r.startsWith("#"));if(n.some(r=>!/^[A-Za-z_][A-Za-z0-9_.-]*$/.test(r)))throw new Error("排除附加参数：请每行填写一个参数名，例如 temperature 或 top_p。");return[...new Set(n)]}function go(e,t){const n={...e};if(!t.length)return n;const r=op(e.custom_exclude_body??"");n.custom_exclude_body=[...new Set([...r,...t])].map(s=>`- ${s}`).join(`
 `);for(const s of t){const a=s.split(".");let i=n;for(const o of a.slice(0,-1)){if(!Object.hasOwn(i,o)||!i[o]||typeof i[o]!="object"){i=null;break}i[o]=Array.isArray(i[o])?[...i[o]]:{...i[o]},i=i[o]}i&&delete i[a.at(-1)]}return n}async function Vf(e,t,n,r,s){if(!s.length)return{override:r,includePreset:!0};const a=e.ConnectionManagerRequestService,i=a.getProfile?.(t)??e.extensionSettings?.connectionManager?.profiles?.find(m=>m.id===t),o=a.validateProfile?.(i)??e.CONNECT_API_MAP?.[i?.api];if(!i||!o)throw new Error("当前酒馆无法读取连接配置的参数。请更新酒馆，或在设置中清空“排除附加参数”后再试。");const c=o.selected==="openai"?e.ChatCompletionService:e.TextCompletionService,p=i.preset?e.getPresetManager?.(o.selected)?.getCompletionPresetByName?.(i.preset):null;let d={...r};if(p){if(typeof c?.presetToGeneratePayload!="function")throw new Error("当前酒馆不支持合并并排除连接预设参数。请更新酒馆，或清空“排除附加参数”后再试。");d=await c.presetToGeneratePayload(p,{},{model:i.model,...o.selected==="openai"?{messages:Array.isArray(n)?n:[{role:"user",content:n}],chat_completion_source:o.source}:{prompt:n,api_type:o.type},...r});for(const m of["stream","messages","prompt","model","max_tokens","max_new_tokens","chat_completion_source","api_type","api_server","secret_id","custom_url","vertexai_region","zai_endpoint","siliconflow_endpoint","minimax_endpoint","pollinations_endpoint","reverse_proxy","proxy_password","custom_prompt_post_processing"])delete d[m]}d=go(d,s);for(const m of s)m.includes(".")||(d[m]=void 0);return{override:d,includePreset:!1}}async function Yf(e,t,n){if(!n.length)return e.generateRaw(t);const r=e.eventSource,s=e.event_types?.CHAT_COMPLETION_SETTINGS_READY;if(!s||typeof r?.on!="function"||typeof r?.removeListener!="function"||e.mainApi&&e.mainApi!=="openai")throw new Error("当前酒馆的旧请求接口无法排除参数。请更新酒馆，或在设置中清空“排除附加参数”后再试。");const a=new WeakSet(t.prompt),i=o=>{if(!o?.messages?.some(p=>a.has(p)))return;const c=go(o,n);for(const p of Object.keys(o))Object.hasOwn(c,p)||delete o[p];Object.assign(o,c)};r.on(s,i);try{return await e.generateRaw(t)}finally{r.removeListener(s,i)}}var Ea=()=>X.SillyTavern.getContext();function Kf(){const e=Ea();return e.ConnectionManagerRequestService?(e.extensionSettings?.connectionManager?.profiles??[]).map(t=>({id:t.id,name:t.name})):[]}function cp(){try{return Ea().getPresetManager?.("openai")?.getAllPresets?.()??[]}catch{return[]}}function lp(e,{required:t=!1}={}){if(!e)return[];try{const r=Ea().getPresetManager?.("openai")?.getCompletionPresetByName?.(e);if(!r){if(t)throw new Error("找不到已选预设");return[]}const s=new Map((r.prompts??[]).map(o=>[o.identifier,o])),a=(r.prompt_order??[]).find(o=>String(o.character_id)==="100001")??(r.prompt_order??[])[0];return(a?.order?.length?a.order.filter(o=>o.enabled).map(o=>s.get(o.identifier)).filter(Boolean):(r.prompts??[]).filter(o=>o.enabled!==!1)).filter(o=>!o.marker&&String(o.content??"").trim()).map(o=>({role:["system","user","assistant"].includes(o.role)?o.role:"system",content:String(o.content)}))}catch(n){if(t)throw Object.assign(new Error(`无法读取已选开场白预设“${e}”，本次未发送。请在开场白页重新选择预设。`),{code:"CW_GREETING_PRESET_UNAVAILABLE"});return console.warn("[Love 写卡机] 读取预设失败",n),[]}}var pp=e=>new Promise(t=>setTimeout(t,e)),dp=0,gr=e=>[e?.message,e?.cause?.message,e?.status,e?.cause?.status,e?.cause?.cause?.message,String(e??"")].filter(Boolean).join(" ");function wo(e){return/429|too many|rate.?limit|频率|过于频繁|quota|resource.?exhausted|overloaded|529/i.test(gr(e))}function Xf(e){return wo(e)?!1:/\b50[0234]\b|bad gateway|gateway time-?out|service unavailable|internal server error|upstream|timed? ?out|timeout|failed to fetch|network ?error|networkerror|ECONNRESET|ECONNREFUSED|socket hang up|fetch failed|terminated|unknown error occurred|网关|超时|服务.{0,4}不可用/i.test(gr(e))}function up(e){if(wo(e))return"429（请求太频繁）";const t=gr(e).match(/\b(50[0234])\b/);return t?`${t[1]}（服务器暂时出错）`:/bad gateway/i.test(gr(e))?"502（服务器暂时出错）":/service unavailable/i.test(gr(e))?"503（服务器暂时出错）":/time-?out|timed? ?out|超时/i.test(gr(e))?"超时":"连接出错"}async function Zf(e){const t=Math.max(0,Number(e.settings?.minInterval??3))*1e3,n=e.settings?.retryWaits??[15,30,60],r=e.settings?.errorWaits??[5,15,30];let s=0,a=0;for(;;){const i=dp+t-Date.now();if(i>0&&await pp(i),e.aborted?.())throw new Error("已停止");dp=Date.now();try{return e.onAttempt?.(),await cwzCatchToasts(e,()=>eg(e))}catch(o){if(e.aborted?.())throw new Error("已停止");if(o?.code==="CW_GREETING_PRESET_UNAVAILABLE")throw o;let c;if(wo(o)){if(s>=n.length)throw new Error("API 一直返回 429（请求太频繁）。等一会儿再试，或者在设置里把“两次调用间隔”调大。");c=n[s++]}else if(Xf(o)){if(a>=r.length)throw new Error(`API 一直返回 ${up(o)}，重试 ${r.length} 次都没成功。多半是 API 或中转站那边的问题，等几分钟再点一次（已经写好的不会丢），或者在设置里换一个连接配置文件。原始错误：${$f(o)}`);c=r[a++]}else throw o;const p=up(o);for(let d=c;d>0;d--){if(e.aborted?.())throw new Error("已停止");e.onWait?.(d,p),await pp(1e3)}}}}var $f=e=>String(e?.message??e??"").slice(0,160);function cwzPickText(r){if(r==null)return"";if(typeof r=="string")return r;const j=v=>Array.isArray(v)?v.map(p=>typeof p=="string"?p:p?.text??"").join(""):typeof v=="string"?v:"";const c=r.choices?.[0];return j(c?.message?.content)||j(c?.text)||j(r.content)||j(r.candidates?.[0]?.content?.parts)||j(r.responseContent?.candidates?.[0]?.content?.parts)||""}
 function cwzWhyOf(r){if(!r||typeof r!="object")return"";const c=r.choices?.[0],g=r.candidates?.[0]??r.responseContent?.candidates?.[0],f=r.promptFeedback??r.responseContent?.promptFeedback;return[c?.finish_reason,c?.native_finish_reason,g?.finishReason,f?.blockReason,r.stop_reason,typeof r.error=="string"?r.error:r.error?.message,r.message].filter(Boolean).map(String).join(" / ")}
@@ -3840,43 +3749,19 @@ const DEFAULT_RULES = [
     FL('f_cold', 'flagImagery', '如坠冰窟|淬(?:了|着)?(?:冰|毒)', '淬了冰'),
 ];
 
-const LEGACY_AI_PROMPT = `你是中文小说编辑，负责给 AI 角色扮演用的角色卡、世界书、开场白去“八股”。
+const LEGACY_AI_PROMPT = `（旧版提示词，已停用）`;
+const PREVIOUS_EDIT_CONTRACT = `（旧版改写规矩，已停用）`;
+const PREVIOUS_AI_PROMPT = `（旧版提示词二，已停用）`;
+const V4_EDIT_CONTRACT = `（旧版片段规矩，已停用）`;
+const V4_AI_PROMPT = `（旧版提示词三，已停用）`;
+const EDIT_CONTRACT = `【整句改写规矩】
+程序只会把带八股的句子交给你，每句附上命中的说法和前后各一句；其余的句子程序原样保留。
+一句一句来：套路词能删就直接删；删了读不通或者丢了内容，就把整句换成自然的说法重写。
+这句原有的动作、台词内容、事实和语气都要留住，不添新情节。长短不限，改好为准。
+整句都是空套路、删了也不影响内容的，可以交空字符串。
+句子里的 {{char}}、{{user}} 这类宏原样留着。`;
 
-八股指 AI 写作的套路化表达，例如：程度副词堆叠（极其/极为/极度）、量词修饰（一丝/一抹/一缕）、若有若无的弧度、骨节分明的手指、眼神暗了暗、空气凝固、时间停滞、命运的齿轮、猎人与猎物、石子投湖、手术刀般精准、“不是……而是……”“与其说……不如说……”这类伪深刻转折、伪精确数字（0.3秒、15度）、硬塞的解剖学词汇、全知视角插入、不必要的动物比喻、空洞的升华式结尾。
-
-改写要求：
-1. 保留全部设定信息：人名、地名、关系、外貌事实、能力、规则、时间线、数值。不增不减。
-2. 原样保留 {{char}}、{{user}} 等宏，尖括号标签，代码块，Markdown 结构和换行。
-3. 用具体、平实的描写代替套路；能删就删，不要换成另一套华丽辞藻。
-4. 对白尽量保留原意和语气，只修掉明显的套路词。
-5. 篇幅与原文接近或更短。
-6. 【必须改掉】里列出的词句，结果里一个都不能再出现（包括对白里），换成具体描写或直接删去。
-7. 只输出改写后的正文，不要解释，不要加标题，不要用代码块或引号包住全文。`;
-const PREVIOUS_EDIT_CONTRACT = `【局部编辑约束】
-逐段保留原文的人物、动作、对白、场景细节、情绪变化、事件顺序和设定信息，只调整命中的词句及其必要衔接。
-可直接删除不承载信息的赘词、重复修饰；承载信息的词句改成自然表达，保留原意和语气。未命中的内容尽量原样保留。
-必改词是措辞修改目标。遇到宽泛规则或改写后仍命中时，优先保全内容，留下待人工处理的词句。
-逐段输出完整修改稿，正文长度通常保持原文的 90%～110%，至少保留 80%；靠保留细节达到篇幅，保持原有剧情。
-原样保留宏、标签、代码块、链接及 Markdown 结构。只输出修改后的全文。`;
-
-const PREVIOUS_AI_PROMPT = `你是中文小说编辑，负责调整角色卡、世界书和开场白中的套路化表达。
-
-${PREVIOUS_EDIT_CONTRACT}`;
-const V4_EDIT_CONTRACT = `【局部替换约束】
-根据上下文修改指定片段，保留片段表达的动作、情绪、人物关系、事实和语气。冗余修饰可精简，承载信息的内容换成自然表达。
-未指定的内容由程序原样保留。上下文供理解使用，输出范围仅限指定片段。
-短语可以自然缩短，例如“嘴角勾起一抹若有若无的弧度”可写成“轻轻笑了笑”。长句保留原有事件和细节。
-每个片段按本次请求指定的格式输出替换文字，宏、标签、代码块和链接由程序保护。`;
-
-const V4_AI_PROMPT = `你是中文小说编辑，负责调整角色卡、世界书和开场白中的套路化表达。\n\n${V4_EDIT_CONTRACT}`;
-const EDIT_CONTRACT = `【整句修改约束】
-程序只把含八股的句子交给你，每句给出命中的八股和前后句。其他句子由程序原样保留。
-逐句处理：能删掉的套路词直接删；删了不通顺或丢了内容的，把这句改写成自然的说法。
-保留这句原有的动作、对白内容、事实和语气，不加新情节。长短不限，按改好为准。
-整句只是空套路、删掉不影响内容的，可以输出空字符串。
-句子里的 {{char}}、{{user}} 等宏原样保留。`;
-
-const DEFAULT_AI_PROMPT = `你是中文小说编辑，负责修改角色卡、世界书和开场白里的 AI 八股句子。\n\n${EDIT_CONTRACT}`;
+const DEFAULT_AI_PROMPT = `你是中文小说编辑，专门把角色卡、世界书和开场白里带 AI 味的八股句子改掉。\n\n${EDIT_CONTRACT}`;
 
 function rewriteIssue(before, after) {
     const count = (s) => String(s ?? '').replace(/<[^>]*>/g, '').replace(/\s/g, '').length;
@@ -4370,74 +4255,13 @@ return{RULE_GROUPS,DEFAULT_RULES,LEGACY_AI_PROMPT,PREVIOUS_EDIT_CONTRACT,PREVIOU
 
 ${Ee.EDIT_CONTRACT}`}${Ee.BAGU_GUIDE?`
 
-${Ee.BAGU_GUIDE}`:""}`,y=[...new Set(e.map(V=>V.kind))],E=(V,R)=>{if(!Ee.introducedHits||typeof R!="string")return"";const L=Ee.introducedHits(V.text,R,t);return L.length?Ee.introducedReason(L):""},P=(V,R)=>Ee.editIssue(V,R)||(R===V.text&&V.hits.length?"这句还没改，原样交回来了":"")||(c(R).length?`还含必改词：${[...new Set(c(R).map(L=>L.match))].join("、")}`:"")||E(V,R),D=new Map,Q=new Map,z=Math.ceil(d.length/a);let M=0;async function _(V,R){for(let L=0;L<V.length;L+=a){if(r())return;const W=V.slice(L,L+a);M++,i?.({sent:M,rounds:z,retry:R,sentences:d.length});const Ce=`【任务】下面是${y.join("、")}里含八股的句子，逐句修改。能删的套路词删掉；删了不通顺或丢内容的，整句改写成自然的说法。长短不限；不要用近义说法换皮，优先删。整句只是空套路的，text 填空字符串。命中的词只是线索，整句写法是八股的就整句处理，按【什么是八股】【怎么改】来。${R?`
-这些句子上次没改好，“上次的问题”写了原因，这次一定要避开。`:""}
-【格式】只输出 JSON：{"edits":[{"id":"b1s1","text":"改好的句子"}]}，每个 id 都要有。
-【句子】
-${JSON.stringify(W.map(me=>({id:me.gid,...y.length>1?{类型:me.kind}:{},句子:me.t.text,八股:me.t.hits.map(J=>J.match),...R&&Q.get(me.gid)?{上次的问题:Q.get(me.gid)}:{},前一句:me.t.prev,后一句:me.t.next})),null,1)}`;let pe=new Map;for(let me=0;me<2&&!pe.size;me++){if(r())return;try{pe=Ee.parseEdits(await n(g,Ce))}catch{pe=new Map}}for(const me of W){const J=pe.get(me.gid),re=P(me.t,J);re?Q.set(me.gid,re):(D.set(me.gid,J),Q.delete(me.gid))}}}await _(d,!1);const ce=d.filter(V=>!D.has(V.gid));return ce.length&&!r()&&await _(ce,!0),p.forEach((V,R)=>{const L=new Map;for(const W of d)W.bi===R&&D.has(W.gid)&&L.set(W.t.id,D.get(W.gid));o[R]={text:L.size?Ee.applyEdits(e[R].text,V,L):e[R].text,changed:L.size,failed:d.filter(W=>W.bi===R&&!D.has(W.gid)).map(W=>W.t.text.slice(0,30))}}),o}function Ta(e){try{return!!Ee?.looksLikeInstructions?.(e)}catch{return!1}}var bo="loveCardWriter",Na="1.22",le=()=>X.SillyTavern.getContext(),Pa={version:1,apiProfile:"",presetCard:"",presetGreeting:"",maxTokens:0,useTemperature:!0,excludedParameters:ip,userToken:"<user>",personaPlace:"blue",personaTpl:"live",autoBackstory:!0,noNumbers:!0,backstoryCount:"按人物需要",introStyles:[],styles:[],customRules:{},ruleOff:{},ruleModes:{},ruleSteps:{},offPages:[],helpMode:"first",seenHelp:[],introStyle:0,minInterval:3,stream:"preset",greetingCount:2,greetingLength:"600–900",greetingExtract:!0,greetingExtractStart:"<content>",greetingExtractEnd:"</content>",storyLength:"800–1200",maxStepCalls:0,lean:!1,author:"",license:{repost:"不可",edit:"可",commercial:"不可"},presetNote:"",introNotes:"",introThanks:"",introEnding:void 0,predictThreshold:.42,autoPredict:!0,autoBagu:!0,greetMustClean:!0,blueBudget:4e3,playLength:300,prompts:{},rules:{},customTags:{},hiddenTags:{},customSteps:[],quickFlows:[{id:"quick-default",name:"简易角色卡",steps:[{id:"quick-persona",name:"人设",output:"description",prompt:"根据一句话梗写这张卡的人设：这个人的经历、性情、处境及与<user>的关系。写成可直接放进角色卡的正文。"},{id:"quick-opening",name:"开场白",output:"greeting",prompt:"根据一句话梗和前面写好的人设写开场白。从正在发生的事情写起，让角色说话或行动，留给<user>回应的余地。只写开场正文。"}]}],quickFlowId:"full",quickDrafts:{},draft:null,drafts:[]},b={busy:!1,abort:!1,root:null,page:"home",checks:null,bagu:null,editStep:"persona",editRule:"通用",editDim:"era",ptab:"step"},sg={npc:`【任务】为这张卡写 NPC，{{count}} 个左右。可以少，不要凑数。
-
-【构想】
-{{concept}}
-【标签】{{tags}}
-【主要角色概要】
-{{overviews}}
-【世界观】
-{{world}}
-
-【要求】
-- 每个 NPC 必须有一个剧情功能：推动剧情 / 制造阻碍 / 提供信息 / 情敌或修罗场 / 衬托主角，选一个写清楚。
-- 每个 NPC 有他自己想要的东西，不只是围着主角转。
-- 每个 NPC 必须有“只有他”这一项：换成别的卡、别的 NPC 都不能直接用的东西。想不出来就少写一个 NPC，不要凑。
-- 轻量写法，不写完整行为指导。
-{{rules.通用}}
-
-【格式】每个 NPC 一块，块前加一行：
-<<<NPC:名字|关键词1,关键词2>>>
-<名字>
-身份: 他在这个世界里靠什么活、站在哪（用世界观里真实的名字和地点）
-功能:
-想要: 一件近期能办成或办不成的具体的事：和谁有关、卡在哪
-只有他: 只有他会做的一件事，或只有他知道的一个信息，或只有他才有的一个毛病（落在这个世界的具体物件和地点上）
-和主角、〔user〕: 他对他们做过什么、常做什么（隔多久、在哪、说什么、避开什么），不写关系结论
-外貌: 一个能一眼认出他的具体特征，来自他的身份，一句
-说话: 他谈什么、不谈什么，被追问不想答的事时怎么办；加 1–2 句示例台词（严禁在正文照抄）。不写语气形容词
-</名字>`,npcOne:`【任务】为这张卡写一个 NPC。
-
-【这个 NPC】
-名字：{{name}}
-作者的设想：{{desc}}
-
-【构想】
-{{concept}}
-【标签】{{tags}}
-【主要角色概要】
-{{overviews}}
-【世界观】
-{{world}}
-【已有的 NPC】（剧情功能不要和他们重复；可以和他们有关系）
-{{otherNpcs}}
-
-【要求】
-- 按作者的设想写；设想没说到的你来补，但不要改掉设想里的东西。
-- 必须有一个剧情功能：推动剧情 / 制造阻碍 / 提供信息 / 情敌或修罗场 / 衬托主角，选一个写清楚。
-- 有他自己想要的东西，不只是围着主角转。
-- 必须有“只有他”这一项：换成别的卡、别的 NPC 都不能直接用的东西。
-- 轻量写法，不写完整行为指导。
-{{rules.通用}}
-
-【格式】只写这一个，块前加一行：
-<<<NPC:名字|关键词1,关键词2>>>
-<名字>
-身份: 他在这个世界里靠什么活、站在哪（用世界观里真实的名字和地点）
-功能:
-想要: 一件近期能办成或办不成的具体的事：和谁有关、卡在哪
-只有他: 只有他会做的一件事，或只有他知道的一个信息，或只有他才有的一个毛病（落在这个世界的具体物件和地点上）
-和主角、〔user〕: 他对他们做过什么、常做什么（隔多久、在哪、说什么、避开什么），不写关系结论
-外貌: 一个能一眼认出他的具体特征，来自他的身份，一句
-说话: 他谈什么、不谈什么，被追问不想答的事时怎么办；加 1–2 句示例台词（严禁在正文照抄）。不写语气形容词
-</名字>`},pg=`NPC 写简短一些，交代来路和现在即可。
+${Ee.BAGU_GUIDE}`:""}`,y=[...new Set(e.map(V=>V.kind))],E=(V,R)=>{if(!Ee.introducedHits||typeof R!="string")return"";const L=Ee.introducedHits(V.text,R,t);return L.length?Ee.introducedReason(L):""},P=(V,R)=>Ee.editIssue(V,R)||(R===V.text&&V.hits.length?"这句还没改，原样交回来了":"")||(c(R).length?`还含必改词：${[...new Set(c(R).map(L=>L.match))].join("、")}`:"")||E(V,R),D=new Map,Q=new Map,z=Math.ceil(d.length/a);let M=0;async function _(V,R){for(let L=0;L<V.length;L+=a){if(r())return;const W=V.slice(L,L+a);M++,i?.({sent:M,rounds:z,retry:R,sentences:d.length});const Ce=`下面是${y.join("、")}里带八股的句子，请一句句改。套路词能删就删；删了读不通或丢了内容，就整句换个自然的说法。长短不限；别拿近义词换皮，能删先删。整句只是空套路的，text 交空字符串。命中的词只是提示，整句写法就是八股的，就整句重写，照【什么算八股】【怎么去掉八股】来。${R?`
+这些句子上回没改好，「上次的问题」里写了原因，这回一定要避开。`:""}
+交稿：只交 JSON：{"edits":[{"id":"b1s1","text":"改好的句子"}]}，每个 id 都要有。
+句子：
+${JSON.stringify(W.map(me=>({id:me.gid,...y.length>1?{类型:me.kind}:{},句子:me.t.text,八股:me.t.hits.map(J=>J.match),...R&&Q.get(me.gid)?{上次的问题:Q.get(me.gid)}:{},前一句:me.t.prev,后一句:me.t.next})),null,1)}`;let pe=new Map;for(let me=0;me<2&&!pe.size;me++){if(r())return;try{pe=Ee.parseEdits(await n(g,Ce))}catch{pe=new Map}}for(const me of W){const J=pe.get(me.gid),re=P(me.t,J);re?Q.set(me.gid,re):(D.set(me.gid,J),Q.delete(me.gid))}}}await _(d,!1);const ce=d.filter(V=>!D.has(V.gid));return ce.length&&!r()&&await _(ce,!0),p.forEach((V,R)=>{const L=new Map;for(const W of d)W.bi===R&&D.has(W.gid)&&L.set(W.t.id,D.get(W.gid));o[R]={text:L.size?Ee.applyEdits(e[R].text,V,L):e[R].text,changed:L.size,failed:d.filter(W=>W.bi===R&&!D.has(W.gid)).map(W=>W.t.text.slice(0,30))}}),o}function Ta(e){try{return!!Ee?.looksLikeInstructions?.(e)}catch{return!1}}var bo="loveCardWriter",Na="1.25",le=()=>X.SillyTavern.getContext(),Pa={version:1,apiProfile:"",presetCard:"",presetGreeting:"",maxTokens:0,useTemperature:!0,excludedParameters:ip,userToken:"<user>",personaPlace:"blue",personaTpl:"live",autoBackstory:!0,noNumbers:!0,backstoryCount:"按人物需要",introStyles:[],styles:[],customRules:{},ruleOff:{},ruleModes:{},ruleSteps:{},offPages:[],helpMode:"first",seenHelp:[],introStyle:0,minInterval:3,stream:"preset",greetingCount:2,greetingLength:"600–900",greetingExtract:!0,greetingExtractStart:"<content>",greetingExtractEnd:"</content>",storyLength:"800–1200",maxStepCalls:0,lean:!1,author:"",license:{repost:"不可",edit:"可",commercial:"不可"},presetNote:"",introNotes:"",introThanks:"",introEnding:void 0,predictThreshold:.42,autoPredict:!0,autoBagu:!0,greetMustClean:!0,blueBudget:4e3,playLength:300,prompts:{},rules:{},customTags:{},hiddenTags:{},customSteps:[],quickFlows:[{id:"quick-default",name:"简易角色卡",steps:[{id:"quick-persona",name:"人设",output:"description",prompt:"照一句话梗写出这张卡的人设：这个人走过的路、脾气、故事开始时的处境，以及他和<user>的关系。写成能直接放进角色卡的正文。"},{id:"quick-opening",name:"开场白",output:"greeting",prompt:"照一句话梗和前面写好的人设写开场白。从正在发生的事写起，让角色开口或动起来，停在<user>能接话的地方。只交开场正文。"}]}],quickFlowId:"full",quickDrafts:{},draft:null,drafts:[]},b={busy:!1,abort:!1,root:null,page:"home",checks:null,bagu:null,editStep:"persona",editRule:"通用",editDim:"era",ptab:"step"},sg={},pg=`NPC 写简短一些，交代来路和现在即可。
 作者没给设想时，按这张卡的世界观自己编，名字和脾气由你定，直接交出人物。作者写了的部分照写，其余你来补。
-用几段短一点的话写他怎么走到今天、现在怎么过、和身边的人什么关系。来路只留影响他现在的脾气或关系的部分，不写流水账。
+用几段短一点的话写他怎么走到故事开头、平常怎么过、和身边的人什么关系。来路只留影响他脾气或关系的部分，不写流水账。
 先想清他自己在乎什么、为什么在乎，再写他怎么待人。对不同的人感情可以不同，对同一个人也可以有好几种念头，写明白，给之后的演绎留余地。性格词只用来定个调，后面要写出他怎么想。
 外貌和说话方式按需要写进介绍。每段都多给一点有用的信息，不拿道具和小动作凑字数，不反复证明同一个特点，也不列固定反应。不规定他必须承担什么剧情作用。
 句子要完整连贯，不堆排比，不用“不是……而是……”，段尾不加总结或感悟，不替〔user〕写言行和心理。`;function U(){const e=le().extensionSettings;e[bo]??(e[bo]={});const t=e[bo];for(const[i,o]of Object.entries(Pa))t[i]===void 0&&(t[i]=structuredClone(o));t.license={...Pa.license,...t.license};return t}var oe=()=>le().saveSettingsDebounced(),_t=()=>Gi(U().customTags,U().hiddenTags);function N(){const e=U();e.draft||(e.draft=hn());const t=e.draft;for(const[n,r]of Object.entries(hn()))t[n]===void 0&&(t[n]=structuredClone(r));return t}function ee(){N().updated=Date.now(),oe()}var B=Wf({settings:U,lib:_t,aborted:()=>b.abort,progress:e=>Be(e),llm:e=>hr(e)});function hr(e){const t=Number(U().maxStepCalls)||0;if(t&&b.busy&&(b.stepCalls??0)>=t)return b.capped=!0,Promise.reject(new Error(`这一步已经调用了 ${b.stepCalls} 次，到了你设的上限，先停在这里。写好的都保留；再点一次会从没写的地方接着往下。`));b.calls=(b.calls??0)+1,b.stepCalls=(b.stepCalls??0)+1,bs();const n=b.lastStatus,r=e.diagnosticOwner??N(),s=r.lastResponse={at:Date.now(),page:b.page,raw:"",processed:"",received:!1,status:"pending",error:""};b.root?.querySelector(".cw-response")?.remove();let a=!1;const i=o=>(a&&b.lastStatus!==n&&Be(n),o);return Zf({...e,settings:U(),userToken:U().userToken||"<user>",aborted:()=>b.abort,onAttempt:()=>{Object.assign(s,{raw:"",processed:"",received:!1,status:"pending",error:""}),hs("")},onRaw:o=>{Object.assign(s,{raw:o,received:!0})},onWait:(o,c)=>{a=!0,Be(`API 返回 ${c||"429（请求太频繁）"}，${o} 秒后自动重试…`)},onStream:o=>{s.raw=o,s.status="partial",hs(o)}}).then(o=>(s.processed=o,s.status="received",oe(),hs(""),i(o)),o=>{throw s.status="error",s.error=String(o?.message??o),oe(),hs(""),o})}function gg(e){if(e?.code!=="CW_INVALID_JSON")return;const t=N();(!t.lastResponse||t.lastResponse.processed!==e.rawResponse)&&(t.lastResponse={at:Date.now(),page:b.page,raw:e.rawResponse,received:!0}),Object.assign(t.lastResponse,{status:"parse-error",error:e.parseError||e.message})}var Oa=Mf(()=>le().getTokenCountAsync,()=>yp()),Wn=(e,t)=>Xl(Oa.sum((e??[]).map(n=>String(n??"")),t)),xo=new Map,wg=0;function yo(e){const t=String(++wg);return xo.set(t,e),`<span class="cw-tok" data-tok-ref="${t}">${Wn(e)}</span>`}function xp(e=N()){const t=io(e,{personaPlace:U().personaPlace,activeRoute:0});return[...t.before,...t.card,...t.after]}function Da(e=N()){const t=xp(e);if(!t.length)return"";const n=Oa.sum(t.map(a=>a.text)),r=Number(U().blueBudget)||0,s=r&&n.n>r;return`<span class="cw-tok ${s?"cw-warntext":""}" data-tok-blue>常驻设定 ${Xl(n)}${r?`（上限 ${r}${s?"，超了":""}）`:""}</span>`}function ko(e=N()){const t=xp(e);if(!t.length)return"";const n=io(e,{personaPlace:U().personaPlace}).green,r=s=>`<div class="cw-small cw-tokrow"><span class="cw-grow">${x(s.label)}</span>${yo([s.text])}</div>`;return`<div class="cw-box"><div class="cw-sub">token ${Da(e)}</div>
@@ -4499,7 +4323,7 @@ ${d.text}`).join(`
 ${a}`),r&&!o&&(p+=`
 
 【前面已写好的内容】
-${r}`),p+=Ip(t,`q:${e.id}`,e.name||"新步骤"),{system:"按作者给本步写的提示词创作。沿用前面已经写好的事实，只返回本步需要的正文。前面写好的内容会一起放进角色卡，这一步不复述人物经历、关系前情和别的步骤已经写过的东西，只写本步负责的部分。",user:p,stage:e.output==="greeting"?"greeting":"card",preserveOutput:!0}}function Ip(e,t,n){try{return Zt(e,t,n)}catch{return""}}async function Ap(e,t,n){const r=e.steps[n];Be(`${x(r.name||`步骤 ${n+1}`)}（${n+1}/${e.steps.length}）…`);const s=Ag(r,t,Cp(e,t,n)),a=String(t.quickState.done?.[r.id]?.text??"").trim(),i=String(t.quickState.feedback?.[r.id]??"").trim(),o=!!Ip(t,`q:${r.id}`,r.name||"新步骤");a&&(i||o)&&(i&&(s.user+=`
+${r}`),p+=Ip(t,`q:${e.id}`,e.name||"新步骤"),{system:"照作者给这一步写的提示词来写。前面写好的事实照用，只交这一步要的正文。前面的内容会一起放进角色卡，所以这一步不再讲人物经历、关系前情和其他步骤写过的东西，只写自己这一部分。",user:p,stage:e.output==="greeting"?"greeting":"card",preserveOutput:!0}}function Ip(e,t,n){try{return Zt(e,t,n)}catch{return""}}async function Ap(e,t,n){const r=e.steps[n];Be(`${x(r.name||`步骤 ${n+1}`)}（${n+1}/${e.steps.length}）…`);const s=Ag(r,t,Cp(e,t,n)),a=String(t.quickState.done?.[r.id]?.text??"").trim(),i=String(t.quickState.feedback?.[r.id]??"").trim(),o=!!Ip(t,`q:${r.id}`,r.name||"新步骤");a&&(i||o)&&(i&&(s.user+=`
 
 【作者对上一版的修改意见，必须优先满足】
 ${i}`),s.user+=`
@@ -4741,7 +4565,7 @@ ${Ve("world",!!e.world.main)}
 <div class="cw-sub">总览 <small class="cw-dim">蓝灯</small></div>${Pe("world.main",10)}
 ${e.world.extra.map((t,n)=>`<div class="cw-card"><div class="cw-row">${We(`world.extra.${n}.name`,"名称","cw-grow")}${q("del","删",`data-path="world.extra" data-i="${n}"`)}</div>${Ba(`world.extra.${n}.keys`,"关键词（空着就是蓝灯）")}${Pe(`world.extra.${n}.content`,6)}</div>`).join("")}
 <div class="cw-row">${q("add","加一个条目",'data-path="world.extra" data-tpl="extra"')}</div>`}function fw(){const e=N();return`${Vn("npc")}<div class="cw-row">${q("npc",e.npcs.length?"重写全部":"生成 NPC")}${q("add","加一个 NPC",'data-path="npcs" data-tpl="npc"')}</div>
-<div class="cw-dim cw-small cw-help">可以直接生成，名字和设想留空也能写。默认写人物经历过的事和如今的生活。有要求再填设想；单个和全部重写都会带上修改意见。</div>
+<div class="cw-dim cw-small cw-help">可以直接生成，名字和设想留空也能写。默认写人物经历过的事和平常的日子。有要求再填设想；单个和全部重写都会带上修改意见。</div>
 ${Ve("npc",e.npcs.length>0)}
 ${e.npcs.map((t,n)=>`<div class="cw-card"><div class="cw-row">${We(`npcs.${n}.name`,"名字（空着让 AI 起）","cw-grow")}${q("npcOne",t.content?.trim()?"重写这个":"写这个 NPC",`data-i="${n}" ${t.content?.trim()?"":'class="cw-primary"'}`)}${q("del","删",`data-path="npcs" data-i="${n}"`)}</div>
 ${We(`npcs.${n}.desc`,"人物设想（可留空，让 AI 自行创作）")}
@@ -4985,7 +4809,7 @@ ${gt(a,c?1/0:14e3)}${o.length?`
 ${gt(o,c?1/0:2e4)}`:""}${t==="greet"&&mr(e)?`
 
 【作者为开场白填写的补充文字】
-${mr(e)}`:""}`}function qw(){if(!b.root||["chat","home","drafts","settings","about","quick","prompts","theme","chatImport","load"].includes(b.page))return;const e=N(),t=b.page,n=!!({idea:1,tags:1,persona:1,world:1,npc:1,routes:1,tone:1,greet:1,play:1,check:1,intro:1,au:1,existing:1}[t]||t.startsWith("step:")||t.startsWith("q:")),r=mo({owner:e,key:t,label:Mw(t),modal:!0,extract:t==="greet"?cwzGreetExtract(e):null,systemExtra:t==="greet"?cwzGreetChatX:"",notice:t==="greet"?()=>`预设：${U().presetGreeting?`${U().presetGreeting}（${lp(U().presetGreeting).length} 条）`:"不用预设"} · 补充文字：${mr(e)?"已启用":e.greetingContext?.useNotes===!1?"已关闭":"未填写"}`:null,applies:n,context:()=>Lw(e,t),busy:()=>b.busy,task:a=>$(a,"本页对话已更新。"),request:a=>hr({...a,stage:t==="greet"?"greeting":"card",temperature:.75}),aborted:()=>b.abort,save:()=>{e.updated=Date.now(),oe()},render:G,confirm:a=>X.confirm(a)}),s=b.root.querySelector(".cw-top");s?s.after(r):b.root.querySelector(".cw")?.prepend(r)}function Eo(){return k.editing?`entry:${k.editing.draft.id}`:k.tab}function Jp(e=Eo()){return e.startsWith("entry:")?`条目 · ${k.editing?.draft.name||se(e.slice(6))?.name||"未命名"}`:{lib:"收藏",gen:"让 AI 写一条",mix:"预设",imp:"导入",set:"设置"}[e]??"当前页面"}function To(e){return String(e?.content??"").trim()?{name:e.name,role:e.role,tags:e.tags,content:e.content}:null}function No(){return k.gen.useSelected?ne().entries.filter(e=>k.selected.has(e.id)).map(To).filter(Boolean):[]}function jw(e){const t=ne();if(e.startsWith("entry:")){const n=k.editing?.draft;return gt({条目:n&&{name:n.name,content:n.content,role:n.role,tags:n.tags,note:n.note},修改意见:k.editing?.comment})}if(e==="gen")return gt({需求:k.gen.need,类型:k.gen.kind,语言:k.gen.lang,拆分多个:k.gen.multi,生成结果:k.gen.results.map(To).filter(Boolean),参考条目:No()});if(e==="mix"){const n=jt();return gt({方案:n&&{name:n.name,items:n.items.map(r=>{if(r.type!=="entry")return{type:r.type,identifier:r.identifier,name:r.name,enabled:r.enabled};const s=r.override;return{type:r.type,enabled:r.enabled,entry:To(mu(n,r)),override:s&&{role:s.role,injection_position:s.injection_position,injection_depth:s.injection_depth}}})}})}return gt(e==="imp"?{待导入文字:k.imp.text,拆分方式:k.imp.splitMode,重复处理:k.imp.dupMode}:e==="set"?{最大回复长度:t.maxTokens,自定义类型:t.customKinds,提示词:{...Ue,...t.templates}}:{条目:t.entries.map(n=>({name:n.name,role:n.role,tags:n.tags,content:k.selected.has(n.id)?n.content:void 0})),搜索:k.search})}function Wp(){const e=ne(),t=Eo();return mo({owner:e,key:t,compact:!0,label:Jp(t),applies:t==="gen"||t==="mix"||t.startsWith("entry:"),systemExtra:t==="mix"?"作者想把聊好的内容放进方案时，告诉作者回到预设页点「让 AI 看整份」（可以只加新条目、只改勾选的条目或改整个方案），这里聊过的内容会自动带上；要从零搭一套就点「AI 写基础版」。":"",context:()=>jw(t),busy:()=>!!k.busy,task:n=>Bn("本页对话",n),request:({system:n,messages:r})=>er(n+(e.antiBagu!==!1&&(t==="gen"||t.startsWith("entry:"))?`
+${mr(e)}`:""}`}function qw(){if(!b.root||["chat","home","drafts","settings","about","quick","prompts","theme","chatImport","load"].includes(b.page))return;const e=N(),t=b.page,n=!!({idea:1,tags:1,persona:1,world:1,npc:1,routes:1,tone:1,greet:1,play:1,check:1,intro:1,au:1,existing:1}[t]||t.startsWith("step:")||t.startsWith("q:")),r=mo({owner:e,key:t,label:Mw(t),modal:!0,extract:t==="greet"?cwzGreetExtract(e):null,systemExtra:t==="greet"?cwzGreetChatX:"",notice:t==="greet"?()=>`预设：${U().presetGreeting?`${U().presetGreeting}（${lp(U().presetGreeting).length} 条）`:"不用预设"} · 补充文字：${mr(e)?"已启用":e.greetingContext?.useNotes===!1?"已关闭":"未填写"}`:null,applies:n,context:()=>Lw(e,t),busy:()=>b.busy,task:a=>$(a,"本页对话已更新。"),request:a=>hr({...a,stage:t==="greet"?"greeting":"card",temperature:.75}),aborted:()=>b.abort,save:()=>{e.updated=Date.now(),oe()},render:G,confirm:a=>X.confirm(a)}),s=b.root.querySelector(".cw-top");s?s.after(r):b.root.querySelector(".cw")?.prepend(r)}function Eo(){return k.editing?`entry:${k.editing.draft.id}`:k.tab}function Jp(e=Eo()){return e.startsWith("entry:")?`条目 · ${k.editing?.draft.name||se(e.slice(6))?.name||"未命名"}`:{lib:"收藏",gen:"让 AI 写一条",mix:"预设",imp:"导入",set:"设置"}[e]??"当前页面"}function To(e){return String(e?.content??"").trim()?{name:e.name,role:e.role,tags:e.tags,content:e.content}:null}function No(){return k.gen.useSelected?ne().entries.filter(e=>k.selected.has(e.id)).map(To).filter(Boolean):[]}function jw(e){const t=ne();if(e.startsWith("entry:")){const n=k.editing?.draft;return gt({条目:n&&{name:n.name,content:n.content,role:n.role,tags:n.tags,note:n.note},修改意见:k.editing?.comment})}if(e==="gen")return gt({需求:k.gen.need,类型:k.gen.kind,语言:k.gen.lang,拆分多个:k.gen.multi,生成结果:k.gen.results.map(To).filter(Boolean),参考条目:No()});if(e==="mix"){const n=jt();return gt({方案:n&&{name:n.name,items:n.items.map(r=>{if(r.type!=="entry")return{type:r.type,identifier:r.identifier,name:r.name,enabled:r.enabled};const s=r.override;return{type:r.type,enabled:r.enabled,entry:To(mu(n,r)),override:s&&{role:s.role,injection_position:s.injection_position,injection_depth:s.injection_depth}}})}})}return gt(e==="imp"?{待导入文字:k.imp.text,拆分方式:k.imp.splitMode,重复处理:k.imp.dupMode}:e==="set"?{最大回复长度:t.maxTokens,自定义类型:t.customKinds,提示词:{...Ue,...t.templates}}:{条目:t.entries.map(n=>({name:n.name,role:n.role,tags:n.tags,content:k.selected.has(n.id)?n.content:void 0})),搜索:k.search})}function Wp(){const e=ne(),t=Eo();return mo({owner:e,key:t,compact:!0,label:Jp(t),applies:t==="gen"||t==="mix"||t.startsWith("entry:"),systemExtra:t==="mix"?"作者想把聊好的东西放进预设时，告诉他回预设页点「让 AI 看整份」（可以只添新条目、只改勾选的几条，或者改整份），这里聊过的会自动带过去；想从零搭一套就点「AI 写基础版」。":"",context:()=>jw(t),busy:()=>!!k.busy,task:n=>Bn("本页对话",n),request:({system:n,messages:r})=>er(n+(e.antiBagu!==!1&&(t==="gen"||t.startsWith("entry:"))?`
 
 `+nr(e.templates):""),r.map(s=>`${s.role==="user"?"作者":"AI"}：${s.content}`).join(`
 
