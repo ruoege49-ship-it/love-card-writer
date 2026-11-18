@@ -2661,11 +2661,12 @@ A("div",{class:"sf-bar",style:"flex-wrap:wrap"},ge("一起写进角色卡",()=>H
 怎么写：
 - 只写一段：一个场景，或者一个晚上、一天。有个起头，中间拐一下，停在事情还悬着的地方，不收尾。
 - 两个主要人物：角色和〔user〕。〔user〕只露出说的话和做的事，不写他心里想什么。可以带一两个旁人，让这个世界不只有他们俩。
-- 给每个人一样别人想不到的具体东西：一个习惯、一件留了很久的旧物、一样怕的东西。别拿形容词堆人。
+- 给每个人一处别人想不到的地方：一个看法、一种做事的路数，或者他在乎、躲着的事。不要钉在某一件具体的物件、食物或小动作上，那样之后会被当成固定标签反复写。别拿形容词堆人。
 - 关系只看他们怎么做、怎么说，不下「他喜欢上她了」「两人之间变了」这种结论。
 - 世界的规矩从发生的事里带出来，不另起旁白解释。
 - 标签里的圈内说法照注释理解；性向、人数、攻受、口味要能在故事里看出来。
 - 躲开用烂的写法，比如「命运的齿轮」「四目相对」。
+- 事情前后说得通：人为什么在这里、为什么这么做，读得出来；人物不为了让事情发生而变笨，也不突然有设定外的本事。每个人只说他知道的事。
 
 交稿：第一行写标题（12 字以内），空一行接正文。不要附说明。`,ideaQA:`作者已经有个脑洞了。先别急着出构想，针对这个脑洞问他 4 个问题，把最影响故事走向、他又还没想好的地方先定下来。
 
@@ -2708,6 +2709,7 @@ A("div",{class:"sf-bar",style:"flex-wrap:wrap"},ge("一起写进角色卡",()=>H
    - novel：标签库没有、这个脑洞又明显需要的新标签，最多 2 个，写成 {"dim":"维度名","name":"标签名"}
    - surprise：从别的维度挑 1 个意料之外、但能打开思路的标签，写成 {"dim":"维度名","name":"标签名","why":"一句话"}
 6. 是同人的话：fandom 写原作名、角色和时间点；check 列几条你记得的原作关键设定，让作者确认没记错。不是同人就留空。
+7. 每个构想自己要说得通：人物的身份、他和〔user〕的关系、关系里最要紧的那件事，这几样能同时成立；那件事是这些人在这个处境里自然会碰上的，不靠巧合或人物犯傻撑着。routes 里每条线上〔user〕的身份，都要在这个构想的世界里本来就有，并且能接触到这些角色。
 
 只交 JSON：
 {"tags":{"picked":[],"guessed":{},"novel":[],"surprise":{}},"concepts":[{"title":"","lineup":[{"name":"","identity":"","archetype":[]}],"user":[],"relation":"","tension":{"core":"","expect":[]},"complexity":"","reason":"","routes":[{"name":"","user":"","period":""}],"npcs":2,"tags":[]}],"fandom":"","check":[]}`,qa:`给下面这个构想里的每个主要角色各出 4 个问题，帮作者找到这个人和同类角色不一样的地方。
@@ -2753,6 +2755,29 @@ NPC 和人物关系：
 {{npRule}}
 现有资料里作者定下的身份、往事、感情和限制都算数，重写时照样留着；空着的地方由你补。动笔前先想清楚：这个人平常一天怎么过，过去哪几件事把他带到故事开头，他看重谁、提防谁、躲着什么。每一栏都要让读的人多知道一点新东西，别让整份人设绕着一个标签打转。
 给他找一处「最反第一印象」的地方：别人照他的身份和外表会怎么想他，他在某件具体的事上偏偏相反。比如看着是霸总，真吵起来反而会哭；爱上〔user〕之后热情不是越来越旺，而是慢慢退下去。这一处要写清楚在什么情况下露出来、为什么会这样（跟他的来历或心事接得上），不能是凭空加的怪癖，也别用「外冷内热」「表面冷漠其实温柔」这种被写烂的反差。作者已经定了的性格照留，反差只补在没定的地方。
+
+—— 动笔前先想清楚 ——
+- 先把材料过一遍：构想、标签、作者定稿、作者答过的问题、这个人现有的资料、世界观、关系和同卡的其他人。作者已经定下的（身份、年龄段、和〔user〕的关系、往事、感情、底线）在心里列出来，写的时候一条都不改、不弱化。
+- 想这个人是怎么一路走过来的：出身和家里的日子，怎么长大，学会了什么、靠什么立足，哪几件事改变了他的处境或想法，最后怎么走到故事开始的那个位置。每一段都要接得上下一段，中间不能跳过「他是怎么做到的」。
+- 想清楚他的本事、钱、地位、人脉分别从哪来、有多大、用起来受什么限制。写进人设的本事，之后整张卡都要认；没写的，之后不能临时冒出来。
+- 想清楚他和〔user〕的关系是怎么来的：怎么认识、一起经历过什么、到故事开始时亲到什么程度。感情的深浅要配得上两人的经历；还不认识的人不会有很深的感情或执念。
+- 想清楚他平常怎么过日子：常在哪、做什么、跟谁打交道、在意什么。这是之后开场白和对话的地基，写得越实，之后越不容易写崩。
+- 想清楚他心里放不下的两头，和那处「最反第一印象」的地方：在什么情况下露出来、为什么会这样、跟他的来路怎么接上。它要和他其余的性子同时成立，不能把前面写的性格推翻。
+
+—— 写好的样子 ——
+- 读完的人能说清：他是谁，怎么过日子，怎么想，在乎谁、提防谁，碰上事会怎么选，为什么这么选。
+- 每个字段讲不同的事；同一件往事只在经历里讲一次，别的地方要提，半句带过。
+- 性格词后面跟着这个词放在他身上是什么样子；不拿「他很复杂」「充满矛盾」「很神秘」「很迷人」这类评语代替具体内容。
+- 示例台词贴着他的身份、教养和说话的对象写，像真人会说的话，不写格言，不把人设念成台词。
+- 禁止项只写作者给的限制和真有依据的禁区，不为了凑条数去编。
+
+—— 交稿前对一遍 ——
+- 作者定下的每一条都还在，没有被改写、弱化或换成更戏剧化的版本。
+- 经历按先后排，阶段之间接得上，最后一格是「故事开始」，没有具体年份和日期。
+- 他的每样本事、每段关系、每个秘密，都能在经历、世界观或人物关系里找到来处；秘密写清谁知道、谁不知道。
+- 他知道的事都有来源，没有凭空知道别人心思或还没发生的事。
+- 人设里没有替〔user〕定下感情、选择或结局的句子。
+查出问题就改好再交。
 
 —— 交稿格式 ——
 只用下面两行做分隔，不加其他标题：
@@ -2913,6 +2938,18 @@ NPC 和人物关系：
 {{zeroRule}}
 - 同人卡不重讲原作，只写剧情进行到哪、跑偏了怎么拉回来。
 
+写之前想清楚：
+- 先看人设、关系和路线里已经写下了哪些地方、组织、身份和规矩。世界观要把它们都装得下：人物的职业在这里存在，他的地位在这里成立，他做过的事在这里做得到。
+- 每写一条规矩，想一想：平常日子里它怎么运转，谁来执行，违反了会怎样，有钱有势的人能不能绕过去、绕过去要付什么代价。这几点说不清的规矩，要么写清楚，要么不写。
+- 每写一个组织，想一想：它靠什么维持，管着谁，又被谁管，跟别的组织是合作、竞争还是各过各的；强的一方为什么没把弱的吞掉。
+- 有特殊能力、特殊体质或超出常识的设定的，写清能做到什么、做不到什么、要付什么代价、大概有多少人有、普通人怎么看待。真有这种东西，社会会怎样跟着改变，也要想到。
+- 时间轴上的大事，后一件要么是前一件的结果，要么只可能在它之后发生；故事开始时的局面，是这些事一路下来的结果。
+写完对一遍：
+- 世界观里没有一条跟人设、关系、路线、作者定稿冲突。
+- 前后写到的规矩互不打架；有例外的，写了例外的原因。
+- 没有为了显得宏大而加进来、却跟人物的日子毫无关系的大段设定。
+查出问题就改好再交。
+
 交稿：用 <世界观> 标签包住，里面写 YAML。字段按需取用，用不上的整条删掉，不留空字段：
 <世界观>
 一句话: 两到四句，这是个什么地方
@@ -2953,6 +2990,14 @@ NPC 和人物关系：
 怎么写：
 {{rules.NPC写法}}
 
+写之前想清楚：
+- 这个人在世界观里归哪一边、住在哪、靠什么过日子；他的身份要能在这个世界里找到位置。
+- 他和主要角色或〔user〕有牵连的，写清是怎么牵上的：同一个地方、同一个圈子、同一件事，或者有人介绍；没有交集的就不硬牵。
+- 他的本事和地位跟他的来路相配，不压过主要角色设定里写明的事实，也不替主要角色把他们该做的事做完。
+- 他对主要角色的看法，要和主要角色那边写下的关系对得上；那边没写到的，补的时候不能跟已有事实打架。
+- 这一批 NPC 之间身份、用处、性子各不相同，不会两个人站在同一个位置、干同一件事。
+写完对一遍：名字不和已有人物重名或太像；他知道的事都有来源；往事按先后讲，没有具体年份日期。查出问题就改好再交。
+
 交稿：每个人前面单独一行写识别标记，介绍放在名字标签里：
 <<<NPC:名字|关键词1,关键词2>>>
 <名字>
@@ -2976,6 +3021,14 @@ NPC 和人物关系：
 从他们实际打过的交道、一起经历过的事和各自的脾气出发，写两个人分别怎么看对方。两人知道的、在乎的可以不一样；感情可以不止一种；关系好也照样会有意见不合，但不用硬造误会或决裂。
 只写真有来往的关系；还不认识的就写还不认识，别为了凑齐每一对而编往事。已有的过去不要重编，也别把所有关系都变成围着〔user〕的竞争。
 几个人同场时，按谁在场、各自在忙什么来安排，每人有自己的说法和判断，不平均分台词。修罗场只在作者或构想要求时写；同场规矩只写这张卡真用得上的。
+
+写之前想清楚：
+- 每一对关系都从两边看：甲怎么看乙、乙怎么看甲，可以不一样，但两人说到的共同经历必须一致；一方知道、另一方不知道的事，写清是谁不知道、为什么不知道。
+- 关系是怎么来的要写得出：在哪认识、因为什么来往、哪件事让关系成了现在这样。感情的深浅配得上来往的多少和一起经历过的事。
+- 整张关系网放在一起看：甲和乙不和，在甲和丙、乙和丙的关系里也看得出这层不和的影响；不会在一处是仇人、另一处像朋友而没有交代。
+- 每个人在关系里的做法，要符合他人设里的性子、处境和底线。
+写完对一遍：没有一段关系跟人设、路线、作者定稿冲突；没有人凭空知道别人的秘密。查出问题就改好再交。
+
 {{rules.通用}}
 
 交稿：用 <角色关系> 包住 YAML，用不上的项删掉：
@@ -3028,6 +3081,14 @@ NPC 和人物关系：
 怎么写：
 {{rules.NPC写法}}
 
+写之前想清楚：
+- 这个人在世界观里归哪一边、住在哪、靠什么过日子；他的身份要能在这个世界里找到位置。
+- 他和主要角色或〔user〕有牵连的，写清是怎么牵上的：同一个地方、同一个圈子、同一件事，或者有人介绍；没有交集的就不硬牵。
+- 他的本事和地位跟他的来路相配，不压过主要角色设定里写明的事实，也不替主要角色把他们该做的事做完。
+- 他对主要角色的看法，要和主要角色那边写下的关系对得上；那边没写到的，补的时候不能跟已有事实打架。
+- 和「已经有的其他 NPC」比一比：身份、用处、性子都要不同，不站同一个位置。
+写完对一遍：名字不和已有人物重名或太像；他知道的事都有来源；往事按先后讲，没有具体年份日期。查出问题就改好再交。
+
 交稿：前面单独一行写识别标记，介绍放在名字标签里：
 <<<NPC:名字|关键词1,关键词2>>>
 <名字>
@@ -3068,6 +3129,14 @@ NPC 和人物关系：
 - 同一个角色在不同路线里，年纪、处境、待〔user〕的态度要看得出差别。
 - 作者给这条线写了主题的，主题里提到的身份、关系、事件都要用上；没提到的只补这条路线开场用得上的（身份、时期、起点），不要另编构想和人设里没有的前情大事（身世变故、旧伤旧病、族人恩怨之类），也不要改动构想里定好的人物底色。
 - 这些内容写进去就不会再变，所以不写「现在」「目前」「如今」这类会过期的话，一律以「故事开始」为界。
+
+写之前想清楚：
+- 这条路线里〔user〕的身份和所处时期，放进世界观里成立吗：这个身份在这个世界里本来就有，〔user〕凭这个身份确实能出现在这些人身边。
+- 角色在这个时期的年纪、处境，和他人设里的经历对得上：这个时期他走到了经历的哪一段，就照那一段的样子写，不提前拥有后来才有的身份和本事。
+- 角色和〔user〕的关系走到了哪一步，是哪些事一路推过来的；这些事和构想、人物关系、作者给这条线写的主题一致。
+- 同一个角色在不同路线里，底子（脾气、怎么想事、底线）不变，变的是处境、年纪和跟〔user〕的关系。
+写完对一遍：「故事开始」那一刻，每个角色在哪、在做什么、跟〔user〕是什么关系，都能从这一块里读出来，而且彼此不冲突。查出问题就改好再交。
+
 {{rules.通用}}
 
 交稿：每条路线一块，块前单独一行写 <<<路线:路线名>>>，格式如下：
@@ -3099,6 +3168,9 @@ NPC 和人物关系：
 - 作者写明的禁止项照抄保留；只有已有设定真的需要时才补，不定条数，不给每张卡套同一份清单。
 {{rules.禁令格式}}
 - 多人卡写关系怎么推进、修罗场怎么处理；大世界卡写玩法（战斗、成长、资源）。用不上的部分删掉。
+- 基调里写的要求要和已经写好的内容对得上：说慢热，路线和开场白里就不会已经是热恋；说日常为主，世界观里就不会天天打仗。对不上时，照作者定稿和已经写好的内容来定基调。
+- 写下的每条写法都要能照着做：说清楚是什么、在什么情况下用；不写「高级」「细腻」「有张力」这种照不着做的形容。
+- 不写和人设、世界规矩相反的要求；写到的称呼、身份、规矩和前面的内容一致。
 
 交稿：
 <创作文体>
@@ -3150,6 +3222,17 @@ NPC 和人物关系：
 【写法】
 {{rules.开场白}}
 不替〔user〕说话、做决定或写心理；停在〔user〕可以回应的地方。
+
+【交稿前对一遍】
+- 时段、地点、在场的人：这个人这时候出现在这个地方说得通（身份、日常安排、这个世界的规矩都允许）；不在场的人不说话、不出手。
+- 每个人说的话、做的事，只用他此刻真的知道的信息；对〔user〕的称呼和熟悉程度，跟这条路线「故事开始」时两人的关系一致。
+- 开场里带出来的往事，跟人设、人物关系、路线里写的一致，不新编和它们冲突的前情。
+- 同一个开场白里，人物站在哪、身上有没有伤、穿着、手里拿着什么、天色和天气，前后一致；从一处到另一处，要写出是怎么过去的。
+- 事情的轻重和人物的反应相称：小事不引出天大的反应，大事也不被轻轻放过。
+- 人物不为了让事情发生而突然变笨，也不突然拥有设定里没有的本事、钱或权力。
+- 写到的世界规矩（身份、等级、特殊能力、组织的管法）和世界观一致，有代价的照样付代价。
+- 停下的地方，〔user〕确实可以接话或行动，而且不止一种接法说得通。
+查出问题就改好再交，正文里不写解释。
 
 【格式】先写 <开场构思>，再写正文。每个开场白前加一行 <<<开场白>>>，正文直接写，不加标题。`,auCore:`下面是一张写好的角色卡。现在要把角色搬进一个 AU（换世界、换身份），但人还得是那个人。先把每个主要角色拆成两层：「内核」是换到哪个世界都不会变的东西，「外壳」是原作世界才有、搬去 AU 要换掉的东西。
 
@@ -3221,6 +3304,9 @@ AU 题材：{{tags}}
 - 身份和时期至少换一样。同样两个人换个处境，常常比硬造一个新身份好玩。
 - 每条都说清好玩在哪：这条线上两个人是什么关系。
 - 不写套话。
+- 每条新路线都要在这张卡的世界里成立：〔user〕的新身份是这个世界本来就有的，在这个时期确实能接触到这些角色。
+- 时期定在角色经历的哪一段，角色就是那一段的样子：年纪、处境、本事都从他的经历推得出来。
+- 跟已有路线比一比：身份和时期至少换一样，关系的样子也要明显不同，不是换个名字的同一条线。
 
 只交 JSON：
 {"routes":[{"name":"路线名","user":"〔user〕的身份","period":"时期","why":"一句话：这条线好玩在哪"}]}`,revise:`作者对下面这段内容提了意见，请照意见改。意见没提到的地方和格式都别动，交回改好的全文。
@@ -3234,6 +3320,20 @@ AU 题材：{{tags}}
 
 写法规则：
 {{rules.通用}}
+
+这张卡的其他部分（只用来对照，别改它们）：
+主要角色概要：
+{{overviews}}
+人物关系：
+{{relations}}
+世界观：
+{{world}}
+
+改的时候：
+- 先弄清作者要改的是什么、为什么改，照这个意思改到位，不是换几个词交差。
+- 改完把改过的地方放回全文读一遍：名字、称呼、关系、经历、先后顺序，和没改的部分以及卡里其他部分对得上；有冲突的，在你改的范围里顺手对齐。
+- 作者这次的意见和卡里别处定下的事实冲突时，照作者这次的意见改，并让改过的地方自己说得通；不在稿子里解释。
+- 意见没提到、也不受这次改动牵连的句子，一字不动。
 
 原文：
 {{text}}
@@ -3255,6 +3355,15 @@ AU 题材：{{tags}}
 顺着这个人的一生往下写：家里怎么过日子、怎么被带大、跟谁来往、碰上过什么事，都算经历。要紧的展开，平淡的几年一句带过；不给每个性格编一个由来，也不要求每段末尾来一句感悟。
 已有的事、人和先后顺序都留着。没定的部分可以补；作者说了不许编的往事、要留白的地方照办。不硬塞童年阴影、创伤或救命之恩，也不为了跟〔user〕扯上关系，让还没认识的人提前认识。
 写清那段日子和后来怎样了，需要时说一句它怎么影响他后来的想法，不拿一件事解释整个人。时期按先后写成「少年时」「入行那几年」这类阶段，不写具体年份日期；最后一段停在故事开始。
+
+写之前想清楚：
+- 先把人设里已有的经历、年龄段、身份和关系列出来，新写的每一段都要卡进这条线里，不和它们打架。
+- 每一段都要答得出：那时他在哪、过着什么日子、碰上了什么、做了什么选择、结果怎样。上一段的结果，就是下一段的起点。
+- 他的本事、地位、钱和人脉是在哪一段得来的，要写得出；后面用得上的东西，前面要有来处。
+- 跟〔user〕有关的往事照构想和路线写：认识以前没有交集，认识以后发生过什么照已有的来，不另编。
+- 先后要算得拢：年龄段和他经历的事相配，不会年纪很轻就已经身居高位、阅历极深，除非设定里写了原因。
+写完对一遍：阶段按先后排，没有跳步；每件事的起因和后果都交代了；最后一段停在故事开始，和人设里写的开场处境一致。查出问题就改好再交。
+
 {{rules.通用}}
 
 交稿：只交 YAML，已有经历按时间顺序合并进去：
@@ -3287,6 +3396,9 @@ NPC：
 怎么想：
 {{rules.开场构思}}
 每个点子用一小段把事情说清，不列分析栏目，不替〔user〕先安排好反应和选择，不附点评。交之前把这一批放在一起比一比，是同一件事换皮的就重想。
+每个点子还要说得通：
+- 事情是这个世界、这些人身上会发生的；人物卷进来的理由合他的身份、性子和这条路线的处境，不靠巧合或人物犯傻撑着。
+- 点子里人物知道的事、做得到的事和设定一致；〔user〕插手的地方，是〔user〕在这条路线的身份确实碰得到的。
 
 只交 JSON：
 {"hooks":["",""]}`,localEdit:`下面原文里用【【 】】括起来的那一段要改，其余部分一个字也别碰。
@@ -3299,6 +3411,16 @@ NPC：
 
 写法规则：
 {{rules.通用}}
+
+这张卡的其他部分（只用来对照）：
+主要角色概要：
+{{overviews}}
+人物关系：
+{{relations}}
+
+改的时候：
+- 只能改【【 】】里那一段，所以改的时候就要让它和前后文接得上：主语、称呼、时态、提到的人和事都跟上下文一致，接回去读起来是通的。
+- 改出来的内容不能跟卡里已经定下的身份、关系、经历冲突；作者这次明确要改的除外。
 
 原文（要改的在【【 】】里，前后是上下文）：
 {{context}}
@@ -3355,6 +3477,11 @@ NPC：
 - 不写外貌、不做性格总结、不加新的童年往事。
 - 写他做什么、跟谁怎样，不写“他很复杂”这类评语。
 - 800 字以内，宁短勿空。
+- 补充里写到的地点、组织、人名和规矩，都要在世界观、NPC 和关系里找得到；找不到的不临时新造，换用现成的。
+- 「他知道的」只写他凭身份、经历和人脉确实接触得到的事，并且说得出他是怎么知道的；别人的秘密、〔user〕没说出口的心思，他不知道。
+- 「各路线里的他」要和那条路线的 user 设定对上：那条线上〔user〕是什么身份、处在什么时期，他就以那个时期的样子、那样的关系出现，不提前拥有后来才有的身份和本事。
+- 「他自己在忙的」要符合他的身份、本事和这个世界的规矩。
+- 交稿前把补充和人设对一遍：性情、底线、往事、关系都一致，没有一句跟人设打架。
 {{rules.通用}}
 {{rules.禁令格式}}
 
@@ -3496,6 +3623,17 @@ NPC：
 {{rules.开场白}}
 - 每个点子里的事和两人的相处方式都要留住，按顺序各写各的；需要的来龙去脉可以补，但别把不同的点子写回同一种碰面、送东西或一问一答的开头。作者在点子里指定了开头或停在哪，照办。
 
+【交稿前对一遍】
+- 时段、地点、在场的人：这个人这时候出现在这个地方说得通（身份、日常安排、这个世界的规矩都允许）；不在场的人不说话、不出手。
+- 每个人说的话、做的事，只用他此刻真的知道的信息；对〔user〕的称呼和熟悉程度，跟这条路线「故事开始」时两人的关系一致。
+- 开场里带出来的往事，跟人设、人物关系、路线里写的一致，不新编和它们冲突的前情。
+- 同一个开场白里，人物站在哪、身上有没有伤、穿着、手里拿着什么、天色和天气，前后一致；从一处到另一处，要写出是怎么过去的。
+- 事情的轻重和人物的反应相称：小事不引出天大的反应，大事也不被轻轻放过。
+- 人物不为了让事情发生而突然变笨，也不突然拥有设定里没有的本事、钱或权力。
+- 写到的世界规矩（身份、等级、特殊能力、组织的管法）和世界观一致，有代价的照样付代价。
+- 停下的地方，〔user〕确实可以接话或行动，而且不止一种接法说得通。
+查出问题就改好再交，正文里不写解释。
+
 交稿：每个开场白前单独一行 <<<开场白>>>，正文直接写，不加标题。`,predict:`这里只给你一个角色的类型。请凭你对这类角色的印象，写出他最典型、最常见的样子。
 
 角色类型：{{archetype}}
@@ -3542,6 +3680,8 @@ NPC：
 人设原文：
 {{persona}}
 
+改完对一遍：身份、本事、往事、感情和底线都还在；改写过的地方和人设其余部分不打架，和世界观、作者的回答也对得上。
+
 交稿：完整人设，格式不变，从 <{{name}}> 到 </{{name}}>。`,free:`给这张卡写一个附加模块「{{name}}」。
 
 作者的描述：{{desc}}
@@ -3552,6 +3692,20 @@ NPC：
 
 写法规则：
 {{rules.通用}}
+
+卡里已有的内容（只用来对照，不要复述）：
+人设：
+{{personas}}
+世界观：
+{{world}}
+基调：
+{{tone}}
+
+怎么写：
+- 先弄清这个模块管什么、在什么时候会用到，只写它管的那部分；人设、世界观、基调里已经有的不再讲。
+- 写成能照着做的条目：在什么情况下、怎么做、做到什么程度，读的人一看就知道怎么用。
+- 和卡里已有的人设、世界规矩、基调一致，不写和它们相反的东西；用得上的地名、人名、组织名用卡里现成的。
+- 写完对一遍：条目之间不打架，没有和卡里别处冲突的地方。
 
 交稿：用 <{{name}}> 标签包住，里面用 YAML。只交这个模块。`,intro:`给这张卡写一篇发在 Discord 上的简介，再配 4 个标题。
 
@@ -3602,9 +3756,9 @@ NPC：
 `).replace(new RegExp(`[、，,]?(?:${Zi.join("|")})(?=[、，,：:。\\s]|$)`,"g"),"");function nf(e){const t={};for(const[n,r]of Object.entries(e??{}))t[`rules.${n}`]=tf(r);return t}var $i="〔char〕";function Un(e){let t=String(e??"").replace(/<(think(?:ing)?|plann?ing|plan|analysis|reasoning)>[\s\S]*?<\/\1>/gi,"");const n=t.match(/<(content|output|answer|result|final)>([\s\S]*?)(?:<\/\1>|$)/i);n&&!t.slice(0,n.index).replace(/```[a-zA-Z]*/g,"").trim()&&(t=n[2]),t=t.replace(/```[a-zA-Z]*[ \t]*\n(\s*<[\s\S]*?>)[ \t]*\n```/g,"$1").replace(/^\s*```[a-zA-Z]*[ \t]*\n/,"").replace(/\n?```[a-zA-Z]*[ \t]*\s*$/,"").replace(/^\s*```[a-zA-Z]*[ \t]*\n/,"").replace(/\n?```[a-zA-Z]*[ \t]*\s*$/,"");for(let r=0;r<3;r++){const s=t.replace(/^\s*<([^\s>/]+)>\s*(<\1>[\s\S]*<\/\1>)\s*<\/\1>\s*$/,"$2");if(s===t)break;t=s}return t.trim()}function dt(e){const t=Un(e),n=[t],r=t.indexOf("{"),s=t.lastIndexOf("}");r>=0&&s>r&&n.push(t.slice(r,s+1));for(const i of[...n])n.push(i.replace(/,\s*([}\]])/g,"$1"));let a;for(const i of n)try{return JSON.parse(i)}catch(o){a??=o.message}throw Object.assign(new Error("AI 返回的不是有效的 JSON，点“查看 AI 返回原文”查看。"),{code:"CW_INVALID_JSON",rawResponse:String(e??""),parseError:a})}var rf=/^[ \t]*<<<\s*([^:：|>]+?)\s*(?:[:：]\s*([^|>]*?)\s*)?(?:\|\s*([^>]*?)\s*)?>>>[ \t]*$/gm;function wn(e,{clean:t=!0}={}){const n=t?Un(e):String(e??"").trim(),r=[];let s="",a=null,i=0;for(const c of n.matchAll(rf)){const p=n.slice(i,c.index);a?a.body=p.trim():s=p.trim(),a={type:c[1].trim(),name:(c[2]??"").trim(),keys:String(c[3]??"").split(/[,，、]/).map(d=>d.trim()).filter(Boolean),body:""},r.push(a),i=c.index+c[0].length}const o=n.slice(i);return a?a.body=o.trim():s=o.trim(),{lead:s,blocks:r}}function ma(e,t){return e.blocks.find(n=>n.type===t)?.body??""}function fa(e){return String(e??"").replace(/\{\{\s*user\s*\}\}/gi,Vi).replace(/<user>/gi,Vi).replace(/\{\{\s*char\s*\}\}/gi,$i).replace(/<bot>/gi,$i)}function _i(e,t="<user>"){return String(e??"").replaceAll(Vi,t).replaceAll("[user]",t).replaceAll($i,"{{char}}")}function is(e,t){const n=t.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),r=String(e??"").match(new RegExp(`<${n}>[\\s\\S]*?</${n}>`));return r?r[0]:String(e??"").trim()}function Qe(e,t=1500){const n=String(e??"").trim();return n.length>t?`${n.slice(0,t)}
 ……（以下省略）`:n}function eo(e){return[...new Set(String(e??"").split(/[\n,，、]/).map(t=>t.trim()).filter(Boolean))]}function sf(e,t){let n=String(e??"");for(const r of eo(t)){const s=r.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),a=new RegExp(`(?<![零一二三四五六七八九十百千万两0-9])${s}(?!时期|钟|之|于)(?:[的地](?=[\\u4e00-\\u9fff]))?(?=[\\u4e00-\\u9fff，。！？、；：,.!?…—\\s」”』）)]|$)`,"g");n=n.replace(a,"")}return n}function to(e,t,n=[]){const r=String(e??"");return eo(t).filter(s=>!n.includes(s)&&r.includes(s))}var af=/[^。！？!?；;\n]+[。！？!?；;]?/g;function Rl(e){return(String(e??"").match(af)||[]).map(t=>t.trim()).filter(t=>t.length>1)}var of=/推了推眼镜|推眼镜|扶了扶眼镜|捏(?:着|紧)?衣角|攥(?:着|紧)?衣角|咬(?:着)?(?:笔杆|下唇|嘴唇)|挠(?:了挠)?(?:后脑勺|头)|揉(?:了揉)?(?:眉心|太阳穴)|摸(?:了摸)?鼻子|口头禅|口癖|招牌动作|标志性动作|标志性的(?:笑|动作)|习惯性地/g,cf=/\d{2,3}\s*(?:cm|CM|厘米|公分|kg|KG|公斤|斤)|三围|\d{2}\s*[-－/]\s*\d{2}\s*[-－/]\s*\d{2}|[A-H]\s*罩杯|罩杯|[0-9一二三四五六七八九十]+岁零[0-9一二三四五六七八九十]+个月/g,lf=/3(?:次|步|回|遍|日|天|年|个时辰)|三(?:次|步|回|遍|日|天|年|月|个|枚|道|处|息|分|成|下|寸|尺|丈|十|百|更|刻|时辰)|第三|三中|两三|三两|三五/g,pf=/永远|绝不|绝对不会|从不|从来不|只会|一定会|无条件/,df=/因为|由于|缘由|所以|因此|毕竟|除非|只要|如果|才会|直到|否则|前提/,uf=/^\s*-?\s*(?:排除|缘由|替代)\s*[:：]/,mf=/美丽|华丽|古老|神秘|阴森|璀璨|宏伟|幽深|静谧|繁华|斑驳|昏暗|奢华|精致|无尽|永恒|深邃|冰冷|温暖|柔和|壮丽|诡异|庄严|肃穆|浩瀚|苍凉|绚丽|迷人|梦幻/g,ff=/[的了是在和与他她它我你们这那个也都就而或被把〔〕<>]/,gf=new Set(["身份","关系","行为","表现","性格","对白","风格","示例","描述","指导","底色","深层","浅层","红线","排除","缘由","替代","矛盾","落点","倾向","日常","决策","社交","反差","外貌","经历","影响","现在","角色","情境","台词","玩家","信息","主要","标签","解释","复杂","细节","当前","状态","公开","隐藏","特殊","世界","规则"]);function zt(e,t,n,r,s){e.push({type:t,level:n,label:r,match:String(s??"").slice(0,160)})}function wf(e,{ignore:t=[],min:n=6,per:r=180}={}){const s=String(e??"").replace(/^[ \t]*[-\w一-鿿]{1,12}[:：]/gm," "),a=new Map;for(const m of[2,3])for(const g of s.matchAll(/[一-鿿]+/g)){const y=g[0];for(let E=0;E+m<=y.length;E++){const P=y.slice(E,E+m);ff.test(P)||gf.has(P)||a.set(P,(a.get(P)||0)+1)}}const i=Math.max(1,s.length),o=Math.max(n,Math.ceil(i/r)),c=t.filter(Boolean),p=[...a.entries()].filter(([m,g])=>g>=o&&!c.some(y=>y.includes(m)||m.includes(y))).sort((m,g)=>g[1]-m[1]||g[0].length-m[0].length),d=[];for(const[m,g]of p)d.some(y=>y.word.includes(m)&&y.count>=g)||d.push({word:m,count:g});return d.slice(0,6)}var cwzLess=["某种", "近乎", "似乎", "仿佛", "大概", "也许", "可能", "好像", "一般", "忍不住", "隐约", "不知为何", "忽然", "突然", "由于", "鉴于", "因为", "也就是说", "以至于", "从而", "更别提", "更何况", "于是", "然后", "之前", "之后", "与此同时", "实际上", "进行", "使得", "作出", "予以", "然而", "偏偏", "可是", "其实", "渐渐地", "不知何时", "一丝", "一缕", "一抹", "一股", "几分", "几许", "些许", "一丝丝", "一缕缕", "淡淡", "浅浅", "薄薄", "微微", "轻轻", "缓缓", "指节", "指腹", "指尖", "指甲", "骨节", "呜咽", "嘶吼", "低笑", "压抑", "麻木", "屈辱", "永远", "永恒", "闪过", "泛白", "欲望", "狂热", "粗暴", "陷入", "困惑", "恐惧", "绝望", "温热", "骤然", "磁性", "深沉", "占有", "命令", "没有说话", "凝固", "清醒", "窒息", "吞咽", "游戏", "确实", "注定", "现在", "接下来", "整个", "整个人", "整颗心", "那一瞬间", "光线", "胸腔", "收敛", "克制", "隐忍", "压下", "防线", "崩塌", "发白", "惨白", "生理性", "僵硬", "泛红", "发烫", "发热", "结构", "框架", "格局", "氛围", "气氛", "感觉", "感受", "状态", "温度", "片刻", "顿了顿", "许久", "那一刻", "那年", "再后来", "一时间", "那人", "已然", "方才", "便是", "暴雨", "潮水", "失重", "疼痛", "点了点头", "摇了摇头", "叹了口气", "沉默了", "猛地", "精准", "默默地", "无声地", "悄然", "弥漫", "萦绕", "静默", "垂眸", "垂下眼", "皱了皱眉", "深吸一口气", "酸涩", "湿漉漉的", "复杂的", "病态的", "机械", "机械地", "悬浮", "漂浮", "一刀", "镜子", "人偶", "木偶", "头颅", "躯体", "脊背", "颧骨", "肋骨", "锁骨", "短促", "死寂", "低沉", "沙哑", "单音", "音节", "气音", "尾音", "鼻音", "节拍", "更深", "恰到好处", "心尖", "骨血里", "血脉里", "一点点", "三两个", "这一下", "这四个字", "分身", "内壁", "软肉", "褶皱", "甬道", "结束了", "这样就好", "差点", "几乎要", "另一边", "端的", "过了一会儿", "停了停", "一刹那", "扣子", "羽毛", "画圈", "松果", "冰雹", "国王", "薄荷糖", "砂纸", "研磨", "苍老", "炽热", "滚烫", "缠绕", "咀嚼", "撕扯", "布局", "一顿", "知觉", "场域", "牙酸", "炸响", "学者般"];function hf(e,t,{names:n=[],pistol:r=!1}={}){const s=String(e??""),a=[];if(!s.trim())return a;if(t!=="intro")for(const i of s.matchAll(of))zt(a,"action","warn","小动作/口头禅",i[0]);if(["persona","npc","route","world","free"].includes(t)){for(const i of s.matchAll(cf))zt(a,"number","warn","数字堆砌",i[0]);for(const i of s.matchAll(lf))zt(a,"number","warn","凑整数字",i[0]);for(const i of Rl(s))uf.test(i)||pf.test(i)&&!df.test(i)&&zt(a,"assert","warn","无缘由断言",i)}if(t==="persona"){const i=ga(s);(!i.found||i.chars===0)&&zt(a,"story","warn","没写经历","需要时可以点“展开经历”")}if(t==="world"&&!r){const i=[...s.matchAll(mf)].map(o=>o[0]);i.length&&zt(a,"adj",i.length>4?"warn":"info",`形容词 ${i.length} 个（零度写作）`,[...new Set(i)].join("、"))}if(["persona","npc","route","greeting","world"].includes(t))for(const i of wf(s,{ignore:n}))zt(a,"freq","info",`高频词 ×${i.count}`,i.word);if(["persona","npc","route","greeting","world"].includes(t))for(const w of cwzLess){const c=s.split(w).length-1;c>=3&&zt(a,"freq","info",`少用词 ×${c}`,w)}if(t==="intro"){(/^\s*\|?\s*:?-{3,}:?\s*\|/m.test(s)||/^\s*\|.+\|.+\|\s*$/m.test(s))&&zt(a,"table","error","Discord 简介不能用表格","表格");const i=[...s].length;i>4e3?zt(a,"length","error",`${i} 字，超过 Discord 上限（Nitro 4000）`,""):i>2e3&&zt(a,"length","warn",`${i} 字，超过 2000（非 Nitro 需拆成两条）`,"")}return a}function Hl(e){const t=String(e??"").replace(/[^一-鿿A-Za-z0-9]/g,""),n=new Set;for(let r=0;r+2<=t.length;r++)n.add(t.slice(r,r+2));return n}function zl(e,t){const n=Hl(e),r=Hl(t);if(!n.size||!r.size)return 0;let s=0;for(const a of n)r.has(a)&&s++;return 2*s/(n.size+r.size)}function no(e){return Rl(String(e??"").replace(/<\/?[^<>\n]{1,40}>/g,`
 `).replace(/^[ \t]*-?[ \t]*[^\n:：]{1,14}[:：][ \t]*/gm,"")).filter(t=>t.replace(/[^一-鿿]/g,"").length>=4)}function bf(e,t,n=.42){const r=no(t),s=[];for(const i of e?.scenes??[])i.behavior&&s.push({from:`${i.scene}·行为`,text:i.behavior}),i.line&&s.push({from:`${i.scene}·台词`,text:i.line});for(const i of e?.traits??[])s.push({from:"常见写法",text:i});const a=[];for(const i of s){let o={score:0,sentence:""};for(const c of r){const p=zl(i.text,c);p>o.score&&(o={score:p,sentence:c})}o.score>=n&&a.push({...i,card:o.sentence,score:Math.round(o.score*100)/100})}return a.sort((i,o)=>o.score-i.score)}function vf(e,t=.5,tpl=""){const n=Object.keys(e??{}),r=[],tb=Hl(String(tpl??"").replace(/\{\{[^}]*\}\}/g,"")),keep=p=>{if(/[:：]\s*$/.test(p.trim())||/示例|仅供|照抄|不在正文|占位/.test(p))return!1;const z=p.replace(/[^一-鿿]/g,"");if(z.length<10)return!1;const g=Hl(p);if(!g.size)return!1;let h=0;for(const y of g)tb.has(y)&&h++;return h/g.size<.6};for(let s=0;s<n.length;s++)for(let a=s+1;a<n.length;a++){const i=no(e[n[s]]).map(p=>p.replaceAll(n[s],"")).filter(keep),o=no(e[n[a]]).map(p=>p.replaceAll(n[a],"")).filter(keep),c=[];for(const p of i)for(const d of o){const m=zl(p,d);m>=t&&c.push({a:p,b:d,score:Math.round(m*100)/100})}c.sort((p,d)=>d.score-p.score),c.length&&r.push({a:n[s],b:n[a],count:c.length,pairs:c.slice(0,5)})}return r.sort((s,a)=>a.count-s.count)}function ga(e){const t=String(e??"").split(`
-`),n=t.findIndex(o=>/^\s*(?:life_story|经历|成长经历)\s*[:：]/.test(o));if(n<0)return{count:0,chars:0,found:!1};const r=t[n].match(/^\s*/)[0].length;let s=0,a=t[n].replace(/^\s*[^:：]+[:：]\s*/,"").replace(/[#|>].*$/,"").trim().length,i=-1;for(let o=n+1;o<t.length;o++){const c=t[o];if(!c.trim())continue;const p=c.match(/^\s*/)[0].length;if(p<=r)break;/^\s*-\s/.test(c)&&(i<0&&(i=p),p===i&&s++),a+=c.replace(/^\s*-?\s*[^:：\s]{1,8}[:：]\s*/,"").replace(/[\s\-:：]/g,"").length}return{count:s,chars:a,found:!0}}function wa(e){const t=ga(e);return!t.found||t.chars===0}function xf(e,t){const n=String(e??""),s=String(t??"").replace(/^\s*```[a-z]*\s*\n?|\n?```\s*$/g,"").split(`
+`),n=t.findIndex(o=>/^\s*(?:life_story|经历|成长经历|来路)\s*[:：]/.test(o));if(n<0)return{count:0,chars:0,found:!1};const r=t[n].match(/^\s*/)[0].length;let s=0,a=t[n].replace(/^\s*[^:：]+[:：]\s*/,"").replace(/[#|>].*$/,"").trim().length,i=-1;for(let o=n+1;o<t.length;o++){const c=t[o];if(!c.trim())continue;const p=c.match(/^\s*/)[0].length;if(p<=r)break;/^\s*-\s/.test(c)&&(i<0&&(i=p),p===i&&s++),a+=c.replace(/^\s*-?\s*[^:：\s]{1,8}[:：]\s*/,"").replace(/[\s\-:：]/g,"").length}return{count:s,chars:a,found:!0}}function wa(e){const t=ga(e);return!t.found||t.chars===0}function xf(e,t){const n=String(e??""),s=String(t??"").replace(/^\s*```[a-z]*\s*\n?|\n?```\s*$/g,"").split(`
 `),a=s.findIndex(E=>/^\s*life_story\s*:/.test(E));if(a<0)return n;const i=s.slice(a),o=i[0].match(/^\s*/)[0].length,c=n.split(`
-`),p=c.findIndex(E=>/^\s*(?:life_story|经历|成长经历)\s*[:：]/.test(E));let d,m,g;if(p>=0){for(d=c[p].match(/^\s*/)[0].length,g=p+1;g<c.length&&(!c[g].trim()||c[g].match(/^\s*/)[0].length>d);)g++;for(;g>p+1&&!c[g-1].trim();)g--;m=p}else{const E=c.findIndex(P=>/^\s*current_state\s*:/.test(P));if(E>=0)d=c[E].match(/^\s*/)[0].length,m=E,g=E;else{const P=c.findIndex(Q=>/^\s*<\/[^>]+>\s*$/.test(Q));m=P>=0?P:c.length,g=m;const D=c.slice(0,m).find(Q=>/^\s+(?:gender|age|identity|current_state|social_connection|appearance|对白风格|矛盾轴|内部描述|角色细节|行为指导)\s*[:：]/.test(Q));if(D)d=D.match(/^\s*/)[0].length;else{const Q=new Map;for(const z of c.slice(0,m))if(/^\s+[^\s-][^:：]*[:：]/.test(z)){const M=z.match(/^\s*/)[0].length;Q.set(M,(Q.get(M)??0)+1)}d=[...Q.entries()].sort((z,M)=>M[1]-z[1]||z[0]-M[0])[0]?.[0]??0}}}const y=i.map(E=>E.trim()?" ".repeat(d)+E.slice(Math.min(o,E.match(/^\s*/)[0].length)):E).join(`
+`),p=c.findIndex(E=>/^\s*(?:life_story|经历|成长经历|来路)\s*[:：]/.test(E));let d,m,g;if(p>=0){for(d=c[p].match(/^\s*/)[0].length,g=p+1;g<c.length&&(!c[g].trim()||c[g].match(/^\s*/)[0].length>d);)g++;for(;g>p+1&&!c[g-1].trim();)g--;m=p}else{const E=c.findIndex(P=>/^\s*current_state\s*:/.test(P));if(E>=0)d=c[E].match(/^\s*/)[0].length,m=E,g=E;else{const P=c.findIndex(Q=>/^\s*<\/[^>]+>\s*$/.test(Q));m=P>=0?P:c.length,g=m;const D=c.slice(0,m).find(Q=>/^\s+(?:gender|age|identity|current_state|social_connection|appearance|对白风格|矛盾轴|内部描述|角色细节|行为指导)\s*[:：]/.test(Q));if(D)d=D.match(/^\s*/)[0].length;else{const Q=new Map;for(const z of c.slice(0,m))if(/^\s+[^\s-][^:：]*[:：]/.test(z)){const M=z.match(/^\s*/)[0].length;Q.set(M,(Q.get(M)??0)+1)}d=[...Q.entries()].sort((z,M)=>M[1]-z[1]||z[0]-M[0])[0]?.[0]??0}}}const lu=p>=0&&/^\s*来路\s*[:：]/.test(c[p]),y=i.map((E,k)=>lu?(k===0?E.replace(/life_story(\s*:)/,"来路$1"):E.replace(/^(\s*-?\s*)时期(\s*[:：])/,"$1阶段$2").replace(/^(\s*)经历(\s*[:：])/,"$1经过$2")):E).map(E=>E.trim()?" ".repeat(d)+E.slice(Math.min(o,E.match(/^\s*/)[0].length)):E).join(`
 `).replace(/\s+$/,"");return[...c.slice(0,m),y,...c.slice(g)].join(`
 `)}function hn(){return{version:1,id:`d${Date.now().toString(36)}`,name:"",updated:Date.now(),idea:"",dice:{},diceSet:{dims:[...gn],count:gn.length},story:{text:"",prev:""},inspire:[],tags:[],ai:{guessed:[],novel:[],surprise:null},concepts:[],pick:0,fandom:"",check:[],qa:{chars:[]},personas:[],world:{main:"",extra:[]},npcs:[],routes:[],tone:"",relations:"",mode:"",free:[],greetings:[],greetingContext:{notes:"",useNotes:!0,parts:{}},intro:{titles:[],pick:0,parts:{},text:""},predict:{},custom:{},ideaQA:[],hooks:{},feedback:{},history:{},truncated:{},pageDialogues:{}}}function ha(e){if(!e)return"（没有构想）";const t=[];e.title&&t.push(`标题：${e.title}`);for(const n of e.lineup??[])t.push(`主要角色：${n.name}｜${n.identity??""}${n.archetype?.length?`｜原型：${[].concat(n.archetype).join("、")}`:""}`);return e.user?.length&&t.push(`〔user〕身份：${[].concat(e.user).join(" / ")}`),e.relation&&t.push(`关系与前情：${e.relation}`),e.tension?.core&&t.push(`核心张力：${e.tension.core}`),e.tension?.expect?.length&&t.push(`期待点：${e.tension.expect.join("；")}`),e.complexity&&t.push(`世界观复杂度：${e.complexity}${e.reason?`（${e.reason}）`:""}`),t.join(`
 `)}function ba(e){const t=[];for(const n of e?.qa?.chars??[])for(const r of n.questions??[])r.answer?.trim()&&t.push(`${n.name}｜${r.q}
@@ -3755,8 +3909,20 @@ ${f.map}`:"","写的时候只写 AU 世界里的样子：原作的地名、组�
 ${w.brief}`}const Ua={world:"人物的过去、彼此的关系和前情已经在构想和人设里，导入后会和这一条一起发给 AI。这里不再讲这些，只写世界本身：地方、日子怎么过、组织、规矩。提到主要角色时一句话交代身份就行；时间轴里只写世界层面的大事，不写主要角色之间发生了什么。",npc:"主要角色的人设、前情，以及他们和〔user〕的关系都写过了，这里不再讲。NPC 和主要角色是什么关系，一句话交代清楚，篇幅留给 NPC 自己。",npcOne:"主要角色的人设、前情，以及他们和〔user〕的关系都写过了，这里不再讲。NPC 和主要角色是什么关系，一句话交代清楚，篇幅留给 NPC 自己。",routes:"构想、主题定稿、人设、世界观和人物关系里已经交代过的前情（两人怎么认识、发生过哪些事）一律不复述，要提最多半句带过；只写这条路线上〔user〕的身份、时期、和别的路线不一样的经历，以及「故事开始」那一刻的处境。",tone:"不讲剧情、人物经历、关系前情和世界观（这些人设和世界观里都有，会一起发给 AI）。这里只写写法：写什么样的故事、偏重什么、怎么写、不许什么。",free:"人设、世界观、基调里有的不再讲，只写这个模块管的部分。"};function En(l){return Ua[l]?`
 
 【别重复】${Ua[l]}`:""}function cwzHasNum(f){try{const t=[f?.chat?.brief,f?.idea,f?.world?.main,f?.tone,...(f?.world?.extra??[]).map(e=>e?.content),...(f?.concepts??[]).map(c=>c?.relation)].map(v=>String(v??"")).join("\n");return/好感|心动值|黑化值|数值|进度条|攻略度|亲密度|信任值|百分之|\d+\s*[%％]/.test(t)}catch{return!1}}
-const cwzLogicRule="【逻辑】交稿前核对一遍：不跟定稿和已写的内容冲突；因果、先后、谁知道什么、能力和规矩都说得通；说不通的改好再交。";
-function cwzRouteSplit(l,f){try{let o="";if(["persona","personaExtra","backstory","relations","routes","npc","npcOne","world","revise","localEdit","tone","free","intro","idea","qa","chatBrief","inspire","destale","auCore","deepAns","ideaQA"].includes(l))o+="\n\n"+(globalThis.__CW_PLAIN||"");if(["persona","personaExtra","backstory","relations","routes","greeting","hooks","expand","npc","npcOne","world","story","revise","localEdit","tone","free","intro"].includes(l))o+="\n\n【时代和用词】先看主题定稿和构想定的是什么时代。现代背景（都市、豪门、校园、职场、娱乐圈之类）就用现代人真会说的话和称呼，不写古风：不用「主母、家主、族中、府上、宅中、病榻、妾身、夫君」这类旧式称呼和书面腔，称呼用名字或现代人真会用的叫法；标签和设定里明写了的身份（比如某个组织里的称号）照用。只有古代、仙侠、宫廷这类背景才写古风。";if(["persona","personaExtra","backstory","relations","routes","greeting","revise","localEdit"].includes(l))o+="\n\n【照原意写】作者在构想、主题定稿、世界规矩、「一定要有」里写明的动机和规律，按作者的原意写：不要把作者写的动机换成另一种更戏剧化的动机，作者说做不到的事，也不要写成角色硬撑一下就做到了。"+(cwzHasNum(f)?"好感度、心动值、黑化值这类数字，量的是人物心里真实的感情。数字只会跟着他心里真的变了才变：他做了什么，先想清楚这件事有没有真的让他的感情变了；没变，数字就不动。不要写成「做了某个动作，数字就跟着降/涨」。":"");if(["persona","personaExtra","backstory","relations","routes","greeting","hooks","expand","npc","npcOne","world","story"].includes(l))o+="\n\n【内核和例子】主题定稿里写了「内核」的，每一步都围着内核写，具体事件只是内核的表现。定稿和构想里举的具体事件（某一次的做法、某个场面）是在说明一种反复出现的模式，是例子，不是清单：先看前面步骤（人设、人物关系、路线、已写的开场白）里已经写过哪些，写过的例子不再写第二次；要体现这个模式，就写它在日常里的新变体（新的小事、新的场合、新的笨办法）。";if(t().logicCheck!==!1&&["persona","relations","routes","greeting","expand","npc","npcOne","world"].includes(l))o+="\n\n"+cwzLogicRule;const rs=(f?.routes??[]).filter(r=>!r.disable&&String(r.name??"").trim());if(rs.length>1&&["persona","personaExtra","backstory","relations"].includes(l))o+=`\n\n【分路线】这张卡分了 ${rs.length} 条路线：${rs.map(r=>`${r.name}${String(r.period??"").trim()?`（${String(r.period).trim()}）`:""}`).join("、")}。不同时期发生的事（走到哪一步、做过什么、关系变成什么样）留给各条路线写，人设里不要按时间顺序把这些事一件件讲出来；人设只写不随路线变的东西：这个人是谁、怎么想、怎么做，以及贯穿所有路线的内核。`;return o}catch{return""}}async function be(l,f,w={},{stage:v,system:h,json:S=!1,key:O,prev:C,close:j,styleKey:K,greetingOutput:Z=!1,dialoguePath:Y="",templateOverride:ke=""}={}){a();const Ke=Z?Hf(t()):"",sn=Fn[l]??{name:l,stage:"card",temp:.8};r(`${sn.name}…`);const st=ap(f,l,K??O,Y)==="greet",Lt=ke||m(l),bt=st?Lo(f):null,Tn={...z(f),...w,...bt};if(st){const Ut=yn(f,"concept")&&!(yn(f,"brief")&&Q(f)),Ya=new Set((f.personas??[]).filter(at=>!at.disable).map(at=>at.name));Ut||(Tn.idea=Tn.tags=""),Tn.answers=ba({qa:{chars:yn(f,"personas")?(f.qa?.chars??[]).filter(at=>Ya.has(at.name)):[]},inspire:Ut?f.inspire:[]})}let Fe=as(Lt,Tn);try{Fe+=await cwzRefText(l)}catch{}["chat","chatBrief","classify"].includes(l)||(Fe+=cwzNoFixed);if(Fe+=p(f,l),Fe+=En(l)+cwzRouteSplit(l,f),st||(Fe+=xs(f,l)),Fe+=fo(f,l,K??O,Y),st){const Ut=new Set([...String(Lt??"").matchAll(/\{\{\s*([^{}\s]+)\s*\}\}/g)].map(at=>at[1]));for(const[at,Ka]of Object.entries(bt))!T(Ka)||Ut.has(at)||(Fe+=at==="brief"?xs(f,"greeting"):`
+const cwzLogicRule=`【逻辑：先想通再动笔，写完再对一遍】
+这张卡写好以后要长期拿来玩，哪里说不通，玩的人就会出戏。下面每一条都要在写之前想到、写完再对一遍；查出问题就在交稿前改好，稿子里不写解释，也不写「注：」。
+【跟已有的对上】作者定稿、构想、标签、作者答过的问题，以及前面已经写好的人设、关系、世界观、NPC、路线和开场白，都是前提。新写的内容不能跟其中任何一条冲突：身份、年龄段、辈分、亲疏、谁先认识谁、谁欠谁、发生过什么、结果怎样，都照已有的写。已有内容自己打架时，作者定稿里最新的说法优先，其次是作者亲手写的，最后才是之前生成的。
+【因果说得通】每件事都要有来由和后果：人为什么会在这里，为什么这么做，这件事怎么来的，之后怎样了。动机要合他的性子和处境；不为了制造冲突让人突然变脸，也不为了让故事顺下去让难事突然变容易。巧合可以有，但不能靠它解决最要紧的问题。
+【先后对得上】先认识才有交情，先发生才能被记住或提起；年龄段、人生阶段、身份变化前后接得上。同一件事在不同地方提到，经过和结果一致。
+【谁知道什么】每个人只知道他亲眼见过、亲耳听过、查得到或者有人告诉过他的事。秘密就是别人不知道；不能凭空知道〔user〕没说出口的心思、别人的秘密或还没发生的事。谁知道了秘密、是怎么知道的，要交代得出。
+【本事和条件有边】每个人能做到的事，受他的身份、钱、权、本事、人脉和这个世界的规矩限制。不给人物没交代过的本事；作者说做不到的，不写成硬撑一下就做到；聪明、有本事的人不为了剧情突然变笨，普通人也不突然无所不能。
+【规矩处处一样】世界里定下的规矩（社会怎么运转、组织怎么管人、特殊能力怎么用、要付什么代价）在每一处都同样成立。有例外，就写清例外是什么、为什么只有这里例外。
+【人前后是同一个人】脾气、说话方式、在乎什么、底线在哪，在每一处都一致。人可以变，但变要有原因、有过程，不是换一段就换了个人。
+【〔user〕的位置】〔user〕是谁、和每个人是什么关系，照构想、路线和作者定稿写，不另编；不替〔user〕定下还没发生的感情、选择和结局。
+【自己拿主意】材料没写到、又非定不可的地方，自己挑一个最说得通、也最有意思的写法，直接写定；不回头向作者提问，不列几种可能让作者挑，也不写「待定」。人物在正文里开口问话不算在内。`;
+function cwzRouteSplit(l,f){try{let o="";if(["persona","personaExtra","backstory","relations","routes","npc","npcOne","world","revise","localEdit","tone","free","intro","idea","qa","chatBrief","inspire","destale","auCore","deepAns","ideaQA"].includes(l))o+="\n\n"+(globalThis.__CW_PLAIN||"");if(["persona","personaExtra","backstory","relations","routes","greeting","hooks","expand","npc","npcOne","world","story","revise","localEdit","tone","free","intro"].includes(l))o+="\n\n【时代和用词】先看主题定稿和构想定的是什么时代。现代背景（都市、豪门、校园、职场、娱乐圈之类）就用现代人真会说的话和称呼，不写古风：不用「主母、家主、族中、府上、宅中、病榻、妾身、夫君」这类旧式称呼和书面腔，称呼用名字或现代人真会用的叫法；标签和设定里明写了的身份（比如某个组织里的称号）照用。只有古代、仙侠、宫廷这类背景才写古风。";if(["persona","personaExtra","backstory","relations","routes","greeting","revise","localEdit"].includes(l))o+="\n\n【照原意写】作者在构想、主题定稿、世界规矩、「一定要有」里写明的动机和规律，按作者的原意写：不要把作者写的动机换成另一种更戏剧化的动机，作者说做不到的事，也不要写成角色硬撑一下就做到了。"+(cwzHasNum(f)?"好感度、心动值、黑化值这类数字，量的是人物心里真实的感情。数字只会跟着他心里真的变了才变：他做了什么，先想清楚这件事有没有真的让他的感情变了；没变，数字就不动。不要写成「做了某个动作，数字就跟着降/涨」。":"");if(["persona","personaExtra","backstory","relations","routes","greeting","hooks","expand","npc","npcOne","world","story"].includes(l))o+="\n\n【内核和例子】主题定稿里写了「内核」的，每一步都围着内核写，具体事件只是内核的表现。定稿和构想里举的具体事件（某一次的做法、某个场面）是在说明一种反复出现的模式，是例子，不是清单：先看前面步骤（人设、人物关系、路线、已写的开场白）里已经写过哪些，写过的例子不再写第二次；要体现这个模式，就写它在日常里的新变体（新的小事、新的场合、新的笨办法）。";if(t().logicCheck!==!1&&["idea","persona","personaExtra","backstory","deepAns","relations","routes","newRoutes","greeting","hooks","expand","npc","npcOne","world","story","tone","free","revise","localEdit","destale","auMap","chatBrief","playChar"].includes(l))o+="\n\n"+cwzLogicRule;const rs=(f?.routes??[]).filter(r=>!r.disable&&String(r.name??"").trim());if(rs.length>1&&["persona","personaExtra","backstory","relations"].includes(l))o+=`\n\n【分路线】这张卡分了 ${rs.length} 条路线：${rs.map(r=>`${r.name}${String(r.period??"").trim()?`（${String(r.period).trim()}）`:""}`).join("、")}。不同时期发生的事（走到哪一步、做过什么、关系变成什么样）留给各条路线写，人设里不要按时间顺序把这些事一件件讲出来；人设只写不随路线变的东西：这个人是谁、怎么想、怎么做，以及贯穿所有路线的内核。`;if(t().baguPrompt!==!1&&cwzBaguSteps.includes(l))o+=cwzBaguBlock(f,l);return o}catch{return""}}
+const cwzBaguSteps=["persona","personaExtra","backstory","deepAns","relations","routes","greeting","expand","npc","npcOne","world","story","tone","free","revise","localEdit","destale","intro","playChar"];
+function cwzBaguBlock(f,l){try{if(typeof Ee=="undefined"||!Ee)return"";const set=$t(le().extensionSettings,[]);if(!set?.rules?.length)return"";const ban=new Set(_(f)),words=[],pats=[],empty=[],plain=/^[\u4e00-\u9fff|]+$/;let arc=!1;for(const r of set.rules){if(r.type!=="flag")continue;const re=String(r.re??"");if(r.group==="flagImagery")words.push(...re.split("|"));else if(r.group==="flagSyntax")plain.test(re)?empty.push(...re.split("|")):pats.push(String(r.label??"").trim());else if(r.id==="must_arc")arc=!0;else if(r.group==="must"&&r.label)words.push(String(r.label))}const u=[...new Set(words.map(w=>w.trim()).filter(w=>w&&!ban.has(w)))],sh=[...u,...ban].filter(Boolean),keep=u.filter(w=>!sh.some(o=>o!==w&&o.length<w.length&&w.includes(o)));const ps=[...new Set(pats.filter(Boolean))],es=[...new Set(empty.filter(Boolean))];if(!keep.length&&!ps.length&&!es.length)return"";const rev=["revise","localEdit","destale"].includes(l);return"\n\n【别写八股】下面这些是写烂了的套路。后面的八股检查会把用了它们的句子挑出来重写，所以一开始就别写进去：\n- 列出来的词句不用，也别换个近义词照搬同一个画面。要么写这个人此刻具体做了什么、说了什么，要么干脆不写这个动作。\n- 情绪直接说，或者写他因此做了什么事、说了什么话；不靠一连串身体反应（呼吸、瞳孔、指节、心头、喉咙的变化）去演情绪。\n- 比喻少用。要用就用一看就懂、贴着这个人的身份和眼前场景的；不用「仿佛整个世界」「命运的……」这类大而空的。\n- 删了也通的话不写，比如「值得一提的是」「某种意义上」「不由得」「下意识地」。\n- 标点：不叠用感叹号和问号；省略号只用一个「……」；破折号只用一个「——」。"+(arc?"不写「……的弧度」。":"")+"\n- 设定、人设、世界观也一样：别拿这些词形容人和事，用平实的话把事情说清。"+(rev?"\n- 改稿时，原文里没要求改的地方照留；你新写或改写的句子不用这些。":"")+(keep.length?"\n套路词句（一个都别用）："+keep.join("、"):"")+(ps.length?"\n套路句式（换了词也别用这种句子结构）："+ps.join("；"):"")+(es.length?"\n空话（删掉）："+es.join("、"):"")+"\n作者自己的禁用词在最前面的要求里，同样一个都不用。"}catch{return""}}async function be(l,f,w={},{stage:v,system:h,json:S=!1,key:O,prev:C,close:j,styleKey:K,greetingOutput:Z=!1,dialoguePath:Y="",templateOverride:ke=""}={}){a();const Ke=Z?Hf(t()):"",sn=Fn[l]??{name:l,stage:"card",temp:.8};r(`${sn.name}…`);const st=ap(f,l,K??O,Y)==="greet",Lt=ke||m(l),bt=st?Lo(f):null,Tn={...z(f),...w,...bt};if(st){const Ut=yn(f,"concept")&&!(yn(f,"brief")&&Q(f)),Ya=new Set((f.personas??[]).filter(at=>!at.disable).map(at=>at.name));Ut||(Tn.idea=Tn.tags=""),Tn.answers=ba({qa:{chars:yn(f,"personas")?(f.qa?.chars??[]).filter(at=>Ya.has(at.name)):[]},inspire:Ut?f.inspire:[]})}let Fe=as(Lt,Tn);try{Fe+=await cwzRefText(l)}catch{}["chat","chatBrief","classify"].includes(l)||(Fe+=cwzNoFixed);if(Fe+=p(f,l),Fe+=En(l)+cwzRouteSplit(l,f),st||(Fe+=xs(f,l)),Fe+=fo(f,l,K??O,Y),st){const Ut=new Set([...String(Lt??"").matchAll(/\{\{\s*([^{}\s]+)\s*\}\}/g)].map(at=>at[1]));for(const[at,Ka]of Object.entries(bt))!T(Ka)||Ut.has(at)||(Fe+=at==="brief"?xs(f,"greeting"):`
 
 【${Ia[at]??"人物概要"}】
 ${Ka}`);for(const[at,Ka]of Object.entries({routeInfo:"本次路线",hooks:"本次选中的剧情",existingGreetings:"已经写出的开场白，仅用于避重"}))T(w[at])&&!Ut.has(at)&&(Fe+=`
@@ -4530,7 +4696,7 @@ ${Ee.BAGU_GUIDE}`:""}`,y=[...new Set(e.map(V=>V.kind))],E=(V,R)=>{if(!Ee.introdu
 这些句子上回没改好，「上次的问题」里写了原因，这回一定要避开。`:""}
 交稿：只交 JSON：{"edits":[{"id":"b1s1","text":"改好的句子"}]}，每个 id 都要有。
 句子：
-${JSON.stringify(W.map(me=>({id:me.gid,...y.length>1?{类型:me.kind}:{},句子:me.t.text,八股:me.t.hits.map(J=>J.match),...R&&Q.get(me.gid)?{上次的问题:Q.get(me.gid)}:{},前一句:me.t.prev,后一句:me.t.next})),null,1)}`;let pe=new Map;for(let me=0;me<2&&!pe.size;me++){if(r())return;try{pe=Ee.parseEdits(await n(g,Ce))}catch{pe=new Map}}for(const me of W){const J=pe.get(me.gid),re=P(me.t,J);re?Q.set(me.gid,re):(D.set(me.gid,J),Q.delete(me.gid))}}}await _(d,!1);const ce=d.filter(V=>!D.has(V.gid));return ce.length&&!r()&&await _(ce,!0),p.forEach((V,R)=>{const L=new Map;for(const W of d)W.bi===R&&D.has(W.gid)&&L.set(W.t.id,D.get(W.gid));o[R]={text:L.size?Ee.applyEdits(e[R].text,V,L):e[R].text,changed:L.size,failed:d.filter(W=>W.bi===R&&!D.has(W.gid)).map(W=>W.t.text.slice(0,30))}}),o}function Ta(e){try{return!!Ee?.looksLikeInstructions?.(e)}catch{return!1}}var bo="loveCardWriter",Na="1.77.1",le=()=>X.SillyTavern.getContext(),Pa={version:1,apiProfile:"",presetCard:"",presetGreeting:"",maxTokens:0,useTemperature:!0,excludedParameters:ip,userToken:"<user>",personaPlace:"blue",personaTpl:"huijiu",autoBackstory:!0,noNumbers:!0,backstoryCount:"按人物需要",introStyles:[],styles:[],customRules:{},ruleOff:{},ruleModes:{},ruleSteps:{},offPages:[],helpMode:"first",seenHelp:[],introStyle:0,minInterval:3,stream:"on",greetingCount:2,greetingLength:"600–900",greetingExtract:!0,greetingExtractStart:"<content>",greetingExtractEnd:"</content>",storyLength:"800–1200",maxStepCalls:0,lean:!1,author:"",license:{repost:"不可",edit:"可",commercial:"不可"},presetNote:"",introNotes:"",introThanks:"",introEnding:void 0,predictThreshold:.42,autoPredict:!0,autoBagu:!0,greetMustClean:!0,blueBudget:2e4,playLength:300,prompts:{},rules:{},customTags:{},hiddenTags:{},customSteps:[],quickFlows:[{id:"quick-default",name:"简易角色卡",steps:[{id:"quick-persona",name:"人设",output:"description",prompt:"照一句话梗写出这张卡的人设：这个人走过的路、脾气、故事开始时的处境，以及他和<user>的关系。写成能直接放进角色卡的正文。"},{id:"quick-opening",name:"开场白",output:"greeting",prompt:"照一句话梗和前面写好的人设写开场白。从正在发生的事写起，让角色开口或动起来，停在<user>能接话的地方。只交开场正文。"}]}],quickFlowId:"full",quickDrafts:{},draft:null,drafts:[]},b={busy:!1,abort:!1,root:null,page:"home",checks:null,bagu:null,editStep:"persona",editRule:"通用",editDim:"era",ptab:"step"},sg={},pg=`NPC 写简短一些，交代来路和现在即可。
+${JSON.stringify(W.map(me=>({id:me.gid,...y.length>1?{类型:me.kind}:{},句子:me.t.text,八股:me.t.hits.map(J=>J.match),...R&&Q.get(me.gid)?{上次的问题:Q.get(me.gid)}:{},前一句:me.t.prev,后一句:me.t.next})),null,1)}`;let pe=new Map;for(let me=0;me<2&&!pe.size;me++){if(r())return;try{pe=Ee.parseEdits(await n(g,Ce))}catch{pe=new Map}}for(const me of W){const J=pe.get(me.gid),re=P(me.t,J);re?Q.set(me.gid,re):(D.set(me.gid,J),Q.delete(me.gid))}}}await _(d,!1);const ce=d.filter(V=>!D.has(V.gid));return ce.length&&!r()&&await _(ce,!0),p.forEach((V,R)=>{const L=new Map;for(const W of d)W.bi===R&&D.has(W.gid)&&L.set(W.t.id,D.get(W.gid));o[R]={text:L.size?Ee.applyEdits(e[R].text,V,L):e[R].text,changed:L.size,failed:d.filter(W=>W.bi===R&&!D.has(W.gid)).map(W=>W.t.text.slice(0,30))}}),o}function Ta(e){try{return!!Ee?.looksLikeInstructions?.(e)}catch{return!1}}var bo="loveCardWriter",Na="1.77.2",le=()=>X.SillyTavern.getContext(),Pa={version:1,apiProfile:"",presetCard:"",presetGreeting:"",maxTokens:0,useTemperature:!0,excludedParameters:ip,userToken:"<user>",personaPlace:"blue",personaTpl:"huijiu",autoBackstory:!0,noNumbers:!0,backstoryCount:"按人物需要",introStyles:[],styles:[],customRules:{},ruleOff:{},ruleModes:{},ruleSteps:{},offPages:[],helpMode:"first",seenHelp:[],introStyle:0,minInterval:3,stream:"on",greetingCount:2,greetingLength:"600–900",greetingExtract:!0,greetingExtractStart:"<content>",greetingExtractEnd:"</content>",storyLength:"800–1200",maxStepCalls:0,lean:!1,author:"",license:{repost:"不可",edit:"可",commercial:"不可"},presetNote:"",introNotes:"",introThanks:"",introEnding:void 0,predictThreshold:.42,autoPredict:!1,autoBagu:!0,baguPrompt:!0,greetMustClean:!0,blueBudget:2e4,playLength:300,prompts:{},rules:{},customTags:{},hiddenTags:{},customSteps:[],quickFlows:[{id:"quick-default",name:"简易角色卡",steps:[{id:"quick-persona",name:"人设",output:"description",prompt:"照一句话梗写出这张卡的人设：这个人走过的路、脾气、故事开始时的处境，以及他和<user>的关系。写成能直接放进角色卡的正文。"},{id:"quick-opening",name:"开场白",output:"greeting",prompt:"照一句话梗和前面写好的人设写开场白。从正在发生的事写起，让角色开口或动起来，停在<user>能接话的地方。只交开场正文。"}]}],quickFlowId:"full",quickDrafts:{},draft:null,drafts:[]},b={busy:!1,abort:!1,root:null,page:"home",checks:null,bagu:null,editStep:"persona",editRule:"通用",editDim:"era",ptab:"step"},sg={},pg=`NPC 写简短一些，交代来路和现在即可。
 作者没给设想时，按这张卡的世界观自己编，名字和脾气由你定，直接交出人物。作者写了的部分照写，其余你来补。
 用几段短一点的话写他怎么走到故事开头、平常怎么过、和身边的人什么关系。来路只留影响他脾气或关系的部分，不写流水账。
 先想清他自己在乎什么、为什么在乎，再写他怎么待人。对不同的人感情可以不同，对同一个人也可以有好几种念头，写明白，给之后的演绎留余地。性格词只用来定个调，后面要写出他怎么想。
@@ -5390,8 +5556,8 @@ ${zp()}
 <label class="checkbox_label"><input type="checkbox" data-set="noNumbers" ${e.noNumbers!==!1?"checked":""}>不写具体数字，绝对不出现「三」（写完还有就自动改一次）</label>
 <label class="checkbox_label"><input type="checkbox" data-set="autoBackstory" ${e.autoBackstory?"checked":""}>一键出卡时，缺少经历才单独补写（每个角色多 1 次调用）</label>
 <label>经历篇幅<input class="text_pole cw-in" data-set="backstoryCount" value="${x(e.backstoryCount)}"></label>
-<label class="checkbox_label"><input type="checkbox" data-set="autoPredict" ${e.autoPredict?"checked":""}>一键出卡时检查常见写法，列出结果供选择，不自动改写（每个角色多 2 次调用）</label>
-<label class="checkbox_label"><input type="checkbox" data-set="autoBagu" ${e.autoBagu?"checked":""}>一键出卡时用八股清理改写</label> <label class="checkbox_label"><input type="checkbox" data-set="logicCheck" ${e.logicCheck!==!1?"checked":""}>写人设、关系、世界观、NPC、路线、开场白时，让 AI 交稿前自查逻辑（不多调用，每次多带一句要求）</label>
+<label class="checkbox_label"><input type="checkbox" data-set="autoPredict" ${e.autoPredict?"checked":""}>一键出卡时额外测一遍人设好不好猜，列出结果供选择（每个角色多 2 次调用；人设提示词里已经要求避开常见写法，一般不用开）</label>
+<label class="checkbox_label"><input type="checkbox" data-set="autoBagu" ${e.autoBagu?"checked":""}>一键出卡后扫一遍八股，扫到才改写（只把带八股的句子发出去；提示词里已经带了八股词表，通常扫不到就不调用）</label> <label class="checkbox_label"><input type="checkbox" data-set="baguPrompt" ${e.baguPrompt!==!1?"checked":""}>写卡时把八股词表放进提示词，让 AI 一开始就别写（不多调用，提示词长一些）</label> <label class="checkbox_label"><input type="checkbox" data-set="logicCheck" ${e.logicCheck!==!1?"checked":""}>写卡的每一步都在提示词里带上逻辑要求：前后对得上、因果说得通、谁知道什么、本事和规矩有边（不多调用，提示词长一些）</label>
 <label class="checkbox_label"><input type="checkbox" data-set="greetMustClean" ${e.greetMustClean?"checked":""}>开场白一写完，带禁用词和“我的八股词”的句子立刻改掉（只改这几句，所有新开场白合在一起，通常 1–2 次调用）</label>
 <label>常驻设定 token 上限<input class="text_pole cw-num" type="number" min="0" step="500" data-set="blueBudget" data-num value="${e.blueBudget}"></label>
 <div class="cw-dim cw-small cw-help">蓝灯条目 + 当前路线 + 角色描述加起来超过这个数，目录和导入页会标出来。0 = 不提示。用酒馆当前 API 的分词器算，算不了时按字数估。</div>
