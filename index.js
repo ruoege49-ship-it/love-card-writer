@@ -203,7 +203,7 @@
 }
 
 /* 关掉界面后还在生成：右下角的小条 */
-.cw-float { position: fixed; right: 12px; bottom: 12px; z-index: 31000; max-width: min(92vw, 420px); display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 12px; border: 1px solid var(--SmartThemeQuoteColor); background: var(--SmartThemeBlurTintColor); color: var(--SmartThemeBodyColor); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35); font-size: 0.9em; }
+.cw-float { position: fixed; right: 12px; bottom: auto; top: calc(100vh - 12px); top: calc(100dvh - 12px); transform: translateY(-100%); z-index: 31000; max-width: min(92vw, 420px); display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 12px; border: 1px solid var(--SmartThemeQuoteColor); background: var(--SmartThemeBlurTintColor); color: var(--SmartThemeBodyColor); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35); font-size: 0.9em; }
 .cw-float .cw-float-text { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .cw-float .cw-btn { padding: 3px 10px; flex: 0 0 auto; }
 
@@ -277,7 +277,8 @@
 /* modules/preset/style.css */
 /* 预设机 */
 .pw-overlay {
-  position: fixed; inset: 0; z-index: 10000;
+  /* 不用 inset:0：酒馆给 html 加了 transform，手机上 body 又是 fixed，html 高度变成 0，inset:0 的遮罩跟着变成 0 高，面板只露出下半截。宽高写死就不受影响 */
+  position: fixed; top: 0; left: 0; right: auto; bottom: auto; width: 100vw; height: 100vh; height: 100dvh; z-index: 10000;
   background: rgba(0, 0, 0, .55);
   display: flex; align-items: center; justify-content: center;
 }
@@ -477,7 +478,8 @@ details[open] > summary { opacity: 1; }
 /* modules/status/style.css */
 /* 状态栏机 */
 .sf-overlay {
-  position: fixed; inset: 0; z-index: 10000;
+  /* 不用 inset:0：酒馆给 html 加了 transform，手机上 body 又是 fixed，html 高度变成 0，inset:0 的遮罩跟着变成 0 高，面板只露出下半截。宽高写死就不受影响 */
+  position: fixed; top: 0; left: 0; right: auto; bottom: auto; width: 100vw; height: 100vh; height: 100dvh; z-index: 10000;
   background: rgba(0, 0, 0, .55);
   display: flex; align-items: center; justify-content: center;
 }
@@ -4509,7 +4511,7 @@ ${Ee.BAGU_GUIDE}`:""}`,y=[...new Set(e.map(V=>V.kind))],E=(V,R)=>{if(!Ee.introdu
 这些句子上回没改好，「上次的问题」里写了原因，这回一定要避开。`:""}
 交稿：只交 JSON：{"edits":[{"id":"b1s1","text":"改好的句子"}]}，每个 id 都要有。
 句子：
-${JSON.stringify(W.map(me=>({id:me.gid,...y.length>1?{类型:me.kind}:{},句子:me.t.text,八股:me.t.hits.map(J=>J.match),...R&&Q.get(me.gid)?{上次的问题:Q.get(me.gid)}:{},前一句:me.t.prev,后一句:me.t.next})),null,1)}`;let pe=new Map;for(let me=0;me<2&&!pe.size;me++){if(r())return;try{pe=Ee.parseEdits(await n(g,Ce))}catch{pe=new Map}}for(const me of W){const J=pe.get(me.gid),re=P(me.t,J);re?Q.set(me.gid,re):(D.set(me.gid,J),Q.delete(me.gid))}}}await _(d,!1);const ce=d.filter(V=>!D.has(V.gid));return ce.length&&!r()&&await _(ce,!0),p.forEach((V,R)=>{const L=new Map;for(const W of d)W.bi===R&&D.has(W.gid)&&L.set(W.t.id,D.get(W.gid));o[R]={text:L.size?Ee.applyEdits(e[R].text,V,L):e[R].text,changed:L.size,failed:d.filter(W=>W.bi===R&&!D.has(W.gid)).map(W=>W.t.text.slice(0,30))}}),o}function Ta(e){try{return!!Ee?.looksLikeInstructions?.(e)}catch{return!1}}var bo="loveCardWriter",Na="1.76.2",le=()=>X.SillyTavern.getContext(),Pa={version:1,apiProfile:"",presetCard:"",presetGreeting:"",maxTokens:0,useTemperature:!0,excludedParameters:ip,userToken:"<user>",personaPlace:"blue",personaTpl:"huijiu",autoBackstory:!0,noNumbers:!0,backstoryCount:"按人物需要",introStyles:[],styles:[],customRules:{},ruleOff:{},ruleModes:{},ruleSteps:{},offPages:[],helpMode:"first",seenHelp:[],introStyle:0,minInterval:3,stream:"on",greetingCount:2,greetingLength:"600–900",greetingExtract:!0,greetingExtractStart:"<content>",greetingExtractEnd:"</content>",storyLength:"800–1200",maxStepCalls:0,lean:!1,author:"",license:{repost:"不可",edit:"可",commercial:"不可"},presetNote:"",introNotes:"",introThanks:"",introEnding:void 0,predictThreshold:.42,autoPredict:!0,autoBagu:!0,greetMustClean:!0,blueBudget:2e4,playLength:300,prompts:{},rules:{},customTags:{},hiddenTags:{},customSteps:[],quickFlows:[{id:"quick-default",name:"简易角色卡",steps:[{id:"quick-persona",name:"人设",output:"description",prompt:"照一句话梗写出这张卡的人设：这个人走过的路、脾气、故事开始时的处境，以及他和<user>的关系。写成能直接放进角色卡的正文。"},{id:"quick-opening",name:"开场白",output:"greeting",prompt:"照一句话梗和前面写好的人设写开场白。从正在发生的事写起，让角色开口或动起来，停在<user>能接话的地方。只交开场正文。"}]}],quickFlowId:"full",quickDrafts:{},draft:null,drafts:[]},b={busy:!1,abort:!1,root:null,page:"home",checks:null,bagu:null,editStep:"persona",editRule:"通用",editDim:"era",ptab:"step"},sg={},pg=`NPC 写简短一些，交代来路和现在即可。
+${JSON.stringify(W.map(me=>({id:me.gid,...y.length>1?{类型:me.kind}:{},句子:me.t.text,八股:me.t.hits.map(J=>J.match),...R&&Q.get(me.gid)?{上次的问题:Q.get(me.gid)}:{},前一句:me.t.prev,后一句:me.t.next})),null,1)}`;let pe=new Map;for(let me=0;me<2&&!pe.size;me++){if(r())return;try{pe=Ee.parseEdits(await n(g,Ce))}catch{pe=new Map}}for(const me of W){const J=pe.get(me.gid),re=P(me.t,J);re?Q.set(me.gid,re):(D.set(me.gid,J),Q.delete(me.gid))}}}await _(d,!1);const ce=d.filter(V=>!D.has(V.gid));return ce.length&&!r()&&await _(ce,!0),p.forEach((V,R)=>{const L=new Map;for(const W of d)W.bi===R&&D.has(W.gid)&&L.set(W.t.id,D.get(W.gid));o[R]={text:L.size?Ee.applyEdits(e[R].text,V,L):e[R].text,changed:L.size,failed:d.filter(W=>W.bi===R&&!D.has(W.gid)).map(W=>W.t.text.slice(0,30))}}),o}function Ta(e){try{return!!Ee?.looksLikeInstructions?.(e)}catch{return!1}}var bo="loveCardWriter",Na="1.76.3",le=()=>X.SillyTavern.getContext(),Pa={version:1,apiProfile:"",presetCard:"",presetGreeting:"",maxTokens:0,useTemperature:!0,excludedParameters:ip,userToken:"<user>",personaPlace:"blue",personaTpl:"huijiu",autoBackstory:!0,noNumbers:!0,backstoryCount:"按人物需要",introStyles:[],styles:[],customRules:{},ruleOff:{},ruleModes:{},ruleSteps:{},offPages:[],helpMode:"first",seenHelp:[],introStyle:0,minInterval:3,stream:"on",greetingCount:2,greetingLength:"600–900",greetingExtract:!0,greetingExtractStart:"<content>",greetingExtractEnd:"</content>",storyLength:"800–1200",maxStepCalls:0,lean:!1,author:"",license:{repost:"不可",edit:"可",commercial:"不可"},presetNote:"",introNotes:"",introThanks:"",introEnding:void 0,predictThreshold:.42,autoPredict:!0,autoBagu:!0,greetMustClean:!0,blueBudget:2e4,playLength:300,prompts:{},rules:{},customTags:{},hiddenTags:{},customSteps:[],quickFlows:[{id:"quick-default",name:"简易角色卡",steps:[{id:"quick-persona",name:"人设",output:"description",prompt:"照一句话梗写出这张卡的人设：这个人走过的路、脾气、故事开始时的处境，以及他和<user>的关系。写成能直接放进角色卡的正文。"},{id:"quick-opening",name:"开场白",output:"greeting",prompt:"照一句话梗和前面写好的人设写开场白。从正在发生的事写起，让角色开口或动起来，停在<user>能接话的地方。只交开场正文。"}]}],quickFlowId:"full",quickDrafts:{},draft:null,drafts:[]},b={busy:!1,abort:!1,root:null,page:"home",checks:null,bagu:null,editStep:"persona",editRule:"通用",editDim:"era",ptab:"step"},sg={},pg=`NPC 写简短一些，交代来路和现在即可。
 作者没给设想时，按这张卡的世界观自己编，名字和脾气由你定，直接交出人物。作者写了的部分照写，其余你来补。
 用几段短一点的话写他怎么走到故事开头、平常怎么过、和身边的人什么关系。来路只留影响他脾气或关系的部分，不写流水账。
 先想清他自己在乎什么、为什么在乎，再写他怎么待人。对不同的人感情可以不同，对同一个人也可以有好几种念头，写明白，给之后的演绎留余地。性格词只用来定个调，后面要写出他怎么想。
